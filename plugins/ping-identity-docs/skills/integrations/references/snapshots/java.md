@@ -1011,3 +1011,75 @@ See the **Default URLs** tab of the service provider configuration.
 | ----------- | ----------------------------------------------------- |
 | For SSO URL | https\://*\<pf_host>*:*\<pf_port>*/SpSample/MainPage/ |
 | For SLO URL | https\://*\<pf_host>*:*\<pf_port>*/SpSample/MainPage/ |
+
+---
+
+---
+title: Modifying sample source files
+description: The Java Integration Kit distribution provides the source files for the sample applications in the sample_src directory, including Java code and supporting JSPs, images, style sheets and other components.
+component: java
+page_id: java:setup:pf_java_ik_modifying_sample_source_files
+canonical_url: https://docs.pingidentity.com/integrations/java/setup/pf_java_ik_modifying_sample_source_files.html
+llms_txt: https://docs.pingidentity.com/integrations/java/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: June 21, 2024
+section_ids:
+  jsps-and-web-page-components: JSPs and web page components
+  rebuilding-the-sample-applications: Rebuilding the sample applications
+  about-this-task: About this task
+  steps: Steps
+---
+
+# Modifying sample source files
+
+The Java Integration Kit distribution provides the source files for the sample applications in the `sample_src` directory, including Java code and supporting JSPs, images, style sheets and other components.
+
+Developers can use these files to change the appearance and behavior of the samples, create different samples for testing, or develop actual prototypes for production purposes. In addition, the commented Java code is engineered into discrete classes and methods that can be repurposed to work with existing web applications.
+
+This section further identifies the source file directories and describes how to rebuild the sample applications, as a means of highlighting file locations and build scripts that developers could use for other customizing purposes.
+
+## JSPs and web page components
+
+You can modify the JSPs, images, and cascading style sheets (CSSs) to customize the look and feel of the installed sample applications.
+
+* The JSP files are located in the following directories in the Java Integration Kit distribution:
+
+  `sample_src/<sample>/webapp/WEB-INF/jsp`
+
+  where *\<sample>* is either idp or sp
+
+* Images and CSS files are located in:
+
+  `sample_src/<sample>/webapp/images`
+
+## Rebuilding the sample applications
+
+As a Java developer, you can make changes to the source code for any of the sample applications for your own needs.
+
+### About this task
+
+The source code for the sample applications is located in `sample_src/<sample>/java`.
+
+|   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+|   | As of Java Integration Kit 2.8, there are two versions of the OpenToken agent: the standard OpenToken agent and the Jakarta EE 9 OpenToken agent. The Jakarta EE 9 OpenToken agent has its own version of the sample applications. The source code for the Jakarta EE 9 sample applications is located in the `jakarta/idp` and `jakarta/sp` files.You can only deploy the sample Jakarta applications on servers that support Jakarta EE 9, such as Tomcat 10.1. Currently, PingFederate does not support Jakarta EE 9. |
+
+After you modify the source code, you can build and repackage the application using `ant` commands executed from the `<sample>` directory for the `build.xml` file included in that directory. You can package either another WAR directory or a compressed WAR file (depending on deployment needs) using the following commands:
+
+|   |                                                                                                                                                                                                                                                                                                                                                                          |
+| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+|   | For backward compatibility, the `build.xml` configuration file is set to use version 1.5 of the Java Development Kit (JDK) *(tooltip: \<div class="paragraph">&#xA;\<p>A development environment for building applications and components using Java.\</p>&#xA;\</div>)*. To recompile using the current JDK version, change the version number in the `build.xml` file. |
+
+### Steps
+
+1. Create a WAR directory. From the `<sample>` directory, enter:
+
+   ```
+   ant
+   ```
+
+2. Create a WAR file. From the `<sample>` directory, enter:
+
+   ```
+   ant war
+   ```

@@ -945,6 +945,139 @@ Use the [scheduler service](../../idm-schedules/schedules.html) and its associat
 ---
 
 ---
+title: Schema
+description: Perform schema operations including creating custom relationship properties
+component: pingoneaic
+page_id: pingoneaic:idm-rest-api:endpoints/rest-schema
+canonical_url: https://docs.pingidentity.com/pingoneaic/idm-rest-api/endpoints/rest-schema.html
+llms_txt: https://docs.pingidentity.com/pingoneaic/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+keywords: ["Data Object Model", "Schema", "Relationships", "REST API"]
+---
+
+# Schema
+
+The Schema API lets you perform operations on managed object schemas. You can create, update, and delete custom relationship properties for managed objects using version 2 of the API. The following table lists the available endpoints for the `/schema/` context path:
+
+| URI                                                                 | HTTP Operation | Description                                                                                                    |
+| ------------------------------------------------------------------- | -------------- | -------------------------------------------------------------------------------------------------------------- |
+| `/openidm/schema/managed/realm-name_assignment`                     | GET            | Returns the schema for the `managed/realm-name_assignment` object.                                             |
+| `/openidm/schema/managed/realm-name_organization`                   | GET            | Returns the schema for the `managed/realm-name_organization` object.                                           |
+| `/openidm/schema/managed/realm-name_role`                           | GET            | Returns the schema for the `managed/realm-name_role` object.                                                   |
+| `/openidm/schema/managed/realm-name_user`                           | GET            | Returns the schema for the `managed/realm-name_user` object.                                                   |
+| `/openidm/schema/managed/realm-name_user/properties/custom_Example` | GET            | Returns the `custom_Example` relationship property on the `managed/realm-name_user` object schema.	API V2 only |
+| `/openidm/schema/managed/realm-name_user/properties/custom_Example` | PUT            | Creates the `custom_Example` relationship property on the `managed/realm-name_user` object schema.	API V2 only |
+| `/openidm/schema/managed/realm-name_user/properties/custom_Example` | PUT            | Updates the `custom_Example` relationship property on the `managed/realm-name_user` object schema.	API V2 only |
+| `/openidm/schema/managed/realm-name_user/properties/custom_Example` | DELETE         | Deletes the `custom_Example` relationship property on the `managed/realm-name_user` object schema.	API V2 only |
+
+The following example creates a custom many-to-many relationship property, `custom_Children`, with a reverse property, `custom_Parents`:
+
+```
+curl \
+--header "Authorization: Bearer <access-token>" \
+--header "Accept-API-Version: resource=2.0" \
+--request PUT \
+--data '{
+  "description": "A user as a child of another user.",
+  "title": "Custom children",
+  "viewable": true,
+  "type": "array",
+  "required": false,
+  "items": {
+    "type": "relationship",
+    "title": "Custom Parent",
+    "reverseRelationship": true,
+    "reversePropertyName": "custom_Parents",
+    "notifySelf": false,
+    "validate": true,
+    "properties": {
+      "_ref": {
+        "description": "References a relationship from a managed object",
+        "type": "string"
+      },
+      "_refProperties": {
+        "description": "Supports metadata within the relationship",
+        "type": "object",
+        "title": "Custom Provisioning Children Parents _refProperties",
+        "properties": {
+          "_id": {
+            "description": "_refProperties object ID",
+            "type": "string"
+          }
+        }
+      }
+    },
+    "resourceCollection": [
+      {
+        "path": "managed/alpha_user",
+        "label": "User",
+        "query": {
+          "queryFilter": "true",
+          "fields": [
+            "userName"
+          ]
+        },
+        "notify": false,
+        "reverseProperty": {
+          "type": "array",
+          "validate": true,
+          "resourceCollection": {
+            "notify": false,
+            "query": {
+              "queryFilter": "true",
+              "fields": [
+                "userName"
+              ]
+            }
+          }
+        }
+      }
+    ]
+  }
+}
+' \
+"https://<tenant-env-fqdn>/openidm/schema/managed/realm-name_user/properties/custom_Children"
+```
+
+---
+
+---
+title: Scripts
+description: Compile and validate scripts through the script service REST endpoint
+component: pingoneaic
+page_id: pingoneaic:idm-rest-api:endpoints/rest-scripts
+canonical_url: https://docs.pingidentity.com/pingoneaic/idm-rest-api/endpoints/rest-scripts.html
+llms_txt: https://docs.pingidentity.com/pingoneaic/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+---
+
+# Scripts
+
+You can interact with the script service over REST, as shown in the following table:
+
+| URI                              | HTTP Operation | Description                                                                                                                                                                                                                        |
+| -------------------------------- | -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| /openidm/script?\_action=compile | POST           | Compiles a script, to validate that it can be executed. Note that this action compiles a script, but does not execute it. A successful compilation returns `true`. An unsuccessful compilation returns the reason for the failure. |
+
+The following example compiles, but does not execute, the script provided in the JSON payload:
+
+```
+curl \
+--header "Authorization: Bearer <access-token>" \
+--header "Accept-API-Version: resource=1.0" \
+--header "Content-Type: application/json" \
+--request POST \
+--data '{
+  "type": "text/javascript",
+  "source": "source.mail ? source.mail.toLowerCase() : null"
+}' \
+"https://<tenant-env-fqdn>/openidm/script?_action=compile"
+True
+```
+
+---
+
+---
 title: Server configuration
 description: Access and modify configuration objects stored in the repository
 component: pingoneaic
@@ -1043,6 +1176,28 @@ curl \
       ],
 ...
 ```
+
+---
+
+---
+title: Server state
+description: Access server state information including authentication status and version
+component: pingoneaic
+page_id: pingoneaic:idm-rest-api:endpoints/rest-info
+canonical_url: https://docs.pingidentity.com/pingoneaic/idm-rest-api/endpoints/rest-info.html
+llms_txt: https://docs.pingidentity.com/pingoneaic/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+---
+
+# Server state
+
+You can access information about the current state of the Advanced Identity Cloud instance through the `info` endpoint, as shown in the following table:
+
+| URI                                                                                                                                                                                                            | HTTP Operation | Description                                                                                                        |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------- | ------------------------------------------------------------------------------------------------------------------ |
+| `/openidm/info/login`                                                                                                                                                                                          | GET            | Provides authentication and authorization details for the current user.                                            |
+| `/openidm/info/ping`&#xA;&#xA;The /openidm/info/ping endpoint is a deprecated feature. Customers should update any external monitoring to use the Advanced Identity Cloud /monitoring/health endpoint instead. | GET            | Lists the current server state. Possible states are `STARTING`,`ACTIVE_READY`, `ACTIVE_NOT_READY`, and `STOPPING`. |
+| `/openidm/info/version`                                                                                                                                                                                        | GET            | Provides the software version of this Advanced Identity Cloud instance.                                            |
 
 ---
 

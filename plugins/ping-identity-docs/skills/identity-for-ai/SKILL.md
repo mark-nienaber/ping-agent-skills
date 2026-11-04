@@ -28,9 +28,9 @@ Landing page for Identity for AI documentation covering Ping Identity's comprehe
 | Task category | Guide slug | Live URL pattern | Snapshot |
 |---|---|---|---|
 | Protocols: authplayground, explore, oauth | protocols | https://developer.pingidentity.com/identity-for-ai/protocols/*.md | references/snapshots/protocols.md |
-| Integrations: gemini, identity, mcp | integrations | https://developer.pingidentity.com/identity-for-ai/integrations/*.md | live-only |
-| Identity: agents, mcp, oauth | identity | https://developer.pingidentity.com/identity-for-ai/identity/*.md | live-only |
-| Agents: agents, learn, use | agents | https://developer.pingidentity.com/identity-for-ai/agents/*.md | live-only |
+| Integrations: gemini, identity, mcp | integrations | https://developer.pingidentity.com/identity-for-ai/integrations/*.md | references/snapshots/integrations.md |
+| Identity: agents, mcp, oauth | identity | https://developer.pingidentity.com/identity-for-ai/identity/*.md | references/snapshots/identity.md |
+| Agents: agents, learn, use | agents | https://developer.pingidentity.com/identity-for-ai/agents/*.md | references/snapshots/agents.md |
 | Use Cases: agents, least, privilege | use-cases | https://developer.pingidentity.com/identity-for-ai/use-cases/*.md | references/snapshots/use-cases.md |
 | Getting Started: identity, about, comprehensive | getting-started | https://developer.pingidentity.com/identity-for-ai/getting-started/*.md | references/snapshots/getting-started.md |
 | Glossary: identity, key, agent | glossary | https://developer.pingidentity.com/identity-for-ai/glossary/*.md | references/snapshots/glossary.md |

@@ -1,14 +1,17 @@
 ---
-title: Release Notes
-description: New features and improvements in PingAuthorize. Updated June 2026.
+title: Release notes
+description: A record of new features and improvements made in each version of PingAuthorize.
 component: pingauthorize
 version: 11.1
 page_id: pingauthorize:release_notes:paz_release_notes_legacy_home
 canonical_url: https://docs.pingidentity.com/pingauthorize/11.1/release_notes/paz_release_notes_legacy_home.html
 llms_txt: https://docs.pingidentity.com/pingauthorize/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: June 23, 2026
+revdate: 2026-10-12T19:57:44Z
 section_ids:
+  pingauthorize-11-1-0-1-september-2026: PingAuthorize 11.1.0.1 (September 2026)
+  fixed-a-security-issue: Fixed a security issue
+  fixed-an-issue-with-gateway-api-request-timeouts: Fixed an issue with Gateway API request timeouts
   pingauthorize-11-1-0-0-june-2026: PingAuthorize 11.1.0.0 (June 2026)
   added-runtime-support-for-java-25: Added runtime support for Java 25
   added-aws-iam-authentication-for-elasticache-and-s3: Added AWS IAM authentication for ElastiCache and S3
@@ -34,19 +37,24 @@ section_ids:
   fixed-a-manage-profile-replace-profile-error: Fixed a manage-profile replace-profile error
   fixed-manage-profile-generate-profile-excluding-obscured-properties: Fixed manage-profile generate-profile excluding obscured properties
   fixed-a-server-shutdown-delay-issue: Fixed a server shutdown delay issue
+  pingauthorize-11-0-0-4-september-2026: PingAuthorize 11.0.0.4 (September 2026)
+  added-correlation-id-to-gateway-request-and-response-logs-2: Added correlation ID to gateway request and response logs
+  fixed-a-security-issue-2: Fixed a security issue
+  fixed-an-issue-with-gateway-api-request-timeouts-2: Fixed an issue with Gateway API request timeouts
+  pingauthorize-11-0-0-3-august-2026: PingAuthorize 11.0.0.3 (August 2026)
+  version-increased-for-administrative-purposes: Version increased for administrative purposes
   pingauthorize-11-0-0-2-march-2026: PingAuthorize 11.0.0.2 (March 2026)
   added-a-policy-query-logger-sdk-extension: Added a Policy Query Logger SDK extension
   fixed-an-issue-with-admin-console-icons-in-closed-environments: Fixed an issue with admin console icons in closed environments
   fixed-a-server-startup-warning-related-to-slf4j: Fixed a server startup warning related to SLF4J
   pingauthorize-11-0-0-1-march-2026: PingAuthorize 11.0.0.1 (March 2026)
-  version-increased-for-administrative-purposes: Version increased for administrative purposes
+  version-increased-for-administrative-purposes-2: Version increased for administrative purposes
   pingauthorize-11-0-0-0-december-2025: PingAuthorize 11.0.0.0 (December 2025)
   converted-the-pingauthorize-admin-console-to-react: Converted the PingAuthorize admin console to React
   step-up-authentication-for-apis: Step-up authentication for APIs
   new-json-manipulation-functions-for-spel: New JSON manipulation functions for SpEL
   added-support-for-rsassa-pss-signing-algorithms: Added support for RSASSA-PSS signing algorithms
   added-http-metrics-to-the-periodic-stats-logger: Added HTTP metrics to the Periodic Stats Logger
-  standardized-url-decoding-behavior: Standardized URL decoding behavior
   documented-the-monitor-history-plugin: Documented the Monitor History plugin
   aws-java-sdk-upgrade: AWS Java SDK upgrade
   enhanced-flexibility-for-policy-query-requests: Enhanced flexibility for policy query requests
@@ -62,17 +70,33 @@ section_ids:
   fixed-an-issue-with-policy-dependency-pagination: Fixed an issue with policy dependency pagination
   fixed-an-issue-with-http-service-timeouts: Fixed an issue with HTTP service timeouts
   fixed-a-policy-editor-startup-issue: Fixed a Policy Editor startup issue
-  fixed-inconsistent-url-decoding: Fixed inconsistent URL decoding
+  fixed-inconsistent-url-decoding-behavior: Fixed inconsistent URL decoding behavior
   fixed-an-issue-with-profile-replacement-in-topologies: Fixed an issue with profile replacement in topologies
   fixed-an-issue-with-performlocalcleanup-in-interactive-mode: Fixed an issue with --performLocalCleanup in interactive mode
-  archive: Previous Releases
+  archive: Previous releases
 ---
 
-# Release Notes
+# Release notes
 
-New features and improvements in PingAuthorize. Updated June 2026.
+New features and improvements in PingAuthorize. Updated October 2026.
 
 Subscribe to get automatic updates: [icon: rss-square, set=fa][PingAuthorize Release Notes RSS feed](paz_release_notes_legacy_home.xml)
+
+## PingAuthorize 11.1.0.1 (September 2026)
+
+### Fixed a security issue
+
+Security PAZ-24037
+
+We fixed a security issue. Learn more in the security advisory [SECADV057](https://support.pingidentity.com/s/article/SECADV057-PingAuthorize-Cross-Request-Response-Leakage) (requires sign-on).
+
+### Fixed an issue with Gateway API request timeouts
+
+Fixed
+
+We fixed an issue where Gateway API requests to an upstream API server could abort after 30 seconds, ignoring configured timeout properties if they were set to a value of 30 seconds or more. The API security gateway now honors the `connect-timeout` and `response-timeout` values configured on the associated external server.
+
+As a result, request handling can now impact concurrent traffic in Gateway mode. If concurrent traffic results in slower responses, increase the [`num-request-handlers`](../pingauthorize_server_administration_guide/paz_api_security_gw_performance_tuning.html) value to allow for higher concurrency.
 
 ## PingAuthorize 11.1.0.0 (June 2026)
 
@@ -260,6 +284,38 @@ Fixed DS-51291
 
 We fixed an issue where a large number of peer connections or unresponsive peers could cause excessively long server shutdown times.
 
+## PingAuthorize 11.0.0.4 (September 2026)
+
+### Added correlation ID to gateway request and response logs
+
+Improved PAZ-22371
+
+API security gateway request and response logs now include the correlation ID and request ID associated with each client request, enabling end-to-end correlation with policy decision and service logs.
+
+Learn more in [Managing HTTP correlation IDs](../pingauthorize_server_administration_guide/paz_manage_http_corr_ids.html).
+
+### Fixed a security issue
+
+Security PAZ-24037
+
+We fixed a security issue. Learn more in the security advisory [SECADV057](https://support.pingidentity.com/s/article/SECADV057-PingAuthorize-Cross-Request-Response-Leakage) (requires sign-on).
+
+### Fixed an issue with Gateway API request timeouts
+
+Fixed
+
+We fixed an issue where Gateway API requests to an upstream API server could abort after 30 seconds, ignoring configured timeout properties if they were set to a value of 30 seconds or more. The API security gateway now honors the `connect-timeout` and `response-timeout` values configured on the associated external server.
+
+As a result, request handling can now impact concurrent traffic in Gateway mode. If concurrent traffic results in slower responses, increase the [`num-request-handlers`](../pingauthorize_server_administration_guide/paz_api_security_gw_performance_tuning.html) value to allow for higher concurrency.
+
+## PingAuthorize 11.0.0.3 (August 2026)
+
+### Version increased for administrative purposes
+
+Info
+
+The PingAuthorize version number was incremented because of changes released for PingDirectory. There are no release notes for this version of PingAuthorize.
+
 ## PingAuthorize 11.0.0.2 (March 2026)
 
 ### Added a Policy Query Logger SDK extension
@@ -292,7 +348,7 @@ We resolved the following server startup warning: `SLF4J(E): A service provider 
 
 Info
 
-The PingAuthorize version number was incremented due to changes released for PingDirectory. There are no release notes for this version of PingAuthorize.
+The PingAuthorize version number was incremented because of changes released for PingDirectory. There are no release notes for this version of PingAuthorize.
 
 ## PingAuthorize 11.0.0.0 (December 2025)
 
@@ -355,20 +411,6 @@ New PAZ-17947
 We've added support for HTTP metrics in the Periodic Stats Logger, offering deeper insights into HTTP request flow and PingAuthorize Server performance. When enabled, the server captures detailed statistics at rolling 1-minute, 5-minute, and 15-minute intervals to help monitor short-term spikes and longer-term trends.
 
 Learn more in [Enabling HTTP metrics in the Periodic Stats Logger](../pingauthorize_server_administration_guide/paz_enable_http_metrics_stats_logger.html).
-
-### Standardized URL decoding behavior
-
-Info PAZ-20178
-
-We've standardized URL decoding behavior:
-
-* **Policy evaluation**: The PingAuthorize Server now decodes the incoming request URL, including the path and query parameters, exactly once before policy evaluation.
-
-* **Request forwarding**: The PingAuthorize Server now forwards the original, unmodified request URL to the backend resource server.
-
-|   |                                                                                                                                                                                                                                                                                                                                                                                                                                          |
-| - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | Backend resource servers must now perform their own URL decoding in accordance with [RFC-3986](https://datatracker.ietf.org/doc/html/rfc3986). If your resource servers previously relied on PingAuthorize to forward fully-decoded request URLs, now these servers might fail to process encoded URLs correctly. You must update these servers to handle encoded URLs or deploy a proxy to decode traffic before it reaches the server. |
 
 ### Documented the Monitor History plugin
 
@@ -486,11 +528,21 @@ Fixed PAZ-19762
 
 We've fixed an issue in the admin point application configuration that could prevent the Policy Editor from starting properly.
 
-### Fixed inconsistent URL decoding
+### Fixed inconsistent URL decoding behavior
 
 Fixed PAZ-20178
 
 We've fixed an issue where inconsistent URL decoding could allow double-URL-encoded requests to bypass path-based access controls in API security gateway mode.
+
+URL decoding behavior is now standardized:
+
+* **Policy evaluation**: The PingAuthorize Server now decodes the incoming request URL, including the path and query parameters, exactly once before policy evaluation.
+
+* **Request forwarding**: The PingAuthorize Server now forwards the original, unmodified request URL to the backend resource server.
+
+|   |                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | Backend resource servers must now perform their own URL decoding in accordance with [RFC-3986](https://datatracker.ietf.org/doc/html/rfc3986). If your resource servers previously relied on PingAuthorize to forward fully-decoded request URLs, now these servers might fail to process encoded URLs correctly. You must update these servers to handle encoded URLs or deploy a proxy to decode traffic before it reaches the server. |
 
 ### Fixed an issue with profile replacement in topologies
 
@@ -504,7 +556,7 @@ Fixed DS-48553
 
 Running `remove-defunct-server --performLocalCleanup` in interactive mode no longer attempts to establish a connection to another live server in the topology.
 
-## Previous Releases
+## Previous releases
 
 For information about enhancements and issues resolved in previous major and minor releases of PingAuthorize, refer to the following:
 
@@ -512,4 +564,4 @@ For information about enhancements and issues resolved in previous major and min
 
 * [10.2](https://docs.pingidentity.com/pingauthorize/10.2/release_notes/paz_release_notes_legacy_home.html)
 
-* [10.1](https://docs.pingidentity.com/pingauthorize/10.1/release_notes/paz_release_notes_legacy_home.html)
+* [10.1](https://cdn-docs.pingidentity.com/archive/pdf/pingauthorize/10.1/pingauthorize-10.1.pdf)

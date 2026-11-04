@@ -1,12 +1,12 @@
 ---
 title: PingOne MFA Connector
-description: PingOne MFA is a cloud-based multi-factor authentication (MFA) service that protects an organization's network, applications, and data resources while providing secure and seamless experiences for your customers and users.
+description: Configure the PingOne MFA connector in PingOne DaVinci to add MFA flows, user enrollment, and passwordless authentication to your applications
 component: connectors
 page_id: connectors::p1_mfa_connector
 canonical_url: https://docs.pingidentity.com/connectors/p1_mfa_connector.html
 llms_txt: https://docs.pingidentity.com/connectors/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: August 19, 2024
+revdate: 2026-07-09T00:00:00Z
 section_ids:
   setup: Setup
   resources: Resources
@@ -60,10 +60,6 @@ section_ids:
 
 # PingOne MFA Connector
 
-PingOne MFA is a cloud-based multi-factor authentication (MFA) *(tooltip: \<div class="paragraph">
-\<p>An electronic authentication method where a user is granted access only after presenting two or more verification factors for authentication.\</p>
-\</div>)* service that protects an organization's network, applications, and data resources while providing secure and seamless experiences for your customers and users.
-
 The PingOne MFA connector supports the use of:
 
 * Customer-friendly authentication flows to increase security without adding unnecessary friction to the end user experience
@@ -84,19 +80,15 @@ The PingOne MFA connector supports the use of:
 
 * PingOne documentation:
 
-  * [Introduction to PingOne MFA](https://docs.pingidentity.com/pingone/getting_started_with_pingone/p1mfa__introduction.html)
+  * [Introduction to strong authentication (MFA)](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_intro_to_strong_authentication.html)
 
-  * [Getting started with PingOne MFA](https://docs.pingidentity.com/pingone/getting_started_with_pingone/p1mfa_getting_started.html)
+  * [Setting up an environment for strong authentication (MFA)](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_create_environment_strong_authentication_start.html)
 
   * [Adding an application](https://docs.pingidentity.com/pingone/applications/p1_applications_add_applications.html)
-
-* DaVinci documentation:
 
   * [Introduction to PingOne](https://docs.pingidentity.com/pingone/introduction_to_pingone/p1_introduction.html)
 
   * [Getting started with PingOne](https://docs.pingidentity.com/pingone/getting_started_with_pingone/p1_getting_started.html)
-
-  * [Adding an application](https://docs.pingidentity.com/pingone/applications/p1_applications_add_applications.html)
 
 ### Requirements
 
@@ -112,7 +104,7 @@ To use the connector, you'll need:
 
 #### Setting up your PingOne MFA environment
 
-Follow the instructions in [Getting started with PingOne MFA](https://docs.pingidentity.com/pingone/getting_started_with_pingone/p1mfa_getting_started.html).
+Follow the instructions in [Setting up an environment for strong authentication (MFA)](https://docs.pingidentity.com/pingone/strong_authentication_mfa/p1_create_environment_strong_authentication_start.html).
 
 #### Choosing a PingOne worker app
 
@@ -158,7 +150,7 @@ To add a worker app:
 
 ### Setting up the connector
 
-In DaVinci, add a **PingOne MFA** connection. Learn more in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html).
+In PingOne DaVinci, add a **PingOne MFA** connection. Learn more in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html).
 
 #### Connector settings
 
@@ -715,7 +707,7 @@ Create devices to use during authentication.
 > - * Enter Device Type textField
 >   * Activation Status dropDown
 >
->   The current status of the device. If a device has an ACTIVATION\_REQUIRED status, activate it before you add it as a trusted device.
+>   The current status of the device. If a device has an ACTIVATION_REQUIRED status, activate it before you add it as a trusted device.
 >
 >   * ACTIVE
 >
@@ -1984,7 +1976,7 @@ Create authentication experiences with virtual or physical devices.
 >
 >       * string
 >
->         * STRONG\_AUTHENTICATION
+>         * STRONG_AUTHENTICATION
 >
 >         * TRANSACTION
 >
@@ -2976,7 +2968,7 @@ Create a single-use code to authenticate a user during sign-on using a mobile ap
 >
 >   * REQUIRED (Default)
 >
->   * NOT\_REQUIRED
+>   * NOT_REQUIRED
 >
 > - Mobile Client Context variableInputList
 >
@@ -3655,7 +3647,7 @@ Cancel the authentication process for a specific device.
 >
 >   The reason that the authentication was canceled.
 >
->   Possible values are SIGNOUT, CHANGE\_DEVICE, ADD\_DEVICE. Any other reason will get the value - DEFAULT.
+>   Possible values are SIGNOUT, CHANGE_DEVICE, ADD_DEVICE. Any other reason will get the value - DEFAULT.
 >
 > * default object
 >
@@ -3762,11 +3754,11 @@ Create devices to use during authentication.
 >
 > - Device Type textField
 >
->   The type of device used during authentication. Supported values are: SMS, EMAIL, VOICE, TOTP, YUBIKEY, OATH\_TOKEN, PLATFORM, SECURITY\_KEY, FIDO2.
+>   The type of device used during authentication. Supported values are: SMS, EMAIL, VOICE, TOTP, YUBIKEY, OATH_TOKEN, PLATFORM, SECURITY_KEY, FIDO2.
 >
 > - Activation Status dropDown
 >
->   The current status of the device. If a device has an ACTIVATION\_REQUIRED status, activate it before you add it as a trusted device.
+>   The current status of the device. If a device has an ACTIVATION_REQUIRED status, activate it before you add it as a trusted device.
 >
 >   * ACTIVE
 >

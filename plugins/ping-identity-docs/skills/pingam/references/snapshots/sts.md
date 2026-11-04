@@ -7,6 +7,7 @@ page_id: pingam:sts:sts-using-console
 canonical_url: https://docs.pingidentity.com/pingam/8.1/sts/sts-using-console.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 keywords: ["Security Token Service (STS)", "Rest"]
 page_aliases: ["sts-guide:sts-using-console.adoc"]
 section_ids:
@@ -45,6 +46,7 @@ page_id: pingam:sts:sts-consume-rest
 canonical_url: https://docs.pingidentity.com/pingam/8.1/sts/sts-consume-rest.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 keywords: ["Security Token Service (STS)", "Rest", "JSON", "Java"]
 page_aliases: ["sts-guide:sts-consume-rest.adoc"]
 section_ids:
@@ -275,6 +277,7 @@ page_id: pingam:sts:sts-custom-token-types
 canonical_url: https://docs.pingidentity.com/pingam/8.1/sts/sts-custom-token-types.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 page_aliases: ["sts-guide:sts-custom-token-types.adoc"]
 section_ids:
   sts-consume-rest-custom-validator: Develop custom token type validator classes
@@ -448,6 +451,7 @@ page_id: pingam:sts:chap-sts-introduction
 canonical_url: https://docs.pingidentity.com/pingam/8.1/sts/chap-sts-introduction.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 keywords: ["Security Token Service (STS)"]
 page_aliases: ["sts-guide:chap-sts-introduction.adoc"]
 section_ids:
@@ -523,6 +527,7 @@ page_id: pingam:sts:sts-query-validate-cancel
 canonical_url: https://docs.pingidentity.com/pingam/8.1/sts/sts-query-validate-cancel.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 keywords: ["Security Token Service (STS)", "Rest", "SAML 2.0", "OpenID Connect (OIDC)", "JSON"]
 page_aliases: ["sts-guide:sts-query-validate-cancel.adoc"]
 section_ids:
@@ -697,6 +702,7 @@ page_id: pingam:sts:chap-sts-reference
 canonical_url: https://docs.pingidentity.com/pingam/8.1/sts/chap-sts-reference.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 keywords: ["Security Token Service (STS)"]
 page_aliases: ["sts-guide:chap-sts-reference.adoc"]
 ---
@@ -716,6 +722,7 @@ page_id: pingam:sts:preface
 canonical_url: https://docs.pingidentity.com/pingam/8.1/sts/preface.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 keywords: ["Security Token Service (STS)"]
 page_aliases: ["index.adoc", "sts-guide:preface.adoc"]
 ---
@@ -755,6 +762,7 @@ page_id: pingam:sts:sts-configure-rest-properties
 canonical_url: https://docs.pingidentity.com/pingam/8.1/sts/sts-configure-rest-properties.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 keywords: ["Security Token Service (STS)", "Rest", "Configuration", "Authentication", "Certificates"]
 page_aliases: ["sts-guide:sts-configure-rest-properties.adoc"]
 section_ids:
@@ -1197,6 +1205,7 @@ page_id: pingam:sts:sts-rest
 canonical_url: https://docs.pingidentity.com/pingam/8.1/sts/sts-rest.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 keywords: ["Security Token Service (STS)", "Rest", "SAML 2.0"]
 page_aliases: ["sts-guide:sts-rest.adoc"]
 section_ids:
@@ -1399,6 +1408,7 @@ page_id: pingam:sts:sts-publish-service
 canonical_url: https://docs.pingidentity.com/pingam/8.1/sts/sts-publish-service.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 keywords: ["Security Token Service (STS)", "Rest", "Customization", "JSON"]
 page_aliases: ["sts-guide:sts-publish-service.adoc"]
 section_ids:

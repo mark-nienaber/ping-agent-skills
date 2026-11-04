@@ -852,3 +852,1197 @@ This command will remove all resources except PVC and PV objects associated with
 ### Example Configurations
 
 Advanced Helm examples now live in Helm section at [Helm Chart Examples](https://developer.pingidentity.com/helm/examples/index.html). Please review [Getting Started Page](../get-started/introduction.html) before trying them.
+
+---
+
+---
+title: Kubernetes Basics
+description: Learn core Kubernetes terminology and commands, such as clusters, pods, deployments, statefulsets, and services, for deploying Ping products
+component: devops
+page_id: devops::reference/k8sBasics
+canonical_url: https://developer.pingidentity.com/devops/reference/k8sBasics.html
+llms_txt: https://developer.pingidentity.com/devops/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+section_ids:
+  devops-kubernetes: Kubernetes
+  devops-terms: Terms
+  devops-deployments: Deployments
+  devops-statefulsets: Statefulsets
+  devops-commands: Commands
+  devops-viewing-resources: Viewing resources
+  devops-debugging: Debugging
+---
+
+# Kubernetes Basics
+
+Although this document cannot cover all aspects of these tools, new Kubernetes users might find other technical documentation too involved for purposes of using Ping Identity images. This document aims to equip new users with helpful terminology in simple terms, with a focus on relevant commands.
+
+|   |                                                                                                                                                                                                                                                                                                       |
+| - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | This overview uses Ping Identity images and practices as a guide, but generally applies to any interactions in Kubernetes. With these assumptions, this document might feel incomplete or inaccurate to veterans. If you would like to contribute to this document, feel free to open a pull request! |
+
+## Kubernetes
+
+### Terms
+
+**Cluster** - The ice cube tray
+
+You can consider a Kubernetes cluster as a set of resources into which you can deploy containers. A cluster can be as small as your local computer or as large as hundreds of virtual machines (VMs), called **nodes**, in a data center. Interaction with the cluster is through an API requiring authentication and role-based access control (RBAC) that allows the actions necessary within the cluster.
+
+In a cloud provider Kubernetes cluster, such as Amazon Web Services (AWS) EKS, Azure AKS, or Google GKE, the cluster can span multiple Availability Zones (AZs), but only *one* region. In AWS terms, a cluster can be in the region us-west-2 but have nodes in the AZs us-west-2a, us-west-2b, and us-west-2c. Kubernetes provides high availability by distributing applications with multiple instances of containers, called replicas, across available AZs.
+
+**Nodes** - The individual ice cube spaces in the tray
+
+The nodes are the pieces that provide allocatable resources, such as CPU and memory, and make up a cluster. Typically, these are VMs, and for example in AWS, they would be EC2 instances.
+
+**Namespace** - A loosely defined slice of the cluster
+
+Namespaces are intended to be a virtual delimiter for deploying grouped applications. While it is possible for pods to communicate across namespaces, policies can be put in place with third-party services to prevent this communication.
+
+|   |                                                                                      |
+| - | ------------------------------------------------------------------------------------ |
+|   | You can allocate resource limits available to a namespace, but this is not required. |
+
+**Context** - A definition in your \~/.kube/config file that specifies the cluster and namespace where your `kubectl` commands will be executed.
+
+**Deployments and Statefulsets** - The water that fills ice cube spots.
+
+Applications are deployed as Deployments or Statefulsets. You can consider both of these objects as controllers that define and manage the following:
+
+* Name of an application
+
+* Number of instances (pods) of an application (replicas)
+
+* Persistent storage
+
+Though they are similar, Deployments differ from Statefulsets in a few fundamental ways.
+
+#### Deployments
+
+* Deployments are typically used for stateless applications - if a pod is lost or removed, any other pod in the same deployment can take on the activity the lost pod was performing.
+
+* Pod names are inconsequential because each pod is identical with no state information required. As a result, the name of the pod does not matter and names are suffixed with a randomly generated string.
+
+* The order in which pods are started is also inconsequential. When starting a deployment all pods are launched at the same time.
+
+* When updating a deployment, you can cycle one, many, or all pods at the same time.
+
+#### Statefulsets
+
+StatefulSets are more structured in the manner in which the pods are handled.
+
+* StatefulSets - as the name implies - are used for applications in which a known state is required. For example, many clustered products have an instance in the cluster that is considered the leader and all pods in the set need to know which pod is acting in this capacity. A controlled scale-up and scale-down process is needed to maintain known state as application nodes or instances join or leave the cluster or are restarted.
+
+* Pod names are *sticky* in that each pod in the StatefulSet has a known name, with each pod receving an ordinal indicator (unlike the random pod name found in Deployments). For example, a StatefulSet will have pod names similar to: `myping-pingdirectory-0`, `myping-pingdirectory-1`, and `myping-pingdirectory-2`
+
+* Controlled startup with health priority: unlike a Deployment, a StatefulSet deploys the first instance (pod name appended with -0) and waits for it to be healthy before adding another to the group.
+
+* Updates occur to instances in a rolling fashion, one-at-a-time, starting with the most recent pod (e.g., `myping-pingdirectory-2`) first.
+
+* With a known Pod name, persistent storage can be maintained for each pod. After persistent storage is created and assigned, the same storage object is provided to the same-named pod every time.
+
+**Pod** - The molecules that make up the water
+
+A Deployment/StatefulSet specifies the *number* of pods to run for a given application. For example, you can have a `pingfederate-engine` deployment that calls for three replicas with two CPUs and 2 GB of memory, but you cannot make one engine larger or smaller than the others.
+
+Like a molecule, a pod can consist of just one container, or it can have multiple containers, called sidecars. For example, your pod can have a PingFederate container as the main process and a sidecar container, such as Splunk Universal Forwarder, to export logs. All containers in a pod, including these sidecars, share a namespace and IP address.
+
+Pods are are considered disposable and by default do not persist any data. To maintain state or data, external storage or a database of some kind is needed.
+
+**PersistentVolume (PV)** and **PersistentVolumeClaim (PVC)** - A virtual external storage device or definition attached to a Pod
+
+The PV is the storage object and PVC is the claim that a given pod makes for that storage.
+
+**Service** - A slim loadbalancer within the cluster
+
+Pods can come and go, be disposed of or restarted. Every time a Pod is started, it will receive an IP address which often changes. In order to access the application hosted in the Pod, a fixed, known location or address is required.
+
+Services provide a single IP address and cluster-internal DNS resolution that is placed in front of Deployments and Statefulsets to distribute traffic. For service-to-service communication, such as PingFederate using PingDirectory as a user store, the application should be configured to point to a service name and port rather than the individual pods. Services are given fully-qualified domain names (FQDNs) in a cluster. Within the same namespace, services are accessible by their name (`https://myping-pingdirectory:443`), but across namespaces, you must be more explicit (`https://myping-pingdirectory.<namespace>:443`). A FQDN would be `https://myping-pingdirectory.<namespace>.svc.cluster.local`.
+
+**Ingress** - A network definition used to expose an application external to the cluster. In order for an ingress to work, you need an Ingress Controller.
+
+A common pattern is a deployment of Nginx pods fronted by a physical loadbalancer. The client application traffic hits the loadbalancer first, then is forwarded to Nginx. The header information (hostname and path) of the request is evaluated and forwarded to a corresponding application service in the cluster.
+
+For example, suppose a PingFederate ingress has a host name of **myping-pingfederate-engine.pingdemo.example**. If a client application makes a request to `https://myping-pingfederate-engine.pingdemo.example/pf/heartbeat.ping`, the traffic flow of the request would be:
+
+* Client -> LoadBalancer -> Nginx k8s Service -> Nginx Pod -> Pingfederate-engine k8s Service -> Pingfederate-engine pod
+
+### Commands
+
+To see which cluster and namespace you are using, use the [kubectx](https://github.com/ahmetb/kubectx#installation) tool.
+
+Alternatively, you can run the following commands:
+
+```
+# Retrieve and set context
+kubectl config get-contexts
+kubectl config current-context
+kubectl config use-context my-cluster-name
+
+# Set Namespace
+kubectl config set-context --current --namespace=<namespace>
+```
+
+#### Viewing resources
+
+You can use [k9s](https://github.com/derailed/k9s), which is a UI designed to run in a terminal.
+
+If you cannot use k9s, review the standard commands here.
+
+You can run `kubectl get` for any [resource type](https://kubernetes.io/docs/reference/kubectl/overview/#resource-types), such as Pods, Deployments, Statefulsets, and PVCs. Many resources have short names:
+
+* `po` = pods
+
+* `deploy` = Deployments
+
+* `sts` = Statefulsets
+
+* `ing` = ingresses
+
+* `pvc` = persistentvolumeclaims
+
+The most common command is `get pods`:
+
+`kubectl get pods`
+
+To show anything that the container prints to `stdout`, use `logs`:
+
+`kubectl logs -f <pod-name>`
+
+To show the logs of a pod with multiple containers, specify the container for which you wish to view logs with the `-c` option:
+
+`kubectl logs -f <pod-name> -c <container-name>`
+
+To show the logs of a crashed pod (`RESTARTS != 0`):
+
+`kubectl logs -f <pod-name> --previous`
+
+To see available host names by ingress:
+
+`kubectl get ing`
+
+#### Debugging
+
+When a pod crashes unexpectedly, you can mine information about the cause with the following commands.
+
+To view logs of the crash:
+
+`kubectl logs -f <pod-name> --previous`
+
+To view the reason for exit:
+
+`kubectl describe pod <pod-name>`
+
+When looking at `describe`, there are two main sections of the output to note:
+
+* lastState - shows the exit code and the reason for exit.
+
+* Events - this list is most helpful when your pod is not being created. It might be stuck in pending state if:
+
+  * There are not enough resources available for the pod to be created.
+
+  * Something about the pod definition is incorrect, such as a missing volume or secret.
+
+Common exit codes associated with containers are:
+
+**Table of Exit Codes and Descriptions**
+
+| Exit Code     | Description                                                                                            |
+| ------------- | ------------------------------------------------------------------------------------------------------ |
+| Exit Code 0   | Absence of an attached foreground process                                                              |
+| Exit Code 1   | Indicates failure due to application error                                                             |
+| Exit Code 137 | Indicates failure as container received SIGKILL (manual intervention or 'oom-killer' \[OUT-OF-MEMORY]) |
+| Exit Code 139 | Indicates failure as container received SIGSEGV                                                        |
+| Exit Code 143 | Indicates failure as a container received SIGTERM                                                      |
+
+---
+
+---
+title: PingOne Worker Application and User Configuration
+description: Configure a PingOne Worker Application and user roles for Authorization Code, Implicit, or Client Credentials authentication flows
+component: devops
+page_id: devops::reference/pingone-config
+canonical_url: https://developer.pingidentity.com/devops/reference/pingone-config.html
+llms_txt: https://developer.pingidentity.com/devops/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+section_ids:
+  devops-pingone-worker-app-configuration: PingOne Worker Application Configuration
+  devops-authorization-code-w-pkce-flow-settings: Authorization Code (w/ PKCE) Flow Settings
+  devops-implicit-flow-settings: Implicit Flow Settings
+  devops-client-credentials-flow-settings: Client Credentials Flow Settings
+  devops-worker-app-roles-settings: Worker App Roles Settings
+  devops-pingone-user-config: PingOne User Config
+---
+
+# PingOne Worker Application and User Configuration
+
+## PingOne Worker Application Configuration
+
+To manage PingOne resources using credentials other than your own, you are required to have a PingOne Worker App.
+
+There are three options to authenticate to PingOne from Ping CLI (`pingcli`):
+
+* [Authorization Code (w/ PKCE) Flow](#devops-authorization-code-w-pkce-flow-settings) (Recommended and most secure) - Using a PingOne Admin User
+
+* [Implicit Flow](#devops-implicit-flow-settings) - Using a PingOne Admin User
+
+* [Client Credentials Flow](#devops-client-credentials-flow-settings) (Easiest, but most insecure, as a user isn't required)
+
+Additionally, you must set up the proper [roles for your Worker App](#devops-worker-app-roles-settings)
+
+### Authorization Code (w/ PKCE) Flow Settings
+
+The following image shows an example of a Worker App setup for Authorization Code (w/ PKCE) Flow:
+
+> **Collapse: Expand Screenshot**
+>
+> ![pingone worker app authorization code](../_images/pingone-worker-app-authorization_code.png)
+
+### Implicit Flow Settings
+
+The following image shows an example of a Worker App setup for Implicit Flow:
+
+> **Collapse: Expand Screenshot**
+>
+> ![pingone worker app implicit](../_images/pingone-worker-app-implicit.png)
+
+### Client Credentials Flow Settings
+
+The following image shows an example of a Worker App setup for Client Credentials Flow:
+
+> **Collapse: Expand Screenshot**
+>
+> ![pingone worker app client credentials](../_images/pingone-worker-app-client-credentials.png)
+
+### Worker App Roles Settings
+
+The following image shows an example of the minimum roles required. Typically, these are set up by default.
+
+> **Collapse: Expand Screenshot**
+>
+> ![pingone worker app roles](../_images/pingone-worker-app-roles.png)
+
+## PingOne User Config
+
+When using Authorization Code or Implicit Flows, you must sign on with an Administrative user to use the Worker App.
+
+It is important to add the proper administrative roles to the user. The following image shows an example of this configuration:
+
+> **Collapse: Expand Screenshot**
+>
+> ![pingone user roles](../_images/pingone-user-roles.png)
+
+---
+
+---
+title: Running product containers with a read-only root filesystem
+description: Configure a Ping product container, using PingDirectory as an example, to run with a read-only root filesystem via emptyDir volumes and Kustomize
+component: devops
+page_id: devops::reference/readOnlyFilesystem
+canonical_url: https://developer.pingidentity.com/devops/reference/readOnlyFilesystem.html
+llms_txt: https://developer.pingidentity.com/devops/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+section_ids:
+  devops-overview: Overview
+  devops-high-level-process: High-level process
+  devops-prerequisites: Prerequisites
+  devops-file-explanation: File explanation
+  devops-process: Process
+  devops-diagram: Diagram
+---
+
+# Running product containers with a read-only root filesystem
+
+## Overview
+
+In some environments, there is a requirement that the container filesystem be read-only. Our product images are maturing to support this capability natively in the future. In the meantime, this guide will explain the overall concepts and provide an example with PingDirectory. The other product images can operate in a similar manner.
+
+|   |                                                                                                                                         |
+| - | --------------------------------------------------------------------------------------------------------------------------------------- |
+|   | This guide is intended to provide an example implementation of solving this problem; your situation might require a different approach. |
+
+|   |                                                                                                                                                                                                                                                                                                                                                       |
+| - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | An excellent starting point for understanding what goes on with our containers as they are instantiated can be found in [this video](https://videos.pingidentity.com/detail/videos/devops/video/6314748082112/ping-product-docker-image-exploration). It is highly recommended that you take the time to view it prior to working through this guide. |
+
+### High-level process
+
+In Ping product containers, the layered approach of bringing the environment and configuration parameters into the container at launch requires merging of files from server profiles and possibly other locations before the product is launched. This process means that files are modified at runtime, and a read-only root filesystem blocks this action. The overall approach is to use [emptyDir](https://kubernetes.io/docs/concepts/storage/volumes/#emptydir) volumes to overlay the directories that need modification, allowing the hook scripts to run as normal against the volume rather than the container filesystem. In order to get everything necessary for the scripts in place, an init container (using the same image as the product container) is launched and the files necessary are copied to the shared volume before starting the product container.
+
+## Prerequisites
+
+* [kustomize](https://kubectl.docs.kubernetes.io/installation/kustomize/) CLI utility to serve as a [post-renderer](https://helm.sh/docs/topics/advanced/#post-rendering) for Helm.
+
+## File explanation
+
+In the **30-helm/read-only-filesystem** folder of the [Getting Started repository](https://github.com/pingidentity/pingidentity-devops-getting-started) is a values file and kustomize directory. First, we will explore the the `pd-values.yaml` file; inline comments explain what is going on:
+
+> **Collapse:&#x20;**
+>
+> ```
+> initContainers:
+> pd-init:
+> name: runtime-init
+> # CHANGEMETAG TO VERSION NEEDED
+> # Init container uses the same image as the product container and therefore versions much match
+> image: pingidentity/pingdirectory:CHANGEMETAG
+> env:
+> # Override the startup command so the product is not launched in the init container
+> - name: STARTUP_COMMAND
+> value: "ls"
+> # Use a name different from /opt/staging for holding the copied files from the product image into the emptyDir volume
+> - name: STAGING_DIR
+> value: "/opt/handoff"
+> # Just in case there is a .env we will need
+> - name: CONTAINER_ENV
+> value: "/opt/handoff/.env"
+> # Another flag for preventing the product from being launched
+> - name: STARTUP_FOREGROUND_OPTS
+> value: ""
+> envFrom:
+> # CHANGEMERELEASE TO MATCH HELM RELEASE NAME
+> - configMapRef:
+> name: CHANGEMERELEASE-global-env-vars
+> optional: true
+> - configMapRef:
+> name: CHANGEMERELEASE-env-vars
+> optional: true
+> - configMapRef:
+> name: CHANGEMERELEASE-pingdirectory-env-vars
+> - secretRef:
+> name: devops-secret
+> optional: true
+> - secretRef:
+> name: CHANGEME-pingdirectory-git-secret
+> optional: true
+> volumeMounts:
+> # emptyDir volume: /opt/staging will be copied from the init container to this volume
+> # This volume will be mounted as /opt/staging in the product container
+> - mountPath: /opt/handoff
+> name: staging
+> readOnly: false
+> # The location for the license file varies by product
+> # See https://devops.pingidentity.com/how-to/existingLicense/ for more information
+> # The license file is required for the init container to operate
+> - name: pingdirectory-license
+> mountPath: "/opt/staging/pd.profile/server-root/pre-setup/PingDirectory.lic"
+> subPath: PingDirectory.lic
+> # Also an emptyDir
+> - name: tmp
+> mountPath: "/tmp"
+> readOnly: false
+> # Also an emptyDir
+> - name: init-runtime
+> mountPath: "/opt/out"
+> readOnly: false
+> # Mount the slightly modified versions of the bootstrap and start sequence scripts (see below)
+> - mountPath: /opt/bootstrap.sh
+> name: bootstrap
+> readOnly: true
+> subPath: bootstrap.sh
+> defaultMode: 0555
+> - mountPath: /opt/staging/hooks/10-start-sequence.sh
+> name: init-start
+> readOnly: true
+> subPath: 10-start-sequence.sh
+> defaultMode: 0555
+>
+> volumes:
+> # The 3 emptyDir volumes referenced above
+> init-runtime:
+> emptyDir: {}
+> staging:
+> emptyDir: {}
+> tmp:
+> emptyDir: {}
+> # This secret is created from a license file
+> pingdirectory-license:
+> secret:
+> secretName: pingdirectory-license
+> # Make the modified bootstrap and start sequence scripts available as configMaps
+> bootstrap:
+> configMap:
+> items:
+> - key: bootstrap.sh
+> path: bootstrap.sh
+> name: bootstrap
+> init-start:
+> configMap:
+> items:
+> - key: 10-start-sequence.sh
+> path: 10-start-sequence.sh
+> name: init-start
+>
+> configMaps:
+> init-start:
+> data:
+> 10-start-sequence.sh: |-
+> #!/usr/bin/env sh
+> echo "overwriting 10 hook"
+> #!/usr/bin/env sh
+> #
+> # Ping Identity DevOps - Docker Build Hooks
+> #
+> # Called when it has been determined that this is the first time the container has
+> # been run.
+> #
+>
+>         ##############################################################################
+>         ####### Prevent init container from starting the product normally.  ##########
+>         ####### These two lines are the only delta from the default script. ##########
+>         ##############################################################################
+>         if test ${STARTUP_FOREGROUND_OPTS} != "" ; then
+>           test "${VERBOSE}" = "true" && set -x
+>
+>           # shellcheck source=./pingcommon.lib.sh
+>           . "${HOOKS_DIR}/pingcommon.lib.sh"
+>
+>           echo "Initializing server for the first time"
+>
+>           run_hook "17-check-license.sh"
+>
+>           run_hook "18-setup-sequence.sh"
+>         fi
+>   bootstrap:
+>     data:
+>       bootstrap.sh: |-
+>         #!/usr/bin/env sh
+>         ######################################################################################################
+>         ####### Make a copy of everything under /opt/staging in the product image to /opt/handoff.  ##########
+>         ####### Primarily, this makes the hook scripts available in the emptyDir (writable) volume. ##########
+>         ####### This line is the only delta from the default script.                                ##########
+>         ######################################################################################################
+>         cp -r /opt/staging/* /opt/handoff
+>         test "${VERBOSE}" = "true" && set -x
+>         # shellcheck source=./staging/hooks/pingcommon.lib.sh
+>         . "${HOOKS_DIR}/pingcommon.lib.sh"
+>
+>         _userID=$(id -u)
+>         _groupID=$(id -g)
+>
+>         echo "### Bootstrap"
+>         if test "${_userID}" -eq 0; then
+>             echo_yellow "### Warning: running container as root user"
+>         else
+>             echo "### Using the default container user and group"
+>
+>             _effectiveGroupName=$(awk 'BEGIN{FS=":"}$3~/^'"${_groupID}"'$/{print $1}' /etc/group)
+>             test -z "${_effectiveGroupName}" && _effectiveGroupName="undefined group"
+>
+>             _effectiveUserName=$(awk 'BEGIN{FS=":"}$3~/^'"${_userID}"'$/{print $1}' /etc/passwd)
+>             test -z "${_effectiveUserName}" && _effectiveUserName="undefined user"
+>
+>             echo "### Container user and group"
+>             echo "###     user : ${_effectiveUserName} (id: ${_userID})"
+>             echo "###     group: ${_effectiveGroupName} (id: ${_groupID})"
+>         fi
+>
+>         # if the current process id is not 1, tini needs to register as sub-reaper
+>         if test $$ -ne 1; then
+>             _subReaper="-s"
+>         fi
+>
+>         # shellcheck disable=SC2086,SC2048
+>         exec "${BASE}/tini" ${_subReaper} -- "${BASE}/entrypoint.sh" ${*}
+>
+> pingdirectory:
+> enabled: true
+> envs:
+> MUTE_LICENSE_VERIFICATION: "yes"
+> ORCHESTRATION_TYPE: "NONE"
+> VERBOSE: "true"
+> # (Optional) Specify a particular tag by uncommenting these two lines and naming the tag to use.
+> # Otherwise, you will get the latest from Docker Hub.
+> # If a particular tag is used, be sure the init container tag matches above
+> # image:
+> #   tag: "2306"
+> includeInitContainers:
+> # Use the init container specification above at pod startup
+> - pd-init
+> # Share the volumes between the init container and the product container
+> includeVolumes:
+> - staging
+> - tmp
+> - pingdirectory-license
+> - bootstrap
+> - init-start
+> - init-runtime
+> volumeMounts:
+> # The emptyDir mounted at /opt/handoff in the init container is mounted to /opt/staging here
+> # Hook scripts and product startup will operate as with a read/write filesystem
+> - mountPath: /opt/staging
+> name: staging
+> readOnly: false
+> - name: pingdirectory-license
+> mountPath: "/opt/staging/pd.profile/server-root/pre-setup/PingDirectory.lic"
+> subPath: PingDirectory.lic
+> - name: tmp
+> mountPath: "/tmp"
+> readOnly: false
+> ```
+
+|   |                                                                                                                                                   |
+| - | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | Kustomize is used as the Ping helm charts do not support setting the readOnlyFileSystem value to the securityContext of a container at this time. |
+
+In the **30-helm/read-only-filesystem/kustomize** subdirectory is a kustomize script and definition file.
+
+The script simply runs kustomize:
+
+```
+#!/bin/bash
+
+cat <&0 > kustomize/all.yaml
+
+kustomize build kustomize && rm kustomize/all.yaml
+```
+
+The `kustomization.yaml` file sets the **securityContext** for the each container's root file system to read-only:
+
+```
+resources:
+  - all.yaml
+
+patches:
+  - target:
+      group: apps
+      version: v1
+      kind: StatefulSet
+    patch: |-
+      - op: add
+        path: /spec/template/spec/containers/0/securityContext
+        value:
+          readOnlyRootFilesystem: true
+      - op: add
+        path: /spec/template/spec/initContainers/0/securityContext
+        value:
+          readOnlyRootFilesystem: true
+```
+
+## Process
+
+To use the example files to deploy PingDirectory with a read-only root filesystem, follow the steps here:
+
+1. Create a secret from a PingDirectory license file. If you have an existing license file, you can use it here (see [Mount Existing Product License](../how-to/existingLicense.html) for more information about license files):
+
+   ```
+   # Create the secret to match the name in the values file:
+   kubectl create secret generic pingdirectory-license --from-file=./PingDirectory.lic
+   ```
+
+2. Update the **`30-helm/read-only-filesystem/pd-values.yaml`** file with the appropriate image tag and release name to be used with Helm. Afterward, use Helm to deploy the release:
+
+   ```
+   # For this example, the release name of 'rofs' is used
+   cd 30-helm/read-only-filesystem
+   helm upgrade --install rofs pingidentity/ping-devops -f './pd-values.yaml' \
+         --post-renderer kustomize/kustomize
+   ```
+
+## Diagram
+
+This image provides an overview of what happens. It is best viewed in a separate tab:
+
+![Read-Only Root Filesystem Example](../_images/readOnlyFileSystem.png)
+
+|   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| - | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | One issue we encountered is that the **`/etc/motd`** file can be modified at startup by hook scripts, but /etc/ is read-only. We are exploring ways to address this in some way, but at this time, it appears one possible solution is to treat `/etc/` in the same manner as /opt/staging (copying to an emptyDir) if the `motd` file is to be updated. However, `/etc` has many more files and directories and such a solution is not practical. Baking it into a custom image is another possibility. |
+
+---
+
+---
+title: Server Profile Structures
+description: Reference the server profile directory structure and file locations for PingFederate, PingAccess, and PingData product containers
+component: devops
+page_id: devops::reference/profileStructures
+canonical_url: https://developer.pingidentity.com/devops/reference/profileStructures.html
+llms_txt: https://developer.pingidentity.com/devops/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+section_ids:
+  devops-pingfederate: PingFederate
+  devops-pingaccess: PingAccess
+  devops-ping-data-products: Ping Data Products
+---
+
+# Server Profile Structures
+
+Each of the Docker images use a server profile structure that is specific to each product. The structure (directory paths and data) of the server profile differs between products. Depending on how you [Deploy Your Server Profile](../how-to/containerAnatomy.html), it will be pulled or mounted into `/opt/in` on the container and used to stage your deployment.
+
+The following locations are the server profile structures for each of our products with example usage. For help with an example of the basics, see the [pingidentity-server-profiles/getting-started](https://github.com/pingidentity/pingidentity-server-profiles/tree/master/getting-started) examples.
+
+|   |                                                                                                                                                                                                                                                                                                            |
+| - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | In the getting-started profile examples, you should not use the `.sec` directory when providing passwords to your containers. These examples are only intended for demonstration purposes. Instead, set an environment variable with your secrets or orchestration later:`PING_IDENTITY_PASSWORD="secret"` |
+
+## PingFederate
+
+See the example at [getting-started/pingfederate](https://github.com/pingidentity/pingidentity-server-profiles/tree/master/getting-started/pingfederate).
+
+**Table of Paths and Location Descriptions**
+
+| Path                                                 | Location description                                                                                                       |
+| ---------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| instance                                             | Directories and files that you want to be used at product runtime, in accordance with the directory layout of the product. |
+| instance/server/default/data                         | An extracted configuration archive exported from PingFederate.                                                             |
+| instance/bulk-config/data.json                       | A JSON export from the PingFed admin API `/bulk/export`.                                                                   |
+| instance/server/default/deploy/OAuthPlayground.war   | Automatically deploy the OAuthPlayground web application.                                                                  |
+| instance/server/default/conf/META-INF/hivemodule.xml | Apply a Hive module config to the container. Used for persisting OAuth clients, grants, and sessions to an external DB.    |
+
+|   |                                                                                                                                                                                                                                                                                                                                                                                             |
+| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | By default, PingFederate is shipped with a handful of integration kits and adapters. If you need other integration kits or adapters in the deployment, manually download them and place them inside `server/default/deploy` of the server profile. You can find these resources in the product download page [here](https://www.pingidentity.com/en/resources/downloads/pingfederate.html). |
+
+## PingAccess
+
+Example at [getting-started/pingaccess](https://github.com/pingidentity/pingidentity-server-profiles/tree/master/getting-started/pingaccess).
+
+**Table of Paths and Location Descriptions**
+
+| Path                           | Location description                                                                                                       |
+| ------------------------------ | -------------------------------------------------------------------------------------------------------------------------- |
+| instance                       | Directories and files that you want to be used at product runtime, in accordance with the directory layout of the product. |
+| instance/conf/pa.jwk           | Used to decrypt a `data.json` configuration upon import.                                                                   |
+| instance/data/data.json        | PA 6.1+ A config file that, if found by the container, is uploaded into the container.                                     |
+| instance/data/PingAccess.mv.db | Database binary that would be ingested at container startup if found.                                                      |
+
+|   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | PingAccess profiles are typically minimalist because the majority of PingAccess configurations can be found within a `data.json` or `PingAccess.mv.db` file. You should use `data.json` for configurations and only use `PingAccess.mv.db` if necessary. You can easily view and manipulate configurations directly in a JSON file as opposed to the binary `PingAccess.mv.db` file. This fact makes tracking changes in version control easier as well.PingAccess 6.1.x+ supports using only `data.json`, even when clustering. *However* on 6.1.0.3 make sure `data.json` is only supplied to the admin node. |
+
+|   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | **PingAccess 6.1.0+** now supports native `data.json` ingestion, which is *the recommended method*. Place `data.json` or `data.json.subst` in `instance/conf/data/start-up-deployer`.> The JSON configuration file for PingAccess *must* be named `data.json`.A `data.json` file that corresponds to earlier PingAccess versions *might* be accepted. However, after you are on version 6.1.x, the `data.json` file will be forward compatible. This support means you are able to avoid upgrades for your deployments! |
+
+|   |                                                                                                                                                 |
+| - | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | For **PingAccess 6.0.x and earlier**, the JSON configuration file for *must* be named `data.json` and located in the `instance/data` directory. |
+
+|   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | For **all PingAccess versions**, a corresponding file named `pa.jwk` must also exist in the `instance/conf` directory for the `data.json` file to be decrypted on import. To get a `data.json` and `pa.jwk` that work together, pull them both from the same running PingAccess instance.For example, if PingAccess is running in a local Docker container you can use these commands to export the `data.json` file and copy the `pa.jwk` file to your local Downloads directory:```
+    curl -k -u "Administrator:${ADMIN_PASSWORD}" -H "X-Xsrf-Header: PingAccess" https://localhost:9000/pa-admin-api/v3/config/export -o ~/Downloads/data.json
+
+    docker cp <container_name>:/opt/out/instance/conf/pa.jwk ~/Downloads/pa.jwk
+``` |
+
+|   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+|   | You can find the PingAccess administrator password in `PingAccess.mv.db`, not in `data.json`. For this reason, you can use the following environment variables to manage different scenarios:* `PING_IDENTITY_PASSWORD`
+
+  Use this variable if:
+
+  * You're starting a PingAccess container without any configurations.
+
+  * You're using only a `data.json` file for configurations.
+
+  * Your `PingAccess.mv.db` file has a password other than the default "2Access".
+
+  The `PING_IDENTITY_PASSWORD` value will be used for all interactions with the PingAccess Admin API (such as importing configurations and creating clustering).
+
+* `PA_ADMIN_PASSWORD_INITIAL`
+
+  Use this variable in addition to `PING_IDENTITY_PASSWORD` to change the runtime admin password and override the password in `PingAccess.mv.db`.> If you use only `data.json` and do notpass `PING_IDENTITY_PASSWORD`, the password will default to "2FederateM0re". **Always** use `PING_IDENTITY_PASSWORD`. |
+
+## Ping Data Products
+
+The Ping Data Products (PingDirectory, PingDataSync, PingAuthorize, PingDirectoryProxy) follow the same structure for server-profiles.
+
+Example at [getting-started/pingdirectory](https://github.com/pingidentity/pingidentity-server-profiles/tree/master/getting-started/pingdirectory).
+
+**Table of Paths and Location Descriptions**
+
+| Path       | Location description                                                                                                                                                                                         |
+| ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| pd.profile | Server profile matching the structure as defined by [PingDirectory Server Profiles](https://docs.pingidentity.com/pingdirectory/latest/pingdirectory_server_administration_guide/pd_ds_server_profiles.html) |
+| instance   | Directories and files that you want to be used at product runtime, in accordance with the layout of the product. In general, this should be **non existing or empty**.                                       |
+| env-vars   | You can set environment variables used during deployment. See [Variables and Scope](variableScoping.html) for more info. In general, this should be **non existing or empty**.                               |
+| extensions | You can provide URLs to download Server SDK extensions in a remote.list file. See [Including Extensions in PingData Server Profiles](../how-to/profilesPingDataExtensions.html) for more info.               |
+
+|   |                                                                                                                                                                                                                                                                                                                                         |
+| - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | * In most circumstances, the `pd.profile` directory should be the only directory in the server profile.
+
+* All environment variables should be provided through Kubernetes configmaps/secrets and a secret management tool. Be careful providing an `env-vars` and if you do, please review [Variables and Scope](variableScoping.html) |
+
+|   |                                                                                                                                                                                                                                                                                                                  |
+| - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | Use the `manage-profile` tool (found in product `bin` directory) to generate a `pd.profile` from an existing Ping Data 8.0+ deployment. An example on creating this `pd.profile` looks like:```
+    manage-profile generate-profile --profileRoot /tmp/pd.profile
+    rm /tmp/pd.profile/setup-arguments.txt
+``` |
+
+Follow the instructions provided when you run the `generate-profile` to ensure that you include any additional components, such as `encryption-settings`.
+
+---
+
+---
+title: Troubleshooting
+description: Troubleshoot common Ping container issues such as stale Docker images, misconfigured DevOps credentials, and evaluation license failures
+component: devops
+page_id: devops::reference/troubleshooting
+canonical_url: https://developer.pingidentity.com/devops/reference/troubleshooting.html
+llms_txt: https://developer.pingidentity.com/devops/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+section_ids:
+  devops-getting-started: Getting started
+  devops-examples-not-working: Examples Not Working
+  devops-misconfigured: Misconfigured DevOps credentials
+  devops-unable-to-retrieve-evaluation-license: Unable To Retrieve Evaluation License
+---
+
+# Troubleshooting
+
+## Getting started
+
+### Examples Not Working
+
+Many common errors using Ping containers arise from using stale images. Our development is highly dynamic and Docker images can rapidly change.
+
+To avoid issues with stale images, remove all local images from your local cache. Doing so will force Docker to pull the latest images:
+
+`docker rmi $(docker images "pingidentity/*" -q)`
+
+|   |                                                                                                                                                                                        |
+| - | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | Even though you might have a local image tagged "latest", this tag does not guarantee it is the newest image in the Docker hub registry. This tag is reapplied for each release image. |
+
+### Misconfigured DevOps credentials
+
+If your containers cannot pull a license based on your DevOps user name and key, there might be some misconfiguration in your DevOps credential variables.
+
+Possible solutions:
+
+1. Make sure `PING_IDENTITY_DEVOPS_USER` and `PING_IDENTITY_DEVOPS_KEY` are set as environment variables. See the [Environment Configuration Documentation](../get-started/prereqs.html#devops-configure-the-environment) on how to configure these variables.
+
+2. Run `env | grep PING_IDENTITY` and make sure the configured variables are correct. See [Using Your DevOps User and Key](../how-to/devopsUserKey.html) for more information.
+
+#### Unable To Retrieve Evaluation License
+
+If a product instance or instances cannot retrieve the evaluation license, you might receive an error similar to this:
+
+```
+----- Starting hook: /opt/staging/hooks/17-check-license.sh
+Pulling evaluation license from Ping Identity for:
+              Prod License: PD - v7.3
+              DevOps User: some-devops-user@example.com...
+Unable to download evaluation product.lic (000), most likely due to invalid PING_IDENTITY_DEVOPS_USER/PING_IDENTITY_DEVOPS_KEY
+
+
+        ALERT        
+
+#
+# No Ping Identity License File (PingDirectory.lic) was found in the server profile.
+# No Ping Identity DevOps User or Key was passed.
+#
+#
+# More info on obtaining your DevOps User and Key can be found at:
+#     https://devops.pingidentity.com/how-to/devopsRegistration/
+#
+##
+CONTAINER FAILURE: License File absent
+CONTAINER FAILURE: Error running 17-check-license.sh
+CONTAINER FAILURE: Error running 10-start-sequence.sh
+```
+
+This error can be caused by:
+
+1. An invalid DevOps user name or key (as noted in the error). This failure is usually caused by some issue with the variables being passed in. To verify the variables are correct for running Docker commands, run the following command:
+
+   `env | grep PING_IDENTITY`
+
+2. A bad Docker image. Pull the Docker image again to verify.
+
+3. Network connectivity to the license server is blocked. To test this, on the machine that is running the container, run:
+
+   `curl -k https://license.pingidentity.com/devops/license`
+
+   If the license server is reachable, you will receive an error similar to this example:
+
+   `{ "error":"missing devops-user header" }`
+
+---
+
+---
+title: Using Certificates with Images
+description: Configure keystore and truststore certificates for PingData product containers and learn how to rotate listener certificates
+component: devops
+page_id: devops::reference/usingCertificates
+canonical_url: https://developer.pingidentity.com/devops/reference/usingCertificates.html
+llms_txt: https://developer.pingidentity.com/devops/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+section_ids:
+  devops-before-you-begin: Before you begin
+  devops-about-this-topic: About this topic
+  devops-pingdata-image-certificates: PingData Image Certificates
+  pingdata-image-certificate-rotation: PingData image certificate rotation
+  devops-rotating-the-listener-certificate-by-adjusting-environment-variables: Rotating the listener certificate by adjusting environment variables
+  devops-rotating-the-listener-certificate-with-the-replace-certificate-command-line-tool: Rotating the listener certificate with the replace-certificate command-line tool
+  rotating-the-listener-certificate-when-your-keystore-and-truststore-are-on-a-read-only-filesystem: Rotating the listener certificate when your keystore and truststore are on a read-only filesystem
+  rotating-certificates-when-they-are-all-signed-by-the-same-issuer-certificate: Rotating certificates when they are all signed by the same issuer certificate
+  add-the-issuer-certificate-to-the-server-instance-listeners-in-the-topology: Add the issuer certificate to the server instance listeners in the topology
+  point-the-servers-key-manager-provider-at-your-new-certificate: Point the server's key manager provider at your new certificate
+  removing-the-old-certs: Removing the old certs
+  rotating-certificates-without-the-assumption-that-they-are-all-signed-by-the-same-issuer-certificate: Rotating certificates without the assumption that they are all signed by the same issuer certificate
+  add-the-new-cert-to-the-server-instance-listeners-in-the-topology: Add the new cert to the server instance listeners in the topology
+  point-the-servers-key-manager-provider-at-the-new-cert: Point the server's key manager provider at the new cert
+  removing-the-old-cert: Removing the old cert
+---
+
+# Using Certificates with Images
+
+This page provides details for using certificates with the Ping Identity images. Specifically, it outlines the preferred locations to place the certificate and PIN/key files to provide best security practices and enable use by the underlying Ping Identity product.
+
+Currently, certificates can be provided to the PingData products (PingDirectory, PingDataSync, PingAuthorize, and PingDirectoryProxy) when the containers are started. For non-PingData images, such as PingAccess and PingFederate, the certificates are managed within the product configurations. Those images will not be covered here.
+
+## Before you begin
+
+You must:
+
+* Complete [Get started](../get-started/introduction.html) to set up your DevOps environment and run a test deployment of the products.
+
+* Strongly recommended: Have a secrets management system, such as Hashicorp Vault, that holds your certificate and places them into your SECRETS_DIR (/run/secrets).
+
+  For information on using a vault, if you have one, see [Using Hashicorp Vault](../how-to/usingVault.html).
+
+## About this topic
+
+The following examples explain how to deploy a certificate/PIN combination to an image in a secure way.
+
+## PingData Image Certificates
+
+The PingData products (PingDirectory, PingDataSync, PingAuthorize, and PingDirectoryProxy) use a file location to determine certificates/PIN files:
+
+* It is best practice to use a non-persistent location, such as /run/secrets, to store these files.
+
+* If no certificate is provided, the container/product will generate a self-signed certificate.
+
+The default location for certificates and associated files are listed below, assuming a default SECRETS_DIR variable of `/run/secrets`.
+
+|                      | Variable Used        | Default Location/Value /run/secrets…​ | Notes                                                                 |
+| -------------------- | -------------------- | ------------------------------------- | --------------------------------------------------------------------- |
+| Keystore (JKS)       | KEYSTORE_FILE        | keystore                              | Java KeyStore (JKS) Format. Set as default in absence of .p12 suffix. |
+| Keystore (PKCS12)    | KEYSTORE_FILE        | keystore.p12                          | PKCS12 Format                                                         |
+| Keystore Type        | KEYSTORE_TYPE        | jks, pkcs12, pem, or bcfks            | Based on suffix of KEYSTORE_FILE. Only use BCFKS in FIPS mode.        |
+| Keystore PIN         | KEYSTORE_PIN_FILE    | keystore.pin                          |                                                                       |
+| Truststore (JKS)     | TRUSTSTORE_FILE      | truststore                            | Set as default in absence of .p12 suffix.                             |
+| Truststore (PKCS12)  | TRUSTSTORE_FILE      | truststore.p12                        | PKCS12 Format                                                         |
+| Truststore Type      | TRUSTSTORE_TYPE      | jks, pkcs12, pem, or bcfks            | Based on suffix of TRUSTSTORE_FILE. Only use BCFKS in FIPS mode.      |
+| Truststore PIN       | TRUSTSTORE_PIN_FILE  | truststore.pin                        |                                                                       |
+| Certificate Nickname | CERTIFICATE_NICKNAME | see below                             |                                                                       |
+
+|   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | There is an additional certificate-based variable used to identity the certificate alias used within the `KEYSTORE_FILE`. That variable is called `CERTIFICATE_NICKNAME`, which identifies the certificate to use by the server in the `KEYSTORE_FILE`. If a value is not provided, the container will look at the list certs found in the `KEYSTORE_FILE` and if one - and only one - certificate is found of type `PrivateKeyEntry`, that alias will be used. |
+
+|   |                                                                                                                                                                                                                                                                                                                                                                                |
+| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+|   | If you are relying on certificates to be mounted to a different locations than the SECRET_DIR location or a different filename, you can provide your own values for those variables identified above. As an example:```
+ KEYSTORE_FILE=/my/path/to/certs/cert-file
+ KEYSTORE_PIN_FILE=/my/path/to/certs/cert.pin
+ KEYSTORE_TYPE=jks
+ CERTIFICATE_NICKNAME=development-cert
+``` |
+
+## PingData image certificate rotation
+
+The certificate rotation process for PingData products varies depending on which product is being configured and whether that product is in a topology. For products that are not in a topology, certificates can be rotated by simply updating the environment variables. For products in a topology, certificate rotation must be done via a command-line call with the servers in the topology online.
+
+### Rotating the listener certificate by adjusting environment variables
+
+The process described in this section can be used for PingAuthorize, PingDirectoryProxy, and *standalone* (single-server) instances of PingDirectory or PingDataSync.
+
+|   |                                                                                                                    |
+| - | ------------------------------------------------------------------------------------------------------------------ |
+|   | If PingDirectory or PingDataSync is deployed with multiple servers, use the process described in the next section. |
+
+As mentioned above, for the PingData products there are variables defining the server truststore and keystore. To change certificates, you will need to update the contents of the truststore or keystore in your server profile or secret store. After you update the contents, restart the container. The changes will be picked up automatically when the server restarts. If you have multiple certificates in the keystore, you can use the above-mentioned CERTIFICATE_NICKNAME variable to specify the certificate. The container will pick up that certificate from those stored in the keystore. For updating the product to use the new certificates, perform a rolling update. This action ensures that other servers will remain available as each pod is cycled.
+
+|   |                                                                                                                            |
+| - | -------------------------------------------------------------------------------------------------------------------------- |
+|   | Verify that remaining pods in the cluster have sufficient capacity to handle the increased load during the rolling update. |
+
+### Rotating the listener certificate with the replace-certificate command-line tool
+
+If multiple PingDataSync or PingDirectory servers are running in a topology, then the servers must be online when updating the listener certificate. Updates to certificates with one or more servers offline (such as rolling updates) can lead to connection issues with the other members of the topology when those servers come back online. Use the PingData `replace-certificate` command-line tool to update certificates with the server online.
+
+|   |                                                                                                                      |
+| - | -------------------------------------------------------------------------------------------------------------------- |
+|   | If your keystore and truststore files are on a read-only file system, use the process described in the next section. |
+
+Shell into the running instance that needs to be updated, and ensure the keystore containing the needed certificate is mounted on the container. Then, run `replace-certificate`. Replace the `--key-manager-provider` and `--trust-manager-provider` values if necessary when using a non-JKS keystore, as well as the `--source-certificate-alias` value if necessary.
+
+```
+replace-certificate replace-listener-certificate \
+    --key-manager-provider JKS \
+    --trust-manager-provider JKS \
+    --source-key-store-file /run/secrets/newkeystore \
+    --source-key-store-password-file /run/secrets/newkeystore.pin \
+    --source-certificate-alias server-cert \
+    --reload-http-connection-handler-certificates
+```
+
+For more information on this command, run- `replace-certificate replace-listener-certificate --help`
+
+Running the first command will replace the listener certificate and notify other servers in the topology that this server's certificate has changed.
+
+To update certificates for the other servers in the topology, follow this same process, shelling into each individual instance.
+
+Once this is done, the running pods have been updated. To ensure a restart does not undo these changes, verify that your server profile and orchestration environment variables are updated to point to the new certificates. For example, if you have modified your server configuration to point to `/run/secrets/newkeystore`, then you must update your KEYSTORE_FILE environment variable to point to that new keystore *after* you have completed the `replace-certificate` process on each server.
+
+### Rotating the listener certificate when your keystore and truststore are on a read-only filesystem
+
+Typically, the `replace-certificate` tool will edit your keystore and truststore when rotating your listener certificate. Because of this, the above method will not work when the keystore and truststore are read-only. In this case, use one of the two following processes to rotate your listener certificates.
+
+#### Rotating certificates when they are all signed by the same issuer certificate
+
+If all your listener certs will be signed by the same certificate authority, you can add this CA to your server instance listeners to make rotation easier, as the servers will automatically trust certificates signed by the CA.
+
+##### Add the issuer certificate to the server instance listeners in the topology
+
+* Copy a PEM file of the your issuer certificate onto your pods. For this example the path will be `/opt/out/instance/config/ca.crt`.
+
+* On each server, use `replace-certificate` to add the issuer certificate to the server instance listener for that server. This will make the servers trust each other provided they are using a cert signed by this issuer. Note that this must be done with all servers online, so that the change gets replicated to the other servers.
+
+  ```
+  replace-certificate add-topology-registry-listener-certificate \
+      --certificate-file /opt/out/instance/config/ca.crt
+  ```
+
+##### Point the server's key manager provider at your new certificate
+
+* Ensure your new certificate has been added to your keystore in whatever external storage method you are using (Vault, etc.), and note the alias you have given the new cert. For this example the alias will be `newcert`.
+
+* Set `CERTIFICATE_NICKNAME=newcert` and perform a rolling update. `manage-profile replace-profile` will run and point your connection handlers to `newcert`, while the servers will continue to trust each other since that cert was signed by the trusted CA you added in the previous step.
+
+##### Removing the old certs
+
+* If desired, you can now remove unused certs from the server instance listeners in the topology registry. You can also remove the old certs from your keystores in your external storage. To remove the old certs from the topology registry, use `replace-certificate`, running the following command on each server in the topology. Note that again this must be done with all servers online, so that the config change gets mirrored across the topology.
+
+  `replace-certificate purge-retired-listener-certificates`
+
+* It is also possible to purge the retired certificates from a single server rather than running a command on each pod, but it requires some configuration changes since it relies on an extended operation and a specific topology admin permission, so it will likely be easier to simply run the previous command on each server. Using dsconfig, the necessary changes would be:
+
+  ```
+  dsconfig create-extended-operation-handler \
+     --handler-name "Replace Certificate Extended Operation Handler"  \
+     --type replace-certificate  \
+     --set enabled:true  \
+     --set allow-remotely-provided-certificates:true
+  dsconfig set-topology-admin-user-prop \
+     --user-name admin  \
+     --add privilege:permit-replace-certificate-request
+  ```
+
+* After these changes are in place on the other servers, the following command can be used to purge retired listener certificates from remote instances:
+
+  `replace-certificate purge-remote-retired-listener-certificates`
+
+#### Rotating certificates without the assumption that they are all signed by the same issuer certificate
+
+##### Add the new cert to the server instance listeners in the topology
+
+* Add the new desired certificate to your keystore and truststore, in whatever external storage method you are using. Note that you are just adding the new cert, not removing the old one yet. Note the alias that you have given the new cert in the keystore. In these examples the new cert's alias will be `newcert` and the previous one `server-cert`.
+
+* Ensure the pods have the updated keystore and truststore on the filesystem, via a rolling update. At this point the keystores and truststores will have both the old cert and the new cert, but the new one is not yet being used.
+
+* On each server, export the PEM file of the new certificate to a writable location, using the `manage-certificates` tool. This action is necessary because the subsequent command can only use a PEM file, it can't read from a keystore directly.
+
+  ```
+  manage-certificates export-certificate \
+      --keystore /run/secrets/keystore \
+      --keystore-password-file /run/secrets/keystore.pin \
+      --alias newcert \
+      --output-file /opt/out/instance/config/newcert.crt \
+      --output-format PEM
+  ```
+
+* On each server, use `replace-certificate` to add the exported certificate PEM file to the server instance listener in the topology. Note that this step must be done with all servers online, so that the config change is mirrored to the other servers in the topology.
+
+  ```
+  replace-certificate add-topology-registry-listener-certificate \
+      --certificate-file /opt/out/instance/config/newcert.crt
+  ```
+
+* Now the server will have both the previous cert and the new cert in its server instance listener.
+
+##### Point the server's key manager provider at the new cert
+
+* There are two ways to do this - first is to change the CERTIFICATE_NICKNAME environment variable to point to your new certificate's alias, and then just restart your pods, allowing manage-profile replace-profile to apply the change on startup.
+
+* The second is to edit your keystore and truststore and rename your new cert to the same alias as the previous one (in the case of this document, renaming `newcert` to `server-cert` - the previous cert will have to be either renamed or removed from the keystores). This way, the key manager provider for the server will load in the new cert. Then you can restart the pods and the new cert will be loaded on server startup.
+
+##### Removing the old cert
+
+* Refer to the removal step in the previous section.
+
+---
+
+---
+title: Using DevOps Hooks
+description: Learn how DevOps hook scripts run during Ping product container startup and how to add custom pre and post hooks
+component: devops
+page_id: devops::reference/hooks
+canonical_url: https://developer.pingidentity.com/devops/reference/hooks.html
+llms_txt: https://developer.pingidentity.com/devops/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+section_ids:
+  devops-using-pre-and-post-hooks: Using .pre and .post hooks
+---
+
+# Using DevOps Hooks
+
+|   |                                                                                                                                                                                       |
+| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | For more information on hook scripts, see the [Ping product image hook script exploration](https://videos.pingidentity.com/detail/video/6315184605112/hook-script-exploration) video. |
+
+Our DevOps hooks are build-specific scripts that are called, or can be called, by the `entrypoint.sh` script used to start our product containers.
+
+|   |                                                                                               |
+| - | --------------------------------------------------------------------------------------------- |
+|   | Use of the hook scripts is intended only for DevOps professionals familiar with the products. |
+
+The available hooks are built into the product images and can be found in the `hooks` subdirectory of each product directory in the [Docker Builds](https://github.com/pingidentity/pingidentity-docker-builds) repository.
+
+In the `entrypoint.sh` startup script, there is an example (stub) provided for the available hooks for all products.
+
+|   |                                                                                                                                                                  |
+| - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | It is **critical** that the supplied hook names be used if you modify `entrypoint.sh`. For example, they can be used to make subtle changes to a server profile. |
+
+## Using .pre and .post hooks
+
+When the hook scripts are called during the `entrypoint.sh` initialization, any corresponding `.pre` and `.post` hooks are also called.
+
+The `.pre` and `.post` extensions allow you to define custom scripts to be executed before or after any hook that is run in the container. You can include any custom `.pre` and `.post` hooks in the `hooks` directory of your server profile.
+
+Hooks with a `.pre` extension are run before the corresponding hook, and hooks with a `.post` extension are run after the corresponding hook.
+
+For example, a script named `80-post-start.sh.pre` will execute immediately before the `80-post-start.sh` hook and a script named `80-post-start.sh.post` will be run immediately after that hook completes.
+
+---
+
+---
+title: Variables and Scope
+description: Understand the image, orchestration, server-profile, and container variable scopes and their precedence in Ping product containers
+component: devops
+page_id: devops::reference/variableScoping
+canonical_url: https://developer.pingidentity.com/devops/reference/variableScoping.html
+llms_txt: https://developer.pingidentity.com/devops/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+section_ids:
+  image-scope: Image scope
+  devops-orchestration-scope: Orchestration scope
+  devops-server-profile-scope: Server profile scope
+  devops-container-scope: Container scope
+  devops-scoping-example: Scoping example
+---
+
+# Variables and Scope
+
+Variables provide a way to store and reuse values with our Docker containers which are ultimately used by our Docker image hooks to customize configurations.
+
+It's important to understand:
+
+* The different levels at which you can set variables
+
+* How you should use variables
+
+* Where you should set and use variables
+
+The following diagram shows the different scopes in which variables can be set and applied.
+
+![Variable Scoping](../_images/variableScoping-1.png)
+
+Assume that you are viewing this diagram as a pyramid with the container at the top. The order of precedence for variables is top-down. Generally, you set variables having an orchestration scope.
+
+## Image scope
+
+Variables having an image scope are assigned using the values set for the Docker image (for example, from Dockerfiles). These variables are often set as defaults, allowing scopes with a higher level of precedence to override them.
+
+To see the default environment variables available with any Docker image, enter:
+
+`docker run pingidentity/<product-image>:<tag> env | sort`
+
+Where \<product-image> is the name of one of our products, and \<tag> is the release tag (such as `edge`).
+
+For the environment variables available for all products (PingBase) or individual products, see [Container Docker Images Information](../docker-images/dockerImagesRef.html).
+
+## Orchestration scope
+
+Variables having orchestration scope are assigned at the orchestration layer. Typically, these environment variables are set using Docker commands, Docker Compose or Helm values. For example:
+
+* Using `docker run` with `--env`:
+
+  ```
+  docker run --env SCOPE=env \
+    pingidentity/pingdirectory:edge env | sort
+  ```
+
+* Using `docker run` with `--env-file`:
+
+  ```
+  echo "SCOPE=env-file"  > /tmp/scope.properties
+
+  docker run --env-file /tmp/scope.properties \
+    pingidentity/pingdirectory:edge env | sort
+  ```
+
+* Using Docker Compose (docker-compose.yaml):
+
+  ```
+  environment:
+    - SCOPE=compose
+      env_file:
+    - /tmp/scope.properties
+  ```
+
+* Using Kubernetes:
+
+  ```
+  env:
+    - name: SCOPE
+      value: kubernetes
+  ```
+
+* Using Helm variables:
+
+  ```
+  global:
+    envs:
+      PING_IDENTITY_ACCEPT_EULA: "YES"
+      PING_IDENTITY_PASSWORD: "2Federate"
+    ...
+  ```
+
+## Server profile scope
+
+Variables having server profile scope are supplied using property files in the server-profile repository. You need to be careful setting variables at this level because the settings can override variables already having an image or orchestration scope value set.
+
+You can use the following masthead in your `env_vars` files to provide examples of setting variables and how they might override variables having a scope with a lower level of precedence. It will also suppress a warning when processing the env_vars file:
+
+```
+# .suppress-container-warning
+#
+# NOTICE: Settings in this file will override values set at the
+#         image or orchestration layers of the container.  Examples
+#         include variables that are specific to this server profile.
+#
+# Options include:
+#
+# ALWAYS OVERRIDE the value in the container
+#   NAME=VAL
+#
+# SET TO DEFAULT VALUE if not already set
+#   export NAME=${NAME:=myDefaultValue}  # Sets to string of "myDefaultValue"
+#   export NAME=${NAME:-OTHER_VAR}       # Sets ot value of OTHER_VAR variable
+#
+```
+
+## Container scope
+
+Variables having a container scope are assigned in the hook scripts and will overwrite variables that are set elsewhere. Variables that need to be passed to other hook scripts must be appended to the file assigned to `${CONTAINER_ENV}`, (which defaults to `/opt/staging/.env`). This file is sourced by every hook script.
+
+## Scoping example
+
+![Variable Scoping](../_images/variableScoping-2.png)

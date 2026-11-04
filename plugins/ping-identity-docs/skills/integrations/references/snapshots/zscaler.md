@@ -1,4 +1,427 @@
 ---
+title: Changelog
+description: The following is the change history for the Zscaler Internet Access Provisioner.
+component: zscaler
+page_id: zscaler:zscaler_internet_access_provisioner:pf_zscaler_zia_connector_changelog
+canonical_url: https://docs.pingidentity.com/integrations/zscaler/zscaler_internet_access_provisioner/pf_zscaler_zia_connector_changelog.html
+llms_txt: https://docs.pingidentity.com/integrations/zscaler/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: June 18, 2024
+section_ids:
+  zscaler-internet-access-provisioner-1-1-1-october-2023: Zscaler Internet Access Provisioner 1.1.1 – October 2023
+  zscaler-internet-access-provisioner-1-1-february-2020: Zscaler Internet Access Provisioner 1.1 – February 2020
+  zscaler-internet-access-provisioner-1-0-2-august-2019: Zscaler Internet Access Provisioner 1.0.2 – August 2019
+  zscaler-internet-access-provisioner-1-0-1-july-2018: Zscaler Internet Access Provisioner 1.0.1 – July 2018
+  zscaler-internet-access-provisioner-1-0-june-2018: Zscaler Internet Access Provisioner 1.0 – June 2018
+---
+
+# Changelog
+
+The following is the change history for the Zscaler Internet Access Provisioner.
+
+## Zscaler Internet Access Provisioner 1.1.1 – October 2023
+
+* Fixed an issue that caused null values or missing members in `PATCH` operations for group updates.
+
+* Improved efficiency of `PATCH` operations for group updates.
+
+* Improved volume of log entries for group create and update operations to reduce log density.
+
+## Zscaler Internet Access Provisioner 1.1 – February 2020
+
+* Renamed the integration to "Zscaler Internet Access Provisioner" to match official branding.
+
+* Added the ability to update the `username` attribute in Zscaler Internet Access.
+
+* Improved error handling and reporting when encountering a user that does not have an ID.
+
+* Improved provisioner efficiency by adding support for Patch operations for group updates.
+
+* Fixed an issue that prevented synchronization of groups with certain special characters in the name.
+
+* Fixed an issue that caused groups to be serialized incorrectly.
+
+## Zscaler Internet Access Provisioner 1.0.2 – August 2019
+
+* Fixed an issue that prevented synchronization of groups with certain special characters in the name.
+
+## Zscaler Internet Access Provisioner 1.0.1 – July 2018
+
+* Fixed compatibility issue when other System for Cross-domain Identity Management (SCIM)-based connectors exist along side Zscaler provisioning connections
+
+## Zscaler Internet Access Provisioner 1.0 – June 2018
+
+* Initial release.
+
+* Added support for user and group life cycle management (including creates, updates, and deletes).
+
+* Added support for adding users to groups.
+
+* Added configuration options for workflow capabilities (for example, the ability to disable updates).
+
+---
+
+---
+title: Changelog
+description: Lists the changes made in each version of the Zscaler Private Access Connector.
+component: zscaler
+page_id: zscaler:zscaler_private_access_provisioner:pf_zscaler_zpa_connector_changelog
+canonical_url: https://docs.pingidentity.com/integrations/zscaler/zscaler_private_access_provisioner/pf_zscaler_zpa_connector_changelog.html
+llms_txt: https://docs.pingidentity.com/integrations/zscaler/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: June 18, 2024
+section_ids:
+  zscaler-private-access-provisioner-1-0-1-october-2023: Zscaler Private Access Provisioner 1.0.1 – October 2023
+  zscaler-private-access-provisioner-1-0-april-2020: Zscaler Private Access Provisioner 1.0 – April 2020
+---
+
+# Changelog
+
+Lists the changes made in each version of the Zscaler Private Access Connector.
+
+## Zscaler Private Access Provisioner 1.0.1 – October 2023
+
+* Fixed an issue that caused null values or missing members in `PATCH` operations for group updates.
+
+* Improved efficiency of `PATCH` operations for group updates.
+
+* Improved volume of log entries for group create and update operations to reduce log density.
+
+## Zscaler Private Access Provisioner 1.0 – April 2020
+
+* Initial release.
+
+* Added support for user and group provisioning.
+
+* Added support for ZPA SCIM attributes.
+
+* Added configuration options for create, update, and disable/delete capabilities.
+
+* Added configuration options for deprovisioning actions
+
+---
+
+---
+title: Configuring provisioning
+description: To enable user provisioning, configure System for Cross-domain Identity Management (SCIM) in Zscaler Internet Access, and then create a connection in PingFederate.
+component: zscaler
+page_id: zscaler:zscaler_internet_access_provisioner:pf_zscaler_zia_connector_configuring_provisioning
+canonical_url: https://docs.pingidentity.com/integrations/zscaler/zscaler_internet_access_provisioner/pf_zscaler_zia_connector_configuring_provisioning.html
+llms_txt: https://docs.pingidentity.com/integrations/zscaler/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: June 18, 2024
+section_ids:
+  steps: Steps
+---
+
+# Configuring provisioning
+
+To enable user provisioning, configure System for Cross-domain Identity Management (SCIM) in Zscaler Internet Access, and then create a connection in PingFederate.
+
+## Steps
+
+1. Complete the steps in [Getting a base URL and bearer token from Zscaler](pf_zscaler_zia_connector_getting_a_base_url_and_bearer_token_from_zscaler.html).
+
+2. Complete the steps in [Creating a provisioning connection](pf_zscaler_zia_connector_creating_a_provisioning_connection.html).
+
+---
+
+---
+title: Configuring single sign-on
+description: To allow PingFederate to act as an identity provider (IdP) for Zscaler Internet Access, configure single sign-on (SSO), exchange signing certificates, and create a connection.
+component: zscaler
+page_id: zscaler:zscaler_internet_access_provisioner:pf_zscaler_zia_connector_configuring_single_sign_on
+canonical_url: https://docs.pingidentity.com/integrations/zscaler/zscaler_internet_access_provisioner/pf_zscaler_zia_connector_configuring_single_sign_on.html
+llms_txt: https://docs.pingidentity.com/integrations/zscaler/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: June 18, 2024
+section_ids:
+  about-this-task: About this task
+  steps: Steps
+---
+
+# Configuring single sign-on
+
+To allow PingFederate to act as an identity provider (IdP) for Zscaler Internet Access, configure single sign-on (SSO), exchange signing certificates, and create a connection.
+
+## About this task
+
+|   |                                                                                                    |
+| - | -------------------------------------------------------------------------------------------------- |
+|   | SSO is an optional part of this integration. If you only want user provisioning, skip these steps. |
+
+## Steps
+
+1. Complete the steps in [Creating a single sign-on connection](pf_zscaler_zia_connector_creating_a_single_sign_on_connection.html).
+
+2. Ensure that your traffic is being forwarded to Zscaler Internet Access.
+
+   Learn more in [Choosing Traffic Forwarding Methods](https://help.zscaler.com/zia/choosing-traffic-forwarding-methods) in the Zscaler Internet Access documentation.
+
+3. Complete the steps in [Registering PingFederate as an identity provider in Zscaler](pf_zscaler_zia_connector_registering_pf_as_an_identity_provider_in_zscaler.html).
+
+---
+
+---
+title: Creating a provisioning connection
+description: To allow PingFederate to manage users in Zscaler Internet Access, create a service provider (SP) connection.
+component: zscaler
+page_id: zscaler:zscaler_internet_access_provisioner:pf_zscaler_zia_connector_creating_a_provisioning_connection
+canonical_url: https://docs.pingidentity.com/integrations/zscaler/zscaler_internet_access_provisioner/pf_zscaler_zia_connector_creating_a_provisioning_connection.html
+llms_txt: https://docs.pingidentity.com/integrations/zscaler/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: June 18, 2024
+section_ids:
+  steps: Steps
+---
+
+# Creating a provisioning connection
+
+To allow PingFederate to manage users in Zscaler Internet Access, create a service provider (SP) connection.
+
+## Steps
+
+1. In the PingFederate administrator console, create a new SP connection:
+
+   * For PingFederate 10.1 or later: go to **Applications > Integration > SP Connections**. Click **Create Connection**.
+
+   * For PingFederate 10.0 or earlier: go to **Identity Provider > SP Connections**. Click **Create Connection**.
+
+2. Configure the basic connection details with the Zscaler Internet Access quick connection template:
+
+   1. On the **Connection Template** tab, select **Use a template for this connection**.
+
+   2. In the **Connection Template** list, select **Zscaler ZIA Provisioner**.
+
+   3. In the **Metadata File** row, upload the `zscaler-metadata.xml` file that you saved in [Getting SAML details from Zscaler](pf_zscaler_zia_connector_getting_saml_details_from_zscaler.html). Click **Next**.
+
+   4. On the **Connection Type** tab, select only **Outbound Provisioning**. Click **Next**.
+
+   5. On the **General Info** tab, in the **Connection Name** field, enter a name for the connection. Click **Next**.
+
+3. On the **Outbound Provisioning** tab, configure provisioning, as shown in [Configuring outbound provisioning](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/help_spconnectionconfigtasklet_saasprovisioningstate.html) in the PingFederate documentation, with the following details:
+
+   1. On the **Target** page, enter the **Base URL** and **Bearer Token** values that you noted in [Getting a base URL and bearer token from Zscaler](pf_zscaler_zia_connector_getting_a_base_url_and_bearer_token_from_zscaler.html).
+
+      |   |                                                                                         |
+      | - | --------------------------------------------------------------------------------------- |
+      |   | PingFederate verifies the access token when you activate the channel and SP connection. |
+
+   2. **Optional:** In the **Provisioning Options** section, customize the provisioning connector actions as shown in [Provisioning options reference](pf_zscaler_zia_connector_provisioning_options_reference.html). Click **Next**.
+
+   3. On the **Manage Channels** page, create a channel as shown in [Managing channels](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/help_saasmanagementtasklet_saasmanagementstate.html) in the PingFederate documentation. Click **Done**.
+
+      |   |                                                                                                                                                                             |
+      | - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+      |   | Learn more about the attributes available for your channel configuration in [Supported attributes reference](pf_zscaler_zia_connector_supported_attributes_reference.html). |
+
+   4. On the **Outbound Provisioning** tab, click **Next**.
+
+4. On the **Activation and Summary** tab, above the **Summary** section, click the toggle to turn on the connection. Click **Save**.
+
+---
+
+---
+title: Creating a provisioning connection
+description: To allow PingFederate to manage users in Zscaler Private Access, create a service provider (SP) connection.
+component: zscaler
+page_id: zscaler:zscaler_private_access_provisioner:pf_zscaler_zpa_connector_creating_a_provisioning_connection
+canonical_url: https://docs.pingidentity.com/integrations/zscaler/zscaler_private_access_provisioner/pf_zscaler_zpa_connector_creating_a_provisioning_connection.html
+llms_txt: https://docs.pingidentity.com/integrations/zscaler/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: June 18, 2024
+section_ids:
+  about-this-task: About this task
+  steps: Steps
+---
+
+# Creating a provisioning connection
+
+To allow PingFederate to manage users in Zscaler Private Access, create a service provider (SP) connection.
+
+## About this task
+
+|   |                                                                                                           |
+| - | --------------------------------------------------------------------------------------------------------- |
+|   | You can follow these steps to create a new SP connection, or you can modify your provisioning connection. |
+
+## Steps
+
+1. In the PingFederate administrator console, configure the data store that PingFederate will use as the source of user data. For instructions, see [Datastores](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/help_managedatasourcestasklet_managedatasourcesstate.html) in the PingFederate documentation.
+
+   * When targeting users and groups for provisioning, exclude the user account that you will use to administer users in your connection to Zscaler Private Access. This prevents the PingFederate provisioning engine from interfering with the account that provisions users and groups.
+
+2. Enable provisioning.
+
+   1. On the **System > Protocol Settings > Roles & Protocols** screen, select **Enable Identity Provider IdP Role and Support the Following**.
+
+   2. Select **Outbound Provisioning**. Click **Save**.
+
+3. On the **Identity Provider** screen, in the **SP Connections** area, open an existing connection or create a new one as follows:
+
+   1. Click **Create new**.
+
+   2. On the **Connection Template** screen, select **Use a template for this connection**.
+
+   3. In the **Connection Template** list, select **Zscaler ZPA Connector**.
+
+   4. Click **Choose File**, select the `sp_metadata.xml` file that you downloaded in [Enabling provisioning and single sign-on in Zscaler](pf_zscaler_zpa_connector_enabling_provisioning_and_single_sign_on_in_zscaler.html), and then click **Open**. Click **Next**.
+
+4. On the **Connection Type** screen, select **Outbound Provisioning** and clear any unwanted types. Click **Next**.
+
+5. On the **General Info** screen, the basic connection information is populated by the metadata XML file. Click **Next**.
+
+6. On the **Outbound Provisioning** screen, configure the provisioning target and channel as shown in [Configuring outbound provisioning](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/help_spconnectionconfigtasklet_saasprovisioningstate.html) in the PingFederate documentation.
+
+   1. Click **Configure Provisioning**.
+
+   2. On the **Target** screen, in the **Base URL** field, enter the **SCIM Service Provider Endpoint** that you noted in [Enabling provisioning and single sign-on in Zscaler](pf_zscaler_zpa_connector_enabling_provisioning_and_single_sign_on_in_zscaler.html).
+
+   3. On the **Target** screen, enter the **Bearer Token** that you noted in [Enabling provisioning and single sign-on in Zscaler](pf_zscaler_zpa_connector_enabling_provisioning_and_single_sign_on_in_zscaler.html).
+
+      |   |                                                                                         |
+      | - | --------------------------------------------------------------------------------------- |
+      |   | PingFederate verifies the access token when you activate the channel and SP connection. |
+
+   4. Under **Provisioning Options**, customize the provisioning connector actions as shown in [Provisioning options reference](pf_zscaler_zpa_connector_provisioning_options_reference.html). Click **Next**.
+
+   5. On the **Manage Channels** screen, create a channel as shown in [Managing channels](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/help_saasmanagementtasklet_saasmanagementstate.html) in the PingFederate documentation. Click **Done**.
+
+      |   |                                                                                                                                                                                        |
+      | - | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+      |   | For more information about the attributes available in your channel configuration, see [Supported attributes reference](pf_zscaler_zpa_connector_supported_attributes_reference.html). |
+
+   6. On the **Outbound Provisioning** screen, click **Next**.
+
+7. On the **Activation and Summary** screen, above the **Summary** section, turn on the connection. Click **Save**.
+
+---
+
+---
+title: Creating a single sign-on connection
+description: To allow PingFederate to handle single sign-on (SSO) to Zscaler Internet Access, create a service provider (SP) connection.
+component: zscaler
+page_id: zscaler:zscaler_internet_access_provisioner:pf_zscaler_zia_connector_creating_a_single_sign_on_connection
+canonical_url: https://docs.pingidentity.com/integrations/zscaler/zscaler_internet_access_provisioner/pf_zscaler_zia_connector_creating_a_single_sign_on_connection.html
+llms_txt: https://docs.pingidentity.com/integrations/zscaler/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: June 18, 2024
+section_ids:
+  about-this-task: About this task
+  steps: Steps
+---
+
+# Creating a single sign-on connection
+
+To allow PingFederate to handle single sign-on (SSO) to Zscaler Internet Access, create a service provider (SP) connection.
+
+## About this task
+
+|   |                                                                                                        |
+| - | ------------------------------------------------------------------------------------------------------ |
+|   | You can follow these steps to create a new connection, or you can modify your provisioning connection. |
+
+## Steps
+
+1. In the PingFederate administrator console, create a new SP connection:
+
+   * For PingFederate 10.1 or later: go to **Applications > Integration > SP Connections**. Click **Create Connection**.
+
+   * For PingFederate 10.0 or earlier: go to **Identity Provider > SP Connections**. Click **Create Connection**.
+
+2. Configure the basic connection details with the Zscaler Internet Access quick connection template:
+
+   1. On the **Connection Template** tab, select **Use a template for this connection**.
+
+   2. In the **Connection Template** list, select **Zscaler ZIA Provisioner**.
+
+   3. In the **Metadata File** row, upload the `zscaler-metadata.xml` file that you saved in [Getting SAML details from Zscaler](pf_zscaler_zia_connector_getting_saml_details_from_zscaler.html). Click **Next**.
+
+   4. On the **Connection Type** tab, select **Browser SSO Profiles**. Click **Next**.
+
+   5. On the **General Info** tab, in the **Connection Name** field, enter a name for the connection. Click **Next**.
+
+3. On the **Browser SSO** tab, configure SSO as shown in [Configuring IdP Browser SSO](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/help_spconnectionconfigtasklet_spbrowserssostate.html) in the PingFederate documentation, with the following details:
+
+   1. On the **Browser SSO > SAML Profiles** tab, select only **IdP-Initiated SSO** and **SP-Initiated SSO**.
+
+      |   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+      | - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+      |   | It is recommended to leverage SP-initiated SSO because IdP-initiated SSO is not commonly used.Learn more in [IdP-Initiated SAML](https://help.zscaler.com/zia/about-saml) in the Zscaler Internet Access documentation and [Setting Assertion Consumer Service URLs (SAML)](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/help_spprotocolsettingstasklet_assertionconsumerservicestate.html) in the PingFederate documentation.If you want to use both IdP-initiated SSO and SP-initiated SSO, both endpoints are accessible using the `ACSIdx` parameter.Learn more in [IdP endpoints](https://docs.pingidentity.com/pingfederate/latest/developers_reference_guide/pf_idp_endpoints.html) in the PingFederate documentation. |
+
+   2. On the **Browser SSO > Protocol Settings > Allowable SAML Bindings** tab, select only **POST**.
+
+   3. On the **Browser SSO > Protocol Settings > Signature Policy** tab, select **Always sign assertion**.
+
+4. On the **Credentials** tab, configure the connection credentials as shown in [Configuring credentials](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/help_spconnectionconfigtasklet_credentialsstate.html) in the PingFederate documentation. Click **Next**.
+
+5. On the **Activation and Summary** tab, above the **Summary** section, click the toggle to turn on the connection. Click **Save**.
+
+---
+
+---
+title: Creating a single sign-on connection
+description: To allow PingFederate to handle single sign-on (SSO) to Zscaler Private Access, create a service provider (SP) connection.
+component: zscaler
+page_id: zscaler:zscaler_private_access_provisioner:pf_zscaler_zpa_connector_creating_a_single_sign_on_connection
+canonical_url: https://docs.pingidentity.com/integrations/zscaler/zscaler_private_access_provisioner/pf_zscaler_zpa_connector_creating_a_single_sign_on_connection.html
+llms_txt: https://docs.pingidentity.com/integrations/zscaler/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: June 18, 2024
+section_ids:
+  about-this-task: About this task
+  steps: Steps
+---
+
+# Creating a single sign-on connection
+
+To allow PingFederate to handle single sign-on (SSO) to Zscaler Private Access, create a service provider (SP) connection.
+
+## About this task
+
+|   |                                                                                                           |
+| - | --------------------------------------------------------------------------------------------------------- |
+|   | You can follow these steps to create a new SP connection, or you can modify your provisioning connection. |
+
+## Steps
+
+1. In the PingFederate administrator console, configure the data store that PingFederate will use as the source of user data. For instructions, see [Datastores](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/help_managedatasourcestasklet_managedatasourcesstate.html) in the PingFederate documentation.
+
+2. On the **Identity Provider** tab, in the **SP Connections** area, open an existing connection or create a new one as follows:
+
+   1. Click **Create new**.
+
+   2. On the **Connection Template** tab, select **Use a template for this connection**.
+
+   3. In the **Connection Template** list, select **Zscaler ZPA Connector**.
+
+   4. Click **Choose File**, select the `sp_metadata.xml` file that you downloaded in [Enabling provisioning and single sign-on in Zscaler](pf_zscaler_zpa_connector_enabling_provisioning_and_single_sign_on_in_zscaler.html), and then click **Open**. Click **Next**.
+
+3. On the **Connection Type** tab, select **Browser SSO Profiles** and clear any unwanted types. Click **Next**.
+
+4. On the **General Info** tab, the basic connection information is populated by the metadata XML file. Click **Next**.
+
+5. On the **Browser SSO** tab, configure browser SSO.
+
+   For a complete guide, see [Configuring IdP Browser SSO](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/help_spconnectionconfigtasklet_spbrowserssostate.html) in the PingFederate documentation.
+
+   1. On the **Browser SSO > SAML Profiles** tab, select only **IdP-Initiated SSO** and **SP-Initiated SSO**.
+
+   2. On the **Browser SSO > Protocol Settings > Allowable SAML Bindings** tab, select only **POST**.
+
+   3. On the **Browser SSO > Protocol Settings > Signature Policy** tab, select **Always sign assertion**.
+
+6. On the **Credentials** tab, configure the connection credentials. Click **Next**.
+
+   For a complete guide, see [Configuring credentials](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/help_spconnectionconfigtasklet_credentialsstate.html) in the PingFederate documentation.
+
+   * On the **Credentials > Signature Verification Settings > Signature Verification Certificate** tab, click **Manage Certificates** and import the certificate that you downloaded in [Enabling provisioning and single sign-on in Zscaler](pf_zscaler_zpa_connector_enabling_provisioning_and_single_sign_on_in_zscaler.html).
+
+7. On the **Activation and Summary** tab, above the **Summary** section, turn on the connection. Click **Save**.
+
+---
+
+---
 title: Deploying the integration files
 description: To get started with the integration, deploy the Zscaler Internet Access Provisioner files to your PingFederate directory.
 component: zscaler
@@ -489,340 +912,3 @@ For general information about these steps, see [Metadata export](https://docs.pi
 10. Save `metadata.xml`.
 
 11. Click **Done**.
-
----
-
----
-title: Getting a base URL and bearer token from Zscaler
-description: To enable provisioning to Zscaler Internet Access, enable the System for Cross-domain Identity Management (SCIM) feature and note your configuration information.
-component: zscaler
-page_id: zscaler:zscaler_internet_access_provisioner:pf_zscaler_zia_connector_getting_a_base_url_and_bearer_token_from_zscaler
-canonical_url: https://docs.pingidentity.com/integrations/zscaler/zscaler_internet_access_provisioner/pf_zscaler_zia_connector_getting_a_base_url_and_bearer_token_from_zscaler.html
-llms_txt: https://docs.pingidentity.com/integrations/zscaler/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: June 18, 2024
-section_ids:
-  about-this-task: About this task
-  steps: Steps
----
-
-# Getting a base URL and bearer token from Zscaler
-
-To enable provisioning to Zscaler Internet Access, enable the System for Cross-domain Identity Management (SCIM) feature and note your configuration information.
-
-## About this task
-
-Learn more in [About SCIM](https://help.zscaler.com/zia/about-scim) and [Configuring SCIM](https://help.zscaler.com/zia/configuring-scim) in the Zscaler Internet Access documentation.
-
-## Steps
-
-1. Sign on to Zscaler Internet Access as an administrator.
-
-2. Go to **Administration > Settings > Company Profile** and note your **Company ID**.
-
-   You'll use this as your organization ID in step 5.
-
-3. Go to **Administration > Authentication > Authentication Settings**.
-
-4. On the **Authentication Profile** tab, in the **Authentication Type** section, select **SAML**. Click **Configure SAML**.
-
-5. Configure SAML and enable provisioning:
-
-   1. In the **Configure SAML** window, select **Enable SCIM-Based Provisioning**.
-
-   2. In the **Base URL** field, enter `https://scim.<Zscaler_cloud_name>.net/<organization_ID>/scim`.
-
-      You can find the cloud name in the URL that you use to sign on to the Zscaler Internet Access service. For example, if you sign on to admin.zscalerbeta.net, then your cloud name is zscalerbeta.net.
-
-   3. Note the **Bearer Token**. Click **Save**.
-
-      You'll use the **Bearer Token** value in [Creating a provisioning connection](pf_zscaler_zia_connector_creating_a_provisioning_connection.html).
-
-6. Click **Save**.
-
-7. Activate the change as shown in [Saving and Activating Changes in the Admin Portal](https://help.zscaler.com/zia/saving-and-activating-changes-admin-portal) in the Zscaler Internet Access documentation.
-
----
-
----
-title: Getting SAML details from Zscaler
-description: To simplify the PingFederate configuration process, download your Zscaler Internet Access SAML metadata XML file.
-component: zscaler
-page_id: zscaler:zscaler_internet_access_provisioner:pf_zscaler_zia_connector_getting_saml_details_from_zscaler
-canonical_url: https://docs.pingidentity.com/integrations/zscaler/zscaler_internet_access_provisioner/pf_zscaler_zia_connector_getting_saml_details_from_zscaler.html
-llms_txt: https://docs.pingidentity.com/integrations/zscaler/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: June 18, 2024
-section_ids:
-  about-this-task: About this task
-  steps: Steps
----
-
-# Getting SAML details from Zscaler
-
-To simplify the PingFederate configuration process, download your Zscaler Internet Access SAML metadata XML file.
-
-## About this task
-
-For more information about configuring SAML, see [About SAML](https://help.zscaler.com/zia/about-saml) and [Configuring SAML](https://help.zscaler.com/zia/configuring-saml) in the Zscaler Internet Access documentation.
-
-## Steps
-
-1. Sign on to Zscaler Internet Access as an administrator.
-
-2. Go to **Administration > Authentication > Authentication Settings**.
-
-3. Click **Configure SAML**.
-
-4. In the **SP's Metadata** section, click **Download**.
-
-5. Save `zscaler-metadata.xml`.
-
----
-
----
-title: Known issues and limitations
-description: The following are known issues or limitations for the Zscaler Internet Access Provisioner.
-component: zscaler
-page_id: zscaler:zscaler_internet_access_provisioner:pf_zscaler_zia_connector_known_issues_and_limitations
-canonical_url: https://docs.pingidentity.com/integrations/zscaler/zscaler_internet_access_provisioner/pf_zscaler_zia_connector_known_issues_and_limitations.html
-llms_txt: https://docs.pingidentity.com/integrations/zscaler/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: June 18, 2024
-section_ids:
-  known-issues: Known issues
-  known-limitations: Known limitations
----
-
-# Known issues and limitations
-
-The following are known issues or limitations for the Zscaler Internet Access Provisioner.
-
-## Known issues
-
-There are no known issues.
-
-## Known limitations
-
-* When an LDAP user is deleted in a targeted group distinguished name (DN), the provisioning connector does not propagate the deletion until a new user is added to the group. This limitation is compounded when the **User Create** provisioning option is disabled. Learn more about solutions in [SaaS provisioner does not remove the user](https://support.pingidentity.com/s/article/After-deleting-an-AD-user-account-SaaS-provisioner-does-not-remove-the-user-in-the-next-provisioning-cycle-when-Group-DN-is-specified) in the Knowledge Base.
-
-* Because of PingFederate limitations, user attributes cannot be cleared once set.
-
-* Because of PingFederate limitations, the group name is the only supported group attribute and must be the Common Name (CN) of the LDAP group being provisioned. Additional group attributes are not supported in PingFederate.
-
-* Performance:
-
-  * Zscaler Internet Access System for Cross-domain Identity Management (SCIM) servers have a rate limit of 5 requests per second. In order to avoid retries, reduce the number of threads in the PingFederate channel configuration. For more information, see [Specifying channel information](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/help_saaschanneltasklet_saasgeneralinfostate.html) in the PingFederate documentation and [SCIM API Examples](https://help.zscaler.com/zia/scim-api-examples) in the Zscaler Internet Access documentation.
-
-  * When provisioning users to a group, all users must be set to active. If an inactive user is present, the active users and group will be provisioned but no users will be added to the group.
-
-  * Rate limiting can prevent the connector from provisioning users to groups. If rate limiting forces a retry, and a user is created on the retry, the user's group memberships are applied the next time the relevant groups are updated.
-
----
-
----
-title: Known issues and limitations
-description: The following are known issues or limitations with the Zscaler Private Access Provisioner.
-component: zscaler
-page_id: zscaler:zscaler_private_access_provisioner:pf_zscaler_zpa_connector_known_issues_and_limitations
-canonical_url: https://docs.pingidentity.com/integrations/zscaler/zscaler_private_access_provisioner/pf_zscaler_zpa_connector_known_issues_and_limitations.html
-llms_txt: https://docs.pingidentity.com/integrations/zscaler/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: June 18, 2024
-section_ids:
-  known-issues: Known issues
-  known-limitations: Known limitations
----
-
-# Known issues and limitations
-
-The following are known issues or limitations with the Zscaler Private Access Provisioner.
-
-## Known issues
-
-There are no known issues.
-
-## Known limitations
-
-* When an LDAP user is deleted in a targeted group distinguished name (DN), the provisioning connector does not propagate the deletion until a new user is added to the group. This limitation is compounded when the **User Create** provisioning option is disabled. For solutions, see [SaaS provisioner does not remove the user](https://support.pingidentity.com/s/article/After-deleting-an-AD-user-account-SaaS-provisioner-does-not-remove-the-user-in-the-next-provisioning-cycle-when-Group-DN-is-specified) in the Knowledge Base.
-
-* Due to PingFederate limitations, user attributes cannot be cleared once set.
-
-* Due to PingFederate limitations, the Group name is the only supported group attribute and must be the Common Name (CN) of the LDAP Group being provisioned. Additional group attributes are not supported in PingFederate.
-
-* Performance
-
-  * Zscaler SCIM servers have a rate limit of 5 requests per second. In order to avoid retries, reduce the number of threads in the PingFederate channel configuration. For more information, see [Specifying channel information](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/help_saaschanneltasklet_saasgeneralinfostate.html) in the PingFederate documentation and [SCIM API Examples](https://help.zscaler.com/zia/scim-api-examples) in the Zscaler documentation.
-
-  * When provisioning users to a group, all users must be set to active. If an inactive user is present, the active users and group will be provisioned but no users will be added to the group.
-
-  * Rate limiting can prevent the connector from provisioning users to groups. If rate limiting forces a retry, and a user is created on the retry, the user's group memberships are applied the next time the relevant groups are updated.
-
----
-
----
-title: Overview of Zscaler integrations
-description: The Zscaler Internet Access Connector allows PingFederate to integrate with Zscaler Internet Access for user provisioning, group provisioning, and single sign-on (SSO).
-component: zscaler
-page_id: zscaler::pf_is_overview_zscaler_integrations
-canonical_url: https://docs.pingidentity.com/integrations/zscaler/pf_is_overview_zscaler_integrations.html
-llms_txt: https://docs.pingidentity.com/integrations/zscaler/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: July 29, 2026
-section_ids:
-  zscaler-internet-access-connector: Zscaler Internet Access Connector
-  zscaler-private-access-connector: Zscaler Private Access Connector
-  configuring-pingfederate-as-an-external-idp-for-zidentity: Configuring PingFederate as an External IdP for ZIdentity
----
-
-# Overview of Zscaler integrations
-
-## Zscaler Internet Access Connector
-
-The Zscaler Internet Access Connector allows PingFederate to integrate with Zscaler Internet Access for user provisioning, group provisioning, and single sign-on (SSO).
-
-## Zscaler Private Access Connector
-
-The Zscaler Private Access Connector allows PingFederate to integrate with Zscaler Private Access for user provisioning, group provisioning, and single sign-on (SSO).
-
-## Configuring PingFederate as an External IdP for ZIdentity
-
-Ping Identity and ZScaler have collaborated on a guide to configuring PingFederate as an external identity provider (IdP) *(tooltip: \<div class="paragraph">
-\<p>A service that manages identity information and provides authentication services to relying clients or SPs within a federated or distributed network.\</p>
-\</div>)* for ZIdentity.
-
-Learn more in [Configuring PingFederate as an External IdP](https://help.zscaler.com/authentication-service/configuring-pingfederate-external-idp) in the ZScaler documentation.
-
----
-
----
-title: Provisioning options reference
-description: The following are setting descriptions for the Zscaler Internet Access provisioning capabilities.
-component: zscaler
-page_id: zscaler:zscaler_internet_access_provisioner:pf_zscaler_zia_connector_provisioning_options_reference
-canonical_url: https://docs.pingidentity.com/integrations/zscaler/zscaler_internet_access_provisioner/pf_zscaler_zia_connector_provisioning_options_reference.html
-llms_txt: https://docs.pingidentity.com/integrations/zscaler/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: June 18, 2024
----
-
-# Provisioning options reference
-
-The following are setting descriptions for the Zscaler Internet Access provisioning capabilities.
-
-| Field Name      | Description                                                                                                                                                                   |
-| --------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **User Create** | * Selected (default)
-
-  PingFederate creates users in Zscaler Internet Access.
-
-* Cleared
-
-  PingFederate does not create users in Zscaler Internet Access.                   |
-| **User Update** | - Selected (default)
-
-  PingFederate updates existing users in Zscaler Internet Access.
-
-- Cleared
-
-  PingFederate does not update existing users in Zscaler Internet Access. |
-| **User Delete** | * Selected (default)
-
-  PingFederate removes users from Zscaler Internet Access.
-
-* Cleared
-
-  PingFederate does not remove users from Zscaler Internet Access.               |
-
-|   |                                                                                                                                                                |
-| - | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | If any of the above options are cleared, PingFederate logs a warning in the user workflow section of the `provisioner.log` file when the related action fails. |
-
----
-
----
-title: Provisioning options reference
-description: Lists the main provisioning capabilities available in the Zscaler connection configuration.
-component: zscaler
-page_id: zscaler:zscaler_private_access_provisioner:pf_zscaler_zpa_connector_provisioning_options_reference
-canonical_url: https://docs.pingidentity.com/integrations/zscaler/zscaler_private_access_provisioner/pf_zscaler_zpa_connector_provisioning_options_reference.html
-llms_txt: https://docs.pingidentity.com/integrations/zscaler/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: June 18, 2024
----
-
-# Provisioning options reference
-
-Lists the main provisioning capabilities available in the Zscaler connection configuration.
-
-| Field Name                                                                                                                                                    | Description                                                                                                                                                                                                                                                                                                                                                                                                                   |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **User Create**                                                                                                                                               | **Selected** (default) – PingFederate creates users in Zscaler.**Cleared** – PingFederate does not create users in Zscaler.                                                                                                                                                                                                                                                                                                   |
-| **User Update**                                                                                                                                               | **Selected** (default) – PingFederate updates existing users in Zscaler.**Cleared** – PingFederate does not update existing users in Zscaler.                                                                                                                                                                                                                                                                                 |
-| **User Disable / User Delete**                                                                                                                                | **Selected** (default) – PingFederate disables or deletes users in Zscaler according to the **Remove User Action** setting.**Cleared** – PingFederate does not disable or delete users in Zscaler.                                                                                                                                                                                                                            |
-| &#xA;&#xA;If any of the above options are cleared, PingFederate logs a warning in the user workflow section of provisioner.log when the related action fails. |                                                                                                                                                                                                                                                                                                                                                                                                                               |
-| **Remove User Action**                                                                                                                                        | This option applies when **User Disable / User Delete** is selected and either of the following is true:- a previously provisioned user no longer meets the condition set on the **Source Location** tab.
-
-- a user has been disabled or deleted from the data store.**Disable** (default) – PingFederate disables the user in Zscaler Private Access.**Delete** – PingFederate deletes the user from Zscaler Private Access. |
-
----
-
----
-title: Registering PingFederate as an identity provider in Zscaler
-description: Export your PingFederate signing certificate and use it to configure SAML in Zscaler Internet Access.
-component: zscaler
-page_id: zscaler:zscaler_internet_access_provisioner:pf_zscaler_zia_connector_registering_pf_as_an_identity_provider_in_zscaler
-canonical_url: https://docs.pingidentity.com/integrations/zscaler/zscaler_internet_access_provisioner/pf_zscaler_zia_connector_registering_pf_as_an_identity_provider_in_zscaler.html
-llms_txt: https://docs.pingidentity.com/integrations/zscaler/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: June 18, 2024
-section_ids:
-  about-this-task: About this task
-  steps: Steps
----
-
-# Registering PingFederate as an identity provider in Zscaler
-
-Export your PingFederate signing certificate and use it to configure SAML in Zscaler Internet Access.
-
-## About this task
-
-For more information on setting up single sign-on (SSO), see [Configuring SAML](https://help.zscaler.com/zia/configuring-saml) in the Zscaler Internet Access documentation.
-
-## Steps
-
-1. In PingFederate, export your signing certificate:
-
-   1. Go to **Security > Signing & Decryption Keys & Certificates**.
-
-   2. For the certificate that you want to use, in the **Action** column, click **Export**.
-
-   3. On the **Export Certificate** tab, click **Next**.
-
-   4. On the **Export & Summary** tab, click **Export**.
-
-   5. Open the `.crt` file in a text editor and copy the contents.
-
-   6. Rename the file extension to `.pem`.
-
-2. In Zscaler Internet Access, configure SAML:
-
-   1. Go to **Administration > Authentication > Authentication Settings**.
-
-   2. On the **Authentication Profile** tab, in the **Authentication Type** section, select **SAML**. Click **Configure SAML**.
-
-      ![A screenshot that shows the Authentication Profile settings with SAML selected.](_images/uvl1563995878221.png)
-
-   3. In the **SAML Portal URL** field, enter your PingFederate SSO endpoint. For example:
-
-      ```none
-      https://<pf_host>:<pf_port>/idp/SSO.saml2
-      ```
-
-   4. In the **Login Name Attribute** field, enter the LDAP attribute that maps to the login name that users enter when they authentication with Zscaler Internet Access, such as `NameID`.
-
-   5. In the **Public SSL Certificate** section, click **Upload**. Click **Choose File**, select the `.pem` file that you exported from PingFederate, and then click **Upload**.
-
-   6. Click **Save** to exit the window.
-
-   7. Click **Save** and activate the change as shown in [Saving and Activating Changes in the Admin Portal](https://help.zscaler.com/zia/saving-and-activating-changes-admin-portal) in the Zscaler Internet Access documentation.

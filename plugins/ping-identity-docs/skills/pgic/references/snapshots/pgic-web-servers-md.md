@@ -4,6 +4,8 @@ description: Web servers proxies HTTP requests to web application servers, while
 component: pgic
 page_id: pgic::pgic_web_servers
 canonical_url: http://docs.pingidentity.com/pgic/pgic_web_servers.html
+llms_txt: http://docs.pingidentity.com/pgic/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 ---
 
 # Web servers and Ingress

@@ -3032,3 +3032,1353 @@ You are now ready to validate the use case by authenticating to the `Set session
 * [Data Store Decision node](https://docs.pingidentity.com/auth-node-ref/latest/data-store-decision.html)
 
 * [Set Session Properties node](https://docs.pingidentity.com/auth-node-ref/latest/set-session-properties.html)
+
+---
+
+---
+title: Get an access token in a journey
+description: Get a service account access token within Advanced Identity Cloud journey nodes
+component: pingoneaic
+page_id: pingoneaic:use-cases:use-case-access-token-for-journeys
+canonical_url: https://docs.pingidentity.com/pingoneaic/use-cases/use-case-access-token-for-journeys.html
+llms_txt: https://docs.pingidentity.com/pingoneaic/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+keywords: ["Use Case", "Journeys", "Scripts", "REST API", "Setup &amp; Configuration"]
+section_ids:
+  get-access-token-description: Description
+  get-access-token-goals: Goals
+  get-access-token-prereqs: Prerequisites
+  get-access-token-tasks: Tasks
+  get-access-token-task-1: "Task 1: Create ESVs"
+  get-access-token-task-2: "Task 2: Create a script to get an access token"
+  get-access-token-task-3: "Task 3: Create a journey to get an access token"
+  get-access-token-validation: Validation
+  get-access-token-validation-steps: Steps
+  get-access-token-explore-further: Explore further
+  get-access-token-reference-material: Reference material
+  get-access-token-nodes-used: Nodes used
+---
+
+# Get an access token in a journey
+
+|   |                                                                                                                                                                                                                                                                                                                                                                                            |
+| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+|   | This use case creates a service account access token for every authentication request, which can cause performance issues. If you only need to call IDM APIs from within a journey script, use the [openidm script binding](../am-scripting/next-generation-scripts.html#v2-openidm) instead. It provides direct administrative access to IDM functions without requiring an access token. |
+
+## Description
+
+Estimated time to complete: 25 minutes *(tooltip: This assumes you complete the prerequisites beforehand.)*
+
+In this use case, create a script to get an access token using a service account. A service account lets you request access tokens for most Advanced Identity Cloud REST API endpoints. Then, create a simple journey with this script to prove you can successfully request an access token.
+
+|   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | The script in this use case uses the `fr:idm:*` scope for access to `/openidm/*` API endpoints. If you want to get an access token for other Advanced Identity Cloud API endpoints, set up your [service account](../tenants/service-accounts.html#service-account-scopes) for the required scopes and update the scopes referenced in the script to match.Service accounts can only be used with Advanced Identity Cloud API endpoints; if you want to communicate with a third-party API, you'll need to use the standard [OAuth 2.0 client credential](../am-oauth2/oauth2-client-cred-grant.html) flow. |
+
+### Goals
+
+After completing this use case, you will know how to do the following:
+
+* Get an access token to use in API calls in a [Scripted Decision node](https://docs.pingidentity.com/auth-node-ref/latest/scripted-decision.html) in Advanced Identity Cloud.
+
+## Prerequisites
+
+Before you start work on this use case, ensure you have these prerequisites:
+
+* A basic understanding of:
+
+  * Journeys and nodes
+
+  * JavaScript
+
+  * Service accounts
+
+  * ESVs
+
+* Access to your Advanced Identity Cloud development environment as a tenant administrator.
+
+* A [service account](../tenants/service-accounts.html#create-a-new-service-account) that can grant the `fr:idm:*` scope to an access token.
+
+  You'll need the service account ID and private key later when you create ESVs.
+
+## Tasks
+
+### Task 1: Create ESVs
+
+1. In the Advanced Identity Cloud admin console, go to [icon: cog, set=fa]Tenant Settings > Global Settings > Environment Secrets & Variables.
+
+2. Create the following ESVs:
+
+   | ESV name                         | ESV type          | Description                                                                                                                                                                                                                                                                                                                                                                           |
+   | -------------------------------- | ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+   | `esv-tenant-env-fqdn`            | Variable (string) | Tenant FQDN (in the appropriate [FQDN format](../tenants/environments.html#tenant-environment-fqdns)); for example: `openam-mycompany-ew2.id.forgerock.io`                                                                                                                                                                                                                            |
+   | `esv-service-account-id`         | Secret            | Service account ID; for example: `449d7e27-7889-47af-a736-83b6bbf97ec5`                                                                                                                                                                                                                                                                                                               |
+   | `esv-service-account-privatekey` | Secret            | Service account private key; for example:```none
+   {
+     d: "RhpIZ32rNfkoVkQh3pt1me...rDkFL9nBWDOZvXQ2LsFEBc",
+     dp: "RfrvtBH_NmzxS......IpJ1vYZS_J0cw",
+     dq: "OVO8_yXFRHT...2VREB2b8f8xvIhv5jrQWQ",
+     e: "AQAB",
+     kty: "RSA",
+     n: "5LoH3Fc8IdRg1...K4eUvMEJsjVvfRgzpWCDM0",
+     p: "_wjzIYyYcQiNOZdV1Cp7...kjDw",
+     q: "5ZeYq0C......6WOaiYw",
+     qi: "Z9ECeon...q56tpl2Mu65yqlw",
+   }
+   ``` |
+
+3. Apply the updates.
+
+   Learn more about creating ESVs and applying updates in [Manage ESVs using the admin console](../tenants/esvs-manage-ui.html) .
+
+### Task 2: Create a script to get an access token
+
+1. Download the sample script: [getAccessToken.js](../_attachments/getAccessToken.js).
+
+   > **Collapse: View script**
+   >
+   > ```javascript
+   > /*
+   >  * Copyright © 2024 - 2026 Ping Identity Corporation
+   >  *
+   >  * This code is to be used exclusively in connection with Ping Identity Corporation
+   >  * software or services.
+   >  * Ping Identity Corporation only offers such software or services to legal entities
+   >  * who have entered into a binding license agreement with Ping Identity Corporation.
+   > */
+   >
+   > var nodeConfig = {
+   >   nodeName: "Get Access Token Demo",
+   >   tenantFqdnEsv: "esv.tenant.env.fqdn",
+   >   accountIdEsv: "esv.service.account.id",
+   >   privateKeyEsv: "esv.service.account.privatekey",
+   >   accessTokenStateField: "idmAccessToken",
+   >   maxAttempts: 3,
+   >   scope: "fr:idm:*",
+   >   serviceAccountClientId: "service-account",
+   >   jwtValiditySeconds: 10,
+   > };
+   >
+   > var nodeLogger = {
+   >   debug: function (message) {
+   >     logger.message("***" + nodeConfig.nodeName + " " + message);
+   >   },
+   >   warning: function (message) {
+   >     logger.warning("***" + nodeConfig.nodeName + " " + message);
+   >   },
+   >   error: function (message) {
+   >     logger.error("***" + nodeConfig.nodeName + " " + message);
+   >   },
+   > };
+   >
+   > var nodeOutcomes = {
+   >   SUCCESS: "Success",
+   >   ERROR: "Error",
+   > };
+   >
+   > var javaImports = JavaImporter(
+   >   org.forgerock.openam.auth.node.api.Action,
+   >   org.forgerock.json.jose.builders.JwtBuilderFactory,
+   >   org.forgerock.json.jose.jwt.JwtClaimsSet,
+   >   org.forgerock.json.jose.jws.JwsAlgorithm,
+   >   org.forgerock.json.jose.jws.SignedJwt,
+   >   org.forgerock.json.jose.jws.handlers.SecretRSASigningHandler,
+   >   org.forgerock.json.jose.jwk.RsaJWK,
+   >   javax.crypto.spec.SecretKeySpec,
+   >   org.forgerock.secrets.SecretBuilder,
+   >   org.forgerock.secrets.keys.SigningKey,
+   >   java.time.temporal.ChronoUnit,
+   >   java.time.Clock,
+   >   java.util.UUID
+   > );
+   >
+   > function getKeyFromJwk(issuer, jwk) {
+   >   var privateKey = javaImports.RsaJWK.parse(jwk).toRSAPrivateKey();
+   >
+   >   var secretBuilder = new javaImports.SecretBuilder();
+   >
+   >   secretBuilder
+   >     .secretKey(privateKey)
+   >     .stableId(issuer)
+   >     .expiresIn(
+   >       5,
+   >       javaImports.ChronoUnit.MINUTES,
+   >       javaImports.Clock.systemUTC()
+   >     );
+   >   return new javaImports.SigningKey(secretBuilder);
+   > }
+   >
+   > function getAssertionJwt(accountId, privateKey, audience, validity) {
+   >   var signingHandler = new javaImports.SecretRSASigningHandler(
+   >     getKeyFromJwk(accountId, privateKey)
+   >   );
+   >
+   >   var iat = new Date().getTime();
+   >   var exp = new Date(iat + validity * 1000);
+   >
+   >   var jwtClaims = new javaImports.JwtClaimsSet();
+   >
+   >   jwtClaims.setIssuer(accountId);
+   >   jwtClaims.setSubject(accountId);
+   >   jwtClaims.addAudience(audience);
+   >   jwtClaims.setExpirationTime(exp);
+   >   jwtClaims.setJwtId(javaImports.UUID.randomUUID());
+   >
+   >   var jwt = new javaImports.JwtBuilderFactory()
+   >     .jws(signingHandler)
+   >     .headers()
+   >     .alg(javaImports.JwsAlgorithm.RS256)
+   >     .done()
+   >     .claims(jwtClaims)
+   >     .build();
+   >
+   >   return jwt;
+   > }
+   >
+   > function getAccessToken(accountId, privateKey, tenantFqdn, maxAttempts) {
+   >   var response = null;
+   >   var accessToken = null;
+   >   var tokenEndpoint = "https://"
+   >     .concat(tenantFqdn)
+   >     .concat("/am/oauth2/access_token");
+   >
+   >   nodeLogger.debug("Getting Access Token from endpoint " + tokenEndpoint);
+   >
+   >   var assertionJwt = getAssertionJwt(
+   >     accountId,
+   >     privateKey,
+   >     tokenEndpoint,
+   >     nodeConfig.jwtValiditySeconds
+   >   );
+   >
+   >   if (!assertionJwt) {
+   >     nodeLogger.error("Error getting assertion JWT");
+   >     return null;
+   >   }
+   >
+   >   nodeLogger.debug("Got assertion JWT " + assertionJwt);
+   >
+   >   for (var attempt = 0; attempt < maxAttempts; attempt++) {
+   >     nodeLogger.debug("Attempt " + (attempt + 1) + " of " + maxAttempts);
+   >     try {
+   >       var request = new org.forgerock.http.protocol.Request();
+   >       request.setUri(tokenEndpoint);
+   >       request.setMethod("POST");
+   >       request
+   >         .getHeaders()
+   >         .add("Content-Type", "application/x-www-form-urlencoded");
+   >
+   >       var params = "grant_type="
+   >         .concat(
+   >           encodeURIComponent("urn:ietf:params:oauth:grant-type:jwt-bearer")
+   >         )
+   >         .concat("&client_id=")
+   >         .concat(encodeURIComponent(nodeConfig.serviceAccountClientId))
+   >         .concat("&assertion=")
+   >         .concat(encodeURIComponent(assertionJwt))
+   >         .concat("&scope=")
+   >         .concat(encodeURIComponent(nodeConfig.scope));
+   >
+   >       request.setEntity(params);
+   >       response = httpClient.send(request).get();
+   >       if (response) {
+   >         break;
+   >       }
+   >     } catch (e) {
+   >       nodeLogger.error(
+   >         "Failure calling access token endpoint: " +
+   >           tokenEndpoint +
+   >           " exception:" +
+   >           e
+   >       );
+   >     }
+   >   }
+   >
+   >   if (!response) {
+   >     nodeLogger.error("Bad response");
+   >     return null;
+   >   }
+   >
+   >   if (response.getStatus().getCode() !== 200) {
+   >     nodeLogger.error(
+   >       "Unable to acquire Access Token. HTTP Result: " + response.getStatus()
+   >     );
+   >     return null;
+   >   }
+   >
+   >   try {
+   >     var responseJson = response.getEntity().getString();
+   >     nodeLogger.debug("Response content " + responseJson);
+   >     var oauth2response = JSON.parse(responseJson);
+   >     accessToken = oauth2response.access_token;
+   >     nodeLogger.debug("Access Token acquired: " + accessToken);
+   >     return accessToken;
+   >   } catch (e) {
+   >     nodeLogger.error("Error getting access token from response: " + e);
+   >   }
+   >
+   >   return null;
+   > }
+   >
+   > (function () {
+   >   try {
+   >     nodeLogger.debug("Node starting");
+   >
+   >     var accessToken = nodeState.get(nodeConfig.accessTokenStateField);
+   >
+   >     if (accessToken) {
+   >       nodeLogger.debug("Access token already present: continuing");
+   >       action = javaImports.Action.goTo(nodeOutcomes.SUCCESS).build();
+   >       return;
+   >     }
+   >
+   >     var tenantFqdn = systemEnv.getProperty(nodeConfig.tenantFqdnEsv);
+   >     if (!tenantFqdn) {
+   >       nodeLogger.error("Couldn't get FQDN from esv " + config.tenantFqdnEsv);
+   >       action = javaImports.Action.goTo(nodeOutcomes.ERROR).build();
+   >       return;
+   >     }
+   >
+   >     var accountId = systemEnv.getProperty(nodeConfig.accountIdEsv);
+   >     if (!accountId) {
+   >       nodeLogger.error(
+   >         "Couldn't get service account id from esv " + nodeConfig.accountIdEsv
+   >       );
+   >       action = javaImports.Action.goTo(nodeOutcomes.ERROR).build();
+   >       return;
+   >     }
+   >
+   >     var privateKey = systemEnv.getProperty(nodeConfig.privateKeyEsv);
+   >     if (!privateKey) {
+   >       nodeLogger.error(
+   >         "Couldn't get private key from esv " + nodeConfig.privateKeyEsv
+   >       );
+   >       action = javaImports.Action.goTo(nodeOutcomes.ERROR).build();
+   >       return;
+   >     }
+   >
+   >     accessToken = getAccessToken(
+   >       accountId,
+   >       privateKey,
+   >       tenantFqdn,
+   >       nodeConfig.maxAttempts
+   >     );
+   >
+   >     if (!accessToken) {
+   >       nodeLogger.error("Failed to get access token");
+   >       action = javaImports.Action.goTo(nodeOutcomes.ERROR).build();
+   >       return;
+   >     }
+   >
+   >     nodeLogger.debug("Success - adding token to transient state");
+   >     nodeState.putTransient(nodeConfig.accessTokenStateField, accessToken);
+   >     action = javaImports.Action.goTo(nodeOutcomes.SUCCESS).build();
+   >   } catch (e) {
+   >     nodeLogger.error("Exception encountered " + e);
+   >     action = javaImports.Action.goTo(nodeOutcomes.ERROR).build();
+   >     return;
+   >   }
+   > })();
+   > ```
+
+2. In the Advanced Identity Cloud admin console, go to [icon: code, set=material, size=inline] Extensions > Scripts, then click + New Script.
+
+3. Select Journey Decision Node and click Next.
+
+4. Select Legacy and click Next.
+
+5. In the New Journey Decision Node Script window, enter the following details:
+
+   | Field       | Value                                                                                         |
+   | ----------- | --------------------------------------------------------------------------------------------- |
+   | Name        | `Get access token`                                                                            |
+   | Description | `Get an access token using a service account`                                                 |
+   | JavaScript  | Replace the sample JavaScript with the contents of the downloaded `getAccessToken.js` script. |
+
+6. Check the variables defined in the script and update as needed:
+
+   ```javascript
+   var nodeConfig = {
+     nodeName: "Get Access Token Demo", (1)
+     tenantFqdnEsv: "esv.tenant.env.fqdn", (2)
+     accountIdEsv: "esv.service.account.id", (3)
+     privateKeyEsv: "esv.service.account.privatekey", (4)
+     accessTokenStateField: "idmAccessToken",
+     maxAttempts: 3,
+     scope: "fr:idm:*", (5)
+     serviceAccountClientId: "service-account", (6)
+     jwtValiditySeconds: 10,
+   };
+   ```
+
+   |       |                                                                                                                                                                                                              |
+   | ----- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+   | **1** | The `nodeName` indicates the name of your journey for debugging purposes.                                                                                                                                    |
+   | **2** | The `tenantFqdnEsv` contains the script reference to the `esv-tenant-env-fqdn` ESV.                                                                                                                          |
+   | **3** | The `accountIdEsv` contains the script reference to the `esv-service-account-id` ESV.                                                                                                                        |
+   | **4** | The `privateKeyEsv` contains the script reference to the `esv-service-account-privatekey` ESV.                                                                                                               |
+   | **5** | The `scope` you chose when you set up your service account; this determines which API endpoints you can get an access token for.                                                                             |
+   | **6** | The `serviceAccountClientId` must be set to `service-account` to use the built-in OAuth 2.0 public client for service accounts; otherwise, the JWT profile for OAuth 2.0 authorization grant flow will fail. |
+
+7. Click Save and Close.
+
+### Task 3: Create a journey to get an access token
+
+1. In the Advanced Identity Cloud admin console, go to [icon: account_tree, set=material, size=inline] Journeys > Journeys.
+
+2. Click [icon: add, set=material, size=inline] Add Journey, select Start from scratch, and then click Next.
+
+3. Enter the following details:
+
+   | Field           | Value                                                    |
+   | --------------- | -------------------------------------------------------- |
+   | Name            | `Get Access Token Demo`                                  |
+   | Identity Object | Alpha realm - Users `managed/alpha_user`                 |
+   | Description     | `Journey to get an access token using a service account` |
+
+4. Click Save. The journey editor displays.
+
+5. In the journey editor, search for the `Scripted Decision` node and drag it onto the canvas.
+
+6. Configure this node as follows:
+
+   | Field    | Value                                      |
+   | -------- | ------------------------------------------ |
+   | Name     | `Get Access Token`                         |
+   | Script   | `Get access token`                         |
+   | Outcomes | Create two outcomes: `Success` and `Error` |
+
+7. In the journey editor, search for the `Message Node` and drag two copies of it onto the canvas.
+
+8. Select the first `Message Node` and configure it as follows:
+
+   | Field   |       | Value                                |
+   | ------- | ----- | ------------------------------------ |
+   | Name    |       | `Success Message`                    |
+   | Message | Key   | `en`                                 |
+   |         | Value | `Access token successfully acquired` |
+
+9. Select the second `Message Node` and configure it as follows:
+
+   | Field   |       | Value                        |
+   | ------- | ----- | ---------------------------- |
+   | Name    |       | `Error Message`              |
+   | Message | Key   | `en`                         |
+   |         | Value | `Failed to get access token` |
+
+10. Connect the nodes:
+
+    ![Get access token journey](_images/use-case-get-access-token/get-access-token-journey.png)
+
+    | Source node                                | Outcome path | Target node                                |
+    | ------------------------------------------ | ------------ | ------------------------------------------ |
+    | Start (person icon)                        | →            | Scripted Decision node(`Get Access Token`) |
+    | Scripted Decision node(`Get Access Token`) | Success      | Message node(`Success Message`)            |
+    |                                            | Error        | Message node(`Error Message`)              |
+    | Message node(`Success Message`)            | True         | Success node                               |
+    |                                            | False        | Success node                               |
+    | Message node(`Error Message`)              | True         | Failure node                               |
+    |                                            | False        | Failure node                               |
+
+11. Click Save.
+
+Check in
+
+At this point, you:
+
+|                                                                                       |
+| ------------------------------------------------------------------------------------- |
+| [icon: check, set=fa]Created ESVs for the tenant FQDN and service account details.    |
+| [icon: check, set=fa]Created a script to get an access token using a service account. |
+| [icon: check, set=fa]Created a simple journey to get an access token.                 |
+|                                                                                       |
+
+## Validation
+
+Now that you have created a journey to get an access token, you are ready to validate it.
+
+The journey runs the script to acquire an access token using the service account and ESVs you set up. If an access token is successfully acquired, the Success Message is shown.
+
+|   |                                                                                                                                                                    |
+| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+|   | If you want to view the access token created during testing, you can enable [debug mode](../end-user/debug-enduser-journeys.html) in your development environment. |
+
+### Steps
+
+1. In the Advanced Identity Cloud admin console, go to [icon: account_tree, set=material, size=inline] Journeys > Journeys and click on the `Get Access Token Demo` journey you just created.
+
+2. In the Preview URL field, click [icon: copy, set=material, size=inline] and paste the URL into an incognito window.
+
+   The script runs to get an access token, and if successful, the Success Message displays:
+
+   ![Success message](_images/use-case-get-access-token/access-token-success.png)
+
+   The Yes and No buttons shown are the default outcomes for a Message node; they are not relevant to this example and don't do anything further.
+
+   If an access token is not acquired, the Error Message is shown instead (`Failed to get access token`).
+
+## Explore further
+
+### Reference material
+
+| Reference                                                                                                                               | Description                                                                                    |
+| --------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| [Service accounts](../tenants/service-accounts.html)                                                                                    | Information about service accounts in Advanced Identity Cloud.                                 |
+| [Authenticate to Advanced Identity Cloud REST API with access token](../developer-docs/authenticate-to-rest-api-with-access-token.html) | Learn how to authenticate to Advanced Identity Cloud REST API endpoints using an access token. |
+| [ESVs](../tenants/esvs.html)                                                                                                            | Information about environment secrets and variables (ESVs).                                    |
+| [Journeys](../journeys/journeys.html)                                                                                                   | Conceptual information on journeys and their purpose in Advanced Identity Cloud.               |
+| [Journey nodes](../journeys/auth-nodes.html)                                                                                            | Learn about the configurable nodes Advanced Identity Cloud offers for use in journeys.         |
+| [Scripted Decision node API](../am-scripting/scripting-api-node.html)                                                                   | Reference information for journey decision node scripts.                                       |
+
+### Nodes used
+
+|   |                                                                         |
+| - | ----------------------------------------------------------------------- |
+|   | The following nodes are listed in the order they appear in the journey. |
+
+* [Scripted Decision node](https://docs.pingidentity.com/auth-node-ref/latest/scripted-decision.html)
+
+* [Message node](https://docs.pingidentity.com/auth-node-ref/latest/message.html)
+
+* [Success node](https://docs.pingidentity.com/auth-node-ref/latest/success.html)
+
+* [Failure node](https://docs.pingidentity.com/auth-node-ref/latest/failure.html)
+
+---
+
+---
+title: Microsoft Entra ID (Azure AD) as OpenID provider
+description: Configure Microsoft Entra ID as an OpenID provider for single sign-on with Advanced Identity Cloud
+component: pingoneaic
+page_id: pingoneaic:use-cases:use-case-sso-oidc-entra-id
+canonical_url: https://docs.pingidentity.com/pingoneaic/use-cases/use-case-sso-oidc-entra-id.html
+llms_txt: https://docs.pingidentity.com/pingoneaic/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+keywords: ["Implementation Guide", "Use Case", "OpenID Connect (OIDC)"]
+page_aliases: ["implementation:use-case-idc-as-rp-oidc.adoc"]
+section_ids:
+  idc-as-rp-description: Description
+  idc-as-rp-goals: Goals
+  idc-as-rp-prereqs: Prerequisites
+  idc-as-rp-tasks: Tasks
+  idc-as-rp-task-1: "Task 1: Create application in Microsoft Entra ID"
+  idc-as-rp-task-2: "Task 2: Configure Advanced Identity Cloud's social identity provider service"
+  idc-as-rp-task-3: "Task 3: Create a social authentication journey"
+  idc-as-rp-task-3-config-journey: Configure journey options
+  idc-as-rp-task-3-collect-user-creds: Collect and validate user credentials locally
+  idc-as-rp-task-3-microsoft-idp: Add Microsoft as identity provider
+  idc-as-rp-task-3-create-identity: Create identity if not present in Advanced Identity Cloud
+  idc-as-rp-task-4: "Task 4: Check journey path connections"
+  idc-as-rp-validation: Validation
+  idc-as-rp-validation-steps: Steps
+  idc-as-rp-video-validation: Video of validation
+  idc-as-rp-explore-further: Explore further
+  idc-as-rp-reference-material: Reference material
+  idc-as-rp-nodes-used: Nodes used
+---
+
+# Microsoft Entra ID (Azure AD) as OpenID provider
+
+## Description
+
+Estimated time to complete: 45 minutes *(tooltip: This assumes you complete the prerequisites beforehand.)*
+
+In this use case, you configure Advanced Identity Cloud to be a relying party (RP), or client, with [Microsoft Entra ID (formerly known as Azure AD)](https://www.microsoft.com/en-us/security/business/identity-access/microsoft-entra-id) as the OpenID provider (IdP).
+
+You also create a journey that lets end users sign on to Advanced Identity Cloud optionally using Microsoft Entra ID.
+
+### Goals
+
+After completing this use case, you will know how to do the following:
+
+* Configure Microsoft Entra ID to be an identity provider (IdP).
+
+* Configure Advanced Identity Cloud to be a relying party (RP) by delegating authentication to a third party.
+
+* Create a journey that lets end users sign on to Advanced Identity Cloud using either their Microsoft Entra ID credentials or their Advanced Identity Cloud credentials. If no identity exists in Advanced Identity Cloud after a user authenticates with Microsoft Entra ID, complete just in time (JIT) registration *(tooltip: Existing users in an identity repository, in this case Microsoft Entra ID, are created in another identity repository (Advanced Identity Cloud) as the user signs on.)* based on information returned to Advanced Identity Cloud from Microsoft Entra ID.
+
+## Prerequisites
+
+Before you start work on this use case, ensure you have these prerequisites:
+
+* A basic understanding of:
+
+  * Realms
+
+  * The UI under Native Consoles > Access Management
+
+  * Journeys
+
+  * Nodes
+
+  * The `managed/alpha_user` object schema
+
+* Access to your Advanced Identity Cloud development environment as a tenant administrator.
+
+* Proficiency in Microsoft Entra ID
+
+* A Microsoft Entra ID environment with administrator privileges
+
+* A test identity in Microsoft Entra ID
+
+## Tasks
+
+|   |                                                                                                                |
+| - | -------------------------------------------------------------------------------------------------------------- |
+|   | This use case requires the use of third-party services. Use your environment specific details where necessary. |
+
+### Task 1: Create application in Microsoft Entra ID
+
+|   |                                                                                                     |
+| - | --------------------------------------------------------------------------------------------------- |
+|   | Some steps require you to copy information. Paste the information into a text editor to keep track. |
+
+1. Sign on to your Microsoft Entra ID environment.
+
+2. Under Azure services, select App registrations.
+
+   If the resource isn't present, use the search bar to search for it.
+
+3. Click + New Registration.
+
+4. Specify the following values on the Register an application page:
+
+   * Name — `Advanced Identity Cloud (OIDC)`
+
+   * Supported account types — Select `Accounts in any organizational directory (Any Azure AD directory - Multitenant)`.
+
+   * Redirect URI — Where to redirect an end user after they authenticate with Microsoft Entra ID.
+
+     Select `Web` and enter the fully qualified domain name (FQDN) of your Advanced Identity Cloud tenant:
+
+     `https://<tenant-env-fqdn>/am`
+
+5. Click Register.
+
+   Copy the value of Application (client) ID and paste it into a text editor. You'll need it in a later step.
+
+6. From the left navigation menu, click Certificates & secrets.
+
+7. Click + New client secret and enter the following values:
+
+   * Description — `Client Secret for Advanced Identity Cloud (OIDC).`
+
+   * Expires — Select `180 days (6 months)`. For the purposes of this use case, six months is sufficient. Ensure you have a change management process in place to update the secrets in Microsoft Entra ID and in Advanced Identity Cloud.
+
+8. Click Add.
+
+   Copy the secret value from the Value column and paste it into a text editor. You'll need it in a later step.
+
+Learn more about registering an application in [Microsoft's documentation](https://learn.microsoft.com/en-us/graph/auth-register-app-v2).
+
+Check in
+
+At this point, you:
+
+|                                                                                                              |                                                        |
+| ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------ |
+| [icon: check, set=fa]Created an application in Microsoft Entra ID for Advanced Identity Cloud to connect to. | [icon: check, set=fa]Copied the Application client ID. |
+| [icon: check, set=fa]Created a client secret and copied the secret.                                          |                                                        |
+
+### Task 2: Configure Advanced Identity Cloud's social identity provider service
+
+Because this use case explores the use of Microsoft Entra ID as an additional sign-on option for end users, you must configure the Microsoft social identity provider as follows:
+
+1. In a new tab, sign on to the Advanced Identity Cloud admin console as an administrator.
+
+2. In the left navigation pane, select Native Consoles > Access Management.
+
+   The realm overview for the Alpha realm displays.
+
+3. In the left navigation pane, click Services.
+
+   In the enabled services, check if Social Identity Provider Service is present. If it is, skip to step 7.
+
+4. Click + Add a Service.
+
+5. In the Service Types…​ drop-down list, select Social Identity Provider Service.
+
+6. Click Create.
+
+7. Ensure the Enabled box is checked.
+
+8. Click Save Changes to accept the default settings.
+
+9. Click the Secondary Configurations tab > + Add a Secondary Configuration > Client configuration for Microsoft.
+
+10. Complete the following fields:
+
+    > **Collapse: Fields**
+    >
+    > | Field                                   | Value                                                                                                                                                                                                                 | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+    > | --------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+    > | Name                                    | Enter `Microsoft Social Login`.                                                                                                                                                                                       | The name of the service.                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+    > | Client ID                               | Enter the client ID you copied in step 5 of [Task 1](#idc-as-rp-task-1).For example, `9b6b20d4-36e0-4d13-af17-412f51a6567f`.                                                                                          | Specifies the `client_id` parameter as described in [section 2.2](https://www.rfc-editor.org/rfc/rfc6749.html#section-2.2) of *The OAuth 2.0 Authorization Framework specification*.                                                                                                                                                                                                                                                                                          |
+    > | Token Introspection Endpoint URL        | Leave blank.                                                                                                                                                                                                          | The URL to the endpoint handling access token validation, as described in the [*OAuth 2.0 Token Introspection specification*](https://www.rfc-editor.org/info/rfc7662).For example, `https://oauth2.googleapis.com/tokeninfo`.                                                                                                                                                                                                                                                |
+    > | Redirect URL                            | The redirect URL you entered in step 7 of [Task 1](#idc-as-rp-task-1). The Redirect URL in Advanced Identity Cloud and the Redirect URI in Microsoft Entra ID must match.For example, `https://<tenant-env-fqdn>/am`. | The URL to which the identity provider will redirect the user after authenticating, as described in [Section 3.1.2](https://www.rfc-editor.org/rfc/rfc6749.html#section-3.1.2) of *The OAuth 2.0 Authorization Framework specification*.                                                                                                                                                                                                                                      |
+    > | Redirect after form post URL            | Leave blank.                                                                                                                                                                                                          | The URL of a custom sign-on page or application. Advanced Identity Cloud sends the processed form post data related to social login authentication to that URL as the value of the `form_post_entry` query parameter.                                                                                                                                                                                                                                                         |
+    > | Scope Delimiter                         | Enter a blank space in this field by placing your cursor in the field and pressing the Spacebar.                                                                                                                      | Specifies the delimiter used to separate scope values. For example, a blank space or a comma character.Most providers use a blank space.                                                                                                                                                                                                                                                                                                                                      |
+    > | JWKS URI Endpoint                       | Leave blank.                                                                                                                                                                                                          | The URI that contains the public keys of the identity provider. Advanced Identity Cloud uses these keys to verify signatures or to encrypt objects.                                                                                                                                                                                                                                                                                                                           |
+    > | JWT Encryption Algorithm                | If not already selected, select `NONE`.                                                                                                                                                                               | The encryption algorithm supported by the provider that Advanced Identity Cloud should use to encrypt client authentication JWTs when Client Authentication Method is set to `PRIVATE_KEY_JWT`, and (OpenID Connect providers only) request JWTs when Request Parameter JWT Option is set to `VALUE` or `REFERENCE`.If set to `NONE`, Advanced Identity Cloud doesn't encrypt the JWTs. Obtain a list of the supported algorithms from the provider's `.well-known` endpoint. |
+    > | JWT Encryption Method                   | If not already selected, select `NONE`.                                                                                                                                                                               | The encryption algorithm supported by the provider that Advanced Identity Cloud should use to encrypt the following:- Client authentication JWTs when Client Authentication Method is set to `PRIVATE_KEY_JWT`.
+    >
+    > - (OpenID Connect providers only) Request JWTs when Request Parameter JWT Option is set to `VALUE` or `REFERENCE`.
+    >
+    >   Used in conjunction with `JWT Encryption Algorithm`. Obtain a list of supported methods from the provider's `.well-known` endpoint.    |
+    > | Certificate Revocation Checking Options | Leave blank.                                                                                                                                                                                                          | Specify one or more options to be used by the TLS certificate revocation checking mechanism.If you select no options, the default behavior is to enable revocation checking with `SOFT_FAIL`.                                                                                                                                                                                                                                                                                 |
+
+11. Click Create.
+
+12. In the Client Secret field, enter the client secret you copied in Task 1.
+
+13. At the bottom of the page, click Save Changes.
+
+    The properties under the UI Config Properties section set the Microsoft logo and branding that displays to the end user when they select to authenticate with Microsoft.
+
+    The default settings use the Microsoft logo and branding. Change them if necessary.
+
+|   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | The Transform Script field with the value of `Microsoft Profile Normalization` is a Groovy script that transforms attributes received from Microsoft into attributes Advanced Identity Cloud can digest.This use case doesn't require you to update this script; however, if needed, you can update the script:1. Under Native Consoles > Access Management, select Scripts.
+
+2. In the filter box above the Name column, enter `Microsoft Profile Normalization`.
+
+3. Select Microsoft Profile Normalization to view the Groovy script and make changes. |
+
+Check in
+
+At this point, you:
+
+|                                                                                                              |                                                                                                                 |
+| ------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------- |
+| [icon: check, set=fa]Created an application in Microsoft Entra ID for Advanced Identity Cloud to connect to. | [icon: check, set=fa]Copied the Application client ID.                                                          |
+| [icon: check, set=fa]Created a client secret and copied the secret.                                          | [icon: check, set=fa]Configured Microsoft Entra ID to be a social identity provider in Advanced Identity Cloud. |
+
+### Task 3: Create a social authentication journey
+
+In this task you create a journey that allows the end user to log in locally (using their Advanced Identity Cloud credentials) or log in socially using SSO (through Microsoft Entra ID).
+
+After you set up the journey, it includes the following capabilities:
+
+![Flowchart of the different paths that can be taken in the social authentication journey](_images/idc-as-rp-oidc/use-case-idc-as-rp-oidc-journey-flowchart.png)
+
+#### Configure journey options
+
+1. In the Advanced Identity Cloud admin console, click Journeys > Journeys.
+
+   All existing Advanced Identity Cloud journeys display.
+
+2. Click [icon: add, set=material, size=inline] Add Journey, select Start from scratch, and then click Next.
+
+3. Configure options for the new journey:
+
+   | Field                         | Value                                                                                                                                       | Description                                                                                          |
+   | ----------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+   | Name                          | Enter `Social authentication with Microsoft`.                                                                                               | A name to display in the journeys list.                                                              |
+   | Identity Object               | Select `Alpha Realm - Users`.                                                                                                               | The type of object that this journey authenticates.                                                  |
+   | Description                   | Enter `A login journey that allows end users to log into the end user UI locally or with Microsoft. This is for the implementation guide.`. | Description of the journey.                                                                          |
+   | Override theme                | Don't enable.                                                                                                                               | Lets you provide a unique UI for this journey.                                                       |
+   | Default journey for end users | Don't enable.                                                                                                                               | Lets you designate this journey as the default journey for your Advanced Identity Cloud environment. |
+   | Tags                          | Enter `Implementation Guide`.                                                                                                               | Keywords for organizing the journeys list.                                                           |
+
+4. Click Save. The journey editor displays.
+
+   |   |                                                                                                                                                                                                   |
+   | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+   |   | To save your progress, periodically click Save in the top right of the journey editor. Failure to do this results in losing your work if the page reloads or if you lose your network connection. |
+
+   ![The journey editor screen](_images/mfa-with-push/use-case-mfa-with-push-journey-screen.png)
+
+#### Collect and validate user credentials locally
+
+1. In the top left search bar, enter `Page Node`.
+
+   A Page node combines multiple nodes that request input into a single page for display to the user. In this case, Advanced Identity Cloud displays the username and password boxes on the same page.
+
+2. Drag the *Page Node* box from the left side of the journey editor to the right side (the canvas).
+
+3. Connect the Start (person) icon to the Page Node by selecting the icon and dragging it into the left side (input) of the *Page Node*. An arrow shows the flow of the journey from the person icon into the Page Node.
+
+4. Search for the `Platform Username` node and drag it *into* the Page Node.
+
+   The Platform Username node prompts the end user to enter their username and stores it in a configurable state attribute.
+
+5. Search for the `Platform Password` node and drag it *into* the Page Node.
+
+   The Platform Password node prompts the end user to enter their password and stores it in a configurable state attribute.
+
+6. Search for the `Data Store Decision` node and drag it to the *right* of the Page Node.
+
+   The Data Store Decision node verifies that the username and password values match those in the data store configured for the realm.
+
+7. Connect the right side of the *Page Node* (the outcome) into the left side of the *Data Store Decision* node (input).
+
+8. Connect the `True` outcome of the *Data Store Decision* node into the *Success* node (green circle).
+
+9. Connect the `False` outcome of the *Data Store Decision* node into the *Failure* node (red X circle).
+
+10. In the top right of the journey editor, click Save.
+
+|   |                                                                                                                                                                                                                                                                                    |
+| - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | When connecting the outcome of a node to another node, make sure there is a hand icon present on the node you're connecting to.> **Collapse: Click to display an example**
+>
+> ![Connecting two nodes together](_images/mfa-with-push/use-case-mfa-with-push-connecting-nodes.gif) |
+
+Check in![First stage of the journey completed](_images/idc-as-rp-oidc/use-case-idc-as-rp-oidc-journey-basic-validation.png)
+
+At this point, the journey is configured to:
+
+* a Collect the username and password from the same page.
+
+* b Validate the username and password.
+
+#### Add Microsoft as identity provider
+
+The next step in the journey is to:
+
+* Update the page node description to provide more information to the end user on login.
+
+* Add Microsoft as an option for the end user to choose when authenticating.
+
+* Upon successful redirect back to Advanced Identity Cloud, verify if the account (identity) exists in Advanced Identity Cloud.
+
+To add Microsoft as an authentication provider:
+
+1. Click the Page Node.
+
+2. In the Page Node configurations under Page Description, click +.
+
+3. Click + Add and enter the following:
+
+   | Field       | Value                                                           | Description                                                                                                                                               |
+   | ----------- | --------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+   | Key         | Enter `en`.                                                     | The locale of the text to display. You can add multiple locales. The locale set in the end user's browser determines the locale presented in the journey. |
+   | Description | Enter `Enter your login credentials or log in with Microsoft.`. | Custom text that displays to the end user when the journey goes through the Page node.                                                                    |
+
+4. Click Done and then Save.
+
+5. Search for the `Select Identity Provider` node and drag it *into* the Page Node.
+
+   The Select Identity Providers node presents the user with a list of configured, enabled, social identity providers to use for authentication.
+
+6. Click the Select Identity Provider node, and in the Filter Enabled Providers field on the right side of the screen, enter `Microsoft Social Login`.
+
+   By default, the node displays all identity providers marked as `Enabled` in the Social Identity Provider Service as a selectable option. Specify the name of one of more providers to filter the list.
+
+   |   |                                                                                                                                                                                                      |
+   | - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+   |   | View the names of your configured social identity providers in Native Consoles > Access Management > Realms > *Realm name* > Services > Social Identity Provider Service > Secondary Configurations. |
+
+   Don't change the default properties.
+
+7. Connect the `Local Authentication` outcome of the *Page Node* as input to the *Data Store Decision* node.
+
+8. Search for the `Social Provider Handler Node` and drag it to the *right* of the Page Node.
+
+   The Social Provider Handler node takes the identity provider the end user selects, in this case Microsoft, from the Select Identity Provider node and attempts to authenticate the user. This node collects relevant profile information from the provider and returns the user to the flow, transforming the profile information into the appropriate attributes.
+
+9. Configure the properties for the Social Provider Handler node:
+
+   > **Collapse: Properties**
+   >
+   > | Field                 | Value                                      | Description                                                                                                                                                                                                                                                        |
+   > | --------------------- | ------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+   > | Name                  | Don't modify.                              | Name of the node. The name entered displays in the journey canvas.                                                                                                                                                                                                 |
+   > | Transformation Script | Select Normalized Profile to Managed User. | This script transforms the IdP's user identity into a normalized user identity that Advanced Identity Cloud can use.You can view the script in [normalized-profile-to-managed-user.js](../am-scripting/sample-scripts.html#normalized-profile-to-managed-user-js). |
+   > | Username Attribute    | Don't modify the default value (userName). | The user identity attribute in Advanced Identity Cloud that contains a user name.                                                                                                                                                                                  |
+   > | Client Type           | Don't modify the default value (BROWSER).  | The client type authenticating to the provider.                                                                                                                                                                                                                    |
+
+10. Connect the `Social Authentication` outcome of the *Page Node* as input to the *Social Provider Handler Node*.
+
+11. Connect the `Account Exists` outcome of the *Social Provider Handler Node* to the *Success* node.
+
+12. Click Save.
+
+Check in![Adding Microsoft as a social login provider and checking if the identity sent back from Microsoft exists in Advanced Identity Cloud](_images/idc-as-rp-oidc/use-case-idc-as-rp-oidc-journey-social-auth.png)
+
+At this point, the journey is configured to:
+
+* a Display description text on the Page Node screen to inform the end user on the actions they can take, and allow the end user to select between local authentication and social authentication on the Page Node.
+
+  * If the end user selects Microsoft as the social authentication provider, redirect the user to Microsoft to enter their credentials.
+
+  * If the end user decides to authenticate locally, the username and password fields are already displayed.
+
+* b If the end user selects local authentication, validate the username and password.
+
+* c If the end user selects social authentication, after they enter their credentials successfully in Microsoft, on redirect back, verify if the identity already exists in Advanced Identity Cloud.
+
+#### Create identity if not present in Advanced Identity Cloud
+
+If the identity returned from Microsoft Entra ID isn't present in Advanced Identity Cloud, then Advanced Identity Cloud must create the identity with JIT registration.
+
+This requires that the journey:
+
+* Check if the attributes in the returned access token from Microsoft Entra ID are enough to create the identity in Advanced Identity Cloud.
+
+  |   |                                                                                                                                                                                                                                                                                                                |
+  | - | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+  |   | The required attributes to create an identity in Advanced Identity Cloud are set by enabling the `required` field on properties in a managed object. Learn more about the `required` property description in [Create and modify managed object types](../idm-objects/creating-modifying-managed-objects.html). |
+
+  If the required attributes are present, create the identity in Advanced Identity Cloud, create a session for the end user, and log them into the Advanced Identity Cloud admin console.
+
+* If the access token from Microsoft Entra ID doesn't contain enough required information to create the identity, prompt the end user to enter the necessary information. After doing this, create the identity in Advanced Identity Cloud, create a session for the end user, and log them into the Advanced Identity Cloud admin console.
+
+To create an identity if not present:
+
+1. Search for the `Required Attributes Present` node and drag it *under* thr Social Provider Handler Node.
+
+   The Required Attributes Present node checks the specified identity resource in Advanced Identity Cloud, and determines if all attributes required to create the specified object exist within the shared node state. In this case, these are the attributes that Microsoft sent back to Advanced Identity Cloud.
+
+2. Connect the `No Account Exists` outcome of the *Social Provider Handler Node* as input to the *Required Attributes Present* node.
+
+3. In the properties of the Required Attributes Present node, set the value of Identity Resource *(tooltip: The identity managed object resource to fetch the required attributes from. Must match the identity resource of the current journey.)* to `managed/alpha_user`.
+
+4. Search for the `Create Object` node and drag it to the *right* of the Required Attributes Present node.
+
+   The Create Object node creates a new object in Advanced Identity Cloud based on information collected during authentication, such as user registration.
+
+   Any managed object attributes that are marked as required must be collected during authentication to create the new object. The is why the Required Attributes Present node precedes the Create Object node.
+
+5. Connect the `True` outcome of the *Required Attributes Present* node to the input of the *Create Object* node.
+
+6. In the properties of the Create Object node, set the value of Identity Resource to `managed/alpha_user`.
+
+7. Connect the `Created` outcome of the *Create Object* node to the *Success* node and the `Failed` outcome to the *Failure* node.
+
+8. Search for the `Attribute Collector` node and drag it *under* the Required Attributes Present node.
+
+   The Attribute Collector node collects the values of attributes for use later in the flow; for example, to populate a new account during registration. To reference the attributes, they must exist in the managed object schema.
+
+9. Connect the `False` outcome of the *Required Attribiutes Present* node to the input of the *Attribute Collector* node.
+
+10. Configure the properties for the Attribute Collector node:
+
+    > **Collapse: Properties**
+    >
+    > | Field                   | Value                                                                                                               | Description                                                                                                                                                                                                                                                                                                                                                                                                                         |
+    > | ----------------------- | ------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+    > | Name                    | Don't modify.                                                                                                       | Name of the node. The name entered displays in the journey canvas.                                                                                                                                                                                                                                                                                                                                                                  |
+    > | Attributes to Collect   | Enter the following attributes:- `userName`
+    >
+    > - `mail`
+    >
+    > - `givenName`
+    >
+    > - `sn`	You must press Enter after each entry. | A list of the attributes to collect, based on those in the Advanced Identity Cloud schema for the current identity object.For example, to view the properties of `alpha_user`, from the Advanced Identity Cloud admin console, go to [icon: people, set=material, size=inline] Identities > Configure, click Alpha realm - User, then click Properties to enter values into this field as they display in the Property Name column. |
+    > | All Attributes Required | Enable.                                                                                                             | When enabled, all attributes collected in this node are required to continue. In this case, all attributes are required because they correspond to the attributes needed by the managed object schema.                                                                                                                                                                                                                              |
+    > | Validate Input          | Don't enable.                                                                                                       | When enabled, validate the content against any policies specified in the managed object schema for each collected attribute. For example, if you set a policy that the `` `userName `` must be in an email format, then the node validates that this policy is met before preceding.                                                                                                                                                |
+    > | Identity Attribute      | If not already entered, enter `userName`.                                                                           | The attribute used to identify the object in Advanced Identity Cloud. In this case, the attribute used to reference the identity in the backend.                                                                                                                                                                                                                                                                                    |
+
+    ![Configurations to set in the Attribute Collector Node](_images/idc-as-rp-oidc/use-case-idc-as-rp-oidc-attribute-collector.png)
+
+11. Connect the outcome of the *Attribute Collector* node to the input of the *Create Object* node.
+
+12. Click Save. You have now configured the journey successfully.
+
+Check in![The journey completed](_images/idc-as-rp-oidc/use-case-idc-as-rp-oidc-journey-completed.png)
+
+The completed journey has the following capabilities:
+
+* a Display description text on the Page Node screen to inform the end user on the actions they can take, and allow the end user to select between local authentication and social authentication on the Page Node.
+
+* b If the end user selects Microsoft as the social authentication provider, redirect the user to Microsoft to enter their credentials. After the end user enters their credentials in Microsoft successfully, on redirect back, verify if the identity already exists in Advanced Identity Cloud. If the identity does exist in Advanced Identity Cloud, create a session for the user and log them in to the hosted account pages.
+
+* c If the user doesn't exist in Advanced Identity Cloud, check if the required attributes are present to create the identity.
+
+* d If the required attributes aren't present, present a screen for the end user to enter the required attributes.
+
+* e Once the required attributes are present, regardless of if the required attributes were given by Microsoft or entered by the end user, create the identity in Advanced Identity Cloud.
+
+* f If the end user decides to authenticate locally, the username and password fields are already displayed. If the end user selects local authentication, validate the username and password. Advanced Identity Cloud creates a session for the end user and logs them in to the hosted account pages.
+
+### Task 4: Check journey path connections
+
+The `Social authentication with Microsoft` journey uses many nodes. Use the following table to compare each node's outcomes and validate that you wired the journey correctly.
+
+Many nodes can have more than one outcome. "→" denotes that a node only has one outcome path.
+
+| Source node                                                                               | Outcome path          | Target node                  |
+| ----------------------------------------------------------------------------------------- | --------------------- | ---------------------------- |
+| Start (person icon)                                                                       | →                     | Page Node                    |
+| Page node containing:- Platform Username
+
+- Platform Password
+
+- Select Identity Provider | Social Authentication | Social Provider Handler Node |
+|                                                                                           | Local Authentication  | Data Store Decision          |
+| Social Provider Handler Node                                                              | Account exists        | Success                      |
+|                                                                                           | No account exists     | Required Attributes Present  |
+| Required Attributes Present                                                               | True                  | Create Object                |
+|                                                                                           | False                 | Attribute Collector          |
+| Attribute Collector                                                                       | →                     | Create Object                |
+| Create Object                                                                             | Created               | Success                      |
+|                                                                                           | Failed                | Failure                      |
+| Data Store Decision                                                                       | True                  | Success                      |
+|                                                                                           | False                 | Failure                      |
+
+## Validation
+
+Now that you have created an application in Microsoft Entra ID, configured Advanced Identity Cloud, and created your journey, you are ready to validate the use case.
+
+Before validating, make sure you have a test user in Microsoft Entra ID that has all the necessary attributes Advanced Identity Cloud requires in its identity:
+
+|   |                                                                                                                                                                                                                                                                                                                       |
+| - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | When you create an identity in Advanced Identity Cloud, you set the required attributes by enabling the `required` field on properties in a managed object. Learn more about the `required` property description in [Create and modify managed object types](../idm-objects/creating-modifying-managed-objects.html). |
+
+* `User Principal Name` (UPN)
+
+  Advanced Identity Cloud uses the UPN to create the `mail` (email) and `userName` attributes of the identity in Advanced Identity Cloud.
+
+* `Display Name`
+
+* `Given Name`
+
+* `Surname`
+
+The steps in this validation follow a typical flow where Microsoft Entra ID provides the necessary attributes that Advanced Identity Cloud requires to create an identity.
+
+### Steps
+
+1. Get a URL you can use to test the journey:
+
+   1. Log in to the Advanced Identity Cloud admin console as an administrator.
+
+   2. Select Journeys.
+
+   3. Select the journey you created, Social authentication with Microsoft.
+
+      A preview screen of the journey displays.
+
+   4. Click the copy icon next to Preview URL, a URL you can use to test a journey as an end user.
+
+2. Authenticate using Microsoft:
+
+   1. Paste the URL into an incognito window.
+
+      Use incognito mode for testing to avoid caching issues so that any current sessions you have don't interfere with your test.
+
+      The hosted pages display.
+
+   2. Click Sign in with Microsoft. The journey redirects you to a Microsoft sign-in page.
+
+   3. Enter the email/UPN of the test user in Microsoft Entra ID.
+
+   4. Click Next.
+
+   5. Enter the password of the test user.
+
+      |   |                                                                                                                                     |
+      | - | ----------------------------------------------------------------------------------------------------------------------------------- |
+      |   | Microsoft may prompt you to configure MFA or other settings. This depends on the configurations you have set in Microsoft Entra ID. |
+
+   6. On the Permissions Requested screen, click Accept. Microsoft is requesting your permission to share the user's information with Advanced Identity Cloud using the application you created.
+
+      Microsoft redirects you back to Advanced Identity Cloud signed on to the hosted account pages.
+
+      If you receive an error similar to `AADSTS500113: no reply address is registered for the application`, make sure the Reply URL you configured in Advanced Identity Cloud and in Microsoft Entra ID are the same.
+
+      If you receive the error `Session has timed out` on redirect to Advanced Identity Cloud, restart the flow. To configure the timeout, go to Native Consoles > Access Management > Authentication > Settings > Trees and set the Max duration (minutes) field.
+
+3. View created user and logout:
+
+   1. From the left navigation menu, click Profile. View the username of the user in Advanced Identity Cloud. This username correlates to the email/UPN in Microsoft Entra ID.
+
+      Under Social Sign In, view that Microsoft is now a connected application.
+
+   2. Click the test user's name in the top right corner of the Advanced Identity Cloud end-user UI.
+
+   3. Select Sign Out.
+
+      You are redirected to a sign-in page. This page differs from the journey you created, Social authentication with Microsoft. The page you are directed to when you sign out is the *default* journey in the realm. Learn how to set the default journey in "Default end-user journey" in [Journeys](../journeys/journeys.html).
+
+   4. Close the incognito window.
+
+|   |                                                                                                                                                                                                                                                                                                                                   |
+| - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | For further validation, test the journey with a test user from Microsoft Entra ID that has the `Given Name` and `Surname` (sn) blank. The journey prompts you to enter the user information manually, in the event that Microsoft Entra ID doesn't provide the attributes Advanced Identity Cloud requires to create an identity. |
+
+### Video of validation
+
+The following video displays the expected validation as an end user authenticating with Microsoft Entra ID:
+
+**Video (Brightcove)**
+
+\<https\://players.brightcove.net/771836189001/default_default/index.html?videoId=6343464978112>
+
+## Explore further
+
+### Reference material
+
+| Reference                                                                                                                                                                      | Description                                                                                                                                                                                                                                                                                          |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [Realms](../realms/realm-settings.html)                                                                                                                                        | Realms are administrative units that group configurations and identities together.Realms let you manage different sets of identities and applications within the same Advanced Identity Cloud tenant. Each realm is fully self-contained and operates independently of other realms within a tenant. |
+| [Admin consoles in Advanced Identity Cloud](../getting-started/getting-started-explore-platform.html)                                                                          | Get to know the admin interfaces; Advanced Identity Cloud admin console, AM native admin console, and IDM admin console.                                                                                                                                                                             |
+| [Journeys](../journeys/journeys.html)                                                                                                                                          | Conceptual information on journeys and their purpose in Advanced Identity Cloud.                                                                                                                                                                                                                     |
+| [Core authentication attributes](../am-authentication/realm-auth-config.html)                                                                                                  | Description of fields that relate to authentication settings that apply to the entire realm.                                                                                                                                                                                                         |
+| [Journeys (on-demand training video)](https://backstage.forgerock.com/university/forgerock/on-demand/path/TGVhcm5pbmdQYXRoOjg3/chapter/Q291cnNlOjI0MDQy/play/Q29udGVudDo0MTAw) | A guided video of journeys in Advanced Identity Cloud and how to use them.                                                                                                                                                                                                                           |
+| [Journey nodes](../journeys/auth-nodes.html)                                                                                                                                   | Learn about the configurable nodes Advanced Identity Cloud offers for use in journeys.                                                                                                                                                                                                               |
+| [Themes](../end-user/hosted-pages-customize.html)                                                                                                                              | Customize the look and feel of hosted pages. This is used when you are using the ForgeRock hosted pages as your UI option.                                                                                                                                                                           |
+| [Social identity provider settings](../authentication/social-authentication-settings.html)                                                                                     | Reference of the social identity provider service configurations.                                                                                                                                                                                                                                    |
+| [Localize hosted pages](../end-user/hosted-pages-localize.html)                                                                                                                | Learn more about localization (support for languages) with Advanced Identity Cloud hosted pages.                                                                                                                                                                                                     |
+| [Apply policies to managed objects](../idm-objects/configuring-default-policy.html)                                                                                            | Configure policies on properties in a managed object. For example, create a policy on the `userName` property to be in an email address format.                                                                                                                                                      |
+
+### Nodes used
+
+The Social authentication with Microsoft journey uses many nodes. Learn more about each node using the following list, which orders the nodes as they appear in the journey:
+
+* [Page node](https://docs.pingidentity.com/auth-node-ref/latest/page.html)
+
+* [Platform Username node](https://docs.pingidentity.com/auth-node-ref/latest/platform-username.html)
+
+* [Platform Password node](https://docs.pingidentity.com/auth-node-ref/latest/platform-password.html)
+
+* [Data Store Decision node](https://docs.pingidentity.com/auth-node-ref/latest/data-store-decision.html)
+
+* [Select Identity Provider node](https://docs.pingidentity.com/auth-node-ref/latest/select-identity-provider.html)
+
+* [Social Provider Handler node](https://docs.pingidentity.com/auth-node-ref/latest/social-provider-handler.html)
+
+* [Required Attributes Present node](https://docs.pingidentity.com/auth-node-ref/latest/required-attributes-present.html)
+
+* [Create Object node](https://docs.pingidentity.com/auth-node-ref/latest/create-object.html)
+
+* [Attribute Collector node](https://docs.pingidentity.com/auth-node-ref/latest/attribute-collector.html)
+
+---
+
+---
+title: Okta as RP (OIDC)
+description: Configure Okta as a relying party with Advanced Identity Cloud as the OIDC identity provider
+component: pingoneaic
+page_id: pingoneaic:use-cases:use-case-sso-oidc-sp-okta
+canonical_url: https://docs.pingidentity.com/pingoneaic/use-cases/use-case-sso-oidc-sp-okta.html
+llms_txt: https://docs.pingidentity.com/pingoneaic/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+keywords: ["Use Case", "OpenID Connect"]
+page_aliases: ["implementation:use-case-idc-as-idp-oidc.adoc"]
+section_ids:
+  oidc-idp-description: Description
+  oidc-idp-goals: Goals
+  oidc-idp-prerequisites: Prerequisites
+  oidc-idp-tasks: Tasks
+  oidc-idp-web-app: "Task 1: Create a custom OIDC application in Advanced Identity Cloud"
+  oidc-idp-okta-idp: "Task 2: Add Advanced Identity Cloud as an IDP in Okta"
+  oidc-idp-validation: Validation
+  validate_your_work_with_an_identity_that_exists_in_advanced_identity_cloud_and_okta: Validate your work with an identity that exists in Advanced Identity Cloud and Okta
+  validate_your_work_with_an_identity_that_exists_in_advanced_identity_cloud_but_not_in_okta: Validate your work with an identity that exists in Advanced Identity Cloud but not in Okta
+  oidc-idp-explore-further: Explore further
+  oidc-idp-reference: Reference material
+---
+
+# Okta as RP (OIDC)
+
+## Description
+
+Estimated time to complete: 20 minutes *(tooltip: This assumes you complete the prerequisites beforehand.)*
+
+In this use case, configure SSO using OIDC with Advanced Identity Cloud as the identity provider (IDP) and Okta as the service provider (SP).
+
+## Goals
+
+After completing this use case, you will know how to do the following:
+
+* Configure Advanced Identity Cloud as an OIDC identity provider
+
+* Configure Okta as a remote SP
+
+* Use the hosted account pages application dashboard to federate to Okta
+
+## Prerequisites
+
+Before you start, make sure you have the following:
+
+* A basic understanding of:
+
+  * The Advanced Identity Cloud admin console and hosted pages
+
+  * SSO (Federation)
+
+  * OIDC
+
+* Completed the use case [Create test users and roles](use-case-test-users-and-roles.html)
+
+* Access to your test Advanced Identity Cloud environment as an administrator
+
+* Access to an Okta development environment as an administrator
+
+## Tasks
+
+|   |                                                                                                                |
+| - | -------------------------------------------------------------------------------------------------------------- |
+|   | This use case requires the use of third-party services. Use your environment-specific details where necessary. |
+
+### Task 1: Create a custom OIDC application in Advanced Identity Cloud
+
+1. Sign on to the Advanced Identity Cloud admin console.
+
+2. In the Advanced Identity Cloud admin console, go to [icon: apps, set=material, size=inline] Applications > Applications > [icon: add, set=material, size=inline] Custom Application > OIDC - OpenId Connect > Web.
+
+3. On the Application Details page, add a web application with the following configuration, and then click Next:
+
+   | Field        | Value                                                                                |
+   | ------------ | ------------------------------------------------------------------------------------ |
+   | Name         | `okta_client`                                                                        |
+   | Description  | `Okta client`                                                                        |
+   | Owners       | `App Owner`                                                                          |
+   | App Logo URI | `https://www.okta.com/sites/default/files/Okta_Logo_BrightBlue_Medium-thumbnail.png` |
+
+4. On the Web Settings page, add the following configuration, and then click Create Application:
+
+   | Field         | Value                                                                                         |
+   | ------------- | --------------------------------------------------------------------------------------------- |
+   | Client ID     | `okta_client`                                                                                 |
+   | Client Secret | Enter a password for the client. Remember the password because you need it to configure Okta. |
+
+   The Okta client page is displayed.
+
+5. On the Okta client page, go to the Sign On tab, add the following configuration, and then click Save:
+
+   | Field        | Value                                                         |
+   | ------------ | ------------------------------------------------------------- |
+   | Sign-in URLs | `https://<okta-tenant-env-fqdn>/oauth2/v1/authorize/callback` |
+   | Grant Types  | `Authorization Code`                                          |
+   | Scopes       | `openid`, `profile`, `email`                                  |
+
+6. At the end of the General Settings panel, click Show advanced settings, and then Authentication.
+
+7. Set Token Endpoint Authentication Method to `client_secret_post` and click Save.
+
+   The configuration should resemble the following examples:
+
+   ![Add Okta client](_images/use-case-oidc-idp/oidc-client1.png)![Add Okta client](_images/use-case-oidc-idp/oidc-client2.png)![Add Okta client](_images/use-case-oidc-idp/oidc-client3.png)
+
+|   |                                                                                                                                  |
+| - | -------------------------------------------------------------------------------------------------------------------------------- |
+|   | To require Advanced Identity Cloud to ask for consent to share information during authorization flows, deselect Implied Consent. |
+
+### Task 2: Add Advanced Identity Cloud as an IDP in Okta
+
+Refer to Okta's documentation on how to [Create an app at the Identity Provider](https://developer.okta.com/docs/guides/add-an-external-idp/openidconnect/main/#create-an-app-at-the-identity-provider).
+
+1. Sign on to the administrator interface for your Okta tenant and go to the Dashboard.
+
+2. On the Okta Admin Console, click Directory > People > Add person and create a user with the same configuration as a user in Advanced Identity Cloud. This example uses the following user:
+
+   | Field                                    | Value                    |
+   | ---------------------------------------- | ------------------------ |
+   | Username                                 | `acruse`                 |
+   | First Name                               | `alex`                   |
+   | Last Name                                | `cruse`                  |
+   | Email Address                            | `alex.cruse@example.com` |
+   | I will set password                      | Enable                   |
+   | Password                                 | `Secret12!`              |
+   | User must change password on first login | Disable                  |
+
+3. Select Security > Identity Providers > Add identity providers and add an OpenID Connect IdP provider.
+
+4. On the Configure OpenID Connect IdP page, add the following configuration, and then click Finish. Leave other fields with the default values:
+
+   | Field                  | Value                                                                                                                              |
+   | ---------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+   | Name                   | `ForgeRock`                                                                                                                        |
+   | IdP Usage              | `SSO only`                                                                                                                         |
+   | Scopes                 | `email`, `openid`, `profile`                                                                                                       |
+   | Client ID              | `okta_client`                                                                                                                      |
+   | Authentication type    | `Client secret`                                                                                                                    |
+   | Client Secret          | The password created for `okta_client` in [Task 1: Create a custom OIDC application in Advanced Identity Cloud](#oidc-idp-web-app) |
+   | Issuer                 | `https://<tenant-env-fqdn>:443/am/oauth2/alpha`	The port number is required for this property.                                     |
+   | Authorization endpoint | `https://<tenant-env-fqdn>/am/oauth2/alpha/authorize`                                                                              |
+   | Token endpoint         | `https://<tenant-env-fqdn>/am/oauth2/alpha/access_token`                                                                           |
+   | JWKS endpoint          | `https://<tenant-env-fqdn>/am/oauth2/alpha/connect/jwk_uri`                                                                        |
+   | Userinfo endpoint      | `https://<tenant-env-fqdn>/am/oauth2/alpha/userinfo`                                                                               |
+   | If no match is found   | `Create new user (JIT)`                                                                                                            |
+   | Profile Source         | `Update attributes for existing users`                                                                                             |
+
+   The ForgeRock identity provider page is displayed.
+
+5. (Optional) Select Edit profile and mappings to change the mapping of attributes from Advanced Identity Cloud to Okta.
+
+6. Enable the ForgeRock identity provider:
+
+   1. On the Okta Admin Console, go to Security > Identity Providers.
+
+   2. On the Routing Rules tab, click Add Routing Rule to redirect requests that meet defined criteria for authentication with Advanced Identity Cloud. The following rule redirects all requests from the `example.com` domain:
+
+      | Field                           | Value                               |
+      | ------------------------------- | ----------------------------------- |
+      | Rule Name                       | `PingOne Advanced Identity Cloud`   |
+      | IF User's IP is                 | `Anywhere`                          |
+      | AND User's device platform is   | `Any device`                        |
+      | AND User is accessing           | `Any application`                   |
+      | AND User matches                | `Domain list on login``example.com` |
+      | THEN Use this identity provider | `ForgeRock`                         |
+
+      For other options, learn more in [Okta's documentation](https://help.okta.com/en-us/content/topics/security/configure-routing-rules.htm).
+
+   3. At the Activate Rule prompt, activate the rule immediately.
+
+      ![Routing rule](_images/use-case-oidc-idp/routing-rule.png)Check in
+
+      At this point, you:
+
+      [icon: check, set=fa]Created and configured a custom OIDC application in Advanced Identity Cloud for SSO with Okta
+
+      [icon: check, set=fa]Configured Okta to redirect requests to Advanced Identity Cloud for authentication. After successful authentication, return the request to Okta.
+
+## Validation
+
+Now that you have created and configured a custom OIDC application and configured Okta as the SP, validate the configurations by:
+
+* Logging in to Okta as an end user
+
+* Authenticating to Advanced Identity Cloud after redirection
+
+### Validate your work with an identity that exists in Advanced Identity Cloud and Okta
+
+1. In your browser's privacy or incognito mode, go to your Okta tenant.
+
+2. Log in as the user you created in Okta. For example, log in as username `alex.cruse@example.com`.
+
+   Because the username matches the routing rule created in [Task 2: Add Advanced Identity Cloud as an IDP in Okta](#oidc-idp-okta-idp), Okta redirects the request to Advanced Identity Cloud for authentication.
+
+   If something is wrong, the authorization response contains error information to help you resolve the issue.
+
+3. Log in to Advanced Identity Cloud as the identity you created in [Create test users and roles](use-case-test-users-and-roles.html). This example logs in as username `acruse` password `Secret12!`.
+
+   If you deselected Implied Consent in [Create a custom OIDC application in Advanced Identity Cloud](#oidc-idp-okta-idp), you are prompted for consent:
+
+   ![Add new role](_images/use-case-oidc-idp/consent.png)
+
+4. Click Allow to give Advanced Identity Cloud consent to access Okta resources.
+
+   After consenting, you are signed on to Okta.
+
+   ![Success](_images/use-case-oidc-idp/success-alex.png)
+
+### Validate your work with an identity that exists in Advanced Identity Cloud but not in Okta
+
+1. In a separate incognito browser, return to your Okta tenant.
+
+2. In the Okta sign-on window, enter the email of a user that exists in Advanced Identity Cloud but not in Okta. For example, enter username `bina.raman@example.com` created in [Create test users and roles](use-case-test-users-and-roles.html).
+
+   Okta redirects the request to Advanced Identity Cloud for authentication.
+
+3. Log in to Advanced Identity Cloud as a user. For example, log in as username `braman` password `Secret12!`.
+
+   After successful authentication, the Okta JIT provisions the user `braman` based on information in the response and logs them in to Okta.
+
+4. On the Okta Admin Console, click Directory > People and see that `braman@example.com` has been provisioned automatically.
+
+## Explore further
+
+### Reference material
+
+| **Reference**                                                                                                                                                   | **Description**                                                                                                      |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| [Add users manually](https://help.okta.com/en-us/content/topics/users-groups-profiles/usgp-add-users.htm)                                                       | In Okta, manually add users, assign them to apps and groups, and manage their profile.                               |
+| [Create an app at the Identity Provider](https://developer.okta.com/docs/guides/add-an-external-idp/openidconnect/main/#create-an-app-at-the-identity-provider) | In Okta, create a client application to use for authenticating and authorizing users.link:                           |
+| [Configure identity provider routing rules](https://help.okta.com/en-us/content/topics/security/configure-routing-rules.htm)                                    | In Okta, configure routing rules for each of your Identity Providers or for different combinations of user criteria. |
+| [Application management](../app-management/applications.html)                                                                                                   | Set up and manage applications that work with Advanced Identity Cloud.                                               |

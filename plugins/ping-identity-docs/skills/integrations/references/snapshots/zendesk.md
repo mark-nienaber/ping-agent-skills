@@ -719,3 +719,194 @@ If you're upgrading from a previous version of the Zendesk Provisioner, note you
 6. From **Outbound Provisioning > Manage Channels > Channel**, on the **Attribute Mapping** tab, configure the attribute mappings based on your notes.
 
 7. Complete the steps in [Configuring SAML SSO in Zendesk](pf_zendesk_connector_configuring_saml_sso_in_zendesk.html).
+
+---
+
+---
+title: Upgrading an existing deployment in PingFederate 10.0 or earlier
+description: Back up your current PingFederate configuration as shown in Configuration archive in the PingFederate documentation.
+component: zendesk
+page_id: zendesk:setup:pf_zendesk_connector_upgrading_an_existing_deployment_in_pf_100_or_earlier
+canonical_url: https://docs.pingidentity.com/integrations/zendesk/setup/pf_zendesk_connector_upgrading_an_existing_deployment_in_pf_100_or_earlier.html
+llms_txt: https://docs.pingidentity.com/integrations/zendesk/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: June 27, 2024
+section_ids:
+  steps: Steps
+---
+
+# Upgrading an existing deployment in PingFederate 10.0 or earlier
+
+## Steps
+
+1. Back up your current PingFederate configuration as shown in [Configuration archive](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/help_configurationarchivetasklet_selectimportexportstate.html) in the PingFederate documentation.
+
+2. In the PingFederate administrative console, go to **Identity Provider > SP Connections** and select your connection.
+
+   Note the attribute mappings for your existing SP connection.
+
+   For help, see [Mapping attributes](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/help_saaschanneltasklet_saasattrmappingmgmtstate.html) in the PingFederate documentation.
+
+3. Delete your existing SP connection.
+
+   1. Go to **Identity Provider > SP Connections > Manage All**.For your existing connection, click **Select action**, and then click **Delete**. Click **Save.**
+
+4. Complete the steps in [Deploying the integration files](pf_zendesk_connector_deploying_the_integration_files.html).
+
+5. Complete the steps in [Creating a connection](pf_zendesk_connector_creating_a_connection.html).
+
+6. From **Outbound Provisioning > Manage Channels > Channel**, on the **Attribute Mapping** tab, configure the attribute mappings based on your notes.
+
+7. Complete the steps in [Configuring SAML SSO in Zendesk](pf_zendesk_connector_configuring_saml_sso_in_zendesk.html).
+
+---
+
+---
+title: Upgrading an existing deployment in PingFederate 10.1 or later
+description: Back up your current PingFederate configuration as shown in Configuration archive in the PingFederate documentation.
+component: zendesk
+page_id: zendesk:setup:pf_zendesk_connector_upgrading_an_existing_deployment_in_pf_101_or_later
+canonical_url: https://docs.pingidentity.com/integrations/zendesk/setup/pf_zendesk_connector_upgrading_an_existing_deployment_in_pf_101_or_later.html
+llms_txt: https://docs.pingidentity.com/integrations/zendesk/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: June 27, 2024
+section_ids:
+  steps: Steps
+---
+
+# Upgrading an existing deployment in PingFederate 10.1 or later
+
+## Steps
+
+1. Back up your current PingFederate configuration as shown in [Configuration archive](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/help_configurationarchivetasklet_selectimportexportstate.html) in the PingFederate documentation.
+
+2. In the PingFederate administrative console, go to **Applications > Integration > SP Connections** and select your connection.
+
+   Note the attribute mappings for your existing SP connection.
+
+   For help, see [Mapping attributes](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/help_saaschanneltasklet_saasattrmappingmgmtstate.html) in the PingFederate documentation.
+
+3. Delete your existing SP connection.
+
+   1. Go to **Applications > Integration > SP Connections**.For your existing connection, click **Select action**, and then click **Delete**. Click **Confirm.**
+
+4. Complete the steps in [Deploying the integration files](pf_zendesk_connector_deploying_the_integration_files.html).
+
+5. Complete the steps in [Creating a connection](pf_zendesk_connector_creating_a_connection.html).
+
+6. From **Outbound Provisioning > Manage Channels > Channel**, on the **Attribute Mapping** tab, configure the attribute mappings based on your notes.
+
+7. Complete the steps in [Configuring SAML SSO in Zendesk](pf_zendesk_connector_configuring_saml_sso_in_zendesk.html).
+
+---
+
+---
+title: User and group management
+description: The Zendesk Provisioner synchronizes users and groups from your datastore to Zendesk. The following describes the behavior of each provisioning capability.
+component: zendesk
+page_id: zendesk::pf_zendesk_connector_user_and_group_management
+canonical_url: https://docs.pingidentity.com/integrations/zendesk/pf_zendesk_connector_user_and_group_management.html
+llms_txt: https://docs.pingidentity.com/integrations/zendesk/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: June 17, 2024
+section_ids:
+  synchronizing-existing-users: Synchronizing existing users
+  user-provisioning: User provisioning
+  user-updates: User updates
+  user-deprovisioning: User deprovisioning
+  synchronizing-existing-groups: Synchronizing existing groups
+  group-provisioning: Group provisioning
+  group-name-updates: Group name updates
+  group-membership-updates: Group membership updates
+  group-deletion: Group deletion
+---
+
+# User and group management
+
+The Zendesk Provisioner synchronizes users and groups from your datastore to Zendesk. The following describes the behavior of each provisioning capability.
+
+|   |                                                                                                                                                                                                                 |
+| - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | You can configure the following capabilities and specify which users to provision when you get to the [Creating a connection](setup/pf_zendesk_connector_creating_a_connection.html) part of the setup process. |
+
+## Synchronizing existing users
+
+PingFederate synchronizes users based on the `email` attribute in Zendesk. If a user already exists in your datastore and Zendesk, mapping this attribute correctly links the two records together.
+
+For example:
+
+* In Zendesk, Janet's `email` is `jsmith@example.com`.
+
+* In your datastore, Janet's `mail` is `jsmith@example.com`.
+
+* On the **Attribute Mapping** tab of your provisioning connection configuration, map the `email` attribute to `mail`.
+
+* When the provisioning connector runs, the datastore user is provisioned with a `email` of `jsmith@example.com`. That matches Janet's existing `email` in Zendesk, so her information in the datastore is synchronized to her Zendesk account.
+
+## User provisioning
+
+PingFederate provisions users when any of the following happens:
+
+* A user is added to the datastore group or filter that is targeted by the provisioning connector.
+
+* A user with `disabled` status is added to the datastore group or filter that is targeted by the provisioning connector, and the**Provision disabled users** provisioning option is enabled. This feature is not available in all provisioning connector versions.
+
+You can define which users PingFederate targets for provisioning on the **Source Location** tab of your provisioning connection configuration.
+
+## User updates
+
+PingFederate updates users when a user attribute changes in your datastore.
+
+You can define which attributes PingFederate monitors for changes on the **Attribute Mapping** tab of your provisioning connection configuration.
+
+## User deprovisioning
+
+PingFederate deprovisions users when any of the following happens:
+
+* A user is deleted from the user store.
+
+* A user is disabled in the user store.
+
+* A user is removed from the datastore group or filter that is targeted by the provisioning connector.
+
+The **Remove User Action** setting in the connection configuration determines whether the deprovisioning action disables or deletes the user.
+
+## Synchronizing existing groups
+
+PingFederate synchronizes groups from the datastore to the target service based on the group name.
+
+For example:
+
+* In Zendesk, there is a group is named `Accounting`.
+
+* In your datastore, there is a group with a `CN` of `Accounting`.
+
+* When the provisioning connector runs, the two groups are synchronized.
+
+## Group provisioning
+
+PingFederate provisions groups when a group is added to the datastore filter that is targeted by the provisioning connector.
+
+You can define which groups PingFederate targets for provisioning and monitors for changes on the **Source Location** tab in your provisioning connection configuration.
+
+## Group name updates
+
+PingFederate renames groups when they are renamed in the datastore.
+
+## Group membership updates
+
+PingFederate updates group memberships when memberships change in the datastore, whether the change is in the group's properties or a user's properties.
+
+Group memberships in the datastore overwrite the group memberships in Zendesk.
+
+## Group deletion
+
+PingFederate deletes groups when any of the following happens:
+
+* The group is deleted in the datastore.
+
+* The group is removed from the datastore group or filter that is targeted by the provisioning connector.
+
+|   |                                                     |
+| - | --------------------------------------------------- |
+|   | Group deletions are permanent and cannot be undone. |

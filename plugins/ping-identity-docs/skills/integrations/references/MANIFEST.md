@@ -5,12 +5,12 @@
 - Sync date: 2026-11-03
 - Source: https://docs.pingidentity.com/integrations/llms.txt
 - Guides discovered: 70
-- Guides captured: 69
-- Guides fully captured: 48
+- Guides captured: 70
+- Guides fully captured: 49
 - Guides partially captured: 21
-- Guides without snapshots: 1
+- Guides without snapshots: 0
 - Total pages indexed: 1646
-- Total snapshot pages captured: 1046
+- Total snapshot pages captured: 1109
 
 ## Source URLs
 
@@ -24,19 +24,20 @@
 | github.md | assembled | https://docs.pingidentity.com/integrations/llms.txt | 44 | 20 | partial |
 | salesforce.md | assembled | https://docs.pingidentity.com/integrations/llms.txt | 44 | 20 | partial |
 | net.md | assembled | https://docs.pingidentity.com/integrations/llms.txt | 43 | 20 | partial |
-| java.md | assembled | https://docs.pingidentity.com/integrations/llms.txt | 40 | 19 | partial |
+| java.md | assembled | https://docs.pingidentity.com/integrations/llms.txt | 40 | 20 | partial |
+| facebook.md | assembled | https://docs.pingidentity.com/integrations/llms.txt | 39 | 20 | partial |
 | zscaler.md | assembled | https://docs.pingidentity.com/integrations/llms.txt | 36 | 20 | partial |
 | office365.md | assembled | https://docs.pingidentity.com/integrations/llms.txt | 35 | 20 | partial |
 | webaccessmanagement.md | assembled | https://docs.pingidentity.com/integrations/llms.txt | 34 | 20 | partial |
 | agentless.md | assembled | https://docs.pingidentity.com/integrations/llms.txt | 29 | 20 | partial |
-| php.md | assembled | https://docs.pingidentity.com/integrations/llms.txt | 29 | 15 | partial |
-| slack.md | assembled | https://docs.pingidentity.com/integrations/llms.txt | 26 | 14 | partial |
+| php.md | assembled | https://docs.pingidentity.com/integrations/llms.txt | 29 | 20 | partial |
+| slack.md | assembled | https://docs.pingidentity.com/integrations/llms.txt | 26 | 20 | partial |
 | duosecurity.md | assembled | https://docs.pingidentity.com/integrations/llms.txt | 25 | 20 | partial |
 | sdg.md | assembled | https://docs.pingidentity.com/integrations/llms.txt | 22 | 20 | partial |
 | apache.md | assembled | https://docs.pingidentity.com/integrations/llms.txt | 21 | 20 | partial |
-| zendesk.md | assembled | https://docs.pingidentity.com/integrations/llms.txt | 21 | 17 | partial |
-| zoom.md | assembled | https://docs.pingidentity.com/integrations/llms.txt | 21 | 1 | partial |
-| box.md | assembled | https://docs.pingidentity.com/integrations/llms.txt | 20 | 11 | partial |
+| zendesk.md | assembled | https://docs.pingidentity.com/integrations/llms.txt | 21 | 20 | partial |
+| zoom.md | assembled | https://docs.pingidentity.com/integrations/llms.txt | 21 | 20 | partial |
+| box.md | assembled | https://docs.pingidentity.com/integrations/llms.txt | 20 | 20 | full |
 | contentful.md | assembled | https://docs.pingidentity.com/integrations/llms.txt | 20 | 20 | full |
 | sharepoint-peoplepicker.md | assembled | https://docs.pingidentity.com/integrations/llms.txt | 20 | 20 | full |
 | aquera.md | assembled | https://docs.pingidentity.com/integrations/llms.txt | 19 | 19 | full |
@@ -92,26 +93,27 @@
 |---|---|
 | llms.txt | 956ab11fa18fc6c7711c1638006d4fe9ca195347fefa5b84c10351e774680ca6 |
 | snapshots/pingone.md | 055d31fe7bf310a1e2b340a8dfad082294f5431ad29f39ac93b722925cfd3866 |
-| snapshots/amazon.md | cb07e516e91de25d3b3b23b0fb2713d166e9ce3d1137d84b6cda999d9a90c5b7 |
+| snapshots/amazon.md | b3b515c584fc89359504c5ac10465d03277ee728110c11d9de6606b280d3609a |
 | snapshots/google.md | b47e20d3257552b44fe83edb8ce5dd7126d8918b98efe0205ebaadf90ec57361 |
 | snapshots/azure.md | 6b2efeee015a9cf7e6b22498f9ba2a92b5ddbd6abe547b8f8b31fab66dd2452b |
 | snapshots/atlassian.md | 9311d2f69e540e140a2a27182f3f8e9ec955dc8f2b99d6b1bb5bba43469dea68 |
-| snapshots/github.md | 84955234bd41557c822f006c2af02d6f291e1c3b30679e217e79e78fa35f7bba |
+| snapshots/github.md | fbeab8a247daed4fb2b18f9024f61e98e69e0f7ba49d31c6ecf396d48e875955 |
 | snapshots/salesforce.md | 59ae13e52ac8da48e00e879ac9c486ed07fde5fa75c5376cdf05555282928e4f |
 | snapshots/net.md | 37fe721cb2dcd1a336f7e75d859762d9a6e95bb458cee5ace583fc6c47071e87 |
-| snapshots/java.md | 182b208b9285b058928761e79e3802dddb208b90454c0fda48720e9fdb64ab61 |
-| snapshots/zscaler.md | 6b1e381a26d3ed13f0240632dfcc5a9da63692b6e0d42daac712fe35ff78d5ef |
+| snapshots/java.md | 739f0fb64a57067d646b414efb0f7780ad8b76d42ca00b5b1e82a3ba0d145c14 |
+| snapshots/facebook.md | 6279eeff38e2a19292c40aa709eb5cb7061779d1b50d65ae55e6455b14636277 |
+| snapshots/zscaler.md | 78707b75a7634af99a1d8ba530b7bc49e8e0704d13557eb3e0ad887ac57f604a |
 | snapshots/office365.md | 42b238253fcfc3e60709a7018aa64145cf0ac921b8ae46a62ca4980be3fe7073 |
 | snapshots/webaccessmanagement.md | 6536d920020967ddf712d46daab64ae702394482308b1208edc5b72b3357214d |
 | snapshots/agentless.md | f862429f1ddea04b0a757292cbae446e7df1fd222d8e7d56f436f6ec51be7b63 |
-| snapshots/php.md | dce5d4a603cf37e25e5b38fe1ce31af14949458c5835f76aabf04e6b421985da |
-| snapshots/slack.md | d132542a69040ff7b62d6fc8056de3803893e26d30fe6ca6ea4f48c9c5c584a3 |
+| snapshots/php.md | b424823f87de0773997c0ad79f35c11d959d74123c12595540f7c677c29126fd |
+| snapshots/slack.md | 388d88718d9c334482a2162354e5ae37e052919a77062a8eb597ab3cf176af52 |
 | snapshots/duosecurity.md | 441651487ddc7efb939e8658f5d033e120006642eae81ad9e632f064c828c0db |
 | snapshots/sdg.md | 3638f511f21a051adbcd31ed1bd4093c1f82d1ed241f4183453ba2e02bcd0d51 |
 | snapshots/apache.md | 3776ac1b6bdabaef0503e4290617dbd9606792734ba340d600714bb9bd482548 |
-| snapshots/zendesk.md | 4ff94b13883e5cc588c8e82790a730700821f79edc8e16b3d0e0d680e826e6ac |
-| snapshots/zoom.md | ca2cbd602c8665c8dda520d6aebc544ced731177ba42cb3c7204a2b29117f847 |
-| snapshots/box.md | ebe12113c52793d42a937578b7183ccb7531dfb9fc4262eba7cdf9114d01a0af |
+| snapshots/zendesk.md | a14e546ac01741313947e3ddf743e383e9ef2a02e390bfbc265f007b01614c39 |
+| snapshots/zoom.md | 2c13213cb27e92ad5aeaf8aaebddf1017a39abdc3d3d0ccfc40de3f98e24b0c1 |
+| snapshots/box.md | e44c12feff74b50cc1ee55c52df3ba01291f240952797c4f084ee7ab60537f7a |
 | snapshots/contentful.md | 04129f8f75676741442cb0bac695b73f59ba8355fe4df35d120ade00188e3de1 |
 | snapshots/sharepoint-peoplepicker.md | 8758666180aa5b69e9444064e74eaa7562cbf2eaf912a895a2fdc0c438d2f808 |
 | snapshots/aquera.md | 6cccc8139c6bf0816ee8f421e6a7e424f7e8fa2d2bb9dd388d2f49262f3bca12 |

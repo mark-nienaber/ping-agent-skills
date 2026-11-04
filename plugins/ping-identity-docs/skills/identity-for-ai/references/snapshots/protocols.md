@@ -2537,6 +2537,504 @@ Autonomous agents, MCP gateways, microservices, and other software components ne
 ---
 
 ---
+title: Token Exchange in the AuthPlayground
+description: Explore how OAuth Token Exchange preserves subject and actor identities while retargeting trust for enterprise AI access in the AuthPlayground.
+component: identity-for-ai
+page_id: identity-for-ai:protocols:authplayground-token-exchange
+canonical_url: https://developer.pingidentity.com/identity-for-ai/protocols/authplayground-token-exchange.html
+llms_txt: https://developer.pingidentity.com/identity-for-ai/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-24T07:38:08Z
+keywords: ["Identity for AI", "OAuth 2.0 protocols", "token exchange", "RFC 8693", "delegation", "impersonation", "subject", "actor", "audience", "retargeting trust", "AuthPlayground"]
+section_ids:
+  the-token-exchange-model: The token exchange model
+  the-authplayground-implementation: The AuthPlayground implementation
+  step-1-obtain-subject-and-actor-tokens: "Step 1: Obtain subject and actor tokens"
+  step-2-perform-the-delegation-token-exchange: "Step 2: Perform the delegation token exchange"
+  the-difference-between-may_act-and-act: The difference between may_act and act
+  whats-in-the-exchanged-token: What's in the exchanged token?
+  retargeting-trust: Retargeting trust
+  how-token-exchange-relates-to-other-protocol-concepts: How token exchange relates to other protocol concepts
+  it-doesnt-always-require-a-human: It doesn't always require a human
+  it-isnt-workload-identity: It isn't workload identity
+  it-differs-from-id-jag-and-transaction-tokens: It differs from ID-JAG and transaction tokens
+  key-takeaways: Key takeaways
+---
+
+# Token Exchange in the AuthPlayground
+
+Retargeting trust for enterprise AI.
+
+When Sarah asks her AI assistant to prepare a meeting briefing, the assistant needs to access customer data. In an enterprise AI architecture, the software component performing this work could be a Model Context Protocol (MCP) gateway, an AI agent, or a backend service brokering access to enterprise APIs. In the playground, an API gateway represents this software actor.
+
+The authorization system must track two distinct identities:
+
+1. **Sarah (the human subject):** Her authority allows access to customer data (the protected resource).
+
+2. **The API gateway (the software actor):** The gateway acts on Sarah's behalf while accessing those APIs.
+
+The software actor shouldn't impersonate Sarah or use a broad service credential that loses the connection to her identity. OAuth 2.0 Token Exchange ([RFC 8693](https://datatracker.ietf.org/doc/html/rfc8693)) solves this problem.
+
+## The token exchange model
+
+Token exchange provides a standard way to take an existing, trusted security context and request a new token for a different audience or purpose while preserving the delegation relationship.
+
+Token exchange does more than simply convert a token. RFC 8693 distinguishes the subject from the actor in a delegated access token. The resulting token proves both that the access is for Sarah, and that the API gateway is the specific actor exercising this authority. This is delegation rather than impersonation.
+
+## The AuthPlayground implementation
+
+**Entities involved**: Client application, IdP (authorization server), resource server
+
+The AuthPlayground demonstrates the [Token Exchange](https://www.authplayground.dev/flows/token-exchange) flow in two steps:
+
+1. Obtain subject and actor tokens.
+
+2. Perform the delegation token exchange.
+
+### Step 1: Obtain subject and actor tokens
+
+This step begins with an Authorization Code flow that creates both the subject (user) and actor credentials.
+
+|   |                                                                                                                                                                                                                                                                                |
+| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+|   | In a production architecture, the human subject and software actor typically establish their credentials through separate identity lifecycles. For simplicity, the playground creates both credentials during the same prerequisite step, but they remain distinct identities. |
+
+The executed request looks like this:
+
+```json
+POST /idp/token
+Content-Type: application/x-www-form-urlencoded
+
+{
+  "grant_type": "authorization_code",
+  "code": "<authorization_code>",
+  "redirect_uri": "<callback>",
+  "client_id": "playground-demo-client",
+  "code_verifier": "<pkce_verifier>"
+}
+```
+
+The response contains several artifacts. The access token represents the authenticated user context:
+
+```json
+{
+  "sub": "demo-user@example.com",
+  "scope": "openid delegation",
+  "client_id": "playground-demo-client",
+  "aud": "playground-demo-client"
+}
+```
+
+The ID token represents the same user. Notice the `may_act` claim. This claim indicates that `api-gateway@example.com` is eligible to act on behalf of the subject.
+
+```json
+{
+  "sub": "demo-user@example.com",
+  "email": "demo-user@example.com",
+  "may_act": {
+    "sub": "api-gateway@example.com"
+  }
+}
+```
+
+The response also contains an `actor_token` that represents the API gateway identity. This token is used to identify the actor in the delegation exchange.
+
+```json
+{
+  "sub": "api-gateway@example.com",
+  "client_id": "playground-demo-client",
+  "iss": "https://.../idp",
+  "aud": "https://.../idp"
+}
+```
+
+Before token exchange happens, two distinct identities have been established:
+
+* **Subject**: The party on whose behalf the token is being requested. In the `subject_token` this is `demo-user@example.com`.
+
+* **Actor**: The party that will exercise the delegated authority. In the `actor_token` this is `api-gateway@example.com`.
+
+### Step 2: Perform the delegation token exchange
+
+The client application sends a token exchange request with both tokens to the authorization server:
+
+```json
+POST /idp/token
+Content-Type: application/x-www-form-urlencoded
+
+{
+  "grant_type": "urn:ietf:params:oauth:grant-type:token-exchange",
+  "subject_token": "<id_token>",
+  "subject_token_type": "urn:ietf:params:oauth:token-type:id_token",
+  "actor_token": "<actor_token>",
+  "actor_token_type": "urn:ietf:params:oauth:token-type:access_token",
+  "requested_token_type": "urn:ietf:params:oauth:token-type:access_token",
+  "audience": "<resource_server>",
+  "client_id": "playground-demo-client",
+  "scope": "openid read"
+}
+```
+
+Important inputs:
+
+* `subject_token`: Identifies Sarah as the subject.
+
+* `actor_token`: Identifies the API gateway performing the action.
+
+* `requested_token_type`: Asks for an OAuth access token.
+
+* `audience`: Targets the token to the protected resource.
+
+* `scope`: Defines the permissions needed for this operation.
+
+The authorization server evaluates the request using the `may_act` claim from the subject token to verify that the gateway is authorized to act for Sarah. If policy allows the exchange, the server issues a new access token.
+
+#### The difference between `may_act` and `act`
+
+These claims represent different stages of delegation:
+
+* **Before the exchange:** The `may_act` claim in the subject token expresses an authorized relationship (the gateway is eligible to act for Sarah).
+
+* **After the exchange:** The `act` claim in the new access token identifies the actual actor (the API gateway) currently exercising this delegated authority.
+
+#### What's in the exchanged token?
+
+The new composite access token contains:
+
+```json
+{
+  "sub": "demo-user@example.com",
+  "scope": "openid read",
+  "client_id": "playground-demo-client",
+  "act": {
+    "sub": "api-gateway@example.com",
+    "iss": "https://.../idp"
+  },
+  "iss": "https://.../idp",
+  "aud": "https://.../rs"
+}
+```
+
+This resource-facing token preserves the entire context: the human subject (`sub`), the software actor (`act`), the target resource (`aud`), and the requested permissions (`scope`).
+
+The same model applies when an MCP gateway brokers access to enterprise systems such as Salesforce or ServiceNow. While specific integrations vary, the principle remains the same: preserve the subject and actor relationship while issuing a security context appropriate for the target.
+
+#### Retargeting trust
+
+The original identity token was intended for the client application. The exchanged access token is intended for the resource server. Token exchange retargets trust by changing the security context instead of simply copying Sarah's original token.
+
+```
+ID Token                                 Access Token
+sub = Sarah            ------->          sub = Sarah
+aud = Client           Token Exchange    act = API Gateway
+may_act = API Gateway                    aud = Resource Server
+                                         scope = read
+```
+
+## How token exchange relates to other protocol concepts
+
+### It doesn't always require a human
+
+While the playground demonstrates human delegation, token exchange also applies to machine-oriented flows where the subject is a workload. The key requirement isn't a human user, but rather the need to transform a trusted security context into a new token appropriate for the requested target.
+
+### It isn't workload identity
+
+Don't confuse the `actor_token` with the broader [workload identity](authplayground-spiffe.html) problem.
+
+* **Workload identity (SPIFFE / SVID):** Establishes trust in a runtime workload (which workload is this?).
+
+* **Token exchange:** Transforms an existing security context (what token should be issued for the requested target?).
+
+A production system might use workload identity (such as a SPIFFE JWT-SVID) as a trusted source to establish the actor during a token exchange. The token exchange flow in the playground doesn't demonstrate this specific integration.
+
+### It differs from ID-JAG and transaction tokens
+
+[ID-JAG](authplayground-xaa-id-jag.html) is a specific profile used to carry delegated user identity into another authorization domain. Token exchange can act as a building block for ID-JAG, but they are not synonymous.
+
+[Transaction tokens](authplayground-transaction-tokens.html) carry trusted transaction context through a workload call chain inside a trust domain. Token exchange is the mechanism used when a calling workload requests a Txn-Token from the token service.
+
+## Key takeaways
+
+The key to token exchange is distinguishing between the subject and the actor. In the enterprise AI scenario, Sarah is the subject and the API gateway is the actor.
+
+Before the exchange, `may_act` indicates that the gateway is eligible to act for Sarah. During the exchange, the client sends Sarah's `subject_token` and the gateway's `actor_token`. After policy evaluation, the resulting access token keeps Sarah as `sub` and records the gateway in `act`.
+
+Token exchange gives the resource-facing security context a much more accurate story than either of these alternatives:
+
+* Sarah made the API call directly.
+
+* A generic gateway service account made the API call.
+
+Neither alternative is entirely true. The reality is that the API gateway (or an MCP gateway in an enterprise AI architecture) acts using authority delegated from Sarah for this audience and requested access. Token exchange represents this distinction.
+
+---
+
+---
+title: Transaction Tokens in the AuthPlayground
+description: Explore how transaction tokens preserve trusted context through distributed AI service call chains in the AuthPlayground.
+component: identity-for-ai
+page_id: identity-for-ai:protocols:authplayground-transaction-tokens
+canonical_url: https://developer.pingidentity.com/identity-for-ai/protocols/authplayground-transaction-tokens.html
+llms_txt: https://developer.pingidentity.com/identity-for-ai/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-24T07:38:08Z
+keywords: ["Identity for AI", "OAuth 2.0 protocols", "transaction tokens", "TTS", "trust domain", "call chain", "distributed AI workflows", "AuthPlayground"]
+section_ids:
+  the-transaction-token-model: The transaction token model
+  whats-a-trust-domain: What's a trust domain?
+  a-human-isnt-required: A human isn't required
+  the-authplayground-implementation: The AuthPlayground implementation
+  step-1-obtain-the-subject-token: "Step 1: Obtain the subject token"
+  step-2-request-the-transaction-token: "Step 2: Request the transaction token"
+  step-3-propagate-the-transaction-token: "Step 3: Propagate the transaction token"
+  how-transaction-tokens-relate-to-other-concepts: How transaction tokens relate to other concepts
+  the-difference-between-principals-and-requesting-workloads: The difference between principals and requesting workloads
+  transaction-tokens-versus-workload-identity: Transaction tokens versus workload identity
+  transaction-tokens-and-token-exchange-solve-different-problems: Transaction tokens and token exchange solve different problems
+  transaction-tokens-differ-from-id-jag: Transaction tokens differ from ID-JAG
+  key-takeaways: Key takeaways
+  short-lifetimes-matter: Short lifetimes matter
+  keeping-the-call-chain-understandable: Keeping the call chain understandable
+---
+
+# Transaction Tokens in the AuthPlayground
+
+Preserving trusted context through a chain of microservices.
+
+Enterprise AI workflows often involve multiple services. Consider a planner agent that needs customer information to complete a task. It asks a retrieval agent to gather the information, and the retrieval agent calls account context and customer intelligence services.
+
+As the request moves through the call chain, each service can usually identify its direct caller. Preserving the trusted context behind the overall transaction is more difficult. Several hops later, a service might know that it was called by the customer intelligence service. The enterprise needs to know:
+
+* Which transaction does this call belong to?
+
+* Which principal is associated with the transaction?
+
+* Which workload originally requested the transaction token?
+
+* What's the purpose or authorization scope of this transaction?
+
+* Is this context valid inside this trust domain?
+
+* Is the token still current?
+
+Transaction tokens ([IETF draft](https://datatracker.ietf.org/doc/draft-ietf-oauth-transaction-tokens/)) carry trusted context through the call chain.
+
+## The transaction token model
+
+A transaction token is a short-lived, signed JSON Web Token (JWT) associated with a specific transaction and trust domain. It carries information such as:
+
+* `sub`: Who or what is the principal of this transaction?
+
+* `txn`: Which transaction is this?
+
+* `req_wl`: Which workload requested the transaction token?
+
+* `aud`: Which trust domain is this token valid in?
+
+* `scope`: What's the purpose or authorization scope?
+
+* `exp`: How long is this context valid?
+
+* `iat`: When was this token issued?
+
+A simplified example looks like this:
+
+```json
+Header {
+  "typ": "txntoken+jwt",
+  "alg": "RS256",
+  "kid": "transaction-token-signing-key"
+}
+
+body
+{
+  "sub": "demo-user@example.com",
+  "txn": "txn-48291",
+  "req_wl": "meeting-prep-agent.bx.internal",
+  "aud": "bx-ai.internal",
+  "scope": "customer.meeting-prep",
+  "iat": 1786575243,
+  "exp": 1786575303
+}
+```
+
+Actual claims and values depend on the Transaction Token Service (TTS) and deployment requirements. Downstream workloads receive a cryptographically protected representation of the transaction instead of reconstructing the security context from arbitrary headers.
+
+### What's a trust domain?
+
+A trust domain is a group of systems that share a common set of security controls and policies. For example, an enterprise might operate several AI services inside one governed environment.
+
+The transaction token is valid within that trust domain, which is why the `aud` claim is important. It doesn't represent an individual service (such as `aud = Account Context Service`). Instead, it represents the entire domain (such as `aud = AI Trust Domain`). Workloads must not accept a transaction token outside the trust domain identified by its `aud` claim.
+
+### A human isn't required
+
+A transaction token can support a human-initiated workflow, but a human isn't required. For autonomous workloads, the transaction might originate entirely from software. The principal represented by the transaction could be a workload instead of a person.
+
+Consider an autonomous monitoring agent versus a human-initiated meeting preparation request. In the human-initiated request, Sarah is the principal. Transaction tokens preserve trusted authorization and request context through a call chain inside a trust domain for both patterns.
+
+## The AuthPlayground implementation
+
+**Entities involved**: Client application, transaction token service, resource server
+
+The AuthPlayground demonstrates the [Transaction Token](https://www.authplayground.dev/flows/txn-tokens) flow in three steps:
+
+1. Obtain the subject token.
+
+2. Request the transaction token.
+
+3. Propagate the transaction token.
+
+### Step 1: Obtain the subject token
+
+The calling workload obtains an OAuth access token from the authorization server:
+
+```json
+POST /idp/token
+Content-Type: application/x-www-form-urlencoded
+
+{
+  "grant_type": "authorization_code",
+  "code": "<authorization_code>",
+  "redirect_uri": "<callback>",
+  "client_id": "playground-demo-client",
+  "code_verifier": "<pkce_verifier>"
+}
+```
+
+The response contains an access token:
+
+```json
+{
+  "token_type": "Bearer",
+  "expires_in": 3600,
+  "scope": "openid profile email",
+  "access_token": "<access_token>",
+  "id_token": "<id_token>"
+}
+```
+
+The OAuth access token becomes the `subject_token` used when requesting the transaction token. It establishes the subject context from which the TTS can create transaction-scoped context.
+
+|   |                                                                                                                                                                                                                                        |
+| - | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | The transaction token specification is broader than this example. A Txn-Token can represent externally or internally originated transactions. An OAuth user access token isn't required for every possible transaction token use case. |
+
+### Step 2: Request the transaction token
+
+The calling workload requests a transaction token from the TTS:
+
+```json
+POST /tts/token
+Content-Type: application/x-www-form-urlencoded
+
+{
+  "grant_type": "urn:ietf:params:oauth:grant-type:token-exchange",
+  "subject_token": "<subject_token>",
+  "subject_token_type": "urn:ietf:params:oauth:token-type:access_token",
+  "requested_token_type": "urn:ietf:params:oauth:token-type:txn_token",
+  "audience": "example.org",
+  "scope": "read write",
+  "request_context": "{\"req_ip\":\"203.0.113.42\",\"authn\":\"urn:mace:incommon:iap:silver\"}",
+  "request_details": "{\"action\":\"read\",\"resource\":\"/api/data\"}"
+}
+```
+
+Notice the following details:
+
+* `subject_token`: Provides the subject context for the transaction.
+
+* `requested_token_type`: Explicitly asks for a transaction token.
+
+* `audience`: Identifies the trust domain, not an individual downstream service.
+
+* `scope`: Expresses the permissions associated with the transaction.
+
+The specification defines `request_context` and `request_details` as recommended parameters. They give the TTS additional context about the transaction and request. In the playground, that information appears in the resulting transaction token as:
+
+```json
+{
+  "rctx": {
+    "req_ip": "203.0.113.42",
+    "authn": "urn:mace:incommon:iap:silver"
+  },
+  "tctx": {
+    "action": "read",
+    "resource": "/api/data"
+  }
+}
+```
+
+The TTS identifies the calling workload, sets `req_wl`, validates the subject context, creates a unique `txn` identifier, and issues the short-lived transaction token.
+
+### Step 3: Propagate the transaction token
+
+The calling workload invokes a downstream service and sends the transaction token in the dedicated HTTP header:
+
+```json
+GET /rs/api/data
+
+Txn-Token: <transaction_token>
+```
+
+The use of a separate `Txn-Token` header is deliberate. Workloads mustn't use the standard `Authorization` header to carry the Txn-Token because they might need that header for other purposes.
+
+The receiving workload validates the transaction token before using it for authorization. It verifies:
+
+* **Signature**: Is the token cryptographically valid?
+
+* **aud**: Is it valid in this trust domain?
+
+* **exp**: Is it still current?
+
+* **Transaction context**: Does this context authorize the requested activity?
+
+If the workload makes another downstream call as part of the same call chain, it propagates the transaction token onward unchanged to provide execution continuity.
+
+## How transaction tokens relate to other concepts
+
+### The difference between principals and requesting workloads
+
+The TTS identifies the requesting workload using the `req_wl` claim. This answers which workload requested the transaction token.
+
+This isn't the same thing as the transaction principal. In a human-driven workflow, Sarah might be the `sub`, while the meeting prep agent is the `req_wl`. This separation is useful in AI systems because the workload executing a transaction and the principal associated with that transaction aren't always the same.
+
+### Transaction tokens versus workload identity
+
+A transaction token contains a `req_wl` claim identifying the requesting workload. This shouldn't be confused with a complete workload identity system.
+
+* [Workload identity](authplayground-spiffe.html) defines which running workload this is.
+
+* Transaction tokens define the trusted transaction context the workload participates in.
+
+In a broader architecture, SPIFFE can establish the identity of the workload requesting the transaction token. The TTS can use trusted workload authentication when deciding whether that workload is authorized to obtain one. These layers complement each other.
+
+### Transaction tokens and token exchange solve different problems
+
+Transaction tokens use the [Token Exchange](authplayground-token-exchange.html) protocol when requesting a token from the TTS, but the architectural purpose differs from the cross-domain token exchange pattern.
+
+* Cross-domain token exchange moves trusted identity and authorization into **another** trust domain.
+
+* Transaction tokens preserve trusted transaction context through a call chain **within** a trust domain.
+
+### Transaction tokens differ from ID-JAG
+
+[ID-JAG](authplayground-xaa-id-jag.html) is used when delegated user identity and authorization need to cross into another authorization domain. Transaction tokens are scoped to one trust domain and carry transaction context through a call chain. A single enterprise AI workflow can use both, but at different points and for different reasons.
+
+## Key takeaways
+
+### Short lifetimes matter
+
+Transaction tokens are deliberately short-lived. They aren't intended to become a broadly reusable enterprise credential. The specification notes that transaction tokens aren't inherently replay-resistant. Short lifetimes are therefore important, and the unique `txn` identifier supports auditing and replay detection.
+
+### Keeping the call chain understandable
+
+Without transaction context, logs from a distributed AI workflow only show which services called each other. A shared `txn` identifier gives those calls a common transaction reference. When workloads log that identifier, the enterprise has a way to associate downstream activity with the transaction that caused it. This is valuable for debugging, authorization analysis, security investigation, and auditing.
+
+Transaction tokens give the trust domain a way to keep context intact. The TTS creates a short-lived, signed token for the transaction that identifies the transaction principal, the requesting workload, the trust domain, and the authorized purpose. Workloads have identities and security controls of their own and the transaction token adds a trusted description of the transaction they're currently participating in.
+
+---
+
+---
 title: What is Agent2Agent (A2A) protocol?
 description: Learn how the Agent2Agent (A2A) protocol enables AI agents to discover, authenticate with, and delegate tasks to other agents across frameworks.
 component: identity-for-ai
@@ -2617,3 +3115,150 @@ Use the following resources to learn more about implementing A2A:
 * Google's [A2A protocol announcement](https://developers.googleblog.com/en/a2a-a-new-era-of-agent-interoperability/)
 
 MCP defines how agents call tools, while A2A defines how agents call each other. Both protocols rely on strong identity controls to ensure that every request, whether to a tool or to another agent, is authenticated, authorized, and auditable. Learn more about how MCP and A2A interact in [A2A and MCP: Complementary Protocols for Agentic Systems](https://a2a-protocol.org/dev/topics/a2a-and-mcp/#a2a-mcp-complementary-protocols-for-agentic-systems) in the A2A protocol documentation.
+
+---
+
+---
+title: What is Model Context Protocol (MCP)?
+description: Learn how Model Context Protocol (MCP) standardizes AI agent connections to external tools, resources, and prompts.
+component: identity-for-ai
+page_id: identity-for-ai:protocols:idai-what-is-mcp
+canonical_url: https://developer.pingidentity.com/identity-for-ai/protocols/idai-what-is-mcp.html
+llms_txt: https://developer.pingidentity.com/identity-for-ai/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-17T00:00:00Z
+keywords: ["model context protocol", "agent-tool integration", "capability discovery", "MCP", "tool connectors"]
+page_aliases: ["agents:idai-what-is-mcp.adoc"]
+section_ids:
+  key-benefits: Key benefits
+  architecture: Architecture
+  workflow: Workflow
+  security-challenges: Security challenges
+---
+
+# What is Model Context Protocol (MCP)?
+
+The foundational challenge in scaling agentic systems is managing the connections between artificial intelligence (AI) agents and the vast array of tools they need to perform their work.
+
+To solve real-world problems, AI agents require connections to external data and services, such as APIs and databases. Without a common standard, each integration must be written and maintained separately, creating brittle connections and duplicated effort. This approach doesn't scale, especially when multiple agents use the same tools.
+
+The [Model Context Protocol (MCP)](https://modelcontextprotocol.io/docs/getting-started/intro), developed by Anthropic, addresses this challenge by standardizing how agents connect to tools. By providing a consistent layer for agent-tool interaction, MCP reduces friction for developers, simplifies maintenance, and creates a foundation for interoperable, secure agent ecosystems.
+
+## Key benefits
+
+MCP's standardized integration layer delivers:
+
+* **Consistent connection semantics**: Developers can swap in a new tool without rewriting core integration logic.
+
+* **Secure authentication and authorization**: MCP servers support OAuth 2.0, eliminating the need for hard-coded secrets or long-lived credentials.
+
+* **Capability discovery**: Agents can automatically discover available tools, resources, and prompts instead of relying on hard-coded lists.
+
+* **Reduced duplication**: Multiple agents can reuse the same MCP server, reducing the operational burden of maintaining separate connectors.
+
+## Architecture
+
+![Example agentic MCP flow](_images/idai-mcp-flow.png)
+
+The MCP architecture includes three core components:
+
+* MCP host
+
+  The application that manages MCP clients and initiates connections to MCP servers. It provides the environment in which agents operate and interact with tools and resources. For example, an AI-powered IDE.
+
+* MCP client
+
+  The component inside the host that maintains a standardized connection with the MCP server. It acts as a bridge between the agent's reasoning and the server's tools, resources, and prompts. The client translates agent requests into MCP-compliant messages and processes server responses in a consistent way. For example, an embedded IDE client or chatbot agent connector.
+
+* MCP server
+
+  A program that exposes capabilities to AI applications in a standardized and discoverable way. It acts as the central repository of tools, resources, and prompts that agents can invoke. MCP servers support OAuth 2.0 for authentication and authorization, ensuring secure access, and can run locally within a host or remotely as a centralized service.
+
+  An MCP server can expose three main types of capabilities:
+
+  * **Tools**: Executable functions that an agent can invoke to perform specific actions.
+
+  * **Resources**: Contextual data that informs agent reasoning, such as files, database records, or configuration information.
+
+  * **Prompts**: Pre-defined, templated messages or workflows that agents can present to users or use internally to structure reasoning.
+
+MCP's technical architecture is based on the [JSON-RPC 2.0](https://www.jsonrpc.org/specification) message format. This ensures that all interactions, such as tool invocation, resource retrieval, and prompt execution, follow a consistent pattern. Each message contains a unique identifier, method name, and parameters.
+
+## Workflow
+
+A typical MCP workflow unfolds as part of an agent's reasoning-action loop:
+
+1. **Initialization**: The MCP host launches an MCP client, which connects to the MCP server. The client queries the server for available tools, resources, and prompts. The agent inspects this metadata to understand which capabilities are available before taking action.
+
+2. **Invocation**: When the agent determines that a specific tool or resource is needed, the MCP client sends a JSON-RPC request to the server, specifying the method and any required parameters.
+
+3. **Execution**: The server applies authentication and authorization checks using OAuth 2.0 and least-privilege scopes, ensuring the client is permitted to execute the requested action. The server then performs the requested operation.
+
+4. **Response**: Results are returned in a standardized JSON-RPC response. If an error occurs, the response includes a structured error object. The client relays the results to the agent, which incorporates them into its reasoning.
+
+5. **Iteration**: Based on the results, the agent might issue additional MCP requests, chaining tool calls or resource queries to achieve higher-level goals. This iterative process allows the agent to refine its reasoning and dynamically adapt to changing conditions or new data.
+
+6. **Observability & Logging** (Optional): Hosts or clients might log requests, responses, and execution traces to support debugging, auditing, or performance monitoring.
+
+In the following example, an agent is connected to a support team's ticketing system. The MCP server exposes a tool called `searchTickets`, which lets agents query tickets by status, assignee, or other fields.
+
+Suppose a support agent makes the following query to an AI agent:
+
+Show me all my open tickets.
+
+The LLM then processes this request and makes the following MCP call:
+
+```json
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "method": "searchTickets",
+  "params": {
+    "status": "open",
+    "assignee": "me"
+  }
+}
+```
+
+* `method`: The MCP tool being called (`searchTickets`)
+
+* `params`: The query parameters for filtering tickets
+
+The MCP server returns a structured list of open tickets:
+
+```json
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "result": [
+    {
+      "ticketId": "123",
+      "title": "Login issue",
+      "priority": "high"
+    },
+    {
+      "ticketId": "124",
+      "title": "Billing discrepancy",
+      "priority": "medium"
+    }
+  ]
+}
+```
+
+The agent acting as the MCP client can now summarize tickets for the user, suggest next steps, or chain further requests by calling other MCP tools.
+
+## Security challenges
+
+While MCP streamlines tool integration, it also introduces new identity and security challenges. Each MCP server must enforce strong authentication and authorization to ensure only trusted clients can access tools and resources.
+
+Common security challenges include:
+
+* Configuring OAuth 2.0 correctly to avoid reliance on static secrets
+
+* Implementing least-privilege scopes so agents can only access the data they need
+
+* Securing multi-tenant MCP servers with fine-grained access control to prevent data leakage across users
+
+* Protecting against denial-of-service with unbounded tool calls, and mitigating risks from prompt injection that could trigger malicious tool execution
+
+Learn more about MCP security best practices in [Securing MCP servers with OAuth 2.0](../identity/idai-securing-mcp-servers-oauth.html).

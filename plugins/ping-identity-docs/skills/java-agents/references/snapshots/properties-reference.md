@@ -516,266 +516,231 @@ In some versions of AM you can configure more than one value for this property, 
 ---
 
 ---
-title: Control Handling of the Backslash Character
-description: This property controls whether the backslash character, if used in incoming URL paths, is rejected, accepted (without decoding) or decoded.
+title: Audit Access Types
+description: The type of messages to audit.
 component: java-agents
 version: 2026
-page_id: java-agents:properties-reference:org.forgerock.agents.backslash.handling.strategy
-canonical_url: https://docs.pingidentity.com/java-agents/2026/properties-reference/org.forgerock.agents.backslash.handling.strategy.html
+page_id: java-agents:properties-reference:org.forgerock.agents.audit.what
+canonical_url: https://docs.pingidentity.com/java-agents/2026/properties-reference/org.forgerock.agents.audit.what.html
 llms_txt: https://docs.pingidentity.com/java-agents/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 ---
 
-# Control Handling of the Backslash Character
+# Audit Access Types
 
-This property controls whether the backslash character, if used in incoming URL paths, is rejected, accepted (without decoding) or decoded.
+The type of messages to audit.
 
-When set to `REJECT_OUTRIGHT`, if a backslash occurs anywhere in the incoming URI path, or path parameters, the agent will reject the incoming request with an HTTP 400 response.
+|                          |                                                                                                                                                                                                                         |
+| ------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Property name            | `org.forgerock.agents.audit.what`                                                                                                                                                                                       |
+| Aliases                  | `com.sun.identity.agents.config.audit.accesstype`   Introduced in Java Agent 5.0   [Recognized](preface.html#how_am_manages_multiple_aliases) from AM 6`org.forgerock.agents.audit.what`   Introduced in Java Agent 5.6 |
+| Function                 | Audit                                                                                                                                                                                                                   |
+| Supported settings       | * LOG_NONE
 
-When set to `ACCEPT_BUT_NOT_INTERPRET`, any occurrence of backslash in the incoming URI path, or path parameters, will be left unconverted.
+  Don't audit anything.
 
-When set to `ACCEPT_AND_INTERPRET`, any occurrence of backslash in the incoming URI path, or path parameters, will be replaced by a forward slash character.
+* LOG_ALLOW
 
-|                          |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Property name            | `org.forgerock.agents.backslash.handling.strategy`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-| Aliases                  | `org.forgerock.agents.backslash.handling.strategy`   Introduced in Java Agent 2024.11                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| Function                 | Configure behaviour                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| Supported settings       | * REJECT_OUTRIGHT
+  Audit only allowed requests.
 
-  Any and all occurrences of the specified sequence within the incoming URL will cause the agent to reject the incoming request with HTTP 400.
+* LOG_DENY
 
-* ACCEPT_BUT_NOT_INTERPRET
+  Audit only denied requests.
 
-  Occurrences of the specified sequence within the incoming URL will not cause the agent to reject the incoming request, but the sequence will be left decoded.
+* LOG_BOTH
 
-* ACCEPT_AND_INTERPRET
-
-  Occurrences of the specified sequence within the incoming URL will not cause the agent to reject the incoming request, and the sequence will be decoded for the purposes of not-enforced rule matching and AM policy evaluation |
-| Default                  | `REJECT_OUTRIGHT`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| Bootstrap property       | No                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-| Required property        | No                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-| Restart required         | No                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-| Local configuration file | `AgentConfig.properties`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
-
----
+  Audit both allowed and denied requests.                                      |
+| Default                  | `LOG_NONE`                                                                                                                                                                                                              |
+| Bootstrap property       | No                                                                                                                                                                                                                      |
+| Required property        | No                                                                                                                                                                                                                      |
+| Restart required         | No                                                                                                                                                                                                                      |
+| Local configuration file | `AgentConfig.properties`                                                                                                                                                                                                |
+| AM console               | Tab: `Global`Title: `Audit Access Types`                                                                                                                                                                                |
 
 ---
-title: Control Handling of the URL Encoded Sequence %2e
-description: This property controls whether the encoding sequence %2e, if used in incoming URL paths, is rejected, accepted (without decoding) or treated as a . character.
+
+---
+title: Audit Log Directory
+description: The full path to the directory for the agent's local audit log files.
 component: java-agents
 version: 2026
-page_id: java-agents:properties-reference:org.forgerock.agents.percent.2e.handling.strategy
-canonical_url: https://docs.pingidentity.com/java-agents/2026/properties-reference/org.forgerock.agents.percent.2e.handling.strategy.html
+page_id: java-agents:properties-reference:org.forgerock.agents.local.audit.dir.path
+canonical_url: https://docs.pingidentity.com/java-agents/2026/properties-reference/org.forgerock.agents.local.audit.dir.path.html
 llms_txt: https://docs.pingidentity.com/java-agents/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 ---
 
-# Control Handling of the URL Encoded Sequence %2e
+# Audit Log Directory
 
-This property controls whether the encoding sequence `%2e`, if used in incoming URL paths, is rejected, accepted (without decoding) or treated as a `.` character.
+The full path to the directory for the agent's local audit log files.
 
-When set to `REJECT_OUTRIGHT`, if the sequence `%2e` occurs anywhere in the incoming URI path, or path parameters, the agent will reject the incoming request with an HTTP 400 response.
+Default: None; local auditing is disabled
 
-When set to `ACCEPT_BUT_NOT_INTERPRET`, any occurrence of `%2e` in the incoming URI path, or path parameters, will be left unconverted.
-
-When set to `ACCEPT_AND_INTERPRET`, any occurrence of `%2e` in the incoming URI path will be interpreted as a `.` character.
-
-|                          |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Property name            | `org.forgerock.agents.percent.2e.handling.strategy`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| Aliases                  | `org.forgerock.agents.percent.2e.handling.strategy`   Introduced in Java Agent 2024.11                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| Function                 | Configure behaviour                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| Supported settings       | * REJECT_OUTRIGHT
-
-  Any and all occurrences of the specified sequence within the incoming URL will cause the agent to reject the incoming request with HTTP 400.
-
-* ACCEPT_BUT_NOT_INTERPRET
-
-  Occurrences of the specified sequence within the incoming URL will not cause the agent to reject the incoming request, but the sequence will be left decoded.
-
-* ACCEPT_AND_INTERPRET
-
-  Occurrences of the specified sequence within the incoming URL will not cause the agent to reject the incoming request, and the sequence will be decoded for the purposes of not-enforced rule matching and AM policy evaluation |
-| Default                  | `REJECT_OUTRIGHT`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| Bootstrap property       | No                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-| Required property        | No                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-| Restart required         | No                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-| Local configuration file | `AgentConfig.properties`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+|                          |                                                                               |
+| ------------------------ | ----------------------------------------------------------------------------- |
+| Property name            | `org.forgerock.agents.local.audit.dir.path`                                   |
+| Aliases                  | `org.forgerock.agents.local.audit.dir.path`   Introduced in Java Agent 2024.6 |
+| Function                 | Audit                                                                         |
+| Type                     | String                                                                        |
+| Bootstrap property       | Yes                                                                           |
+| Required property        | No                                                                            |
+| Restart required         | Yes - Restart the container after changing the property                       |
+| Local configuration file | `AgentBootstrap.properties`                                                   |
 
 ---
 
 ---
-title: Control Handling of the URL Encoded Sequence %2f
-description: This property controls whether the encoding sequence %2f, if used in incoming URL paths, is rejected, accepted (without decoding) or decoded.
+title: Audit Log Exclude Paths
+description: A list of JSON paths to exclude from audit logs. Audit event fields use JSON pointer notation and are taken from the JSON schema for the audit event content.
 component: java-agents
 version: 2026
-page_id: java-agents:properties-reference:org.forgerock.agents.percent.2f.handling.strategy
-canonical_url: https://docs.pingidentity.com/java-agents/2026/properties-reference/org.forgerock.agents.percent.2f.handling.strategy.html
+page_id: java-agents:properties-reference:org.forgerock.agents.audit.exclude.path.list
+canonical_url: https://docs.pingidentity.com/java-agents/2026/properties-reference/org.forgerock.agents.audit.exclude.path.list.html
 llms_txt: https://docs.pingidentity.com/java-agents/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 ---
 
-# Control Handling of the URL Encoded Sequence %2f
+# Audit Log Exclude Paths
 
-This property controls whether the encoding sequence `%2f`, if used in incoming URL paths, is rejected, accepted (without decoding) or decoded.
+A list of JSON paths to exclude from audit logs. Audit event fields use JSON pointer notation and are taken from the JSON schema for the audit event content.
 
-When set to `REJECT_OUTRIGHT`, if the sequence `%2f` occurs anywhere in the incoming URI path, or path parameters, the agent will reject the incoming request with an HTTP 400 response.
+To prevent logging of sensitive data for an audit event, the Common Audit Framework uses a safelist to specify which audit event fields appear in the logs. By default, only safelisted audit event fields are included in the logs.
 
-When set to `ACCEPT_BUT_NOT_INTERPRET`, any occurrence of `%2f` in the incoming URI path, or path parameters, will be left unconverted.
+This property takes precedence over [Audit Log Include Paths](org.forgerock.agents.audit.include.path.list.html). If a path is specified here and in [Audit Log Include Paths](org.forgerock.agents.audit.include.path.list.html), the corresponding audit event field is excluded.
 
-When set to `ACCEPT_AND_INTERPRET`, any occurrence of `%2f` in the incoming URI path, or path parameters, will be replaced by a forward slash character.
+The following example excludes Header1 but includes Header2 and Cookie1:
 
-|                          |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Property name            | `org.forgerock.agents.percent.2f.handling.strategy`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| Aliases                  | `org.forgerock.agents.percent.2f.handling.strategy`   Introduced in Java Agent 2024.11                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| Function                 | Configure behaviour                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| Supported settings       | * REJECT_OUTRIGHT
+`org.forgerock.agents.audit.exclude.path.list[0]=/access/http/request/headers/Header1Name`
 
-  Any and all occurrences of the specified sequence within the incoming URL will cause the agent to reject the incoming request with HTTP 400.
+`org.forgerock.agents.audit.include.path.list[0]=/access/http/request/headers/Header2Name`
 
-* ACCEPT_BUT_NOT_INTERPRET
+`org.forgerock.agents.audit.include.path.list[1]=/access/http/request/cookies/Cookie1Name`
 
-  Occurrences of the specified sequence within the incoming URL will not cause the agent to reject the incoming request, but the sequence will be left decoded.
-
-* ACCEPT_AND_INTERPRET
-
-  Occurrences of the specified sequence within the incoming URL will not cause the agent to reject the incoming request, and the sequence will be decoded for the purposes of not-enforced rule matching and AM policy evaluation |
-| Default                  | `REJECT_OUTRIGHT`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| Bootstrap property       | No                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-| Required property        | No                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-| Restart required         | No                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-| Local configuration file | `AgentConfig.properties`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+|                          |                                                                                  |
+| ------------------------ | -------------------------------------------------------------------------------- |
+| Property name            | `org.forgerock.agents.audit.exclude.path.list`                                   |
+| Aliases                  | `org.forgerock.agents.audit.exclude.path.list`   Introduced in Java Agent 2024.6 |
+| Function                 | Audit                                                                            |
+| Type                     | List                                                                             |
+| Bootstrap property       | Yes                                                                              |
+| Required property        | No                                                                               |
+| Restart required         | Yes - Restart the container after changing the property                          |
+| Local configuration file | `AgentBootstrap.properties`                                                      |
 
 ---
 
 ---
-title: Control Handling of the URL Encoded Sequence %3b
-description: This property controls whether the encoding sequence %3b, if used in incoming URL paths, is rejected, accepted (without decoding) or decoded.
+title: Audit Log Filename (deprecated)
+description: This property is deprecated; the log filename is fixed and can't be specified. If this property is specified and Audit Log Directory is empty, the directory name is extracted from this property and used in Audit Log Directory.
 component: java-agents
 version: 2026
-page_id: java-agents:properties-reference:org.forgerock.agents.percent.3b.handling.strategy
-canonical_url: https://docs.pingidentity.com/java-agents/2026/properties-reference/org.forgerock.agents.percent.3b.handling.strategy.html
+page_id: java-agents:properties-reference:org.forgerock.agents.local.audit.file.path
+canonical_url: https://docs.pingidentity.com/java-agents/2026/properties-reference/org.forgerock.agents.local.audit.file.path.html
 llms_txt: https://docs.pingidentity.com/java-agents/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 ---
 
-# Control Handling of the URL Encoded Sequence %3b
+# Audit Log Filename (deprecated)
 
-This property controls whether the encoding sequence `%3b`, if used in incoming URL paths, is rejected, accepted (without decoding) or decoded.
+This property is deprecated; the log filename is fixed and can't be specified. If this property is specified and [Audit Log Directory](org.forgerock.agents.local.audit.dir.path.html) is empty, the directory name is extracted from this property and used in [Audit Log Directory](org.forgerock.agents.local.audit.dir.path.html).
 
-When set to `REJECT_OUTRIGHT`, if the sequence `%3b` occurs anywhere in the incoming URI path, or path parameters, the agent will reject the incoming request with an HTTP 400 response..
+Default: None; local auditing is disabled
 
-When set to `ACCEPT_BUT_NOT_INTERPRET`, any occurrence of `%3b` in the incoming URI path, or path parameters, will be left unconverted.
-
-When set to `ACCEPT_AND_INTERPRET`, any occurrence of `%3b` in the incoming URI path will be replaced by a semicolon and used as a path segment/path parameter separator.
-
-|                          |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Property name            | `org.forgerock.agents.percent.3b.handling.strategy`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| Aliases                  | `org.forgerock.agents.percent.3b.handling.strategy`   Introduced in Java Agent 2024.11                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| Function                 | Configure behaviour                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| Supported settings       | * REJECT_OUTRIGHT
-
-  Any and all occurrences of the specified sequence within the incoming URL will cause the agent to reject the incoming request with HTTP 400.
-
-* ACCEPT_BUT_NOT_INTERPRET
-
-  Occurrences of the specified sequence within the incoming URL will not cause the agent to reject the incoming request, but the sequence will be left decoded.
-
-* ACCEPT_AND_INTERPRET
-
-  Occurrences of the specified sequence within the incoming URL will not cause the agent to reject the incoming request, and the sequence will be decoded for the purposes of not-enforced rule matching and AM policy evaluation |
-| Default                  | `REJECT_OUTRIGHT`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| Bootstrap property       | No                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-| Required property        | No                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-| Restart required         | No                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-| Local configuration file | `AgentConfig.properties`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+|                          |                                                                                                                                                                                                                                 |
+| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Property name            | `org.forgerock.agents.local.audit.file.path`                                                                                                                                                                                    |
+| Aliases                  | `com.sun.identity.agents.config.local.logfile`   Introduced in Java Agent 5.0   [Recognized](preface.html#how_am_manages_multiple_aliases) from AM 7`org.forgerock.agents.local.audit.file.path`   Introduced in Java Agent 5.6 |
+| Function                 | Deprecated                                                                                                                                                                                                                      |
+| Type                     | String                                                                                                                                                                                                                          |
+| Bootstrap property       | Yes                                                                                                                                                                                                                             |
+| Required property        | No                                                                                                                                                                                                                              |
+| Restart required         | Yes - Restart the container after changing the property                                                                                                                                                                         |
+| Local configuration file | `AgentBootstrap.properties`                                                                                                                                                                                                     |
 
 ---
 
 ---
-title: Control Handling of the URL Encoded Sequence %5c
-description: This property controls whether the encoding sequence %5c, if used in incoming URL paths, is rejected, accepted (without decoding) or decoded.
+title: Audit Log Include Paths
+description: A list of JSON paths to include in audit logs. Audit event fields use JSON pointer notation and are taken from the JSON schema for the audit event content.
 component: java-agents
 version: 2026
-page_id: java-agents:properties-reference:org.forgerock.agents.percent.5c.handling.strategy
-canonical_url: https://docs.pingidentity.com/java-agents/2026/properties-reference/org.forgerock.agents.percent.5c.handling.strategy.html
+page_id: java-agents:properties-reference:org.forgerock.agents.audit.include.path.list
+canonical_url: https://docs.pingidentity.com/java-agents/2026/properties-reference/org.forgerock.agents.audit.include.path.list.html
 llms_txt: https://docs.pingidentity.com/java-agents/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 ---
 
-# Control Handling of the URL Encoded Sequence %5c
+# Audit Log Include Paths
 
-This property controls whether the encoding sequence `%5c`, if used in incoming URL paths, is rejected, accepted (without decoding) or decoded.
+A list of JSON paths to include in audit logs. Audit event fields use JSON pointer notation and are taken from the JSON schema for the audit event content.
 
-When set to `REJECT_OUTRIGHT`, if the sequence `%5c` occurs anywhere in the incoming URI path, or path parameters, the agent will reject the incoming request with an HTTP 400 response.
+To prevent logging of sensitive data for an audit event, the Common Audit Framework uses a safelist to specify which audit event fields appear in the logs. By default, only safelisted audit event fields are included in the logs.
 
-When set to `ACCEPT_BUT_NOT_INTERPRET`, any occurrence of `%5c` in the incoming URI path, or path parameters, will be left unconverted.
+|   |                                                                                                                                                                                                                                                                                                               |
+| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | Before you include non-safelisted audit event fields in the logs, consider the impact on security. Inclusion of some headers, query parameters, or cookies could cause credentials or tokens to be logged, and allow anyone with access to the logs to impersonate the holder of these credentials or tokens. |
 
-When set to `ACCEPT_AND_INTERPRET`, any occurrence of `%5c` in the incoming URI path, or path parameters, will be replaced by a forward slash character.
+[Audit Log Exclude Paths](org.forgerock.agents.audit.exclude.path.list.html) takes precedence over this property. If a path is specified here and in [Audit Log Exclude Paths](org.forgerock.agents.audit.exclude.path.list.html), the corresponding audit event field is excluded.
 
-|                          |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Property name            | `org.forgerock.agents.percent.5c.handling.strategy`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| Aliases                  | `org.forgerock.agents.percent.5c.handling.strategy`   Introduced in Java Agent 2024.11                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| Function                 | Configure behaviour                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| Supported settings       | * REJECT_OUTRIGHT
+The following example excludes Header1 but includes Header2 and Cookie1:
 
-  Any and all occurrences of the specified sequence within the incoming URL will cause the agent to reject the incoming request with HTTP 400.
+`org.forgerock.agents.audit.exclude.path.list[0]=/access/http/request/headers/Header1Name`
 
-* ACCEPT_BUT_NOT_INTERPRET
+`org.forgerock.agents.audit.include.path.list[0]=/access/http/request/headers/Header2Name`
 
-  Occurrences of the specified sequence within the incoming URL will not cause the agent to reject the incoming request, but the sequence will be left decoded.
+`org.forgerock.agents.audit.include.path.list[1]=/access/http/request/cookies/Cookie1Name`
 
-* ACCEPT_AND_INTERPRET
-
-  Occurrences of the specified sequence within the incoming URL will not cause the agent to reject the incoming request, and the sequence will be decoded for the purposes of not-enforced rule matching and AM policy evaluation |
-| Default                  | `REJECT_OUTRIGHT`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| Bootstrap property       | No                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-| Required property        | No                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-| Restart required         | No                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-| Local configuration file | `AgentConfig.properties`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
-
----
+|                          |                                                                                                                                                           |
+| ------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Property name            | `org.forgerock.agents.audit.include.path.list`                                                                                                            |
+| Aliases                  | `org.forgerock.agents.audit.include.path.list`   Introduced in Java Agent 2024.6   [Recognized](preface.html#how_am_manages_multiple_aliases) from AM 7.1 |
+| Function                 | Audit                                                                                                                                                     |
+| Type                     | List                                                                                                                                                      |
+| Bootstrap property       | Yes                                                                                                                                                       |
+| Required property        | No                                                                                                                                                        |
+| Restart required         | Yes - Restart the container after changing the property                                                                                                   |
+| Local configuration file | `AgentBootstrap.properties`                                                                                                                               |
 
 ---
-title: Convert SSO Tokens Into OIDC JWTs
-description: For each incoming request, the agent looks for an OIDC JWT in the cookie named by JWT Cookie Name. Set this property as follows:
+
+---
+title: Audit Log Location
+description: The location where the agent logs audit messages. If Audit Access Types is LOG_NONE, this property has no effect.
 component: java-agents
 version: 2026
-page_id: java-agents:properties-reference:org.forgerock.agents.accept.ipdp.cookie
-canonical_url: https://docs.pingidentity.com/java-agents/2026/properties-reference/org.forgerock.agents.accept.ipdp.cookie.html
+page_id: java-agents:properties-reference:org.forgerock.agents.audit.where
+canonical_url: https://docs.pingidentity.com/java-agents/2026/properties-reference/org.forgerock.agents.audit.where.html
 llms_txt: https://docs.pingidentity.com/java-agents/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 ---
 
-# Convert SSO Tokens Into OIDC JWTs
+# Audit Log Location
 
-For each incoming request, the agent looks for an OIDC JWT in the cookie named by [JWT Cookie Name](org.forgerock.agents.jwt.cookie.name.html). Set this property as follows:
+The location where the agent logs audit messages. If [Audit Access Types](org.forgerock.agents.audit.what.html) is `LOG_NONE`, this property has no effect.
 
-* `true`: Use this value to allow users to access resources protected with systems that continue to use SSO tokens, and to use the default login redirection mode.
+|                          |                                                                                                                                                                                                                         |
+| ------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Property name            | `org.forgerock.agents.audit.where`                                                                                                                                                                                      |
+| Aliases                  | `com.sun.identity.agents.config.log.disposition`   Introduced in Java Agent 5.0   [Recognized](preface.html#how_am_manages_multiple_aliases) from AM 6`org.forgerock.agents.audit.where`   Introduced in Java Agent 5.6 |
+| Function                 | Audit                                                                                                                                                                                                                   |
+| Supported settings       | * NONE
 
-  * If the agent does not find a JWT in the cookie, the agent looks for an SSO token in the iPDP cookie defined during AM installation. During agent startup, the agent retrieves the name of this cookie from AM.
+  Don't audit anything, anywhere.
 
-  * If the agent finds an SSO token in the iPDP cookie, it makes a request to AM to convert the SSO token into an OIDC JWT.
+* LOCAL
 
-  * The agent caches the SSO token, so that if it is presented in another incoming request, the agent substitutes the JWT without making a request to AM.
+  Audit locally only.
 
-  * If the agent does not find either token, authentication fails. The user can only access resources that are available through not-enforced rules.
+* REMOTE
 
-* `false`: Do not convert SSO tokens into OIDC JWTs.
+  Audit remotely only.
 
-|                          |                                                                                                                                                                                                                                                                                                                      |
-| ------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Property name            | `org.forgerock.agents.accept.ipdp.cookie`                                                                                                                                                                                                                                                                            |
-| Aliases                  | `com.forgerock.agents.accept.ipdp.cookie`   Introduced in Java Agent 5.6   [Recognized](preface.html#how_am_manages_multiple_aliases) from AM 7`org.forgerock.agents.accept.ipdp.cookie.enabled`   Introduced in Java Agent 5.7`org.forgerock.agents.exchange.ipdp.cookie.enabled`   Introduced in Java Agent 2024.9 |
-| Function                 | SSO cookie handling                                                                                                                                                                                                                                                                                                  |
-| Type                     | Boolean: `true` returns true; all other strings return `false`.                                                                                                                                                                                                                                                      |
-| Default                  | `false`                                                                                                                                                                                                                                                                                                              |
-| Bootstrap property       | No                                                                                                                                                                                                                                                                                                                   |
-| Required property        | No                                                                                                                                                                                                                                                                                                                   |
-| Restart required         | No                                                                                                                                                                                                                                                                                                                   |
-| Local configuration file | `AgentConfig.properties`                                                                                                                                                                                                                                                                                             |
-| AM console               | Tab: `SSO (from AM 7)`Title: `Convert SSO Tokens Into OIDC JWTs`Legacy title: `Convert SSO Tokens into OpenID Connect JWTs`                                                                                                                                                                                          |
+* ALL
+
+  Audit both locally and remotely.                                                                  |
+| Default                  | `NONE`                                                                                                                                                                                                                  |
+| Bootstrap property       | No                                                                                                                                                                                                                      |
+| Required property        | No                                                                                                                                                                                                                      |
+| Restart required         | No                                                                                                                                                                                                                      |
+| Local configuration file | `AgentConfig.properties`                                                                                                                                                                                                |
+| AM console               | Tab: `Global`Title: `Audit Log Location`                                                                                                                                                                                |

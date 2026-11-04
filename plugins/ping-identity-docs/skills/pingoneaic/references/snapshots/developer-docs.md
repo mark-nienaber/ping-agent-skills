@@ -1,4 +1,101 @@
 ---
+title: Action
+description: Use the Action verb to perform predefined operations on Advanced Identity Cloud REST API resources via HTTP POST
+component: pingoneaic
+page_id: pingoneaic:developer-docs:crest/action
+canonical_url: https://docs.pingidentity.com/pingoneaic/developer-docs/crest/action.html
+llms_txt: https://docs.pingidentity.com/pingoneaic/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+section_ids:
+  parameters: Parameters
+---
+
+# Action
+
+Actions are a means of extending Advanced Identity Cloud REST APIs and are defined by the resource provider. The actions you can use depend on the implementation.
+
+The standard action indicated by `_action=create` is described in [Create](create.html).
+
+## Parameters
+
+You can use the following query string parameters. Other parameters depend on the specific action implementation:
+
+| Parameter                  | Description                                                                                                                                                                                                                                                                              |
+| -------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `_fields=field[,field...]` | Return only the specified fields in the body of the response.The `field` values are JSON pointers. For example, if the resource is `{"parent":{"child":"value"}}`, `parent/child` refers to the `"child":"value"`.If the `field` is left blank, the endpoint returns all default values. |
+| `_prettyPrint=true`        | Format the body of the response.                                                                                                                                                                                                                                                         |
+
+---
+
+---
+title: Advanced Identity Cloud API reference
+description: Overview of Advanced Identity Cloud REST APIs covering access management, identity management, and scripting endpoints
+component: pingoneaic
+page_id: pingoneaic:developer-docs:api-reference
+canonical_url: https://docs.pingidentity.com/pingoneaic/developer-docs/api-reference.html
+llms_txt: https://docs.pingidentity.com/pingoneaic/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+keywords: ["REST API", "Integration"]
+section_ids:
+  api_versions: API versions
+  the_apis: The APIs
+---
+
+# Advanced Identity Cloud API reference
+
+Many of the features available through Advanced Identity Cloud UIs are also available through REST APIs.
+
+|   |                                                                                                                                                                                                                                                                                    |
+| - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | Some documented APIs aren't active in all Advanced Identity Cloud tenants.The REST APIs have *Evolving* interface stability. This interface is continuing to evolve and so is subject to change in backwards-incompatible ways. All changes are documented at the time of release. |
+
+## API versions
+
+To maintain compatibility between releases, many REST APIs are versioned (`v1.0`, `v2.0`, and so on). The version number of a feature increases when Advanced Identity Cloud introduces breaking changes to an API.
+
+Advanced Identity Cloud provides versions for these API aspects:
+
+* *resource*
+
+  Any changes to the structure or syntax of a returned response result in a change to the *resource* version. For example, changing `errorMessage` to `message` in a JSON response.
+
+* *protocol*
+
+  Any changes to the methods used to make REST API calls result in change to the *protocol* version. For example, changing `_action` to `$action` in the required parameters of an API feature.
+
+When an API is versioned, include resource versions in your REST calls by setting the `Accept-API-Version` request header. The following example requests *resource* version 2.0 and *protocol* version 1.0:
+
+```
+Accept-API-Version: resource=2.0, protocol=1.0
+```
+
+This header ensures you call the correct version of the API, avoiding unexpected behavior due to incompatible changes.
+
+## The APIs
+
+Learn more in the API reference pages:
+
+* [Authenticate over REST](../am-authentication/authn-rest.html)
+
+- [Identity management](../_attachments/api/index-idm.html), [PingIDM REST API reference](../idm-rest-api/preface.html)
+
+* [Manage scripts over REST](../am-scripting/manage-scripts-rest.html)
+
+* [Manage sessions over REST](../am-sessions/managing-sessions-REST.html)
+
+* [OAuth 2.0 administration endpoints](../am-oauth2/oauth2-admin-endpoints.html)
+
+* [OAuth 2.0 APIs](../am-oauth2/oauth2-client-endpoints.html)
+
+* [OIDC APIs](../am-oidc1/oidc-client-endpoints.html)
+
+- [Tenant administration](../_attachments/api/index.html)
+
+1 Identity Governance is an add-on capability to Advanced Identity Cloud. Contact your Ping Identity representative if you want to add PingOne® Identity Governance to your Advanced Identity Cloud subscription.
+
+---
+
+---
 title: Advanced Identity Cloud Postman collection
 description: Import and configure the Advanced Identity Cloud Postman collection to explore and test REST APIs for identity and access management
 component: pingoneaic

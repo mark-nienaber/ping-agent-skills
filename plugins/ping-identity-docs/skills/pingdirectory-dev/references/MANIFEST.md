@@ -25,6 +25,6 @@
 | File | SHA-256 |
 |---|---|
 | llms.txt | 18d1e9bf07c0d5b18dbe7513aa2cbe974513930ca0eacb532221b43830342e3b |
-| snapshots/directory.md | 3cc96548ece035f073c0b1ff0be746155831fa0b6c8041d37b2582789fca75d2 |
+| snapshots/directory.md | 00195a20770461c82699e53a7355511971f87d744551aadad4f77ba442c5eceb |
 | snapshots/directory-proxy-scim.md | d57d6858b24084a75db69a63d967889a18dbda0be1e69e0ae377f08a4acd3e53 |
 | snapshots/consent.md | 3944b4ed4859d99ff52c88cd4495db49df9958995c8cf2cc13a5eb57969005a3 |

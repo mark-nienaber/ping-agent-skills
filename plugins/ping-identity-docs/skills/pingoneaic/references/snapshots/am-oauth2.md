@@ -1,4 +1,1604 @@
 ---
+title: /json/token/macaroon
+description: Inspect and add caveats to macaroon tokens using the token manipulation endpoint
+component: pingoneaic
+page_id: pingoneaic:am-oauth2:oauth2-introspect-macaroon-endpoint
+canonical_url: https://docs.pingidentity.com/pingoneaic/am-oauth2/oauth2-introspect-macaroon-endpoint.html
+llms_txt: https://docs.pingidentity.com/pingoneaic/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+keywords: ["OAuth 2.0", "OpenID Connect (OIDC)", "Endpoints", "Macaroons", "Scope"]
+page_aliases: ["oauth2-guide:varlist-oauth2-introspect-macaroon-endpoint.adoc", "oauth2-guide:oauth2-introspect-macaroon-endpoint.adoc"]
+---
+
+# /json/token/macaroon
+
+The `/json/token/macaroon` endpoint lets you inspect and manipulate [macaroon tokens](oauth2-macaroons.html).
+
+Specify the realm in the request URL; for example:
+
+```none
+https://<tenant-env-fqdn>/am/oauth2/realms/root/realms/alpha/token/macaroon
+```
+
+This endpoint supports these parameters:
+
+| Field             | Description                                             |
+| ----------------- | ------------------------------------------------------- |
+| `action=inspect`  | Return details about the macaroon.                      |
+| `action=restrict` | Add a caveat to the macaroon, returning a new macaroon. |
+
+You can manipulate macaroons locally using a macaroon library. Anyone in possession of a macaroon token can inspect and restrict the macaroon securely.
+
+The following example restricts the scope of a macaroon token and inspects the result. The original scope of the unrestricted token is `openid profile`:
+
+```bash
+$ curl \
+--request POST \
+--header "Content-Type: application/json" \
+--header "cache-control: no-cache" \
+--data '{
+  "macaroon": "<macaroon-token>",
+  "caveat": {"type": "first-party", "identifier": {"scope": "profile"}}
+}' \
+'https://<tenant-env-fqdn>/am/json/realms/root/realms/alpha/token/macaroon?action=restrict'
+{
+  "macaroon": "<restricted-macaroon-token>"
+}
+
+$ curl \
+--request POST \
+--header "Content-Type: application/json" \
+--header "cache-control: no-cache" \
+--data '{"macaroon": "<restricted-macaroon-token>"}' \
+'https://<tenant-env-fqdn>_/am/json/realms/root/realms/alpha/token/macaroon?_action=inspect'
+{
+  "identifier": "<identifier>",
+  "location": "",
+  "caveats": [{
+    "type": "first-party",
+    "identifier": {
+      "scope": "profile"
+    }
+  }],
+  "signature": "<signature>"
+}
+```
+
+|   |                                                                                                                                                                                                                                                        |
+| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+|   | OpenID Connect clients must ensure the following information is present in the JSON:- The `openid` scope; for example, `"scopes": ["profile", "openid"]`.
+
+- The `id_token` response type; for example, `"response_types": ["code", "id_token code"]`. |
+
+---
+
+---
+title: /oauth2/access_token
+description: Exchange authorization codes and other grants for access tokens using token endpoint
+component: pingoneaic
+page_id: pingoneaic:am-oauth2:oauth2-access_token-endpoint
+canonical_url: https://docs.pingidentity.com/pingoneaic/am-oauth2/oauth2-access_token-endpoint.html
+llms_txt: https://docs.pingidentity.com/pingoneaic/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+keywords: ["OAuth 2.0", "Endpoints", "Authorization", "REST API"]
+page_aliases: ["oauth2-guide:oauth2-access_token-endpoint.adoc"]
+section_ids:
+  request_parameters: Request parameters
+  responses: Responses
+---
+
+# /oauth2/access_token
+
+The `/oauth2/access_token` endpoint is the OAuth 2.0 [token endpoint](https://www.rfc-editor.org/rfc/rfc6749.html#section-3.2) (RFC 6749).
+
+Use this endpoint to acquire an access or refresh token with the following flows:
+
+* Authorization code grant ([OAuth 2.0 and OIDC](oauth2-authz-grant.html))
+
+* Authorization code grant with PKCE ([OAuth 2.0 and OIDC](oauth2-authz-grant-pkce.html))
+
+* Authorization code grant with PAR ([OAuth 2.0](oauth2-authz-grant-par.html))
+
+* Client credentials grant ([OAuth 2.0](oauth2-client-cred-grant.html))
+
+* Resource owner password credentials grant ([OAuth 2.0](oauth2-ropc-grant.html))
+
+* Device flow ([OAuth 2.0](oauth2-device-flow.html))
+
+* SAML 2.0 profile for authorization grant ([OAuth 2.0](oauth2-saml2-bearer-grant.html))
+
+* Token exchange ([OAuth 2.0 | OpenID Connect](token-exchange.html))
+
+Specify the realm in the request URL; for example:
+
+```none
+https://<tenant-env-fqdn>/am/oauth2/realms/root/realms/alpha/access_token
+```
+
+## Request parameters
+
+The `access_token` endpoint supports the following parameters:
+
+| Parameter               | Description                                                                                                               | Required                                                                           |
+| ----------------------- | ------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| `actor_token`           | The token representing a delegate acting on behalf of another identity.                                                   | Yes, for [Token exchange](token-exchange.html)                                     |
+| `actor_token_type`      | The type of actor token.                                                                                                  | Yes, for [Token exchange](token-exchange.html)                                     |
+| `auth_chain`            | A string naming the journey to authenticate the resource owner.                                                           | No, only for [Resource owner password credentials grant](oauth2-ropc-grant.html)   |
+| `assertion`             | A string holding a base64-encoded then URL-encoded SAML 2.0 assertion                                                     | Yes, when `grant_type=urn:ietf:params:oauth:grant-type:saml2-bearer`               |
+| `client_assertion`      | A signed JSON Web Token (JWT) to use as client credentials.                                                               | Yes, for [JWT profile](client-auth-jwt.html) authentication                        |
+| `client_assertion_type` | The type of assertion, `client_assertion_type=urn%3Aietf%3Aparams%3Aoauth%3Aclient-assertion-type%3Ajwt-bearer`.          | Yes, for [JWT profile](client-auth-jwt.html) authentication                        |
+| `client_id`             | Uniquely identifies the application making the request.                                                                   | Yes                                                                                |
+| `client_secret`         | The password for a confidential client; do not use with `cnf_key`.                                                        | Yes, when authenticating with [Form parameters (HTTP POST)](client-auth-form.html) |
+| `cnf_key`               | A base64-encoded JSON Web Key (JWK); do not use with `client_secret`.                                                     | Yes, for [JWK-based proof-of-possession](oauth2-PoP-JWK.html)                      |
+| `code`                  | A string holding the authorization code for an authorization code grant.                                                  | Yes, when `grant_type=authorization_code`                                          |
+| `code_verifier`         | A random string correlating a PKCE authorization request with the token request.                                          | Yes, for flows with PKCE                                                           |
+| `device_code`           | A string holding the device code requested from the user for a device flow.                                               | Yes, when `grant_type=urn:ietf:params:oauth:grant-type:device_code`                |
+| `grant_type`            | A string specifying the type of grant to acquire an access token.                                                         | Yes                                                                                |
+| `password`              | A string holding the resource owner password for the [Resource owner password credentials grant](oauth2-ropc-grant.html). | Yes, when `grant_type=password`                                                    |
+| `redirect_uri`          | The URI to return the resource owner to after authorization is complete.                                                  | Yes, when `grant_type=authorization_code` and it was included earlier in the flow  |
+| `refresh_token`         | The refresh to get a new access token.                                                                                    | Yes, for [Refresh tokens](oauth2-refresh-tokens.html)                              |
+| `requested_token_type`  | The type of token requested in exchange.                                                                                  | No, but recommended for [Token exchange](token-exchange.html)                      |
+| `scope`                 | The scopes linked to the permissions requested by the client from the resource owner.                                     | No                                                                                 |
+| `subject_token`         | The original token to exchange.                                                                                           | Yes, for [Token exchange](token-exchange.html)                                     |
+| `subject_token_type`    | The type of subject token.                                                                                                | Yes, for [Token exchange](token-exchange.html)                                     |
+| `username`              | A string holding the resource owner username for the [Resource owner password credentials grant](oauth2-ropc-grant.html). | Yes, when `grant_type=password`                                                    |
+
+## Responses
+
+| HTTP status       | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| ----------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `200 OK`          | Success. The response body contains a JSON object with the issued tokens, including `access_token`, `token_type`, `expires_in`, and optionally `refresh_token`, `id_token`, and `authorization_details`. For example:```json
+{
+  "access_token": "access-token",
+  "token_type": "Bearer",
+  "expires_in": 3600,
+  "refresh_token": "refresh-token",
+  "scope": "read write",
+  "id_token": "id-token",
+  "authorization_details": [{
+      "type": "account_information",
+      "actions": [
+         "list_accounts",
+         "read_balances",
+         "read_transactions"
+      ],
+      "locations": [
+         "https://example.com/accounts"
+      ]
+  }]
+}
+```Advanced Identity Cloud includes `authorization_details` in the response if the resource owner has authorized them during the authorize flow with [remote consent](oauth2-remote-consent.html). The `authorization_details` returned here are the same as the consented `authorization_details` returned from the RCS.                                                                                                                                                                                                                                                                                                                                    |
+| `400 Bad Request` | * The request is malformed or contains an unsupported or invalid parameter value. For example:
+
+  ```json
+  {
+    "error": "invalid_request",
+    "error_description": "Invalid Content Type"
+  }
+  ```
+
+* The request is missing a required parameter. For example:
+
+  ```json
+  {
+    "error": "invalid_request",
+    "error_description": "Missing parameters: grant_type code redirect_uri"
+  }
+  ```
+
+* Invalid/unauthorized client. For example:
+
+  ```json
+  {
+    "error": "unauthorized_client",
+    "error_description": "Public clients can't use client credentials grant."
+  }
+  ```
+
+* Invalid grant (authorization code / password / refresh token problems). For example:
+
+  ```json
+  {
+    "error": "invalid_grant",
+    "error_description": "The provided access grant is invalid, expired, or revoked."
+  }
+  ```
+
+* Advanced Identity Cloud returns this error when the request includes `authorization_details` for the `authorization_code` or `refresh_token` grant type, and [Enable Rich Authorization Requests with RCS](../authorization/oauth2-provider-settings.html#enable-rich-authorization-requests-rcs) is enabled on the OAuth 2.0 provider. For example:
+
+  ```json
+  {
+    "error": "invalid_request",
+    "error_description": "authorization_details parameter not supported"
+  }
+  ``` |
+
+---
+
+---
+title: /oauth2/authorize
+description: Obtain resource owner consent and authorization using OAuth 2.0 authorization endpoint
+component: pingoneaic
+page_id: pingoneaic:am-oauth2:oauth2-authorize-endpoint
+canonical_url: https://docs.pingidentity.com/pingoneaic/am-oauth2/oauth2-authorize-endpoint.html
+llms_txt: https://docs.pingidentity.com/pingoneaic/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+keywords: ["OAuth 2.0", "Endpoints", "Authorization", "REST API"]
+page_aliases: ["oauth2-guide:oauth2-authorize-endpoint.adoc"]
+section_ids:
+  request_parameters: Request parameters
+  responses: Responses
+---
+
+# /oauth2/authorize
+
+The `/oauth2/authorize` endpoint is the OAuth 2.0 authorization endpoint defined in [RFC 6749](https://www.rfc-editor.org/info/rfc6749).
+
+Use this endpoint to gather consent and authorization from the resource owner for the following flows:
+
+* Authorization code grant ([OAuth 2.0 and OIDC](oauth2-authz-grant.html))
+
+* Authorization code grant with PKCE ([OAuth 2.0 and OIDC](oauth2-authz-grant-pkce.html))
+
+* Authorization code grant with PAR ([OAuth 2.0](oauth2-authz-grant-par.html))
+
+* Implicit grant ([OAuth 2.0 and OIDC](oauth2-implicit-grant.html))
+
+Specify the realm in the request URL; for example:
+
+```none
+https://<tenant-env-fqdn>/am/oauth2/realms/root/realms/alpha/authorize
+```
+
+## Request parameters
+
+The authorization endpoint supports the following parameters:
+
+| Parameter               | Description                                                                                                                                                         | Required                                                                                             |
+| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| `acr_values`            | The OpenID Connect authentication context class reference values.                                                                                                   | Yes, if [required by the OpenID Connect provider](../am-oidc1/oidc-authentication-requirements.html) |
+| `authorization_details` | Additional fine-grained authorization requirements, as specified in [RFC 9396: OAuth 2.0 Rich Authorization Requests](https://www.rfc-editor.org/rfc/rfc9396.html). | No. Accepted only if [remote consent](oauth2-remote-consent.html) is configured.                     |
+| `claims`                | The user attributes to be returned in the ID token.                                                                                                                 | No                                                                                                   |
+| `client_id`             | Uniquely identifies the application making the request.                                                                                                             | Yes                                                                                                  |
+| `code_challenge`        | The code verifier generated for the PKCE flow.                                                                                                                      | Yes, for the [Authorization code grant with PKCE](oauth2-authz-grant-pkce.html) flow                 |
+| `code_challenge_method` | The method to derive the code challenge.                                                                                                                            | Yes, when the `code_challenge` is hashed (recommended)                                               |
+| `csrf`                  | The SSO token string linking the request to the user session to protect against Cross-Site Request Forgery attacks.                                                 | Yes, when gathering consent without a remote consent service                                         |
+| `decision`              | Specifies whether the resource owner consents to the requested access.                                                                                              | Yes, when gathering consent unless consent is already saved for the scope                            |
+| `id_token_hint`         | Previously issued ID token passed as a hint about the end user's session with the client.                                                                           | No                                                                                                   |
+| `login_hint`            | String value that can be set to the ID the user uses to log in.                                                                                                     | No                                                                                                   |
+| `nonce`                 | String value that associates the client session with the ID token.                                                                                                  | Yes, for the [Implicit grant](oauth2-implicit-grant.html) flow for OIDC                              |
+| `prompt`                | Specifies whether to prompt the end user for authentication and consent.                                                                                            | No                                                                                                   |
+| `redirect_uri`          | The URI to return the resource owner to after authorization is complete.                                                                                            | No                                                                                                   |
+| `response_mode`         | Specifies the mechanism for returning response parameters.                                                                                                          | No                                                                                                   |
+| `response_type`         | The type of response expected from the authorization server.                                                                                                        | Yes                                                                                                  |
+| `request`               | The JWT request object.                                                                                                                                             | Yes, for JAR request and OIDC flows requiring a request object and providing no `request_uri`        |
+| `request_uri`           | For PAR or OIDC flows, a reference to JWT request object(s).                                                                                                        | Yes, for JAR request and OIDC flows requiring a request object and providing no `request`            |
+| `save_consent`          | Specifies whether to store a resource owner's consented scopes.                                                                                                     | No                                                                                                   |
+| `scope`                 | The scopes linked to the permissions requested by the client from the resource owner.                                                                               | No                                                                                                   |
+| `service`               | The authentication journey to use when authenticating the resource owner.                                                                                           | No                                                                                                   |
+| `state`                 | The value to maintain state between the request and the callback.                                                                                                   | No, but strongly recommended                                                                         |
+| `ui_locales`            | The end user's preferred languages for the user interface.                                                                                                          | No                                                                                                   |
+
+## Responses
+
+| HTTP status        | Description                                                                                                                                                                                                                                                                                                                                                                                                             |
+| ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `302 Found`        | Success. Advanced Identity Cloud redirects the resource owner's browser to the `redirect_uri`, appending the authorization code (or token, for the implicit grant) and any `state` value as query parameters.                                                                                                                                                                                                           |
+| `400 Bad Request`  | The request is malformed. For example, a required parameter is missing or an unsupported value is supplied.                                                                                                                                                                                                                                                                                                             |
+| `401 Unauthorized` | Advanced Identity Cloud could not authenticate the resource owner or the client.	When an error occurs at the authorization endpoint, Advanced Identity Cloud returns 401 rather than redirecting to the client's redirect_uri with an error parameter as described in RFC 6749. This behavior is intentional and provides additional security by not disclosing error details to potentially unvalidated redirect URIs. |
+
+---
+
+---
+title: /oauth2/bc-authorize
+description: Initiate backchannel authorization for client-initiated backchannel authentication flows
+component: pingoneaic
+page_id: pingoneaic:am-oauth2:oauth2-bc-authorize-endpoint
+canonical_url: https://docs.pingidentity.com/pingoneaic/am-oauth2/oauth2-bc-authorize-endpoint.html
+llms_txt: https://docs.pingidentity.com/pingoneaic/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+keywords: ["OAuth 2.0", "Endpoints", "Authorization", "REST API"]
+page_aliases: ["oauth2-guide:oauth2-bc-authorize-endpoint.adoc"]
+section_ids:
+  request_parameters: Request parameters
+  responses: Responses
+---
+
+# /oauth2/bc-authorize
+
+The `/oauth2/bc-authorize` endpoint is the backchannel authorization endpoint for [OpenID Connect Client-Initiated Backchannel Authentication Flow - Core 1.0](https://openid.net/specs/openid-client-initiated-backchannel-authentication-core-1_0.html).
+
+Use this endpoint to initiate backchannel authorization with the resource owner with the following flow:
+
+* Backchannel request grant ([OpenID Connect](../am-oidc1/openid-connect-backchannel-request-flow.html))
+
+Specify the realm in the request URL; for example:
+
+```none
+https://<tenant-env-fqdn>/am/oauth2/realms/root/realms/alpha/bc-authorize
+```
+
+## Request parameters
+
+The endpoint supports the following parameters:
+
+| Parameter               | Description                                                                                                      | Required                                                                           |
+| ----------------------- | ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| `client_assertion`(1)   | A signed JSON Web Token (JWT) to use as client credentials.                                                      | Yes, for [JWT profile](client-auth-jwt.html) authentication                        |
+| `client_assertion_type` | The type of assertion, `client_assertion_type=urn%3Aietf%3Aparams%3Aoauth%3Aclient-assertion-type%3Ajwt-bearer`. | Yes, for [JWT profile](client-auth-jwt.html) authentication                        |
+| `client_id`             | Uniquely identifies the application making the request.                                                          | Yes                                                                                |
+| `client_secret`         | The password for a confidential client.                                                                          | Yes, when authenticating with [Form parameters (HTTP POST)](client-auth-form.html) |
+
+(1) The endpoint requires a signed JWT with these claims:
+
+| Claim             | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | Example                                                                                                                                                                              |
+| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `acr_values`      | A string identifying the mechanism for the end user to provide authorization. If this claim is omitted, the authentication journey is resolved from configured defaults when the [ESV](../tenants/esvs.html#variables) named `esv-am-oauth2-ciba-spec-compliant-acr-resolution-enabled` is enabled; otherwise the provider's default ACR values are used. Learn more in [Resolve the CIBA authentication journey](../am-oidc1/openid-connect-backchannel-request-flow.html#ciba-acr-resolution). | `"acr_values": "push"`                                                                                                                                                               |
+| `aud`             | A string or array of strings indicating the intended audience of the JWT. Must include the authorization server OAuth 2.0 endpoint including port number 443.                                                                                                                                                                                                                                                                                                                                    | `"aud": "https://<tenant-env-fqdn>:443/am/oauth2/realms/root/realms/alpha"`                                                                                                          |
+| `binding_message` | A short (100 character max.) string message to display to the user when obtaining authorization.For push notification, messages must:- Begin with a letter, number, or punctuation mark.
+
+- **Not** include line breaks or control characters.                                                                                                                                                                                                                                                   | `"binding_message": "Allow ExampleBank to transfer £50 from 'Main' to 'Savings'? (EB-0246326)"`                                                                                      |
+| `exp`             | The expiration time in seconds since January 1, 1970 UTC. An expiration time more than 30 minutes in the future causes a `JWT expiration time is unreasonable` error message.                                                                                                                                                                                                                                                                                                                    | `"exp": 1761066489`&#xA;&#xA;To generate a value just under 30 minutes in the future, run the following command in a Unix or Linux shell:&#xA;&#xA;$ echo $(($(date -u +%s) + 1799)) |
+| `iss`             | The unique identifier of the JWT issuer; must match the client ID in the application profile.                                                                                                                                                                                                                                                                                                                                                                                                    | `"iss": "myCIBAClient"`                                                                                                                                                              |
+| `login_hint`      | A string identifying the principal and subject of the JWT (the end user).                                                                                                                                                                                                                                                                                                                                                                                                                        | `"login_hint": "a0325ea4-9d9b-4056-931b-ab64704cc3da"`                                                                                                                               |
+| `scope`           | A string holding a space-separated list of the requested scopes; must include `openid`.                                                                                                                                                                                                                                                                                                                                                                                                          | `"scope": "openid profile"`                                                                                                                                                          |
+
+## Responses
+
+| HTTP status | Description                                                                                                                                                                                                                                                                                                                                               |
+| ----------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `200 OK`    | Success. The response body contains a JSON object with `auth_req_id` (the backchannel authentication request identifier), `expires_in`, and optionally `interval`. For example:```json
+{
+  "auth_req_id": "auth-req-id",
+  "expires_in": 600,
+  "interval": 2
+}
+```                                                                                       |
+| `4xx`       | Standard OAuth 2.0 error JSON object including `error` (typically `invalid_request`, `invalid_client`, and so on) and `error_description` (human-readable explanation of what failed). For example:```json
+{
+  "error": "invalid_request",
+  "error_description": "Request must have a 'request' parameter the value of which must be a signed jwt"
+}
+``` |
+
+---
+
+---
+title: /oauth2/device/code
+description: Request device and user codes for input-constrained devices using RFC 8628 device authorization
+component: pingoneaic
+page_id: pingoneaic:am-oauth2:rest-api-oauth2-device-code
+canonical_url: https://docs.pingidentity.com/pingoneaic/am-oauth2/rest-api-oauth2-device-code.html
+llms_txt: https://docs.pingidentity.com/pingoneaic/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+keywords: ["OAuth 2.0", "API Explorer", "Endpoints"]
+page_aliases: ["oauth2-guide:rest-api-oauth2-device-code.adoc"]
+---
+
+# /oauth2/device/code
+
+The [Device authorization grant](oauth2-device-flow.html) endpoint defined in RFC 8628 [OAuth 2.0 Device Authorization Grant](https://www.rfc-editor.org/info/rfc8628).
+
+Client devices use this endpoint in the following flows to get the codes and information required to obtain the resource owner's consent for device access:
+
+* Device flow ([OAuth 2.0](oauth2-device-flow.html))
+
+* Device flow with PKCE ([OAuth 2.0](oauth2-device-flow-pkce.html))
+
+Specify the realm in the request URL; for example:
+
+```none
+https://<tenant-env-fqdn>/am/oauth2/realms/root/realms/alpha/device/code
+```
+
+The device code endpoint supports the following parameters:
+
+| Parameter               | Description                                                                           | Required                                                                                             |
+| ----------------------- | ------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| `acr_values`            | The OpenID Connect authentication context class reference values.                     | Yes, if [required by the OpenID Connect provider](../am-oidc1/oidc-authentication-requirements.html) |
+| `claims`                | The user attributes to be returned in the ID token.                                   | No                                                                                                   |
+| `client_id`             | Uniquely identifies the application making the request.                               | Yes                                                                                                  |
+| `code_challenge`        | The code verifier generated for the PKCE flow.                                        | Yes, for the [Authorization code grant with PKCE](oauth2-authz-grant-pkce.html) flow                 |
+| `code_challenge_method` | The method to derive the code challenge.                                              | Yes, when the `code_challenge` is hashed (recommended)                                               |
+| `login_hint`            | String value that can be set to the ID the user uses to log in.                       | No                                                                                                   |
+| `nonce`                 | String value that associates the client session with the ID token.                    | No                                                                                                   |
+| `prompt`                | Specifies whether to prompt the end user for authentication and consent.              | No                                                                                                   |
+| `scope`                 | The scopes linked to the permissions requested by the client from the resource owner. | No                                                                                                   |
+| `state`                 | The value to maintain state between the request and the callback.                     | No, but strongly recommended                                                                         |
+| `ui_locales`            | The end user's preferred languages for the user interface.                            | No                                                                                                   |
+
+---
+
+---
+title: /oauth2/device/user
+description: Obtain resource owner consent for device flow authorization using device user endpoint
+component: pingoneaic
+page_id: pingoneaic:am-oauth2:rest-api-oauth2-device-user
+canonical_url: https://docs.pingidentity.com/pingoneaic/am-oauth2/rest-api-oauth2-device-user.html
+llms_txt: https://docs.pingidentity.com/pingoneaic/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+keywords: ["OAuth 2.0", "API Explorer", "Endpoints", "PKCE"]
+page_aliases: ["oauth2-guide:rest-api-oauth2-device-user.adoc"]
+---
+
+# /oauth2/device/user
+
+This is the [Device authorization grant](oauth2-device-flow.html) endpoint for user interaction.
+
+Client devices use this endpoint to confirm the resource owner's consent in the following flows:
+
+* Device flow ([OAuth 2.0](oauth2-device-flow.html))
+
+* Device flow with PKCE ([OAuth 2.0](oauth2-device-flow-pkce.html))
+
+Specify the realm in the request URL; for example:
+
+```none
+https://<tenant-env-fqdn>/am/oauth2/realms/root/realms/alpha/device/user
+```
+
+The device user endpoint supports the following parameters:
+
+| Parameter      | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     | Required                                                                  |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
+| `csrf`         | The SSO token string linking the request to the user session to protect against Cross-Site Request Forgery attacks.                                                                                                                                                                                                                                                                                                                                                                                                                                                             | Yes, when gathering consent without a remote consent service              |
+| `decision`     | Whether the resource owner consents to the requested access.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    | Yes, when gathering consent unless consent is already saved for the scope |
+| `save_consent` | Whether to store a resource owner's consented scopes.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           | No                                                                        |
+| `scope`        | The scopes linked to the permissions requested by the client from the resource owner.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           | No                                                                        |
+| `user_code`    | The user code confirmed by the resource owner.The endpoint checks for the `user_code` on the initial request and uses it to retrieve the associated device code to determine if any ACRs were requested. If ACRs were requested, the user authenticates through the specified authentication journey.If a user accesses the endpoint without supplying a `user_code`, the user authenticates through the default authentication journey. If that journey doesn't match the ACRs required by the device request, the user is prompted to reauthenticate after entering the code. | Yes                                                                       |
+
+---
+
+---
+title: /oauth2/introspect
+description: Retrieve token metadata including scopes and expiry time using RFC 7662 token introspection
+component: pingoneaic
+page_id: pingoneaic:am-oauth2:oauth2-introspect-endpoint
+canonical_url: https://docs.pingidentity.com/pingoneaic/am-oauth2/oauth2-introspect-endpoint.html
+llms_txt: https://docs.pingidentity.com/pingoneaic/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+keywords: ["OAuth 2.0", "Endpoints", "Scope", "JWT", "Grant Flow", "REST API"]
+page_aliases: ["oauth2-guide:varlist-oauth2-introspect-endpoint.adoc", "oauth2-guide:oauth2-introspect-endpoint.adoc"]
+section_ids:
+  example: Example
+  introspection_requirements: Introspection requirements
+  special_tokens: Special tokens
+  response_signing_and_encryption: Response signing and encryption
+  rfc-9701-token-introspection-claim: RFC 9701 token_introspection claim
+  response_content: Response content
+---
+
+# /oauth2/introspect
+
+The `/oauth2/introspect` endpoint, defined in RFC 7662 [OAuth 2.0 Token Introspection](https://www.rfc-editor.org/info/rfc7662), lets a client (including resource servers) retrieve details about a token. These details include:
+
+* The approved scopes
+
+* The user who authorized the client to obtain the token
+
+* The expiry time
+
+* The proof-of-possession JSON Web Key (JWK)
+
+The client making the request must authenticate to this endpoint.
+
+Specify the realm in the request URL. For example:
+
+```none
+https://<tenant-env-fqdn>/am/oauth2/realms/root/realms/alpha/introspect
+```
+
+The token introspection endpoint supports the following parameters:
+
+| Parameter               | Description                                                                                                                   | Required                                                                           |
+| ----------------------- | ----------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| `client_assertion`      | A signed JSON Web Token (JWT) to use as client credentials.                                                                   | Yes, for [JWT profile](client-auth-jwt.html) authentication                        |
+| `client_assertion_type` | The type of assertion, `client_assertion_type=urn%3Aietf%3Aparams%3Aoauth%3Aclient-assertion-type%3Ajwt-bearer`.              | Yes, for [JWT profile](client-auth-jwt.html) authentication                        |
+| `client_id`             | Uniquely identifies the application making the request.                                                                       | Yes                                                                                |
+| `client_secret`         | The password for a confidential client.                                                                                       | Yes, when authenticating with [Form parameters (HTTP POST)](client-auth-form.html) |
+| `token`                 | The token to introspect.                                                                                                      | Yes                                                                                |
+| `token_type_hint`       | A hint about the type of token to introspect. Valid values are `access_token`, `refresh_token`, and `requesting_party_token`. | No                                                                                 |
+
+## Example
+
+The following example demonstrates token introspection:
+
+```bash
+$ curl \
+--request POST \
+--user "myClient:mySecret" \
+--data "token=<access-token>" \
+"https://<tenant-env-fqdn>/am/oauth2/realms/root/realms/alpha/introspect"
+{
+  "active": true,
+  "scope": "profile",
+  "realm": "/alpha",
+  "client_id": "myClient",
+  "user_id": "a0325ea4-9d9b-4056-931b-ab64704cc3da",
+  "username": "a0325ea4-9d9b-4056-931b-ab64704cc3da",
+  "token_type": "Bearer",
+  "exp": 1675703376,
+  "sub": "a0325ea4-9d9b-4056-931b-ab64704cc3da",
+  "subname": "a0325ea4-9d9b-4056-931b-ab64704cc3da",
+  "iss": "https://<tenant-env-fqdn>/am/oauth2/realms/root/realms/alpha",
+  "auth_level": 0,
+  "authGrantId": "sReMmkL05mN4xtDMQdVrpjXB_go",
+  "auditTrackingId": "1d7a3317-03a9-4461-9d12-745f886019c2-5860187",
+  "expires_in": 3575
+}
+```
+
+## Introspection requirements
+
+A client can only introspect a token if it meets one of the following requirements:
+
+* The client has a special scope
+
+  The client has a [special introspection scope](oauth2-scopes.html#special-oauth2-scopes) (`am-introspect-all-tokens` or `am-introspect-all-tokens-any-realm`) specified in its client profile.
+
+* Token was issued to the client (server-side tokens)
+
+  For server-side tokens, Advanced Identity Cloud compares the issuing client identity stored in the token against the `client_id` of the introspecting client. If they match, the client can introspect the token.
+
+* Token audience includes the client
+
+  When the `Allow audience members to introspect tokens` setting is enabled on the OAuth 2.0 Provider, Advanced Identity Cloud checks if the `client_id` of the introspecting client is present anywhere in the token's `aud` (audience) claim. If there's a match, the client can introspect the token.
+
+  By default, the `aud` claim contains the requesting client ID for client-side tokens and might be absent for server-side tokens. Token exchange can add audience values when `Accept Audience Parameters in Token Exchange Requests` is enabled and the requested values are allowed.
+
+* The `client_id` claim matches (client-side tokens only)
+
+  When the `Include client_id claim in stateless access tokens` setting is enabled, Advanced Identity Cloud checks whether the `client_id` JWT claim in the token matches the `client_id` of the introspecting client. If there's a match, the client can introspect the token.
+
+### Special tokens
+
+To introspect macaroon access tokens containing third-party caveats, use the `X-Discharge-Macaroon` header to pass the discharge macaroon.
+
+## Response signing and encryption
+
+The default introspection response is a plain JSON object.
+
+Advanced Identity Cloud also supports signed JWT (JSON Web Token) or signed and encrypted JWT introspection responses, as defined in [RFC 9701: JWT Response for OAuth Token Introspection](https://www.rfc-editor.org/info/rfc9701).
+
+Regardless of the configured response format, a client can request a signed JWT response by adding one of the following headers to the introspection request:
+
+* `Accept:application/jwt` (default, for compatibility with older clients)
+
+* `Accept: application/token-introspection+jwt` (for compatibility with [RFC 9701](#rfc-9701-token-introspection-claim))
+
+To enable signing and encryption for all requests to a client, follow these steps:
+
+1. In the Advanced Identity Cloud admin console, go to Applications > Applications > *Name* > Sign On > General Settings > Show advanced settings > Endpoint Response Formats and select the response type in the Token Inspection Response Format list.
+
+2. Save your work.
+
+3. If you need to configure signing and encryption, go to Native Consoles > Access Management > Realms > *Realm Name* > Applications > OAuth 2.0 > Clients > *Client ID* > Signing and Encryption and configure the following properties:
+
+   * Token introspection response signing algorithm
+
+     Default: `RS256`
+
+   * Token introspection response encryption algorithm
+
+     Default: `RSA-OAEP-256`
+
+   * Token introspection encrypted response encryption algorithm
+
+     Default: `A128CBC-HS256`
+
+4. Save your work.
+
+Requests for plain JSON now return errors.
+
+## RFC 9701 token_introspection claim
+
+By default, Advanced Identity Cloud returns a flat JWT introspection response for backwards compatibility with older clients. To comply with RFC 9701, enable the Use token_introspection claim for JWT setting.
+
+To enable the `token_introspection` claim, you can configure it at two levels:
+
+* Realm level
+
+  1. In the Advanced Identity Cloud admin console, go to [icon: vpn_key, set=material, size=inline] Authorization > OAuth2 Provider > Advanced.
+
+     1. Select Use token_introspection claim for JWT.
+
+* Client level
+
+  1. Under Native Consoles > Access Management, go to Realms > *Realm Name* > Applications > OAuth 2.0 > *Client ID* > OAuth2 Provider Overrides.
+
+  2. Enable OAuth2 Provider Overrides and select Use token_introspection claim for JWT.
+
+If enabled, Advanced Identity Cloud wraps the introspected token's claims inside a `token_introspection` claim in the JWT. This separates the JWT's own top-level claims (such as `iss`, `aud`, and `iat` for the introspection response itself) from the introspected token's claims:
+
+```json
+{
+  "iss": "<authorization-server-issuer>",
+  "aud": "<resource-server-client-id>",
+  "iat": 1234567890,
+  "token_introspection": {
+    "active": true,
+    "scope": "profile",
+    "client_id": "myClient",
+    "aud": ["myClient", "api.example.com"],
+    "sub": "a0325ea4-9d9b-4056-931b-ab64704cc3da",
+    "exp": 1675703376
+  }
+}
+```
+
+The `aud` claim of the introspected token is always included in the JWT response, including for client-side tokens. The JSON introspection response also includes the `aud` claim of the introspected token, if present.
+
+If not enabled, Advanced Identity Cloud returns a flat JWT structure. For client-side tokens, the `aud` claim is omitted from both the JWT response and the JSON response.
+
+|   |                                                                                                                                                                                                    |
+| - | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | This setting isn't enabled by default to preserve existing behavior after upgrades. Enable it for new deployments or when your resource servers are ready to consume RFC 9701-compliant responses. |
+
+## Response content
+
+The following table describes fields you may find in the introspection response:
+
+| Field                   | Description                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| ----------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `active`                | Whether the token is active (`true`) or not (`false`).                                                                                                                                                                                                                                                                                                                                                                           |
+| `aud`                   | The audience of the token. In a JWT response, the top-level `aud` identifies the audience of the introspection response itself. The `token_introspection.aud` claim is the audience claim from the token being introspected.                                                                                                                                                                                                     |
+| `auth_level`            | The authentication level for the resource owner who granted access to the token.                                                                                                                                                                                                                                                                                                                                                 |
+| `authorization_details` | The fine-grained authorization details granted to the token, as specified in [RFC 9396: OAuth 2.0 Rich Authorization Requests](https://www.rfc-editor.org/rfc/rfc9396.html). Present only if the token was issued with `authorization_details`.                                                                                                                                                                                  |
+| `client_id`             | The client the token was issued to.                                                                                                                                                                                                                                                                                                                                                                                              |
+| `cnf`                   | The confirmation key claim.The `jwk` type contains the decoded JWK for the access token in the [JWK-based proof-of-possession](oauth2-PoP-JWK.html) flow.                                                                                                                                                                                                                                                                        |
+| `exp`                   | Expiration time in seconds since January 1, 1970 UTC.                                                                                                                                                                                                                                                                                                                                                                            |
+| `expires_in`            | Expiration time in seconds from now; the value decreases with every request to Advanced Identity Cloud.Unlike the calculated value, the expiration time stored in the token does not change.For client-side tokens, Advanced Identity Cloud only returns this to a client in the same realm as the resource owner.                                                                                                               |
+| `iss`                   | The token issuer.                                                                                                                                                                                                                                                                                                                                                                                                                |
+| `macaroon`              | The macaroon the token validates, including any caveats.                                                                                                                                                                                                                                                                                                                                                                         |
+| `scope`                 | The space-separated list of the scopes associated with the token.                                                                                                                                                                                                                                                                                                                                                                |
+| `sub`                   | The subject of the access token.This can use the format `(type!subject)`, where:- `subject` is the principal's ID.
+
+- `type` can be one of the following:
+
+  * `age`
+
+    The *subject* is an OAuth 2.0 or OpenID Connect client, a Remote Consent Service agent, or a Web or Java Agent internal client.
+
+  * `usr`
+
+    The *subject* is a user, device, or similar identity.Examples: `(usr!bjensen)`, `(age!myOAuth2Client)` |
+| `token_type`            | The type of token.                                                                                                                                                                                                                                                                                                                                                                                                               |
+| `user_id`               | Deprecated form of `username`.                                                                                                                                                                                                                                                                                                                                                                                                   |
+| `username`              | The user who authorized the client to obtain the token.                                                                                                                                                                                                                                                                                                                                                                          |
+
+---
+
+---
+title: /oauth2/par
+description: Push authorization request payloads to authorization server for early client authentication
+component: pingoneaic
+page_id: pingoneaic:am-oauth2:oauth2-par-endpoint
+canonical_url: https://docs.pingidentity.com/pingoneaic/am-oauth2/oauth2-par-endpoint.html
+llms_txt: https://docs.pingidentity.com/pingoneaic/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+keywords: ["OAuth 2.0", "OpenID Connect (OIDC)", "PAR", "Authorization", "Endpoints"]
+page_aliases: ["oauth2-guide:oauth2-par-endpoint.adoc"]
+section_ids:
+  request_parameters: Request parameters
+  responses: Responses
+---
+
+# /oauth2/par
+
+The `/oauth2/par` endpoint is the OAuth 2.0 pushed authorization request (PAR) endpoint defined in [RFC 9126](https://www.rfc-editor.org/info/rfc9126).
+
+Use this endpoint to push an authorization request payload directly to the authorization server for the following flows:
+
+* Authorization code grant ([OAuth 2.0 and OIDC](oauth2-authz-grant.html))
+
+* Authorization code grant with PKCE ([OAuth 2.0 and OIDC](oauth2-authz-grant-pkce.html))
+
+* Implicit grant ([OAuth 2.0 and OIDC](oauth2-implicit-grant.html))
+
+Specify the realm in the request URL; for example:
+
+```none
+https://<tenant-env-fqdn>/am/oauth2/realms/root/realms/alpha/par
+```
+
+## Request parameters
+
+The PAR endpoint supports the following parameters:
+
+| Parameter               | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               | Required                                                                                                                            |
+| ----------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| `acr_values`            | The OpenID Connect authentication context class reference values.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | Yes, if [required by the OpenID Connect provider](../am-oidc1/oidc-authentication-requirements.html)                                |
+| `authorization_details` | Additional fine-grained authorization requirements, as specified in [RFC 9396: OAuth 2.0 Rich Authorization Requests](https://www.rfc-editor.org/rfc/rfc9396.html).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | No. Accepted only if [remote consent](oauth2-remote-consent.html) is configured.                                                    |
+| `claims`                | The user attributes to be returned in the ID token.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | No                                                                                                                                  |
+| `client_assertion`      | A signed JSON Web Token (JWT) to use as client credentials.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               | Yes, for [JWT profile](client-auth-jwt.html) authentication                                                                         |
+| `client_assertion_type` | The type of assertion, `client_assertion_type=urn%3Aietf%3Aparams%3Aoauth%3Aclient-assertion-type%3Ajwt-bearer`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          | Yes, for [JWT profile](client-auth-jwt.html) authentication                                                                         |
+| `client_id`             | Uniquely identifies the application making the request.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   | Yes, even when it is also included in a `request` object                                                                            |
+| `client_secret`         | The password for a confidential client.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   | Yes, when authenticating with [Form parameters (HTTP POST)](client-auth-form.html)                                                  |
+| `code_challenge`        | The code verifier generated for the PKCE flow.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            | Yes, for confidential clients and for all clients using the [Authorization code grant with PKCE](oauth2-authz-grant-pkce.html) flow |
+| `code_challenge_method` | The method to derive the code challenge.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  | Yes, when the `code_challenge` is hashed (recommended)                                                                              |
+| `csrf`                  | The SSO token string linking the request to the user session to protect against Cross-Site Request Forgery attacks.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | Yes, when gathering consent without a remote consent service                                                                        |
+| `decision`              | Specifies whether the resource owner consents to the requested access.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    | Yes, when gathering consent unless consent is already saved for the scope                                                           |
+| `id_token_hint`         | Previously issued ID token previously passed as a hint about the end user's session with the client.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | No                                                                                                                                  |
+| `login_hint`            | String value that can be set to the ID the user uses to log in.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           | No                                                                                                                                  |
+| `nonce`                 | String value that associates the client session with the ID token.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        | No                                                                                                                                  |
+| `prompt`                | Specifies whether to prompt the end user for authentication and consent.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  | No                                                                                                                                  |
+| `redirect_uri`          | The URI to return the resource owner to after authorization is complete.The value must match a redirect URI pre-registered for the client. Advanced Identity Cloud doesn't currently support per-request unregistered redirect URIs.                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | No                                                                                                                                  |
+| `request`               | A signed and encrypted JWT that contains the request parameters used for [JWT-Secured Authorization Requests (JAR)](https://www.rfc-editor.org/info/rfc9101).When using JAR, the request JWT must be signed with the client's private key and optionally encrypted with the authorization server's public key. You can obtain the authorization server's public key from its JWKS URI.All request parameters must be included as claims inside the JWT. Only the following client authentication parameters can be used alongside the `request` parameter:- `client_assertion`
+
+- `client_assertion_type`
+
+- `client_id`
+
+- `client_secret`Otherwise, the response is an `Invalid parameter scope` error. | No                                                                                                                                  |
+| `response_mode`         | Specifies the mechanism for returning response parameters.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | No                                                                                                                                  |
+| `response_type`         | The type of response expected from the authorization server.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              | Yes                                                                                                                                 |
+| `save_consent`          | Specifies whether to store a resource owner's consented scopes.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           | No                                                                                                                                  |
+| `scope`                 | The scopes linked to the permissions requested by the client from the resource owner.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     | No                                                                                                                                  |
+| `service`               | The authentication journey to use when authenticating the resource owner.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | No                                                                                                                                  |
+| `state`                 | The value to maintain state between the request and the callback.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | No, but strongly recommended                                                                                                        |
+| `ui_locales`            | The end user's preferred languages for the user interface.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | No                                                                                                                                  |
+
+## Responses
+
+| HTTP status   | Description                                                                                                                                                                                                                                                                                                                                               |
+| ------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `201 Created` | Success. The response body contains a JSON object with a `request_uri` (for use in a subsequent authorization request) and `expires_in`. For example:```json
+{
+  "request_uri": "C2c3yhu2IApAELttmZtfPNPQaIJxvTCHk",
+  "expires_in": 90
+}
+```                                                                                                             |
+| `4xx`         | Standard OAuth 2.0 error JSON object including `error` (typically `invalid_request`, `invalid_client`, and so on) and `error_description` (human-readable explanation of what failed). For example:```json
+{
+  "error": "invalid_request",
+  "error_description": "Request must have a 'request' parameter the value of which must be a signed jwt"
+}
+``` |
+
+---
+
+---
+title: /oauth2/token/revoke
+description: Revoke OAuth 2.0 access tokens and refresh tokens using RFC 7009 token revocation endpoint
+component: pingoneaic
+page_id: pingoneaic:am-oauth2:oauth2-token-revoke-endpoint
+canonical_url: https://docs.pingidentity.com/pingoneaic/am-oauth2/oauth2-token-revoke-endpoint.html
+llms_txt: https://docs.pingidentity.com/pingoneaic/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+keywords: ["OAuth 2.0", "Scopes", "Grant Flow", "Endpoints", "Setup &amp; Configuration"]
+page_aliases: ["oauth2-guide:varlist-oauth2-token-revoke-endpoint.adoc", "oauth2-guide:oauth2-token-revoke-endpoint.adoc"]
+section_ids:
+  request_parameters: Request parameters
+  responses: Responses
+---
+
+# /oauth2/token/revoke
+
+Endpoint defined in RFC 7009 [Token Revocation](https://www.rfc-editor.org/info/rfc7009) to revoke access tokens and refresh tokens.
+
+When you revoke a refresh token, you revoke all tokens issued with the same authorization grant. If you obtained multiple access tokens for a single user with different authorization grants, you must revoke the tokens separately to invalidate each one.
+
+Specify the realm in the request URL; for example:
+
+```none
+https://<tenant-env-fqdn>/am/oauth2/realms/root/realms/alpha/token/revoke
+```
+
+## Request parameters
+
+The revoke token endpoint supports the following parameters:
+
+| Parameter               | Description                                                                                                      | Required                                                                           |
+| ----------------------- | ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| `client_assertion`      | A signed JSON Web Token (JWT) to use as client credentials.                                                      | Yes, for [JWT profile](client-auth-jwt.html) authentication                        |
+| `client_assertion_type` | The type of assertion, `client_assertion_type=urn%3Aietf%3Aparams%3Aoauth%3Aclient-assertion-type%3Ajwt-bearer`. | Yes, for [JWT profile](client-auth-jwt.html) authentication                        |
+| `client_id`             | Uniquely identifies the application making the request.                                                          | Yes                                                                                |
+| `client_secret`         | The password for a confidential client.                                                                          | Yes, when authenticating with [Form parameters (HTTP POST)](client-auth-form.html) |
+| `token`                 | The access token or refresh token to revoke.                                                                     | Yes                                                                                |
+| `token_type_hint`       | A hint about the type of token to revoke. Valid values are `access_token` and `refresh_token`.                   | No                                                                                 |
+
+The following example revokes a refresh token:
+
+```bash
+$ curl \
+--request POST \
+--user "myClient:mySecret" \
+--data "client_id=myClient" \
+--data "token=refresh-token" \
+"https://<tenant-env-fqdn>/am/oauth2/realms/root/realms/alpha/token/revoke"
+{}
+```
+
+## Responses
+
+| HTTP status | Description                                                                                                                                                                                                                                                                         |
+| ----------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `200 OK`    | Success. The response body is an empty JSON object (`{}`).                                                                                                                                                                                                                          |
+| `400`       | Missing or invalid client authentication:```json
+{
+    "error_description":"Client authentication failed",
+    "error":"invalid_client"
+}
+```Malformed request or bad request parameters:```json
+{
+    "error_description":"error-description",
+    "error":"invalid_request"
+}
+``` |
+| `500`       | Server-side failure:```json
+{
+    "error": "server_error",
+    "error_description": "Failed to revoke access token"
+}
+```                                                                                                                                                           |
+
+---
+
+---
+title: /oauth2/tokeninfo (Legacy)
+description: Deprecated. Legacy OAuth 2.0 endpoints maintained for backward compatibility with existing clients
+component: pingoneaic
+page_id: pingoneaic:am-oauth2:legacy-oauth2-endpoints
+canonical_url: https://docs.pingidentity.com/pingoneaic/am-oauth2/legacy-oauth2-endpoints.html
+llms_txt: https://docs.pingidentity.com/pingoneaic/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+keywords: ["OAuth 2.0", "Endpoints", "Administration"]
+page_aliases: ["oauth2-guide:legacy-oauth2-endpoints.adoc"]
+---
+
+# /oauth2/tokeninfo (Legacy)
+
+Advanced Identity Cloud exposes the legacy `/oauth2/tokeninfo` endpoint.
+
+|   |                                                                                                                        |
+| - | ---------------------------------------------------------------------------------------------------------------------- |
+|   | Use this endpoint only when you can't use the standard [/oauth2/introspect](oauth2-introspect-endpoint.html) endpoint. |
+
+Use this endpoint to validate tokens and retrieve token metadata to determine how to respond to requests for protected resources.
+
+To inspect the contents of the token, send an HTTP GET request to:
+
+```none
+https://<tenant-env-fqdn>/am/oauth2/realms/root/realms/realm/tokeninfo
+```
+
+Use the token as a bearer token in an authorization header; for example, `Authorization: Bearer <access-token>`.
+
+---
+
+---
+title: /realm-config/agents/OAuth2Client
+description: Create, list, and delete OAuth 2.0 clients programmatically using admin endpoint
+component: pingoneaic
+page_id: pingoneaic:am-oauth2:rest-api-oauth2-client-admin-endpoint
+canonical_url: https://docs.pingidentity.com/pingoneaic/am-oauth2/rest-api-oauth2-client-admin-endpoint.html
+llms_txt: https://docs.pingidentity.com/pingoneaic/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+keywords: ["OAuth 2.0", "API Explorer", "Administration", "Endpoints", "Clients"]
+page_aliases: ["oauth2-guide:rest-api-oauth2-client-admin-endpoint.adoc"]
+section_ids:
+  create-oauth2-client: Create an OAuth 2.0 client
+  update-oauth2-client: Update an OAuth 2.0 client
+  query-oauth2-clients: Query OAuth 2.0 clients
+  delete_an_oauth_2_0_client: Delete an OAuth 2.0 client
+---
+
+# /realm-config/agents/OAuth2Client
+
+Invoke this Advanced Identity Cloud-specific endpoint to create, list, and delete OAuth 2.0 clients.
+
+## Create an OAuth 2.0 client
+
+This example registers a basic OAuth 2.0 client named `myClient` in the `alpha` realm. Append the name of the client to the URL:
+
+```bash
+$ curl \
+--request PUT \
+--header "Accept-API-Version: resource=1.0" \
+--header "Content-Type: application/json" \
+--header "Accept: application/json" \
+--header "Authorization: Bearer <access-token>" \
+--data '{
+   "coreOAuth2ClientConfig":{
+      "agentgroup":"",
+      "status":{
+         "inherited":true,
+         "value":"string"
+      },
+      "userpassword":"mySecret",
+      "clientType":{
+         "inherited":false,
+         "value":"Confidential"
+      },
+      "redirectionUris":{
+         "inherited":false,
+         "value":[
+            "https://www.example.com:443/callback"
+         ]
+      },
+      "scopes":{
+         "inherited":false,
+         "value":[
+            "write",
+            "read"
+         ]
+      },
+      "defaultScopes":{
+         "inherited":true,
+         "value":[
+            "write"
+         ]
+      },
+      "clientName":{
+         "inherited":true,
+         "value":[
+            "My Test Client"
+         ]
+      }
+   },
+   "advancedOAuth2ClientConfig":{
+      "name":{
+         "inherited":false,
+         "value":[
+            null
+         ]
+      },
+      "grantTypes":{
+         "inherited":true,
+         "value":[
+            "authorization_code",
+            "client_credentials"
+         ]
+      },
+      "tokenEndpointAuthMethod":{
+         "inherited":true,
+         "value":"client_secret_basic"
+      }
+   }
+}' \
+"https://<tenant-env-fqdn>/am/json/realms/root/realms/alpha/realm-config/agents/OAuth2Client/myClient"
+```
+
+> **Collapse: Display output**
+>
+> ```bash
+> {
+>     "_id": "myClient",
+>     "_rev": "720283894",
+>     "overrideOAuth2ClientConfig": {
+>         "issueRefreshToken": true,
+>         "validateScopePluginType": "PROVIDER",
+>         "tokenEncryptionEnabled": false,
+>         "evaluateScopePluginType": "PROVIDER",
+>         "oidcMayActScript": "[Empty]",
+>         "oidcClaimsScript": "[Empty]",
+>         "scopesPolicySet": "oauth2Scopes",
+>         "accessTokenModificationPluginType": "PROVIDER",
+>         "authorizeEndpointDataProviderClass": "org.forgerock.oauth2.core.plugins.registry.DefaultEndpointDataProvider",
+>         "oidcClaimsPluginType": "PROVIDER",
+>         "providerOverridesEnabled": false,
+>         "authorizeEndpointDataProviderScript": "[Empty]",
+>         "statelessTokensEnabled": false,
+>         "authorizeEndpointDataProviderPluginType": "PROVIDER",
+>         "remoteConsentServiceId": null,
+>         "enableRemoteConsent": false,
+>         "validateScopeClass": "org.forgerock.oauth2.core.plugins.registry.DefaultScopeValidator",
+>         "usePolicyEngineForScope": false,
+>         "evaluateScopeClass": "org.forgerock.oauth2.core.plugins.registry.DefaultScopeEvaluator",
+>         "overrideableOIDCClaims": [],
+>         "accessTokenMayActScript": "[Empty]",
+>         "evaluateScopeScript": "[Empty]",
+>         "clientsCanSkipConsent": false,
+>         "accessTokenModificationScript": "[Empty]",
+>         "issueRefreshTokenOnRefreshedToken": true,
+>         "validateScopeScript": "[Empty]"
+>     },
+>     "advancedOAuth2ClientConfig": {
+>         "logoUri": {
+>             "inherited": false,
+>             "value": []
+>         },
+>         "subjectType": {
+>             "inherited": false,
+>             "value": "public"
+>         },
+>         "clientUri": {
+>             "inherited": false,
+>             "value": []
+>         },
+>         "tokenExchangeAuthLevel": {
+>             "inherited": false,
+>             "value": 0
+>         },
+>         "responseTypes": {
+>             "inherited": false,
+>             "value": [
+>                 "code",
+>                 "token",
+>                 "id_token",
+>                 "code token",
+>                 "token id_token",
+>                 "code id_token",
+>                 "code token id_token",
+>                 "device_code",
+>                 "device_code id_token"
+>             ]
+>         },
+>         "mixUpMitigation": {
+>             "inherited": false,
+>             "value": false
+>         },
+>         "customProperties": {
+>             "inherited": false,
+>             "value": []
+>         },
+>         "javascriptOrigins": {
+>             "inherited": false,
+>             "value": []
+>         },
+>         "policyUri": {
+>             "inherited": false,
+>             "value": []
+>         },
+>         "softwareVersion": {
+>             "inherited": false
+>         },
+>         "tosURI": {
+>             "inherited": false,
+>             "value": []
+>         },
+>         "sectorIdentifierUri": {
+>             "inherited": false
+>         },
+>         "tokenEndpointAuthMethod": {
+>             "inherited": false,
+>             "value": "client_secret_basic"
+>         },
+>         "refreshTokenGracePeriod": {
+>             "inherited": false,
+>             "value": 0
+>         },
+>         "isConsentImplied": {
+>             "inherited": false,
+>             "value": false
+>         },
+>         "softwareIdentity": {
+>             "inherited": false
+>         },
+>         "grantTypes": {
+>             "inherited": false,
+>             "value": [
+>                 "authorization_code"
+>             ]
+>         },
+>         "require_pushed_authorization_requests": {
+>             "inherited": false,
+>             "value": false
+>         },
+>         "descriptions": {
+>             "inherited": false,
+>             "value": []
+>         },
+>         "requestUris": {
+>             "inherited": false,
+>             "value": []
+>         },
+>         "name": {
+>             "inherited": false,
+>             "value": [
+>                 "null"
+>             ]
+>         },
+>         "contacts": {
+>             "inherited": false,
+>             "value": []
+>         },
+>         "updateAccessToken": {
+>             "inherited": false
+>         }
+>     },
+>     "signEncOAuth2ClientConfig": {
+>         "tokenEndpointAuthSigningAlgorithm": {
+>             "inherited": false,
+>             "value": "RS256"
+>         },
+>         "idTokenEncryptionEnabled": {
+>             "inherited": false,
+>             "value": false
+>         },
+>         "tokenIntrospectionEncryptedResponseEncryptionAlgorithm": {
+>             "inherited": false,
+>             "value": "A128CBC-HS256"
+>         },
+>         "requestParameterSignedAlg": {
+>             "inherited": false
+>         },
+>         "authorizationResponseSigningAlgorithm": {
+>             "inherited": false,
+>             "value": "RS256"
+>         },
+>         "clientJwtPublicKey": {
+>             "inherited": false
+>         },
+>         "idTokenPublicEncryptionKey": {
+>             "inherited": false
+>         },
+>         "mTLSSubjectDN": {
+>             "inherited": false
+>         },
+>         "jwkStoreCacheMissCacheTime": {
+>             "inherited": false,
+>             "value": 60000
+>         },
+>         "jwkSet": {
+>             "inherited": false
+>         },
+>         "idTokenEncryptionMethod": {
+>             "inherited": false,
+>             "value": "A128CBC-HS256"
+>         },
+>         "jwksUri": {
+>             "inherited": false
+>         },
+>         "tokenIntrospectionEncryptedResponseAlg": {
+>             "inherited": false,
+>             "value": "RSA-OAEP-256"
+>         },
+>         "authorizationResponseEncryptionMethod": {
+>             "inherited": false
+>         },
+>         "userinfoResponseFormat": {
+>             "inherited": false,
+>             "value": "JSON"
+>         },
+>         "mTLSCertificateBoundAccessTokens": {
+>             "inherited": false,
+>             "value": false
+>         },
+>         "publicKeyLocation": {
+>             "inherited": false,
+>             "value": "jwks_uri"
+>         },
+>         "tokenIntrospectionResponseFormat": {
+>             "inherited": false,
+>             "value": "JSON"
+>         },
+>         "requestParameterEncryptedEncryptionAlgorithm": {
+>             "inherited": false,
+>             "value": "A128CBC-HS256"
+>         },
+>         "userinfoSignedResponseAlg": {
+>             "inherited": false
+>         },
+>         "idTokenEncryptionAlgorithm": {
+>             "inherited": false,
+>             "value": "RSA-OAEP-256"
+>         },
+>         "requestParameterEncryptedAlg": {
+>             "inherited": false
+>         },
+>         "authorizationResponseEncryptionAlgorithm": {
+>             "inherited": false
+>         },
+>         "mTLSTrustedCert": {
+>             "inherited": false
+>         },
+>         "jwksCacheTimeout": {
+>             "inherited": false,
+>             "value": 3600000
+>         },
+>         "userinfoEncryptedResponseAlg": {
+>             "inherited": false
+>         },
+>         "idTokenSignedResponseAlg": {
+>             "inherited": false,
+>             "value": "RS256"
+>         },
+>         "tokenIntrospectionSignedResponseAlg": {
+>             "inherited": false,
+>             "value": "RS256"
+>         },
+>         "userinfoEncryptedResponseEncryptionAlgorithm": {
+>             "inherited": false,
+>             "value": "A128CBC-HS256"
+>         }
+>     },
+>     "coreOpenIDClientConfig": {
+>         "claims": {
+>             "inherited": false,
+>             "value": []
+>         },
+>         "backchannel_logout_uri": {
+>             "inherited": false
+>         },
+>         "defaultAcrValues": {
+>             "inherited": false,
+>             "value": []
+>         },
+>         "jwtTokenLifetime": {
+>             "inherited": false,
+>             "value": 0
+>         },
+>         "defaultMaxAgeEnabled": {
+>             "inherited": false,
+>             "value": false
+>         },
+>         "clientSessionUri": {
+>             "inherited": false
+>         },
+>         "defaultMaxAge": {
+>             "inherited": false,
+>             "value": 600
+>         },
+>         "postLogoutRedirectUri": {
+>             "inherited": false,
+>             "value": []
+>         },
+>         "backchannel_logout_session_required": {
+>             "inherited": false,
+>             "value": false
+>         }
+>     },
+>     "coreOAuth2ClientConfig": {
+>         "userpassword": null,
+>         "status": {
+>             "inherited": false,
+>             "value": "Active"
+>         },
+>         "clientName": {
+>             "inherited": false,
+>             "value": []
+>         },
+>         "clientType": {
+>             "inherited": false,
+>             "value": "Confidential"
+>         },
+>         "loopbackInterfaceRedirection": {
+>             "inherited": false,
+>             "value": false
+>         },
+>         "defaultScopes": {
+>             "inherited": false,
+>             "value": []
+>         },
+>         "refreshTokenLifetime": {
+>             "inherited": false,
+>             "value": 0
+>         },
+>         "scopes": {
+>             "inherited": false,
+>             "value": [
+>                 "write",
+>                 "read"
+>             ]
+>         },
+>         "accessTokenLifetime": {
+>             "inherited": false,
+>             "value": 0
+>         },
+>         "redirectionUris": {
+>             "inherited": false,
+>             "value": [
+>                 "https://www.example.com:443/callback"
+>             ]
+>         },
+>         "authorizationCodeLifetime": {
+>             "inherited": false,
+>             "value": 0
+>         }
+>     },
+>     "coreUmaClientConfig": {
+>         "claimsRedirectionUris": {
+>             "inherited": false,
+>             "value": []
+>         }
+>     },
+>     "_type": {
+>         "_id": "OAuth2Client",
+>         "name": "OAuth2 Clients",
+>         "collection": true
+>     }
+> }
+> ```
+
+## Update an OAuth 2.0 client
+
+To update an existing OAuth 2.0 client, use a similar PUT request to the create request. Make sure you include *all* the attributes to be retained in the client configuration. If you omit an attribute in the JSON payload, the request effectively deletes that attribute from the client. This doesn't apply to the client secret attribute.
+
+## Query OAuth 2.0 clients
+
+This example lists the OAuth 2.0 clients in the `alpha` realm.
+
+```bash
+$ curl \
+--request GET \
+--header "Accept-API-Version: resource=1.0" \
+--header "Authorization: Bearer <access-token>" \
+"https://<tenant-env-fqdn>/am/json/realms/root/realms/alpha/realm-config/agents/OAuth2Client?_queryFilter=true"
+```
+
+> **Collapse: Display output**
+>
+> ```bash
+> {
+>   "result": [
+>     {
+>       "_id": "myClient",
+>       "_rev": "-1788958356",
+>       "overrideOAuth2ClientConfig": {
+>         "issueRefreshToken": true,
+>         "validateScopePluginType": "PROVIDER",
+>         "tokenEncryptionEnabled": false,
+>         "evaluateScopePluginType": "PROVIDER",
+>         "oidcMayActScript": "[Empty]",
+>         "oidcClaimsScript": "[Empty]",
+>         "accessTokenModificationPluginType": "PROVIDER",
+>         "authorizeEndpointDataProviderClass": "org.forgerock.oauth2.core.plugins.registry.DefaultEndpointDataProvider",
+>         "oidcClaimsPluginType": "PROVIDER",
+>         "providerOverridesEnabled": false,
+>         "authorizeEndpointDataProviderScript": "[Empty]",
+>         "statelessTokensEnabled": false,
+>         "authorizeEndpointDataProviderPluginType": "PROVIDER",
+>         "remoteConsentServiceId": null,
+>         "enableRemoteConsent": false,
+>         "validateScopeClass": "org.forgerock.oauth2.core.plugins.registry.DefaultScopeValidator",
+>         "usePolicyEngineForScope": false,
+>         "evaluateScopeClass": "org.forgerock.oauth2.core.plugins.registry.DefaultScopeEvaluator",
+>         "overrideableOIDCClaims": [],
+>         "accessTokenMayActScript": "[Empty]",
+>         "evaluateScopeScript": "[Empty]",
+>         "clientsCanSkipConsent": false,
+>         "accessTokenModificationScript": "[Empty]",
+>         "issueRefreshTokenOnRefreshedToken": true,
+>         "validateScopeScript": "[Empty]"
+>       },
+>       "advancedOAuth2ClientConfig": {
+>         "logoUri": [],
+>         "subjectType": "public",
+>         "clientUri": [],
+>         "tokenExchangeAuthLevel": 0,
+>         "responseTypes": [
+>           "code",
+>           "token",
+>           "id_token",
+>           "code token",
+>           "token id_token",
+>           "code id_token",
+>           "code token id_token",
+>           "device_code",
+>           "device_code id_token"
+>         ],
+>         "mixUpMitigation": false,
+>         "customProperties": [],
+>         "javascriptOrigins": [],
+>         "policyUri": [],
+>         "softwareVersion": null,
+>         "sectorIdentifierUri": null,
+>         "tosURI": [],
+>         "tokenEndpointAuthMethod": "client_secret_basic",
+>         "isConsentImplied": false,
+>         "refreshTokenGracePeriod": 0,
+>         "softwareIdentity": null,
+>         "grantTypes": [
+>           "authorization_code"
+>         ],
+>         "require_pushed_authorization_requests": false,
+>         "descriptions": [],
+>         "requestUris": [],
+>         "name": [],
+>         "contacts": [],
+>         "updateAccessToken": null
+>       },
+>       "signEncOAuth2ClientConfig": {
+>         "tokenEndpointAuthSigningAlgorithm": "RS256",
+>         "idTokenEncryptionEnabled": false,
+>         "tokenIntrospectionEncryptedResponseEncryptionAlgorithm": "A128CBC-HS256",
+>         "requestParameterSignedAlg": null,
+>         "authorizationResponseSigningAlgorithm": "RS256",
+>         "clientJwtPublicKey": null,
+>         "idTokenPublicEncryptionKey": null,
+>         "mTLSSubjectDN": null,
+>         "jwkStoreCacheMissCacheTime": 60000,
+>         "jwkSet": null,
+>         "idTokenEncryptionMethod": "A128CBC-HS256",
+>         "jwksUri": null,
+>         "tokenIntrospectionEncryptedResponseAlg": "RSA-OAEP-256",
+>         "authorizationResponseEncryptionMethod": null,
+>         "userinfoResponseFormat": "JSON",
+>         "mTLSCertificateBoundAccessTokens": false,
+>         "publicKeyLocation": "jwks_uri",
+>         "tokenIntrospectionResponseFormat": "JSON",
+>         "requestParameterEncryptedEncryptionAlgorithm": "A128CBC-HS256",
+>         "userinfoSignedResponseAlg": null,
+>         "idTokenEncryptionAlgorithm": "RSA-OAEP-256",
+>         "requestParameterEncryptedAlg": null,
+>         "authorizationResponseEncryptionAlgorithm": null,
+>         "mTLSTrustedCert": null,
+>         "jwksCacheTimeout": 3600000,
+>         "userinfoEncryptedResponseAlg": null,
+>         "idTokenSignedResponseAlg": "RS256",
+>         "userinfoEncryptedResponseEncryptionAlgorithm": "A128CBC-HS256",
+>         "tokenIntrospectionSignedResponseAlg": "RS256"
+>       },
+>       "coreOpenIDClientConfig": {
+>         "claims": [],
+>         "backchannel_logout_uri": null,
+>         "defaultAcrValues": [],
+>         "jwtTokenLifetime": 0,
+>         "defaultMaxAgeEnabled": false,
+>         "clientSessionUri": null,
+>         "defaultMaxAge": 600,
+>         "postLogoutRedirectUri": [],
+>         "backchannel_logout_session_required": false
+>       },
+>       "coreOAuth2ClientConfig": {
+>         "status": "Active",
+>         "clientName": [],
+>         "clientType": "Confidential",
+>         "loopbackInterfaceRedirection": false,
+>         "defaultScopes": [],
+>         "agentgroup": null,
+>         "refreshTokenLifetime": 0,
+>         "scopes": [],
+>         "accessTokenLifetime": 0,
+>         "redirectionUris": [],
+>         "authorizationCodeLifetime": 0
+>       },
+>       "coreUmaClientConfig": {
+>         "claimsRedirectionUris": []
+>       },
+>       "_type": {
+>         "_id": "OAuth2Client",
+>         "name": "OAuth2 Clients",
+>         "collection": true
+>       }
+>     }
+>   ],
+>   "resultCount": 1,
+>   "pagedResultsCookie": null,
+>   "totalPagedResultsPolicy": "EXACT",
+>   "totalPagedResults": 1,
+>   "remainingPagedResults": -1
+> }
+> ```
+
+## Delete an OAuth 2.0 client
+
+This example deletes an OAuth 2.0 client named `myClient` in the `alpha` realm. Append the name of the client to the URL:
+
+```bash
+$ curl \
+--request DELETE \
+--header "Accept-API-Version: resource=1.0" \
+--header "Authorization: Bearer <access-token>" \
+"https://<tenant-env-fqdn>/am/json/realms/root/realms/alpha/realm-config/agents/OAuth2Client/myClient"
+{
+    "_id": "myClient",
+    "_rev": "-614477476",
+    ...
+}
+```
+
+---
+
+---
+title: /users/user/oauth2/applications
+description: List and revoke OAuth 2.0 tokens for resource owners across multiple client applications
+component: pingoneaic
+page_id: pingoneaic:am-oauth2:rest-api-oauth2-applications-endpoint
+canonical_url: https://docs.pingidentity.com/pingoneaic/am-oauth2/rest-api-oauth2-applications-endpoint.html
+llms_txt: https://docs.pingidentity.com/pingoneaic/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+keywords: ["OAuth 2.0", "API Explorer", "Endpoints", "Clients"]
+page_aliases: ["oauth2-guide:rest-api-oauth2-applications-endpoint.adoc"]
+section_ids:
+  list_clients_with_active_tokens: List clients with active tokens
+  delete_tokens_for_a_client: Delete tokens for a client
+---
+
+# /users/user/oauth2/applications
+
+Invoke this Advanced Identity Cloud-specific endpoint to list the applications granted OAuth 2.0 access and to delete tokens for a specified client. This lets you manage the tokens granted to applications on behalf of a resource owner.
+
+For example, you can revoke all tokens for a resource owner across all clients after a password change or a suspected account compromise. To do this:
+
+1. Query the applications endpoint to list all clients with active tokens for the resource owner.
+
+2. Delete the tokens for each client returned.
+
+|   |                                                                                                                                                                                                                                                |
+| - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | This approach revokes all tokens held by each client for the specified resource owner. If you want to revoke a single known access token or refresh token, use the [/oauth2/token/revoke](oauth2-token-revoke-endpoint.html) endpoint instead. |
+
+To call the endpoint, you must compose the path to the realm where the client is registered.
+
+## List clients with active tokens
+
+This example lists all the OAuth 2.0 clients holding active tokens granted in the `alpha` realm for the resource owner, `bjensen`. You must provide the SSO token of the tenant administrator or the resource owner as a header, and include the `_id` of the resource owner (`bjensen`) in the URL:
+
+```bash
+$  curl --request GET \
+--header "Accept-API-Version: resource=1.1" \
+--header "<session-cookie-name>: Ua6fsH2vjgHqVY..." \
+"https://<tenant-env-fqdn>/am/json/realms/root/realms/alpha/users/1dff18dc-ac57-4388-8127-dff309f80002/oauth2/applications?_queryFilter=true"
+```
+
+On success, Advanced Identity Cloud returns an HTTP 200 code and a JSON object describing each OAuth 2.0 client that currently holds at least one active access or refresh token for the specified resource owner. For example:
+
+```json
+{
+    "result": [
+        {
+            "_id": "myClient",
+            "_rev": "-1121350941",
+            "name": "My client name",
+            "scopes": {
+                "write": "write"
+            },
+            "expiryDateTime": "2027-04-23T16:40:55.000Z",
+            "logoUri": null
+        },
+        {
+            "_id": "anotherClient",
+            "_rev": "987654321",
+            "name": "Another client name",
+            "scopes": {
+                "read": "read",
+                "openid": "openid"
+            },
+            "expiryDateTime": null,
+            "logoUri": null
+        }
+    ],
+    "resultCount": 2,
+    "pagedResultsCookie": null,
+    "totalPagedResultsPolicy": "NONE",
+    "totalPagedResults": -1,
+    "remainingPagedResults": -1
+}
+```
+
+**Response fields**
+
+| Field            | Description                                                                                                                                        |
+| ---------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `_id`            | The client ID of the OAuth 2.0 client that holds tokens on behalf of the resource owner.                                                           |
+| `name`           | The display name of the client, if configured. Returns `null` if no display name is set.                                                           |
+| `scopes`         | The scopes granted to this client by the resource owner, collected across all active access and refresh tokens for this resource owner and client. |
+| `expiryDateTime` | The expiry date of the longest-lived token held by this client for the resource owner. Returns `null` if the tokens have no expiry.                |
+| `logoUri`        | The URI of the client's logo, if configured. Returns `null` if no logo URI is set on the client.                                                   |
+
+## Delete tokens for a client
+
+The following example deletes all tokens held by the OAuth 2.0 client `myClient` granted in the `alpha` realm by `bjensen`. You must provide the SSO token of the tenant administrator or the resource owner as a header, and include the `_id` of the resource owner (`bjensen`) and `_id` of the client (`myClient`) in the URL:
+
+```bash
+$ curl --request DELETE \
+--header "Accept-API-Version: resource=1.1" \
+--header "<session-cookie-name>: Ua6fsH2vjgHqVY..." \
+"https://<tenant-env-fqdn>/am/json/realms/root/realms/alpha/users/1dff18dc-ac57-4388-8127-dff309f80002/oauth2/applications/myClient"
+```
+
+On success, Advanced Identity Cloud returns an HTTP 200 code and a JSON object with information about the deleted tokens, such as the granted scopes and ID of the client. For example:
+
+```json
+{
+    "_id": "myClient",
+    "_rev": "-1121350941",
+    "name": "My client name",
+    "scopes": {
+        "write": "write"
+    },
+    "expiryDateTime": "2027-04-23T16:40:55.000Z",
+    "logoUri": null
+}
+```
+
+Repeat this request for each client `_id` returned when you queried the applications endpoint to delete all tokens for the resource owner across all clients.
+
+---
+
+---
 title: Access tokens
 description: Customize OAuth 2.0 access tokens by modifying key-value pairs before access management issues them
 component: pingoneaic
@@ -1933,2530 +3533,3 @@ Test your authorize endpoint data provider scripts as you did for the demonstrat
      *Your script*
 
 3. Save your work.
-
----
-
----
-title: Client application authentication
-description: Choose OAuth 2.0 client authentication methods for authorization server token endpoint
-component: pingoneaic
-page_id: pingoneaic:am-oauth2:oauth2-client-auth
-canonical_url: https://docs.pingidentity.com/pingoneaic/am-oauth2/oauth2-client-auth.html
-llms_txt: https://docs.pingidentity.com/pingoneaic/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-keywords: ["OAuth 2.0", "Endpoints", "Authorization", "REST API"]
-page_aliases: ["oauth2-guide:oauth2-client-auth.adoc"]
----
-
-# Client application authentication
-
-OAuth 2.0 client applications send their authentication credentials using one of the following mechanisms:
-
-* The [Authorization header (HTTP Basic)](client-auth-header.html) (default)
-
-* [Form parameters (HTTP POST)](client-auth-form.html)
-
-* A [JWT profile](client-auth-jwt.html)
-
-Authentication depends on the Client Type defined in the Advanced Identity Cloud admin console under Applications > Applications > *Name* > Sign On > General Settings > Advanced > Authentication:
-
-* Confidential clients
-
-  These applications include websites and services that make secure connections to Advanced Identity Cloud.
-
-  They can protect their client secret or JSON Web Token (JWT).
-
-  You configure the authentication method for a confidential client in the Advanced Identity Cloud admin console under Applications > Applications > *Name* > Sign On > General Settings > Advanced > Authentication as the Token Endpoint Authentication Method.
-
-  When a client authenticates with form parameters, the server can store POST data on the user-agent in an `OAUTH_REQUEST_ATTRIBUTES` cookie. Advanced Identity Cloud uses the cookie to continue the authentication process across redirects. It marks the cookie for deletion on the next successful OAuth 2.0 authorization.
-
-* Public clients
-
-  These are single-page applications (SPAs) and applications running on devices.
-
-  They cannot protect secrets.
-
-  Public clients identify themselves by client ID, but do not fully authenticate.
-
-  Public OpenID Connect clients must specify `none` as their authentication method.
-
----
-
----
-title: Client application registration
-description: Register OAuth 2.0 clients to enable them to request authorization and obtain tokens
-component: pingoneaic
-page_id: pingoneaic:am-oauth2:oauth2-register-client
-canonical_url: https://docs.pingidentity.com/pingoneaic/am-oauth2/oauth2-register-client.html
-llms_txt: https://docs.pingidentity.com/pingoneaic/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-keywords: ["OAuth 2.0", "OpenID Connect (OIDC)", "Clients", "Setup &amp; Configuration", "Grant Flow"]
-page_aliases: ["oauth2-guide:oauth2-register-client.adoc"]
-section_ids:
-  shared_application_settings: Shared application settings
-  oauth2-client-profile-group: Create group settings
-  oauth2-client-profile-assign-group: Inherit group settings
-  oauth2app-journey: Client application journeys
----
-
-# Client application registration
-
-OAuth 2.0 or OIDC client applications must *register* with Advanced Identity Cloud before they can connect.
-
-Registration involves setting up a client application profile in one of the following ways:
-
-* Using the Advanced Identity Cloud admin console.
-
-  For details, refer to [Application management](../app-management/applications.html).
-
-* Programmatically.
-
-  For details, refer to [Dynamic client registration](../am-oidc1/oauth2-dynamic-client-registration.html).
-
-|   |                                                                                                                                                                                                |
-| - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | To configure large numbers of short-lived clients at runtime, such as AI agents in Model Context Protocol (MCP) flows, use the [client ID metadata document (CIMD) feature](oauth2-cimd.html). |
-
-## Shared application settings
-
-To define shared settings for multiple client application profiles, you have these alternatives:
-
-* Configure default settings for all clients in the realm.
-
-  Client applications inherit their default settings from the OAuth 2.0 provider service. Configure these settings in the Advanced Identity Cloud admin console, under [icon: vpn_key, set=material, size=inline] Authorization > OAuth2 Provider.
-
-* [Create an OAuth 2.0 client profile group](#oauth2-client-profile-group).
-
-  Client applications that belong to the group can inherit its settings.
-
-## Create group settings
-
-1. Under Native Consoles > Access Management, go to Realms > *Realm Name* > Applications > OAuth 2.0 > Clients.
-
-2. On the Groups tab, click + Add Group, and click Create.
-
-3. Adjust the configuration as needed, saving changes on each tab.
-
-4. [Assign clients to the group](#oauth2-client-profile-assign-group).
-
-## Inherit group settings
-
-1. Under Native Consoles > Access Management, go to Realms > *Realm Name* > Applications > OAuth 2.0 > Clients > *Client ID*.
-
-2. On the Core tab, select the Group in the drop-down.
-
-3. Save your work.
-
-   Selecting a group refreshes the client configuration, discarding any other unsaved settings.
-
-   Inheritance icons [icon: lock-open, set=fa]appear next to inherited group settings. Not all properties can inherit their value; for example, the Client secret property is specific to each client application.
-
-   ![Set a client application's group to inherit settings.](_images/create-oauth2-profile-group.png)Figure 1. Inheriting group settings
-
-4. Inherit settings by clicking their inheritance icons [icon: lock-open, set=fa].
-
-   The icon changes to [icon: lock, set=fa], indicating the setting is inherited.
-
-5. Save your work.
-
-Configuration changes have the following effects:
-
-* When you change inherited settings in the group, the client applications get them automatically.
-
-* When you change a client application's Group, locked settings inherit from the new group.
-
-* When you remove or delete a group, Advanced Identity Cloud writes inherited settings to the client profile, which you can edit independently.
-
-## Client application journeys
-
-You can configure OAuth 2.0 / OIDC client applications to redirect authentication requests to a specified journey.
-
-Learn about configuring application journeys in [Application journeys](../app-management/application-journeys.html).
-
----
-
----
-title: Client credentials grant
-description: Request access tokens using client credentials grant when the client is the resource owner
-component: pingoneaic
-page_id: pingoneaic:am-oauth2:oauth2-client-cred-grant
-canonical_url: https://docs.pingidentity.com/pingoneaic/am-oauth2/oauth2-client-cred-grant.html
-llms_txt: https://docs.pingidentity.com/pingoneaic/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-keywords: ["OAuth 2.0", "Endpoints", "Authorization", "Clients", "Grant Flow", "REST API"]
-page_aliases: ["oauth2-guide:oauth2-client-cred-grant.adoc"]
-section_ids:
-  the_client_credentials_grant_flow: The client credentials grant flow
-  oauth2-client-credentials-demo: Demonstrate the client credentials grant flow
-  prepare-demo-client-credentials: Prepare the demonstration
-  proc-token-client-credentials: Get an access token using the client credentials grant
----
-
-# Client credentials grant
-
-* Endpoints
-
-  * [/oauth2/access_token](oauth2-access_token-endpoint.html)
-
-The client credentials grant is intended for clients who are also resource owners that need to access their own data rather than acting on behalf of a user.
-
-For example, an application that needs access to a protected resource to update its configuration might use the client credentials grant to get an access token.
-
-The client credentials grant flow supports confidential clients only.
-
-In the client credentials grant, the client authenticates as itself, so the access token represents the client rather than an end user. If you need to add custom claims to a client credentials access token, use access token modification. Don't use OIDC claims customization for this flow. OIDC claims apply to end-user flows, not to tokens issued to a client acting on its own behalf. Learn more in [Access tokens](modifying-access-tokens-scripts.html).
-
-## The client credentials grant flow
-
-![Advanced Identity Cloud supports the client credentials grant.](_images/oauth2-client-cred.svg)Figure 1. OAuth 2.0 client credentials grant flow
-
-1. The client sends its credentials to the authorization server to get authenticated and requests an access token.
-
-2. If the client credentials are valid, the authorization server returns an access token to the client.
-
-3. The client requests access to the protected resource from the resource server.
-
-4. The resource server contacts the authorization server to validate the access token.
-
-5. The authorization server validates the token and responds to the resource server.
-
-6. If the token is valid, the resource server allows the client to access the protected resource.
-
-## Demonstrate the client credentials grant flow
-
-Perform these steps to get an access token:
-
-1. [Prepare the demonstration](#prepare-demo-client-credentials)
-
-2. [Get an access token using the client credentials grant](#proc-token-client-credentials)
-
-### Prepare the demonstration
-
-Complete these steps to prepare the client credentials grant flow demonstration:
-
-1. [Create an application owner profile](../identities/manage-identities.html#create-a-user-profile) and record the username and password.
-
-2. [Register a client application](../app-management/register-a-custom-application.html).
-
-   1. In the Advanced Identity Cloud admin console, go to Applications > Applications and select + Custom Application.
-
-   2. Select the sign-in method as OIDC - OpenId Connect and application type as Web.
-
-   3. Create the application, providing the following details:
-
-      * Name
-
-        `myClient`
-
-      * Owners
-
-        `<application-owner>`
-
-      * Client ID
-
-        `myClient`
-
-      * Client Secret
-
-        `mySecret`
-
-   4. Switch to the Sign On tab and under General Settings, update these fields to have the following values:
-
-      * Sign-in URLs
-
-        `https://www.example.com:443/callback`
-
-      * Scopes
-
-        `write`
-
-   5. Ensure Grant Types contains `Client Credentials`.
-
-   6. Save your changes.
-
-3. [Create a resource owner profile](../identities/manage-identities.html#create-a-user-profile) and record the username and password.
-
-4. In the Advanced Identity Cloud admin console, go to [icon: vpn_key, set=material, size=inline] Authorization > OAuth2 Provider > Advanced and ensure the Grant Types field includes `Client Credentials`.
-
-### Get an access token using the client credentials grant
-
-As the client, call [/oauth2/access_token](oauth2-access_token-endpoint.html) specifying the client's credentials, and `grant_type=client_credentials`.
-
-For example:
-
-```bash
-$ curl
---request POST \
---user '<client-id>:<client-secret>' \
---data "grant_type=client_credentials" \
---data "scope=write" \
-"https://<tenant-env-fqdn>/am/oauth2/realms/root/realms/alpha/access_token"
-```
-
-|   |                                                                                                               |
-| - | ------------------------------------------------------------------------------------------------------------- |
-|   | The `scope` parameter is optional if default values are configured in the authorization server or the client. |
-
-Advanced Identity Cloud returns an access token, for example:
-
-```json
-{
-  "access_token": "<access-token>",
-  "scope": "write",
-  "token_type": "Bearer",
-  "expires_in": 3599
-}
-```
-
----
-
----
-title: Client ID metadata document (CIMD)
-description: Configure Advanced Identity Cloud to accept OAuth 2.0 clients that identify themselves using a URL pointing to a hosted JSON metadata document, without requiring prior registration.
-component: pingoneaic
-page_id: pingoneaic:am-oauth2:oauth2-cimd
-canonical_url: https://docs.pingidentity.com/pingoneaic/am-oauth2/oauth2-cimd.html
-llms_txt: https://docs.pingidentity.com/pingoneaic/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: 2026-09-07T20:35:41Z
-keywords: ["OAuth 2.0", "CIMD", "Client ID Metadata Document", "AI agents", "MCP", "dynamic client", "registration"]
-section_ids:
-  cimd-how-it-works: How it works
-  cimd-document-format: Document format
-  cimd-supported-grants: Grant types
-  cimd-supported-auth-methods: Authentication methods
-  cimd-limitations: Limitations
-  cimd-configure: Configure a CIMD profile
-  cimd-example-flow: Example authorization code flow
----
-
-# Client ID metadata document (CIMD)
-
-The client ID metadata document (CIMD) feature lets you configure OAuth 2.0 clients to identify themselves using an HTTPS URL as their `client_id`. Advanced Identity Cloud fetches the JSON metadata document at that URL and uses it to configure the client at runtime, with no prior registration required.
-
-CIMD is particularly suited to large numbers of clients such as [AI agents](../identity-for-ai/ai-agent-identities.html) in Model Context Protocol (MCP) flows, where preregistering every short-lived or externally-hosted client is impractical.
-
-Advanced Identity Cloud's support for CIMD aligns with the [IETF OAuth Client ID Metadata Document draft specification](https://datatracker.ietf.org/doc/draft-ietf-oauth-client-id-metadata-document/).
-
-## How it works
-
-When Advanced Identity Cloud receives an OAuth 2.0 request with a `client_id` that begins with `https://`, it treats the value as a URL pointing to a CIMD document and performs the following steps:
-
-![How CIMD works](_images/oauth2-cimd-how-it-works.svg)
-
-1. Advanced Identity Cloud receives a request with a URL-valued `client_id`.
-
-2. Advanced Identity Cloud checks the realm for a CIMD profile whose URL pattern matches the `client_id`.
-
-   If no matching profile exists, or if more than one profile matches, Advanced Identity Cloud rejects the request with an `invalid_client` error.
-
-3. A matching CIMD profile defines the security settings that Advanced Identity Cloud applies to the request.
-
-4. Advanced Identity Cloud fetches the JSON document at the `client_id` URL over HTTPS.
-
-   Redirects aren't followed. Only an HTTP 200 response is accepted.
-
-5. Advanced Identity Cloud receives the metadata document and …​
-
-6. …​ validates that the document's own `client_id` field exactly matches the URL it was fetched from.
-
-   If validation fails, the request is rejected with an `invalid_client` error.
-
-7. Advanced Identity Cloud applies the security checks defined in the matching CIMD profile, including server-side request forgery (SSRF) protection and metadata denylist.
-
-8. If the security checks are successful, Advanced Identity Cloud uses the fetched metadata as the client's runtime configuration for the flow.
-
-9. The resulting client exists only for the duration of the flow and isn't persisted to the identity store.
-
-10. The OAuth 2.0 flow continues.
-
-## Document format
-
-The metadata document follows the RFC 7591 [OAuth 2.0 Dynamic Client Registration Protocol](https://www.rfc-editor.org/rfc/rfc7591) client metadata format.
-
-Example document:
-
-```json
-{
-  "client_id": "https://app.example.com/oauth/client.json",
-  "client_name": "Example MCP Client",
-  "client_uri": "https://app.example.com",
-  "redirect_uris": [
-    "https://app.example.com/callback"
-  ],
-  "grant_types": ["authorization_code", "refresh_token"],
-  "response_types": ["code"],
-  "token_endpoint_auth_method": "none",
-  "scope": "read write"
-}
-```
-
-When Advanced Identity Cloud processes a CIMD metadata document, it applies the following constraints:
-
-* The `client_id` must be an HTTPS URL that exactly matches the URL where the document is hosted.
-
-* The following secret-based authentication fields are rejected:
-
-  * `client_secret`
-
-  * `client_secret_expires_at`
-
-  * `token_endpoint_auth_method` secret values (`client_secret_basic`, `client_secret_post`, `client_secret_jwt`)
-
-* The document must not exceed 5 KB.
-
-* The following fields support localization using locale tags, for example `client_name#en` or `client_name#fr`:
-
-  * `client_name`
-
-  * `client_uri`
-
-  * `logo_uri`
-
-  * `policy_uri`
-
-  * `tos_uri`
-
-Learn more about metadata document constraints in the [Limitations](#cimd-limitations) section.
-
-The matching CIMD profile and the metadata document both contribute to the client's runtime configuration. For each metadata field, Advanced Identity Cloud resolves the value in the following order:
-
-1. If the field is in the profile's metadata override denylist, the profile's value is used.
-
-2. Otherwise, if the document specifies the field, the document's value overrides the profile's value.
-
-3. If neither the document nor the profile specifies a value, Advanced Identity Cloud applies the following defaults:
-
-| Field                        | Default                     |
-| ---------------------------- | --------------------------- |
-| `scope`                      | The realm's default scopes. |
-| `grant_types`                | `authorization_code`        |
-| `response_types`             | `code`                      |
-| `token_endpoint_auth_method` | `none`                      |
-
-|   |                                                                                                                                                                                                                       |
-| - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | Redirect URIs aren't required to share the same origin as the `client_id` URL. You can add `redirect_uri` to the override denylist to enforce that the requested redirect URI must be configured in the CIMD profile. |
-
-### Grant types
-
-The following grant types are available to CIMD clients:
-
-* `authorization_code`
-
-* `client_credentials`
-
-* `refresh_token`
-
-* `urn:ietf:params:oauth:grant-type:device_code`
-
-* `urn:ietf:params:oauth:grant-type:jwt-bearer`
-
-* `urn:ietf:params:oauth:grant-type:token-exchange`
-
-A client's declared `grant_types` are filtered to the intersection of this list and the grant types enabled in the realm's OAuth 2.0 provider.
-
-If a client declares grant types but none survive the filtering, Advanced Identity Cloud rejects the request. This prevents a client from accidentally proceeding with a misconfigured or entirely unsupported set of grant types.
-
-### Authentication methods
-
-The following token endpoint authentication methods are available to CIMD clients:
-
-* `none`
-
-* `private_key_jwt`
-
-* `tls_client_auth`
-
-* `self_signed_tls_client_auth`
-
-|   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
-| - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | You can't set the client type. Advanced Identity Cloud derives it from the authentication method in the metadata document:* `private_key_jwt`, `tls_client_auth`, or `self_signed_tls_client_auth` produces a confidential client.
-
-* Any other method produces a public client.CIMD clients are public by design but can authenticate confidentially using `private_key_jwt` or mTLS. This is what enables flows such as `client_credentials` for CIMD clients. |
-
-## Limitations
-
-The following features aren't supported for CIMD clients:
-
-* UMA (User-Managed Access)
-
-* CIBA (Client-Initiated Backchannel Authentication)
-
-* Backchannel logout. Advanced Identity Cloud ignores `backchannel_logout_uri` and `backchannel_logout_session_required` in the metadata document.
-
-* Wildcard ports in CIMD profile URL patterns, for example `https://app.example.com:*/`
-
-* Client secrets and symmetric authentication methods
-
-* Setting the client type (public or confidential). This is derived from the authentication method in the metadata document.
-
-* Authorization response signing and encryption
-
-The CIMD profile doesn't expose the following OAuth 2.0 client properties, and CIMD documents can't set them:
-
-* JavaScript origins
-
-* Access token endpoint override
-
-* Software identity and version (`software_id` and `software_version`)
-
-* Group
-
-* Secret label identifier
-
-Additionally, CIMD has the following constraints:
-
-* If the matching profile requires pushed authorization requests, CIMD clients must use a [pushed authorization request (PAR)](oauth2-authz-grant-par.html).
-
-  A direct authorization request without PAR is rejected.
-
-* Advanced Identity Cloud doesn't advertise support for CIMD in its authorization server metadata yet, so clients can't tell whether a realm supports CIMD until they try a CIMD flow.
-
-## Configure a CIMD profile
-
-CIMD is controlled by *CIMD profiles*. Each profile defines a URL pattern that Advanced Identity Cloud matches against incoming `client_id` values, along with security settings for that pattern. You configure CIMD profiles per realm in the Advanced Identity Cloud admin console.
-
-|   |                                                                                                                                                       |
-| - | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | You use CIMD profiles to allow or deny specific origins. If no CIMD profile matches the `client_id` URL, Advanced Identity Cloud rejects the request. |
-
-1. Under Native Consoles > Access Management, go to Realms > *realm name* > Applications > OAuth 2.0 > CIMD Profiles.
-
-2. Click Add CIMD Profile.
-
-3. Enter a unique CIMD profile name that adheres to the following rules:
-
-   * Must not start with the `#` or `"` characters.
-
-   * Must not start or end with the space character.
-
-   * Must not contain any of the following characters: `\/+;,%[]|?`.
-
-   * Must not be `.` or `..`.
-
-4. Enter a valid CIMD Client ID URL Pattern that starts with `https://`. Advanced Identity Cloud matches the URL pattern against incoming `client_id` values. For example, `https://app.example.com/*` allows all CIMD clients hosted under that origin.
-
-5. Click Create.
-
-6. Configure additional profile properties as required and save your changes.
-
-   | Property                         | Description                                                                                                                                                                                                                                                                                                                                                                                                                                          |
-   | -------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-   | CIMD Client ID URL Patterns      | *Required*. One or more HTTPS URLs that the `client_id` value must match.Only `https://` patterns are accepted. Wildcard paths are accepted, for example `https://app.example.com/*` allows all CIMD clients hosted under that origin. An explicit port is allowed, for example `https://app.example.com:8443/*`, but wildcard ports aren't.                                                                                                         |
-   | CIMD Metadata Override Deny List | *Optional*. A list of metadata field names that always use the profile value. Advanced Identity Cloud ignores the corresponding fields in CIMD documents matched by this profile. For example, select `scope` from the list to ensure the client can't override the scope in the profile with a different value in its metadata document.Use this to prevent clients from asserting sensitive metadata values that your realm policy doesn't permit. |
-   | CIMD SSRF Protection Enabled     | When `true`, Advanced Identity Cloud blocks `client_id` URLs that resolve to special-use or loopback IP addresses, to prevent SSRF attacks.Only set to `false` in controlled test environments where the CIMD server runs on loopback.Default: `true`                                                                                                                                                                                                |
-
-## Example authorization code flow
-
-1. [Configure a CIMD profile](#cimd-configure) that allows the client to use its metadata document URL as the `client_id`.
-
-   For test purposes, use the following values in the [example metadata document](#cimd-document-format) to create the profile:
-
-   * CIMD Client ID URL Pattern
-
-     `https://app.example.com/oauth/client.json`
-
-   * CIMD Metadata Override Deny List
-
-     `scope`
-
-   * CIMD SSRF Protection Enabled
-
-     `false`
-
-2. Save the profile.
-
-3. On the Core tab in the client profile, set Scope(s) to `openid` and save your changes.
-
-4. [Get an authorization code](oauth2-authz-grant.html#proc-auth-code-browser) in a browser using the metadata document URL as the `client_id`:
-
-   ```none
-   https://<tenant-env-fqdn>/am/oauth2/realms/root/realms/alpha/authorize
-     ?client_id=https%3A%2F%2Fapp.example.com%2Foauth%2Fclient.json
-     &response_type=code
-     &redirect_uri=https%3A%2F%2Fapp.example.com%2Fcallback
-     &scope=read
-     &state=state
-   ```
-
-   |   |                                            |
-   | - | ------------------------------------------ |
-   |   | The URL is split for readability purposes. |
-
-   Advanced Identity Cloud fetches and validates the metadata document, then proceeds with the standard flow.
-
-5. [Exchange the authorization code for an access token](oauth2-authz-grant.html#proc-auth-code-token) using the same `client_id` URL:
-
-   ```bash
-   $ curl \
-   --request POST \
-   --data "grant_type=authorization_code" \
-   --data "code=authorization-code" \
-   --data "client_id=https://app.example.com/oauth/client.json" \
-   --data "redirect_uri=https://app.example.com/callback" \
-   'https://<tenant-env-fqdn>/am/oauth2/realms/root/realms/alpha/access_token'
-   {
-     "access_token": "access-token",
-     "refresh_token": "refresh-token",
-     "scope":"openid",
-     "id_token":"id-token",
-     "token_type":"Bearer",
-     "expires_in":3599
-   }
-   ```
-
-   The `scope` in the access token is `openid`, which comes from the configured CIMD profile, not `read` from the authorization request, because the profile's metadata override denylist includes `scope`. The `id_token` is also returned.
-
----
-
----
-title: Client-side tokens
-description: Store OAuth 2.0 tokens as JWTs on clients with optional signing and encryption protection
-component: pingoneaic
-page_id: pingoneaic:am-oauth2:client-side-tokens
-canonical_url: https://docs.pingidentity.com/pingoneaic/am-oauth2/client-side-tokens.html
-llms_txt: https://docs.pingidentity.com/pingoneaic/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-keywords: ["OAuth 2.0", "Endpoints", "Clients", "Setup &amp; Configuration"]
-page_aliases: ["oauth2-guide:client-side-tokens.adoc"]
-section_ids:
-  client_side_token_characteristics: Client-side token characteristics
-  protect-client-side-tokens: Protect client-side tokens
-  encrypt-tokens: Encrypt tokens
-  sign-tokens: Sign tokens
----
-
-# Client-side tokens
-
-By default, Advanced Identity Cloud returns a token to the client after successfully completing one of the [OAuth 2.0 grant flows](oauth2-implementing-flows.html).
-
-This example shows the encoded client-side token as a value of the `access_token` property:
-
-```json
-{
-   "access_token":"eyJ0eXAiOiJKV1QiLOT05FIiwiYWxnQY1lIjoxNTM5MDEzMzYyLsbSI6Ii8iLCj...",
-   "scope":"write",
-   "token_type":"Bearer",
-   "expires_in":3599
-}
-```
-
-An access token contains a large amount of information about the user, permissions, validity, and so on. You can see the information when the token is decoded.
-
-> **Collapse: Example decoded access token**
->
-> ```json
-> {
->      typ: "JWT",
->      zip: "NONE",
->      alg: "HS256"
-> }
-> {
->      sub: "(usr!myClient)",
->      subname" "myClient",
->      cts: "OAUTH2_STATELESS_GRANT",
->      auditTrackingId: "f20f4099-5248-4399-a7f0-2d54d4020099-108676",
->      iss: "https://<tenant-env-fqdn>/am/oauth2",
->      tokenName: "access_token",
->      token_type: "Bearer",
->      authGrantId: "1LUgI8zcDWqcfEnnLdZDnNqA2wc",
->      aud: "myClient",
->      nbf: 1539075967,
->      grant_type: "client_credentials",
->      scope: [
->       "write"
->      ],
->      auth_time: 1539075967,
->      realm: "/alpha",
->      exp: 1539079567,
->      iat: 1539075967,
->      expires_in: 3600,
->      jti: "FTQT6eZkDhm6PHEaSthORoTLB80"
-> }
-> [signature]
-> ```
-
-## Client-side token characteristics
-
-* Client-side tokens are larger than the *reference* returned for server-side tokens.
-
-  If you send client-side tokens in a header, pay attention to their size. The size of the token can't exceed the maximum header size allowed by your end users' browsers.
-
-  The size of a token increases when you customize Advanced Identity Cloud to store additional attributes in tokens.
-
-* Client-side tokens are presented to the client after successfully completing an OAuth 2.0 grant flow, which makes them vulnerable to tampering attacks.
-
-  Configure Advanced Identity Cloud to [sign and encrypt](#protect-client-side-tokens) them to mitigate this risk.
-
-* Client-side tokens can be introspected without calling the authorization server.
-
-* They incur an overhead when they're decrypted and verified because Advanced Identity Cloud doesn't store the decrypt sequence of the token in memory.
-
-* Client-side tokens support *token denylisting*.
-
-  Advanced Identity Cloud maintains a list of revoked tokens and authorization codes stored in the CTS token store. Token denylisting protects against replay attacks and is *always enabled* for client-side tokens.
-
-  When a client presents a client-side token in a request, Advanced Identity Cloud checks whether the token has been revoked in the CTS token store. If the token hasn't been revoked, Advanced Identity Cloud decrypts the token to retrieve its information.
-
-  |   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-  | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-  |   | * Advanced Identity Cloud periodically polls the CTS for changes to logged-out sessions. There is a small window during which the CTS might not be updated with the latest denylisted client-side tokens. If this window isn't acceptable in your deployment, use server-side tokens instead.
-
-  * Client-side *refresh* tokens have corresponding entries in a CTS allowlist rather than a denylist. When presenting a client-side refresh token, Advanced Identity Cloud checks that a matching entry is found in the CTS allowlist, and prevents reissue if the record doesn't exist.
-
-    Adding a client-side OAuth 2.0 token to the denylist removes the associated refresh token from the allowlist. |
-
-## Protect client-side tokens
-
-To protect OAuth 2.0 client-side access and refresh tokens, Advanced Identity Cloud supports encrypting their JWTs using AES authenticated encryption. Because this encryption also protects the integrity of the JWT, you only need to configure Advanced Identity Cloud to sign client-side tokens if token encryption is disabled.
-
-|   |                                                                                                                                                                                                          |
-| - | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | Client-side tokens must be signed and/or encrypted for security reasons. If your environment does not support encrypting OAuth 2.0 tokens, you must configure signing to protect them against tampering. |
-
-### Encrypt tokens
-
-To configure the OAuth 2.0 provider to encrypt client-side and refresh tokens:
-
-1. In the Advanced Identity Cloud admin console, go to [icon: vpn_key, set=material, size=inline] Authorization > OAuth2 Provider.
-
-2. On the Advanced tab, enable Encrypt Client-Side Tokens.
-
-3. Save your changes.
-
-   Client-side OAuth 2.0 access and refresh tokens will now be encrypted.
-
-|   |                                                                                                                                                    |
-| - | -------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | When you enable token encryption, token *signature* is disabled because Advanced Identity Cloud encrypts tokens using direct symmetric encryption. |
-
-### Sign tokens
-
-Advanced Identity Cloud secures the integrity of client-side tokens by signing them with digital signature algorithms.
-
-Token signature is enabled by default for client-side tokens, using a `demo` key. You must change this key in production environments.
-
-Advanced Identity Cloud exposes the public key to validate client-side token signatures in its JWK URI ([/oauth2/connect/jwk_uri](../am-oidc1/managing-jwk_uri.html)).
-
-To configure the algorithm used to sign client-side tokens:
-
-1. Under [icon: open_in_new, set=material, size=inline] Native Consoles > Access Management, go to Realms > *Realm Name* > Services.
-
-2. Select OAuth2 Provider and click the Advanced tab.
-
-3. In the OAuth2 Token Signing Algorithm list, select algorithm to use for signing client-side tokens.
-
-4. Save your changes.
-
----
-
----
-title: Customize OAuth 2.0 using JavaScript extensions
-description: Customize OAuth 2.0 authorization server functionality using JavaScript extensions
-component: pingoneaic
-page_id: pingoneaic:am-oauth2:plugins-customize
-canonical_url: https://docs.pingidentity.com/pingoneaic/am-oauth2/plugins-customize.html
-llms_txt: https://docs.pingidentity.com/pingoneaic/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-keywords: ["OAuth 2.0", "Customization", "Federation", "Scripting"]
-page_aliases: ["oauth2-guide:plugins-customize.adoc"]
-section_ids:
-  supported_extensions: Supported extensions
-  use-custom-oauth2-plugin: Configure the OAuth 2.0 provider to use extensions
-  override-oauth2-provider-settings: Override OAuth 2.0 provider extension settings
----
-
-# Customize OAuth 2.0 using JavaScript extensions
-
-Advanced Identity Cloud lets you script extensions in JavaScript to customize OAuth 2.0 authorization server functionality, such as modifying access tokens or customizing how Advanced Identity Cloud processes scopes.
-
-## Supported extensions
-
-You can create scripts for each of the supported extension points [using the Advanced Identity Cloud admin console](../developer-docs/scripting-auth.html). The scripts have access to [bindings](../am-scripting/oauth2-scripting-api.html) to help you write your customization.
-
-The following table describes the extensible features of an Advanced Identity Cloud OAuth 2.0 authorization server.
-
-| Feature                                                                      | Extension options                                                                                                      | Samples                                                                                                          |
-| ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
-| [Access tokens](modifying-access-tokens-scripts.html)                        | Modify the OAuth 2.0 access token before the token is persisted or returned to the client.                             | [oauth2-access-token-modification.js](../_attachments/scripts/oauth2-access-token-modification.js)               |
-| [Authorize endpoint data provider](plugins-auth-endpoint-data-provider.html) | Return additional data from an authorization request.                                                                  | [oauth2-authorize-endpoint-data-provider.js](../_attachments/scripts/oauth2-authorize-endpoint-data-provider.js) |
-| [Scope evaluation](plugins-scope-evaluator.html)                             | Evaluate and return an OAuth 2.0 access token's scope information.                                                     | [oauth2-evaluate-scope.js](../_attachments/scripts/oauth2-evaluate-scope.js)                                     |
-| [Scope validation](plugins-scope-validator.html)                             | Customize the requested scopes for authorization, access token, refresh token, and backchannel authorization requests. | [oauth2-validate-scope.js](../_attachments/scripts/oauth2-validate-scope.js)                                     |
-| [OIDC claims](plugins-user-info-claims.html)                                 | Fetch the resource owner's information based on an issued access token.                                                | [oidc-claims-extension.js](../_attachments/scripts/oidc-claims-extension.js)                                     |
-
-## Configure the OAuth 2.0 provider to use extensions
-
-After creating a script, configure the OAuth 2.0 provider service to use it:
-
-1. In the Advanced Identity Cloud admin console, go to [icon: vpn_key, set=material, size=inline] Authorization > OAuth2 Provider > Plugins.
-
-2. []()For your extension, set the extension type to `SCRIPTED` and select your script from the appropriate list:
-
-   | Extension                        | Extension type setting                       | Script list setting                     |
-   | -------------------------------- | -------------------------------------------- | --------------------------------------- |
-   | Access token modification        | Access Token Modification Plugin Type        | Access Token Modification Script        |
-   | Authorize endpoint data provider | Authorize Endpoint Data Provider Plugin Type | Authorize Endpoint Data Provider Script |
-   | Scope evaluator                  | Scope Evaluation Plugin Type                 | Scope Evaluation Provider Script        |
-   | Scope validator                  | Scope Validation Plugin Type                 | Scope Validation Provider Script        |
-   | User info claims                 | OIDC Claims Plugin Type                      | OIDC Claims Script                      |
-
-Learn more about the provider settings in [OAuth2 provider plugins](../authorization/oauth2-provider-settings.html#realm-oauth-oidc-plugins).
-
-## Override OAuth 2.0 provider extension settings
-
-You can also configure extensions in client profiles that override the settings in the OAuth 2.0 provider.
-
-1. Under Native Consoles > Access Management, go to Realms > *Realm Name* > Applications > OAuth 2.0 > Clients > *Client ID* > OAuth2 Provider Overrides.
-
-2. Select Enable OAuth2 Provider Overrides.
-
-3. Configure the client overrides in the same way as [the provider](#extension-settings). Set the extension type to `SCRIPTED` and select your script from the appropriate list.
-
----
-
----
-title: Demonstrate delegation
-description: Demonstrate OAuth 2.0 token exchange with delegation by exchanging an access token for one with reduced scopes
-component: pingoneaic
-page_id: pingoneaic:am-oauth2:token-exchange-delegation
-canonical_url: https://docs.pingidentity.com/pingoneaic/am-oauth2/token-exchange-delegation.html
-llms_txt: https://docs.pingidentity.com/pingoneaic/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-keywords: ["OAuth 2.0", "OpenID Connect (OIDC)", "Scripting", "Setup &amp; Configuration"]
-page_aliases: ["oauth2-guide:token-exchange-delegation.adoc"]
-section_ids:
-  prepare_the_demonstration: Prepare the demonstration
-  delegation-script: May act script
-  delegation-subject-oauth2-client: Subject client
-  delegation-actor-oauth2-client: Actor client
-  delegation-resource-owner: Resource owner
-  test_the_demonstration: Test the demonstration
----
-
-# Demonstrate delegation
-
-This page demonstrates [token exchange with delegation](token-exchange.html#token-exchange-delegation). The example exchanges an access token for an access token with reduced scopes. You can also exchange ID tokens with delegation.
-
-## Prepare the demonstration
-
-Start by preparing the demonstration:
-
-* [Create a may act script](#delegation-script).
-
-* [Create the OAuth 2.0 client the subject uses](#delegation-subject-oauth2-client).
-
-* [Create the OAuth 2.0 client for delegation](#delegation-actor-oauth2-client).
-
-* [Create a resource owner account](#delegation-resource-owner).
-
-### May act script
-
-The script adds a `may_act` claim to the subject token.
-
-1. In the Advanced Identity Cloud admin console, [create a new](../developer-docs/scripting-auth.html#create-a-new-auth-script) OAuth2 May Act script.
-
-2. Select either legacy or next-generation as the script engine.
-
-3. In the new script window, name the script `May act` and save the following JavaScript:
-
-   * Legacy
-
-   * Next-generation
-
-   ```javascript
-   (function () {
-       var frJava = JavaImporter(
-           org.forgerock.json.JsonValue
-       );
-
-       var mayAct = frJava.JsonValue.json(frJava.JsonValue.object())
-       mayAct.put('client_id', 'delegateClient')
-       mayAct.put('sub', 'delegateClient')
-       token.setMayAct(mayAct)
-   }());
-   ```
-
-   ```javascript
-   (function () {
-       var mayAct = {
-           'client_id': 'delegateClient',
-           'sub': 'delegateClient'
-       };
-       token.setMayAct(mayAct);
-   }());
-   ```
-
-   This script generates a `may_act` claim to permit the delegate actor client to exchange the subject token, provided it also supplies an actor token where it is the subject.
-
-### Subject client
-
-The OAuth 2.0 client profile in this example overrides the OAuth 2.0 provider settings. This lets you test the script without affecting access tokens issued to other clients.
-
-1. Create a confidential OAuth 2.0 client account to get an original token for the subject.
-
-   In the Advanced Identity Cloud admin console, go to Applications > Applications > + Custom Application, and create a new Web client with the following settings:
-
-   * Client ID
-
-     `myClient`
-
-   * Client Secret
-
-     `mySecret`
-
-2. Add the following settings under Sign On > General Settings and save your work:
-
-   * Sign-in URLs
-
-     `https://www.example.com:443/callback`
-
-   * Scopes
-
-     `change_contract`\
-     `repair`
-
-3. Override OAuth 2.0 provider settings for this client.
-
-   Under Native Consoles > Access Management, select Realms > alpha > Applications > OAuth 2.0 > Clients > myClient. Switch to the OAuth2 Provider Overrides tab, update the following settings and save your work:
-
-   * Enable OAuth2 Provider Overrides
-
-     Enabled
-
-   * OAuth2 Access Token May Act Script
-
-     `May act`
-
-   * OIDC ID Token May Act Script
-
-     `May act`
-
-### Actor client
-
-1. Create a confidential OAuth 2.0 client account for the service that acts on behalf of the user.
-
-   In the Advanced Identity Cloud admin console, go to Applications > Applications > + Custom Application, and create a new Service client with the following settings:
-
-   * Client ID
-
-     `delegateClient`
-
-   * Client Secret
-
-     `mySecret`
-
-2. Add the following settings under Sign On > General Settings and save your work:
-
-   * Grant Types
-
-     `Refresh Token`\
-     `Token Exchange`
-
-   * Scopes
-
-     `repair`
-
-### Resource owner
-
-An OAuth 2.0 client requests the access token on behalf of a resource owner.
-
-1. [Create a user profile](../identities/manage-identities.html#create-a-user-profile).
-
-2. Record the username and password.
-
-## Test the demonstration
-
-After preparing the demonstration, test your work using HTTP calls to REST endpoints.
-
-The demonstration uses the [Authorization code grant](oauth2-authz-grant.html) and and [Client credentials grant](oauth2-client-cred-grant.html) flows followed by token exchange:
-
-* The resource owner authenticates to obtain an SSO token.
-
-* The subject client relies on Implied Consent being enabled (default) in the Advanced Identity Cloud admin console under Applications > Applications > *Name* > Sign On > Advanced settings > Authentication. It assumes the resource owner grants the client access.
-
-* The subject client requests the authorization code and exchanges it for an access token. Your script sets the `may_act` claim in the access token.
-
-* The actor client requests an actor token with its client credentials.
-
-* The actor client exchanges the subject token and actor token for an ID token.
-
-Follow these steps:
-
-1. Authenticate as the resource owner:
-
-   ```bash
-   curl \
-   --request POST \
-   --header 'Content-Type: application/json' \
-   --header 'X-OpenAM-Username: <resource-owner-username>' \
-   --header 'X-OpenAM-Password: <resource-owner-password>' \
-   --header 'Accept-API-Version: resource=2.0, protocol=1.0' \
-   'https://<tenant-env-fqdn>/am/json/realms/root/realms/alpha/authenticate'
-   {
-     "tokenId": "<resource-owner-tokenId>",
-     "successUrl": "/enduser/?realm=/alpha",
-     "realm": "/alpha"
-   }
-   ```
-
-2. Request the authorization code as the subject client:
-
-   ```bash
-   curl \
-   --dump-header - \
-   --request POST \
-   --cookie '<session-cookie-name>=<resource-owner-tokenId>' \
-   --data 'scope=change_contract repair' \
-   --data 'response_type=code' \
-   --data 'client_id=myClient' \
-   --data 'csrf=<resource-owner-tokenId>' \
-   --data 'redirect_uri=https://www.example.com:443/callback' \
-   --data 'state=abc123' \
-   --data 'decision=allow' \
-   'https://<tenant-env-fqdn>/am/oauth2/realms/root/realms/alpha/authorize'
-   ...
-   location: https://www.example.com:443/callback?code=<authorization-code>&iss=https%3A%2F%2F...
-   ...
-   ```
-
-   |   |                                                                                                                                          |
-   | - | ---------------------------------------------------------------------------------------------------------------------------------------- |
-   |   | If you're exchanging an ID token instead of an access token, set `scope=openid profile` here to return the ID token in the next command. |
-
-3. Exchange the authorization code for an access token or ID token as the subject client:
-
-   ```bash
-   curl \
-   --request POST \
-   --user 'myClient:mySecret' \
-   --data 'grant_type=authorization_code' \
-   --data 'code=<authorization-code>' \
-   --data 'redirect_uri=https://www.example.com:443/callback' \
-   'https://<tenant-env-fqdn>/am/oauth2/realms/root/realms/alpha/access_token'
-   {
-     "access_token": "<subject-access-token>",
-     "refresh_token": "<refresh-token>",
-     "scope": "change_contract repair",
-     "token_type": "Bearer",
-     "expires_in": 3599
-   }
-   ```
-
-   Your script has set the `may_act` claim, which is not directly visible. To see the `may_act` claim, you must [introspect](oauth2-introspect-endpoint.html) the access token.
-
-4. Request an access token as the actor client:
-
-   ```bash
-   curl \
-   --request POST \
-   --user 'delegateClient:mySecret' \
-   --data 'grant_type=client_credentials' \
-   --data 'scope=repair' \
-   'https://<tenant-env-fqdn>/am/oauth2/realms/root/realms/alpha/access_token'
-   {"access_token":"<actor-access-token>","scope":"repair","token_type":"Bearer","expires_in":3599}
-   ```
-
-5. Request an exchanged token as the actor client:
-
-   ```bash
-   curl \
-   --request POST \
-   --user 'delegateClient:mySecret' \
-   --data 'grant_type=urn:ietf:params:oauth:grant-type:token-exchange' \
-   --data 'scope=repair' \
-   --data 'subject_token=<subject-access-token>' \
-   --data 'subject_token_type=urn:ietf:params:oauth:token-type:access_token' \
-   --data 'actor_token=<actor-access-token>' \
-   --data 'actor_token_type=urn:ietf:params:oauth:token-type:access_token' \
-   --data 'requested_token_type=urn:ietf:params:oauth:token-type:id_token' \
-   'https://<tenant-env-fqdn>/am/oauth2/realms/root/realms/alpha/access_token'
-   {
-     "access_token": "<exchanged-id-token>",
-     "refresh_token": "<new-refresh-token>,"
-     "issued_token_type": "urn:ietf:params:oauth:token-type:id_token",
-     "scope": "repair",
-     "token_type": "Bearer",
-     "expires_in": 3599
-   }
-   ```
-
-   The `issued_token_type` shows this is an exchanged token.
-
-   |   |                                                                                                                                                                                                |
-   | - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-   |   | If your subject token is an ID token rather than an access token, set `subject_token_type=urn:ietf:params:oauth:token-type:id_token` and provide the ID token as the value of `subject_token`. |
-
----
-
----
-title: Demonstrate impersonation
-description: "Demonstrate OAuth 2.0 token exchange with impersonation by exchanging tokens for others' access"
-component: pingoneaic
-page_id: pingoneaic:am-oauth2:token-exchange-impersonation
-canonical_url: https://docs.pingidentity.com/pingoneaic/am-oauth2/token-exchange-impersonation.html
-llms_txt: https://docs.pingidentity.com/pingoneaic/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-keywords: ["OAuth 2.0", "OpenID Connect (OIDC)", "Scripting", "Setup &amp; Configuration"]
-page_aliases: ["oauth2-guide:token-exchange-impersonation.adoc"]
-section_ids:
-  prepare_the_demonstration: Prepare the demonstration
-  impersonation-script: May act script
-  impersonation-subject-oauth2-client: Subject client
-  impersonation-actor-oauth2-client: Actor client
-  impersonation-resource-owner: Resource owner
-  test_the_demonstration: Test the demonstration
----
-
-# Demonstrate impersonation
-
-This page demonstrates [token exchange with impersonation](token-exchange.html#token-exchange-impersonation). The example exchanges an access token for an access token with reduced scopes. You can also exchange ID tokens with impersonation.
-
-## Prepare the demonstration
-
-Start by preparing the demonstration:
-
-* [Create a may act script](#impersonation-script).
-
-* [Create the OAuth 2.0 client the subject uses](#impersonation-subject-oauth2-client).
-
-* [Create the OAuth 2.0 client for impersonation](#impersonation-actor-oauth2-client).
-
-* [Create a resource owner account](#impersonation-resource-owner).
-
-### May act script
-
-The script adds a `may_act` claim to the subject token.
-
-1. In the Advanced Identity Cloud admin console, [create a script](../developer-docs/scripting-auth.html#create-a-new-auth-script) of type OAuth2 May Act.
-
-2. Select either legacy or next-generation as the script engine.
-
-3. In the new script window, name the script `May act` and save the following JavaScript:
-
-   * Legacy
-
-   * Next-generation
-
-   ```javascript
-   (function () {
-       var frJava = JavaImporter(
-           org.forgerock.json.JsonValue
-       );
-
-       var mayAct = frJava.JsonValue.json(frJava.JsonValue.object())
-       mayAct.put('client_id', 'impersonationClient')
-       token.setMayAct(mayAct)
-   }());
-   ```
-
-   ```javascript
-   (function () {
-       var mayAct = {
-           'client_id': 'impersonationClient'
-       };
-       token.setMayAct(mayAct);
-   }());
-   ```
-
-   This script generates a `may_act` claim to permit the impersonating actor client to exchange the subject token.
-
-### Subject client
-
-The OAuth 2.0 client profile in this example overrides the OAuth 2.0 provider settings. This lets you test the script without affecting access tokens issued to other clients.
-
-1. Create a confidential OAuth 2.0 client account to get an original token for the subject.
-
-   In the Advanced Identity Cloud admin console, go to Applications > Applications > + Custom Application, and create a new Web client with the following settings:
-
-   * Client ID
-
-     `myClient`
-
-   * Client Secret
-
-     `mySecret`
-
-2. Add the following settings under Sign On > General Settings and save your work:
-
-   * Sign-in URLs
-
-     `https://www.example.com:443/callback`
-
-   * Scopes
-
-     `change_data`\
-     `create_accounts`\
-     `read_accounts`\
-     `transfer`
-
-3. Override OAuth 2.0 provider settings for this client.
-
-   Under Native Consoles > Access Management, select Realms > alpha > Applications > OAuth 2.0 > Clients > myClient. Switch to the OAuth2 Provider Overrides tab, update the following settings and save your work:
-
-   * Enable OAuth2 Provider Overrides
-
-     Enabled
-
-   * OAuth2 Access Token May Act Script
-
-     `May act`
-
-   * OIDC ID Token May Act Script
-
-     `May act`
-
-### Actor client
-
-1. Create a confidential OAuth 2.0 client account for the service that acts on behalf of the user.
-
-   In the Advanced Identity Cloud admin console, select Applications > Applications > + Custom Application, and create a new Service client with the following settings:
-
-   * Client ID
-
-     `impersonationClient`
-
-   * Client Secret
-
-     `mySecret`
-
-2. Add the following settings under Sign On > General Settings and save your work:
-
-   * Sign-in URLs
-
-     `https://www.example.com:443/callback`
-
-   * Grant Types
-
-     `Refresh Token`\
-     `Token Exchange`
-
-   * Scopes
-
-     `transfer`
-
-### Resource owner
-
-An OAuth 2.0 client requests the access token on behalf of a resource owner.
-
-1. [Create a user profile](../identities/manage-identities.html#create-a-user-profile).
-
-2. Record the username and password.
-
-## Test the demonstration
-
-After preparing the demonstration, test your work using HTTP calls to REST endpoints.
-
-The demonstration uses the [Authorization code grant](oauth2-authz-grant.html) flow followed by token exchange:
-
-* The resource owner authenticates to obtain an SSO token.
-
-* The subject client relies on Implied Consent being enabled (default) in the Advanced Identity Cloud admin console under Applications > Applications > *Name* > Sign On > Advanced settings > Authentication. It assumes the resource owner grants the client access.
-
-* The subject client requests the authorization code and exchanges it for an access token. Your script sets the `may_act` claim in the access token.
-
-* The actor client exchanges the subject token for an access token.
-
-Follow these steps:
-
-1. Authenticate as the resource owner:
-
-   ```bash
-   curl \
-   --request POST \
-   --header 'Content-Type: application/json' \
-   --header 'X-OpenAM-Username: <resource-owner-username>' \
-   --header 'X-OpenAM-Password: <resource-owner-password>' \
-   --header 'Accept-API-Version: resource=2.0, protocol=1.0' \
-   'https://<tenant-env-fqdn>/am/json/realms/root/realms/alpha/authenticate'
-   {
-     "tokenId": "<resource-owner-tokenId>",
-     "successUrl": "/enduser/?realm=/alpha",
-     "realm": "/alpha"
-   }
-   ```
-
-2. Request the authorization code as the subject client:
-
-   ```bash
-   curl \
-   --dump-header - \
-   --request POST \
-   --cookie '<session-cookie-name>=<resource-owner-tokenId>' \
-   --data 'scope=change_data create_accounts read_accounts transfer' \
-   --data 'response_type=code' \
-   --data 'client_id=myClient' \
-   --data 'csrf=<resource-owner-tokenId>' \
-   --data 'redirect_uri=https://www.example.com:443/callback' \
-   --data 'state=abc123' \
-   --data 'decision=allow' \
-   'https://<tenant-env-fqdn>/am/oauth2/realms/root/realms/alpha/authorize'
-   ...
-   location: https://www.example.com:443/callback?code=<authorization-code>&iss=https%3A%2F%2F...
-   ...
-   ```
-
-   |   |                                                                                                                                          |
-   | - | ---------------------------------------------------------------------------------------------------------------------------------------- |
-   |   | If you're exchanging an ID token instead of an access token, set `scope=openid profile` here to return the ID token in the next command. |
-
-3. Exchange the authorization code for an access token or ID token as the subject client:
-
-   ```bash
-   curl \
-   --request POST \
-   --user 'myClient:mySecret' \
-   --data 'grant_type=authorization_code' \
-   --data 'code=<authorization-code>' \
-   --data 'redirect_uri=https://www.example.com:443/callback' \
-   'https://<tenant-env-fqdn>/am/oauth2/realms/root/realms/alpha/access_token'
-   {
-     "access_token": "<access-token>",
-     "refresh_token": "<refresh-token>",
-     "scope": "change_data transfer create_accounts read_accounts",
-     "token_type": "Bearer",
-     "expires_in": 3599
-   }
-   ```
-
-   Your script has set the `may_act` claim, which is not directly visible. To see the `may_act` claim, you must [introspect](oauth2-introspect-endpoint.html) the access token.
-
-4. Request an exchanged token as the actor client:
-
-   ```bash
-   curl \
-   --request POST \
-   --user 'impersonationClient:mySecret' \
-   --data 'grant_type=urn:ietf:params:oauth:grant-type:token-exchange' \
-   --data 'scope=transfer' \
-   --data 'subject_token=<access-token>' \
-   --data 'subject_token_type=urn:ietf:params:oauth:token-type:access_token' \
-   'https://<tenant-env-fqdn>/am/oauth2/realms/root/realms/alpha/access_token'
-   {
-     "access_token": "<exchanged-token>",
-     "refresh_token": "<new-refresh-token>",
-     "issued_token_type": "urn:ietf:params:oauth:token-type:access_token",
-     "scope": "transfer",
-     "token_type": "Bearer",
-     "expires_in": 3599
-   }
-   ```
-
-   The `issued_token_type` shows this is an exchanged token.
-
-   |   |                                                                                                                                                                                                |
-   | - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-   |   | If your subject token is an ID token rather than an access token, set `subject_token_type=urn:ietf:params:oauth:token-type:id_token` and provide the ID token as the value of `subject_token`. |
-
----
-
----
-title: Device authorization grant
-description: Enable input-constrained devices to request authorization using separate user agents for consent
-component: pingoneaic
-page_id: pingoneaic:am-oauth2:oauth2-device-flow
-canonical_url: https://docs.pingidentity.com/pingoneaic/am-oauth2/oauth2-device-flow.html
-llms_txt: https://docs.pingidentity.com/pingoneaic/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-keywords: ["OAuth 2.0", "Endpoints", "Authorization", "Grant Flow", "REST API", "Browser"]
-page_aliases: ["oauth2-guide:oauth2-device-flow.adoc"]
-section_ids:
-  device-flow: The device authorization grant flow
-  demo-device: Demonstrate the device authorization grant flow
-  prepare-demo-device: Prepare the demonstration
-  proc-device-flow-request-user-code: Get a user code for the device
-  proc-device-flow-allow-access-no-browser: Grant consent using REST
-  proc-device-flow-allow-access-browser: Grant consent using a browser
-  proc-device-flow-poll-for-authz: Poll for authorization
----
-
-# Device authorization grant
-
-* Endpoints
-
-  * [/oauth2/device/code](rest-api-oauth2-device-code.html)
-
-  * [/oauth2/device/user](rest-api-oauth2-device-user.html)
-
-  * [/oauth2/access_token](oauth2-access_token-endpoint.html)
-
-The device authorization grant, formerly known as the device flow, is designed for client devices that have limited user interfaces, such as a set-top box, streaming radio, or a server process running on a headless operating system.
-
-Instead of logging in with the client device, you can authorize the client to access protected resources on your behalf. You log in with a different user agent, such as a phone or Internet browser, and authenticate using a code that the client device displays.
-
-## The device authorization grant flow
-
-![Advanced Identity Cloud acting as the authorization server in the OAuth 2.0 device flow.](_images/oauth2-device-flow.svg)Figure 1. OAuth 2.0 device authorization grant flow
-
-1. The client device requests a device code from Advanced Identity Cloud.
-
-2. Advanced Identity Cloud returns a device code, a user code, a URL for entering the user code, and an interval, in seconds.
-
-3. The client device provides instructions to the user. The client can choose an appropriate method to convey the instructions, for example, text instructions on screen, or a QR code.
-
-4. The client device continuously polls Advanced Identity Cloud to check if authorization has completed.
-
-5. If the user hasn't completed the authorization, Advanced Identity Cloud returns an HTTP 403 status code with an `authorization_pending` message.
-
-6. The user is redirected to Advanced Identity Cloud's login page to authenticate.
-
-7. Advanced Identity Cloud retrieves the associated device code and determines if any Authentication Context Class References (ACRs) were explicitly requested.
-
-   * If ACRs were requested, they're used to determine the authentication journey.
-
-   * If no ACRs were requested, Advanced Identity Cloud uses the default ACRs configured either at the client or OAuth 2.0 provider level.
-
-8. On authentication, Advanced Identity Cloud prompts the user to confirm the user code and pre-populates the page with the code entered previously.
-
-9. The user can authorize the client device. The Advanced Identity Cloud consent page also displays the requested scopes and their values.
-
-   |   |                                                                                                                                                                                                                                                                                      |
-   | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-   |   | If the user had a valid session when they entered the code and the client is configured to skip consent, Advanced Identity Cloud doesn't display the confirmation or the consent pages.This is also true if you perform the call using REST and pass the `decision=allow` parameter. |
-
-10. On authorization, Advanced Identity Cloud responds to the client device's polling with an HTTP 200 status and an access token, giving the client device access to the requested resources.
-
-## Demonstrate the device authorization grant flow
-
-Follow these steps to demonstrate the OAuth 2.0 device grant flow:
-
-* [Prepare the demonstration](#prepare-demo-device)
-
-* [Get a user code for the device](#proc-device-flow-request-user-code)
-
-* [Grant consent using a browser](#proc-device-flow-allow-access-browser) or [Grant consent using REST](#proc-device-flow-allow-access-no-browser)
-
-* [Poll for authorization](#proc-device-flow-poll-for-authz)
-
-### Prepare the demonstration
-
-Complete these steps to prepare the device authorization grant demonstration:
-
-1. [Create an application owner profile](../identities/manage-identities.html#create-a-user-profile) and record the username and password.
-
-2. [Register a client application](../app-management/register-a-custom-application.html).
-
-   1. In the Advanced Identity Cloud admin console, go to Applications > Applications and select + Custom Application.
-
-   2. Select the sign-in method as OIDC - OpenId Connect and application type as Native / SPA.
-
-   3. Create the application, providing the following details:
-
-      * Name
-
-        `myClient`
-
-      * Owners
-
-        `<application-owner>`
-
-      * Client ID
-
-        `myClient`
-
-   4. Switch to the Sign On tab and under General Settings, set these fields to have the following values:
-
-      * Sign-in URLs
-
-        `https://www.example.com:443/callback`
-
-      * Scopes
-
-        `write`
-
-      * Grant Types
-
-        `Device Code`
-
-   5. Save your changes.
-
-3. [Create a resource owner profile](../identities/manage-identities.html#create-a-user-profile) and record the username and password.
-
-### Get a user code for the device
-
-Devices can display a user code and instructions for a user. You can use these instructions on a separate client to provide consent, allowing the device to access resources.
-
-User codes consist of a random selection of characters. You can configure the character set.
-
-By default, Advanced Identity Cloud generates the user code from eight of the following characters:
-
-```
-234567ABCDEFGHIJKLMNOPQRSTVWXYZabcdefghijkmnopqrstvwxyz
-```
-
-|   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | You can configure the list of possible characters to improve usability. For example, remove similar characters such as `4` and `A` to reduce ambiguity on low-resolution device screens, or limit input to either alphabetical or numerical characters to suit mobile keyboards.The length of the user code is also configurable.Find details on each configuration property in [device flow configuration](../authorization/oauth2-provider-settings.html#realm-oauth-oidc-device-flow). |
-
-Perform the following steps to request a user code in the OAuth 2.0 device flow:
-
-1. As the client, call the [/oauth2/device/code](rest-api-oauth2-device-code.html) endpoint, specifying at least the client ID, `myClient`.
-
-   For information about client authentication methods, refer to [Client application authentication](oauth2-client-auth.html).
-
-   For example:
-
-   ```bash
-   $ curl \
-   --request POST \
-   --data "client_id=myClient" \
-   --data "scope=write" \
-   "https://<tenant-env-fqdn>/am/oauth2/realms/root/realms/alpha/device/code"
-   {
-       "interval": 5,
-       "device_code": "7a95a0a4-6f13-42e3-ac3e-d3d159c94c55...",
-       "verification_uri": "https://<tenant-env-fqdn>/am/oauth2/realms/root/realms/alpha/device/user",
-       "verification_url": "https://<tenant-env-fqdn>/am/oauth2/realms/root/realms/alpha/device/user",
-       "verification_uri_complete": "https://<tenant-env-fqdn>/am/oauth2/realms/root/realms/alpha/device/user?user_code=VAL12e0v",
-       "user_code": "VAL12e0v",
-       "expires_in": 300
-   }
-   ```
-
-   On success, Advanced Identity Cloud returns a user code, a `verification_uri`, and a `verification_uri_complete` value that comprises the user code appended to the URI. You can use the `verification_uri_complete` value to create QR codes.
-
-   The output includes the `verification_url` to support earlier versions of the specification.
-
-   Advanced Identity Cloud also returns an interval, in seconds, that the client device must wait before it can request an access token again.
-
-   |   |                                                                                                                                                                                |
-   | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-   |   | In the Advanced Identity Cloud admin console, go to [icon: vpn_key, set=material, size=inline] Authorization > OAuth2 Provider > Device Flow to configure the returned values. |
-
-2. The client device must now instruct the user to enter the user code and grant access to the OAuth 2.0 device.
-
-   The client can choose an appropriate method to convey the instructions, for example, text instructions on screen or a QR code. Perform the steps in one of the following procedures:
-
-   * To grant access to the client without using a browser, refer to [Grant consent using REST](#proc-device-flow-allow-access-no-browser).
-
-   * To grant access to the client using a browser, refer to [Grant consent using a browser](#proc-device-flow-allow-access-browser).
-
-3. The client device must start polling the authorization server for the access token using the interval and device code information obtained in the previous step.
-
-   For more information, refer to [Poll for authorization](#proc-device-flow-poll-for-authz).
-
-### Grant consent using REST
-
-The OAuth 2.0 device authorization grant requires the user to grant consent to let a client device access a resource. The authorization server provides the client with an access token.
-
-To grant consent with a user code without using a browser, perform the following steps:
-
-1. The resource owner logs in to the authorization server.
-
-   For example:
-
-   ```bash
-   $ curl \
-   --include \
-   --request POST \
-   --header "Content-Type: application/json" \
-   --header "X-OpenAM-Username: <resource-owner-username>" \
-   --header "X-OpenAM-Password: <resource-owner-password>" \
-   --header "Accept-API-Version: resource=2.0, protocol=1.0" \
-   'https://<tenant-env-fqdn>/am/json/realms/root/realms/alpha/authenticate'
-   {
-     "tokenId":"<tokenId>",
-     "successUrl":"/enduser/?realm=/alpha",
-     "realm":"/alpha
-   "}
-   ```
-
-2. As the client, call the [/oauth2/device/user](rest-api-oauth2-device-user.html) endpoint. Provide the resource owner's SSO token in a cookie, and at least the following parameters:
-
-   * **`user_code`**=\<resource-owner-user-code>
-
-   * **`decision`**=`allow`
-
-   * **`csrf`**=\<tokenId>
-
-   The `scope` and the `client_id` parameters aren't required because the user code already contains that information.
-
-   ```bash
-   $ curl \
-   --request POST \
-   --header "Cookie: <session-cookie-name>=<tokenId>" \
-   --data "user_code=VAL12e0v" \
-   --data "decision=allow" \
-   --data "csrf=<tokenId>" \
-   "https://<tenant-env-fqdn>/am/oauth2/realms/root/realms/alpha/device/user"
-   ```
-
-   Advanced Identity Cloud returns HTML containing a JavaScript fragment named `pageData`, with details of the result. The following example shows the default HTML response:
-
-   ```html
-   <!DOCTYPE html>
-   <!--
-     Copyright …​
-   -→
-   <html lang="en">
-   <head>
-     <meta charset="utf-8">
-     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-     <meta name="viewport" content="width=device-width, initial-scale=1">
-     <meta name="description" content="OAuth2 Authorization">
-     <title>OAuth2 Authorization Server</title>
-   </head>
-
-   <body style="display:none">
-   <div id="wrapper">Loading…​</div>
-   <footer id="footer" class="footer"></footer>
-   <script type="text/javascript">
-     pageData = {
-         locale: "en_US",
-         baseUrl : "https://<tenant-env-fqdn>/am",
-         realm : "\/alpha",
-         done: true
-     };
-   </script>
-   <script src="https://<tenant-env-fqdn>/am/main-device.js"></script>
-   </body>
-   </html>
-   ```
-
-   The `done: true` line in the `pageData` fragment means the flow can continue.
-
-   To return the output in JSON format instead of HTML, include the `Accept: application/json` header in the request. The following example returns the output in JSON:
-
-   ```bash
-   $ curl \
-   --request POST \
-   --header "Cookie: iPlanetDirectoryPro=ne1QUOjPzY0r…​" \
-   --header "Accept: application/json" \
-   --data "user_code=Gp4qkX4G" \
-   --data "decision=allow" \
-   --data "csrf=ne1QUOjPzY0r…​" \
-   "https://<tenant-env-fqdn>/am/oauth2/realms/root/realms/alpha/device/user"
-   {
-     "baseUrl": "https://<tenant-env-fqdn>/am",
-     "errorCode": null,
-     "realm": "/alpha",
-     "csrf": "1hQSplblZgaErLQ0/1rvcEvw5lj/cJQx3lrC3dV/3ac=",
-     "locale": "en_US",
-     "userCode": "Gp4qkX4G"
-   }
-   ```
-
-   In this case, the `"errorCode": null` means the request is successful and the flow can continue.
-
-   If the supplied user code is wrong or has been used, the output includes the following `pageData` fragment:
-
-   ```javascript
-   pageData = {
-       locale: "en_US",
-       errorCode: "not_found",
-       realm : "/alpha",
-       baseUrl : "https://<tenant-env-fqdn>/am"
-       oauth2Data: {
-             csrf: "ErFIk8pMraJ1rvKbloTgpp6b7GZ57kyk9HaIiKMVK3g=",
-             userCode: "VAL12e0v"
-       }
-   }
-   ```
-
-|   |                                                                                                                                                                                                                                                                                                                                                                                                   |
-| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | In accordance with [Section 4.1.1 of the OAuth 2.0 authorization framework](https://www.rfc-editor.org/rfc/rfc6749.html#section-4.1.1), the authorization server *must* obtain an authorization decision from the resource owner.Clients using the endpoints to register consent must ensure this requirement is met. Advanced Identity Cloud can't assert that consent was given in these cases. |
-
-### Grant consent using a browser
-
-The OAuth 2.0 device flow requires that the user grants consent to allow the client device to access the resources.
-
-The authorization server would then provide the client with an access token.
-
-To grant consent with a user code using a browser, perform the following steps:
-
-1. The resource owner navigates to the verification URL acquired with the user code. For example:
-
-   ```none
-   https://<tenant-env-fqdn>/am/oauth2/realms/root/realms/alpha/device/user
-   ```
-
-2. The resource owner logs in to the authorization server.
-
-3. The resource owner enters their user code:
-
-   ![Visit the verification URL to enter the user code.](_images/oauth2-device-user-code.png)Figure 2. OAuth 2.0 User Code
-
-   |   |                                                                                                                                                                                                                        |
-   | - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-   |   | The `verification_uri_complete` property in the response appends the user code as a query parameter.Advanced Identity Cloud prefills the form with the user code value if provided in the `user_code` query parameter. |
-
-4. The resource owner authorizes the device flow client by allowing the requested scopes:
-
-   ![Advanced Identity Cloud lists the scopes requested by the client device, and their values.](_images/oauth2-authz-page-xui.png)Figure 3. OAuth 2.0 Consent Page
-
-   |   |                                                                                                                                                                  |
-   | - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-   |   | By default, client applications use [implied consent](oauth2-manage-consent.html#skip-consent). Advanced Identity Cloud does not display the screen to the user. |
-
-5. Advanced Identity Cloud adds the OAuth 2.0 client to the user's profile page in the *Authorized Apps* section and displays that the user is done with the flow:
-
-   ![The user code part of the device flow is done.](_images/oauth2-authz-page-done.png)Figure 4. OAuth 2.0 Done Page
-
-   The device that polls the authorization server (Advanced Identity Cloud) can now obtain an access token.
-
-### Poll for authorization
-
-The client device must poll the authorization server for an access token, since it cannot know whether the resource owner has already given consent or not.
-
-Perform the following steps to poll for an access token:
-
-1. On the client device, create a POST request to poll the `/oauth2/access_token` endpoint to request an access token specifying, at least, the following parameters:
-
-   * **`client_id`**=\<your-client-id>
-
-   * **`grant_type`**=`urn:ietf:params:oauth:grant-type:device_code`
-
-   * **`device_code`**=\<your-device-code>
-
-   For information about the parameters supported by the `/oauth2/access_token` endpoint, refer to [/oauth2/access_token](oauth2-access_token-endpoint.html).
-
-   The client device must wait for the number of seconds previously provided as the value of `interval` between polling Advanced Identity Cloud for an access token. For example:
-
-   ```bash
-   $ curl \
-   --request POST \
-   --data "client_id=myClient" \
-   --data "grant_type=urn:ietf:params:oauth:grant-type:device_code" \
-   --data "device_code=<your-device-code>" \
-   "https://<tenant-env-fqdn>/am/oauth2/realms/root/realms/alpha/access_token"
-   ```
-
-   If the user has authorized the client device, Advanced Identity Cloud returns an HTTP 200 status code with an access token that can be used to request resources:
-
-   ```json
-   {
-       "access_token": "<access-token>",
-       "refresh_token": "<refresh-token>",
-       "scope": "write",
-       "token_type": "Bearer",
-       "expires_in": 3599
-   }
-   ```
-
-   If the user hasn't authorized the client device, Advanced Identity Cloud returns an HTTP 403 status code with the following error message:
-
-   ```json
-   {
-       "error": "authorization_pending",
-       "error_description": "The user has not yet completed authorization"
-   }
-   ```
-
-   If the client device polls faster than the specified interval, Advanced Identity Cloud returns an HTTP 400 status code with the following error message:
-
-   ```json
-   {
-       "error": "slow_down",
-       "error_description": "The polling interval has not elapsed since the last request"
-   }
-   ```
-
----
-
----
-title: Device authorization grant with PKCE
-description: Combine device flow with PKCE to securely authenticate input-constrained device clients
-component: pingoneaic
-page_id: pingoneaic:am-oauth2:oauth2-device-flow-pkce
-canonical_url: https://docs.pingidentity.com/pingoneaic/am-oauth2/oauth2-device-flow-pkce.html
-llms_txt: https://docs.pingidentity.com/pingoneaic/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-keywords: ["OAuth 2.0", "Endpoints", "Authorization", "Grant Flow", "REST API", "Browser", "PKCE"]
-page_aliases: ["oauth2-guide:oauth2-device-flow-pkce.adoc"]
-section_ids:
-  device-flow-pkce: The device authorization grant flow with PKCE
-  demo-device-pkce: Demonstrate the device authorization grant flow with PKCE
-  prepare-demo-device-pkce: Prepare the demonstration
-  proc-device-flow-request-user-code-pkce: Get a user code for the device
-  proc-device-flow-allow-access-no-browser-pkce: Grant consent using REST
-  proc-device-flow-allow-access-browser-pkce: Grant consent using a browser
-  proc-device-flow-poll-for-authz-pkce: Poll for authorization
----
-
-# Device authorization grant with PKCE
-
-* Endpoints
-
-  * [/oauth2/device/code](rest-api-oauth2-device-code.html)
-
-  * [/oauth2/device/user](rest-api-oauth2-device-user.html)
-
-  * [/oauth2/access_token](oauth2-access_token-endpoint.html)
-
-The device authorization grant is designed for client devices that have limited user interfaces, such as a set-top box. Because the devices are usually public clients, it's possible for malicious users to intercept the device code. If a device allows it, you can mitigate against interception attacks by combining the device authorization grant with the Proof Key for Code Exchange (PKCE) standard ([RFC 7636](https://www.rfc-editor.org/info/rfc7636)).
-
-Advanced Identity Cloud implements this grant by adding the following parameters to those used for the [device authorization grant](#oauth2-device-flow):
-
-* `code_verifier`
-
-  Contains a random string that correlates the authorization request to the token request.
-
-* `code_challenge`
-
-  Contains a string derived from the code verifier that is sent in the authorization request and needs to be verified later with the code verifier.
-
-* `code_challenge_method`
-
-  Contains the method used to derive the code challenge.
-
-## The device authorization grant flow with PKCE
-
-![Advanced Identity Cloud acting as the authorization server in the OAuth 2.0 device flow with PKCE.](_images/oauth2-device-flow-pkce.svg)Figure 1. OAuth 2.0 device authorization grant flow with PKCE
-
-1. When using the PKCE standard, the device must be able to generate a code verifier and a code challenge. For details, refer to the PKCE standard ([RFC 7636](https://www.rfc-editor.org/info/rfc7636)).
-
-   For examples that generate a code verifier and a code challenge, refer to [Generate a code verifier and a code challenge](oauth2-authz-grant-pkce.html#proc-auth-code-generate-pkce).
-
-2. The client device requests a device code from Advanced Identity Cloud, appending the code challenge previously generated to the request.
-
-3. Advanced Identity Cloud returns a device code, a user code, a URL for entering the user code, and an interval, in seconds.
-
-4. The client device provides instructions to the user to enter the user code. The client can choose an appropriate method to convey the instructions, for example, text instructions on screen, or a QR code.
-
-5. The client device begins to continuously poll Advanced Identity Cloud to check if authorization has been completed, appending the code verifier previously generated.
-
-6. If the user has not yet completed the authorization, Advanced Identity Cloud returns an HTTP 403 status code, with an `authorization_pending` message.
-
-7. The user follows the instructions from the client device to enter the user code by using a separate device.
-
-8. Advanced Identity Cloud verifies the code challenge stored in memory using the validation code. It also verifies the user code.
-
-   If both codes are valid, Advanced Identity Cloud uses the user code to retrieve the associated device code and determine if any Authentication Context Class References (ACRs) were explicitly requested.
-
-   * If ACRs were requested, they're used to determine the authentication journey.
-
-   * If no ACRs were requested, Advanced Identity Cloud uses the default ACRs configured either at the client or OAUTH 2.0 provider level.
-
-9. Advanced Identity Cloud redirects the user for authentication.
-
-10. Upon authentication, the user is prompted to confirm the user code. The page is pre-populated with the one entered before.
-
-11. The user can authorize the client device. The Advanced Identity Cloud consent page also displays the requested scopes, and their values.
-
-    |   |                                                                                                                                                                                                                                                                       |
-    | - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-    |   | If the user has a valid session when they enter the code and the client can skip consent, Advanced Identity Cloud doesn't display the confirmation or the consent pages.This is also true if you perform the call using REST and pass the `decision=allow` parameter. |
-
-12. Upon authorization, Advanced Identity Cloud responds to the client device's polling with an HTTP 200 status, and an access token, giving the client device access to the requested resources.
-
-## Demonstrate the device authorization grant flow with PKCE
-
-Follow these steps to grant consent with a user code and poll for authorization:
-
-* [Prepare the demonstration](#prepare-demo-device-pkce)
-
-* [Get a user code for the device](#proc-device-flow-request-user-code-pkce)
-
-* [Grant consent using a browser](#proc-device-flow-allow-access-browser-pkce) or [Grant consent using REST](#proc-device-flow-allow-access-no-browser-pkce)
-
-* [Poll for authorization](#proc-device-flow-poll-for-authz-pkce)
-
-### Prepare the demonstration
-
-Complete these steps to prepare the device authorization grant demonstration:
-
-1. [Create an application owner profile](../identities/manage-identities.html#create-a-user-profile) and record the username and password.
-
-2. [Register a client application](../app-management/register-a-custom-application.html).
-
-   1. In the Advanced Identity Cloud admin console, go to Applications > Applications and select + Custom Application.
-
-   2. Select the sign-in method as OIDC - OpenId Connect and application type as Native / SPA.
-
-   3. Create the application, providing the following details:
-
-      * Name
-
-        `myClient`
-
-      * Owners
-
-        `<application-owner>`
-
-      * Client ID
-
-        `myClient`
-
-   4. Switch to the Sign On tab and under General Settings, set these fields to have the following values:
-
-      * Sign-in URLs
-
-        `https://www.example.com:443/callback`
-
-      * Scopes
-
-        `write`
-
-      * Grant Types
-
-        `Device Code`
-
-      |   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
-      | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-      |   | The `Code Verifier Parameter Required` setting (in the Advanced Identity Cloud admin console, under [icon: vpn_key, set=material, size=inline] Authorization > OAuth2 Provider > Advanced) specifies whether Advanced Identity Cloud requires clients to include a code verifier in their calls.However, if a client makes a call to Advanced Identity Cloud with the `code_challenge` parameter, Advanced Identity Cloud honors the code exchange regardless of the value of `Code Verifier Parameter Required`. Find more information in [Configure Advanced Identity Cloud as an authorization server](../authorization/oauth2-provider.html). |
-
-   5. Save your changes.
-
-3. [Create a resource owner profile](../identities/manage-identities.html#create-a-user-profile) and record the username and password.
-
-### Get a user code for the device
-
-Devices can display a user code and instructions for a user. These can be used on a separate client to provide consent, allowing the device to access the resources.
-
-Devices can display a user code and instructions for a user. You can use these instructions on a separate client to provide consent, allowing the device to access resources.
-
-User codes consist of a random selection of characters. You can configure the character set.
-
-By default, Advanced Identity Cloud generates the user code from eight of the following characters:
-
-```
-234567ABCDEFGHIJKLMNOPQRSTVWXYZabcdefghijkmnopqrstvwxyz
-```
-
-|   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | You can configure the list of possible characters to improve usability. For example, remove similar characters such as `4` and `A` to reduce ambiguity on low-resolution device screens, or limit input to either alphabetical or numerical characters to suit mobile keyboards.The length of the user code is also configurable.Find details on each configuration property in [device flow configuration](../authorization/oauth2-provider-settings.html#realm-oauth-oidc-device-flow). |
-
-Perform the following steps to request a user code in the OAuth 2.0 device flow:
-
-1. As the client, call the [/oauth2/device/code](rest-api-oauth2-device-code.html) endpoint, specifying at least the following parameters:
-
-   * **`client_id`**=\<your-client-id>
-
-   * **`code_challenge`**=\<your-code-challenge>
-
-   * **`code_challenge_method`**=S256
-
-     Creating the challenge using a SHA-256 algorithm is mandatory if the device supports it, as per [RFC 7636](https://www.rfc-editor.org/rfc/rfc7636).
-
-     Refer to [Generate a code verifier and a code challenge](oauth2-authz-grant-pkce.html#proc-auth-code-generate-pkce).
-
-   For information about client authentication methods, refer to [Client application authentication](oauth2-client-auth.html).
-
-   For example:
-
-   ```bash
-   $ curl \
-   --request POST \
-   --data "client_id=myClient" \
-   --data "code_challenge=<your-code-challenge>" \
-   --data "code_challenge_method=S256" \
-   --data "scope=write" \
-   "https://<tenant-env-fqdn>/am/oauth2/realms/root/realms/alpha/device/code"
-   {
-       "interval": 5,
-       "device_code": "7a95a0a4-6f13-42e3-ac3e-d3d159c94c55...",
-       "verification_uri": "https://<tenant-env-fqdn>/am/oauth2/realms/root/realms/alpha/device/user",
-       "verification_url": "https://<tenant-env-fqdn>/am/oauth2/realms/root/realms/alpha/device/user",
-       "verification_uri_complete": "https://<tenant-env-fqdn>/am/oauth2/realms/root/realms/alpha/device/user?user_code=VAL12e0v",
-       "user_code": "VAL12e0v",
-       "expires_in": 300
-   }
-   ```
-
-   On success, Advanced Identity Cloud returns a user code, a `verification_uri`, and a `verification_uri_complete` value that comprises the user code appended to the URI. You can use the `verification_uri_complete` value to create QR codes.
-
-   The output includes the `verification_url` to support earlier versions of the specification.
-
-   Advanced Identity Cloud also returns an interval, in seconds, that the client device must wait before it can request an access token again.
-
-   |   |                                                                                                                                                                                |
-   | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-   |   | In the Advanced Identity Cloud admin console, go to [icon: vpn_key, set=material, size=inline] Authorization > OAuth2 Provider > Device Flow to configure the returned values. |
-
-2. The client device should now provide instructions to the user to enter the user code and grant access to the OAuth 2.0 device.
-
-   The client can choose an appropriate method to convey the instructions, for example, text instructions on screen, or a QR code. Perform the steps in one of the following procedures:
-
-   * To grant access to the client using a browser, refer to [Grant consent using a browser](#proc-device-flow-allow-access-browser-pkce).
-
-   * To grant access to the client without using a browser, refer to [Grant consent using REST](#proc-device-flow-allow-access-no-browser-pkce).
-
-3. The client device should also begin polling the authorization server for the access token using the interval and device code information obtained in the previous step and the PKCE code verifier.
-
-For more information, refer to [Poll for authorization](#proc-device-flow-poll-for-authz-pkce).
-
-### Grant consent using REST
-
-The OAuth 2.0 device authorization grant requires the user to grant consent to let a client device access a resource. The authorization server provides the client with an access token.
-
-To grant consent with a user code without using a browser, perform the following steps:
-
-1. The resource owner logs in to the authorization server.
-
-   For example:
-
-   ```bash
-   $ curl \
-   --include \
-   --request POST \
-   --header "Content-Type: application/json" \
-   --header "X-OpenAM-Username: <resource-owner-username>" \
-   --header "X-OpenAM-Password: <resource-owner-password>" \
-   --header "Accept-API-Version: resource=2.0, protocol=1.0" \
-   'https://<tenant-env-fqdn>/am/json/realms/root/realms/alpha/authenticate'
-   {
-     "tokenId":"<tokenId>",
-     "successUrl":"/enduser/?realm=/alpha",
-     "realm":"/alpha
-   "}
-   ```
-
-2. As the client, call the [/oauth2/device/user](rest-api-oauth2-device-user.html) endpoint. Provide the resource owner's SSO token in a cookie, and at least the following parameters:
-
-   * **`user_code`**=\<resource-owner-user-code>
-
-   * **`decision`**=`allow`
-
-   * **`csrf`**=\<tokenId>
-
-   The `scope` and the `client_id` parameters aren't required because the user code already contains that information.
-
-   ```bash
-   $ curl \
-   --request POST \
-   --header "Cookie: <session-cookie-name>=<tokenId>" \
-   --data "user_code=VAL12e0v" \
-   --data "decision=allow" \
-   --data "csrf=<tokenId>" \
-   "https://<tenant-env-fqdn>/am/oauth2/realms/root/realms/alpha/device/user"
-   ```
-
-   Advanced Identity Cloud returns HTML containing a JavaScript fragment named `pageData`, with details of the result. The following example shows the default HTML response:
-
-   ```html
-   <!DOCTYPE html>
-   <!--
-     Copyright …​
-   -→
-   <html lang="en">
-   <head>
-     <meta charset="utf-8">
-     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-     <meta name="viewport" content="width=device-width, initial-scale=1">
-     <meta name="description" content="OAuth2 Authorization">
-     <title>OAuth2 Authorization Server</title>
-   </head>
-
-   <body style="display:none">
-   <div id="wrapper">Loading…​</div>
-   <footer id="footer" class="footer"></footer>
-   <script type="text/javascript">
-     pageData = {
-         locale: "en_US",
-         baseUrl : "https://<tenant-env-fqdn>/am",
-         realm : "\/alpha",
-         done: true
-     };
-   </script>
-   <script src="https://<tenant-env-fqdn>/am/main-device.js"></script>
-   </body>
-   </html>
-   ```
-
-   The `done: true` line in the `pageData` fragment means the flow can continue.
-
-   To return the output in JSON format instead of HTML, include the `Accept: application/json` header in the request. The following example returns the output in JSON:
-
-   ```bash
-   $ curl \
-   --request POST \
-   --header "Cookie: iPlanetDirectoryPro=ne1QUOjPzY0r…​" \
-   --header "Accept: application/json" \
-   --data "user_code=Gp4qkX4G" \
-   --data "decision=allow" \
-   --data "csrf=ne1QUOjPzY0r…​" \
-   "https://<tenant-env-fqdn>/am/oauth2/realms/root/realms/alpha/device/user"
-   {
-     "baseUrl": "https://<tenant-env-fqdn>/am",
-     "errorCode": null,
-     "realm": "/alpha",
-     "csrf": "1hQSplblZgaErLQ0/1rvcEvw5lj/cJQx3lrC3dV/3ac=",
-     "locale": "en_US",
-     "userCode": "Gp4qkX4G"
-   }
-   ```
-
-   In this case, the `"errorCode": null` means the request is successful and the flow can continue.
-
-   If the supplied user code is wrong or has been used, the output includes the following `pageData` fragment:
-
-   ```javascript
-   pageData = {
-       locale: "en_US",
-       errorCode: "not_found",
-       realm : "/alpha",
-       baseUrl : "https://<tenant-env-fqdn>/am"
-       oauth2Data: {
-             csrf: "ErFIk8pMraJ1rvKbloTgpp6b7GZ57kyk9HaIiKMVK3g=",
-             userCode: "VAL12e0v"
-       }
-   }
-   ```
-
-|   |                                                                                                                                                                                                                                                                                                                                                                                                   |
-| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | In accordance with [Section 4.1.1 of the OAuth 2.0 authorization framework](https://www.rfc-editor.org/rfc/rfc6749.html#section-4.1.1), the authorization server *must* obtain an authorization decision from the resource owner.Clients using the endpoints to register consent must ensure this requirement is met. Advanced Identity Cloud can't assert that consent was given in these cases. |
-
-### Grant consent using a browser
-
-The OAuth 2.0 device flow requires that the user grants consent to allow the client device to access the resources.
-
-The authorization server would then provide the client with an access token.
-
-To grant consent with a user code using a browser, perform the following steps:
-
-1. The resource owner navigates to the verification URL acquired with the user code. For example:
-
-   ```none
-   https://<tenant-env-fqdn>/am/oauth2/realms/root/realms/alpha/device/user
-   ```
-
-2. The resource owner logs in to the authorization server.
-
-3. The resource owner enters their user code:
-
-   ![Visit the verification URL to enter the user code.](_images/oauth2-device-user-code.png)Figure 2. OAuth 2.0 User Code
-
-   |   |                                                                                                                                                                                                                        |
-   | - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-   |   | The `verification_uri_complete` property in the response appends the user code as a query parameter.Advanced Identity Cloud prefills the form with the user code value if provided in the `user_code` query parameter. |
-
-4. The resource owner authorizes the device flow client by allowing the requested scopes:
-
-   ![Advanced Identity Cloud lists the scopes requested by the client device, and their values.](_images/oauth2-authz-page-xui.png)Figure 3. OAuth 2.0 Consent Page
-
-   |   |                                                                                                                                                                  |
-   | - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-   |   | By default, client applications use [implied consent](oauth2-manage-consent.html#skip-consent). Advanced Identity Cloud does not display the screen to the user. |
-
-5. Advanced Identity Cloud adds the OAuth 2.0 client to the user's profile page in the *Authorized Apps* section and displays that the user is done with the flow:
-
-   ![The user code part of the device flow is done.](_images/oauth2-authz-page-done.png)Figure 4. OAuth 2.0 Done Page
-
-   The device that polls the authorization server (Advanced Identity Cloud) can now obtain an access token.
-
-### Poll for authorization
-
-The client device must poll the authorization server for an access token, as it can't know whether the resource owner has given consent.
-
-Perform the following steps to poll for an access token:
-
-1. On the client device, create a POST request to poll the [/oauth2/access_token](oauth2-access_token-endpoint.html) endpoint to request an access token specifying, at least, the following parameters:
-
-   * **`client_id`**=\<your-client-id>
-
-   * **`grant_type`**=`urn:ietf:params:oauth:grant-type:device_code`
-
-   * **`device_code`**=\<your-device-code>
-
-   * **`code_verifier`**=\<your-code-verifier>
-
-   The client device must wait for the number of seconds previously provided as the value of `interval` between polling Advanced Identity Cloud for an access token. For example:
-
-   ```bash
-   $ curl \
-   --request POST \
-   --data "client_id=myClient" \
-   --data "grant_type=urn:ietf:params:oauth:grant-type:device_code" \
-   --data "device_code=<your-device-code>" \
-   --data "code_verifier=<your-code-verifier>" \
-   "https://<tenant-env-fqdn>/am/oauth2/realms/root/realms/alpha/access_token"
-   ```
-
-   If the user has authorized the client device, Advanced Identity Cloud returns an HTTP 200 status code with an access token that can be used to request resources:
-
-   ```json
-   {
-       "access_token": "<access-token>",
-       "refresh_token": "<refresh-token>",
-       "scope": "write",
-       "token_type": "Bearer",
-       "expires_in": 3599
-   }
-   ```
-
-   If the user hasn't authorized the client device, Advanced Identity Cloud returns an HTTP 403 status code with the following error message:
-
-   ```json
-   {
-       "error": "authorization_pending",
-       "error_description": "The user has not yet completed authorization"
-   }
-   ```
-
-   If the client device is polling faster than the specified interval, Advanced Identity Cloud returns an HTTP 400 status code with the following error message:
-
-   ```json
-   {
-       "error": "slow_down",
-       "error_description": "The polling interval has not elapsed since the last request"
-   }
-   ```
-
----
-
----
-title: Form parameters (HTTP POST)
-description: Authenticate OAuth 2.0 clients by sending credentials as HTTP POST form parameters
-component: pingoneaic
-page_id: pingoneaic:am-oauth2:client-auth-form
-canonical_url: https://docs.pingidentity.com/pingoneaic/am-oauth2/client-auth-form.html
-llms_txt: https://docs.pingidentity.com/pingoneaic/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-keywords: ["Authentication", "OAuth 2.0", "Federation", "HTTP", "Clients"]
-page_aliases: ["oauth2-guide:client-auth-form.adoc"]
----
-
-# Form parameters (HTTP POST)
-
-The OAuth 2.0 client authenticates by sending `client_id` and `client_secret` form parameters in an HTTP POST request:
-
-```bash
-$ curl \
---request POST \
---data "client_id=myClient" \
---data "client_secret=mySecret" \
-...
-```
-
-To use this authentication method for a confidential OAuth 2.0 client, edit the client profile in the Advanced Identity Cloud admin console:
-
-1. Go to Applications > Applications > *Name* > Sign On > General Settings > Advanced > Authentication.
-
-2. Set the Token Endpoint Authentication Method to `client_secret_post` and save your work.
-
-Make sure all connections to Advanced Identity Cloud use HTTPS to protect the secret.
-
----
-
----
-title: Implicit grant
-description: Issue tokens directly to browser-based clients in authorization endpoint redirection URI
-component: pingoneaic
-page_id: pingoneaic:am-oauth2:oauth2-implicit-grant
-canonical_url: https://docs.pingidentity.com/pingoneaic/am-oauth2/oauth2-implicit-grant.html
-llms_txt: https://docs.pingidentity.com/pingoneaic/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-keywords: ["OAuth 2.0", "OpenID Connect (OIDC)", "Endpoints", "Authorization", "Grant Flow", "REST API"]
-page_aliases: ["oidc1-guide:openid-connect-implicit-flow.adoc", "oauth2-guide:oauth2-implicit-grant.adoc"]
-section_ids:
-  oauth2-implicit-flow: The implicit grant flow
-  oauth_2_0: OAuth 2.0
-  oidc: OIDC
-  oauth2-implicit-demo: Demonstrate the implicit grant flow
-  prepare-demo-implicit: Prepare the demonstration
-  proc-access-token-implicit-browser: Get an access token using a browser
-  proc-access-token-implicit-rest: Get an access token using REST
-  additional_oidc_claims: Additional OIDC claims
----
-
-# Implicit grant
-
-* Endpoints
-
-  * [/oauth2/authorize](oauth2-authorize-endpoint.html)
-
-  * [/oauth2/userinfo](../am-oidc1/rest-api-oidc-userinfo-endpoint.html) (OpenID Connect \[OIDC])
-
-The implicit grant is designed for public clients that run inside the resource owner's user-agent, for example, JavaScript applications. For OIDC, this flow lets the relying party (RP) interact directly with the OpenID provider (OP), and receive tokens directly from the authorization endpoint.
-
-Because applications running in the user-agent are considered less trusted than applications running in servers, the authorization server or OP never issues refresh tokens in this flow. Also, you must consider the security impact of cross-site scripting (XSS) attacks that could leak the access token to other systems, and implement cross-origin resource sharing (CORS) to make OAuth 2.0 requests to different domains.
-
-Due to the security implications of this flow, ForgeRock recommends that you use the [Authorization code grant with PKCE](oauth2-authz-grant-pkce.html) flow whenever possible.
-
-## The implicit grant flow
-
-### OAuth 2.0
-
-![Advanced Identity Cloud supports the implicit grant.](_images/oauth2-implicit.svg)
-
-1. The client, usually a single-page application (SPA), receives a request to access a protected resource. To access the resource, the client requires authorization from the resource owner.
-
-2. The client redirects the resource owner's user-agent or opens a new frame to the Advanced Identity Cloud authorization service.
-
-3. The authorization server authenticates the resource owner, confirms resource access, and gathers consent if not previously saved.
-
-4. If the resource owner's credentials are valid, the authorization server returns the access token to the user-agent as part of the redirection URI.
-
-5. Now, the client must extract the access token from the URI. In this example, the user-agent follows the redirection to the web-hosted server that contains the protected resource without the access token.
-
-6. The web-hosted server returns a web page with an embedded script to extract the access token from the URI.
-
-   In another possible scenario, the redirection URI is a dummy URI in the client, and the client already has the logic in itself to extract the access token.
-
-7. The user-agent executes the script and retrieves the access token.
-
-8. The user-agent returns the access token to the client.
-
-9. The client requests access to the protected resources presenting the access token to the resource server.
-
-10. The resource server contacts the authorization server to validate the access token.
-
-11. The authorization server validates the token and responds to the resource server.
-
-12. If the token is valid, the resource server allows the client to access the protected resource.
-
-### OIDC
-
-![Advanced Identity Cloud supports the OIDC Implicit Flow.](_images/oidc-implicit.svg)
-
-1. The RP, usually an SPA, receives a request to access user information at the OP. To access this information, the RP requires authorization from the end user.
-
-2. The RP redirects the end user's user-agent or opens a new frame to the OP.
-
-   As part of the implicit flow, the request includes the `openid` scope and the `nonce` parameter.
-
-3. The OP authenticates the end user, confirms resource access, and gathers consent if necessary.
-
-4. On success, the OP returns access and ID tokens to the user-agent in the redirection URI.
-
-5. The user-agent extracts the tokens from the URI.
-
-   In this example, the user-agent follows the redirection to the RP without the tokens.
-
-6. The RP returns a web page with an embedded script to extract the tokens from the URI.
-
-   In another possible scenario, the redirection URI is a dummy URI in the RP application and the RP application already has the logic to extract the tokens.
-
-7. The user-agent executes the script and retrieves the tokens.
-
-8. The user-agent returns the tokens to the RP.
-
-9. The RP validates the ID token and its claims.
-
-   The RP can use the ID token subject ID claim as the end user's identity.
-
-10. If the RP requires additional claims, it sends a request to the [/oauth2/userinfo](../am-oidc1/rest-api-oidc-userinfo-endpoint.html) endpoint with the access token for authorization.
-
-11. If the access token is valid, the `/oauth2/userinfo` endpoint returns any additional claims.
-
-    The RP can use the subject ID and the additional claims to identify the end user.
-
-## Demonstrate the implicit grant flow
-
-Perform these steps to get an access token:
-
-1. [Prepare the demonstration](#prepare-demo-implicit)
-
-2. [Get an access token using a browser](#proc-access-token-implicit-browser) or [Get an access token using REST](#proc-access-token-implicit-rest)
-
-### Prepare the demonstration
-
-Complete these steps to prepare the implicit grant demonstration:
-
-1. [Create an application owner profile](../identities/manage-identities.html#create-a-user-profile) and record the username and password.
-
-2. [Register a client application](../app-management/register-a-custom-application.html).
-
-   1. In the Advanced Identity Cloud admin console, go to Applications > Applications and select + Custom Application.
-
-   2. Select the sign-in method as OIDC - OpenId Connect and application type as Native / SPA.
-
-   3. Create the application, providing the following details:
-
-      * Name
-
-        `myClient`
-
-      * Owners
-
-        `<application-owner>`
-
-      * Client ID
-
-        `myClient`
-
-   4. Switch to the Sign On tab and under General Settings, set these fields to have the following values:
-
-      * Sign-in URLs
-
-        `https://www.example.com:443/callback`
-
-      * Scopes
-
-        `write` (for OAuth 2.0)\
-        `openid` and `profile` (for OIDC)
-
-      * Grant Types
-
-        `Implicit`
-
-   5. Save your changes.
-
-3. [Create a resource owner profile](../identities/manage-identities.html#create-a-user-profile) and record the username and password.
-
-### Get an access token using a browser
-
-1. The client redirects the resource owner's user-agent to the authorization server's [/oauth2/authorize](oauth2-authorize-endpoint.html) endpoint, including the following query parameters:
-
-   * **`client_id`**: `myClient`
-
-   * **response_type**: `token` (OAuth 2.0) or `token id_token` (OIDC)
-
-   * **scope**: `write` (OAuth 2.0) or `openid` and `profile` (OIDC)
-
-   * **`redirect_uri`**: `https://www.example.com:443/callback`
-
-   * **nonce**: `<nonce-value>`(OIDC)
-
-   Example OAuth 2.0 call:
-
-   ```none
-   https://<tenant-env-fqdn>/am/oauth2/realms/root/realms/alpha/authorize \
-   ?client_id=myClient \
-   &response_type=token \
-   &scope=write \
-   &redirect_uri=https://www.example.com:443/callback \
-   &state=abc123
-   ```
-
-   For OIDC, use `scope=openid profile`, `response_type=token id_token`, and include the `nonce` parameter.
-
-   Example OIDC call:
-
-   ```none
-   https://<tenant-env-fqdn>/am/oauth2/realms/root/realms/alpha/authorize \
-   ?client_id=myClient \
-   &response_type=token id_token \
-   &scope=openid profile \
-   &redirect_uri=https://www.example.com:443/callback \
-   &state=abc123
-   &nonce=123abc
-   ```
-
-   |   |                                                                                                                                                                                                                                                                 |
-   | - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-   |   | The URL is split and spaces added for readability purposes.The `scope` parameter is optional if default values are configured in the authorization server or the client.The `state` parameter is included to protect against CSRF attacks but is also optional. |
-
-2. The resource owner authenticates to the authorization server. In this demonstration, they sign in using the default journey configured for the realm.
-
-   |   |                                                                                                                                                                                                                                                                                                                                                             |
-   | - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-   |   | By default, client applications in Advanced Identity Cloud use [implied consent](oauth2-manage-consent.html#skip-consent). If Advanced Identity Cloud is configured to require explicit consent, the authorization server presents the resource owner with a consent screen. To continue the flow, the resource owner must select `Allow` to grant consent. |
-
-   The authorization server redirects the resource owner to the URL specified in the `redirect_uri` parameter.
-
-3. Inspect the URL in the browser.
-
-   For OAuth 2.0, it contains the access token the authorization server has issued. For example:
-
-   `https://www.example.com/callback#access_token=<access_token>&iss...`
-
-   For OIDC, it contains the access and ID tokens. For example:
-
-   `https://www.example.com/callback#access_token=<access_token>&id_token=<id_token>...`
-
-### Get an access token using REST
-
-1. [Authenticate](../am-authentication/authn-rest.html) as the resource owner.
-
-   For example:
-
-   ```bash
-   $ curl \
-   --request POST \
-   --header "Content-Type: application/json" \
-   --header 'X-OpenAM-Username: <resource-owner-username>' \
-   --header 'X-OpenAM-Password: <resource-owner-password>' \
-   --header "Accept-API-Version: resource=2.0, protocol=1.0" \
-   'https://<tenant-env-fqdn>/am/json/realms/root/realms/alpha/authenticate'
-   {
-     "tokenId": "<tokenId>",
-     "successUrl": "/enduser/?realm=/alpha",
-     "realm": "/alpha"
-   }
-   ```
-
-2. As the client, call the [/oauth2/authorize](oauth2-authorize-endpoint.html) endpoint to request the authorization code. Provide the resource owner's SSO token in a cookie and the following parameters:
-
-   * **`client_id`**: `myClient`
-
-   * **`response_type`**: `token` (OAuth 2.0) or `token id_token` (OIDC)
-
-   * **`scope`**: `write` (OAuth 2.0) or `openid` and `profile` (OIDC)
-
-   * **`nonce`**: `<nonce-value>` (OIDC)
-
-   * **`csrf`**: `<tokenId>`
-
-   * **`redirect_uri`**: `https://www.example.com:443/callback`
-
-   * **`decision`**: `allow`
-
-   Example OAuth 2.0 call:
-
-   ```bash
-   $ curl \
-   --cookie "<session-cookie-name>=<tokenId>" \
-   --request POST \
-   --data "client_id=myClient" \
-   --data "response_type=token" \
-   --data "scope=write" \
-   --data "state=abc123" \
-   --data "decision=allow" \
-   --data "csrf=<tokenId>" \
-   --data "redirect_uri=https://www.example.com:443/callback" \
-   "https://<tenant-env-fqdn>/am/oauth2/realms/root/realms/alpha/authorize"
-   ```
-
-   For OIDC, use `scope=openid profile`, `response_type=token id_token`, and include the `nonce` parameter.
-
-   Example OIDC call:
-
-   ```bash
-   $ curl \
-   --cookie "<session-cookie-name>=<tokenId>" \
-   --request POST \
-   --data "client_id=myClient" \
-   --data "response_type=token id_token" \
-   --data "scope=openid profile" \
-   --data "state=abc123" \
-   --data "nonce=123abc" \
-   --data "decision=allow" \
-   --data "csrf=<tokenId>" \
-   --data "redirect_uri=https://www.example.com:443/callback" \
-   "https://<tenant-env-fqdn>/am/oauth2/realms/root/realms/alpha/authorize"
-   ```
-
-   |   |                                                                                                                                                                                                      |
-   | - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-   |   | The `scope` parameter is optional if default values are configured in the authorization server or the client.The `state` parameter is included to protect against CSRF attacks but is also optional. |
-
-   For OAuth 2.0, if the authorization server is able to authenticate the user, it returns an HTTP 302 response with the access token appended to the redirection URI:
-
-   ```none
-   HTTP/2 302
-   ...
-   location: https://www.example.com:443/callback#access_token=<access-token>&iss...
-   ...
-   ```
-
-   For OIDC, it returns the access and ID tokens in the redirection URI:
-
-   ```none
-   HTTP/2 302
-   ...
-   location: https://www.example.com:443/callback#access_token=<access-token>&&id_token=<id_token>...
-   ...
-   ```
-
-## Additional OIDC claims
-
-An RP can request additional claims about the end user with the access token at the [/oauth2/userinfo](../am-oidc1/rest-api-oidc-userinfo-endpoint.html) endpoint:
-
-```bash
-$ curl \
---request GET \
---header "Authorization Bearer <access-token>" \
-"https://<tenant-env-fqdn>/am/oauth2/realms/root/realms/alpha/userinfo"
-{
-  "name": "<resource-owner-display-name>",
-  "family_name": "<resource-owner-family-name>",
-  "given_name": "<resource-owner-given-name>",
-  "sub": "<resource-owner-id>",
-  "subname": "<resource-owner-id>"
-}
-```

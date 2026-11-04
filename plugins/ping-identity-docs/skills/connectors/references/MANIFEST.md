@@ -5,12 +5,12 @@
 - Sync date: 2026-11-03
 - Source: https://docs.pingidentity.com/connectors/llms.txt
 - Guides discovered: 97
-- Guides captured: 89
-- Guides fully captured: 88
+- Guides captured: 97
+- Guides fully captured: 96
 - Guides partially captured: 1
-- Guides without snapshots: 8
+- Guides without snapshots: 0
 - Total pages indexed: 139
-- Total snapshot pages captured: 111
+- Total snapshot pages captured: 119
 
 ## Source URLs
 
@@ -79,7 +79,15 @@
 | p1-advanced-identity-cloud-login-connector-md.md | assembled | https://docs.pingidentity.com/connectors/llms.txt | 1 | 1 | full |
 | p1-authentication-connector-md.md | assembled | https://docs.pingidentity.com/connectors/llms.txt | 1 | 1 | full |
 | p1-connector-md.md | assembled | https://docs.pingidentity.com/connectors/llms.txt | 1 | 1 | full |
+| p1-credentials-connector-md.md | assembled | https://docs.pingidentity.com/connectors/llms.txt | 1 | 1 | full |
+| p1-mfa-connector-md.md | assembled | https://docs.pingidentity.com/connectors/llms.txt | 1 | 1 | full |
 | p1-notifications-connector-md.md | assembled | https://docs.pingidentity.com/connectors/llms.txt | 1 | 1 | full |
+| p1-protect-connector-md.md | assembled | https://docs.pingidentity.com/connectors/llms.txt | 1 | 1 | full |
+| p1-radius-gateway-connector-md.md | assembled | https://docs.pingidentity.com/connectors/llms.txt | 1 | 1 | full |
+| p1-recognize-connector-md.md | assembled | https://docs.pingidentity.com/connectors/llms.txt | 1 | 1 | full |
+| p1-scope-consent-connector-md.md | assembled | https://docs.pingidentity.com/connectors/llms.txt | 1 | 1 | full |
+| p1-verify-connector-md.md | assembled | https://docs.pingidentity.com/connectors/llms.txt | 1 | 1 | full |
+| p1az-connector-md.md | assembled | https://docs.pingidentity.com/connectors/llms.txt | 1 | 1 | full |
 | pf-connector-md.md | assembled | https://docs.pingidentity.com/connectors/llms.txt | 1 | 1 | full |
 | pid-connector-md.md | assembled | https://docs.pingidentity.com/connectors/llms.txt | 1 | 1 | full |
 | pid-legacy-connector-md.md | assembled | https://docs.pingidentity.com/connectors/llms.txt | 1 | 1 | full |
@@ -174,7 +182,15 @@
 | snapshots/p1-advanced-identity-cloud-login-connector-md.md | d8876d22789ed49914ae96ecb8d3a1fcc093aa9a3d2e429cc3bc3dbd9bbfb9d0 |
 | snapshots/p1-authentication-connector-md.md | b9b8166367bb7daeb76a9d9570306cc3b2045fdf09dad70ffa0e0dfa3ad1d786 |
 | snapshots/p1-connector-md.md | 88564bf63c4daad981e9afeac597207a797888ca23dbd96a56e2b207c0639eca |
+| snapshots/p1-credentials-connector-md.md | 60bd4493d982903d291ad38bd2cc2d318e5e5c20b989eb72868d9e9641d73795 |
+| snapshots/p1-mfa-connector-md.md | cab467d36dbddacb86edf83264eca156453d812cb9e2be88c9bf3e7224879397 |
 | snapshots/p1-notifications-connector-md.md | c4a15615e0d868021cc22ffb707cea57bcbb17a58d36432c6be66a2d48e4c847 |
+| snapshots/p1-protect-connector-md.md | 0c91557be3870ecba081cb7e4cd873f7cd65621295c01ca5549a7ca7ab3ca7ec |
+| snapshots/p1-radius-gateway-connector-md.md | 3d2480696cda7e44089f141938b069761809cb7a325cd291c6730b3970d2baf0 |
+| snapshots/p1-recognize-connector-md.md | cafca3bc01d2a5cd9ec9329644f60ffff6b0c03453a583443a492a95f6117f91 |
+| snapshots/p1-scope-consent-connector-md.md | 4c7f8b2d2b30e6cc369e10c6764aabaab028ba491b1e2cac4114aa2604feeaee |
+| snapshots/p1-verify-connector-md.md | 34942f59cd6c8218c226bd2f021d88060bfbf7f9c0e99e061b45aaf49c5e7f28 |
+| snapshots/p1az-connector-md.md | c8bf6e11f8269c9105186ac323fb8df979cd4c91200c633d02ede22a6f5c46ed |
 | snapshots/pf-connector-md.md | e3ba26ca1a8b393fe209dedee3804cd61ba3f8ffb9919badd26a6540b004996f |
 | snapshots/pid-connector-md.md | ff2212c0ac6045ad74cd3d9337c715904f28941a422fd296f4f4b6ef9197ab68 |
 | snapshots/pid-legacy-connector-md.md | b1f6ae1074c3db1b3d57a6f05c58854d9569f7f8add3cbb7b8468dec3ff4dd13 |

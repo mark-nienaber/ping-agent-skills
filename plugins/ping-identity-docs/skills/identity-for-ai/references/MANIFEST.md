@@ -5,19 +5,22 @@
 - Sync date: 2026-11-03
 - Source: https://developer.pingidentity.com/identity-for-ai/llms.txt
 - Guides discovered: 9
-- Guides captured: 6
-- Guides fully captured: 4
-- Guides partially captured: 2
-- Guides without snapshots: 3
+- Guides captured: 9
+- Guides fully captured: 9
+- Guides partially captured: 0
+- Guides without snapshots: 0
 - Total pages indexed: 39
-- Total snapshot pages captured: 19
+- Total snapshot pages captured: 39
 
 ## Source URLs
 
 | Snapshot | Source type | Source URL | Pages indexed | Pages captured | Coverage |
 |---|---|---|---|---|---|
-| protocols.md | assembled | https://developer.pingidentity.com/identity-for-ai/llms.txt | 16 | 13 | partial |
-| use-cases.md | assembled | https://developer.pingidentity.com/identity-for-ai/llms.txt | 3 | 2 | partial |
+| protocols.md | assembled | https://developer.pingidentity.com/identity-for-ai/llms.txt | 16 | 16 | full |
+| integrations.md | assembled | https://developer.pingidentity.com/identity-for-ai/llms.txt | 9 | 9 | full |
+| identity.md | assembled | https://developer.pingidentity.com/identity-for-ai/llms.txt | 4 | 4 | full |
+| agents.md | assembled | https://developer.pingidentity.com/identity-for-ai/llms.txt | 3 | 3 | full |
+| use-cases.md | assembled | https://developer.pingidentity.com/identity-for-ai/llms.txt | 3 | 3 | full |
 | getting-started.md | assembled | https://developer.pingidentity.com/identity-for-ai/llms.txt | 1 | 1 | full |
 | glossary.md | assembled | https://developer.pingidentity.com/identity-for-ai/llms.txt | 1 | 1 | full |
 | index-md.md | assembled | https://developer.pingidentity.com/identity-for-ai/llms.txt | 1 | 1 | full |
@@ -28,8 +31,11 @@
 | File | SHA-256 |
 |---|---|
 | llms.txt | 3b49ad9dcec3611c5de2f675ef7eabfc4f9edc60322fc8d8a9365b6f308d0a76 |
-| snapshots/protocols.md | ad740b8419aa54fea2da9ee48c5e9bb31f7f27e5a83fea70a7fd8a30f153b6ed |
-| snapshots/use-cases.md | 93dbee34dd5f5739a2275395477400e58b62209cf9f40b233dcba5c395c7bee1 |
+| snapshots/protocols.md | 93256b6f4b56aeb1d448f21e1c84809e5d5c36ca083a83722582c139f95d7325 |
+| snapshots/integrations.md | ecfbcf9cd6721ec3a485b9d49241d9eca3ffb3f455eb780e73da8859fbe9e06a |
+| snapshots/identity.md | cb86ea7776b660f3e6057399ca8624e0c17511ef6f18b7bf5598873c6eda37ab |
+| snapshots/agents.md | b5c716bbf6684667551489bff286f2f9add49ce0525e02232b5211aeb2cd3c43 |
+| snapshots/use-cases.md | 9bcceca869760deb7e609f04c6efe11e1e22fef717f06326e7cba5d0d4bf1305 |
 | snapshots/getting-started.md | 2dd28526f022f4a7b22746f80f4bb82c76e45598f91027eabffb2bda6bd97693 |
 | snapshots/glossary.md | 298a2e832213c83fed1e5bd95095658e9bb94e161d4f7cf52d6478a1e46787f8 |
 | snapshots/index-md.md | 6cc99839130cb381046a1cf49bb5eace9d009309a2a339310fa7dbd86e19e7e3 |

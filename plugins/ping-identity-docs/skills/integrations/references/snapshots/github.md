@@ -977,6 +977,71 @@ After enabling outbound provisioning in the `<pf_install>/pingfederate/bin/run.p
 ---
 
 ---
+title: Enabling debug logging
+description: To help with troubleshooting or monitoring, you can turn on activity logging for the adapter.
+component: github
+page_id: github:github_login_integration_kit:pf_github_cic_enabling_debug_logging
+canonical_url: https://docs.pingidentity.com/integrations/github/github_login_integration_kit/pf_github_cic_enabling_debug_logging.html
+llms_txt: https://docs.pingidentity.com/integrations/github/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: June 25, 2024
+section_ids:
+  about-this-task: About this task
+  steps: Steps
+---
+
+# Enabling debug logging
+
+To help with troubleshooting or monitoring, you can turn on activity logging for the adapter.
+
+## About this task
+
+These steps are optional. For general information about logging, see [Enabling debug messages and console logging](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/pf_enabling_debug_message_and_console_logging.html) in the PingFederate documentation.
+
+## Steps
+
+1. Open the `<pf_install>/pingfederate/server/default/conf/log4j2.xml` file for editing.
+
+2. If you want to log activity for PingFederate and all adapters, do the following.
+
+   1. Find the following section.
+
+      ```html
+      <AsyncRoot level="INFO" includeLocation="false">
+      	<!-- <AppenderRef ref="CONSOLE" /> -->
+      	<AppenderRef ref="FILE" />
+      </AsyncRoot>
+      ```
+
+   2. Change `INFO` to `DEBUG`.
+
+      ```html
+      <AsyncRoot level="DEBUG" includeLocation="false">
+      	<!-- <AppenderRef ref="CONSOLE" /> -->
+      	<AppenderRef ref="FILE" />
+      </AsyncRoot>
+      ```
+
+   3. If you want to see the adapter activity in the console, remove the comment tags.
+
+      ```html
+      <AsyncRoot level="INFO" includeLocation="false">
+      	<AppenderRef ref="CONSOLE" />
+      	<AppenderRef ref="FILE" />
+      </AsyncRoot>
+      ```
+
+3. If you want to log activity just for the GitHub IdP Adapter, add the following line.
+
+   ```html
+   <Logger name="com.pingidentity.adapter.idp.github" level="DEBUG"/>
+   ```
+
+4. Save the file.
+
+---
+
+---
 title: Enabling provisioning and single sign-on in PingFederate
 description: To use PingFederate for provisioning and single sign-on, configure an external datastore and set a SAML entity ID.
 component: github
@@ -1085,88 +1150,30 @@ section_ids:
 ---
 
 ---
-title: GitHub Login Integration Kit
-description: The GitHub Login Integration Kit allows PingFederate to use GitHub as an identity provider (IdP). This allows users to access service provider (SP) applications by signing on to GitHub.
+title: Enabling provisioning and single sign-on in PingFederate 10.1 or later
+description: In the PingFederate administrative console, configure the datastore for PingFederate to use as the source of user data.
 component: github
-page_id: github:github_login_integration_kit:pf_github_cic
-canonical_url: https://docs.pingidentity.com/integrations/github/github_login_integration_kit/pf_github_cic.html
-llms_txt: https://docs.pingidentity.com/integrations/github/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: November 3, 2024
-section_ids:
-  features: Features
-  components: Components
-  intended-audience: Intended audience
-  system-requirements: System requirements
----
-
-# GitHub Login Integration Kit
-
-The GitHub Login Integration Kit allows PingFederate to use GitHub as an identity provider (IdP). This allows users to access service provider (SP) applications by signing on to GitHub.
-
-## Features
-
-* Supports the [PingFederate authentication API](https://docs.pingidentity.com/pingfederate/latest/developers_reference_guide/pf_authentication_api.html).
-
-* Supports the [JavaScript Widget for the PingFederate Authentication API](https://github.com/pingidentity/pf-authn-js-widget).
-
-## Components
-
-* GitHub IdP Adapter
-
-  * Allows PingFederate to communicate with the GitHub API to process sign-on requests and get user information.
-
-* Templates
-
-  * Allows the adapter to prompt the user to sign on. The template can be presented with a browser redirect or as a pop-up window.
-
-  * Allows you to modify the appearance of the sign-on prompt.
-
-* Language packs
-
-  * Allows you to customize or localize the messages returned by the PingFederate authentication API and shown on the templates during authentication. Learn more in [Localizing messages for end users](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/pf_local_message_end_users.html) in the PingFederate documentation.
-
-## Intended audience
-
-This document is intended for PingFederate administrators.
-
-If you need help during the setup process, see the following sections of the PingFederate documentation:
-
-* [Identity provider SSO configuration](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/pf_ident_provid_sso_config.html)
-
-* [Managing IdP adapters](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/pf_managing_idp_adapters.html)
-
-* [Authentication policies](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/pf_authentication_policies.html)
-
-* [SP connection management](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/pf_sp_connect_management.html)
-
-## System requirements
-
-* PingFederate 11.3 or later
-
-* A standard GitHub account
-
----
-
----
-title: Supported attributes reference
-description: The following table consists of the attributes that can be mapped for user provisioning. For more information on available attributes, see SCIM in the GitHub documentation.
-component: github
-page_id: github:github_provisioner:pf_github_connector_supported_attributes_reference
-canonical_url: https://docs.pingidentity.com/integrations/github/github_provisioner/pf_github_connector_supported_attributes_reference.html
+page_id: github:github_emu_provisioner:pf_github_emu_connector_enabling_provisioning_and_sso_in_pf_101_or_later
+canonical_url: https://docs.pingidentity.com/integrations/github/github_emu_provisioner/pf_github_emu_connector_enabling_provisioning_and_sso_in_pf_101_or_later.html
 llms_txt: https://docs.pingidentity.com/integrations/github/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 25, 2024
+section_ids:
+  steps: Steps
 ---
 
-# Supported attributes reference
+# Enabling provisioning and single sign-on in PingFederate 10.1 or later
 
-The following table consists of the attributes that can be mapped for user provisioning. For more information on available attributes, see [SCIM](https://developer.github.com/v3/scim/) in the GitHub documentation.
+## Steps
 
-| Attribute   | Description                                                                                                                                                                  |
-| ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Username    | GitHub's unique identifier for the user. This attribute is required.                                                                                                         |
-| Email       | The email for the user (for example, `bjensen@example.com`). This attribute is required.                                                                                     |
-| First Name  | The given name of the user, or first name in most Western languages (for example, 'Barbara' given the full name 'Ms. Barbara Jane Jensen, III'). This attribute is required. |
-| Last Name   | The family name of the user, or last name in most Western languages (for example, 'Jensen' given the full name 'Ms. Barbara Jane Jensen, III'). This attribute is required.  |
-| External ID | A string that is an identifier for the resource as defined by the provisioning client.                                                                                       |
+1. In the PingFederate administrative console, configure the datastore for PingFederate to use as the source of user data.
+
+   For help, see [Datastores](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/pf_datastores.html) in the PingFederate documentation.
+
+2. Go to **System > Server > Protocol Settings > Federation Info**.
+
+3. In the **SAML 2.0 Entity ID** field, enter a name for PingFederate to use when identifying itself to SAML partners.
+
+4. On the **Outbound Provisioning** tab, in the **Provisioner Data Store** list, select the internal database that will store the synchronization state. Click **Save**.
+
+   For more information, see [Configuring outbound provisioning settings](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/help_protocolsettingstasklet_saasglobalprovisioningsettingsstate.html) in the PingFederate documentation.

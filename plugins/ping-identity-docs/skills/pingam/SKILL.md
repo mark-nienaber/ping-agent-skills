@@ -32,7 +32,7 @@ Secure your resources and manage user access across your network with PingAM, a 
 | Am Authentication: authentication, pingam, configure | am-authentication | https://docs.pingidentity.com/pingam/8.1/am-authentication/*.md | references/snapshots/am-authentication.md |
 | Release Notes: changes, fixes, deprecated | release-notes | https://docs.pingidentity.com/pingam/release-notes/*.md | references/snapshots/release-notes.md |
 | Security: pingam, session, configure | security | https://docs.pingidentity.com/pingam/8.1/security/*.md | references/snapshots/security.md |
-| Am Scripting: scripts, scripting, bindings | am-scripting | https://docs.pingidentity.com/pingam/8.1/am-scripting/*.md | live-only |
+| Am Scripting: scripts, scripting, bindings | am-scripting | https://docs.pingidentity.com/pingam/8.1/am-scripting/*.md | references/snapshots/am-scripting.md |
 | Installation: pingam, configuration, install | installation | https://docs.pingidentity.com/pingam/8.1/installation/*.md | references/snapshots/installation.md |
 | Am Saml2: saml, service, pingam | am-saml2 | https://docs.pingidentity.com/pingam/8.1/am-saml2/*.md | references/snapshots/am-saml2.md |
 | Setup: configure, pingam, directory | setup | https://docs.pingidentity.com/pingam/8.1/setup/*.md | references/snapshots/setup.md |

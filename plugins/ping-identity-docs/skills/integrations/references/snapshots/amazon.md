@@ -18,865 +18,1043 @@ For information and configuration steps, see [Amazon Web Services session tags i
 ---
 
 ---
-title: Deploying the integration files
-description: To get started with the integration, deploy the Amazon Login Integration Kit files to your PingFederate directory.
+title: Amazon IdP Adapter settings reference
+description: Field descriptions for the Amazon IdP Adapter configuration page.
 component: amazon
-page_id: amazon:amazon_login_integration_kit:pf_amazon_cic_deploying_the_integration_files
-canonical_url: https://docs.pingidentity.com/integrations/amazon/amazon_login_integration_kit/pf_amazon_cic_deploying_the_integration_files.html
+page_id: amazon:amazon_login_integration_kit:pf_amazon_cic_amazon_idp_adapter_settings_reference
+canonical_url: https://docs.pingidentity.com/integrations/amazon/amazon_login_integration_kit/pf_amazon_cic_amazon_idp_adapter_settings_reference.html
 llms_txt: https://docs.pingidentity.com/integrations/amazon/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: October 24, 2025
 section_ids:
-  steps: Steps
+  standard-fields: Standard fields
+  advanced-fields: Advanced fields
 ---
 
-# Deploying the integration files
+# Amazon IdP Adapter settings reference
 
-To get started with the integration, deploy the Amazon Login Integration Kit files to your PingFederate directory.
+Field descriptions for the Amazon IdP Adapter configuration page.
 
-## Steps
+## Standard fields
 
-1. Download the Amazon Login Integration Kit `.zip` archive from the [**Add-ons** tab of the PingFederate downloads page](https://www.pingidentity.com/en/resources/downloads/pingfederate.html) or the [Ping Identity Marketplace](https://marketplace.pingone.com/item/amazon-login-integration-kit).
+> **Collapse: Details**
+>
+> | Field                               | Description                                                                                                                                                                                                                                                                                                                                                   |
+> | ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+> | **Client ID**                       | The client ID that you noted in [Registering PingFederate as a security profile in Amazon](pf_amazon_cic_registering_pf_as_a_security_profile_in_amazon.html).                                                                                                                                                                                                |
+> | **Client Secret**                   | The client secret that you noted in [Registering PingFederate as a security profile in Amazon](pf_amazon_cic_registering_pf_as_a_security_profile_in_amazon.html).                                                                                                                                                                                            |
+> | **Error Redirect URL**              | When an error occurs in the adapter, PingFederate redirects the browser to this URL instead of the default error page.This field is blank by default.                                                                                                                                                                                                         |
+> | **Unauthorized Redirect URL**       | When a user denies the requested Amazon permissions, PingFederate redirects the browser to this URL instead of the default error page.This field is blank by default.                                                                                                                                                                                         |
+> | **Authorization Callback Endpoint** | The PingFederate endpoint that Amazon uses to respond to authorization requests. If you set a custom endpoint in the **Authorization callback URL** field in [Registering PingFederate as a security profile in Amazon](pf_amazon_cic_registering_pf_as_a_security_profile_in_amazon.html), change this field to match.This default value is `/amazon-authn`. |
 
-2. Stop PingFederate.
+## Advanced fields
 
-3. If you're upgrading an existing deployment, back up your customizations and delete earlier versions of the integration files:
-
-   1. Back up any Amazon Login Integration Kit files that you customized in the `<pf_install>/pingfederate/server/default/conf/` directory.
-
-   2. Delete the `pf-amazon-idp-adapter-<version>.jar` file from your `<pf_install>/pingfederate/server/default/deploy` directory.
-
-4. Extract the `.zip` archive and merge the contents of the `dist` directory with your `<pf_install>/pingfederate` directory.
-
-5. If there is more than one version of the `pf-authn-api-sdk-<version>.jar` file in your `<pf_install>/pingfederate/server/default/lib` directory, delete all but the latest version of the file.
-
-6. If you backed up any customized files, modify the new files with your customizations.
-
-7. Start PingFederate.
-
-8. If you operate PingFederate in a cluster, repeat steps 2 - 8 for each engine node.
+> **Collapse: Details**
+>
+> | Field                           | Description                                                                                                                                                                                                                                                                                                                               |
+> | ------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+> | **Amazon Authorization URL**    | The URL that PingFederate uses to send authentication requests to Amazon. If Amazon changes this endpoint, enter the new URL.The default value is `https://amazon.com/ap/oa`.                                                                                                                                                             |
+> | **Amazon Access Token URL**     | The URL that PingFederate uses to retrieve access tokens from Amazon. If Amazon changes this endpoint, enter the new URL.The default value is `https://amazon.com/auth/02/token`.                                                                                                                                                         |
+> | **Amazon User Info URL**        | The URL that PingFederate uses to retrieve user data from Amazon.The default value is `https://api.amazon.com/user/profile`.                                                                                                                                                                                                              |
+> | **Scopes**                      | The scopes that you want to request from Amazon. Separate scopes with a space.The default value is `profile`.                                                                                                                                                                                                                             |
+> | **Amazon Sign-On Presentation** | Determines how the adapter presents the Amazon sign-on form:- Redirect (default)
+>
+>   The adapter redirects the browser to the Amazon sign-on form.
+>
+> - Pop-up window
+>
+>   The adapter opens a new window with the Amazon sign-on form on a PingFederate template. Use this option if automatic redirects are blocked by your users' browsers. |
+> | **Amazon Pop-Up Template**      | The template file that presents the Amazon sign-on form. Applies only when **Amazon Login Presentation** is set to **Pop-up window**.The default value is `amazon-pop-up-template.html`.                                                                                                                                                  |
+> | **Amazon Post-Auth Template**   | The template file that the adapter presents after the user signs on. Applies only when **Amazon Login Presentation** is set to **Pop-up window**.The default value is `amazon-post-auth-template.html`.                                                                                                                                   |
+> | **Amazon Messages File**        | The language-pack file associated with the Amazon pop-up template.The default value is `pingfederate-amazon-adapter-messages`.                                                                                                                                                                                                            |
+> | **Retry Request**               | Determines whether PingFederate will retry requests after it receives a response with a failure code.This checkbox is cleared by default.                                                                                                                                                                                                 |
+> | **Maximum Retries Limit**       | Determines how many times PingFederate retries a request.The default value is `5`.                                                                                                                                                                                                                                                        |
+> | **Retry Error Codes**           | A list of response codes that should trigger a retry. Separate response codes with a comma.The default value is `403`.                                                                                                                                                                                                                    |
+> | **API Request Timeout**         | The amount of time in milliseconds that PingFederate waits for Amazon to respond to requests. A value of `0` disables the timeout.The default value is `5000`.                                                                                                                                                                            |
+> | **Connection Timeout**          | The amount of time in milliseconds that PingFederate allows to establish a connection with Amazon. A value of 0 disables the timeout.The default value is `5000`.                                                                                                                                                                         |
+> | **Proxy Settings**              | Defines proxy settings for outbound HTTP requests.The default value is **System Defaults**.                                                                                                                                                                                                                                               |
+> | **Custom Proxy Host**           | The proxy server host name to use when **Proxy Settings** is set to **Custom**.This field is blank by default.                                                                                                                                                                                                                            |
+> | **Custom Proxy Port**           | The proxy server port to use when **Proxy Settings** is set to **Custom**.This field is blank by default.                                                                                                                                                                                                                                 |
 
 ---
 
 ---
-title: Deploying the integration files
-description: To get started with the integration, deploy the Amazon Web Services Connector files to your PingFederate installation directory. This must be done on the administrative node installation first, regardless of whether you use PingFederate in STANDALONE mode or as part of a cluster.
+title: Amazon integrations
+description: The Amazon Login Integration Kit allows PingFederate to use Amazon as an identity provider (IdP). This allows users to access service provider (SP) applications by signing on to Amazon.
 component: amazon
-page_id: amazon:amazon_web_services_connector:pf_aws_connector_deploying_the_integration_files
-canonical_url: https://docs.pingidentity.com/integrations/amazon/amazon_web_services_connector/pf_aws_connector_deploying_the_integration_files.html
+page_id: amazon::pf_is_overview_of_amazon_integrations
+canonical_url: https://docs.pingidentity.com/integrations/amazon/pf_is_overview_of_amazon_integrations.html
 llms_txt: https://docs.pingidentity.com/integrations/amazon/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: July 23, 2024
+revdate: October 24, 2025
 section_ids:
-  steps: Steps
-  result: Result:
+  amazon-login-integration-kit-formerly-the-amazon-cloud-identity-connector: Amazon Login Integration Kit (formerly the Amazon Cloud Identity Connector)
+  aws-connector: AWS Connector
+  aws-iam-identity-center-provisioner-aws-single-sign-on-connector: AWS IAM Identity Center Provisioner (AWS Single Sign-On Connector)
+  amazon-web-services-session-tags-integrations-for-pingfederate-and-pingone: Amazon Web Services session tags integrations for PingFederate and PingOne
 ---
 
-# Deploying the integration files
+# Amazon integrations
 
-To get started with the integration, deploy the Amazon Web Services Connector files to your PingFederate installation directory. This must be done on the administrative node installation first, regardless of whether you use PingFederate in `STANDALONE` mode or as part of a cluster.
+## Amazon Login Integration Kit (formerly the Amazon Cloud Identity Connector)
 
-## Steps
+The Amazon Login Integration Kit allows PingFederate to use Amazon as an identity provider (IdP) *(tooltip: \<div class="paragraph">
+\<p>A service that manages identity information and provides authentication services to relying clients or SPs within a federated or distributed network.\</p>
+\</div>)*. This allows users to access service provider (SP) *(tooltip: \<div class="paragraph">
+\<p>In SAML, an entity that receives and accepts an authentication assertion issued by an IdP, typically for the purpose of allowing access to a protected resource.\</p>
+\</div>)* applications by signing on to Amazon.
 
-1. Download the Amazon Web Services Connector `.zip` archive from the [**Add-ons** tab of the PingFederate downloads page](https://www.pingidentity.com/en/resources/downloads/pingfederate.html) or the [Ping Identity Marketplace](https://marketplace.pingone.com/item/amazon-web-services-sso-integration).
+## AWS Connector
 
-2. Stop PingFederate.
+The Amazon Web Services (AWS) Connector allows PingFederate to integrate with Amazon's AWS Identity and Access Management service for provisioning and single sign-on (SSO) *(tooltip: \<div class="paragraph">
+\<p>The process of authenticating an identity (signing on) at one website (usually with a user ID and password) and then accessing resources secured by other domains without reauthenticating.\</p>
+\</div>)*.
 
-3. If you're upgrading an existing deployment, delete the `pf-aws-quickconnection-<version>.jar` file from your `<pf_install>/pingfederate/server/default/deploy` directory.
+## AWS IAM Identity Center Provisioner (AWS Single Sign-On Connector)
 
-4. Extract the `.zip` archive and copy the `pf-aws-quickconnection-<version>.jar` file from the `dist` directory to the `<pf_install>/pingfederate/server/default/deploy` directory.
+The AWS IAM Identity Center Provisioner allows PingFederate to integrate with Amazon's AWS IAM Identity Center service for provisioning and SSO.
 
-   |   |                                                                                                                                                                               |
-   | - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-   |   | You will use the supplied `aws-saml-metadata.xml` file later in the [Creating a provisioning connection](pf_aws_connector_creating_a_provisioning_connection.html) procedure. |
+## Amazon Web Services session tags integrations for PingFederate and PingOne
 
-5. Enable the PingFederate provisioning engine:
-
-   1. Open your `<pf_install>/pingfederate/bin/run.properties` file.
-
-   2. Change `pf.provisioner.mode` to `STANDALONE`. Save the file.
-
-      |   |                                                                                                                                                                                                                                        |
-      | - | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-      |   | To configure the `FAILOVER` mode instead, see [Deploying provisioning failover](https://docs.pingidentity.com/pingfederate/latest/server_clustering_guide/pf_deploy_provis_failover.html) in the PingFederate Server Clustering Guide. |
-
-6. Start PingFederate.
-
-   ### Result:
-
-   If you are using the PingFederate provisioning engine in `STANDALONE` mode on the administrative node, you have completed the deploying the integration files procedure. Otherwise, continue to step 7.
-
-7. If you are using the PingFederate provisioning engine in any mode other than `STANDALONE` mode, including `FAILOVER` mode in a clustered environment, repeat steps 2-4 and step 6 for each engine node.
+AWS session tags allow enterprises to use Ping Identity products for attribute-based access control (ABAC) *(tooltip: \<div class="paragraph">
+\<p>Access control based on attributes of a user, such as how old a user is or whether the user is a paying customer.\</p>
+\</div>)* in AWS. Includes instructions for PingFederate and PingOne for Customers using Security Assertion Markup Language (SAML) *(tooltip: \<div class="paragraph">
+\<p>A standard, XML-based, message-exchange framework enabling the secure transmittal of authentication tokens and other user attributes across domains.\</p>
+\</div>)* or OpenID Connect (OIDC) *(tooltip: \<div class="paragraph">
+\<p>An authentication protocol built on top of OAuth that authenticates users and enables clients (relying parties) of all types to request and receive information about authenticated sessions and users. OIDC is extensible, allowing clients to use optional features such as encryption of identity data, discovery of OpenID Providers (OAuth authorization servers), and session management.\</p>
+\</div>)*.
 
 ---
 
 ---
-title: Deploying the integration files
-description: To get started with the integration, deploy the AWS IAM Identity Center Provisioner files to your PingFederate directory.
+title: Amazon Login Integration Kit
+description: The Amazon Login Integration Kit (formerly the Amazon Cloud Identity Connector) allows PingFederate to use Amazon as an identity provider (IdP). This allows users to access service provider (SP) applications by signing on to Amazon.
 component: amazon
-page_id: amazon:aws_iam_identity_center_provisioner:pf_aws_singlesignon_connector_deploying_the_integration_files
-canonical_url: https://docs.pingidentity.com/integrations/amazon/aws_iam_identity_center_provisioner/pf_aws_singlesignon_connector_deploying_the_integration_files.html
+page_id: amazon:amazon_login_integration_kit:pf_amazon_cic
+canonical_url: https://docs.pingidentity.com/integrations/amazon/amazon_login_integration_kit/pf_amazon_cic.html
 llms_txt: https://docs.pingidentity.com/integrations/amazon/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: July 27, 2026
+revdate: October 24, 2025
 section_ids:
-  steps: Steps
+  features: Features
+  components: Components
+  intended-audience: Intended audience
+  system-requirements: System requirements
 ---
 
-# Deploying the integration files
+# Amazon Login Integration Kit
 
-To get started with the integration, deploy the AWS IAM Identity Center Provisioner files to your PingFederate directory.
+The Amazon Login Integration Kit (formerly the Amazon Cloud Identity Connector) allows PingFederate to use Amazon as an identity provider (IdP) *(tooltip: \<div class="paragraph">
+\<p>A service that manages identity information and provides authentication services to relying clients or SPs within a federated or distributed network.\</p>
+\</div>)*. This allows users to access service provider (SP) *(tooltip: \<div class="paragraph">
+\<p>In SAML, an entity that receives and accepts an authentication assertion issued by an IdP, typically for the purpose of allowing access to a protected resource.\</p>
+\</div>)* applications by signing on to Amazon.
 
-## Steps
+## Features
 
-1. Download the AWS IAM Identity Center Provisioner `.zip` archive from the [**Add-ons** tab of the PingFederate downloads page](https://www.pingidentity.com/en/resources/downloads/pingfederate.html) or the [Ping Identity Marketplace](https://marketplace.pingone.com/item/aws-iam-identity-center-provisioner).
+* Supports the [PingFederate authentication API](https://docs.pingidentity.com/pingfederate/latest/developers_reference_guide/pf_authentication_api.html).
 
-2. Stop PingFederate.
+* Supports the [JavaScript Widget for the PingFederate Authentication API](https://github.com/pingidentity/pf-authn-js-widget).
 
-3. If you're upgrading an existing deployment, delete the `pf-aws-sso-quickconnection-<version>.jar` file from the filepath`<pf_install>/pingfederate/server/default/deploy` directory in your admin node.
+## Components
 
-4. Extract the `.zip` archive and merge the contents of the `dist` directory with your `<pf_install>/pingfederate/server/default/deploy` directory.
+* Amazon IdP Adapter
 
-5. Enable the PingFederate provisioning engine:
+  * Allows PingFederate to communicate with the Amazon API to process sign-on requests and get user information.
 
-   1. Open your `<pf_install>/pingfederate/bin/run.properties` file.
+* Templates
 
-   2. Change `pf.provisioner.mode` to `STANDALONE`. Save the file.
+  * Allows the adapter to prompt the user to sign on. The template can be presented with a browser redirect or as a pop-up window.
 
-      |   |                                                                                                                                                                                                                                        |
-      | - | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-      |   | To configure the `FAILOVER` mode instead, see [Deploying provisioning failover](https://docs.pingidentity.com/pingfederate/latest/server_clustering_guide/pf_deploy_provis_failover.html) in the PingFederate Server Clustering Guide. |
+  * Allows you to modify the appearance of the sign-on prompt.
 
-6. Start PingFederate.
+* Language packs
 
-7. If you operate PingFederate in a cluster, repeat steps 2-4 and step 6 for each engine node.
+  * Allows you to customize or localize the messages returned by the PingFederate authentication API and shown on the templates during authentication.
+
+    Learn more in [Localizing messages for end users](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/pf_local_message_end_users.html) in the PingFederate documentation.
+
+## Intended audience
+
+This document is intended for PingFederate administrators.
+
+If you need help during the setup process, see the following sections of the PingFederate documentation:
+
+* [PingFederate authentication API](https://docs.pingidentity.com/pingfederate/latest/developers_reference_guide/pf_authentication_api.html)
+
+* [Exploring the Authentication API](https://docs.pingidentity.com/pingfederate/latest/developers_reference_guide/pf_exploring_authentication_api.html)
+
+* [Set pseudonym and masking options](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/pf_setting_pseudonym_masking_options.html)
+
+* [Define the IdP adapter contract](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/help_authnadapterinstancetasklet_plugincontractstate.html)
+
+## System requirements
+
+* PingFederate 11.3 or later
+
+* An Amazon developer account
 
 ---
 
 ---
-title: Download manifest
-description: The following files are included in the Amazon Login Integration Kit .zip archive:
+title: Amazon Web Services Connector
+description: The Amazon Web Services (AWS) Connector allows PingFederate to integrate with Amazon's AWS Identity and Access Management service for provisioning and single sign-on (SSO).
 component: amazon
-page_id: amazon:amazon_login_integration_kit:pf_amazon_cic_download_manifest
-canonical_url: https://docs.pingidentity.com/integrations/amazon/amazon_login_integration_kit/pf_amazon_cic_download_manifest.html
+page_id: amazon:amazon_web_services_connector:pf_aws_connector
+canonical_url: https://docs.pingidentity.com/integrations/amazon/amazon_web_services_connector/pf_aws_connector.html
 llms_txt: https://docs.pingidentity.com/integrations/amazon/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: January 21, 2026
+revdate: July 3, 2024
+section_ids:
+  features: Features
+  intended-audience: Intended audience
+  system-requirements: System requirements
 ---
 
-# Download manifest
+# Amazon Web Services Connector
 
-The following files are included in the Amazon Login Integration Kit `.zip` archive:
+The Amazon Web Services (AWS) Connector allows PingFederate to integrate with Amazon's AWS Identity and Access Management service for provisioning and single sign-on (SSO).
 
-* `ReadMeFirst.pdf`: Contains links to this online documentation.
+## Features
 
-* `legal/Legal.pdf`: Contains copyright and license information.
+* Manages users in Amazon Web Services based on changes in an external data store that is attached to PingFederate.
 
-* `dist` – contains the integration files
+  * Creates, updates, and deletes users.
 
-  * `deploy` – contains the Java libraries
+  * Allows you to enable the create, update, and delete capabilities independently.
 
-    * `pf-amazon-idp-adapter-<version>.jar`: A `.jar` file that contains the Amazon IdP Adapter.
+* Manages groups
 
-  * `conf`: Contains the HTML template that presents the Amazon sign-on form.
+  * Creates groups
 
-    * `language-packs`: Contains files with customizable user-facing messages.
+  * Updates group memberships and names.
 
-      * `pingfederate-amazon-adapter-messages.properties`: A variable file that customizes the messages that appear on the template files.
+* Enables browser-based SSO initiated by the identity provider (IdP).
 
-    * `template`: Contains user-facing HTML template files.
+* Pre-populates some connection settings with the included quick connection template.
 
-      * `amazon-pop-up-template.html`: A template that opens a pop-up window to prompt the user to sign on.
+* Supports the following attributes: `UserName`, `Password`, and `PasswordResetRequired`.
 
-      * `amazon-post-auth-template.html`: A template that returns the user to the PingFederate sign-on flow after they sign on with Amazon.
+* Pre-populates some connection settings with the included quick connection template.
 
-      * `assets`: Contains functional scripts and files used by the template.
+## Intended audience
 
-        * `css/amazon.css`: A CSS file that customizes the appearance of the template files.
+This document is intended for PingFederate administrators.
 
-        * `fonts/end-user`: Contains template fonts and icons.
+Before you start, you should be familiar with the following:
 
-          * `icons`: Contains template icons.
+* The following sections of the Amazon Web Services documentation:
 
-        * `images`: Contains template image files.
+  * [AWS Identity and Access Management (IAM)](https://aws.amazon.com/iam/)
 
-          * `ping-logo.svg`: An image file with company branding.
+  * [IAM Users](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users.html)
 
-  * `lib/pf-authn-api-sdk-<version>.jar`: A `.jar` file that contains the PingFederate Authentication API SDK.
+* The following sections of the PingFederate documentation:
+
+  * [Identity provider SSO configuration](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/pf_ident_provid_sso_config.html)
+
+  * [Datastores](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/help_managedatasourcestasklet_managedatasourcesstate.html)
+
+  * [Managing IdP adapters](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/pf_managing_idp_adapters.html)
+
+  * [Managing digital signing certificates and decryption keys](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/help_certmanagementtasklet_dsigsigningcert_certmanagementstate.html)
+
+  * [SP connection management](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/pf_sp_connect_management.html)
+
+  * [Configuring outbound provisioning](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/help_spconnectionconfigtasklet_saasprovisioningstate.html)
+
+  * [Configuring outbound provisioning settings](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/help_protocolsettingstasklet_saasglobalprovisioningsettingsstate.html)
+
+## System requirements
+
+* PingFederate 8.0 or later.
+
+* To allow PingFederate to make outbound connections to Amazon Web Services, you might need to allow the following endpoint in your firewall:
+
+  * https\://iam.amazonaws.com
 
 ---
 
 ---
-title: Download manifest
-description: The following files are included in the Amazon Web Services Connector .zip archive:
+title: Amazon Web Services Session Tags Integrations Guide
+description: Amazon Web Services (AWS) session tags allow enterprises to use Ping Identity products for attribute-based access control (ABAC) in the AWS Identity and Access Management (IAM) and AWS IAM Identity Center services.
 component: amazon
-page_id: amazon:amazon_web_services_connector:pf_aws_connector_download_manifest
-canonical_url: https://docs.pingidentity.com/integrations/amazon/amazon_web_services_connector/pf_aws_connector_download_manifest.html
+page_id: amazon:amazon_web_services_session_tags_integrations_guide:pf_awssessiontags_integration_amazon_web_services_session_tags_integrations_guide
+canonical_url: https://docs.pingidentity.com/integrations/amazon/amazon_web_services_session_tags_integrations_guide/pf_awssessiontags_integration_amazon_web_services_session_tags_integrations_guide.html
 llms_txt: https://docs.pingidentity.com/integrations/amazon/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 3, 2024
 ---
 
-# Download manifest
+# Amazon Web Services Session Tags Integrations Guide
 
-The following files are included in the Amazon Web Services Connector `.zip` archive:
+Amazon Web Services (AWS) session tags allow enterprises to use Ping Identity products for attribute-based access control (ABAC) in the AWS Identity and Access Management (IAM) and AWS IAM Identity Center services.
 
-* `legal/Legal.pdf` – copyright and license information.
+ABAC helps enterprises simplify fine-grained access to AWS resources by using attributes from their corporate directories in permissions rules.
 
-* `dist` – contains the integration files
+When an employee federates into AWS from a standards-compliant identity provider (IdP) such as PingFederate or PingOne for Enterprise, the administrator can include attributes such as cost center, job title, and email address in the AWS session. These attributes function as session tags and can be matched to tags on AWS resources to control their access to resources during their AWS session.
 
-  * `pf-aws-quickconnection-<version>.jar` – The Amazon Web Services Connector quick connection template.
+For example, an employee with job title "Systems Engineer" and cost center "Stratford" could be granted write access to an Amazon EC2 table that is also tagged with cost center "Stratford."
 
-* `aws-saml-metadata.xml` – a modifiable metadata file used to create the connection.
+You can configure PingFederate or PingOne for Enterprise to send attributes in the AWS sessions when your users federate into AWS. Then, you can implement a policy in AWS that evaluates the attributes from PingFederate or PingOne for Enterprise to control access to AWS resources.
+
+For more information, see the following:
+
+* [Attributes for Access Control](https://docs.aws.amazon.com/singlesignon/latest/userguide/attributesforaccesscontrol.html) in the AWS IAM Identity Center documentation.
+
+* [IAM Tutorial: Use SAML session tags for ABAC](https://docs.aws.amazon.com/IAM/latest/UserGuide/tutorial_abac-saml.html) in the AWS IAM documentation.
+
+To use AWS session tags for ABAC, complete the steps in one or more of the following topics.
 
 ---
 
 ---
-title: Download manifest
-description: The following files are included in the AWS IAM Identity Center Provisioner .zip archive:
+title: Authentication API Support
+description: You can use the PingFederate authentication API to integrate the Amazon IdP Adapter into your application.
 component: amazon
-page_id: amazon:aws_iam_identity_center_provisioner:pf_aws_singlesignon_connector_download_manifest
-canonical_url: https://docs.pingidentity.com/integrations/amazon/aws_iam_identity_center_provisioner/pf_aws_singlesignon_connector_download_manifest.html
-llms_txt: https://docs.pingidentity.com/integrations/amazon/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: July 3, 2024
----
-
-# Download manifest
-
-The following files are included in the AWS IAM Identity Center Provisioner `.zip` archive:
-
-* `Legal.pdf` – copyright and license information
-
-* `dist` – contains the integration files
-
-  * `pf-aws-sso-quickconnection-<version>.jar` – The AWS IAM Identity Center Provisioner quick connection template.
-
----
-
----
-title: Enabling debug logging
-description: To help with troubleshooting or monitoring, you can turn on activity logging for the adapter.
-component: amazon
-page_id: amazon:amazon_login_integration_kit:pf_amazon_cic_enabling_debug_logging
-canonical_url: https://docs.pingidentity.com/integrations/amazon/amazon_login_integration_kit/pf_amazon_cic_enabling_debug_logging.html
+page_id: amazon:amazon_login_integration_kit:pf_amazon_cic_authentication_api_support
+canonical_url: https://docs.pingidentity.com/integrations/amazon/amazon_login_integration_kit/pf_amazon_cic_authentication_api_support.html
 llms_txt: https://docs.pingidentity.com/integrations/amazon/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 10, 2024
+---
+
+# Authentication API Support
+
+You can use the PingFederate authentication API to integrate the Amazon IdP Adapter into your application.
+
+The PingFederate Authentication API provides access to the current state of the authentication flow as a user steps through the PingFederate authentication policy. You can find more information in [PingFederate authentication API](https://docs.pingidentity.com/pingfederate/latest/developers_reference_guide/pf_authentication_api.html) in the PingFederate documentation.
+
+To integrate the Amazon IdP Adapter into your authentication flow, configure your application based on the states, actions, and models available in the PingFederate Authentication API Explorer. Learn more in [Exploring the Authentication API](https://docs.pingidentity.com/pingfederate/latest/developers_reference_guide/pf_exploring_authentication_api.html) in the PingFederate documentation.
+
+---
+
+---
+title: Available user attributes
+description: The following table lists the attributes Amazon supports.
+component: amazon
+page_id: amazon:amazon_login_integration_kit:pf_amazon_cic_available_user_attributes
+canonical_url: https://docs.pingidentity.com/integrations/amazon/amazon_login_integration_kit/pf_amazon_cic_available_user_attributes.html
+llms_txt: https://docs.pingidentity.com/integrations/amazon/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: October 24, 2025
+---
+
+# Available user attributes
+
+The following table lists the attributes Amazon supports.
+
+| Attribute      | Description                                                |
+| -------------- | ---------------------------------------------------------- |
+| `access_token` | The access token that Amazon provides to your application. |
+| `email`        | The user's email address.                                  |
+| `name`         | The user's name.                                           |
+| `postal_code`  | The user's shipping postal code for the Amazon account.    |
+| `user_id`      | The user's Amazon ID.                                      |
+
+---
+
+---
+title: AWS IAM Identity Center Provisioner
+description: The AWS IAM Identity Center Provisioner allows PingFederate to integrate with Amazon's AWS IAM Identity Center service for provisioning and single sign-on (SSO).
+component: amazon
+page_id: amazon:aws_iam_identity_center_provisioner:pf_aws_singlesignon_connector
+canonical_url: https://docs.pingidentity.com/integrations/amazon/aws_iam_identity_center_provisioner/pf_aws_singlesignon_connector.html
+llms_txt: https://docs.pingidentity.com/integrations/amazon/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: January 20, 2026
 section_ids:
-  about-this-task: About this task
+  features: Features
+  intended-audience: Intended audience
+  system-requirements: System requirements
+---
+
+# AWS IAM Identity Center Provisioner
+
+The AWS IAM Identity Center Provisioner allows PingFederate to integrate with Amazon's AWS IAM Identity Center service for provisioning and single sign-on (SSO).
+
+## Features
+
+* Manages users in AWS IAM Identity Center based on changes in a datastore that is attached to PingFederate.
+
+  * Creates, updates, disables, and deletes users.
+
+  * Allows you to enable the create, update, disable, and delete capabilities independently.
+
+  * Allows you to provision disabled users.
+
+  * Allows you to choose whether to disable or delete users when deprovisioning.
+
+* Manages groups in AWS IAM Identity Center based on changes in an external data store that is attached to PingFederate.
+
+  * Creates and deletes groups.
+
+  * Updates group memberships.
+
+* Enables browser-based SSO initiated by the service provider (SP) or identity provider (IdP).
+
+* Pre-populates some connection settings with the included quick connection template.
+
+## Intended audience
+
+This document is intended for PingFederate administrators.
+
+If you need help during the setup process, see the following resources:
+
+* AWS IAM Identity Center documentation:
+
+  * [What Is AWS Single Sign-On?](https://docs.aws.amazon.com/singlesignon/latest/userguide/what-is.html)
+
+  * [IAM Identity Center prerequisites and considerations](https://docs.aws.amazon.com/singlesignon/latest/userguide/identity-center-prerequisites.html)
+
+  * [Users, Groups, and Provisioning](https://docs.aws.amazon.com/singlesignon/latest/userguide/users-groups-provisioning.html)
+
+  * [SCIM Profile and SAML 2.0 Implementation](https://docs.aws.amazon.com/singlesignon/latest/userguide/scim-profile-saml.html)
+
+  * [Automatic Provisioning](https://docs.aws.amazon.com/singlesignon/latest/userguide/provision-automatically.html)
+
+  * [Using Ping Identity products with IAM Identity Center](https://docs.aws.amazon.com/singlesignon/latest/userguide/pingidentity.html)
+
+* PingFederate documentation:
+
+  * [SP connection management](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/pf_sp_connect_management.html)
+
+  * [Identity provider SSO configuration](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/pf_ident_provid_sso_config.html)
+
+  * [Managing digital signing certificates and decryption keys](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/help_certmanagementtasklet_dsigsigningcert_certmanagementstate.html)
+
+  * [Datastores](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/pf_datastores.html)
+
+  * [Configuring outbound provisioning](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/help_spconnectionconfigtasklet_saasprovisioningstate.html)
+
+  * [Configuring outbound provisioning settings](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/help_protocolsettingstasklet_saasglobalprovisioningsettingsstate.html)
+
+## System requirements
+
+* PingFederate 9.0 or later.
+
+* An AWS IAM Identity Center administrator account.
+
+* To allow PingFederate to make outbound connections to the AWS IAM Identity Center API, you might need to allow the following domain in your firewall:
+
+  * https\://aws.amazon.com
+
+---
+
+---
+title: Changelog
+description: The following is the change history for the Amazon Login Integration Kit (formerly the Amazon Cloud Identity Connector).
+component: amazon
+page_id: amazon:amazon_login_integration_kit:pf_amazon_cic_changelog
+canonical_url: https://docs.pingidentity.com/integrations/amazon/amazon_login_integration_kit/pf_amazon_cic_changelog.html
+llms_txt: https://docs.pingidentity.com/integrations/amazon/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: February 19, 2026
+section_ids:
+  version-1-1-2-january-2026: Version 1.1.2 - January 2026
+  version-1-1-1-november-2025: Version 1.1.1 – November 2025
+  version-1-1-november-2020: Version 1.1 – November 2020
+  version-1-0-october-2019: Version 1.0 – October 2019
+---
+
+# Changelog
+
+The following is the change history for the Amazon Login Integration Kit (formerly the Amazon Cloud Identity Connector).
+
+## Version 1.1.2 - January 2026
+
+* Removed third-party fonts and the `authn-api-messages.properties` file.
+
+## Version 1.1.1 – November 2025
+
+* Updated Apache Commons Text library version to address a potential security vulnerability.
+
+## Version 1.1 – November 2020
+
+* Added a setting to use browser redirect or pop-up window for the sign-on presentation.
+
+* Added customizable sign-on templates for the pop-up window presentation.
+
+* Added customizable user-facing language-pack messages.
+
+* Added support for the [PingFederate authentication API](https://docs.pingidentity.com/pingfederate/latest/developers_reference_guide/pf_authentication_api.html).
+
+* Added support for the [JavaScript Widget for the PingFederate Authentication API](https://github.com/pingidentity/pf-authn-js-widget).
+
+## Version 1.0 – October 2019
+
+* Initial release.
+
+* Added support for social login using Amazon credentials.
+
+* Added support for retrieving Amazon user information.
+
+* Added settings for retrying failed request and maximum number of retries.
+
+* Added an adapter setting to override system-default proxy settings.
+
+* Added API connection timeout settings.
+
+* Added Amazon API endpoints override settings.
+
+* Added custom **Error Redirect** and **Unauthorized Redirect URL** settings.
+
+---
+
+---
+title: Changelog
+description: Amazon Web Services (AWS) Connector 2.0 – April 2019 (current release)
+component: amazon
+page_id: amazon:amazon_web_services_connector:pf_aws_connector_changelog
+canonical_url: https://docs.pingidentity.com/integrations/amazon/amazon_web_services_connector/pf_aws_connector_changelog.html
+llms_txt: https://docs.pingidentity.com/integrations/amazon/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: July 3, 2024
+---
+
+# Changelog
+
+**Amazon Web Services (AWS) Connector 2.0 – April 2019 (current release)**
+
+* Added support for the AWS 2.0 API.
+
+* Added support for the `Password` and `PasswordResetRequired` attributes.
+
+* Added the ability to update group names.
+
+* Added the ability to disable the "create", "update", and "delete" capabilities individually.
+
+* Added the ability to show debug information from the AWS API in the PingFederate server log. See [Show Amazon API errors in the server log](pf_aws_connector_show_amazon_api_errors_in_the_server_log.html).
+
+* Added support for proxy connections.
+
+* Improved error-handling and reporting behavior.
+
+**Amazon Web Services Connector 1.0 – January 2014**
+
+* Initial release.
+
+* Added support for user and group provisioning.
+
+* Added support for browser-based single sign-on.
+
+---
+
+---
+title: Changelog
+description: The following is the change history for the AWS IAM Identity Center Provisioner.
+component: amazon
+page_id: amazon:aws_iam_identity_center_provisioner:pf_aws_singlesignon_connector_changelog
+canonical_url: https://docs.pingidentity.com/integrations/amazon/aws_iam_identity_center_provisioner/pf_aws_singlesignon_connector_changelog.html
+llms_txt: https://docs.pingidentity.com/integrations/amazon/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: January 20, 2025
+section_ids:
+  version-1-1-0-6-january-2026: Version 1.1.0.6 - January 2026
+  version-1-1-0-5-january-2026: Version 1.1.0.5 - January 2026
+  version-1-1-0-4-december-2025: Version 1.1.0.4 - December 2025
+  version-1-1-0-3-november-2025: Version 1.1.0.3 - November 2025
+  version-1-1-october-2024: Version 1.1 – October 2024
+  version-1-0-october-2020: Version 1.0 – October 2020
+---
+
+# Changelog
+
+The following is the change history for the AWS IAM Identity Center Provisioner.
+
+## Version 1.1.0.6 - January 2026
+
+* Fixed an issue with the SCIM API URL format for group members and users that caused `404` errors during provisioning. The adapter now adds a trailing slash between the base URL and the endpoint if it's missing.
+
+## Version 1.1.0.5 - January 2026
+
+* Replaced deprecated AWS IAM Identity Center PatchGroup `Remove All` and `Replace` operations with incremental `add` or `remove` `PATCH` updates. This change aligns with AWS requirements and prevents access disruptions and throttling issues when synchronizing large group memberships.
+
+## Version 1.1.0.4 - December 2025
+
+* Added the ability to retry `PATCH` requests automatically with an exponential delay to improve HTTP `429` error handling.
+
+## Version 1.1.0.3 - November 2025
+
+* The AWS IAM Identity Center Provisioner now sets the `User-Agent` HTTP header with a value of `PingFederate` when making `PATCH` requests.
+
+  |   |                                                                                             |
+  | - | ------------------------------------------------------------------------------------------- |
+  |   | By default, AWS IAM Identity Center blocks `PATCH` requests that don't include this header. |
+
+## Version 1.1 – October 2024
+
+* Fixed an issue that prevented updates made to an existing user's `sAMAccountName` in the LDAP source from synchronizing with the [nickName](pf_aws_singlesignon_connector_supported_attributes_reference.html) attribute in the AWS platform.
+
+## Version 1.0 – October 2020
+
+* Initial release.
+
+* Added support for user and group provisioning.
+
+* Added support for AWS IAM Identity Center attributes.
+
+* Added support for provisioning disabled users.
+
+* Added configuration options for the create, update, and disable or delete capabilities.
+
+* Added configuration options for deprovisioning actions.
+
+---
+
+---
+title: Configuring an adapter instance
+description: Configure the Amazon IdP Adapter to determine how PingFederate communicates with the Amazon authentication service.
+component: amazon
+page_id: amazon:amazon_login_integration_kit:pf_amazon_cic_configuring_an_adapter_instance
+canonical_url: https://docs.pingidentity.com/integrations/amazon/amazon_login_integration_kit/pf_amazon_cic_configuring_an_adapter_instance.html
+llms_txt: https://docs.pingidentity.com/integrations/amazon/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: October 24, 2025
+section_ids:
   steps: Steps
 ---
 
-# Enabling debug logging
+# Configuring an adapter instance
 
-To help with troubleshooting or monitoring, you can turn on activity logging for the adapter.
-
-## About this task
-
-These steps are optional. You can find general information about logging in [Enabling debug messages and console logging](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/pf_enabling_debug_message_and_console_logging.html) in the PingFederate documentation.
+Configure the Amazon IdP Adapter to determine how PingFederate communicates with the Amazon authentication service.
 
 ## Steps
 
-1. Open the `<pf_install>/pingfederate/server/default/conf/log4j2.xml` file for editing.
+1. Sign on to the PingFederate admin console.
 
-2. If you want to log activity for PingFederate and all adapters, do the following:
+2. On the **Identity Provider > Adapters** page, click **Create New Instance**.
 
-   1. Find the following section:
+3. On the **Type** tab, set the basic adapter instance attributes:
 
-      ```html
-      <AsyncRoot level="INFO" includeLocation="false">
-      	<!-- <AppenderRef ref="CONSOLE" /> -->
-      	<AppenderRef ref="FILE" />
-      </AsyncRoot>
-      ```
+   1. In the **Instance Name** field, enter a name for the adapter instance.
 
-   2. Change `INFO` to `DEBUG`:
+   2. In the **Instance ID** field, enter a unique identifier for the adapter instance.
 
-      ```html
-      <AsyncRoot level="DEBUG" includeLocation="false">
-      	<!-- <AppenderRef ref="CONSOLE" /> -->
-      	<AppenderRef ref="FILE" />
-      </AsyncRoot>
-      ```
+   3. In the **Type** list, select **Amazon IdP Adapter *\<version_number>***. Click **Next**.
 
-   3. If you want to see the adapter activity in the console, remove the comment tags:
+4. On the **IdP Adapter** tab, configure the adapter instance by referring to the [Amazon IdP Adapter settings reference](pf_amazon_cic_amazon_idp_adapter_settings_reference.html). Click **Next**.
 
-      ```html
-      <AsyncRoot level="INFO" includeLocation="false">
-      	<AppenderRef ref="CONSOLE" />
-      	<AppenderRef ref="FILE" />
-      </AsyncRoot>
-      ```
+5. On the **Actions** tab, click **Test Connection**. Resolve any issues, and then click **Next**.
 
-3. If you want to log activity for the Amazon IdP Adapter only, add the following line:
+6. On the **Extended Contract** tab, add any non-core attributes you want to include in the contract. Click **Next**.
 
-   ```html
-   <Logger name="com.pingidentity.adapter.idp.amazon" level="DEBUG"/>
-   ```
+   You can find a list of core contract attributes in [Available user attributes](pf_amazon_cic_available_user_attributes.html).
 
-4. Save the file.
+7. On the **Adapter Attributes** page, set pseudonym and masking options as shown in [Set pseudonym and masking options](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/pf_setting_pseudonym_masking_options.html) in the PingFederate documentation. Click **Next**.
+
+8. On the **Adapter Contract Mapping** page, configure the contract fulfillment details for the adapter as shown in [Define the IdP adapter contract](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/help_authnadapterinstancetasklet_plugincontractstate.html) in the PingFederate documentation. Click **Next**.
+
+9. On the **Summary** tab, verify your configuration. Click **Done**.
+
+10. On the **Manage IdP Adapter Instances** page, click **Save**.
 
 ---
 
 ---
-title: Enabling provisioning and single sign-on in PingFederate
-description: To use PingFederate for provisioning and single sign-on, configure an external datastore and set a SAML entity ID.
+title: Configuring AWS session tags for PingFederate OIDC connections
+description: You can configure AWS Session Tag support for OpenID Connect (OIDC) connections in PingFederate.
 component: amazon
-page_id: amazon:aws_iam_identity_center_provisioner:pf_aws_singlesignon_connector_enabling_provisioning_and_single_sign_on_in_pf
-canonical_url: https://docs.pingidentity.com/integrations/amazon/aws_iam_identity_center_provisioner/pf_aws_singlesignon_connector_enabling_provisioning_and_single_sign_on_in_pf.html
+page_id: amazon:amazon_web_services_session_tags_integrations_guide:pf_awssessiontags_integration_configuring_aws_session_tags_for_pf_oidc_connections
+canonical_url: https://docs.pingidentity.com/integrations/amazon/amazon_web_services_session_tags_integrations_guide/pf_awssessiontags_integration_configuring_aws_session_tags_for_pf_oidc_connections.html
 llms_txt: https://docs.pingidentity.com/integrations/amazon/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 3, 2024
 section_ids:
-  about-this-task: About this task
-  enabling-provisioning-and-single-sign-on-in-pingfederate-10-1-or-later: Enabling provisioning and single sign-on in PingFederate 10.1 or later
+  before-you-begin: Before you begin
   steps: Steps
-  enabling-provisioning-and-single-sign-on-in-pingfederate-10-0-or-earlier: Enabling provisioning and single sign-on in PingFederate 10.0 or earlier
-  steps-2: Steps
+  choose-from: Choose from:
+  result: Result
 ---
 
-# Enabling provisioning and single sign-on in PingFederate
+# Configuring AWS session tags for PingFederate OIDC connections
 
-To use PingFederate for provisioning and single sign-on, configure an external datastore and set a SAML entity ID.
+You can configure AWS Session Tag support for OpenID Connect (OIDC) connections in PingFederate.
 
-## About this task
+## Before you begin
 
-Your external datastore acts as the source of data for provisioning. PingFederate also uses an internal datastore to store the state of synchronization between the source datastore and the target datastore.
+* If you want to use OGNL expressions to populate the values of the AWS session tags, see [Enabling and disabling expressions](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/pf_enable_disable_express.html) in the PingFederate documentation.
 
-For more information, see [Datastores](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/pf_datastores.html) and [Configuring outbound provisioning settings](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/help_protocolsettingstasklet_saasglobalprovisioningsettingsstate.html) in the PingFederate documentation.
+* Create an Amazon Web Services (AWS) console account and policy that uses session tags. For help, see [AWS prerequisites (page 241)](https://cdn-docs.pingidentity.com/archive/pdf/pingaccess/pingaccess-52.pdf#page=242) in the PingAccess documentation.
 
-## Enabling provisioning and single sign-on in PingFederate 10.1 or later
+* Configure your PingFederate OAuth client for AWS console authentication.
 
-### Steps
-
-1. In the PingFederate administrative console, configure the datastore for PingFederate to use as the source of user data.
-
-   For help, see [Datastores](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/pf_datastores.html) in the PingFederate documentation.
-
-2. Go to **System > Server > Protocol Settings > Federation Info**.
-
-3. In the **SAML 2.0 Entity ID** field, enter a name for PingFederate to use when identifying itself to SAML partners.
-
-4. On the **Outbound Provisioning** tab, in the **Provisioner Data Store** list, select the internal database that will store the synchronization state. Click **Save**.
-
-   For more information, see [Configuring outbound provisioning settings](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/help_protocolsettingstasklet_saasglobalprovisioningsettingsstate.html) in the PingFederate documentation.
-
-## Enabling provisioning and single sign-on in PingFederate 10.0 or earlier
-
-### Steps
-
-1. In the PingFederate administrative console, configure the datastore for PingFederate to use as the source of user data.
-
-   For help, see [Datastores](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/pf_datastores.html) in the PingFederate documentation.
-
-2. Go to **System > Protocol Settings > Roles & Protocols**.
-
-3. Select the **Enable Identity Provider IdP Role and Support the Following** check box.
-
-4. Select the **SAML 2.0** and **Outbound Provisioning** check boxes. Click **Next**.
-
-5. Click the **Federation Info** tab.
-
-6. In the **SAML 2.0 Entity ID** field, enter a name for PingFederate to use to identify itself to SAML partners.
-
-7. On the **Outbound Provisioning** tab, in the **Provisioner Data Store** list, select the internal database that will store the synchronization state. Click **Save**.
-
-   For more information, see [Configuring outbound provisioning settings](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/help_protocolsettingstasklet_saasglobalprovisioningsettingsstate.html) in the PingFederate documentation.
-
----
-
----
-title: Enabling provisioning and single sign-on in PingFederate 10.0 or earlier
-description: In the PingFederate administrative console, configure the datastore for PingFederate to use as the source of user data.
-component: amazon
-page_id: amazon:aws_iam_identity_center_provisioner:pf_aws_singlesignon_connector_enabling_provisioning_and_single_sign_on_in_pf_100_or_earlier
-canonical_url: https://docs.pingidentity.com/integrations/amazon/aws_iam_identity_center_provisioner/pf_aws_singlesignon_connector_enabling_provisioning_and_single_sign_on_in_pf_100_or_earlier.html
-llms_txt: https://docs.pingidentity.com/integrations/amazon/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: July 3, 2024
-section_ids:
-  steps: Steps
----
-
-# Enabling provisioning and single sign-on in PingFederate 10.0 or earlier
+* Define a PingFederate OpenID Connect policy. For help, see [Configuring OpenID Connect policies](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/pf_configuring_oidc_policies.html) in the PingFederate documentation.
 
 ## Steps
 
-1. In the PingFederate administrative console, configure the datastore for PingFederate to use as the source of user data.
+1. Open your OpenID Connect policy.
 
-   For help, see [Datastores](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/pf_datastores.html) in the PingFederate documentation.
+   ### Choose from:
 
-2. Go to **System > Protocol Settings > Roles & Protocols**.
+   * For PingFederate 10.1 or later: go to **Applications > OAuth > OpenID Connect Policy Management**.
 
-3. Select the **Enable Identity Provider IdP Role and Support the Following** check box.
+   * For PingFederate 10.0 or earlier: go to **OAuth Server > OpenID Connect Policy Management**.
 
-4. Select the **SAML 2.0** and **Outbound Provisioning** check boxes. Click **Next**.
+2. Select the client that you want to edit. Click **Attribute Contract**.
 
-5. Click the **Federation Info** tab.
+3. Create a new attribute and name it `http://aws.amazon.com/tags`. Click **Add**.
 
-6. In the **SAML 2.0 Entity ID** field, enter a name for PingFederate to use to identify itself to SAML partners.
+4. Click **Contract Fulfillment** and enter the required OGNL expression for the session tag.
 
-7. On the **Outbound Provisioning** tab, in the **Provisioner Data Store** list, select the internal database that will store the synchronization state. Click **Save**.
+   |   |                                                                                                                   |
+   | - | ----------------------------------------------------------------------------------------------------------------- |
+   |   | You must construct the OGNL expression for the specific source data structure, as shown in the following example. |
 
-   For more information, see [Configuring outbound provisioning settings](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/help_protocolsettingstasklet_saasglobalprovisioningsettingsstate.html) in the PingFederate documentation.
+   ![Screen capture of the Contract Fulfillment tab showing the appropriate values in the Attribute Contract, Source and value columns.](_images/joe1571947495981.png)
+
+5. Click **Save**, then from **Policy** drop-down list, select the OpenID Connect policy you just created.
+
+## Result
+
+The ID token generated by PingFederate will include the following AWS Tags value:
+
+```
+https://aws.amazon.com/Tags:
+{
+"principal_tags ": {
+          "project  ":["Project1],
+          "cost_center": ["1234"]
+        }
+"transitive_tags": ["cost_center"]
+}
+```
 
 ---
 
 ---
-title: Enabling provisioning and single sign-on in PingFederate 10.1 or later
-description: In the PingFederate administrative console, configure the datastore for PingFederate to use as the source of user data.
+title: Configuring AWS session tags for PingFederate SAML connections
+description: You can configure AWS Identity and Access Management (IAM) and AWS IAM Identity Center session tag support for SAML connections in PingFederate.
 component: amazon
-page_id: amazon:aws_iam_identity_center_provisioner:pf_aws_singlesignon_connector_enabling_provisioning_and_sso_in_pf_101_or_later
-canonical_url: https://docs.pingidentity.com/integrations/amazon/aws_iam_identity_center_provisioner/pf_aws_singlesignon_connector_enabling_provisioning_and_sso_in_pf_101_or_later.html
+page_id: amazon:amazon_web_services_session_tags_integrations_guide:pf_awssessiontags_integration_configuring_aws_session_tags_for_pf_saml_connections
+canonical_url: https://docs.pingidentity.com/integrations/amazon/amazon_web_services_session_tags_integrations_guide/pf_awssessiontags_integration_configuring_aws_session_tags_for_pf_saml_connections.html
 llms_txt: https://docs.pingidentity.com/integrations/amazon/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 3, 2024
 section_ids:
+  before-you-begin: Before you begin
   steps: Steps
+  choose-from: Choose from:
+  result: Result
 ---
 
-# Enabling provisioning and single sign-on in PingFederate 10.1 or later
+# Configuring AWS session tags for PingFederate SAML connections
+
+You can configure AWS Identity and Access Management (IAM) and AWS IAM Identity Center session tag support for SAML connections in PingFederate.
+
+## Before you begin
+
+* If you want to use OGNL expressions to populate the values of the AWS session tags, see [Enabling and disabling expressions](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/pf_enable_disable_express.html) in the PingFederate documentation.
+
+* Create an Amazon Web Services (AWS) console account and policy that uses session tags. For help, see [AWS prerequisites (page 241)](https://cdn-docs.pingidentity.com/archive/pdf/pingaccess/pingaccess-52.pdf#page=242) in the PingAccess documentation.
 
 ## Steps
 
-1. In the PingFederate administrative console, configure the datastore for PingFederate to use as the source of user data.
+1. Open your service provider (SP) connection. Go to **SP Connection > Browser SSO > Assertion Creation > Attribute Contract**.
 
-   For help, see [Datastores](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/pf_datastores.html) in the PingFederate documentation.
+2. Extend the contract of the AWS SP connection.
 
-2. Go to **System > Server > Protocol Settings > Federation Info**.
+   ### Choose from:
 
-3. In the **SAML 2.0 Entity ID** field, enter a name for PingFederate to use when identifying itself to SAML partners.
+   * If you are using AWS SSO, include the access control tags based on the following format:
 
-4. On the **Outbound Provisioning** tab, in the **Provisioner Data Store** list, select the internal database that will store the synchronization state. Click **Save**.
+     * `https://aws.amazon.com/SAML/Attributes/AccessControl:{attribute}`
 
-   For more information, see [Configuring outbound provisioning settings](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/help_protocolsettingstasklet_saasglobalprovisioningsettingsstate.html) in the PingFederate documentation.
+       ![This screen capture shows the Attribute Contract tab with several example AWS SSO access control attributes.](_images/qld1605284905064.jpg)
+
+   * If you are using AWS IAM, include the AWS Principal Tags and TransitiveTagKeys, based on the following examples:
+
+     * `https://aws.amazon.com/SAML/Attributes/AccessControl:{attribute}`
+
+     * `https://aws.amazon.com/SAML/Attributes/PrincipalTag:project`
+
+     * `https://aws.amazon.com/SAML/Attributes/Role`
+
+     * `https://aws.amazon.com/SAML/Attributes/RoleSessioName`
+
+     * `https://aws.amazon.com/SAML/Attributes/TransitiveTagKeys`
+
+   ![This screen capture shows the Attribute Contract tab with the example AWS IAM PrincipalTag and TransitiveTagKeys attributes.](_images/kwg1571947883022.png)
+
+3. Go to **SP Connection > Browser SSO > Assertion Creation > IdP Adapter Mapping > Attribute Sources & User Lookup > Attribute Contract Fulfillment**.
+
+4. Configure the attribute contract fulfillment for the AWS attributes.
+
+   Example 1: This example shows AWS IAM Identity Center attributes mapped directly from an HTML Form Adapter instance.
+
+   ![This screen capture shows the Attribute Contract Fulfillment tab with AWS IAM Identity Center attributes mapped to Adapter sources.](_images/jmq1605288110796.jpg)
+
+   Example 2: This example shows AWS IAM attributes mapped from a data source and manipulated by the OGNL expression language available in PingFederate.
+
+   ![This screen capture shows the Attribute Contract Fulfillment tab with AWS IAM attributes mapped to Adapter and LDAP sources.](_images/vaw1571948042845.png)
+
+5. Click **Save**.
+
+## Result
+
+The AWS session tags are now included in the SAML assertion created by PingFederate.
 
 ---
 
 ---
-title: Exporting SAML metadata from PingFederate
-description: Export a metadata file that describes your PingFederate identity provider configuration.
+title: Configuring AWS session tags for PingOne OIDC connections
+description: You can configure AWS session tag support for OpenID Connect (OIDC) connections in PingOne by changing the attribute mappings in your OIDC application.
 component: amazon
-page_id: amazon:amazon_web_services_connector:pf_aws_connector_exporting_saml_metadata_from_pf
-canonical_url: https://docs.pingidentity.com/integrations/amazon/amazon_web_services_connector/pf_aws_connector_exporting_saml_metadata_from_pf.html
+page_id: amazon:amazon_web_services_session_tags_integrations_guide:pf_awssessiontags_integration_configuring_aws_session_tags_for_p1_oidc_connections
+canonical_url: https://docs.pingidentity.com/integrations/amazon/amazon_web_services_session_tags_integrations_guide/pf_awssessiontags_integration_configuring_aws_session_tags_for_p1_oidc_connections.html
 llms_txt: https://docs.pingidentity.com/integrations/amazon/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 3, 2024
 section_ids:
+  before-you-begin: Before you begin
+  steps: Steps
+---
+
+# Configuring AWS session tags for PingOne OIDC connections
+
+You can configure AWS session tag support for OpenID Connect (OIDC) connections in PingOne by changing the attribute mappings in your OIDC application.
+
+## Before you begin
+
+* Create an Amazon Web Services (AWS) console account and policy that uses session tags. For help, see [AWS prerequisites (page 241)](https://cdn-docs.pingidentity.com/archive/pdf/pingaccess/pingaccess-52.pdf#page=242) in the PingAccess documentation.
+
+* Sign on to your [PingOne account](https://admin.pingone.com/web-portal/login) as an administrator.
+
+* Configure an external identity provider, such as PingFederate, with a `Tags` attribute. The value must be in JSON format as specified by the AWS session tag feature.
+
+## Steps
+
+1. Go to **Applications > OIDC.**
+
+2. Select the application you want to edit and click **Edit**.
+
+3. In the **Default User Profile Attribute Contract** section, click **Add Attribute**.
+
+4. Enter `http://aws.amazon.com/tags` as shown, then click **Next**.
+
+   ![This screen capture shows the Default User Profile Attribute Contract section with the AWS tag entered as an attribute.](_images/bej1571949193322.png)
+
+5. In the **Attribute Mapping** section, map the `http://aws.amazon.come/tags` attribute to the external identity provider attribute that contains the JSON formatted session tags data as shown.
+
+   ![This screen capture shows the Attribute Mapping section with the newly-created AWS attribute mapped to the external identity provider attribute.](_images/xmv1571949306074.png)
+
+---
+
+---
+title: Configuring AWS session tags for PingOne SAML connections
+description: You can create a custom SAML application to support AWS Identity and Access Management (IAM) and AWS IAM Identity Center session tags for SAML connections in PingOne.
+component: amazon
+page_id: amazon:amazon_web_services_session_tags_integrations_guide:pf_awssessiontags_integration_configuring_aws_session_tags_for_p1_saml_connections
+canonical_url: https://docs.pingidentity.com/integrations/amazon/amazon_web_services_session_tags_integrations_guide/pf_awssessiontags_integration_configuring_aws_session_tags_for_p1_saml_connections.html
+llms_txt: https://docs.pingidentity.com/integrations/amazon/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: July 3, 2024
+section_ids:
+  before-you-begin: Before you begin
   about-this-task: About this task
   steps: Steps
   choose-from: Choose from:
 ---
 
-# Exporting SAML metadata from PingFederate
+# Configuring AWS session tags for PingOne SAML connections
 
-Export a metadata file that describes your PingFederate identity provider configuration.
+You can create a custom SAML application to support AWS Identity and Access Management (IAM) and AWS IAM Identity Center session tags for SAML connections in PingOne.
+
+## Before you begin
+
+* Create an Amazon Web Services (AWS) console account and policy that uses session tags. For help, see [AWS prerequisites (page 241)](https://cdn-docs.pingidentity.com/archive/pdf/pingaccess/pingaccess-52.pdf#page=242) in the PingAccess documentation.
+
+* Sign on to your [PingOne account](https://admin.pingone.com/web-portal/login) as an administrator.
+
+* Configure an external identity provider, such as PingFederate, that will provide the values for the AWS attributes.
 
 ## About this task
 
-For general information about these steps, see [Metadata export](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/pf_metadata_export.html) in the PingFederate documentation.
+|   |                                                                                                                                                                                                                                                                     |
+| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | In the PingOne App Catalog, PingOne provides a ready-made AWS application template. That template uses static SAML attributes, and cannot be used for session tags. The following steps allow you to create a custom SAML application to use with AWS session tags. |
 
 ## Steps
 
-1. In the PingFederate administrative console, go to the **Metadata Export** window.
+1. On the PingOne console, go to **Applications > My Applications > Add Application > New SAML Application**.
+
+2. Enter an application name, such as `AWS with Session Tags`.
+
+3. Enter the application description, category, and application icon and then click **Continue to Next Step**.
+
+4. In the **Application Configuration** section, enter the following:
+
+   1. In the **Assertion Consumer Service (ACS)**field, enter `https://signin.aws.amazon.com/saml`.
+
+   2. In the **Entry ID** field, enter `urn:amazon:webservices`.
+
+5. Click **Continue to Next Step**.
+
+6. In the **SSO Mapping Attributes**section, click **Add new attribute**. Enter the session tags attributes that you plan to use.
 
    ### Choose from:
 
-   * For PingFederate 10.1 or later: go to **System > Protocol Metadata > Metadata Export**.
+   * If you are using AWS IAM Identity Center, include the access control tags based on the following format: `https://aws.amazon.com/SAML/Attributes/AccessControl:{attribute}`
 
-   * For PingFederate 10.0 or earlier: go to **System > Metadata Export**.
+   * If you are using AWS IAM, enter the AWS Principal Tags and TransitiveTagKeys, based on the following examples:
 
-2. If you see the **Metadata Role** tab, select **I am the identity provider (IdP)**. Click **Next**.
+   * `https://aws.amazon.com/SAML/Attributes/AccessControl:{attribute}`
 
-3. On the **Metadata Mode** tab, select **Select information to include in metadata manually**. Click **Next**.
+   * `https://aws.amazon.com/SAML/Attributes/PrincipalTag:project`
 
-4. On the **Protocol** tab, click **Next**.
+   * `https://aws.amazon.com/SAML/Attributes/Role`
 
-5. On the **Attribute Contract** tab, click **Next**.
+   * `https://aws.amazon.com/SAML/Attributes/RoleSessioName`
 
-6. On the **Signing Key** tab, select a signing certificate. Click **Next**.
+   * `https://aws.amazon.com/SAML/Attributes/TransitiveTagKeys`
 
-7. **Optional:** On the **Metadata Signing** tab, select a certificate to sign the metadata XML file. Click **Next**.
+     ![This screen capture shows the SSO Attribute Mapping section with examples of potential Principal Tags and TransitiveTagKeys for AWS IAM.](_images/onu1571948983354.png)
 
-8. On the **XML Encryption Certificate** tab, select the certificate that you want to use to encrypt the XML content. Click **Next**.
-
-9. On the **Export & Summary** tab, click **Export**.
-
-10. Save `metadata.xml`.
-
-11. Click **Done**.
+7. Click **Continue to Next Step** twice and then click **Finish** to create the AWS Session Tag SAML application.
 
 ---
 
 ---
-title: Exporting SAML metadata from PingFederate
-description: Export a metadata file that describes your PingFederate identity provider configuration.
+title: Configuring single sign-on
+description: To allow PingFederate to act as an identity provider for Amazon Web Services (AWS), enable single sign-on (SSO) in PingFederate and AWS, and create a connection.
 component: amazon
-page_id: amazon:aws_iam_identity_center_provisioner:pf_aws_singlesignon_connector_exporting_saml_metadata_from_pf
-canonical_url: https://docs.pingidentity.com/integrations/amazon/aws_iam_identity_center_provisioner/pf_aws_singlesignon_connector_exporting_saml_metadata_from_pf.html
+page_id: amazon:amazon_web_services_connector:pf_aws_connector_configuring_single_sign_on
+canonical_url: https://docs.pingidentity.com/integrations/amazon/amazon_web_services_connector/pf_aws_connector_configuring_single_sign_on.html
 llms_txt: https://docs.pingidentity.com/integrations/amazon/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 3, 2024
 section_ids:
   about-this-task: About this task
   steps: Steps
-  choose-from: Choose from:
 ---
 
-# Exporting SAML metadata from PingFederate
+# Configuring single sign-on
 
-Export a metadata file that describes your PingFederate identity provider configuration.
+To allow PingFederate to act as an identity provider for Amazon Web Services (AWS), enable single sign-on (SSO) in PingFederate and AWS, and create a connection.
 
 ## About this task
 
-For general information about these steps, see [Metadata export](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/pf_metadata_export.html) in the PingFederate documentation.
+|   |                                                                                                                                                         |
+| - | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | Single sign-on integration is an optional part of this integration. If you only want to use the Atlassian Connector for provisioning, skip these steps. |
 
 ## Steps
 
-1. In the PingFederate administrative console, go to the **Metadata Export** window.
+1. Complete the steps in [Exporting connection-specific SAML metadata](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/help_exportmetadatatasklet_exportconnectionstate.html).
 
-   ### Choose from:
+2. Create an identity provider profile to represent PingFederate in Amazon Web Services (AWS).
 
-   * For PingFederate 10.1 or later: go to **System > Protocol Metadata > Metadata Export**.
+   Complete the steps in [Creating and Managing an IAM SAML Identity Provider (Console)](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_create_saml.html) in the AWS documentation.
 
-   * For PingFederate 10.0 or earlier: go to **System > Metadata Export**.
+3. Create a federation role in Amazon Web Services (AWS) that uses PingFederate as an identity provider.
 
-2. If you see the **Metadata Role** tab, select **I am the identity provider (IdP)**. Click **Next**.
+   Complete the steps in [Creating a Role for SAML 2.0 Federation (Console)](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-idp_saml.html) in the AWS documentation.
 
-3. On the **Metadata Mode** tab, select **Select information to include in metadata manually**. Click **Next**.
-
-4. On the **Protocol** tab, click **Next**.
-
-5. On the **Attribute Contract** tab, click **Next**.
-
-6. On the **Signing Key** tab, select a signing certificate. Click **Next**.
-
-7. **Optional:** On the **Metadata Signing** tab, select a certificate to sign the metadata XML file. Click **Next**.
-
-8. On the **XML Encryption Certificate** tab, click **Next**.
-
-9. On the **Export & Summary** tab, click **Export**.
-
-10. Save `metadata.xml`.
-
-11. Click **Done**.
+4. Complete the steps in [Creating a single sign-on connection](pf_aws_connector_creating_a_single_sign_on_connection.html).
 
 ---
 
 ---
-title: Integrating social sign-on into your application
-description: To complete your Amazon sign-on integration, add a sign-on hyperlink to your application.
+title: Create security credentials in Amazon Web Services
+description: PingFederate needs credentials to manage users and groups in Amazon Web Services (AWS). You can create these credentials in the AWS management console. For more details, see Managing Access Keys for Your AWS Account Root User in the AWS documentation.
 component: amazon
-page_id: amazon:amazon_login_integration_kit:pf_amazon_cic_integrating_social_sign_on_into_your_application
-canonical_url: https://docs.pingidentity.com/integrations/amazon/amazon_login_integration_kit/pf_amazon_cic_integrating_social_sign_on_into_your_application.html
+page_id: amazon:amazon_web_services_connector:pf_aws_connector_create_security_credentials_in_amazon_web_services
+canonical_url: https://docs.pingidentity.com/integrations/amazon/amazon_web_services_connector/pf_aws_connector_create_security_credentials_in_amazon_web_services.html
 llms_txt: https://docs.pingidentity.com/integrations/amazon/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: October 24, 2025
+revdate: July 3, 2024
+section_ids:
+  about-this-task: About this task
+  steps: Steps
+---
+
+# Create security credentials in Amazon Web Services
+
+## About this task
+
+PingFederate needs credentials to manage users and groups in Amazon Web Services (AWS). You can create these credentials in the AWS management console. For more details, see [Managing Access Keys for Your AWS Account Root User](https://docs.aws.amazon.com/general/latest/gr/managing-aws-access-keys.html) in the AWS documentation.
+
+## Steps
+
+1. Sign on to the [AWS Management Console](https://console.aws.amazon.com/) as the root user for the AWS account.
+
+2. On the navigation menu, click your account name, and then click **My Security Credentials**.
+
+3. If you receive a warning about accessing the security credentials for your AWS account, click **Continue to Security Credentials**.
+
+4. Expand the **Access keys (access key ID and secret access key)** section.
+
+5. Click **Create New Access Key**.
+
+   |   |                                                                                                                                                                                                                |
+   | - | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+   |   | You might need to delete an existing access key before you can create a new key. See [IAM Object Limits](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-limits.html) in the AWS documentation. |
+
+6. Note the access key ID and the access key secret.
+
+   |   |                                                                          |
+   | - | ------------------------------------------------------------------------ |
+   |   | This is your only opportunity to view or download the secret access key. |
+
+---
+
+---
+title: Creating a connection
+description: To allow PingFederate to act as an identity provider and manage users in AWS IAM Identity Center, create a service provider (SP) connection.
+component: amazon
+page_id: amazon:aws_iam_identity_center_provisioner:pf_aws_singlesignon_connector_creating_a_connection
+canonical_url: https://docs.pingidentity.com/integrations/amazon/aws_iam_identity_center_provisioner/pf_aws_singlesignon_connector_creating_a_connection.html
+llms_txt: https://docs.pingidentity.com/integrations/amazon/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: July 3, 2024
 section_ids:
   steps: Steps
 ---
 
-# Integrating social sign-on into your application
+# Creating a connection
 
-To complete your Amazon sign-on integration, add a sign-on hyperlink to your application.
+To allow PingFederate to act as an identity provider and manage users in AWS IAM Identity Center, create a service provider (SP) connection.
 
 ## Steps
 
-1. If your application is outside the PingFederate domain, configure an SP connection as follows:
+1. In the PingFederate administrator console, create a new SP connection:
 
-   1. Create a service provider (SP) *(tooltip: \<div class="paragraph">
-      \<p>In SAML, an entity that receives and accepts an authentication assertion issued by an IdP, typically for the purpose of allowing access to a protected resource.\</p>
-      \</div>)* connection as shown in [SP connection management](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/pf_sp_connect_management.html) and [Mapping an adapter instance](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/pf_mapping_adapter_instance.html) in the PingFederate documentation.
+   Choose from:
 
-      |   |                                                                  |
-      | - | ---------------------------------------------------------------- |
-      |   | Use the Amazon IdP Adapter instance as an authentication source. |
+   * For PingFederate 10.1 or later: go to **Applications > Integration > SP Connections**. Click **Create Connection**.
 
-   2. In your web application, create a hyperlink to allow users to sign on to the SP application. Use the following URL and replace the variables based on the descriptions in the following table.
+   * For PingFederate 10.0 or earlier: go to **Identity Provider > SP Connections**. Click **Create Connection**.
 
-      ```none
-      https://<pf_host>:<pf_port>/idp/startSSO.ping?PartnerSpId=<ConnectionId>
-      ```
+2. Configure the basic connection details with the AWS IAM Identity Center quick connection template.
 
-      > **Collapse: Variables**
-      >
-      > | Variable          | Description                                                                                       |
-      > | ----------------- | ------------------------------------------------------------------------------------------------- |
-      > | *\<pf_host>*      | The host name or IP address of the PingFederate server.                                           |
-      > | *\<pf_port>*      | The port number for PingFederate.                                                                 |
-      > | *\<ConnectionId>* | The federation identifier of the SP for the connection that uses the Amazon IdP Adapter instance. |
+   1. On the **Connection Template** tab, select **Use a template for this connection**.
 
-2. If your application is inside the PingFederate domain, configure an adapter-to-adapter mapping as follows:
+   2. From the **Connection Template** list, select **AWS SSO Cloud Connector**.
 
-   1. On the **System > Protocol Settings > Roles & Protocols** page, select **Enable Identity Provider (IdP) role and support for the following** and **Enable Service Provider (SP) role and support for the following**.
+   3. On the **Metadata File** row, upload the sp-saml-metadata.xml file that you saved in [Registering PingFederate as an identity provider in AWS Single Sign-On](pf_aws_singlesignon_connector_registering_pf_as_an_identity_provider_in_aws_single_sign_on.html). Click **Next**.
 
-   2. In both the **Enable Identity Provider** and **Enable Service Provider** sections, select any protocol, such as **SAML 2.0**. Click **Save**.
+   4. On the **Connection Type** tab select **Browser SSO Profiles** and **Outbound Provisioning**. Click **Next**.
 
-      |   |                                                                                                                                 |
-      | - | ------------------------------------------------------------------------------------------------------------------------------- |
-      |   | PingFederate requires a protocol selection to activate the roles. The protocol that you select isn't used for this integration. |
+   5. On the **Connection Options** tab, click **Next**.
 
-   3. On the **Service Provider > Adapters** page, create or select an adapter instance that's integrated with the application as shown in [SP application integration settings](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/pf_sp_applicat_integra_settings.html) in the PingFederate documentation.
+   6. On the **General Info** tab, in the **Connection Name** field, enter a name of your choosing. Click **Next**.
 
-   4. On the **Identity Provider > Adapter-to-Adapter Mappings** page, configure the IdP-to-SP adapter mapping as shown in [Adapter-to-adapter mappings](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/pf_adaptertoadapter_mappings.html) in the PingFederate documentation.
+3. On the **Browser SSO** tab, configure your assertion creation settings and customize the defaults set by the metadata file.
 
-   5. In your web application, create a hyperlink to allow users to sign on to the SP application. Use the following URL and replace the variables based on the descriptions in the table below:
+   For help, see [Configuring IdP Browser SSO](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/help_spconnectionconfigtasklet_spbrowserssostate.html) in the PingFederate documentation.
 
-      `https://<pf_host>:<pf_port>/pf/adapter2adapter.ping?IdpAdapterId=<IdpAdapterId>&SpSessionAuthnAdapterId=<SpAdapterId>`
+4. On the **Credentials** tab, configure the connection credentials as shown in [Configuring credentials](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/help_spconnectionconfigtasklet_credentialsstate.html) in the PingFederate documentation. Click **Next**.
 
-      > **Collapse: Variables**
-      >
-      > | Variable          | Description                                                                        |
-      > | ----------------- | ---------------------------------------------------------------------------------- |
-      > | *\<pf_host>*      | The host name or IP address of the PingFederate server.                            |
-      > | *\<pf_port>*      | The port number for PingFederate.                                                  |
-      > | *\<IdpAdapterId>* | The instance ID of the Amazon IdP Adapter instance.                                |
-      > | *\<SpAdapterId>*  | The instance ID of the SP adapter instance that's integrated with the application. |
+5. On the **Outbound Provisioning** tab, configure provisioning with the following details.
 
----
+   For help, see [Configuring outbound provisioning](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/help_spconnectionconfigtasklet_saasprovisioningstate.html) in the PingFederate documentation.
 
----
-title: Known issues and limitations
-description: The following are known issues or limitations for the Amazon Login Integration Kit.
-component: amazon
-page_id: amazon:amazon_login_integration_kit:pf_amazon_cic_known_issues_and_limitations
-canonical_url: https://docs.pingidentity.com/integrations/amazon/amazon_login_integration_kit/pf_amazon_cic_known_issues_and_limitations.html
-llms_txt: https://docs.pingidentity.com/integrations/amazon/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: October 24, 2025
-section_ids:
-  known-issues: Known issues
-  known-limitations: Known limitations
----
+   1. On the **Target** tab, complete the **SCIM URL** and **Access Token** fields with the values that you noted in [Registering PingFederate as an identity provider in AWS Single Sign-On](pf_aws_singlesignon_connector_registering_pf_as_an_identity_provider_in_aws_single_sign_on.html).
 
-# Known issues and limitations
+   2. Under **Provisioning Options**, customize the provisioning connector behavior by referring to [Provisioning options reference](pf_aws_singlesignon_connector_provisioning_options_reference.html). Click **Next**.
 
-The following are known issues or limitations for the Amazon Login Integration Kit.
+   3. On the **Manage Channels > Attribute Mapping** tab, at the bottom of the attribute list, click **Refresh Fields** to get fields and specifications from your AWS IAM Identity Center site. Complete the attribute mappings by referring to [Supported attributes reference](pf_aws_singlesignon_connector_supported_attributes_reference.html).
 
-## Known issues
+      For help, see [Managing channels](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/help_saasmanagementtasklet_saasmanagementstate.html) in the PingFederate documentation.
 
-There are no known issues.
-
-## Known limitations
-
-* single logout (SLO) *(tooltip: \<div class="paragraph">
-  \<p>The process of signing a user out of multiple sites where the user has started a SSO session.\</p>
-  \</div>)*
-
-  SLO isn't supported because of a limitation on the Amazon side.
-
----
-
----
-title: Known issues and limitations
-description: There are no known issues.
-component: amazon
-page_id: amazon:amazon_web_services_connector:pf_aws_connector_known_issues_and_limitations
-canonical_url: https://docs.pingidentity.com/integrations/amazon/amazon_web_services_connector/pf_aws_connector_known_issues_and_limitations.html
-llms_txt: https://docs.pingidentity.com/integrations/amazon/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: July 3, 2024
-section_ids:
-  known-issues: Known issues
-  known-limitations: Known limitations
----
-
-# Known issues and limitations
-
-## Known issues
-
-There are no known issues.
-
-## Known limitations
-
-* Groups
-
-  * Before deleting a group, Amazon Web Services (AWS) requires you to remove all users from the group. Otherwise, an error will occur in the AWS API.
-
-  * AWS does not allow a user to be a member of more than 10 groups.
-
-* Deprovisioning
-
-  * AWS does not support disabled users. These users are deleted instead.
-
-  * When an LDAP user is deleted in a targeted Group DN, the provisioning connector does not propagate the deletion until a new user is added to the group. This limitation is compounded when the **User Create** provisioning option is disabled. For solutions, see [SaaS provisioning connector does not remove the user](https://support.pingidentity.com/s/article/After-deleting-an-AD-user-account-SaaS-provisioner-does-not-remove-the-user-in-the-next-provisioning-cycle-when-Group-DN-is-specified) in the Knowledge Base.
-
-* When a user is created with a `passwordResetRequired` value other than `true` or `TRUE`, the provisioning connector sets the value to `false` in AWS.
-
-* Attributes
-
-  * Due to limitations in PingFederate, user attributes cannot be cleared after they are set.
-
-  * Due to limitations in PingFederate, the "Create only" attribute mapping option is not available for the `UserName` attribute.
-
-* In PingFederate 8.1 and earlier, when you configure a second SP connection with the provisioning connector, the second connection may be pre-populated with the channel from the first connection. To avoid conflicts, remove this pre-populated channel and create a unique channel for each connection.
-
----
-
----
-title: Known issues and limitations
-description: The following are known issues or limitations with the AWS IAM Identity Center Provisioner.
-component: amazon
-page_id: amazon:aws_iam_identity_center_provisioner:pf_aws_singlesignon_connector_known_issues_and_limitations
-canonical_url: https://docs.pingidentity.com/integrations/amazon/aws_iam_identity_center_provisioner/pf_aws_singlesignon_connector_known_issues_and_limitations.html
-llms_txt: https://docs.pingidentity.com/integrations/amazon/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: July 3, 2024
-section_ids:
-  known-issues: Known issues
-  known-limitations: Known limitations
----
-
-# Known issues and limitations
-
-The following are known issues or limitations with the AWS IAM Identity Center Provisioner.
-
-## Known issues
-
-There are no known issues.
-
-## Known limitations
-
-* Attributes
-
-  * After an attribute is set, it can be updated but not cleared.
-
-* Deprovisioning
-
-  * When an LDAP user is deleted in a targeted group distinguished name (DN), the provisioning connector does not propagate the deletion until a new user is added to the group. This limitation is compounded when the **User Create** provisioning option is disabled. For solutions, see [SaaS provisioner does not remove the user](https://support.pingidentity.com/s/article/After-deleting-an-AD-user-account-SaaS-provisioner-does-not-remove-the-user-in-the-next-provisioning-cycle-when-Group-DN-is-specified) in the Knowledge Base.
-
----
-
----
-title: Overview of the SSO flow
-description: With the Amazon Login Integration Kit, PingFederate includes an Amazon authentication server in the sign-on flow to access service provider (SP) applications.
-component: amazon
-page_id: amazon:amazon_login_integration_kit:pf_amazon_cic_overview_of_the_sso_flow
-canonical_url: https://docs.pingidentity.com/integrations/amazon/amazon_login_integration_kit/pf_amazon_cic_overview_of_the_sso_flow.html
-llms_txt: https://docs.pingidentity.com/integrations/amazon/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: October 24, 2025
-section_ids:
-  processing-steps: Processing Steps
----
-
-# Overview of the SSO flow
-
-With the Amazon Login Integration Kit, PingFederate includes an Amazon authentication server in the sign-on flow to access service provider (SP) *(tooltip: \<div class="paragraph">
-\<p>In SAML, an entity that receives and accepts an authentication assertion issued by an IdP, typically for the purpose of allowing access to a protected resource.\</p>
-\</div>)* applications.
-
-The following diagram shows a SP-initiated SSO *(tooltip: \<div class="paragraph">
-\<p>In SAML, an identity federation transaction in which the initial action for SSO occurs at the SP site.\</p>
-\</div>)* scenario in which PingFederate authenticates users to an SP application using the Amazon IdP Adapter.
-
-![Diagram showing SP-initiated SSO with PingFederate and Amazon.](_images/amazon_login_ik_sso_flow_overview_diagram.png)
-
-## Processing Steps
-
-1. The user opens a web application and selects the Amazon sign-on option.
-
-2. The sign-on link points to the PingFederate Amazon IdP Adapter, which redirects the browser to Amazon with a list of requested permissions and the authorization callback endpoint.
-
-3. On Amazon, the user authenticates their identity and then authorizes the requested permissions.
-
-4. Amazon redirects the browser to the PingFederate Amazon IdP Adapter authorization callback endpoint.
-
-5. Amazon includes an authorization code while redirecting the browser.
-
-   If the user fails to authenticate or doesn't authorize the request, the response includes an error code instead.
-
-6. PingFederate sends Amazon the client ID, client secret, authorization code, and the PingFederate authorization callback URL.
-
-7. Amazon returns an access token.
-
-8. PingFederate sends Amazon a request for user attributes and presents the access token.
-
-9. Amazon verifies the access token and provides the user information.
-
-10. PingFederate redirects the user to the web application with the user attributes.
-
----
-
----
-title: Provisioning options
-description: User Create
-component: amazon
-page_id: amazon:amazon_web_services_connector:pf_aws_connector_provisioning_options
-canonical_url: https://docs.pingidentity.com/integrations/amazon/amazon_web_services_connector/pf_aws_connector_provisioning_options.html
-llms_txt: https://docs.pingidentity.com/integrations/amazon/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: July 3, 2024
----
-
-# Provisioning options
-
-| Field Name                                                                                                                                                    | Description                                                                                                                               |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
-| **User Create**                                                                                                                                               | **Selected** (default) – PingFederate creates users in Amazon Web Services (AWS).**Cleared** – PingFederate does not create users in AWS. |
-| **User Update**                                                                                                                                               | **Selected** (default) – PingFederate updates existing users in AWS.**Cleared** – PingFederate does not update existing users in AWS.     |
-| **User Delete**                                                                                                                                               | **Selected** (default) – PingFederate deletes users in AWS.**Cleared** – PingFederate does not delete users in AWS.                       |
-| &#xA;&#xA;If any of the above options are cleared, PingFederate logs a warning in the user workflow section of provisioner.log when the related action fails. |                                                                                                                                           |
-
----
-
----
-title: Provisioning options reference
-description: The AWS IAM Identity Center Provisioner allows you to enable actions independently and customize other provisioning options.
-component: amazon
-page_id: amazon:aws_iam_identity_center_provisioner:pf_aws_singlesignon_connector_provisioning_options_reference
-canonical_url: https://docs.pingidentity.com/integrations/amazon/aws_iam_identity_center_provisioner/pf_aws_singlesignon_connector_provisioning_options_reference.html
-llms_txt: https://docs.pingidentity.com/integrations/amazon/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: July 3, 2024
----
-
-# Provisioning options reference
-
-The AWS IAM Identity Center Provisioner allows you to enable actions independently and customize other provisioning options.
-
-| Field Name                   | Description                                                                                                                                                                                                                                                                                                                                                                                                 |
-| ---------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **User Create**              | * Selected (default)
-
-  PingFederate creates users in AWS IAM Identity Center.
-
-* Cleared
-
-  PingFederate does not create users in AWS IAM Identity Center.                                                                                                                                                                                                                                                 |
-| **User Update**              | - Selected (default)
-
-  PingFederate updates existing users in AWS IAM Identity Center.
-
-- Cleared
-
-  PingFederate does not update existing users in AWS IAM Identity Center.                                                                                                                                                                                                                               |
-| **User Disable / Delete**    | * Selected (default)
-
-  PingFederate removes users from AWS IAM Identity Center according to the **Remove User Action** setting.
-
-* Cleared
-
-  PingFederate does not remove users from AWS IAM Identity Center.                                                                                                                                                                                             |
-| **Provision Disabled Users** | - Selected
-
-  PingFederate creates users in AWS IAM Identity Center with a "disabled" status.
-
-- Cleared (default)
-
-  If a user has a "disable" status, PingFederate does not create the user in AWS IAM Identity Center.                                                                                                                                                                                   |
-|                              | &#xA;&#xA;If any of the above options are cleared, PingFederate logs a warning in the user workflow section of provisioner.log when the related action fails.                                                                                                                                                                                                                                               |
-| **Remove User Action**       | This option applies when:- **User Disable / Delete** is selected, and
-
-- a previously-provisioned user no longer meets the condition set on the **Source Location** tab, or
-
-- a user has been disabled or deleted from the data store.
-
-  * Delete
-
-    PingFederate deletes the user from AWS IAM Identity Center.
-
-  * Disable (default)
-
-    PingFederate disables the user in AWS IAM Identity Center. |
+6. On the **Activation and Summary** tab, above the **Summary** section, click the toggle to turn on the connection. Click **Save**.

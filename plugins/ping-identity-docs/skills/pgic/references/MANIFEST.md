@@ -5,12 +5,12 @@
 - Sync date: 2026-11-03
 - Source: https://docs.pingidentity.com/pgic/llms.txt
 - Guides discovered: 15
-- Guides captured: 14
-- Guides fully captured: 13
+- Guides captured: 15
+- Guides fully captured: 14
 - Guides partially captured: 1
-- Guides without snapshots: 1
+- Guides without snapshots: 0
 - Total pages indexed: 64
-- Total snapshot pages captured: 41
+- Total snapshot pages captured: 42
 
 ## Source URLs
 
@@ -29,7 +29,8 @@
 | pgic-infrastructure-md.md | assembled | https://docs.pingidentity.com/pgic/llms.txt | 1 | 1 | full |
 | pgic-observability-md.md | assembled | https://docs.pingidentity.com/pgic/llms.txt | 1 | 1 | full |
 | pgic-task-summary-table.md | assembled | https://docs.pingidentity.com/pgic/llms.txt | 1 | 1 | full |
-| secure-containers-md.md | page | http://docs.pingidentity.com/pgic/secure-containers.md | 1 | 1 | full |
+| pgic-web-servers-md.md | assembled | https://docs.pingidentity.com/pgic/llms.txt | 1 | 1 | full |
+| secure-containers-md.md | assembled | https://docs.pingidentity.com/pgic/llms.txt | 1 | 1 | full |
 
 ## Checksums
 
@@ -49,4 +50,5 @@
 | snapshots/pgic-infrastructure-md.md | 05ff82bde7feb4086295e6d78e90b7c78877cfe8dc1a6947eda3ebdd932b14c9 |
 | snapshots/pgic-observability-md.md | a64109626ad78780542f4668b4316ea5480471f2306f6efd0cd927d22bab9dfe |
 | snapshots/pgic-task-summary-table.md | 1acc6f29c81fbb6bb1e2586bf499c5e016539b063932284444fa336bb16ff6f8 |
-| snapshots/secure-containers-md.md | 32c001bcec98a41101c122f59ca58f4d3502340661e482ca903be2da7650424a |
+| snapshots/pgic-web-servers-md.md | ba202b75afdbeb2ea06fde54740f4d54acc52d36707793ac44e101b408204e67 |
+| snapshots/secure-containers-md.md | 25dca27a827340977cd6d4868c0541190b671be931d1f1f66147996e7426b083 |

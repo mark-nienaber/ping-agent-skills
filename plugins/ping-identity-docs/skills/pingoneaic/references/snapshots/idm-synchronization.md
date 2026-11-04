@@ -1,4 +1,1068 @@
 ---
+title: Clustered reconciliation
+description: Distribute reconciliation across cluster nodes using paged queries and sub-jobs
+component: pingoneaic
+page_id: pingoneaic:idm-synchronization:clustered-recon
+canonical_url: https://docs.pingidentity.com/pingoneaic/idm-synchronization/clustered-recon.html
+llms_txt: https://docs.pingidentity.com/pingoneaic/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+keywords: ["Reconciliation"]
+section_ids:
+  clustered-recon-config: Configure clustered reconciliation for a mapping
+  clustered-recon-progress: Clustered reconciliation progress
+  clustered-recon-cancel: Cancel a clustered reconciliation
+---
+
+# Clustered reconciliation
+
+In a clustered deployment, you can configure reconciliation jobs to be distributed across multiple nodes in the cluster. Clustered reconciliation is configured *per mapping* and can improve reconciliation performance, particularly for very large data sets.
+
+Clustered reconciliation uses the paged reconciliation mechanism and the scheduler service to divide the *source* data set into pages, and then to schedule reconciliation "sub-jobs" per page, distributing these sub-jobs across the nodes in the cluster.
+
+Regular (non-clustered) reconciliation has two phases: a source phase and a target phase. Clustered reconciliation effectively has three phases:
+
+* Source page phase
+
+  During this phase, reconciliation sub-jobs are scheduled in succession, page by page. Each source page job does the following:
+
+  * Executes a source query using the paging cookie from the invocation context.
+
+  * Schedules the next source page job.
+
+  * Performs the reconciliation of the source IDs returned by the query.
+
+  * Writes statistics summary information which is aggregated so that you can obtain the status of the complete reconciliation run by performing a GET on the `recon` endpoint.
+
+  * On completion, writes the `repo_id`, `source_id`, and `target_id` to the repository.
+
+* Source phase completion check
+
+  This phase is scheduled when the source query returns null. This check runs, and continues to reschedule itself, as long as source page jobs are running. When the completion check determines that all the source page jobs are complete, it schedules the target phase.
+
+* Target phase
+
+  This phase queries the target IDs, then removes all of the IDs that correspond to the `repo_id`, `source_id`, and `target_id` written by the source pages. The remaining target IDs are used to run the target phase, taking into account all records on the target system that were not correlated to a source ID during the source phase sub-jobs.
+
+## Configure clustered reconciliation for a mapping
+
+To specify that the reconciliation for a specific mapping should be distributed across a cluster, add the `clusteredSourceReconEnabled` property to the mapping and set it to `true`. For example:
+
+```json
+{
+    "mappings" : [
+        {
+            "name" : "systemLdapAccounts_managedUser",
+            "source" : "system/ldap/account",
+            "target" : "managed/realm-name_user",
+            "clusteredSourceReconEnabled" : true,
+  ...
+}
+```
+
+|   |                                                                                                                                                                                        |
+| - | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | When clustered reconciliation is enabled, source query paging is enabled automatically, regardless of the value that you set for the `reconSourceQueryPaging` property in the mapping. |
+
+By default, the number of records per page is **10000**. You can also enable *target query paging* with the `reconTargetQueryPaging` property (defaults to `false`). To change the query page sizes, set the `reconSourceQueryPageSize` and `reconTargetQueryPageSize` properties.
+
+The following example enables *target query paging* and changes the target and source query page sizes:
+
+```json
+{
+      "mappings" : [
+          {
+              "name" : "systemLdapAccounts_managedUser",
+              "source" : "system/ldap/account",
+              "target" : "managed/realm-name_user",
+              "clusteredSourceReconEnabled" : true,
+              "reconTargetQueryPaging" : true,
+              "reconSourceQueryPageSize" : 12000,
+              "reconTargetQueryPageSize" : 12000,
+          ...
+}
+```
+
+|   |                                                                                                                                                                                                                                                                                               |
+| - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | These properties can be set only using the IDM native admin console, which is [deprecated](../product-information/migration-dependent-features/deprecated-identity-management-native-console-faq.html). Click Configure > Mappings, select the mapping to change, and click the Advanced tab. |
+
+Clustered reconciliation has the following limitations:
+
+* A complete non-clustered reconciliation run is synchronous with the single reconciliation invocation.
+
+  By contrast, a clustered reconciliation is *asynchronous*. In a clustered reconciliation, the first execution is synchronous only with the reconciliation of the first page. This job also schedules the subsequent pages of the clustered reconciliation to run on other cluster nodes. When you schedule a clustered reconciliation or call the operation over REST, do not set `waitForCompletion` to `true`, because you cannot wait for the operation to complete before the next operation starts.
+
+  Because this first execution does not encompass the entire reconciliation operation for that mapping, you cannot rely on the Quartz `concurrentExecution` property to prevent two reconciliation operations from running concurrently. If you use Quartz to schedule clustered reconciliations (as described in [Configure Scheduled Synchronization](chap-schedules.html#configuring-sync-schedule)), make sure that the interval between scheduled operations exceeds the known run of the entire clustered reconciliation. The run-length of a specific clustered reconciliation can vary. You must therefore build in appropriate buffer times between schedules, or use a scheduled script that performs a GET on the `recon/` endpoint, and dispatches the next reconciliation on a mapping only when the previous reconciliation run has completed.
+
+* Clustered reconciliations can recover missing source pages (for example, if a cluster goes offline during a clustered reconciliation run), except when used with a connector using server-side logic to handle paging that returns a static paging cookie.
+
+## Clustered reconciliation progress
+
+The `sourceProcessedByNode` property indicates how many records are processed by each node. You can verify the load distribution per node by running a GET on the recon endpoint, for example:
+
+```
+curl \
+--header "Authorization: Bearer <access-token>" \
+--header "Accept-API-Version: resource=1.0" \
+--request GET \
+"https://<tenant-env-fqdn>/openidm/recon"
+...
+    "started": "2017-05-11T10:04:59.563Z",
+    "ended": "",
+    "duration": 342237,
+    "sourceProcessedByNode": {
+        "node2": 21500,
+        "node1": 22000
+    }
+}
+```
+
+## Cancel a clustered reconciliation
+
+You cancel a clustered reconciliation in the same way as a non-clustered reconciliation, for example:
+
+```
+curl \
+--header "Authorization: Bearer <access-token>" \
+--header "Accept-API-Version: resource=1.0" \
+--request POST \
+"https://<tenant-env-fqdn>/openidm/recon/90892122-5ceb-4bbe-86f7-94272df834ad-406025?_action=cancel"
+{
+  "_id": "90892122-5ceb-4bbe-86f7-94272df834ad-406025",
+  "action": "cancel",
+  "status": "INITIATED"
+}
+```
+
+When the cancellation has completed, a query on that reconciliation ID will show the state and stage of the reconciliation as follows:
+
+```json
+{
+   "_id": "90892122-5ceb-4bbe-86f7-94272df834ad-406025",
+   "mapping": "systemLdapAccounts_managedUser",
+   "state": "CANCELED",
+   "stage": "COMPLETED_CANCELED",
+   "stageDescription": "reconciliation aborted.",
+   "progress": {
+     "source": {
+       "existing": {
+         "processed": 23500,
+         "total": "23500"
+       }
+     },
+     "target": {
+       "existing": {
+         "processed": 23498,
+         "total": "?"
+     },
+     ...
+}
+```
+
+In a clustered environment, *all* reconciliation operations are considered to be "cluster-friendly". This means that even if a mapping is configured as `"clusteredSourceReconEnabled" : false`, you can view the in progress operation on *any* node in the cluster, even if that node is not currently processing the reconciliation. You can also cancel a reconciliation in progress from any node in the cluster.
+
+---
+
+---
+title: Configure a resource mapping
+description: Configure resource mappings between system and managed objects using UI
+component: pingoneaic
+page_id: pingoneaic:idm-synchronization:cfg-mapping-resource
+canonical_url: https://docs.pingidentity.com/pingoneaic/idm-synchronization/cfg-mapping-resource.html
+llms_txt: https://docs.pingidentity.com/pingoneaic/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+keywords: ["Synchronization", "Resource", "Mappings", "Configuration"]
+section_ids:
+  mappings-ui: Configure mappings using the admin console
+---
+
+# Configure a resource mapping
+
+Objects in external resources are specified in a mapping as `system/name/object-type`, where name is the name used in the connector configuration *(tooltip: You can create and change connector configurations over REST at the /openidm/config/provisioner.openicf/\<connector-name> endpoint.)*, and object-type is the object defined in the connector configuration *(tooltip: You can create and change connector configurations over REST at the /openidm/config/provisioner.openicf/\<connector-name> endpoint.)* list of object types. Objects in the repository are specified in the mapping as `managed/object-type`, where object-type is defined in the managed object configuration *(tooltip: You can edit the managed object configuration over REST at the config/managed endpoint.)*.
+
+External resources, and Advanced Identity Cloud managed objects, can be the *source* or the *target* in a mapping. By convention, the mapping name is a string of the form `source_target`, as shown in the following example:
+
+> **Collapse: Basic LDAP Mapping**
+>
+> ```json
+> {
+>     "mappings": [
+>         {
+>             "name": "systemLdapAccounts_managedUser",
+>             "source": "system/ldap/account",
+>             "target": "managed/realm-name_user",
+>             "properties": [
+>                 {
+>                     "source": "lastName",
+>                     "target": "sn"
+>                 },
+>                 {
+>                     "source": "telephoneNumber",
+>                     "target": "telephoneNumber"
+>                 },
+>                 {
+>                     "target": "phoneExtension",
+>                     "default": "0047"
+>                 },
+>                 {
+>                     "source": "email",
+>                     "target": "mail",
+>                     "comment": "Set mail if non-empty.",
+>                     "condition": {
+>                         "type": "text/javascript",
+>                         "source": "(object.email != null)"
+>                     }
+>                 },
+>                 {
+>                     "source": "",
+>                     "target": "displayName",
+>                     "transform": {
+>                         "type": "text/javascript",
+>                         "source": "source.lastName +', ' + source.firstName;"
+>                     }
+>                 },
+>                {
+>                     "source" : "uid",
+>                     "target" : "userName",
+>                     "condition" : "/linkQualifier eq \"user\""
+>                     }
+>                },
+>             ]
+>         }
+>     ]
+> }
+> ```
+
+In this example, the name of the source is the external resource (`ldap`), and the target is Advanced Identity Cloud's user repository; specifically, `managed/realm-name_user`. The `properties` defined in the mapping correspond to attribute names defined in the Advanced Identity Cloud configuration. For example, the source attribute `uid` is defined in the `ldap` connector configuration file, rather than on the external resource itself.
+
+## Configure mappings using the admin console
+
+To set up a synchronization mapping, use the [Advanced Sync](../identities/advanced-sync.html) editor in the admin console.
+
+Learn more in [Create an advanced sync mapping](../identities/advanced-sync-mappings.html#create-advanced-sync-mapping).
+
+---
+
+---
+title: Connections between resources
+description: Configure connectors to transfer data between different resource systems
+component: pingoneaic
+page_id: pingoneaic:idm-synchronization:sync-connections
+canonical_url: https://docs.pingidentity.com/pingoneaic/idm-synchronization/sync-connections.html
+llms_txt: https://docs.pingidentity.com/pingoneaic/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+keywords: ["Synchronization", "Connectors"]
+section_ids:
+  connector-config-adminui: Configure connectors using the admin console
+  connector-config-over-rest: Configure connectors using REST
+---
+
+# Connections between resources
+
+A connector lets you transfer data between different resource systems. The connector configuration works in conjunction with the [synchronization mapping](mappings.html) and specifies how target object attributes map to attributes on external objects.
+
+To create and modify connector configurations, use one of the following methods:
+
+## Configure connectors using the admin console
+
+You can view and configure connector mappings in the Advanced Identity Cloud admin console through the [Advanced Sync](../identities/advanced-sync.html) editor and the [Provisioners](../app-management/standalone-provisioners.html) page.
+
+## Configure connectors using REST
+
+Create connector configurations using REST with the `createCoreConfig` and `createFullConfig` actions. For more information, see [Configure Connectors Using REST](https://docs.pingidentity.com/openicf/connector-reference/configure-connector.html#connector-wiz-REST).
+
+---
+
+---
+title: Correlate source objects with existing target objects
+description: Correlate source and target objects using queries or scripts before synchronization
+component: pingoneaic
+page_id: pingoneaic:idm-synchronization:chap-correlation
+canonical_url: https://docs.pingidentity.com/pingoneaic/idm-synchronization/chap-correlation.html
+llms_txt: https://docs.pingidentity.com/pingoneaic/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+keywords: ["Synchronization", "Mappings"]
+section_ids:
+  correlation-ui: Configure correlation using the admin console
+  correlation-queries-configuring: Correlation queries
+  correlation-filtered-queries: Use filtered queries to correlate objects
+  correlation-expression-builder: Create correlation queries using the expression builder (deprecated)
+  correlation-scripts: Correlation scripts
+  correlation-script-link-qual: Correlation script using link qualifiers
+  correlation-script-ui: Configure a correlation script using the admin console
+---
+
+# Correlate source objects with existing target objects
+
+When a synchronization operation creates an object on a target system, it also creates a *link* between the source and target object. Advanced Identity Cloud then uses that link to determine the object's *synchronization situation* during later synchronization operations. Learn more in [How Advanced Identity Cloud assesses synchronization situations](sync-situations.html).
+
+Every synchronization operation can *correlate* existing source and target objects. Correlation matches source and target objects, based on the results of a query or script, and creates links between matched objects.
+
+Correlation queries and correlation scripts are configured as part of the mapping. Each query or script is specific to the mapping for which it is configured.
+
+## Configure correlation using the admin console
+
+Use the [Advanced Sync](../identities/advanced-sync.html) editor to configure correlation queries and scripts.
+
+Learn more in [Configure advanced sync correlation](../identities/advanced-sync-correlation.html).
+
+## Correlation queries
+
+Advanced Identity Cloud processes a correlation query by constructing a query map. The content of the query is generated dynamically, using values from the source object. For each source object, a new query is sent to the target system, using (possibly transformed) values from the source object for its execution.
+
+Queries are run against *target resources*, either managed or system objects, depending on the mapping. Correlation queries on system objects access the connector, which executes the query on the external resource.
+
+You express a correlation query using a query filter (`_queryFilter`). For more information about query filters, refer to [Define and call data queries](../idm-objects/queries.html). The synchronization process executes the correlation query to search through the target system for objects that match the current source object.
+
+To configure a correlation query, define a script whose source returns a query that uses the `_queryFilter`, for example:
+
+```json
+{ "_queryFilter" : "uid eq \"" + source.userName + "\"" }
+```
+
+### Use filtered queries to correlate objects
+
+For filtered queries, the script that is defined or referenced in the `correlationQuery` property must return an object with the following elements:
+
+* The element that is being compared on the target object; for example, `uid`.
+
+  The element on the target object is not necessarily a single attribute. Your query filter can be simple or complex; valid query filters range from a single operator to an entire boolean expression tree.
+
+  If the target object is a system object, this attribute must be referred to by its Advanced Identity Cloud name rather than its ICF `nativeName`. For example, with the following provisioner configuration, the attribute to use in the correlation query would be `uid` and not `` +NAME` ``:
+
+  ```json
+  ...
+      "uid" : {
+          "type" : "string",
+          "nativeName" : "__NAME__",
+          "required" : true,
+          "nativeType" : "string"
+      }
+  ...
+  ```
+
+* The value to search for in the query.
+
+  This value is generally based on one or more values from the source object. However, it does not have to match the value of a single source object property. You can define how your script uses the values from the source object to find a matching record in the target system.
+
+  You might use a transformation of a source object property, such as `toUpperCase()`. You can concatenate that output with other strings or properties. You can also use this value to call an external REST endpoint, and redirect the response to the final "value" portion of the query.
+
+The following correlation query matches source and target objects if the value of the `uid` attribute on the target is the same as the `userName` attribute on the source:
+
+```json
+"correlationQuery" : {
+    "type" : "text/javascript",
+    "source" : "var qry = {'_queryFilter': 'uid eq \"' + source.userName + '\"'}; qry"
+},
+```
+
+The query can return zero or more objects. The situation assigned to the source object depends on the number of target objects that are returned, and on the presence of any *link qualifiers* in the query. For information about synchronization situations, refer to [How Synchronization Situations Are Assessed](chap-situations-actions.html). For information about link qualifiers, refer to [Map a Single Source Object to Multiple Target Objects](linking-multiple-targets.html).
+
+### Create correlation queries using the expression builder (deprecated)
+
+Use the expression builder to build a correlation query by selecting the link qualifier and the source and target fields to compare.
+
+|   |                                                                                                                                                                                                                        |
+| - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | The expression builder is currently available only in the IDM native admin console, which is [deprecated](../product-information/migration-dependent-features/deprecated-identity-management-native-console-faq.html). |
+
+## Correlation scripts
+
+In general, a correlation query should meet the requirements of most deployments. However, if you need a more powerful correlation mechanism than a simple query can provide, you can write a correlation script with additional logic. Correlation scripts can be useful if your query needs extra processing, such as fuzzy-logic matching or out-of-band verification with a third-party service over REST. Correlation scripts are generally more complex than correlation queries, and impose no restrictions on the methods used to find matching objects.
+
+A correlation script must execute a query and return the result of that query. The result of a correlation script is a list of maps, each of which contains a candidate `_id` value. If no match is found, the script returns a zero-length list. If exactly one match is found, the script returns a single-element list. If there are multiple ambiguous matches, the script returns a list with multiple elements. There is no assumption that the matching target record or records can be found by a simple query on the target system. All of the work required to find matching records is left to the script.
+
+To invoke a correlation script, use one of the following properties:
+
+* `correlationQuery`
+
+  Returns a `Map` whose values specify the `QueryFilter` for the sync engine to execute.
+
+* `correlationScript`
+
+  Returns a `List<Map>` whose value is a list of correlated objects from the target.
+
+  You can invoke a correlation script inline:
+
+  ```json
+  "correlationScript" : {
+      "type": "text/javascript",
+      "source": " var resultData = openidm.query("system/ldap/account", myQuery); return resultData.result;"
+  }
+  ```
+
+### Correlation script using link qualifiers
+
+The following example shows a correlation script that uses link qualifiers. The script returns `resultData.result`—a list of maps, each of which has an `_id` entry. These entries will be the values that are used for correlation.
+
+```javascript
+(function () {
+    var query, resultData;
+    switch (linkQualifier) {
+        case "test":
+            logger.info("linkQualifier = test");
+	        query = {'_queryFilter': 'uid eq \"' + source.userName + '-test\"'};
+            break;
+        case "user":
+            logger.info("linkQualifier = user");
+	        query = {'_queryFilter': 'uid eq \"' + source.userName + '\"'};
+            break;
+        case "default":
+            logger.info("linkQualifier = default");
+	        query = {'_queryFilter': 'uid eq \"' + source.userName + '\"'};
+            break;
+        default:
+            logger.info("No linkQualifier provided.");
+	        break;
+    }
+    var resultData = openidm.query("system/ldap/account", query);
+    logger.info("found " + resultData.result.length + " results for link qualifier " + linkQualifier)
+    for (i=0;i<resultData.result.length;i++) {
+        logger.info("found target: " + resultData.result[i]._id);
+    }
+    return resultData.result;
+} ());
+```
+
+### Configure a correlation script using the admin console
+
+Learn more in [Configure advanced sync correlation](../identities/advanced-sync-correlation.html).
+
+|   |                                                                                                                                                                                                                                                                                                                                                                         |
+| - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | To create a correlation script, use the details from the source object to find the matching record in the target system. If you are using link qualifiers to match a single source record to multiple target records, you must also use the value of the `linkQualifier` variable within your correlation script to find the target ID that applies for that qualifier. |
+
+---
+
+---
+title: Data mapping model
+description: Choose meta-directory or virtual data model for identity data synchronization
+component: pingoneaic
+page_id: pingoneaic:idm-synchronization:sync-data-model
+canonical_url: https://docs.pingidentity.com/pingoneaic/idm-synchronization/sync-data-model.html
+llms_txt: https://docs.pingidentity.com/pingoneaic/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+keywords: ["Synchronization", "Data model", "Mapping"]
+---
+
+# Data mapping model
+
+Advanced Identity Cloud uses mappings to determine which data to synchronize, and how that data must be synchronized.
+
+In general, identity management software implements one of the following data models:
+
+* A meta-directory data model, where all data is mirrored in a central repository.
+
+  The meta-directory model offers fast access at the risk of getting outdated data.
+
+* A virtual data model, where only a minimum set of attributes are stored centrally, and most are loaded on demand from the external resources in which they are stored.
+
+  The virtual model guarantees fresh data, but pays for that guarantee in terms of performance.
+
+Advanced Identity Cloud leaves the data model choice up to you. You determine the right trade-offs for a particular deployment. Advanced Identity Cloud doesn't hard code any particular schema or set of attributes stored in the repository. Instead, you define how external system objects map onto managed objects, and Advanced Identity Cloud dynamically updates the repository to store the managed object attributes that you configure.
+
+---
+
+---
+title: Default attribute values in a mapping
+description: Set default values for target object attributes in mappings
+component: pingoneaic
+page_id: pingoneaic:idm-synchronization:mapping-default-attributes
+canonical_url: https://docs.pingidentity.com/pingoneaic/idm-synchronization/mapping-default-attributes.html
+llms_txt: https://docs.pingidentity.com/pingoneaic/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+keywords: ["Synchronization", "Attributes", "Mappings"]
+section_ids:
+  default-values-ui: Configure default attribute values using the admin console
+---
+
+# Default attribute values in a mapping
+
+You can use a mapping to *create* attributes on the target resource. The following mapping excerpt creates a `phoneExtension` attribute with a default value of `0047` on the target object:
+
+```json
+{
+    "target": "phoneExtension",
+    "default": "0047"
+},
+```
+
+The `default` property specifies a value to assign to the attribute on the target object. Before Advanced Identity Cloud determines the value of the target attribute, it evaluates any applicable conditions, followed by any transformation scripts. If the `source` property and the `transform` script yield a null value, Advanced Identity Cloud applies the default value in the create and update actions. The default value overrides the target value, if one exists.
+
+## Configure default attribute values using the admin console
+
+To apply a default value to a mapping property, use the [Advanced Sync](../identities/advanced-sync.html) editor's default value editor.
+
+Learn more in [Define and preview mapping rules](../identities/advanced-sync-mappings.html#define-preview-mapping-rules).
+
+---
+
+---
+title: Enhance implicit sync and liveSync
+description: Configure automatic synchronization through implicit sync and liveSync with retry policies
+component: pingoneaic
+page_id: pingoneaic:idm-synchronization:chap-implicit-live-sync
+canonical_url: https://docs.pingidentity.com/pingoneaic/idm-synchronization/chap-implicit-live-sync.html
+llms_txt: https://docs.pingidentity.com/pingoneaic/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+keywords: ["Synchronization"]
+section_ids:
+  array-comparison: Array comparison
+  disabling-automatic-sync: Disable automatic synchronization operations
+  livesync-retry-strategy: Configure the liveSync retry policy
+  queued-sync: Improve reliability with queued synchronization
+  configure-queued-sync: Configure queued synchronization
+  tuning-queued-sync: Tune queued synchronization
+  queued-sync-over-rest: Manage the synchronization queue
+  queued-sync-recovery: Recover mappings when nodes are down
+  queued-sync-balancing: Balance mapping locks across nodes
+  sync-failure-compensation: Synchronization failure compensation
+---
+
+# Enhance implicit sync and liveSync
+
+You can propagate changes to and from Advanced Identity Cloud and external systems through *implicit synchronization* and *liveSync*. These refer to the automatic synchronization of changes from and to the managed objects (such as users or roles) repository. For more information, refer to [Synchronization types](sync-types.html).
+
+The following topics describe the mechanisms for configuring these automatic synchronization mechanisms.
+
+|   |                                                                                                                                                                                                                                     |
+| - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | Before you modify sync configuration settings, mappings and connectors must be configured. For more information, refer to [resource mappings](mappings.html) and [sync connectors](sync-connections.html#connector-config-adminui). |
+
+## Array comparison
+
+You can choose how synchronization detects managed object array changes using *unordered* or *ordered* comparison using the configuration property `comparison` in the schema. Unordered JSON array comparison ignores the order of elements and can negate the need for certain custom scripts within mappings.
+
+Relationship and virtual property array fields default to unordered comparisons. All other fields default to ordered comparisons.
+
+Learn more about [managed object schema properties](../idm-objects/appendix-managed-objects.html#managed-object-property-config-properties).
+
+## Disable automatic synchronization operations
+
+By default, all mappings are automatically synchronized. A change to a managed object is automatically synchronized to all resources for which the managed object is configured as a source. If liveSync is enabled for a system, changes to an object on that system are automatically propagated to the managed object repository.
+
+To prevent automatic synchronization for a specific mapping, set the `enableSync` property of that mapping to false. In the following example, implicit synchronization is disabled. This means that changes to objects in the internal repository are not automatically propagated to the LDAP directory. To propagate changes to the LDAP directory, reconciliation must be launched manually:
+
+```json
+{
+  "mappings" : [
+    {
+      "name" : "managedUser_systemLdapAccounts",
+      "source" : "managed/realm-name_user",
+      "target" : "system/ldap/account",
+      "enableSync" : false,
+      ...
+}
+```
+
+If `enableSync` is set to `false` for a mapping from a system resource to managed/realm-name_user (for example `"systemLdapAccounts_managedUser"`), liveSync is disabled for that mapping.
+
+|   |                                                                                                                                                                                              |
+| - | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | To disable automatic synchronization for a mapping in the [Advanced Sync](../identities/advanced-sync.html) editor, update the mapping's `enableSync` property as described in this section. |
+
+## Configure the liveSync retry policy
+
+If a liveSync operation fails, Advanced Identity Cloud reattempts the change an infinite number of times until the change is successful. This behavior can increase data consistency in the case of transient failures (for example, when the connection to the database is temporarily lost). However, in situations where the cause of the failure is permanent (for example, if the change does not meet certain policy requirements) the change will never succeed, regardless of the number of attempts. In this case, the infinite retry behavior can effectively block subsequent liveSync operations from starting.
+
+To avoid this, you can configure a liveSync retry policy to specify the number of times a failed modification should be reattempted, and what should happen if the modification is unsuccessful after the specified number of attempts.
+
+Ultimately, a scheduled reconciliation operation forces consistency; however, to prevent repeated retries that block liveSync, restrict the number of times you attempt the same modification. You can then specify what happens to failed liveSync changes.
+
+The failed modification can be stored in a *dead letter queue* , discarded, or reapplied. Alternatively, an administrator can be notified of the failure by email or by some other means. This behavior can be scripted. The default configuration in the samples provided with Advanced Identity Cloud is to retry a failed modification five times, and then to log and ignore the failure.
+
+You configure the liveSync retry policy in the [connector configuration](https://docs.pingidentity.com/openicf/connector-reference/configure-connector.html). The sample connector configurations have a retry policy defined as follows:
+
+```json
+"syncFailureHandler" : {
+  "maxRetries" : 5,
+  "postRetryAction" : "logged-ignore"
+},
+```
+
+* `maxRetries`
+
+  Specifies the number of attempts that Advanced Identity Cloud should make to process the failed modification.
+
+  The value of this property must be a positive integer, or `-1`. A value of zero indicates that failed modifications should not be reattempted. In this case, the post-retry action is executed immediately when a liveSync operation fails. A value of `-1` (or omitting the `maxRetries` property, or the entire `syncFailureHandler` from the configuration) indicates that failed modifications should be retried an infinite number of times. In this case, no post retry action is executed.
+
+  The default retry policy relies on the scheduler, or whatever invokes liveSync. Therefore, if retries are enabled and a liveSync modification fails, Advanced Identity Cloud retries the modification the next time that liveSync is invoked.
+
+* `postRetryAction`
+
+  Indicates what should happen if the maximum number of retries has been reached (or if `maxRetries` has been set to zero). The post-retry action can be one of the following:
+
+  * `logged-ignore`
+
+    Advanced Identity Cloud should ignore the failed modification, and log its occurrence.
+
+  * `dead-letter-queue`
+
+    Advanced Identity Cloud should save the details of the failed modification in a table in the repository (accessible over REST at `repo/synchronisation/deadLetterQueue/provisioner-name`).
+
+  * `script`
+
+    Specifies a custom script that should be executed when the maximum number of retries has been reached. For information about using custom scripts in the configuration, refer to [scripting functions](../idm-scripting/scripting-func-engine.html). In addition to the regular objects described in that section, the following objects are available in the script scope:
+
+    * `syncFailure`
+
+      Provides details about the failed record. The structure of the `syncFailure` object is as follows:
+
+      ```json
+      "syncFailure" :
+        {
+          "token" : the ID of the token,
+          "systemIdentifier" : a string identifier that matches the "name" property in the connector configuration,
+          "objectType" : the object type being synced, one of the keys in the "objectTypes" property in the connector configuration,
+          "uid" : the UID of the object (for example uid=joe,ou=People,dc=example,dc=com),
+          "failedRecord", the record that failed to synchronize
+        },
+      ```
+
+      To access these fields, include `syncFailure.fieldname` in your script.
+
+    * `failureCause`
+
+      Provides the exception that caused the original liveSync failure.
+
+    * `failureHandlers`
+
+      Two synchronization failure handlers are provided by default:
+
+      * `loggedIgnore` indicates that the failure should be logged, after which no further action should be taken.
+
+      * `deadLetterQueue` indicates that the failed record should be written to a specific table in the repository, where further action can be taken.
+
+  |   |                                                                                                                                                                                                                 |
+  | - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+  |   | To invoke one of the internal failure handlers from your script, use a call similar to the following (shown here for JavaScript):```none
+  failureHandlers.deadLetterQueue.invoke(syncFailure, failureCause);
+  ``` |
+
+The following liveSync retry policy configuration specifies a maximum of four retries before the failed modification is sent to the dead letter queue:
+
+```json
+...
+    "syncFailureHandler" : {
+        "maxRetries" : 4,
+        "postRetryAction" : dead-letter-queue
+    },
+...
+```
+
+In the case of a failed modification, a message similar to the following is output to the logs:
+
+```
+INFO: sync retries = 1/4, retrying
+```
+
+Advanced Identity Cloud reattempts the modification the specified number of times. If the modification is still unsuccessful, a message similar to the following is logged:
+
+```none
+INFO: sync retries = 4/4, retries exhausted
+Jul 19, 2013 11:59:30 AM
+    org.forgerock.openidm.provisioner.openicf.syncfailure.DeadLetterQueueHandler invoke
+INFO: uid=jdoe,ou=people,dc=example,dc=com saved to dead letter queue
+```
+
+The log message indicates the entry for which the modification failed (`uid=jdoe`, in this example).
+
+You can view the failed modification in the dead letter queue, over the REST interface, as follows:
+
+```
+curl \
+--header "Authorization: Bearer <access-token>" \
+--header "Accept-API-Version: resource=1.0" \
+--request GET \
+"https://<tenant-env-fqdn>/openidm/repo/synchronisation/deadLetterQueue/ldap?_queryFilter=true&_fields=_id"
+{
+  "result":
+    [
+      {
+        "_id": "4",
+        "_rev": "000000001298f6a6"
+      }
+    ],
+  ...
+}
+```
+
+To view the details of a specific failed modification, include its ID in the URL:
+
+```
+curl \
+--header "Authorization: Bearer <access-token>" \
+--header "Accept-API-Version: resource=1.0" \
+--request GET \
+"https://<tenant-env-fqdn>/openidm/repo/synchronisation/deadLetterQueue/ldap/4"
+{
+  "objectType": "account",
+  "systemIdentifier": "ldap",
+  "failureCause": "org.forgerock.openidm.sync.SynchronizationException:
+            org.forgerock.openidm.objset.ConflictException:
+            org.forgerock.openidm.sync.SynchronizationException:
+            org.forgerock.openidm.script.ScriptException:
+            ReferenceError: \"bad\" is not defined.
+            (PropertyMapping/mappings/0/properties/3/condition#1)",
+  "token": 4,
+  "failedRecord": "complete record, in xml format"
+  "uid": "uid=jdoe,ou=people,dc=example,dc=com",
+  "_rev": "000000001298f6a6",
+  "_id": "4"
+}
+```
+
+|   |                                                                                                                                                                                     |
+| - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | The `repo` endpoint is an *internal interface*. Although it is used in the preceding example for the purposes of demonstration, you should not rely on this endpoint in production. |
+
+## Improve reliability with queued synchronization
+
+By default, Advanced Identity Cloud implicitly synchronizes managed object changes out to all resources for which the managed object is configured as a source. If there are several targets that must be synchronized, these targets are synchronized one at a time, one after the other. If any of the targets is remote or has a high latency, the implicit synchronization operations can take some time, delaying the successful return of the managed object change.
+
+To decouple the managed object changes from the corresponding synchronizations, you can configure *queued synchronization*, which persists implicit synchronization events to the Advanced Identity Cloud repository. Queued events are then read from the repository and executed according to the queued synchronization configuration.
+
+Because synchronization operations are performed in parallel, queued synchronization can improve performance if you have several fast, reliable targets. However, queued synchronization is also useful when your targets are slow or unreliable, because the managed object changes can complete before all targets have been synchronized.
+
+The following illustration shows how synchronization operations are added to a local, in-memory queue. Note that this queue is distinct from the repository queue for synchronization events:
+
+![Image shows how synchronization events are added to an in-memory queue.](_images/queued-sync.png)Figure 1. Queued Synchronization
+
+### Configure queued synchronization
+
+Queued synchronization is disabled by default. To enable it, add a `queuedSync` object to your mapping, as follows:
+
+```json
+{
+  "mappings" : [
+    {
+      "name" : "managedUser_systemLdapAccounts",
+      "source" : "managed/realm-name_user",
+      "target" : "system/ldap/account",
+      "links" : "systemLdapAccounts_managedUser",
+      "queuedSync" : {
+        "enabled" : true,
+        "pageSize" : 100,
+        "pollingInterval" : 1000,
+        "maxQueueSize" : 1000,
+        "maxRetries" : 5,
+        "retryDelay" : 1000,
+        "postRetryAction" : "logged-ignore"
+      },
+      ...
+    }
+  ]
+}
+```
+
+|   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | * These settings apply *only* to the implicit synchronization operations for that mapping. Reconciliation is unaffected by queued synchronization settings. Events associated with mappings where queued synchronization is enabled are submitted to the synchronization queue for asynchronous processing. Events associated with mappings where queued synchronization is not enabled are processed immediately, and block further event processing until they are complete.
+
+* During implicit synchronization, mappings are processed in the order in which they are defined, regardless of whether queued synchronization is enabled for those mappings. If you want all queued synchronization mappings to be processed first, you must explicitly order your mappings accordingly.
+
+* Processing the synchronization queue for a mapping is *paused* if either the source or target system route is *unregistered*. A route is unregistered when you remove the connector configuration *(tooltip: You can create and change connector configurations over REST at the /openidm/config/provisioner.openicf/\<connector-name> endpoint.)*, set `"enabled" : false` in the connector configuration *(tooltip: You can create and change connector configurations over REST at the /openidm/config/provisioner.openicf/\<connector-name> endpoint.)*, delete the mapping, or remove the managed object type from the managed object configuration *(tooltip: You can edit the managed object configuration over REST at the config/managed endpoint.)*. |
+
+The `queuedSync` object has the following configuration:
+
+* `enabled`
+
+  Specifies whether queued synchronization is enabled for that mapping. Boolean, `true`, or `false`.
+
+* `pageSize` (integer)
+
+  Specifies the maximum number of events to retrieve from the repository queue within a single polling interval. You can't set this higher than `100` or lower than `10`. If the configured `pageSize` is greater than `maxQueueSize / 10`, Advanced Identity Cloud uses `maxQueueSize / 10` for the page size. The default is `100` events.
+
+* `pollingInterval` (integer)
+
+  Specifies the repository queue polling interval, in milliseconds. The default is `1000` ms.
+
+* `maxQueueSize` (integer)
+
+  Specifies the maximum number of synchronization events that can be accepted into the in-memory queue. You can't set this higher than `1000` or lower than `100`. The default is `1000` events.
+
+* `maxRetries` (integer)
+
+  The number of retries to perform before invoking the `postRetry` action. Most sample configurations set the maximum number of retries to `5`. To set an infinite number of retries, either omit the `maxRetries` property, or set it to a negative value, such as `-1`.
+
+* `retryDelay` (integer)
+
+  In the event of a failed queued synchronization operation, this parameter specifies the number of milliseconds to delay before attempting the operation again. The default is `1000` ms.
+
+* `postRetryAction`
+
+  The action to perform after the retries have been exhausted. Possible options are `logged-ignore`, `dead-letter-queue`, and `script`. These options are described in [Configure the LiveSync Retry Policy](#livesync-retry-strategy). The default action is `logged-ignore`.
+
+|   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | Retries occur synchronously to the failure. For example, if the `maxRetries` is set to `10`, at least 10 seconds will pass between the failing sync event and the next sync. (There are 10 retries, and the `retryDelay` is 1 second by default.) These 10 seconds do not take into account the latency of the ten sync requests. Retries are configured per-mapping and block processing of all subsequent sync events until the configured retries have been exhausted. |
+
+### Tune queued synchronization
+
+Queued synchronization employs a single worker thread. While implicit synchronization operations are being generated, that worker thread should always be occupied. The occupation of the worker thread is a function of the `pageSize`, the `pollingInterval`, the latency of the poll request, and the latency of each synchronization operation for the mapping.
+
+For example, assume that a poll takes 500 milliseconds to complete. Your system must provide operations to the worker thread at approximately the same rate at which the thread can consume events (based on the page size, poll frequency, and poll latency). Operation consumption is a function of the `notifyaction.execution` for that particular mapping. If the system does not provide operations fast enough, implicit synchronization won't occur as optimally as it could. If the system provides operations too quickly, the operations in the queue could exceed the default maximum of `1000`. If the `maxQueueSize` is reached, additional synchronization events result in a `RejectedExecutionException`.
+
+Depending on your hardware and workload, you might need to adjust the default `pageSize`, `pollingInterval`, and `maxQueueSize`.
+
+Monitor the queued synchronization metrics; specifically, the `rejected-executions`, and adjust the `maxQueueSize` accordingly. Set a large enough `maxQueueSize` to prevent slow mappings and heavy loads from causing newly-submitted synchronization events to be rejected.
+
+Monitor the synchronization latency using the `sync.queue.mapping-name.poll-pending-events` metric.
+
+### Manage the synchronization queue
+
+You can manage queued synchronization events over the REST interface, at the `openidm/sync/queue` endpoint. The following examples show the operations that are supported on this endpoint:
+
+List all events in the synchronization queue:
+
+```
+curl \
+--header "Authorization: Bearer <access-token>" \
+--header "Accept-API-Version: resource=1.0" \
+--request GET \
+"https://<tenant-env-fqdn>/openidm/sync/queue?_queryFilter=true"
+{
+  "result": [
+    {
+      "_id": "03e6ab3b-9e5f-43ac-a7a7-a889c5556955",
+      "_rev": "0000000034dba395",
+      "mapping": "managedUser_systemLdapAccounts",
+      "resourceId": "e6533cfe-81ad-4fe8-8104-55e17bd9a1a9",
+      "syncAction": "notifyCreate",
+      "state": "PENDING",
+      "resourceCollection": "managed/realm-name_user",
+      "nodeId": null,
+      "createDate": "2018-11-12T07:45:00.072Z"
+    },
+    {
+      "_id": "ed940f4b-ce80-4a7f-9690-1ad33ad309e6",
+      "_rev": "000000007878a376",
+      "mapping": "managedUser_systemLdapAccounts",
+      "resourceId": "28b1bd90-f647-4ba9-8722-b51319f68613",
+      "syncAction": "notifyCreate",
+      "state": "PENDING",
+      "resourceCollection": "managed/realm-name_user",
+      "nodeId": null,
+      "createDate": "2018-11-12T07:45:00.150Z"
+    },
+    {
+      "_id": "f5af2eed-d83f-4b70-8001-8bc86075134f",
+      "_rev": "00000000099aa321",
+      "mapping": "managedUser_systemLdapAccounts",
+      "resourceId": "d2691a45-0a10-4f51-aa2a-b6854b2f8086",
+      "syncAction": "notifyCreate",
+      "state": "PENDING",
+      "resourceCollection": "managed/realm-name_user",
+      "nodeId": null,
+      "createDate": "2018-11-12T07:45:00.276Z"
+    },
+    ...
+  ],
+  "resultCount": 8,
+  "pagedResultsCookie": null,
+  "totalPagedResultsPolicy": "NONE",
+  "totalPagedResults": -1,
+  "remainingPagedResults": -1
+}
+```
+
+Query the queued synchronization events based on the following properties:
+
+* `mapping`—the mapping associated with this event. For example:
+
+  ```
+  curl \
+  --header "Authorization: Bearer <access-token>" \
+  --header "Accept-API-Version: resource=1.0" \
+  --request GET \
+  "https://<tenant-env-fqdn>/openidm/sync/queue?_queryFilter=mapping+eq+'managedUser_systemLdapAccount'"
+  ```
+
+* `nodeId`—the ID of the node that has acquired this event.
+
+* `resourceId`—the source object resource ID.
+
+* `resourceCollection`—the source object resource collection.
+
+* `_id`—the ID of this sync event.
+
+* `state`—the state of the synchronization event. For example:
+
+  ```
+  curl \
+  --header "Authorization: Bearer <access-token>" \
+  --header "Accept-API-Version: resource=1.0" \
+  --request GET \
+  "https://<tenant-env-fqdn>/openidm/sync/queue?_queryFilter=state+eq+'PENDING'"
+  ```
+
+  The `state` of a queued synchronization event is one of the following:
+
+  `PENDING`—the event is waiting to be processed.\
+  `ACQUIRED`—the event is being processed by a node.
+
+* `remainingRetries`—the number of retries available for this synchronization event before it is abandoned. For more information about how synchronization events are retried, refer to [Configure the LiveSync Retry Policy](#livesync-retry-strategy). For example:
+
+  ```
+  curl \
+  --header "Authorization: Bearer <access-token>" \
+  --header "Accept-API-Version: resource=1.0" \
+  --request GET \
+  "https://<tenant-env-fqdn>/openidm/sync/queue?_queryFilter=remainingRetries+lt+2"
+  ```
+
+* `syncAction`—the synchronization action that initiated this event. Possible synchronization actions are `notifyCreate`, `notifyUpdate`, and `notifyDelete`. For example:
+
+  ```
+  curl \
+  --header "Authorization: Bearer <access-token>" \
+  --header "Accept-API-Version: resource=1.0" \
+  --request GET \
+  "https://<tenant-env-fqdn>/openidm/sync/queue?_queryFilter=syncAction+eq+'notifyCreate'"
+  ```
+
+* `createDate`—the date that the event was created.
+
+### Recover mappings when nodes are down
+
+Synchronization events for mappings with queued synchronization enabled are processed by a single cluster node. While a node is present in the cluster, that node holds a *lock* on the specific mapping. The node can release or reacquire the mapping lock if a balancing event occurs (refer to [Balance Mapping Locks Across Nodes](#queued-sync-balancing)). However, the mapping lock is held across all events on that mapping. In a stable running cluster, a single node will hold the lock for a mapping indefinitely.
+
+It is possible a node goes down or is removed from the cluster while holding a mapping lock on operations in the synchronization queue. To prevent these operations from being lost, the queued synchronization facility includes a *recovery monitor* that checks for any *orphaned* mappings in the cluster.
+
+A mapping is considered orphaned in the following cases:
+
+* No active node holds a lock on the mapping.
+
+* The node that holds a lock on the mapping has an instance state of `STATE_DOWN`.
+
+* The node that holds a lock on the mapping does not exist in the cluster.
+
+The recovery monitor periodically checks for orphaned mappings. When all orphaned mappings are recovered, it attempts to initialize new queue consumers.
+
+The recovery monitor is enabled by default and executes every 300 seconds. To change the default behavior for a [mapping](mappings.html), add the following to the mapping configuration and change the parameters as required:
+
+```json
+{
+    "mappings" : [...],
+    "queueRecovery" : {
+        "enabled" : true,
+        "recoveryInterval" : 300
+    }
+}
+```
+
+|   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | If a queued synchronization job has already been claimed by a node, and that node is *shut down*, Advanced Identity Cloud notifies the entire cluster of the shutdown. This lets a different node pick up the job in progress. The recovery monitor takes over jobs in a synchronization queue that have not been fully processed by an available cluster node, so no job should be lost. If you have configured queued synchronization for one or more mappings, do not use the `enabled` flag in the cluster configuration to remove a node from the cluster. |
+
+### Balance mapping locks across nodes
+
+Queued synchronization mapping locks are balanced equitably across cluster nodes. At a specified interval, each node attempts to release and acquire mapping locks based on the number of running cluster nodes. When new cluster nodes come online, existing nodes release sufficient mapping locks for new nodes to pick them up, resulting in an equitable distribution of locks.
+
+Lock balancing is enabled by default, and the interval at which nodes attempt to balance locks in the queue is five seconds. To change the default configuration, add a `queueBalancing` object to your [mapping](mappings.html) and set the following parameters:
+
+```json
+{
+    "mappings" : [...],
+    "queueBalancing" : {
+        "enabled" : true,
+        "balanceInterval" : 5
+    }
+}
+```
+
+## Synchronization failure compensation
+
+|   |                                                                                                                                                                        |
+| - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | It is recommended that you first attempt to [Improve reliability with queued synchronization](#queued-sync) before you configure synchronization failure compensation. |
+
+If implicit synchronization fails for a target resource (for example, due to a policy validation failure on the target or the target being unavailable), the synchronization operation stops at that point. In this scenario, a record might be changed in the repository and in the targets on which synchronization was successful but not on the failed target or on any targets that would have been synchronized *after* the failure. This can result in disparate data sets across resources. Although a reconciliation operation would bring all targets back in sync, reconciliation can be expensive with large data sets.
+
+|   |                                                                                                                                                          |
+| - | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | If synchronization failure compensation is not accounted for, any issues with connections to an external resource can result in out-of-sync data stores. |
+
+You can configure *synchronization failure compensation* to:
+
+* Prevent data sets from becoming out of sync by reverting the implicit synchronization operation if it is not completely successful across all configured mappings.
+
+* Ensure all resources are synchronized successfully or that the original change is rolled back. This mechanism uses an `onSync` script hook in the managed object configuration *(tooltip: You can edit the managed object configuration over REST at the config/managed endpoint.)*.
+
+  The `onSync` hook calls a script that prevents partial synchronization by reverting a partial change in the event that all resources are not synchronized.
+
+> **Collapse: Synchronization failure  inline script**
+>
+> ```js
+> (function() {
+>     var _ = require("lib/lodash.js");
+>
+>     if (syncResults.success) {
+>         logger.debug("sync was a success; no compensation necessary");
+>         return;
+>     }
+>
+>     if (request !== null
+>             && request.additionalParameters !== null
+>             && request.additionalParameters.compensating === "true") {
+>         logger.debug("already compensating, returning");
+>         return;
+>     }
+>
+>     logger.debug("compensating for " + resourceName);
+>
+>     var params = { "compensating" : true };
+>     switch (syncResults.action) {
+>         case "notifyCreate":
+>             try {
+>                 openidm.delete(resourceName.toString(), newObject._rev, params);
+>             } catch (e) {
+>                 logger.warn("Was not able to delete {} from compensation script. Exception: {}", resourceName.toString(), e);
+>             }
+>             break;
+>         case "notifyUpdate":
+>             try {
+>                 openidm.update(resourceName.toString(), newObject._rev, oldObject, params);
+>             } catch (e) {
+>                 logger.warn("Was not able to update {} from compensation script. Exception: {}", resourceName.toString(), e);
+>             }
+>             break;
+>         case "notifyDelete":
+>             try {
+>                 openidm.create(resourceName.parent().toString(), resourceName.leaf().toString(), oldObject, params);
+>             } catch (e) {
+>                 logger.warn("Was not able to create {} from compensation script. Exception: {}", resourceName.toString(), e);
+>             }
+>             break;
+>     }
+>     logger.debug(resourceName + " sync failure compensation complete");
+>
+>     // throw the error that caused the sync failure
+>     var firstFailure = _.find(syncResults.syncDetails,
+>             function (r) {
+>                 return r.result === "FAILED" && r.cause !== undefined;
+>             });
+>
+>     if (firstFailure !== null) {
+>           throw firstFailure.cause;
+>     }
+>
+> }());
+> ```
+
+With this script:
+
+* A change to a managed object triggers an implicit synchronization for each configured [mapping](mappings.html), in the order in which the mappings are defined. If synchronization is successful for all configured mappings, Advanced Identity Cloud exits from the script.
+
+  If synchronization fails for a particular resource, the `onSync` hook invokes inline script. script, which attempts to revert the original change by performing another update to the managed object. This change triggers another implicit synchronization operation to all external resources for which mappings are configured.
+
+* If the synchronization operation fails again, the script is triggered a second time. This time, however, the script recognizes that the change was originally called as a result of a compensation and aborts. Advanced Identity Cloud logs warning messages related to the sync action (`notifyCreate`, `notifyUpdate`, `notifyDelete`), along with the error that caused the sync failure.
+
+* Any such errors result in each data store retaining the information it had before implicit synchronization started. This information is stored temporarily in the `oldObject` variable.
+
+---
+
+---
 title: Filter synchronization data
 description: Filter synchronization data using scripts, conditions, and queries
 component: pingoneaic
@@ -2212,366 +3276,3 @@ During a reconciliation operation, these scripts would generate output in the OS
 2017-02... WARN Case onCreate: the source object contains: = {roles=openidm-..., lastname=Jensen,  ...]
 2017-02... WARN Case result: the source object contains: = {SOURCE_IGNORED={count=0, ids=[]}, FOUND_ALL...]
 ```
-
----
-
----
-title: Situations specific to implicit synchronization and liveSync
-description: Synchronization situations specific to implicit sync and liveSync deletion events
-component: pingoneaic
-page_id: pingoneaic:idm-synchronization:autosync-and-livesync
-canonical_url: https://docs.pingidentity.com/pingoneaic/idm-synchronization/autosync-and-livesync.html
-llms_txt: https://docs.pingidentity.com/pingoneaic/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-keywords: ["Synchronization"]
----
-
-# Situations specific to implicit synchronization and liveSync
-
-Certain situations occur only during implicit synchronization (when changes made in the repository are pushed out to external systems) and liveSync (when Advanced Identity Cloud polls external system change logs for changes and updates the repository).
-
-The following table shows the situations that pertain only to implicit sync and liveSync, when records are *deleted* from the source or target resource.
-
-**Situations detected during implicit sync or liveSync deletion events**
-
-| Source Qualifies | Link Exists | Targets Found \[[1](#_footnotedef_1 "View footnote.")] | Targets Qualify | Situation      | Default Action        | Possible Actions                                   |
-| ---------------- | ----------- | ------------------------------------------------------ | --------------- | -------------- | --------------------- | -------------------------------------------------- |
-| n/a              | **YES**     | 0                                                      | n/a             | LINK_ONLY      | EXCEPTION             | IGNORE, REPORT, NOREPORT, ASYNC                    |
-| n/a              | **YES**     | 1                                                      | 1               | SOURCE_MISSING | EXCEPTION             | DELETE, IGNORE, REPORT, NOREPORT, ASYNC            |
-| n/a              | **YES**     | 1                                                      | 0               | TARGET_IGNORED | IGNORE                | DELETE, UNLINK, EXCEPTION, REPORT, NOREPORT, ASYNC |
-| n/a              | **NO**      | 0                                                      | n/a             | ALL_GONE       | IGNORE                | EXCEPTION, REPORT, NOREPORT, ASYNC                 |
-| **YES**          | **NO**      | 0                                                      | n/a             | ALL_GONE       | IGNORE                | EXCEPTION, REPORT, NOREPORT, ASYNC                 |
-| **YES**          | **NO**      | 1                                                      | 1               | UNASSIGNED     | EXCEPTION             | REPORT, NOREPORT                                   |
-| **YES**          | **NO**      | > 1                                                    | > 1             | AMBIGUOUS      | EXCEPTION             | IGNORE, REPORT, NOREPORT, ASYNC                    |
-| **NO**           | **NO**      | 0                                                      | n/a             | ALL_GONE       | IGNORE                | EXCEPTION, REPORT, NOREPORT, ASYNC                 |
-| **NO**           | **NO**      | 1                                                      | 1               | TARGET_IGNORED | IGNORE target object  | DELETE, UNLINK, EXCEPTION, REPORT, NOREPORT, ASYNC |
-| **NO**           | **NO**      | > 1                                                    | > 1             | UNQUALIFIED    | DELETE target objects | EXCEPTION, IGNORE, REPORT, NOREPORT, ASYNC         |
-
-|   |                                                                                                                                                   |
-| - | ------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | Learn more about how to configure situations and actions using [Advanced sync situation rules](../identities/advanced-sync-situation-rules.html). |
-
-***
-
-[1](#_footnoteref_1). If no link exists for the source object, Advanced Identity Cloud executes any included correlation logic. If a link exists, correlation does not apply.
-
----
-
----
-title: Source reconciliation
-description: Understand synchronization situations detected during source reconciliation phase
-component: pingoneaic
-page_id: pingoneaic:idm-synchronization:source-reconciliation
-canonical_url: https://docs.pingidentity.com/pingoneaic/idm-synchronization/source-reconciliation.html
-llms_txt: https://docs.pingidentity.com/pingoneaic/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-keywords: ["Synchronization", "Reconciliation"]
-section_ids:
-  sync-situations-source-target-conflict: The SOURCE_TARGET_CONFLICT situation
----
-
-# Source reconciliation
-
-During source reconciliation and liveSync, Advanced Identity Cloud iterates through the objects in the source resource. For reconciliation, the list of objects includes all objects that are available through the connector. For liveSync, the list contains only changed objects. Advanced Identity Cloud can filter objects from the list by using the following:
-
-* Scripts specified in the `validSource` property
-
-* A query specified in the `sourceCondition` property
-
-* A query specified in the `sourceQuery` property
-
-For each object in the list, Advanced Identity Cloud assesses the following conditions:
-
-1. Is the source object valid?
-
-   Valid source objects are categorized `qualifies=1`. Invalid source objects are categorized `qualifies=0`. Invalid objects include objects that were filtered out by a `validSource` script or `sourceCondition`. For more information, refer to [Filter source and target objects with scripts](chap-restricting-sync.html#filtering-source-and-target).
-
-2. Does the source object have a record in the links table?
-
-   Source objects that have a corresponding link in the repository's `links` table are categorized `link=1`. Source objects that do not have a corresponding link are categorized `link=0`.
-
-3. Does the source object have a corresponding valid target object?
-
-   Source objects that have a corresponding object in the target resource are categorized `target=1`. Source objects that do not have a corresponding object in the target resource are categorized `target=0`.
-
-The following diagram illustrates the categorization of four sample objects during source reconciliation. In this example, the source is the managed user repository and the target is an LDAP directory:
-
-![sync-situations](_images/sync-situations.png)Figure 1. Object Categorization During the Source Synchronization Phase
-
-Based on the categorizations of source objects during the source reconciliation phase, the synchronization process assesses a *situation* for each source object, and executes the *action* that is configured for each situation.
-
-Not all situations are detected during all synchronization types (reconciliation, implicit synchronization, and liveSync). The following table describes the set of synchronization situations detected during source reconciliation, the default action taken for each situation, and valid alternative actions that can be configured for each situation:
-
-**Situations Detected During Reconciliation and Source Change Events**
-
-| Source Qualifies | Link Exists | Target Objects Found | Situation                                                     | Default Action                                                       | Possible Actions                                        |
-| ---------------- | ----------- | -------------------- | ------------------------------------------------------------- | -------------------------------------------------------------------- | ------------------------------------------------------- |
-| **NO**           | **NO**      | 0                    | SOURCE_IGNORED                                                | IGNORE source object                                                 | EXCEPTION, REPORT, NOREPORT, ASYNC                      |
-| **NO**           | **NO**      | 1                    | UNQUALIFIED                                                   | DELETE target object                                                 | EXCEPTION, IGNORE, REPORT, NOREPORT, ASYNC              |
-| **NO**           | **NO**      | > 1                  | UNQUALIFIED                                                   | DELETE target objects                                                | EXCEPTION, IGNORE, REPORT, NOREPORT, ASYNC              |
-| **NO**           | **YES**     | 0                    | UNQUALIFIED                                                   | DELETE linked target object \[[1](#_footnotedef_1 "View footnote.")] | EXCEPTION, REPORT, NOREPORT, ASYNC                      |
-| **NO**           | **YES**     | 1                    | UNQUALIFIED                                                   | DELETE linked target object                                          | EXCEPTION, REPORT, NOREPORT, ASYNC                      |
-| **NO**           | **YES**     | > 1                  | UNQUALIFIED                                                   | DELETE linked target object                                          | EXCEPTION, REPORT, NOREPORT, ASYNC                      |
-| **YES**          | **NO**      | 0                    | ABSENT                                                        | CREATE target object                                                 | EXCEPTION, IGNORE, REPORT, NOREPORT, ASYNC              |
-| **YES**          | **NO**      | 1                    | FOUND                                                         | UPDATE target object                                                 | EXCEPTION, IGNORE, REPORT, NOREPORT, ASYNC              |
-| **YES**          | **NO**      | 1                    | FOUND_ALREADY_LINKED \[[2](#_footnotedef_2 "View footnote.")] | EXCEPTION                                                            | IGNORE, REPORT, NOREPORT, ASYNC                         |
-| **YES**          | **NO**      | > 1                  | AMBIGUOUS \[[3](#_footnotedef_3 "View footnote.")]            | EXCEPTION                                                            | REPORT, NOREPORT, ASYNC                                 |
-| **YES**          | **YES**     | 0                    | MISSING \[[4](#_footnotedef_4 "View footnote.")]              | EXCEPTION                                                            | CREATE, UNLINK, DELETE, IGNORE, REPORT, NOREPORT, ASYNC |
-| **YES**          | **YES**     | 1                    | CONFIRMED \[[5](#_footnotedef_5 "View footnote.")]            | UPDATE target object                                                 | IGNORE, REPORT, NOREPORT, ASYNC                         |
-
-Based on this table, the following situations would be assigned to the previous diagram:
-
-![sync-situations2](_images/sync-situations2.png)Figure 2. Situation Assignment During the Source Synchronization Phase
-
-## The `SOURCE_TARGET_CONFLICT` situation
-
-For mappings between applications and workforce identities, `CONFIRMED` has a conflict variant. Advanced Identity Cloud reports `SOURCE_TARGET_CONFLICT` when a source object qualifies for the mapping and is linked to a target object, and changes made directly to the linked objects can't be reconciled. This happens when both objects have changed since the last successful synchronization, or when the next outbound synchronization would overwrite changes made directly to the application account.
-
-Application templates preconfigure the action to `ASYNC`. The `EXCEPTION`, `IGNORE`, `REPORT`, and `NOREPORT` actions are also valid alternatives. Learn more in [Synchronization actions](sync-actions.html).
-
-|   |                                                                                                                                                   |
-| - | ------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | Learn more about how to configure situations and actions using [Advanced sync situation rules](../identities/advanced-sync-situation-rules.html). |
-
-***
-
-[1](#_footnoteref_1). In this case (and the two following cases), the DELETE action is applied to the linked target object and not necessarily to the target object(s) found by the correlation query. If the source is no longer valid and a link existed, the correlation logic is skipped.[2](#_footnoteref_2). The source object qualifies for a target object and is not linked to an existing target object. There is a single target object that correlates with this source object, according to the logic in the correlation, but that target object is already linked to a different source object.[3](#_footnoteref_3). The source object qualifies for a target object, is not linked to an existing target object, but there is more than one correlated target object (that is, more than one possible match on the target system).[4](#_footnoteref_4). If the action is CREATE for the situation MISSING, the orphaned link associated with the source object is updated to point to the new target object. When a target object is deleted, the link from the target to the corresponding source object is not deleted automatically. This lets Advanced Identity Cloud detect and report items that might have been removed without permission or might need review. If you need to remove the corresponding link when a target object is deleted, change the action to UNLINK to remove the link, or to DELETE to remove the target object and the link.[5](#_footnoteref_5). For application-to-workforce identity mappings, when conflicting changes are made directly to the linked objects, Advanced Identity Cloud reports `SOURCE_TARGET_CONFLICT` instead of `CONFIRMED`. Refer to [The `SOURCE_TARGET_CONFLICT` situation](#sync-situations-source-target-conflict).
-
----
-
----
-title: Synchronization
-description: Configure synchronization between Advanced Identity Cloud and other resources.
-component: pingoneaic
-page_id: pingoneaic:idm-synchronization:preface
-canonical_url: https://docs.pingidentity.com/pingoneaic/idm-synchronization/preface.html
-llms_txt: https://docs.pingidentity.com/pingoneaic/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-keywords: ["Synchronization"]
-page_aliases: ["index.adoc"]
----
-
-# Synchronization
-
-> Configure synchronization between Advanced Identity Cloud and other resources.
-
-Synchronizing identity data between resources is one of the core services of Advanced Identity Cloud. The following topics discuss the different types of synchronization and how to configure the flexible synchronization mechanism.
-
-[icon: book, set=fas, size=3x]
-
-#### [Synchronization overview](sync-overview.html)
-
-Understand synchronization types and configuration.
-
-[icon: map-signs, set=fas, size=3x]
-
-#### [Mappings](mappings.html)
-
-Map data between resources.
-
-[icon: cubes, set=fas, size=3x]
-
-#### [Situations and actions](chap-situations-actions.html)
-
-Learn about synchronization situations and how to configure actions for each.
-
-[icon: sort-amount-down, set=fas, size=3x]
-
-#### [Filter synchronization data](chap-restricting-sync.html)
-
-Use filtering mechanisms to limit the synchronized data.
-
-[icon: sync-alt, set=fas, size=3x]
-
-#### [Implicit sync and liveSync](chap-implicit-live-sync.html)
-
-Configure automatic synchronization between resources.
-
-[icon: cogs, set=fas, size=3x]
-
-#### [Reconciliation performance](chap-performance.html)
-
-Learn about ways to improve reconciliation performance.
-
----
-
----
-title: Synchronization actions
-description: Perform actions based on synchronization situations including create, update, delete
-component: pingoneaic
-page_id: pingoneaic:idm-synchronization:sync-actions
-canonical_url: https://docs.pingidentity.com/pingoneaic/idm-synchronization/sync-actions.html
-llms_txt: https://docs.pingidentity.com/pingoneaic/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-keywords: ["Synchronization", "Scripts"]
-section_ids:
-  script-actions: Launch a script as an action
----
-
-# Synchronization actions
-
-When an object has been assigned a situation, the synchronization process takes the configured *action* on that object. If no action is configured, the default action for that situation applies.
-
-The following actions can be taken:
-
-* `CREATE`
-
-  Create and link a target object.
-
-* `UPDATE`
-
-  Link and update a target object.
-
-* `DELETE`
-
-  Delete and unlink the target object.
-
-* `LINK`
-
-  Link the correlated target object.
-
-* `UNLINK`
-
-  Unlink the linked target object.
-
-* `EXCEPTION`
-
-  Flag the link situation as an exception.
-
-  |   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-  | - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-  |   | Do *not* use this action for liveSync mappings.In the context of liveSync, the EXCEPTION action triggers the liveSync failure handler, and the operation is retried in accordance with the configured retry policy. This is not useful because the operation will never succeed. If the configured number of retries is high, these pointless retries can continue for a long period of time.If the maximum number of retries is exceeded, the liveSync operation terminates and does not continue processing the entry that follows the failed (EXCEPTION) entry. LiveSync is only resumed at the next liveSync polling interval.This behavior differs from reconciliation, where a failure to synchronize a single source-target association does not fail the entire reconciliation. |
-
-* `IGNORE`
-
-  Do not change the link or target object state.
-
-* `REPORT`
-
-  Do not perform any action but report what would happen if the default action were performed.
-
-* `NOREPORT`
-
-  Do not perform any action or generate any report.
-
-* `ASYNC`
-
-  An asynchronous process has been started, so do not perform any action or generate any report.
-
-|   |                                                                                                                                                                                                                                                                        |
-| - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | For more information on how to configure the situations and actions in the Advanced Identity Cloud admin console, refer to [Configure situations and actions using the Advanced Identity Cloud admin console](chap-situations-actions.html#situations-and-actions-ui). |
-
-## Launch a script as an action
-
-In addition to the static synchronization actions described previously, you can provide a script to run in specific synchronization situations. You can specify the script inline (with the `"source"` property).
-
-The following excerpt of a sample mapping specifies that an inline script should be invoked when a synchronization operation assesses an entry as `ABSENT` in the target system. The script checks whether the `employeeType` property of the corresponding source entry is `contractor`. If so, the source entry is ignored. Otherwise, the entry is created on the target system:
-
-```json
-{
-    "situation" : "ABSENT",
-    "action" : {
-        "type" : "text/javascript",
-        "globals" : { },
-        "source" : "if (source.employeeType === 'contractor') {action='IGNORE'}
-                   else {action='CREATE'};action;"
-    },
-}
-```
-
-The following variables are available to a script that is called as an action:
-
-* `source`
-
-* `target`
-
-* `linkQualifier`
-
-* `recon` (where `recon.actionParam` contains information about the current reconciliation operation)
-
-For more information about the variables available to scripts, refer to [Script variables](../idm-scripting/script-vars.html).
-
-The result obtained from evaluating this script must be a string whose value is one of the synchronization actions listed in [Synchronization actions](sync-actions.html). This resulting action is shown in the reconciliation log.
-
-To launch a script as a synchronization action in the admin console, use the [Advanced Sync](../identities/advanced-sync.html) editor to [define situation rules](../identities/advanced-sync-situation-rules.html).
-
----
-
----
-title: Synchronization configuration overview
-description: High-level configuration overview for synchronization between resources
-component: pingoneaic
-page_id: pingoneaic:idm-synchronization:sync-config
-canonical_url: https://docs.pingidentity.com/pingoneaic/idm-synchronization/sync-config.html
-llms_txt: https://docs.pingidentity.com/pingoneaic/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-keywords: ["Synchronization", "Configuration"]
----
-
-# Synchronization configuration overview
-
-This section describes the high-level steps required to set up synchronization between two resources. A basic synchronization configuration involves the following steps:
-
-1. Set up a connection between the source and target resource.
-
-   A connector configuration *(tooltip: You can create and change connector configurations over REST at the /openidm/config/provisioner.openicf/\<connector-name> endpoint.)* references a specific connector type and indicates the connection details of the external resource. You must define a connector configuration for each external resource to which you are connecting.
-
-   For more information, refer to [Connections between resources](sync-connections.html).
-
-2. Map source objects to target objects.
-
-   The mapping configuration *(tooltip: You can manage the mapping configuration over REST at the config/sync endpoint.)* of your project. Mappings are synchronized in the order in which they are created. Mappings can be created either over REST or using the [Advanced Sync](../identities/advanced-sync.html) editor.
-
-   Learn more in [Configure advanced sync mappings](../identities/advanced-sync-mappings.html).
-
-3. Configure any scripts that are required to check source and target objects, and to manipulate attributes.
-
-4. In addition to these configuration elements, Advanced Identity Cloud stores a `links` table in its repository. The links table maintains a record of relationships established between source and target objects.
-
-The following diagram illustrates the high-level synchronization configuration:
-
-![sync-config](_images/sync-config.png)
-
----
-
----
-title: Synchronization operations
-description: Manage reconciliation and liveSync operations ensuring data consistency across stores
-component: pingoneaic
-page_id: pingoneaic:idm-synchronization:chap-sync-operations
-canonical_url: https://docs.pingidentity.com/pingoneaic/idm-synchronization/chap-sync-operations.html
-llms_txt: https://docs.pingidentity.com/pingoneaic/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
----
-
-# Synchronization operations
-
-There are various *synchronization* operations within Advanced Identity Cloud that ensure data consistency:
-
-* *Reconciliation* is the process of ensuring that the objects in two different data stores are consistent. Reconciliation is very thorough and a heavy process.
-
-* *LiveSync* captures the changes that occur on an external system, and pushes those changes to Advanced Identity Cloud.
-
-The following subsections describe the various ways you can manage reconciliation and liveSync via REST and the Advanced Identity Cloud admin console.
-
----
-
----
-title: Synchronization overview
-description: Understand synchronization types and mechanisms for keeping data consistent
-component: pingoneaic
-page_id: pingoneaic:idm-synchronization:sync-overview
-canonical_url: https://docs.pingidentity.com/pingoneaic/idm-synchronization/sync-overview.html
-llms_txt: https://docs.pingidentity.com/pingoneaic/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-keywords: ["Synchronization", "Types"]
----
-
-# Synchronization overview
-
-*Synchronization* keeps data consistent across disparate resources. Within Advanced Identity Cloud, we refer to two resource types— *managed resources* (stored in the Advanced Identity Cloud repository) and *external resources*.
-
-An external resource can be any system that holds identity data, such as DS, Active Directory, a CSV file, a JDBC database, and so on.
-
-Advanced Identity Cloud connects to external resources through [*connectors*](https://docs.pingidentity.com/openicf/index.html). Synchronization across resources happens when managed resources change, or when Advanced Identity Cloud discovers a change on a system resource. There are various [synchronization mechanisms](sync-types.html) that ensure data consistency.

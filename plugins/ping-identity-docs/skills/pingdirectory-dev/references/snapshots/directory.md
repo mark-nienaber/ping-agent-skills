@@ -1,51 +1,9 @@
 ---
-title: Assured replication request control
-description: Add the assured replication request control to a Directory REST API request to delay the response until replication requirements are satisfied
+title: API Test - Get an Entry
+description: Shows how to use the PingDirectory REST API GET operation to retrieve a directory entry and its attributes by distinguished name
 component: pingdirectory
-page_id: pingdirectory:directory:controls/assured-replication-request-control
-canonical_url: https://developer.pingidentity.com/pingdirectory/directory/controls/assured-replication-request-control.html
-llms_txt: https://developer.pingidentity.com/pingdirectory/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: 2026-08-11
----
-
-# Assured replication request control
-
-This control may be included in an add, delete, modify, or modify DN request to indicate that the server should delay the response for that operation until it has satisfied certain replication requirements. The control has an OID of 1.3.6.1.4.1.30221.2.5.28, and it takes a value. The following fields may be present in the `value-json` representation of the value:
-
-* `minimum-local-level`: An optional string field whose value is the name of the minimum assurance level desired for replicas in the same location as the target server. The value may be one of "none", "received-any-server", or "processed-all-servers". If this is not specified, then the server will choose an appropriate minimum local assurance level based on its configuration.
-
-* `maximum-local-level`: An optional string field whose value is the name of the maximum assurance level desired for local replicas. If specified (with a value of "none", "received-any-server", or "processed-all-servers"), it may cause the server to use a lower local assurance level than it may have otherwise chosen based on configuration. If this is not specified, then the server will choose an appropriate maximum local assurance level based on its configuration and the minimum local assurance level.
-
-* `minimum-remote-level`: An optional string field whose value is the name of the minimum assurance level desired for replicas in a different location from the target server. The value may be one of "none", "received-any-remote-location", "received-all-remote-locations", or "processed-all-remote-servers". If this is not specified, then the server will choose an appropriate minimum remote assurance level based on its configuration.
-
-* `maximum-remote-level`: An optional string field whose value is the name of the maximum assurance level desired for remote replicas. If specified (with a value of "none", "received-any-remote-location", "received-all-remote-locations", or "processed-all-remote-servers"), it may cause the server to use a lower remote assurance level than it may have otherwise chosen based on configuration. If this is not specified, then the server will choose an appropriate maximum remote assurance level based on its configuration and the minimum remote assurance level.
-
-* `timeout-millis`: An optional integer field whose value specifies the maximum length of time in milliseconds that the server should wait for assurance to be satisfied. If this is not specified, then the server will choose an appropriate timeout.
-
-* `send-response-immediately`: A Boolean field that indicates whether the server should return the response to the client immediately after applying the change locally, even if it has not yet been replicated. Sending the response immediately is primarily useful if the client will monitor the replication status for the operation.
-
-The following sample shows the JSON encoding for the control:
-
-```json
-{ "oid":"1.3.6.1.4.1.30221.2.5.28",
-  "control-name":"Assured Replication Request Control",
-  "criticality":false,
-  "value-json":{ "minimum-local-level":"received-any-server",
-                 "minimum-remote-level":"received-any-remote-location",
-                 "timeout-millis":1000
-    }
-}
-```
-
----
-
----
-title: Get All Schemas
-description: Retrieve a list of all configured objectClass entities and their schemas using the PingDirectory Directory REST API
-component: pingdirectory
-page_id: pingdirectory:directory:schemas-apis/get-all-schemas
-canonical_url: https://developer.pingidentity.com/pingdirectory/directory/schemas-apis/get-all-schemas.html
+page_id: pingdirectory:directory:getting-started/api-test-get-an-entry
+canonical_url: https://developer.pingidentity.com/pingdirectory/directory/getting-started/api-test-get-an-entry.html
 llms_txt: https://developer.pingidentity.com/pingdirectory/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: 2026-01-02
@@ -55,288 +13,7 @@ section_ids:
   example-response: Example Response
 ---
 
-# Get All Schemas
-
-##
-
-```none
-GET {{apiPath}}/directory/v1/schemas/
-```
-
-The `GET /directory/v1/schemas` endpoint returns a list of all configured objectClass entities on the server. If no `objectClass` entities are configured on the directory server, the request returns an empty list.
-
-The sample gets all configured `schemas` and their associated `objectClass` entities.
-
-### Headers
-
-Authorization      Bearer {{accessToken}}
-
-##
-
-### Example Request
-
-* cURL
-
-* C#
-
-* Go
-
-* HTTP
-
-* Java
-
-* jQuery
-
-* NodeJS
-
-* Python
-
-* PHP
-
-* Ruby
-
-* Swift
-
-```shell
-curl --location --globoff '{{apiPath}}/directory/v1/schemas/' \
---header 'Authorization: Bearer {{accessToken}}'
-```
-
-```csharp
-var options = new RestClientOptions("{{apiPath}}/directory/v1/schemas/")
-{
-  MaxTimeout = -1,
-};
-var client = new RestClient(options);
-var request = new RestRequest("", Method.Get);
-request.AddHeader("Authorization", "Bearer {{accessToken}}");
-RestResponse response = await client.ExecuteAsync(request);
-Console.WriteLine(response.Content);
-```
-
-```golang
-package main
-
-import (
-  "fmt"
-  "net/http"
-  "io"
-)
-
-func main() {
-
-  url := "{{apiPath}}/directory/v1/schemas/"
-  method := "GET"
-
-  client := &http.Client {
-  }
-  req, err := http.NewRequest(method, url, nil)
-
-  if err != nil {
-    fmt.Println(err)
-    return
-  }
-  req.Header.Add("Authorization", "Bearer {{accessToken}}")
-
-  res, err := client.Do(req)
-  if err != nil {
-    fmt.Println(err)
-    return
-  }
-  defer res.Body.Close()
-
-  body, err := io.ReadAll(res.Body)
-  if err != nil {
-    fmt.Println(err)
-    return
-  }
-  fmt.Println(string(body))
-}
-```
-
-```http
-GET /directory/v1/schemas/ HTTP/1.1
-Host: {{apiPath}}
-Authorization: Bearer {{accessToken}}
-```
-
-```java
-OkHttpClient client = new OkHttpClient().newBuilder()
-  .build();
-MediaType mediaType = MediaType.parse("text/plain");
-RequestBody body = RequestBody.create(mediaType, "");
-Request request = new Request.Builder()
-  .url("{{apiPath}}/directory/v1/schemas/")
-  .method("GET", body)
-  .addHeader("Authorization", "Bearer {{accessToken}}")
-  .build();
-Response response = client.newCall(request).execute();
-```
-
-```javascript
-var settings = {
-  "url": "{{apiPath}}/directory/v1/schemas/",
-  "method": "GET",
-  "timeout": 0,
-  "headers": {
-    "Authorization": "Bearer {{accessToken}}"
-  },
-};
-
-$.ajax(settings).done(function (response) {
-  console.log(response);
-});
-```
-
-```javascript
-var request = require('request');
-var options = {
-  'method': 'GET',
-  'url': '{{apiPath}}/directory/v1/schemas/',
-  'headers': {
-    'Authorization': 'Bearer {{accessToken}}'
-  }
-};
-request(options, function (error, response) {
-  if (error) throw new Error(error);
-  console.log(response.body);
-});
-```
-
-```python
-import requests
-
-url = "{{apiPath}}/directory/v1/schemas/"
-
-payload = {}
-headers = {
-  'Authorization': 'Bearer {{accessToken}}'
-}
-
-response = requests.request("GET", url, headers=headers, data=payload)
-
-print(response.text)
-```
-
-```php
-<?php
-require_once 'HTTP/Request2.php';
-$request = new HTTP_Request2();
-$request->setUrl('{{apiPath}}/directory/v1/schemas/');
-$request->setMethod(HTTP_Request2::METHOD_GET);
-$request->setConfig(array(
-  'follow_redirects' => TRUE
-));
-$request->setHeader(array(
-  'Authorization' => 'Bearer {{accessToken}}'
-));
-try {
-  $response = $request->send();
-  if ($response->getStatus() == 200) {
-    echo $response->getBody();
-  }
-  else {
-    echo 'Unexpected HTTP status: ' . $response->getStatus() . ' ' .
-    $response->getReasonPhrase();
-  }
-}
-catch(HTTP_Request2_Exception $e) {
-  echo 'Error: ' . $e->getMessage();
-}
-```
-
-```ruby
-require "uri"
-require "net/http"
-
-url = URI("{{apiPath}}/directory/v1/schemas/")
-
-http = Net::HTTP.new(url.host, url.port);
-request = Net::HTTP::Get.new(url)
-request["Authorization"] = "Bearer {{accessToken}}"
-
-response = http.request(request)
-puts response.read_body
-```
-
-```swift
-var request = URLRequest(url: URL(string: "{{apiPath}}/directory/v1/schemas/")!,timeoutInterval: Double.infinity)
-request.addValue("Bearer {{accessToken}}", forHTTPHeaderField: "Authorization")
-
-request.httpMethod = "GET"
-
-let task = URLSession.shared.dataTask(with: request) { data, response, error in
-  guard let data = data else {
-    print(String(describing: error))
-    return
-  }
-  print(String(data: data, encoding: .utf8)!)
-}
-
-task.resume()
-```
-
-### Example Response
-
-200 OK
-
-```json
-{
-  "schemas": [
-    {
-      "$schema": "http://json-schema.org/draft-07/schema#23",
-      "title": "top",
-      "required": ["objectClass"],
-      "classType": "abstract",
-      "type": "object",
-      "properties": {
-        "objectClass": {
-          "type": array,
-          "items": {"type": "string"},
-          "contains": {"const": "top"},
-          "description": "Since 'top' is an abstract objectClass, new objects cannot be created with only 'top' as the objectClass value. A structural objectClass that derives from 'top' must be included"
-        }
-      },
-      "additionalProperties": false,
-      "_links": {
-        "self": {
-          "href": "https://localhost:5034/directory/v1/schemas/top"
-        }
-      }
-    },
-    {
-      "$schema": "http://json-schema.org/draft-07/schema#23",
-      "title": "person",
-      ...
-    },
-    ...
-  ],
-  "_links": {
-    "self: {
-      "href": "https://localhost:5034/directory/v1/schemas"
-    }
-  }
-}
-```
-
----
-
----
-title: Get an Entry
-description: Retrieve a PingDirectory Server entry by its distinguished name using the Directory REST API GET operation
-component: pingdirectory
-page_id: pingdirectory:directory:directory-entry-apis/get-an-entry
-canonical_url: https://developer.pingidentity.com/pingdirectory/directory/directory-entry-apis/get-an-entry.html
-llms_txt: https://developer.pingidentity.com/pingdirectory/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: 2026-01-02
-section_ids:
-  headers: Headers
-  example-request: Example Request
-  example-response: Example Response
----
-
-# Get an Entry
+# API Test - Get an Entry
 
 ##
 
@@ -344,11 +21,22 @@ section_ids:
 GET {{apiPath}}/directory/v1/{{dn}}
 ```
 
-The following sample shows the `GET /directory/v1/{{dn}}` operation to return the directory entry specified by its distinguished name (`dn`).
+The `GET /directory/v1/{{dn}}` operation returns a specific directory record and its associated attributes. The distinguished name \\{{dn}} of the entry is specified in the request URL.
 
-|   |                                                                                                    |
-| - | -------------------------------------------------------------------------------------------------- |
-|   | This endpoint accepts the `expand`, `includeAttributes`, and `excludeAttributes` query parameters. |
+In this example, the value of the `dn` attribute is `uid=lindajones,ou=people,dc=example,dc=com`.
+
+In the Authorization request header field, `Bearer` is required and the `accessToken` value is your full base64url-encoded token generated by the authentication service.
+
+This `GET` request does not require a request body. The response returns the entry data.
+
+| Authorization | Basic Auth   |
+| ------------- | ------------ |
+| **Username**  | {{username}} |
+| **Password**  | \<password>  |
+
+| Request Headers   |                    |
+| ----------------- | ------------------ |
+| **Authorization** | Bearer accessToken |
 
 ### Headers
 
@@ -563,7 +251,7 @@ task.resume()
 
 200 OK
 
-```json
+````json
 {
   "_dn": "uid=lindajones,ou=people,dc=example,dc=com",
   "objectClass": [ "top", "ubidPerson" ],
@@ -588,61 +276,255 @@ task.resume()
   }
 }
 ```
+````
 
 ---
 
 ---
-title: Get an Entry (Exclude SN)
-description: Retrieve a PingDirectory Server entry using the Directory REST API GET operation while excluding the sn attribute from the response
+title: Assertion request control
+description: Add the assertion request control to a Directory REST API request to process the operation only if the target entry matches a given filter
 component: pingdirectory
-page_id: pingdirectory:directory:directory-entry-apis/get-an-entry-exclude-sn
-canonical_url: https://developer.pingidentity.com/pingdirectory/directory/directory-entry-apis/get-an-entry-exclude-sn.html
+page_id: pingdirectory:directory:controls/assertion-request-control
+canonical_url: https://developer.pingidentity.com/pingdirectory/directory/controls/assertion-request-control.html
+llms_txt: https://developer.pingidentity.com/pingdirectory/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-11
+---
+
+# Assertion request control
+
+The standard assertion request control may be included in an add, compare, delete, modify, modify DN, or search request to indicate that the operation should only be processed if the target entry matches a given filter. The control has an OID of 1.3.6.1.1.12, and it takes a value. The following fields may be present in the `value-json` representation of the value:
+
+* `filter`: A required string field whose value is the string representation of the filter that the target entry must match.
+
+The following sample shows the JSON encoding for the control:
+
+```json
+{ "oid":"1.3.6.1.1.12",
+  "control-name":"Assertion Request Control",
+  "criticality":true,
+  "value-json":{ "filter":"(objectClass=person)"
+  }
+}
+```
+
+---
+
+---
+title: Assured replication request control
+description: Add the assured replication request control to a Directory REST API request to delay the response until replication requirements are satisfied
+component: pingdirectory
+page_id: pingdirectory:directory:controls/assured-replication-request-control
+canonical_url: https://developer.pingidentity.com/pingdirectory/directory/controls/assured-replication-request-control.html
+llms_txt: https://developer.pingidentity.com/pingdirectory/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-11
+---
+
+# Assured replication request control
+
+This control may be included in an add, delete, modify, or modify DN request to indicate that the server should delay the response for that operation until it has satisfied certain replication requirements. The control has an OID of 1.3.6.1.4.1.30221.2.5.28, and it takes a value. The following fields may be present in the `value-json` representation of the value:
+
+* `minimum-local-level`: An optional string field whose value is the name of the minimum assurance level desired for replicas in the same location as the target server. The value may be one of "none", "received-any-server", or "processed-all-servers". If this is not specified, then the server will choose an appropriate minimum local assurance level based on its configuration.
+
+* `maximum-local-level`: An optional string field whose value is the name of the maximum assurance level desired for local replicas. If specified (with a value of "none", "received-any-server", or "processed-all-servers"), it may cause the server to use a lower local assurance level than it may have otherwise chosen based on configuration. If this is not specified, then the server will choose an appropriate maximum local assurance level based on its configuration and the minimum local assurance level.
+
+* `minimum-remote-level`: An optional string field whose value is the name of the minimum assurance level desired for replicas in a different location from the target server. The value may be one of "none", "received-any-remote-location", "received-all-remote-locations", or "processed-all-remote-servers". If this is not specified, then the server will choose an appropriate minimum remote assurance level based on its configuration.
+
+* `maximum-remote-level`: An optional string field whose value is the name of the maximum assurance level desired for remote replicas. If specified (with a value of "none", "received-any-remote-location", "received-all-remote-locations", or "processed-all-remote-servers"), it may cause the server to use a lower remote assurance level than it may have otherwise chosen based on configuration. If this is not specified, then the server will choose an appropriate maximum remote assurance level based on its configuration and the minimum remote assurance level.
+
+* `timeout-millis`: An optional integer field whose value specifies the maximum length of time in milliseconds that the server should wait for assurance to be satisfied. If this is not specified, then the server will choose an appropriate timeout.
+
+* `send-response-immediately`: A Boolean field that indicates whether the server should return the response to the client immediately after applying the change locally, even if it has not yet been replicated. Sending the response immediately is primarily useful if the client will monitor the replication status for the operation.
+
+The following sample shows the JSON encoding for the control:
+
+```json
+{ "oid":"1.3.6.1.4.1.30221.2.5.28",
+  "control-name":"Assured Replication Request Control",
+  "criticality":false,
+  "value-json":{ "minimum-local-level":"received-any-server",
+                 "minimum-remote-level":"received-any-remote-location",
+                 "timeout-millis":1000
+    }
+}
+```
+
+---
+
+---
+title: Assured replication response control
+description: Read the assured replication response control in a Directory REST API response to see whether local and remote assurance requirements were satisfied
+component: pingdirectory
+page_id: pingdirectory:directory:controls/assured-replication-response-control
+canonical_url: https://developer.pingidentity.com/pingdirectory/directory/controls/assured-replication-response-control.html
+llms_txt: https://developer.pingidentity.com/pingdirectory/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-11
+---
+
+# Assured replication response control
+
+This control may be used to convey the results of processing for an assured replication request control. The control has an OID of 1.3.6.1.4.1.30221.2.5.29, and it takes a value. The following fields may be present in the `value-json` representation of the value:
+
+* `local-level`: An optional string field that specifies the local assurance level used for the operation. If present, its value will be one of "`none`", "`received-any-server`", or "`processed-all-servers`".
+
+* `local-assurance-satisfied`: A Boolean field that indicates whether the local assurance requirement was satisfied for the operation.
+
+* `local-assurance-message`: An optional string field that provides additional information about the local assurance processing for the operation.
+
+* `remote-level`: An optional string field that specifies the remote assurance level used for the operation. If present, its value will be one of "`none`", "`received-any-remote-location`", "`received-all-remote-locations`", or "`processed-all-remote-servers`".
+
+* `remote-assurance-satisfied`: A Boolean field that indicates whether the remote assurance requirement was satisfied for the operation.
+
+* `remote-assurance-message`: An optional string field that provides additional information about the remote assurance processing for the operation.
+
+* `csn`: An optional string field that provides the change sequence number (CSN) that the server assigned for the operation.
+
+* `server-results`: An optional array of JSON objects that provides individual results from the local and/or remote servers used in replication assurance processing. These JSON objects may include the following fields:
+
+  * `result-code-value`: An integer field that specifies the numeric value for the result code for server assurance processing.
+
+  * `result-code-name`: An optional string field whose value is the name of the result code for server assurance processing.
+
+  * `replication-server-id`: An optional integer field that specifies the server ID for the associated replication server.
+
+  * `replica-id`: An optional integer field that specifies the replica ID for the associated replica.
+
+At present, the defined set of result codes that may be used in assured replication server results are:
+
+* `complete` (0): Indicates that the replicated operation completed successfully.
+
+* `timeout` (1): Indicates that the replicated operation did not complete within the associated timeout period.
+
+* `conflict` (2): Indicates that assurance was not satisfied because a conflict was detected.
+
+* `server-shutdown` (3): Indicates that assurance was not satisfied because the server was shutting down.
+
+* `unavailable` (4): Indicates that assurance was not satisfied because the server was not available.
+
+* `duplicate` (5): Indicates that the server determined that the operation was a duplicate of another operation.
+
+The following represents an example JSON encoding for the control:
+
+```json
+{ "oid":"1.3.6.1.4.1.30221.2.5.29",
+  "control-name":"Assured Replication Response Control",
+  "criticality":false,
+  "value-json":{ "local-level":"received-any-server",
+                 "local-assurance-satisfied":true,
+                 "remote-level":"received-any-remote-location",
+                 "remote-assurance-satisfied":true,
+                 "csn":"1234567890ABCDEF1234567890AB",
+                 "server-results":[ { "result-code-value":0,
+                                      "result-code-name":"complete",
+                                      "replication-server-id":1234 },
+                                    { "result-code-value":0,
+                                      "result-code-name":"complete",
+                                      "replication-server-id":5678 }
+                                     ]
+                    }
+    }
+```
+
+---
+
+---
+title: Authenticate
+description: Documents the PingDirectory REST API POST /authenticate operation for authenticating a user with credentials and returning an access token
+component: pingdirectory
+page_id: pingdirectory:directory:authentication/authenticate
+canonical_url: https://developer.pingidentity.com/pingdirectory/directory/authentication/authenticate.html
 llms_txt: https://developer.pingidentity.com/pingdirectory/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: 2026-01-02
 section_ids:
   headers: Headers
+  body: Body
   example-request: Example Request
   example-response: Example Response
 ---
 
-# Get an Entry (Exclude SN)
+# Authenticate
 
 ##
 
 ```none
-GET {{apiPath}}/directory/v1/{{dn}}?includeAttributes=*&excludeAttributes=sn
+POST {{apiPath}}/directory/v1/authenticate
 ```
 
-By default, endpoints that retrieve and list entry data return all user attributes and no operational attributes (unless the server is configured to return specified operational attributes by default). The `GET /directory/v1/{{dn}}` endpoint also supports fine-tuning the response data through the following query parameters:
+The `POST /authenticate` endpoint allows users to generate an access token by providing combinations of valid credentials depending on the authentication type that they specify in the HTTP request body. For more information, refer to [Supported credential types](index.html#supported-credential-types).
 
-* `includeAttributes`
+The request body may include the following fields:
 
-  Specifies the attribute or attributes in the entry that should be included in the response.
+* `credentials`
 
-* `excludeAttributes`
+  A mandatory JSON object that describes the authentication method to use to authenticate and provides the appropriate type(s) of credentials for that authentication method.
 
-  Specifies the attribute or attributes in the entry that should be excluded in the response.
+* `returnUserAttributes`
 
-These query parameters accept a comma-separated list of attributes to either include or exclude from the response entries. They also support the following aliases as values:
+  An optional array of strings that name the attributes from the authenticated user's entry that should be included in the response. If this is absent or empty, the response will not include any attributes from the target user's entry. Values in this object may be specific attribute names, or they may also be tokens like "\*" (indicating that all user attributes should be included) or "+" (indicating that all operational attributes should be included).
 
-* `*`
+* `_controls`
 
-  Refers to all user attributes of the resource.
+  An optional array of JSON-formatted request controls that can be used when processing the authentication request.
 
-* `_operationalAttributes`
+Upon a successful operation, the JSON object in the response body may include the following fields:
 
-  Refers to all operational attributes of the resource.
+* `resultCode`
 
-|   |                                                                                                                                                                                                                                                                                                                                                                                    |
-| - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | If the same attribute is provided in both `includeAttributes` and `excludeAttributes`, an error is returned. When the ``**alias is used, the `excludeAttributes` parameter takes precedence. For example, `includeAttributes=`**`&excludeAttributes=sn` returns all user attributes except `sn`, but `excludeAttributes=*&includeAttributes=sn` returns no attributes (except DN). |
+  A mandatory JSON object that contains the following fields:
 
-The sample shows the `GET /directory/v1/{{dn}}` operation to return the base entry and all user attributes for the entry, but exclude `sn`.
+  * `value` - The integer value for the LDAP result code. This is required.
+
+  * `name` - A name for the LDAP result code. This is optional but recommended.
+
+* `diagnosticMessage`
+
+  An optional string field that holds a human-readable message with additional information about the operation.
+
+* `accessToken`
+
+  An optional string field that holds an access token that the user can use to authorize subsequent requests. This token may be used in the `Authorization` header of subsequent requests submitted to the Directory REST API.The access token can be included as a Bearer Token in an HTTP Authorization header in later API HTTP requests.
+
+* `userAttributes`
+
+  An optional JSON object field whose contents represent attributes from the authenticated user's entry. This is included in the response to a successful authentication attempt if the request included the `returnUserAttributes` field. The attributes are subject to access control restrictions imposed on the target user.
+
+* `secondsUntilPasswordExpiration`
+
+  An optional integer field whose value will be the length of time in seconds until the user's current password will expire. This is only included if the user's account has a known password expiration time.
+
+* `mustChangePassword`
+
+  An optional Boolean field that indicates whether the user will be required to choose a new password before they will be allowed to perform any other operations on the server.
+
+* `_controls`
+
+  An optional array of JSON-formatted response controls.
 
 ### Headers
 
 Authorization      Bearer {{accessToken}}
+
+Content-Type      application/json
+
+### Body
+
+raw ( application/json )
+
+```json
+{
+    "returnUserAttributes": [
+        "*"
+    ],
+    "credentials": {
+        "authenticationType": "password",
+        "dn": "uid=jimbob,ou=people,dc=example,dc=com",
+        "staticPassword": "password"
+    }
+}
+```
 
 ##
 
@@ -671,18 +553,41 @@ Authorization      Bearer {{accessToken}}
 * Swift
 
 ```shell
-curl --location --globoff '{{apiPath}}/directory/v1/{{dn}}?includeAttributes=*&excludeAttributes=sn' \
---header 'Authorization: Bearer {{accessToken}}'
+curl --location --globoff '{{apiPath}}/directory/v1/authenticate' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer {{accessToken}}' \
+--data '{
+    "returnUserAttributes": [
+        "*"
+    ],
+    "credentials": {
+        "authenticationType": "password",
+        "dn": "uid=jimbob,ou=people,dc=example,dc=com",
+        "staticPassword": "password"
+    }
+}'
 ```
 
 ```csharp
-var options = new RestClientOptions("{{apiPath}}/directory/v1/{{dn}}?includeAttributes=*&excludeAttributes=sn")
+var options = new RestClientOptions("{{apiPath}}/directory/v1/authenticate")
 {
   MaxTimeout = -1,
 };
 var client = new RestClient(options);
-var request = new RestRequest("", Method.Get);
+var request = new RestRequest("", Method.Post);
+request.AddHeader("Content-Type", "application/json");
 request.AddHeader("Authorization", "Bearer {{accessToken}}");
+var body = @"{" + "\n" +
+@"    ""returnUserAttributes"": [" + "\n" +
+@"        ""*""" + "\n" +
+@"    ]," + "\n" +
+@"    ""credentials"": {" + "\n" +
+@"        ""authenticationType"": ""password""," + "\n" +
+@"        ""dn"": ""uid=jimbob,ou=people,dc=example,dc=com""," + "\n" +
+@"        ""staticPassword"": ""password""" + "\n" +
+@"    }" + "\n" +
+@"}";
+request.AddStringBody(body, DataFormat.Json);
 RestResponse response = await client.ExecuteAsync(request);
 Console.WriteLine(response.Content);
 ```
@@ -692,23 +597,36 @@ package main
 
 import (
   "fmt"
+  "strings"
   "net/http"
   "io"
 )
 
 func main() {
 
-  url := "{{apiPath}}/directory/v1/{{dn}}?includeAttributes=*&excludeAttributes=sn"
-  method := "GET"
+  url := "{{apiPath}}/directory/v1/authenticate"
+  method := "POST"
+
+  payload := strings.NewReader(`{
+    "returnUserAttributes": [
+        "*"
+    ],
+    "credentials": {
+        "authenticationType": "password",
+        "dn": "uid=jimbob,ou=people,dc=example,dc=com",
+        "staticPassword": "password"
+    }
+}`)
 
   client := &http.Client {
   }
-  req, err := http.NewRequest(method, url, nil)
+  req, err := http.NewRequest(method, url, payload)
 
   if err != nil {
     fmt.Println(err)
     return
   }
+  req.Header.Add("Content-Type", "application/json")
   req.Header.Add("Authorization", "Bearer {{accessToken}}")
 
   res, err := client.Do(req)
@@ -728,19 +646,32 @@ func main() {
 ```
 
 ```http
-GET /directory/v1/{{dn}}?includeAttributes=*&excludeAttributes=sn HTTP/1.1
+POST /directory/v1/authenticate HTTP/1.1
 Host: {{apiPath}}
+Content-Type: application/json
 Authorization: Bearer {{accessToken}}
+
+{
+    "returnUserAttributes": [
+        "*"
+    ],
+    "credentials": {
+        "authenticationType": "password",
+        "dn": "uid=jimbob,ou=people,dc=example,dc=com",
+        "staticPassword": "password"
+    }
+}
 ```
 
 ```java
 OkHttpClient client = new OkHttpClient().newBuilder()
   .build();
-MediaType mediaType = MediaType.parse("text/plain");
-RequestBody body = RequestBody.create(mediaType, "");
+MediaType mediaType = MediaType.parse("application/json");
+RequestBody body = RequestBody.create(mediaType, "{\n    \"returnUserAttributes\": [\n        \"*\"\n    ],\n    \"credentials\": {\n        \"authenticationType\": \"password\",\n        \"dn\": \"uid=jimbob,ou=people,dc=example,dc=com\",\n        \"staticPassword\": \"password\"\n    }\n}");
 Request request = new Request.Builder()
-  .url("{{apiPath}}/directory/v1/{{dn}}?includeAttributes=*&excludeAttributes=sn")
-  .method("GET", body)
+  .url("{{apiPath}}/directory/v1/authenticate")
+  .method("POST", body)
+  .addHeader("Content-Type", "application/json")
   .addHeader("Authorization", "Bearer {{accessToken}}")
   .build();
 Response response = client.newCall(request).execute();
@@ -748,12 +679,23 @@ Response response = client.newCall(request).execute();
 
 ```javascript
 var settings = {
-  "url": "{{apiPath}}/directory/v1/{{dn}}?includeAttributes=*&excludeAttributes=sn",
-  "method": "GET",
+  "url": "{{apiPath}}/directory/v1/authenticate",
+  "method": "POST",
   "timeout": 0,
   "headers": {
+    "Content-Type": "application/json",
     "Authorization": "Bearer {{accessToken}}"
   },
+  "data": JSON.stringify({
+    "returnUserAttributes": [
+      "*"
+    ],
+    "credentials": {
+      "authenticationType": "password",
+      "dn": "uid=jimbob,ou=people,dc=example,dc=com",
+      "staticPassword": "password"
+    }
+  }),
 };
 
 $.ajax(settings).done(function (response) {
@@ -764,11 +706,23 @@ $.ajax(settings).done(function (response) {
 ```javascript
 var request = require('request');
 var options = {
-  'method': 'GET',
-  'url': '{{apiPath}}/directory/v1/{{dn}}?includeAttributes=*&excludeAttributes=sn',
+  'method': 'POST',
+  'url': '{{apiPath}}/directory/v1/authenticate',
   'headers': {
+    'Content-Type': 'application/json',
     'Authorization': 'Bearer {{accessToken}}'
-  }
+  },
+  body: JSON.stringify({
+    "returnUserAttributes": [
+      "*"
+    ],
+    "credentials": {
+      "authenticationType": "password",
+      "dn": "uid=jimbob,ou=people,dc=example,dc=com",
+      "staticPassword": "password"
+    }
+  })
+
 };
 request(options, function (error, response) {
   if (error) throw new Error(error);
@@ -778,15 +732,26 @@ request(options, function (error, response) {
 
 ```python
 import requests
+import json
 
-url = "{{apiPath}}/directory/v1/{{dn}}?includeAttributes=*&excludeAttributes=sn"
+url = "{{apiPath}}/directory/v1/authenticate"
 
-payload = {}
+payload = json.dumps({
+  "returnUserAttributes": [
+    "*"
+  ],
+  "credentials": {
+    "authenticationType": "password",
+    "dn": "uid=jimbob,ou=people,dc=example,dc=com",
+    "staticPassword": "password"
+  }
+})
 headers = {
+  'Content-Type': 'application/json',
   'Authorization': 'Bearer {{accessToken}}'
 }
 
-response = requests.request("GET", url, headers=headers, data=payload)
+response = requests.request("POST", url, headers=headers, data=payload)
 
 print(response.text)
 ```
@@ -795,14 +760,16 @@ print(response.text)
 <?php
 require_once 'HTTP/Request2.php';
 $request = new HTTP_Request2();
-$request->setUrl('{{apiPath}}/directory/v1/{{dn}}?includeAttributes=*&excludeAttributes=sn');
-$request->setMethod(HTTP_Request2::METHOD_GET);
+$request->setUrl('{{apiPath}}/directory/v1/authenticate');
+$request->setMethod(HTTP_Request2::METHOD_POST);
 $request->setConfig(array(
   'follow_redirects' => TRUE
 ));
 $request->setHeader(array(
+  'Content-Type' => 'application/json',
   'Authorization' => 'Bearer {{accessToken}}'
 ));
+$request->setBody('{\n    "returnUserAttributes": [\n        "*"\n    ],\n    "credentials": {\n        "authenticationType": "password",\n        "dn": "uid=jimbob,ou=people,dc=example,dc=com",\n        "staticPassword": "password"\n    }\n}');
 try {
   $response = $request->send();
   if ($response->getStatus() == 200) {
@@ -820,23 +787,40 @@ catch(HTTP_Request2_Exception $e) {
 
 ```ruby
 require "uri"
+require "json"
 require "net/http"
 
-url = URI("{{apiPath}}/directory/v1/{{dn}}?includeAttributes=*&excludeAttributes=sn")
+url = URI("{{apiPath}}/directory/v1/authenticate")
 
 http = Net::HTTP.new(url.host, url.port);
-request = Net::HTTP::Get.new(url)
+request = Net::HTTP::Post.new(url)
+request["Content-Type"] = "application/json"
 request["Authorization"] = "Bearer {{accessToken}}"
+request.body = JSON.dump({
+  "returnUserAttributes": [
+    "*"
+  ],
+  "credentials": {
+    "authenticationType": "password",
+    "dn": "uid=jimbob,ou=people,dc=example,dc=com",
+    "staticPassword": "password"
+  }
+})
 
 response = http.request(request)
 puts response.read_body
 ```
 
 ```swift
-var request = URLRequest(url: URL(string: "{{apiPath}}/directory/v1/{{dn}}?includeAttributes=*&excludeAttributes=sn")!,timeoutInterval: Double.infinity)
+let parameters = "{\n    \"returnUserAttributes\": [\n        \"*\"\n    ],\n    \"credentials\": {\n        \"authenticationType\": \"password\",\n        \"dn\": \"uid=jimbob,ou=people,dc=example,dc=com\",\n        \"staticPassword\": \"password\"\n    }\n}"
+let postData = parameters.data(using: .utf8)
+
+var request = URLRequest(url: URL(string: "{{apiPath}}/directory/v1/authenticate")!,timeoutInterval: Double.infinity)
+request.addValue("application/json", forHTTPHeaderField: "Content-Type")
 request.addValue("Bearer {{accessToken}}", forHTTPHeaderField: "Authorization")
 
-request.httpMethod = "GET"
+request.httpMethod = "POST"
+request.httpBody = postData
 
 let task = URLSession.shared.dataTask(with: request) { data, response, error in
   guard let data = data else {
@@ -855,22 +839,515 @@ task.resume()
 
 ```json
 {
+    "resultCode": {
+        "value": 0,
+        "name": "success"
+    },
+    "userAttributes": {
+        "_dn": "uid=jimbob,ou=People,dc=example,dc=com",
+        "objectClass": [
+            "top",
+            "person",
+            "organizationalPerson",
+            "inetOrgPerson"
+        ],
+        "sn": [
+            "Bob"
+        ],
+        "cn": [
+            "Jim Bob"
+        ],
+        "givenName": [
+            "Jim"
+        ],
+        "uid": [
+            "jimbob"
+        ]
+    },
+    "accessToken": "VW5A..."
+}
+```
+
+---
+
+---
+title: Authentication
+description: Documents the PingDirectory REST API authenticate endpoint, which supports password, TOTP, delivered OTP, and YubiKey OTP credential types to obtain an access token
+component: pingdirectory
+page_id: pingdirectory:directory:authentication/index
+canonical_url: https://developer.pingidentity.com/pingdirectory/directory/authentication/index.html
+llms_txt: https://developer.pingidentity.com/pingdirectory/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-11
+section_ids:
+  supported-credential-types: Supported credential types
+---
+
+# Authentication
+
+The PingDirectory REST API supports a top-level `authenticate` endpoint used to authenticate users.
+
+|   |                                                                                    |
+| - | ---------------------------------------------------------------------------------- |
+|   | PingDirectory version 10 or higher is required to use the `authenticate` endpoint. |
+
+In most cases, requests sent to the authenticate endpoint will not require and should not include an Authorization header. The only exception to this would be if the request is attempting to use a control that is only available to authorized users. If the request does include an Authorization header, then it must be validated and used to identify the associated user.
+
+## Supported credential types
+
+In an `authenticate` request, the `credentials` element must be a JSON object with a set of credentials for the desired type of authentication. All types of authentication must include an `authenticationType` field in the `credentials` object that specifies what type of authentication to use. The following `authenticationType` values are supported:
+
+* `password`
+
+  The `password` authentication type identifies a user with either a username or a DN and only uses a static password as the credentials. The following additional fields are allowed in the `credentials` object:
+
+  * `dn` — An optional string field whose value is the full DN of the user that is attempting to authenticate. Exactly one of the `dn` and `username` fields must be present.
+
+  * `username` — An optional string field whose value is the username for the user that is attempting to authenticate. Exactly one of the `dn` and `username` fields must be present.
+
+  * `staticPassword` — A mandatory string field whose value is the static password for the target user.
+
+* `passwordPlusTOTP`
+
+  The `passwordPlusTOTP` authentication type identifies a user with either a username or a DN and uses both a static password and a time-based one-time password (TOTP) as the credentials. For TOTP shared secret management, refer to [Generate TOTP shared secret](../extended-operations/generate-totp-shared-secret/generate-totp-shared-secret.html) and [Revoke TOTP shared secret](../extended-operations/revoke-totp-shared-secret/revoke-totp-shared-secret.html). The following additional fields are allowed in the `credentials` object:
+
+  * `dn` — An optional string field whose value is the full DN of the user that is attempting to authenticate. Exactly one of the `dn` and `username` fields must be present.
+
+  * `username` — An optional string field whose value is the username for the user that is attempting to authenticate. Exactly one of the `dn` and `username` fields must be present.
+
+  * `staticPassword` — A mandatory string field whose value is the static password for the target user.
+
+  * `totp` — A mandatory string field whose value is the time-based one-time password for the target user.
+
+* `passwordPlusDeliveredOTP`
+
+  The `passwordPlusDeliveredOTP` authentication type identifies a user with either a username or a DN and uses both a static password and a one-time password that has been delivered to the user through a method like email or SMS. The one-time password will be valid for a limited period of time, and it will only be valid for a single authentication attempt. This authentication type uses the [deliver one-time password extended operation](../extended-operations/deliver-one-time-password/deliver-one-time-password.html).
+
+  Once the deliver one-time password extended request has been used and the one-time password has been generated and delivered to the user, the `authenticate` endpoint can be used to authenticate with that one-time password. The following additional fields are allowed in the `credentials` object:
+
+  * `dn` — An optional string field whose value is the full DN of the user that is attempting to authenticate. Exactly one of the `dn` and `username` fields must be present.
+
+  * `username` — An optional string field whose value is the username for the user that is attempting to authenticate. Exactly one of the `dn` and `username` fields must be present.
+
+  * `otp` — A mandatory string field whose value is the one-time password that was delivered to the target user.
+
+* `passwordPlusYubiKeyOTP`
+
+  The `passwordPlusYubiKeyOTP` authentication type identifies a user with either a username or a DN and uses both a static password and one-time password generated by a YubiKey device as the credentials. For information on YubiKey device management, refer to [Register YubiKey OTP device](../extended-operations/register-yubikey-otp-device/register-yubikey-otp-device.html) and [Deregister YubiKey OTP device](../extended-operations/deregister-yubikey-otp-device/deregister-yubikey-otp-device.html). The following additional fields are allowed in the `credentials` object:
+
+  * `dn` — An optional string field whose value is the full DN of the user that is attempting to authenticate. Exactly one of the `dn` and `username` fields must be present.
+
+  * `username` — An optional string field whose value is the username for the user that is attempting to authenticate. Exactly one of the `dn` and `username` fields must be present.
+
+  * `staticPassword` — A mandatory string field whose value is the static password for the target user.
+
+  * `otp` — A mandatory string field whose value is the one-time password generated by the YubiKey device.
+
+---
+
+---
+title: Change other Attributes (CN, UID, SN)
+description: Update the cn, uid, and sn attributes on a PingDirectory Server entry along with the parent DN in a single Directory REST API request
+component: pingdirectory
+page_id: pingdirectory:directory:directory-entry-apis/change-other-attributes-cn-uid-sn
+canonical_url: https://developer.pingidentity.com/pingdirectory/directory/directory-entry-apis/change-other-attributes-cn-uid-sn.html
+llms_txt: https://developer.pingidentity.com/pingdirectory/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-01-02
+section_ids:
+  headers: Headers
+  body: Body
+  example-request: Example Request
+  example-response: Example Response
+---
+
+# Change other Attributes (CN, UID, SN)
+
+##
+
+```none
+PUT {{apiPath}}/directory/v1/{{dn}}
+```
+
+You can also modify other attributes in addition to the parent DN in this request.
+
+### Headers
+
+Authorization      Bearer {{accessToken}}
+
+Content-Type      application/json
+
+### Body
+
+raw ( application/json )
+
+```json
+{
     "_dn": "uid=lindajones,ou=people,dc=example,dc=com",
+    "cn": [
+        "Linda Jones"
+    ],
     "uid": [
         "lindajones"
     ],
+    "sn": [
+        "Jones"
+    ]
+}
+```
+
+##
+
+### Example Request
+
+* cURL
+
+* C#
+
+* Go
+
+* HTTP
+
+* Java
+
+* jQuery
+
+* NodeJS
+
+* Python
+
+* PHP
+
+* Ruby
+
+* Swift
+
+```shell
+curl --location --globoff --request PUT '{{apiPath}}/directory/v1/{{dn}}' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer {{accessToken}}' \
+--data '{
+    "_dn": "uid=lindajones,ou=people,dc=example,dc=com",
     "cn": [
-        "Linda Jones",
-        "Linda F. Jones"
+        "Linda Jones"
     ],
+    "uid": [
+        "lindajones"
+    ],
+    "sn": [
+        "Jones"
+    ]
+}'
+```
+
+```csharp
+var options = new RestClientOptions("{{apiPath}}/directory/v1/{{dn}}")
+{
+  MaxTimeout = -1,
+};
+var client = new RestClient(options);
+var request = new RestRequest("", Method.Put);
+request.AddHeader("Content-Type", "application/json");
+request.AddHeader("Authorization", "Bearer {{accessToken}}");
+var body = @"{" + "\n" +
+@"    ""_dn"": ""uid=lindajones,ou=people,dc=example,dc=com""," + "\n" +
+@"    ""cn"": [" + "\n" +
+@"        ""Linda Jones""" + "\n" +
+@"    ]," + "\n" +
+@"    ""uid"": [" + "\n" +
+@"        ""lindajones""" + "\n" +
+@"    ]," + "\n" +
+@"    ""sn"": [" + "\n" +
+@"        ""Jones""" + "\n" +
+@"    ]" + "\n" +
+@"}";
+request.AddStringBody(body, DataFormat.Json);
+RestResponse response = await client.ExecuteAsync(request);
+Console.WriteLine(response.Content);
+```
+
+```golang
+package main
+
+import (
+  "fmt"
+  "strings"
+  "net/http"
+  "io"
+)
+
+func main() {
+
+  url := "{{apiPath}}/directory/v1/{{dn}}"
+  method := "PUT"
+
+  payload := strings.NewReader(`{
+    "_dn": "uid=lindajones,ou=people,dc=example,dc=com",
+    "cn": [
+        "Linda Jones"
+    ],
+    "uid": [
+        "lindajones"
+    ],
+    "sn": [
+        "Jones"
+    ]
+}`)
+
+  client := &http.Client {
+  }
+  req, err := http.NewRequest(method, url, payload)
+
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  req.Header.Add("Content-Type", "application/json")
+  req.Header.Add("Authorization", "Bearer {{accessToken}}")
+
+  res, err := client.Do(req)
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  defer res.Body.Close()
+
+  body, err := io.ReadAll(res.Body)
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  fmt.Println(string(body))
+}
+```
+
+```http
+PUT /directory/v1/{{dn}} HTTP/1.1
+Host: {{apiPath}}
+Content-Type: application/json
+Authorization: Bearer {{accessToken}}
+
+{
+    "_dn": "uid=lindajones,ou=people,dc=example,dc=com",
+    "cn": [
+        "Linda Jones"
+    ],
+    "uid": [
+        "lindajones"
+    ],
+    "sn": [
+        "Jones"
+    ]
+}
+```
+
+```java
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+MediaType mediaType = MediaType.parse("application/json");
+RequestBody body = RequestBody.create(mediaType, "{\n    \"_dn\": \"uid=lindajones,ou=people,dc=example,dc=com\",\n    \"cn\": [\n        \"Linda Jones\"\n    ],\n    \"uid\": [\n        \"lindajones\"\n    ],\n    \"sn\": [\n        \"Jones\"\n    ]\n}");
+Request request = new Request.Builder()
+  .url("{{apiPath}}/directory/v1/{{dn}}")
+  .method("PUT", body)
+  .addHeader("Content-Type", "application/json")
+  .addHeader("Authorization", "Bearer {{accessToken}}")
+  .build();
+Response response = client.newCall(request).execute();
+```
+
+```javascript
+var settings = {
+  "url": "{{apiPath}}/directory/v1/{{dn}}",
+  "method": "PUT",
+  "timeout": 0,
+  "headers": {
+    "Content-Type": "application/json",
+    "Authorization": "Bearer {{accessToken}}"
+  },
+  "data": JSON.stringify({
+    "_dn": "uid=lindajones,ou=people,dc=example,dc=com",
+    "cn": [
+      "Linda Jones"
+    ],
+    "uid": [
+      "lindajones"
+    ],
+    "sn": [
+      "Jones"
+    ]
+  }),
+};
+
+$.ajax(settings).done(function (response) {
+  console.log(response);
+});
+```
+
+```javascript
+var request = require('request');
+var options = {
+  'method': 'PUT',
+  'url': '{{apiPath}}/directory/v1/{{dn}}',
+  'headers': {
+    'Content-Type': 'application/json',
+    'Authorization': 'Bearer {{accessToken}}'
+  },
+  body: JSON.stringify({
+    "_dn": "uid=lindajones,ou=people,dc=example,dc=com",
+    "cn": [
+      "Linda Jones"
+    ],
+    "uid": [
+      "lindajones"
+    ],
+    "sn": [
+      "Jones"
+    ]
+  })
+
+};
+request(options, function (error, response) {
+  if (error) throw new Error(error);
+  console.log(response.body);
+});
+```
+
+```python
+import requests
+import json
+
+url = "{{apiPath}}/directory/v1/{{dn}}"
+
+payload = json.dumps({
+  "_dn": "uid=lindajones,ou=people,dc=example,dc=com",
+  "cn": [
+    "Linda Jones"
+  ],
+  "uid": [
+    "lindajones"
+  ],
+  "sn": [
+    "Jones"
+  ]
+})
+headers = {
+  'Content-Type': 'application/json',
+  'Authorization': 'Bearer {{accessToken}}'
+}
+
+response = requests.request("PUT", url, headers=headers, data=payload)
+
+print(response.text)
+```
+
+```php
+<?php
+require_once 'HTTP/Request2.php';
+$request = new HTTP_Request2();
+$request->setUrl('{{apiPath}}/directory/v1/{{dn}}');
+$request->setMethod(HTTP_Request2::METHOD_PUT);
+$request->setConfig(array(
+  'follow_redirects' => TRUE
+));
+$request->setHeader(array(
+  'Content-Type' => 'application/json',
+  'Authorization' => 'Bearer {{accessToken}}'
+));
+$request->setBody('{\n    "_dn": "uid=lindajones,ou=people,dc=example,dc=com",\n    "cn": [\n        "Linda Jones"\n    ],\n    "uid": [\n        "lindajones"\n    ],\n    "sn": [\n        "Jones"\n    ]\n}');
+try {
+  $response = $request->send();
+  if ($response->getStatus() == 200) {
+    echo $response->getBody();
+  }
+  else {
+    echo 'Unexpected HTTP status: ' . $response->getStatus() . ' ' .
+    $response->getReasonPhrase();
+  }
+}
+catch(HTTP_Request2_Exception $e) {
+  echo 'Error: ' . $e->getMessage();
+}
+```
+
+```ruby
+require "uri"
+require "json"
+require "net/http"
+
+url = URI("{{apiPath}}/directory/v1/{{dn}}")
+
+http = Net::HTTP.new(url.host, url.port);
+request = Net::HTTP::Put.new(url)
+request["Content-Type"] = "application/json"
+request["Authorization"] = "Bearer {{accessToken}}"
+request.body = JSON.dump({
+  "_dn": "uid=lindajones,ou=people,dc=example,dc=com",
+  "cn": [
+    "Linda Jones"
+  ],
+  "uid": [
+    "lindajones"
+  ],
+  "sn": [
+    "Jones"
+  ]
+})
+
+response = http.request(request)
+puts response.read_body
+```
+
+```swift
+let parameters = "{\n    \"_dn\": \"uid=lindajones,ou=people,dc=example,dc=com\",\n    \"cn\": [\n        \"Linda Jones\"\n    ],\n    \"uid\": [\n        \"lindajones\"\n    ],\n    \"sn\": [\n        \"Jones\"\n    ]\n}"
+let postData = parameters.data(using: .utf8)
+
+var request = URLRequest(url: URL(string: "{{apiPath}}/directory/v1/{{dn}}")!,timeoutInterval: Double.infinity)
+request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+request.addValue("Bearer {{accessToken}}", forHTTPHeaderField: "Authorization")
+
+request.httpMethod = "PUT"
+request.httpBody = postData
+
+let task = URLSession.shared.dataTask(with: request) { data, response, error in
+  guard let data = data else {
+    print(String(describing: error))
+    return
+  }
+  print(String(data: data, encoding: .utf8)!)
+}
+
+task.resume()
+```
+
+### Example Response
+
+200 OK
+
+```json
+{
+    "_dn": "cn=lindajones,ou=people,dc=example,dc=com",
     "objectClass": [
         "top",
         "person",
         "organizationalPerson",
         "inetOrgPerson"
     ],
-    "createTimestamp": "2018-05-01T15:04:49.866Z",
-    "modifyTimestamp": "2018-05-01T15:04:51.591Z",
+    "uid": [
+        "lindajones"
+    ],
+    "cn": [
+        "Linda Jones"
+    ],
+    "sn": [
+        "Jones"
+    ],
+    "ubidEmailJSON": [
+        {
+            "type": "home",
+            "value": "user@example.com",
+            "verified": true
+        }
+    ],
     "_links": {
         "schemas": [
             {
@@ -878,7 +1355,7 @@ task.resume()
             }
         ],
         "self": {
-            "href": "https://ds.example.com/directory/v1/entryUUID=a4fbd3ca-f7a0-42f2-af66-13f2c0dd8cd1,ou=people,dc=example,dc=com"
+            "href": "https://ds.example.com/directory/v1/uid=lindajones,ou=people,dc=example,dc=com"
         }
     }
 }
@@ -887,33 +1364,59 @@ task.resume()
 ---
 
 ---
-title: Get Current User
-description: Retrieve the record of the currently authenticated user from PingDirectory Server using the GET /directory/v1/me alias endpoint
+title: Change the Naming Attribute
+description: Change the naming attribute used for a PingDirectory Server entry when multiple naming attribute options are defined in the entry
 component: pingdirectory
-page_id: pingdirectory:directory:directory-entry-apis/get-current-user
-canonical_url: https://developer.pingidentity.com/pingdirectory/directory/directory-entry-apis/get-current-user.html
+page_id: pingdirectory:directory:directory-entry-apis/change-the-naming-attribute
+canonical_url: https://developer.pingidentity.com/pingdirectory/directory/directory-entry-apis/change-the-naming-attribute.html
 llms_txt: https://developer.pingidentity.com/pingdirectory/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: 2026-01-02
 section_ids:
   headers: Headers
+  body: Body
   example-request: Example Request
   example-response: Example Response
 ---
 
-# Get Current User
+# Change the Naming Attribute
 
 ##
 
 ```none
-GET {{apiPath}}/directory/v1/me
+PUT {{apiPath}}/directory/v1/{{dn}}
 ```
 
-In addition to retrieving a specified resource by providing the distinguished name, you can get the record of the currently authenticated user by calling the alias `GET /directory/v1/me`.
+It is possible to change the attribute that is used as the naming attribute. In this case, both attribute options must be defined in the entry.
+
+|   |                                                                                                                                    |
+| - | ---------------------------------------------------------------------------------------------------------------------------------- |
+|   | This operation allows that both attributes can change, either one or the other attributes can change, or no attributes can change. |
 
 ### Headers
 
 Authorization      Bearer {{accessToken}}
+
+Content-Type      application/json
+
+### Body
+
+raw ( application/json )
+
+```json
+{
+    "_dn": "cn=Linda Brown,ou=people,dc=example,dc=com",
+    "uid": [
+        "lindabrown"
+    ],
+    "cn": [
+        "Linda Brown"
+    ],
+    "sn": [
+        "Brown"
+    ]
+}
+```
 
 ##
 
@@ -942,18 +1445,45 @@ Authorization      Bearer {{accessToken}}
 * Swift
 
 ```shell
-curl --location --globoff '{{apiPath}}/directory/v1/me' \
---header 'Authorization: Bearer {{accessToken}}'
+curl --location --globoff --request PUT '{{apiPath}}/directory/v1/{{dn}}' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer {{accessToken}}' \
+--data '{
+    "_dn": "cn=Linda Brown,ou=people,dc=example,dc=com",
+    "uid": [
+        "lindabrown"
+    ],
+    "cn": [
+        "Linda Brown"
+    ],
+    "sn": [
+        "Brown"
+    ]
+}'
 ```
 
 ```csharp
-var options = new RestClientOptions("{{apiPath}}/directory/v1/me")
+var options = new RestClientOptions("{{apiPath}}/directory/v1/{{dn}}")
 {
   MaxTimeout = -1,
 };
 var client = new RestClient(options);
-var request = new RestRequest("", Method.Get);
+var request = new RestRequest("", Method.Put);
+request.AddHeader("Content-Type", "application/json");
 request.AddHeader("Authorization", "Bearer {{accessToken}}");
+var body = @"{" + "\n" +
+@"    ""_dn"": ""cn=Linda Brown,ou=people,dc=example,dc=com""," + "\n" +
+@"    ""uid"": [" + "\n" +
+@"        ""lindabrown""" + "\n" +
+@"    ]," + "\n" +
+@"    ""cn"": [" + "\n" +
+@"        ""Linda Brown""" + "\n" +
+@"    ]," + "\n" +
+@"    ""sn"": [" + "\n" +
+@"        ""Brown""" + "\n" +
+@"    ]" + "\n" +
+@"}";
+request.AddStringBody(body, DataFormat.Json);
 RestResponse response = await client.ExecuteAsync(request);
 Console.WriteLine(response.Content);
 ```
@@ -963,23 +1493,38 @@ package main
 
 import (
   "fmt"
+  "strings"
   "net/http"
   "io"
 )
 
 func main() {
 
-  url := "{{apiPath}}/directory/v1/me"
-  method := "GET"
+  url := "{{apiPath}}/directory/v1/{{dn}}"
+  method := "PUT"
+
+  payload := strings.NewReader(`{
+    "_dn": "cn=Linda Brown,ou=people,dc=example,dc=com",
+    "uid": [
+        "lindabrown"
+    ],
+    "cn": [
+        "Linda Brown"
+    ],
+    "sn": [
+        "Brown"
+    ]
+}`)
 
   client := &http.Client {
   }
-  req, err := http.NewRequest(method, url, nil)
+  req, err := http.NewRequest(method, url, payload)
 
   if err != nil {
     fmt.Println(err)
     return
   }
+  req.Header.Add("Content-Type", "application/json")
   req.Header.Add("Authorization", "Bearer {{accessToken}}")
 
   res, err := client.Do(req)
@@ -999,19 +1544,34 @@ func main() {
 ```
 
 ```http
-GET /directory/v1/me HTTP/1.1
+PUT /directory/v1/{{dn}} HTTP/1.1
 Host: {{apiPath}}
+Content-Type: application/json
 Authorization: Bearer {{accessToken}}
+
+{
+    "_dn": "cn=Linda Brown,ou=people,dc=example,dc=com",
+    "uid": [
+        "lindabrown"
+    ],
+    "cn": [
+        "Linda Brown"
+    ],
+    "sn": [
+        "Brown"
+    ]
+}
 ```
 
 ```java
 OkHttpClient client = new OkHttpClient().newBuilder()
   .build();
-MediaType mediaType = MediaType.parse("text/plain");
-RequestBody body = RequestBody.create(mediaType, "");
+MediaType mediaType = MediaType.parse("application/json");
+RequestBody body = RequestBody.create(mediaType, "{\n    \"_dn\": \"cn=Linda Brown,ou=people,dc=example,dc=com\",\n    \"uid\": [\n        \"lindabrown\"\n    ],\n    \"cn\": [\n        \"Linda Brown\"\n    ],\n    \"sn\": [\n        \"Brown\"\n    ]\n}");
 Request request = new Request.Builder()
-  .url("{{apiPath}}/directory/v1/me")
-  .method("GET", body)
+  .url("{{apiPath}}/directory/v1/{{dn}}")
+  .method("PUT", body)
+  .addHeader("Content-Type", "application/json")
   .addHeader("Authorization", "Bearer {{accessToken}}")
   .build();
 Response response = client.newCall(request).execute();
@@ -1019,12 +1579,25 @@ Response response = client.newCall(request).execute();
 
 ```javascript
 var settings = {
-  "url": "{{apiPath}}/directory/v1/me",
-  "method": "GET",
+  "url": "{{apiPath}}/directory/v1/{{dn}}",
+  "method": "PUT",
   "timeout": 0,
   "headers": {
+    "Content-Type": "application/json",
     "Authorization": "Bearer {{accessToken}}"
   },
+  "data": JSON.stringify({
+    "_dn": "cn=Linda Brown,ou=people,dc=example,dc=com",
+    "uid": [
+      "lindabrown"
+    ],
+    "cn": [
+      "Linda Brown"
+    ],
+    "sn": [
+      "Brown"
+    ]
+  }),
 };
 
 $.ajax(settings).done(function (response) {
@@ -1035,11 +1608,25 @@ $.ajax(settings).done(function (response) {
 ```javascript
 var request = require('request');
 var options = {
-  'method': 'GET',
-  'url': '{{apiPath}}/directory/v1/me',
+  'method': 'PUT',
+  'url': '{{apiPath}}/directory/v1/{{dn}}',
   'headers': {
+    'Content-Type': 'application/json',
     'Authorization': 'Bearer {{accessToken}}'
-  }
+  },
+  body: JSON.stringify({
+    "_dn": "cn=Linda Brown,ou=people,dc=example,dc=com",
+    "uid": [
+      "lindabrown"
+    ],
+    "cn": [
+      "Linda Brown"
+    ],
+    "sn": [
+      "Brown"
+    ]
+  })
+
 };
 request(options, function (error, response) {
   if (error) throw new Error(error);
@@ -1049,15 +1636,28 @@ request(options, function (error, response) {
 
 ```python
 import requests
+import json
 
-url = "{{apiPath}}/directory/v1/me"
+url = "{{apiPath}}/directory/v1/{{dn}}"
 
-payload = {}
+payload = json.dumps({
+  "_dn": "cn=Linda Brown,ou=people,dc=example,dc=com",
+  "uid": [
+    "lindabrown"
+  ],
+  "cn": [
+    "Linda Brown"
+  ],
+  "sn": [
+    "Brown"
+  ]
+})
 headers = {
+  'Content-Type': 'application/json',
   'Authorization': 'Bearer {{accessToken}}'
 }
 
-response = requests.request("GET", url, headers=headers, data=payload)
+response = requests.request("PUT", url, headers=headers, data=payload)
 
 print(response.text)
 ```
@@ -1066,14 +1666,16 @@ print(response.text)
 <?php
 require_once 'HTTP/Request2.php';
 $request = new HTTP_Request2();
-$request->setUrl('{{apiPath}}/directory/v1/me');
-$request->setMethod(HTTP_Request2::METHOD_GET);
+$request->setUrl('{{apiPath}}/directory/v1/{{dn}}');
+$request->setMethod(HTTP_Request2::METHOD_PUT);
 $request->setConfig(array(
   'follow_redirects' => TRUE
 ));
 $request->setHeader(array(
+  'Content-Type' => 'application/json',
   'Authorization' => 'Bearer {{accessToken}}'
 ));
+$request->setBody('{\n    "_dn": "cn=Linda Brown,ou=people,dc=example,dc=com",\n    "uid": [\n        "lindabrown"\n    ],\n    "cn": [\n        "Linda Brown"\n    ],\n    "sn": [\n        "Brown"\n    ]\n}');
 try {
   $response = $request->send();
   if ($response->getStatus() == 200) {
@@ -1091,23 +1693,42 @@ catch(HTTP_Request2_Exception $e) {
 
 ```ruby
 require "uri"
+require "json"
 require "net/http"
 
-url = URI("{{apiPath}}/directory/v1/me")
+url = URI("{{apiPath}}/directory/v1/{{dn}}")
 
 http = Net::HTTP.new(url.host, url.port);
-request = Net::HTTP::Get.new(url)
+request = Net::HTTP::Put.new(url)
+request["Content-Type"] = "application/json"
 request["Authorization"] = "Bearer {{accessToken}}"
+request.body = JSON.dump({
+  "_dn": "cn=Linda Brown,ou=people,dc=example,dc=com",
+  "uid": [
+    "lindabrown"
+  ],
+  "cn": [
+    "Linda Brown"
+  ],
+  "sn": [
+    "Brown"
+  ]
+})
 
 response = http.request(request)
 puts response.read_body
 ```
 
 ```swift
-var request = URLRequest(url: URL(string: "{{apiPath}}/directory/v1/me")!,timeoutInterval: Double.infinity)
+let parameters = "{\n    \"_dn\": \"cn=Linda Brown,ou=people,dc=example,dc=com\",\n    \"uid\": [\n        \"lindabrown\"\n    ],\n    \"cn\": [\n        \"Linda Brown\"\n    ],\n    \"sn\": [\n        \"Brown\"\n    ]\n}"
+let postData = parameters.data(using: .utf8)
+
+var request = URLRequest(url: URL(string: "{{apiPath}}/directory/v1/{{dn}}")!,timeoutInterval: Double.infinity)
+request.addValue("application/json", forHTTPHeaderField: "Content-Type")
 request.addValue("Bearer {{accessToken}}", forHTTPHeaderField: "Authorization")
 
-request.httpMethod = "GET"
+request.httpMethod = "PUT"
+request.httpBody = postData
 
 let task = URLSession.shared.dataTask(with: request) { data, response, error in
   guard let data = data else {
@@ -1126,66 +1747,38 @@ task.resume()
 
 ```json
 {
-  "_dn": "uid=lindajones,ou=people,dc=example,dc=com",
-  "objectClass": [ "top", "ubidPerson" ],
-  "uid": ["lindajones"],
-  "cn": ["Linda Jones"],
-  "sn": ["Jones"],
-  "ubidEmailJSON": [
-    {
-      "type": "work",
-      "value": "ljones@example.com"
-    },
-  ],
-  "_links": {
-    "schemas": [
-      {
-        "href": "https://ds.example.com/directory/v1/schemas/ubidPerson"
-      }
+    "_dn": "cn=Linda Brown,ou=people,dc=example,dc=com",
+    "objectClass": [
+        "top",
+        "person",
+        "organizationalPerson",
+        "inetOrgPerson"
     ],
-    "self": {
-      "href": "https://ds.example.com/directory/v1/uid=lindajones,ou=people,dc=example,dc=com"
-    }
-  }
-}
-```
-
----
-
----
-title: Get effective rights request control
-description: Add the get effective rights request control to a Directory REST API search request to return access control permissions a user has on matching entries
-component: pingdirectory
-page_id: pingdirectory:directory:controls/get-effective-rights-request-control
-canonical_url: https://developer.pingidentity.com/pingdirectory/directory/controls/get-effective-rights-request-control.html
-llms_txt: https://developer.pingidentity.com/pingdirectory/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: 2026-08-11
----
-
-# Get effective rights request control
-
-The proprietary get effective rights request control may be included in a search request to indicate that matching entries should include one or more `aclRights` attributes with the access control permissions that a given user may have when interacting with the entry. The control has an OID of 1.3.6.1.4.1.42.2.27.9.5.2, and it takes a value. The following fields may be present in the `value-json` representation of the value:
-
-* `authorization-id`: A mandatory string field whose value is the authorization identity of the user for whom to make the access control determination.
-
-* `attributes`: An optional array field whose values are the names of the attributes for which to calculate effective rights. If this is not provided, or if it is empty, then the default behavior calculates effective rights for all user attributes in the entry.
-
-The following sample shows the JSON encoding for the control:
-
-```json
-{
-    "oid":"1.3.6.1.4.1.42.2.27.9.5.2",
-    "control-name":"Get Effective Rights Request Control",
-    "criticality":false,
-    "value-json":{
-        "authorization-id":"dn:uid=jdoe,ou=People,dc=example,dc=com",
-        "attributes":[
-            "uid",
-            "mail",
-            "telephoneNumber",
-            "userPassword"
-            ]
+    "uid": [
+        "lindabrown"
+    ],
+    "cn": [
+        "Linda Brown"
+    ],
+    "sn": [
+        "Brown"
+    ],
+    "ubidEmailJSON": [
+        {
+            "type": "home",
+            "value": "user@example.com",
+            "verified": true
+        }
+    ],
+    "_links": {
+        "schemas": [
+            {
+                "href": "https://ds.example.com/directory/v1/schemas/inetOrgPerson"
+            }
+        ],
+        "self": {
+            "href": "https://ds.example.com/directory/v1/cn=Linda+Brown,ou=people,dc=example,dc=com"
+        }
     }
 }
 ```
@@ -1193,35 +1786,901 @@ The following sample shows the JSON encoding for the control:
 ---
 
 ---
-title: Get Metadata
-description: Retrieve server and API metadata, including configured schemas, from the PingDirectory Server Directory REST API base endpoint
+title: Change the Parent DN
+description: Move a PingDirectory Server entry to a new parent DN using the Directory REST API, with or without also changing the RDN
 component: pingdirectory
-page_id: pingdirectory:directory:directory-entry-apis/get-metadata
-canonical_url: https://developer.pingidentity.com/pingdirectory/directory/directory-entry-apis/get-metadata.html
+page_id: pingdirectory:directory:directory-entry-apis/change-the-parent-dn
+canonical_url: https://developer.pingidentity.com/pingdirectory/directory/directory-entry-apis/change-the-parent-dn.html
 llms_txt: https://developer.pingidentity.com/pingdirectory/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: 2026-01-02
 section_ids:
   headers: Headers
+  body: Body
   example-request: Example Request
   example-response: Example Response
 ---
 
-# Get Metadata
+# Change the Parent DN
 
 ##
 
 ```none
-GET {{apiPath}}/directory/v1
+PUT {{apiPath}}/directory/v1/{{dn}}
 ```
 
-A `GET` request on the base endpoint, `/directory/v1`, returns metadata about the server and API. It also returns a list of configured schemas allowed on the server. The sample shows the `GET /directory/v1` operation.
-
-When successful, the operation returns a `200 OK` message and the response data.
+You can also change the parent DN, in addition to or independent of the RDN, in order to move the entry. The new parent DN must point to an existing entry and the naming attribute must still be provided, even if the RDN does not change.
 
 ### Headers
 
 Authorization      Bearer {{accessToken}}
+
+Content-Type      application/json
+
+### Body
+
+raw ( application/json )
+
+```json
+{
+    "_dn": "cn=Linda Brown,ou=employees,dc=example,dc=com",
+    "cn": [
+        "Linda Brown"
+    ]
+}
+```
+
+##
+
+### Example Request
+
+* cURL
+
+* C#
+
+* Go
+
+* HTTP
+
+* Java
+
+* jQuery
+
+* NodeJS
+
+* Python
+
+* PHP
+
+* Ruby
+
+* Swift
+
+```shell
+curl --location --globoff --request PUT '{{apiPath}}/directory/v1/{{dn}}' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer {{accessToken}}' \
+--data '{
+    "_dn": "cn=Linda Brown,ou=employees,dc=example,dc=com",
+    "cn": [
+        "Linda Brown"
+    ]
+}'
+```
+
+```csharp
+var options = new RestClientOptions("{{apiPath}}/directory/v1/{{dn}}")
+{
+  MaxTimeout = -1,
+};
+var client = new RestClient(options);
+var request = new RestRequest("", Method.Put);
+request.AddHeader("Content-Type", "application/json");
+request.AddHeader("Authorization", "Bearer {{accessToken}}");
+var body = @"{" + "\n" +
+@"    ""_dn"": ""cn=Linda Brown,ou=employees,dc=example,dc=com""," + "\n" +
+@"    ""cn"": [" + "\n" +
+@"        ""Linda Brown""" + "\n" +
+@"    ]" + "\n" +
+@"}";
+request.AddStringBody(body, DataFormat.Json);
+RestResponse response = await client.ExecuteAsync(request);
+Console.WriteLine(response.Content);
+```
+
+```golang
+package main
+
+import (
+  "fmt"
+  "strings"
+  "net/http"
+  "io"
+)
+
+func main() {
+
+  url := "{{apiPath}}/directory/v1/{{dn}}"
+  method := "PUT"
+
+  payload := strings.NewReader(`{
+    "_dn": "cn=Linda Brown,ou=employees,dc=example,dc=com",
+    "cn": [
+        "Linda Brown"
+    ]
+}`)
+
+  client := &http.Client {
+  }
+  req, err := http.NewRequest(method, url, payload)
+
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  req.Header.Add("Content-Type", "application/json")
+  req.Header.Add("Authorization", "Bearer {{accessToken}}")
+
+  res, err := client.Do(req)
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  defer res.Body.Close()
+
+  body, err := io.ReadAll(res.Body)
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  fmt.Println(string(body))
+}
+```
+
+```http
+PUT /directory/v1/{{dn}} HTTP/1.1
+Host: {{apiPath}}
+Content-Type: application/json
+Authorization: Bearer {{accessToken}}
+
+{
+    "_dn": "cn=Linda Brown,ou=employees,dc=example,dc=com",
+    "cn": [
+        "Linda Brown"
+    ]
+}
+```
+
+```java
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+MediaType mediaType = MediaType.parse("application/json");
+RequestBody body = RequestBody.create(mediaType, "{\n    \"_dn\": \"cn=Linda Brown,ou=employees,dc=example,dc=com\",\n    \"cn\": [\n        \"Linda Brown\"\n    ]\n}");
+Request request = new Request.Builder()
+  .url("{{apiPath}}/directory/v1/{{dn}}")
+  .method("PUT", body)
+  .addHeader("Content-Type", "application/json")
+  .addHeader("Authorization", "Bearer {{accessToken}}")
+  .build();
+Response response = client.newCall(request).execute();
+```
+
+```javascript
+var settings = {
+  "url": "{{apiPath}}/directory/v1/{{dn}}",
+  "method": "PUT",
+  "timeout": 0,
+  "headers": {
+    "Content-Type": "application/json",
+    "Authorization": "Bearer {{accessToken}}"
+  },
+  "data": JSON.stringify({
+    "_dn": "cn=Linda Brown,ou=employees,dc=example,dc=com",
+    "cn": [
+      "Linda Brown"
+    ]
+  }),
+};
+
+$.ajax(settings).done(function (response) {
+  console.log(response);
+});
+```
+
+```javascript
+var request = require('request');
+var options = {
+  'method': 'PUT',
+  'url': '{{apiPath}}/directory/v1/{{dn}}',
+  'headers': {
+    'Content-Type': 'application/json',
+    'Authorization': 'Bearer {{accessToken}}'
+  },
+  body: JSON.stringify({
+    "_dn": "cn=Linda Brown,ou=employees,dc=example,dc=com",
+    "cn": [
+      "Linda Brown"
+    ]
+  })
+
+};
+request(options, function (error, response) {
+  if (error) throw new Error(error);
+  console.log(response.body);
+});
+```
+
+```python
+import requests
+import json
+
+url = "{{apiPath}}/directory/v1/{{dn}}"
+
+payload = json.dumps({
+  "_dn": "cn=Linda Brown,ou=employees,dc=example,dc=com",
+  "cn": [
+    "Linda Brown"
+  ]
+})
+headers = {
+  'Content-Type': 'application/json',
+  'Authorization': 'Bearer {{accessToken}}'
+}
+
+response = requests.request("PUT", url, headers=headers, data=payload)
+
+print(response.text)
+```
+
+```php
+<?php
+require_once 'HTTP/Request2.php';
+$request = new HTTP_Request2();
+$request->setUrl('{{apiPath}}/directory/v1/{{dn}}');
+$request->setMethod(HTTP_Request2::METHOD_PUT);
+$request->setConfig(array(
+  'follow_redirects' => TRUE
+));
+$request->setHeader(array(
+  'Content-Type' => 'application/json',
+  'Authorization' => 'Bearer {{accessToken}}'
+));
+$request->setBody('{\n    "_dn": "cn=Linda Brown,ou=employees,dc=example,dc=com",\n    "cn": [\n        "Linda Brown"\n    ]\n}');
+try {
+  $response = $request->send();
+  if ($response->getStatus() == 200) {
+    echo $response->getBody();
+  }
+  else {
+    echo 'Unexpected HTTP status: ' . $response->getStatus() . ' ' .
+    $response->getReasonPhrase();
+  }
+}
+catch(HTTP_Request2_Exception $e) {
+  echo 'Error: ' . $e->getMessage();
+}
+```
+
+```ruby
+require "uri"
+require "json"
+require "net/http"
+
+url = URI("{{apiPath}}/directory/v1/{{dn}}")
+
+http = Net::HTTP.new(url.host, url.port);
+request = Net::HTTP::Put.new(url)
+request["Content-Type"] = "application/json"
+request["Authorization"] = "Bearer {{accessToken}}"
+request.body = JSON.dump({
+  "_dn": "cn=Linda Brown,ou=employees,dc=example,dc=com",
+  "cn": [
+    "Linda Brown"
+  ]
+})
+
+response = http.request(request)
+puts response.read_body
+```
+
+```swift
+let parameters = "{\n    \"_dn\": \"cn=Linda Brown,ou=employees,dc=example,dc=com\",\n    \"cn\": [\n        \"Linda Brown\"\n    ]\n}"
+let postData = parameters.data(using: .utf8)
+
+var request = URLRequest(url: URL(string: "{{apiPath}}/directory/v1/{{dn}}")!,timeoutInterval: Double.infinity)
+request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+request.addValue("Bearer {{accessToken}}", forHTTPHeaderField: "Authorization")
+
+request.httpMethod = "PUT"
+request.httpBody = postData
+
+let task = URLSession.shared.dataTask(with: request) { data, response, error in
+  guard let data = data else {
+    print(String(describing: error))
+    return
+  }
+  print(String(data: data, encoding: .utf8)!)
+}
+
+task.resume()
+```
+
+### Example Response
+
+200 OK
+
+```json
+{
+    "_dn": "cn=Linda Brown,ou=employees,dc=example,dc=com",
+    "objectClass": [
+        "top",
+        "person",
+        "organizationalPerson",
+        "inetOrgPerson"
+    ],
+    "uid": [
+        "lindabrown"
+    ],
+    "cn": [
+        "Linda Brown"
+    ],
+    "sn": [
+        "Brown"
+    ],
+    "ubidEmailJSON": [
+        {
+            "type": "home",
+            "value": "user@example.com",
+            "verified": true
+        }
+    ],
+    "_links": {
+        "schemas": [
+            {
+                "href": "https://ds.example.com/directory/v1/schemas/inetOrgPerson"
+            }
+        ],
+        "self": {
+            "href": "https://ds.example.com/directory/v1/cn=Linda+Brown,ou=employees,dc=example,dc=com"
+        }
+    }
+}
+```
+
+---
+
+---
+title: Changelog
+description: Lists changes and new features added to the PingDirectory REST API over time, including authentication and extended operation support
+component: pingdirectory
+page_id: pingdirectory:directory:changelog
+canonical_url: https://developer.pingidentity.com/pingdirectory/directory/changelog.html
+llms_txt: https://developer.pingidentity.com/pingdirectory/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-11
+---
+
+# Changelog
+
+The following changes have been made to the PingDirectory REST API.
+
+| Release Date | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| 12/13/2024   | The Directory REST API supports using OAuth scopes for ACI rules. Learn more in [Getting started](getting-started/index.html).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| 12/14/2023   | The Directory REST API supports [Authentication](authentication/index.html) in PingDirectory version 10 or higher. The following LDAP extended operations have been adopted to support the [Authenticate endpoint](authentication/authenticate.html): [Deliver one-time password](extended-operations/deliver-one-time-password/deliver-one-time-password.html), [Deregister YubiKey OTP device](extended-operations/deregister-yubikey-otp-device/deregister-yubikey-otp-device.html), [Generate TOTP shared secret](extended-operations/generate-totp-shared-secret/generate-totp-shared-secret.html), [Register YubiKey OTP device](extended-operations/register-yubikey-otp-device/register-yubikey-otp-device.html), [Revoke TOTP shared secret](extended-operations/revoke-totp-shared-secret/revoke-totp-shared-secret.html). |
+| 6/6/2023     | The Directory REST API now supports implementations of the LDAP [get password quality requirements](extended-operations/get-password-quality-requirements/get-password-quality-requirements.html) and [generate password](extended-operations/generate-password/generate-password.html) extended operations.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| 5/22/2023    | The LDAP [modify password](extended-operations/password-modify/password-modify.html) extended operation is now enabled through the Directory REST API.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| 6/1/2022     | All PingDirectory REST API documentation converted to Markdown and moved from Postman.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+
+---
+
+---
+title: Controls
+description: Add LDAP controls to Directory REST API requests and responses using the _controls property, including OID, criticality, and value fields
+component: pingdirectory
+page_id: pingdirectory:directory:controls/index
+canonical_url: https://developer.pingidentity.com/pingdirectory/directory/controls/index.html
+llms_txt: https://developer.pingidentity.com/pingdirectory/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-11
+---
+
+# Controls
+
+The requests for creating, updating, deleting, and searching entries support the `_controls` property, which is a JSON field added to the requests and responses. The property specifies an array of JSON formatted controls that provide additional content in LDAP requests and responses.
+
+LDAP controls consist of these attributes:
+
+* `oid`: A required object identifier (OID) that identifies the type of control. Each type of control must have its own unique OID, although request and response controls of the same type may optionally share the same OID. When the server receives an LDAP request with one or more controls, it uses the OID to determine the kind of control it is so that it can determine how to process it. Similarly, clients can identify the type of a response control based on its OID.
+
+* `control-name`: An optional string field that specifies the user-friendly name of the control.
+
+* `criticality`: A required Boolean that indicates whether the control should be considered a critical part of the operation. If a request control is critical, and if the server does not support it for the requested operation, or if the client does not have permission to request it, then the server must reject the operation with an `unavailableCriticalExtension` result. Conversely, if a non-critical request control cannot be honored, then the server simply ignores it. Response controls should always have a criticality of `false`.
+
+* `value-base64`: An optional string field whose value is the base64-encoded representation of the raw value for the control when encoded in LDAP. Note that this should only consist of the value of the `controlValue` element of the control sequence, rather than an encoded representation of the entire octet string element.
+
+* `value-json`: An optional property that provides additional information for use with the control. The format for the value varies from one type of control to another. Some types of controls do not require a value because the mere presence of a control with a given OID is sufficient to achieve the desired purpose (for example, the manage DSA IT request control may be used to indicate that the server should treat smart referral entries as regular entries, and no additional information is needed by that control).
+
+For examples of the `_controls` property in requests, refer to [Create Entry with Controls](../directory-entry-apis/create-entry-with-controls.html) and [Search Using POST with Controls](../subtree-apis/search-using-post-with-controls.html).
+
+|   |                                                                            |
+| - | -------------------------------------------------------------------------- |
+|   | The `_controls` property is only supported for PingDirectory 9.1 or later. |
+
+---
+
+---
+title: Conventions
+description: Describes conventions for the PingDirectory REST API, including HTTP methods, link expansion, response structure, filtering, error formats, and attribute tagging rules
+component: pingdirectory
+page_id: pingdirectory:directory:conventions
+canonical_url: https://developer.pingidentity.com/pingdirectory/directory/conventions.html
+llms_txt: https://developer.pingidentity.com/pingdirectory/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-11
+section_ids:
+  directory-rest-api-requests: Directory REST API requests
+  authorization: Authorization
+  http-methods: HTTP methods
+  updating-a-resource: Updating a resource
+  partial-updates-to-a-resource: Partial updates to a resource
+  supported-data-exchange-formats: Supported data exchange formats
+  link-expansion: Link expansion
+  directory-rest-api-responses: Directory REST API responses
+  http-response-headers: HTTP response headers
+  http-response-codes: HTTP response codes
+  synchronous-responses: Synchronous responses
+  response-data-structure: Response data structure
+  errors: Errors
+  filtering-collections: Filtering collections
+  attribute-tagging-rules: Attribute tagging rules
+  reject-tagging-options-on-_dn-attributes-and-associated-naming-attribute: Reject tagging options on _dn attributes and associated naming attribute
+  representation-of-user-attributes-with-tagging-options: Representation of user attributes with tagging options
+  using-post-to-create-a-new-entry-containing-tagged-attributes: Using POST to create a new entry containing tagged attributes
+  using-get-or-postsubtree-search-to-retrieve-existing-entries-containing-tagged-attributes: Using GET or POST/subtree /search to retrieve existing entries containing tagged attributes
+  query-parameter-filtering: Query parameter filtering
+  query-parameters-includeattributes-and-excludeattributes: "Query parameters 'includeAttributes' and 'excludeAttributes'"
+  using-put-to-modify-an-existing-entry-containing-tagged-attributes: Using PUT to modify An existing entry containing tagged attributes
+  using-patch-to-modify-existing-entries-containing-tagged-attributes: Using PATCH to modify existing entries containing tagged attributes
+---
+
+# Conventions
+
+## Directory REST API requests
+
+### Authorization
+
+To make a call to the Directory REST API, you can use basic authentication (username/password) or an OAuth 2.0 access token for API authentication. The access token, shown here as `accessToken`, is accepted per [RFC 6750](https://datatracker.ietf.org/doc/html/rfc6750) through the Authorization HTTP request header. For more information about acquiring a bearer access token for your organization, refer to [Getting started](getting-started/index.html).
+
+### HTTP methods
+
+The Directory REST API supports the following HTTP methods. Note that a resource may not support all listed methods below. When a method is not supported, the platform returns a `405 METHOD NOT ALLOWED` error in the response.
+
+* `POST`
+
+  Creates a new resource in the collection. If a specific resource is identified, it performs an operation on that resource.
+
+* `PUT`
+
+  Updates attribute values specified by the user for the identified resource. Unspecified attributes are ignored.
+
+* `PATCH`
+
+  Updates only the attribute values specified by the user for the identified resource. Unspecified attributes are ignored.
+
+* `GET`
+
+  Lists or queries a collection of resources. If a specific resource is identified, it returns the attribute values for the specific resource.
+
+* `DELETE`
+
+  Deletes or unlinks a resource from the collection.
+
+#### Updating a resource
+
+Requests submitted using `PUT` update attribute values of the resource specified in the request. You can explicitly clear an entry by specifying null for the attribute or by specifying an empty array in the case of multi-value attributes.
+
+#### Partial updates to a resource
+
+A `PATCH` operation performs updates of a resource, similar to that of a `PUT` operation. In addition, it allows updates to one item in a multi-value attribute. Omitting an attribute in a `PATCH` operation results in the attribute being ignored.
+
+For set actions, you can use a value of `null` to explicitly clear the value. For remove actions, you must specify the value to remove.
+
+#### Supported data exchange formats
+
+The Directory REST API supports JSON as the data exchange format. The `Content-type` request header for the API call identifies the format of the request body for `PUT`, `POST`, and `PATCH` operations. The following sample identifies JSON as the data exchange type:
+
+```none
+curl -X PATCH "https://ds.example.com/directory/v1/{{dn}}" \
+-H "Content-type: application/json" \
+-H "Authorization: Bearer accessToken" \
+-d "{
+  "param1" : "value1",
+  "param2" : "value2",
+}"
+```
+
+#### Link expansion
+
+You can optimize the information returned by a request through link expansion. Link expansion is helpful when you need the query to return detailed information from an additional resource in the response data. You can identify a resource to expand using the `expand` query string parameter in the request. The allowed values for the `expand` parameter are found in a resource's `_links` field (not including "self"). Unrecognized values are ignored. Multiple values are separated using the comma character.
+
+Here is a sample request that uses the `expand` parameter to provide an inline representation of the `manager` resource in the `_embedded` field.
+
+```none
+GET /directory/v1/uid=example.user,ou=people,dc=example,dc=com?expand=manager
+```
+
+The response data looks like this:
+
+```json
+{
+    "_dn": "uid=example.user,ou=People,dc=example,dc=com",
+    "_embedded": {
+        "manager": {
+            "_dn": "uid=manager,ou=People,dc=example,dc=com",
+            "cn": ["Manager User"],
+            "givenName": ["Manager"],
+            "objectClass": [
+                "top",
+                "person",
+                "organizationalPerson",
+                "inetOrgPerson"
+            ],
+            "sn": ["User"],
+            "uid": ["manager"]
+        }
+    },
+    "_links": {
+        "manager": {
+            "href": "https://ds.example.com/directory/v1/uid=manager,ou=people,dc=example,dc=com"
+        },
+        "schemas": [
+            {
+                "href": "https://ds.example.com/directory/v1/schemas/inetOrgPerson"
+            }
+        ],
+        "self": {
+            "href": "https://ds.example.com/directory/v1/uid=example.user,ou=People,dc=example,dc=com"
+        }
+    },
+    "cn": ["Example User"],
+    "givenName": ["Example"],
+    "manager": ["uid=manager,ou=people,dc=example,dc=com"],
+    "objectClass": [
+        "top",
+        "person",
+        "organizationalPerson",
+        "inetOrgPerson"
+    ],
+    "sn": ["User"],
+    "uid": ["example.user"]
+}
+```
+
+|   |                                                                                                                                                                                                                                                                                                                     |
+| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | If available, you can specify multiple resources to expand in the query string by listing multiple attribute names separated by commas. In addition, if an element does not expand as expected, check the link to make sure the attribute name is specified accurately, particularly for case-sensitive attributes. |
+
+## Directory REST API responses
+
+### HTTP response headers
+
+The Directory REST API includes information about the result of the operation in the HTTP headers. This enables you to determine the appropriate action to take without having to parse the response body.
+
+The following HTTP Headers are returned by every operation:
+
+* `Access-Control-Allow-Headers`
+
+  This header is used in response to a preflight request to indicate that HTTP headers can be used when making a request.
+
+* `Access-Control-Allow-Max-Age`
+
+  This header specifies how long the results of a preflight request can be cached.
+
+* `Access-Control-Allow-Methods`
+
+  This header specifies specifies the method or methods allowed when accessing the resource in response to a preflight request.
+
+* `Content-Type`
+
+  This header specifies the data exchange format for the response data. The value is `application/HAL+json` for successful operations and `application/json` for errors.
+
+* `Date`
+
+  This header specifies the date the response was sent.
+
+### HTTP response codes
+
+The Directory REST API returns the status of an operation as a registered HTTP response code. The HTTP response codes are:
+
+* `200-299`
+
+  Confirms a successful call.
+
+* `300-399`
+
+  Indicates that the call or subsequent calls should be made to another resource.
+
+* `400-499`
+
+  Shows that an exception occurred, generally due to client code, insufficient permissions, or incorrect parameters.
+
+* `500-599`
+
+  Shows that an error occurred, generally due to an issue with the service (for example, a service outage).
+
+Operations may also return additional information about a failed operation in the HTTP response body.
+
+#### Synchronous responses
+
+Responses for synchronous operations have the following behavior:
+
+* `GET` operations
+
+  A request that returns a body also returns the code `200 OK` with the resource in the body of the response.
+
+* `POST` operations
+
+  A request that creates a new resource returns `201 CREATED` with a `Location` header containing the location of the created resource. A `POST` operation that does not create a resource, such as `POST /directory/v1/{{dn}}/subtree/search+`, returns a `200 OK` message.
+
+* `PUT` or `PATCH` operations
+
+  A request that updates a resource returns `200 OK` and the full resource in the body.
+
+* `DELETE` operations
+
+  A request that deletes a resource returns `204 NO CONTENT` and no body.
+
+### Response data structure
+
+All Directory REST API endpoints return data using the HAL+JSON content type. The HAL media type provides a common format for linking API resources. HAL conventions adopted by the Directory REST API result in an easily readable structure for resource links and for expressing embedded resources contained within parent resources. The following sample shows how embedded resources are structured in the response data.
+
+```json
+{
+    "size": 3,
+    "_links": {
+        "self": {
+            "href": "https://<server>//directory/v1/schemas"
+        }
+    },
+    "_embedded": {
+        "schemas": [
+            {
+                "id": "5caa81af-ec05-41ff-a709-c7378007a99c",
+                "name": "SchemaName",
+                "description": "Schema 1 description",
+              }
+          ...
+```
+
+For collections, the result data returns a `size` attribute, and all API requests return a `self` URL under the `_links` attribute that identifies the URI of the main resource. The `_embedded` attribute lists all the results in the collection.
+
+These relationships and references are represented as follows:
+
+* Links are represented using JSON HAL conventions (such as, in a `_links` object).
+
+* Links are represented as absolute URLs.
+
+* Links can be expanded using the `expand` parameter. The links can also be referenced via the "property-as-resource" pattern.
+
+* References as attributes have an `id` value and may also have additional attributes.
+
+### Errors
+
+Errors generated by the Directory REST API provide high-level information about the error, including an `id`, `code`, and the error `message`. Error responses also include a `details` attribute that provides specific information about one or more errors that occurred with the request. The response payload is formatted as follows:
+
+```json
+{
+   "id": "4ffa81af-ec05-41ff-a709-c7378007a99c",
+   "code": "INVALID_DATA",
+   "message": "Errors occurred while processing the request",
+   "details": [
+       {
+           "code": "REQUEST_FAILED",
+           "message": "Entry 'cn=Linda MissingFieldSN,ou=people,dc=example,dc=com' violates the Directory Server schema configuration because it is missing attribute 'sn' which is required by object class 'person'"
+       }
+   ]
+}
+```
+
+| Attribute | Required | Description                                                                                                                                                                                                                                       |
+| --------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `id`      | Yes      | A unique identifier that is stored in log files and always included in an error response. This value can be used to track the error received by the client (with server-side activity included for troubleshooting purposes).                     |
+| `code`    | Yes      | A general fault code which the client must handle to provide all exception handling routines and to localize messages for users. This code is common across all services and is human readable (such as a defined constant rather than a number). |
+| `message` | Yes      | A short description of the error. This message is intended to assist with debugging and is returned in English only.                                                                                                                              |
+| `details` | Yes      | A detailed description of one or more errors returned as a result of the request.                                                                                                                                                                 |
+
+## Filtering collections
+
+Requests that are known to return a large number of items can be filtered using the `filter` query string parameter. The following SCIM protocol filtering operators are supported.
+
+| Operator | Description              | Behavior                                                                                                                                                                                                                                                                                                                                    |
+| -------- | ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| eq       | equal                    | The attribute and operator values must be identical for a match.                                                                                                                                                                                                                                                                            |
+| ne       | not equal                | The attribute and operator values are not identical.                                                                                                                                                                                                                                                                                        |
+| co       | contains                 | The entire operator value must be a substring of the attribute value for a match.                                                                                                                                                                                                                                                           |
+| sw       | starts with              | The entire operator value must be a substring of the attribute value, starting at the beginning of the attribute value. This criterion is satisfied if the two strings are identical.                                                                                                                                                       |
+| ew       | ends with                | The entire operator value must be a substring of the attribute value, matching at the end of the attribute value. This criterion is satisfied if the two strings are identical.                                                                                                                                                             |
+| pr       | present (has value)      | If the attribute has a non-empty or non-null value, or if it contains a non-empty node for complex attributes, there is a match.                                                                                                                                                                                                            |
+| ge       | greater than or equal to | If the attribute value is greater than or equal to the operator value, there is a match. The actual comparison is dependent on the attribute type. For string attribute types, this is a lexicographical comparison, and for DateTime types, it is a chronological comparison. For integer attributes, it is a comparison by numeric value. |
+| le       | less than or equal to    | If the attribute value is less than or equal to the operator value, there is a match. The actual comparison is dependent on the attribute type. For string attribute types, this is a lexicographical comparison, and for DateTime types, it is a chronological comparison. For integer attributes, it is a comparison by numeric value.    |
+
+For more information about the SCIM Protocol Specification, refer to [SCIM Filtering](https://datatracker.ietf.org/doc/html/rfc7644#section-3.4.2.2).
+
+|   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | For searches using `POST`, the filter expression is placed in the request body, and the expression syntax requires escaping of quotes and spaces. The following sample shows a SCIM filtering expression that returns a list of entries that include an `sn` attribute value of `Jones`:```none
+curl -X "POST" "https://ds.example.com/directory/v1/ou=people,dc=example,dc=com/subtree/search" \
+-H 'Content-type: application/json' \
+-H 'Authorization: Bearer accessToken' \
+-d $'{
+  "filter": "objectClass eq \"person\" and sn eq \"Jones\"",
+  "searchScope": "wholeSubtree",
+  "limit": 20,
+  "includeAttributes": "*,_operationalAttributes",
+  "excludeAttributes": "sn,isMemberOf"
+}'
+``` |
+
+## Attribute tagging rules
+
+An LDAP attribute description that uses tagging options should be treated as a subtype of the same attribute type without the tagging option, inheriting from any parent attribute types. For example, `cn;region1` would be a subtype of `cn` and also of `name` since `cn` is a subtype of `name`. Likewise, `cn;region2` would be a different subtype of `cn` and `name`. The combined attribute description (the attribute type and tagging options) is not declared explicitly in the directory schema; only the attribute type is declared.
+
+|   |                                                                                                                                         |
+| - | --------------------------------------------------------------------------------------------------------------------------------------- |
+|   | An attribute type that **may** or **must** appear in an object class can be fulfilled by an attribute description with tagging options. |
+
+### Reject tagging options on \_dn attributes and associated naming attribute
+
+The Directory REST API does not allow tagging options in the `_dn` attribute or associated naming attribute, since the Ping Directory Server does not support this for the underlying LDAP entries. If tagging is attempted, it returns a Code: 34 (invalid DN syntax) error.
+
+```none
+{
+  "_dn": "uid;x-opt=lindajones,oupeople,dc=example,dc=com",
+  "uid;x-opt": "lindajones",
+}
+```
+
+### Representation of user attributes with tagging options
+
+User attributes with tagging options appear in a separate JSON field from other attributes with the same type but different (or no) options.
+
+If there are multiple values with the same attribute type and tagging options, they will be represented as a JSON array.
+
+### Using POST to create a new entry containing tagged attributes
+
+Tagged attributes are translated correctly into LDAP entries, including various permutations of the following:
+
+* Single-valued attributes of all supported types (string, integer, boolean, JSON), with no tagging option.
+
+* Multi-valued attributes of all supported types (string, integer, boolean, JSON), with no tagging option.
+
+* Single-valued attributes of all supported types (string, integer, boolean, JSON), tagged with a single option.
+
+* Multi-valued attributes of all supported types (string, integer, boolean, JSON), tagged with a single option.
+
+* Single-valued attributes of all supported types (string, integer, boolean, JSON), tagged with multiple options.
+
+* Multi-valued attributes of all supported types (string, integer, boolean, JSON), tagged with multiple options.
+
+### Using GET or POST/subtree /search to retrieve existing entries containing tagged attributes
+
+Tagged attributes are translated correctly from LDAP entries, covering the same permutations for POST.
+
+Tagged attributes are returned correctly when returning multiple entries with the /subtree option. Tagged attributes are returned correctly for multiple entries with a cursored search option.
+
+#### Query parameter filtering
+
+Note that the [SCIM filter syntax](https://datatracker.ietf.org/doc/html/rfc7644) (section 3.4.2.2) does not allow semicolons in attribute names. The PingDirectory REST API supports the variant syntax 'REST API Filter syntax' (which is the SCIM filter syntax plus semicolons).
+
+If a filter clause specifies an attribute name with no tagging options, the filter applies to all attributes with that base name, tagged or untagged.
+
+If a filter clause specifies an attribute name with tagging options, the filter applies only to attributes with that base name and all of the specified tagging options.
+
+As specified in RFC 7644, if the specified attribute in a filter expression is a multi-valued attribute, the filter matches if any of the values of the specified attribute match the specified criterion.
+
+* `eq`: Matches if any applicable attribute has a value identical to the specified one.
+
+* `ne`: Matches if any applicable attribute has a value not identical to the specified one.
+
+* `co`, `sw`, `ew`: Matches if any applicable attribute has a value containing the specified substring, prefix, or suffix, respectively.
+
+* `gt`, `ge`, `lt`, `le`: Matches if any applicable attribute has a value greater than (or less than) the specified value.
+
+#### Query parameters 'includeAttributes' and 'excludeAttributes'
+
+Similarly, if the `includeAttributes` or `excludeAttributes` parameters specify an attribute name with no tagging options, the result includes or excludes all attributes of that type, tagged or untagged. If the query parameter specifies an attribute name with tagging options, the result includes or excludes only attributes with that exact name and tagging options.
+
+#### Using PUT to modify An existing entry containing tagged attributes
+
+Attributes modified using a `PUT` request should be specified using the exact name and tagging options. For example, the following only updates the value of `myAttr` and not `myAttr;x-opt-1`, or any other tagged attribute.
+
+```none
+PUT /directory/v1/uid=lindajones,ou=people,dc=example,dc=com
+    Content-Type: application/json
+    Request Body
+    {
+      "myAttr": "new value for myAttr with no tagging options"
+    }
+```
+
+Likewise, the following only updates the value of `myAttr;x-opt-2;x-opt-3` and not any of the others.
+
+```none
+PUT /directory/v1/uid=lindajones,ou=people,dc=example,dc=com
+    Content-Type: application/json
+    Request Body
+    {
+      "myAttr;x-opt-2;x-opt-3": "new value for myAttr with x-opt-2 and x-opt-3"
+    }
+```
+
+#### Using PATCH to modify existing entries containing tagged attributes
+
+Attributes to be updated using a `PATCH` request should be specified using the exact name and tagging options in the `attributeName` field.
+
+For `PATCH` "add" and "remove", only attributes with the exact name and tagging options are affected. However, using `PATCH` "set" with an untagged attribute name removes any tagged attributes.
+
+---
+
+---
+title: Create Entry
+description: Add a new entry to PingDirectory Server using the Directory REST API POST /directory/v1 operation
+component: pingdirectory
+page_id: pingdirectory:directory:directory-entry-apis/create-entry
+canonical_url: https://developer.pingidentity.com/pingdirectory/directory/directory-entry-apis/create-entry.html
+llms_txt: https://developer.pingidentity.com/pingdirectory/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-01-02
+section_ids:
+  headers: Headers
+  body: Body
+  example-request: Example Request
+  example-response: Example Response
+---
+
+# Create Entry
+
+##
+
+```none
+POST {{apiPath}}/directory/v1
+```
+
+The `POST /directory/v1` operation adds a new entry to the directory. The request body must contain all of the required attributes as defined in the schema. If there are no required attributes defined in the schema, you can submit a valid create request with only the `_dn` attribute in the request body.
+
+The sample shows a create request for a schema that requires the `objectClass` attribute value in the request body.
+
+When successful, the response returns a `201 Created` message.
+
+### Headers
+
+Authorization      Bearer {{accessToken}}
+
+Content-Type      application/json
+
+### Body
+
+raw ( application/json )
+
+```json
+{
+    "_dn": "uid=user1,ou=people,dc=example,dc=com",
+    "objectClass": [
+        "top",
+        "ubidPerson"
+    ],
+    "uid": "user1",
+    "userPassword": "userpassword1",
+    "cn": "UnauthorizedUserUnauthUser1",
+    "sn": "UnauthUser1",
+    "c": "United States",
+    "ubidEmailJSON": {
+        "type": "work",
+        "value": "unauth1@example.com"
+    }
+}
+```
 
 ##
 
@@ -1251,7 +2710,24 @@ Authorization      Bearer {{accessToken}}
 
 ```shell
 curl --location --globoff '{{apiPath}}/directory/v1' \
---header 'Authorization: Bearer {{accessToken}}'
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer {{accessToken}}' \
+--data-raw '{
+    "_dn": "uid=user1,ou=people,dc=example,dc=com",
+    "objectClass": [
+        "top",
+        "ubidPerson"
+    ],
+    "uid": "user1",
+    "userPassword": "userpassword1",
+    "cn": "UnauthorizedUserUnauthUser1",
+    "sn": "UnauthUser1",
+    "c": "United States",
+    "ubidEmailJSON": {
+        "type": "work",
+        "value": "unauth1@example.com"
+    }
+}'
 ```
 
 ```csharp
@@ -1260,8 +2736,26 @@ var options = new RestClientOptions("{{apiPath}}/directory/v1")
   MaxTimeout = -1,
 };
 var client = new RestClient(options);
-var request = new RestRequest("", Method.Get);
+var request = new RestRequest("", Method.Post);
+request.AddHeader("Content-Type", "application/json");
 request.AddHeader("Authorization", "Bearer {{accessToken}}");
+var body = @"{" + "\n" +
+@"    ""_dn"": ""uid=user1,ou=people,dc=example,dc=com""," + "\n" +
+@"    ""objectClass"": [" + "\n" +
+@"        ""top""," + "\n" +
+@"        ""ubidPerson""" + "\n" +
+@"    ]," + "\n" +
+@"    ""uid"": ""user1""," + "\n" +
+@"    ""userPassword"": ""userpassword1""," + "\n" +
+@"    ""cn"": ""UnauthorizedUserUnauthUser1""," + "\n" +
+@"    ""sn"": ""UnauthUser1""," + "\n" +
+@"    ""c"": ""United States""," + "\n" +
+@"    ""ubidEmailJSON"": {" + "\n" +
+@"        ""type"": ""work""," + "\n" +
+@"        ""value"": ""unauth1@example.com""" + "\n" +
+@"    }" + "\n" +
+@"}";
+request.AddStringBody(body, DataFormat.Json);
 RestResponse response = await client.ExecuteAsync(request);
 Console.WriteLine(response.Content);
 ```
@@ -1271,6 +2765,7 @@ package main
 
 import (
   "fmt"
+  "strings"
   "net/http"
   "io"
 )
@@ -1278,16 +2773,34 @@ import (
 func main() {
 
   url := "{{apiPath}}/directory/v1"
-  method := "GET"
+  method := "POST"
+
+  payload := strings.NewReader(`{
+    "_dn": "uid=user1,ou=people,dc=example,dc=com",
+    "objectClass": [
+        "top",
+        "ubidPerson"
+    ],
+    "uid": "user1",
+    "userPassword": "userpassword1",
+    "cn": "UnauthorizedUserUnauthUser1",
+    "sn": "UnauthUser1",
+    "c": "United States",
+    "ubidEmailJSON": {
+        "type": "work",
+        "value": "unauth1@example.com"
+    }
+}`)
 
   client := &http.Client {
   }
-  req, err := http.NewRequest(method, url, nil)
+  req, err := http.NewRequest(method, url, payload)
 
   if err != nil {
     fmt.Println(err)
     return
   }
+  req.Header.Add("Content-Type", "application/json")
   req.Header.Add("Authorization", "Bearer {{accessToken}}")
 
   res, err := client.Do(req)
@@ -1307,19 +2820,38 @@ func main() {
 ```
 
 ```http
-GET /directory/v1 HTTP/1.1
+POST /directory/v1 HTTP/1.1
 Host: {{apiPath}}
+Content-Type: application/json
 Authorization: Bearer {{accessToken}}
+
+{
+    "_dn": "uid=user1,ou=people,dc=example,dc=com",
+    "objectClass": [
+        "top",
+        "ubidPerson"
+    ],
+    "uid": "user1",
+    "userPassword": "userpassword1",
+    "cn": "UnauthorizedUserUnauthUser1",
+    "sn": "UnauthUser1",
+    "c": "United States",
+    "ubidEmailJSON": {
+        "type": "work",
+        "value": "unauth1@example.com"
+    }
+}
 ```
 
 ```java
 OkHttpClient client = new OkHttpClient().newBuilder()
   .build();
-MediaType mediaType = MediaType.parse("text/plain");
-RequestBody body = RequestBody.create(mediaType, "");
+MediaType mediaType = MediaType.parse("application/json");
+RequestBody body = RequestBody.create(mediaType, "{\n    \"_dn\": \"uid=user1,ou=people,dc=example,dc=com\",\n    \"objectClass\": [\n        \"top\",\n        \"ubidPerson\"\n    ],\n    \"uid\": \"user1\",\n    \"userPassword\": \"userpassword1\",\n    \"cn\": \"UnauthorizedUserUnauthUser1\",\n    \"sn\": \"UnauthUser1\",\n    \"c\": \"United States\",\n    \"ubidEmailJSON\": {\n        \"type\": \"work\",\n        \"value\": \"unauth1@example.com\"\n    }\n}");
 Request request = new Request.Builder()
   .url("{{apiPath}}/directory/v1")
-  .method("GET", body)
+  .method("POST", body)
+  .addHeader("Content-Type", "application/json")
   .addHeader("Authorization", "Bearer {{accessToken}}")
   .build();
 Response response = client.newCall(request).execute();
@@ -1328,11 +2860,28 @@ Response response = client.newCall(request).execute();
 ```javascript
 var settings = {
   "url": "{{apiPath}}/directory/v1",
-  "method": "GET",
+  "method": "POST",
   "timeout": 0,
   "headers": {
+    "Content-Type": "application/json",
     "Authorization": "Bearer {{accessToken}}"
   },
+  "data": JSON.stringify({
+    "_dn": "uid=user1,ou=people,dc=example,dc=com",
+    "objectClass": [
+      "top",
+      "ubidPerson"
+    ],
+    "uid": "user1",
+    "userPassword": "userpassword1",
+    "cn": "UnauthorizedUserUnauthUser1",
+    "sn": "UnauthUser1",
+    "c": "United States",
+    "ubidEmailJSON": {
+      "type": "work",
+      "value": "unauth1@example.com"
+    }
+  }),
 };
 
 $.ajax(settings).done(function (response) {
@@ -1343,11 +2892,29 @@ $.ajax(settings).done(function (response) {
 ```javascript
 var request = require('request');
 var options = {
-  'method': 'GET',
+  'method': 'POST',
   'url': '{{apiPath}}/directory/v1',
   'headers': {
+    'Content-Type': 'application/json',
     'Authorization': 'Bearer {{accessToken}}'
-  }
+  },
+  body: JSON.stringify({
+    "_dn": "uid=user1,ou=people,dc=example,dc=com",
+    "objectClass": [
+      "top",
+      "ubidPerson"
+    ],
+    "uid": "user1",
+    "userPassword": "userpassword1",
+    "cn": "UnauthorizedUserUnauthUser1",
+    "sn": "UnauthUser1",
+    "c": "United States",
+    "ubidEmailJSON": {
+      "type": "work",
+      "value": "unauth1@example.com"
+    }
+  })
+
 };
 request(options, function (error, response) {
   if (error) throw new Error(error);
@@ -1357,15 +2924,32 @@ request(options, function (error, response) {
 
 ```python
 import requests
+import json
 
 url = "{{apiPath}}/directory/v1"
 
-payload = {}
+payload = json.dumps({
+  "_dn": "uid=user1,ou=people,dc=example,dc=com",
+  "objectClass": [
+    "top",
+    "ubidPerson"
+  ],
+  "uid": "user1",
+  "userPassword": "userpassword1",
+  "cn": "UnauthorizedUserUnauthUser1",
+  "sn": "UnauthUser1",
+  "c": "United States",
+  "ubidEmailJSON": {
+    "type": "work",
+    "value": "unauth1@example.com"
+  }
+})
 headers = {
+  'Content-Type': 'application/json',
   'Authorization': 'Bearer {{accessToken}}'
 }
 
-response = requests.request("GET", url, headers=headers, data=payload)
+response = requests.request("POST", url, headers=headers, data=payload)
 
 print(response.text)
 ```
@@ -1375,13 +2959,15 @@ print(response.text)
 require_once 'HTTP/Request2.php';
 $request = new HTTP_Request2();
 $request->setUrl('{{apiPath}}/directory/v1');
-$request->setMethod(HTTP_Request2::METHOD_GET);
+$request->setMethod(HTTP_Request2::METHOD_POST);
 $request->setConfig(array(
   'follow_redirects' => TRUE
 ));
 $request->setHeader(array(
+  'Content-Type' => 'application/json',
   'Authorization' => 'Bearer {{accessToken}}'
 ));
+$request->setBody('{\n    "_dn": "uid=user1,ou=people,dc=example,dc=com",\n    "objectClass": [\n        "top",\n        "ubidPerson"\n    ],\n    "uid": "user1",\n    "userPassword": "userpassword1",\n    "cn": "UnauthorizedUserUnauthUser1",\n    "sn": "UnauthUser1",\n    "c": "United States",\n    "ubidEmailJSON": {\n        "type": "work",\n        "value": "unauth1@example.com"\n    }\n}');
 try {
   $response = $request->send();
   if ($response->getStatus() == 200) {
@@ -1399,23 +2985,46 @@ catch(HTTP_Request2_Exception $e) {
 
 ```ruby
 require "uri"
+require "json"
 require "net/http"
 
 url = URI("{{apiPath}}/directory/v1")
 
 http = Net::HTTP.new(url.host, url.port);
-request = Net::HTTP::Get.new(url)
+request = Net::HTTP::Post.new(url)
+request["Content-Type"] = "application/json"
 request["Authorization"] = "Bearer {{accessToken}}"
+request.body = JSON.dump({
+  "_dn": "uid=user1,ou=people,dc=example,dc=com",
+  "objectClass": [
+    "top",
+    "ubidPerson"
+  ],
+  "uid": "user1",
+  "userPassword": "userpassword1",
+  "cn": "UnauthorizedUserUnauthUser1",
+  "sn": "UnauthUser1",
+  "c": "United States",
+  "ubidEmailJSON": {
+    "type": "work",
+    "value": "unauth1@example.com"
+  }
+})
 
 response = http.request(request)
 puts response.read_body
 ```
 
 ```swift
+let parameters = "{\n    \"_dn\": \"uid=user1,ou=people,dc=example,dc=com\",\n    \"objectClass\": [\n        \"top\",\n        \"ubidPerson\"\n    ],\n    \"uid\": \"user1\",\n    \"userPassword\": \"userpassword1\",\n    \"cn\": \"UnauthorizedUserUnauthUser1\",\n    \"sn\": \"UnauthUser1\",\n    \"c\": \"United States\",\n    \"ubidEmailJSON\": {\n        \"type\": \"work\",\n        \"value\": \"unauth1@example.com\"\n    }\n}"
+let postData = parameters.data(using: .utf8)
+
 var request = URLRequest(url: URL(string: "{{apiPath}}/directory/v1")!,timeoutInterval: Double.infinity)
+request.addValue("application/json", forHTTPHeaderField: "Content-Type")
 request.addValue("Bearer {{accessToken}}", forHTTPHeaderField: "Authorization")
 
-request.httpMethod = "GET"
+request.httpMethod = "POST"
+request.httpBody = postData
 
 let task = URLSession.shared.dataTask(with: request) { data, response, error in
   guard let data = data else {
@@ -1430,496 +3039,55 @@ task.resume()
 
 ### Example Response
 
-200 OK
+201 Created
 
 ```json
 {
-   "vendorName": "Ping Identity Corporation",
-   "vendorVersion": "Ping Identity Directory Server 7.2.0.0",
-   "startupUUID": "cb1ee26d-683d-43b9-817b-f41ffe68d21c",
-   "startTime": "20181108171520Z",
-   "publicBaseDNs": [
-       "dc=example,dc=com"
-   ],
-   "_links": {
-       "schemas": {
-           "href": "https://ds.example.com/directory/v1/schemas"
-       },
-       "self": {
-           "href": "https://ds.example.com/directory/v1/"
-       },
-       "publicBaseDNs": [
-           {
-               "href": "https://ds.example.com/directory/v1/dc=example,dc=com"
-           }
-       ]
-   }
+    "_dn": "uid=lindajones,ou=people,dc=example,dc=com",
+    "objectClass": [
+        "top",
+        "ubidPerson"
+    ],
+    "_links": {
+        "schemas": [
+            {
+                "href": "https://ds.example.com/directory/v1/schemas/ubidPerson"
+            }
+        ],
+        "self": {
+            "href": "https://ds.example.com/directory/v1/uid=lindajones,ou=people,dc=example,dc=com"
+        }
+    }
 }
 ```
 
 ---
 
 ---
-title: Get Operational Attributes
-description: Retrieve the operational attributes configured on the server using the PingDirectory Directory REST API
+title: Create Entry and entryUUID
+description: Create a PingDirectory Server entry under a parent DN and retrieve its generated entryUUID attribute value in the response
 component: pingdirectory
-page_id: pingdirectory:directory:schemas-apis/get-operational-attributes
-canonical_url: https://developer.pingidentity.com/pingdirectory/directory/schemas-apis/get-operational-attributes.html
+page_id: pingdirectory:directory:directory-entry-apis/create-entry-and-entryUUID
+canonical_url: https://developer.pingidentity.com/pingdirectory/directory/directory-entry-apis/create-entry-and-entryUUID.html
 llms_txt: https://developer.pingidentity.com/pingdirectory/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: 2026-01-02
 section_ids:
-  headers: Headers
-  example-request: Example Request
-  example-response: Example Response
----
-
-# Get Operational Attributes
-
-##
-
-```none
-GET {{apiPath}}/directory/v1/schemas/_operationalAttributes
-```
-
-The `GET /directory/v1/schemas/_operationalAttributes` endpoint returns a list of all operational attributes configured on the server.
-
-### Headers
-
-Authorization      Bearer {{accessToken}}
-
-##
-
-### Example Request
-
-* cURL
-
-* C#
-
-* Go
-
-* HTTP
-
-* Java
-
-* jQuery
-
-* NodeJS
-
-* Python
-
-* PHP
-
-* Ruby
-
-* Swift
-
-```shell
-curl --location --globoff '{{apiPath}}/directory/v1/schemas/_operationalAttributes' \
---header 'Authorization: Bearer {{accessToken}}'
-```
-
-```csharp
-var options = new RestClientOptions("{{apiPath}}/directory/v1/schemas/_operationalAttributes")
-{
-  MaxTimeout = -1,
-};
-var client = new RestClient(options);
-var request = new RestRequest("", Method.Get);
-request.AddHeader("Authorization", "Bearer {{accessToken}}");
-RestResponse response = await client.ExecuteAsync(request);
-Console.WriteLine(response.Content);
-```
-
-```golang
-package main
-
-import (
-  "fmt"
-  "net/http"
-  "io"
-)
-
-func main() {
-
-  url := "{{apiPath}}/directory/v1/schemas/_operationalAttributes"
-  method := "GET"
-
-  client := &http.Client {
-  }
-  req, err := http.NewRequest(method, url, nil)
-
-  if err != nil {
-    fmt.Println(err)
-    return
-  }
-  req.Header.Add("Authorization", "Bearer {{accessToken}}")
-
-  res, err := client.Do(req)
-  if err != nil {
-    fmt.Println(err)
-    return
-  }
-  defer res.Body.Close()
-
-  body, err := io.ReadAll(res.Body)
-  if err != nil {
-    fmt.Println(err)
-    return
-  }
-  fmt.Println(string(body))
-}
-```
-
-```http
-GET /directory/v1/schemas/_operationalAttributes HTTP/1.1
-Host: {{apiPath}}
-Authorization: Bearer {{accessToken}}
-```
-
-```java
-OkHttpClient client = new OkHttpClient().newBuilder()
-  .build();
-MediaType mediaType = MediaType.parse("text/plain");
-RequestBody body = RequestBody.create(mediaType, "");
-Request request = new Request.Builder()
-  .url("{{apiPath}}/directory/v1/schemas/_operationalAttributes")
-  .method("GET", body)
-  .addHeader("Authorization", "Bearer {{accessToken}}")
-  .build();
-Response response = client.newCall(request).execute();
-```
-
-```javascript
-var settings = {
-  "url": "{{apiPath}}/directory/v1/schemas/_operationalAttributes",
-  "method": "GET",
-  "timeout": 0,
-  "headers": {
-    "Authorization": "Bearer {{accessToken}}"
-  },
-};
-
-$.ajax(settings).done(function (response) {
-  console.log(response);
-});
-```
-
-```javascript
-var request = require('request');
-var options = {
-  'method': 'GET',
-  'url': '{{apiPath}}/directory/v1/schemas/_operationalAttributes',
-  'headers': {
-    'Authorization': 'Bearer {{accessToken}}'
-  }
-};
-request(options, function (error, response) {
-  if (error) throw new Error(error);
-  console.log(response.body);
-});
-```
-
-```python
-import requests
-
-url = "{{apiPath}}/directory/v1/schemas/_operationalAttributes"
-
-payload = {}
-headers = {
-  'Authorization': 'Bearer {{accessToken}}'
-}
-
-response = requests.request("GET", url, headers=headers, data=payload)
-
-print(response.text)
-```
-
-```php
-<?php
-require_once 'HTTP/Request2.php';
-$request = new HTTP_Request2();
-$request->setUrl('{{apiPath}}/directory/v1/schemas/_operationalAttributes');
-$request->setMethod(HTTP_Request2::METHOD_GET);
-$request->setConfig(array(
-  'follow_redirects' => TRUE
-));
-$request->setHeader(array(
-  'Authorization' => 'Bearer {{accessToken}}'
-));
-try {
-  $response = $request->send();
-  if ($response->getStatus() == 200) {
-    echo $response->getBody();
-  }
-  else {
-    echo 'Unexpected HTTP status: ' . $response->getStatus() . ' ' .
-    $response->getReasonPhrase();
-  }
-}
-catch(HTTP_Request2_Exception $e) {
-  echo 'Error: ' . $e->getMessage();
-}
-```
-
-```ruby
-require "uri"
-require "net/http"
-
-url = URI("{{apiPath}}/directory/v1/schemas/_operationalAttributes")
-
-http = Net::HTTP.new(url.host, url.port);
-request = Net::HTTP::Get.new(url)
-request["Authorization"] = "Bearer {{accessToken}}"
-
-response = http.request(request)
-puts response.read_body
-```
-
-```swift
-var request = URLRequest(url: URL(string: "{{apiPath}}/directory/v1/schemas/_operationalAttributes")!,timeoutInterval: Double.infinity)
-request.addValue("Bearer {{accessToken}}", forHTTPHeaderField: "Authorization")
-
-request.httpMethod = "GET"
-
-let task = URLSession.shared.dataTask(with: request) { data, response, error in
-  guard let data = data else {
-    print(String(describing: error))
-    return
-  }
-  print(String(data: data, encoding: .utf8)!)
-}
-
-task.resume()
-```
-
-### Example Response
-
-200 OK
-
-```json
-{
-    "_operationalAttributes": {
-        "aci": {
-            "type": "array",
-            "items": {
-                "type": "string",
-                "format": "Sun-defined Access Control Information"
-            },
-            "description": "Sun-defined access control information attribute type"
-        },
-        "aclRights": {
-            "type": "string",
-            "readOnly": true,
-            "description": "Sun-defined access control effective rights attribute type"
-        },
-        "aclRightsInfo": {
-            "type": "string",
-            "readOnly": true,
-            "description": "Sun-defined access control effective rights information attribute type"
-        },
-        "administratorsAddress": {
-            "type": "array",
-            "items": {
-                "type": "string",
-                "format": "IA5 String"
-            }
-        },
-        "altServer": {
-            "type": "array",
-            "items": {
-                "type": "string",
-                "format": "IA5 String"
-            }
-        },
-        "attributeTypes": {
-            "type": "array",
-            "items": {
-                "type": "string",
-                "format": "Attribute Type Description"
-            }
-        },
-        "baselineConfigurationDigest": {
-            "type": "string"
-        },
-        "blockInheritance": {
-            "type": "boolean",
-            "readOnly": true
-        },
-        "changeTime": {
-            "type": "string",
-            "readOnly": true,
-            "description": "the GMT time when the changelog entry was created"
-        },
-        "changelog-add-entry": {
-            "type": "string",
-            "format": "Octet String",
-            "readOnly": true
-        },
-        "changelog-deleted-entry": {
-            "type": "string",
-            "format": "Octet String",
-            "readOnly": true
-        },
-
-
-        ...
-}
-```
-
----
-
----
-title: Get Password Quality Requirements
-description: Retrieve the password quality requirements that apply to a new password for an add, self change, or administrative reset using the PingDirectory Directory REST API
-component: pingdirectory
-page_id: pingdirectory:directory:extended-operations/get-password-quality-requirements/get-password-quality-requirements
-canonical_url: https://developer.pingidentity.com/pingdirectory/directory/extended-operations/get-password-quality-requirements/get-password-quality-requirements.html
-llms_txt: https://developer.pingidentity.com/pingdirectory/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: 2026-01-02
-section_ids:
-  request-body: Request body
-  response-body: Response body
   headers: Headers
   body: Body
   example-request: Example Request
   example-response: Example Response
 ---
 
-# Get Password Quality Requirements
+# Create Entry and entryUUID
 
 ##
 
 ```none
-POST {{apiPath}}/directory/v1/passwordRequirements
+POST {{apiPath}}/directory/v1
 ```
 
-The `POST /directory/v1/passwordRequirements` request performs the LDAP get password quality requirements extended operation through HTTP.
-
-### Request body
-
-The request may include the following fields:
-
-* `operationType`
-
-  A required parameter that specifies the type of operation in which the new password will be used. The value for this parameter must be one of the following:
-
-  * `add`
-
-    The new password will be used to create a new user.
-
-  * `selfChange`
-
-    The new password will be used for a self password change.
-
-  * `administrativeReset`
-
-    The new password will be used for an administrative password reset.
-
-* `userDN`
-
-  The DN of the target user who will be using the password.
-
-  * This is required if the `operationType` is `administrativeReset`.
-
-  * The must be absent if the `operationType` is `add`.
-
-  * If the request has an authorization header and the new password is for the user associated with that authorization identity, it can be absent for an `operationType` of `selfChange`.
-
-* `passwordPolicyDN`
-
-  An optional parameter that specifies the DN of the password policy to determine the requirements for a new user.
-
-  * This must be absent for an `operationType` of `selfChange` or `administrativeReset`.
-
-  * It can be present for an `operationType` of `add`.
-
-    |   |                                                                      |
-    | - | -------------------------------------------------------------------- |
-    |   | 	If it is absent, then the server's default password policy is used. |
-
-* `_controls`
-
-  An optional array of JSON-formatted request controls to be used when processing the get password quality requirements request. These controls are narrowed down based on which conversions from JSON to LDAP are currently implemented by the Directory REST API. Documentation for all controls supported by the Directory REST API are listed here.
-
-  * [Operation Purpose Request Control](../../controls/operation-purpose-request-control.html)
-
-  * [Intermediate Client Request Control](../../controls/intermediate-client-request-control.html)
-
-  * [Intermediate Client Response Control](../../controls/intermediate-client-response-control.html)
-
-  * [Proxied Authorization v1 Request Control](../../controls/proxied-authorization-v1-request-control.html)
-
-  * [Proxied Authorization v2 Request Control](../../controls/proxied-authorization-v2-request-control.html)
-
-|   |                                                                                      |
-| - | ------------------------------------------------------------------------------------ |
-|   | 	The No operation request control is read-only and not supported for this operation. |
-
-### Response body
-
-The response must include a body that is formatted as a JSON object. Upon a successful operation where the LDAP `resultCode value` is `0` and HTTP status code is `200`, the following fields will be included in the JSON object:
-
-* `resultCode`
-
-  A required JSON object that contains the following fields:
-
-  * `value`
-
-    The required integer value for the LDAP result code.
-
-  * `name`
-
-    A name for the LDAP result code. This is optional but recommended.
-
-* `matchedDN`
-
-  An optional string field that holds the matched DN for the operation. You can omit this if no matched DN value is needed or appropriate.
-
-* `diagnosticMessage`
-
-  An optional string field that holds a human-readable message with additional information about the operation. You can omit this if no diagnostic message is needed or appropriate.
-
-* `passwordQualityRequirements`
-
-  A required array of JSON objects that represent the set of password quality requirements that the server will impose. This field will be returned even if the array of JSON objects is empty. Each of these objects should include the following fields:
-
-  * `description`
-
-    A required string field that provides a user-friendly description for the environment.
-
-  * `client-side-validation-type`
-
-    An optional string field that contains the name of the client-side validation type for the requirement.
-
-  * `client-side-validation-properties`
-
-    An optional array of JSON objects with the client-side validation properties for the requirement. Each of these objects should include the following fields:
-
-    * `name`
-
-      A required string field with the name for the client-side validation property.
-
-    * `value`
-
-      A required string field with the value for the client-side validation property.
-
-* `currentPasswordRequired`
-
-  An optional Boolean field that indicates whether the target user is required to provide their current password when choosing a new password. This field is present in a successful response to a request for a self password change, and is absent otherwise.
-
-* `mustChangePassword`
-
-  An optional Boolean field that indicates whether the target user will be required to choose a new password after an administrative reset. This field is present in a successful response to a request for an add or an administrative password reset, and is absent otherwise.
-
-* `secondsUntilExpiration`
-
-  An optional integer field that specifies the length of time that a new password is considered valid for the requested type of operation. This field is absent if the request was not processed successfully or if the new password may be used indefinitely.
-
-* `_controls`
-
-  An optional array of JSON-formatted response controls.
+You can create a new entry using the parent DN. The response shows the entry data, including the generated `entryUUID` attribute value associated with the entry resource. The `entryUUID` can be used to reference the entry, keeping confidential information from appearing in the DN.
 
 ### Headers
 
@@ -1933,25 +3101,1218 @@ raw ( application/json )
 
 ```json
 {
-    "operationType": "administrativeReset",
-    "userDN": "uid=jimbob,ou=people,dc=example,dc=com",
+    "_parentDN": "ou=people,dc=example,dc=com",
+    "objectClass": [
+        "top",
+        "person",
+        "organizationalPerson",
+        "inetOrgPerson"
+    ],
+    "uid": [
+        "lindajones"
+    ],
+    "cn": [
+        "Linda Jones"
+    ],
+    "sn": [
+        "Jones"
+    ]
+}
+```
+
+##
+
+### Example Request
+
+* cURL
+
+* C#
+
+* Go
+
+* HTTP
+
+* Java
+
+* jQuery
+
+* NodeJS
+
+* Python
+
+* PHP
+
+* Ruby
+
+* Swift
+
+```shell
+curl --location --globoff '{{apiPath}}/directory/v1' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer {{accessToken}}' \
+--data '{
+    "_parentDN": "ou=people,dc=example,dc=com",
+    "objectClass": [
+        "top",
+        "person",
+        "organizationalPerson",
+        "inetOrgPerson"
+    ],
+    "uid": [
+        "lindajones"
+    ],
+    "cn": [
+        "Linda Jones"
+    ],
+    "sn": [
+        "Jones"
+    ]
+}'
+```
+
+```csharp
+var options = new RestClientOptions("{{apiPath}}/directory/v1")
+{
+  MaxTimeout = -1,
+};
+var client = new RestClient(options);
+var request = new RestRequest("", Method.Post);
+request.AddHeader("Content-Type", "application/json");
+request.AddHeader("Authorization", "Bearer {{accessToken}}");
+var body = @"{" + "\n" +
+@"    ""_parentDN"": ""ou=people,dc=example,dc=com""," + "\n" +
+@"    ""objectClass"": [" + "\n" +
+@"        ""top""," + "\n" +
+@"        ""person""," + "\n" +
+@"        ""organizationalPerson""," + "\n" +
+@"        ""inetOrgPerson""" + "\n" +
+@"    ]," + "\n" +
+@"    ""uid"": [" + "\n" +
+@"        ""lindajones""" + "\n" +
+@"    ]," + "\n" +
+@"    ""cn"": [" + "\n" +
+@"        ""Linda Jones""" + "\n" +
+@"    ]," + "\n" +
+@"    ""sn"": [" + "\n" +
+@"        ""Jones""" + "\n" +
+@"    ]" + "\n" +
+@"}";
+request.AddStringBody(body, DataFormat.Json);
+RestResponse response = await client.ExecuteAsync(request);
+Console.WriteLine(response.Content);
+```
+
+```golang
+package main
+
+import (
+  "fmt"
+  "strings"
+  "net/http"
+  "io"
+)
+
+func main() {
+
+  url := "{{apiPath}}/directory/v1"
+  method := "POST"
+
+  payload := strings.NewReader(`{
+    "_parentDN": "ou=people,dc=example,dc=com",
+    "objectClass": [
+        "top",
+        "person",
+        "organizationalPerson",
+        "inetOrgPerson"
+    ],
+    "uid": [
+        "lindajones"
+    ],
+    "cn": [
+        "Linda Jones"
+    ],
+    "sn": [
+        "Jones"
+    ]
+}`)
+
+  client := &http.Client {
+  }
+  req, err := http.NewRequest(method, url, payload)
+
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  req.Header.Add("Content-Type", "application/json")
+  req.Header.Add("Authorization", "Bearer {{accessToken}}")
+
+  res, err := client.Do(req)
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  defer res.Body.Close()
+
+  body, err := io.ReadAll(res.Body)
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  fmt.Println(string(body))
+}
+```
+
+```http
+POST /directory/v1 HTTP/1.1
+Host: {{apiPath}}
+Content-Type: application/json
+Authorization: Bearer {{accessToken}}
+
+{
+    "_parentDN": "ou=people,dc=example,dc=com",
+    "objectClass": [
+        "top",
+        "person",
+        "organizationalPerson",
+        "inetOrgPerson"
+    ],
+    "uid": [
+        "lindajones"
+    ],
+    "cn": [
+        "Linda Jones"
+    ],
+    "sn": [
+        "Jones"
+    ]
+}
+```
+
+```java
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+MediaType mediaType = MediaType.parse("application/json");
+RequestBody body = RequestBody.create(mediaType, "{\n    \"_parentDN\": \"ou=people,dc=example,dc=com\",\n    \"objectClass\": [\n        \"top\",\n        \"person\",\n        \"organizationalPerson\",\n        \"inetOrgPerson\"\n    ],\n    \"uid\": [\n        \"lindajones\"\n    ],\n    \"cn\": [\n        \"Linda Jones\"\n    ],\n    \"sn\": [\n        \"Jones\"\n    ]\n}");
+Request request = new Request.Builder()
+  .url("{{apiPath}}/directory/v1")
+  .method("POST", body)
+  .addHeader("Content-Type", "application/json")
+  .addHeader("Authorization", "Bearer {{accessToken}}")
+  .build();
+Response response = client.newCall(request).execute();
+```
+
+```javascript
+var settings = {
+  "url": "{{apiPath}}/directory/v1",
+  "method": "POST",
+  "timeout": 0,
+  "headers": {
+    "Content-Type": "application/json",
+    "Authorization": "Bearer {{accessToken}}"
+  },
+  "data": JSON.stringify({
+    "_parentDN": "ou=people,dc=example,dc=com",
+    "objectClass": [
+      "top",
+      "person",
+      "organizationalPerson",
+      "inetOrgPerson"
+    ],
+    "uid": [
+      "lindajones"
+    ],
+    "cn": [
+      "Linda Jones"
+    ],
+    "sn": [
+      "Jones"
+    ]
+  }),
+};
+
+$.ajax(settings).done(function (response) {
+  console.log(response);
+});
+```
+
+```javascript
+var request = require('request');
+var options = {
+  'method': 'POST',
+  'url': '{{apiPath}}/directory/v1',
+  'headers': {
+    'Content-Type': 'application/json',
+    'Authorization': 'Bearer {{accessToken}}'
+  },
+  body: JSON.stringify({
+    "_parentDN": "ou=people,dc=example,dc=com",
+    "objectClass": [
+      "top",
+      "person",
+      "organizationalPerson",
+      "inetOrgPerson"
+    ],
+    "uid": [
+      "lindajones"
+    ],
+    "cn": [
+      "Linda Jones"
+    ],
+    "sn": [
+      "Jones"
+    ]
+  })
+
+};
+request(options, function (error, response) {
+  if (error) throw new Error(error);
+  console.log(response.body);
+});
+```
+
+```python
+import requests
+import json
+
+url = "{{apiPath}}/directory/v1"
+
+payload = json.dumps({
+  "_parentDN": "ou=people,dc=example,dc=com",
+  "objectClass": [
+    "top",
+    "person",
+    "organizationalPerson",
+    "inetOrgPerson"
+  ],
+  "uid": [
+    "lindajones"
+  ],
+  "cn": [
+    "Linda Jones"
+  ],
+  "sn": [
+    "Jones"
+  ]
+})
+headers = {
+  'Content-Type': 'application/json',
+  'Authorization': 'Bearer {{accessToken}}'
+}
+
+response = requests.request("POST", url, headers=headers, data=payload)
+
+print(response.text)
+```
+
+```php
+<?php
+require_once 'HTTP/Request2.php';
+$request = new HTTP_Request2();
+$request->setUrl('{{apiPath}}/directory/v1');
+$request->setMethod(HTTP_Request2::METHOD_POST);
+$request->setConfig(array(
+  'follow_redirects' => TRUE
+));
+$request->setHeader(array(
+  'Content-Type' => 'application/json',
+  'Authorization' => 'Bearer {{accessToken}}'
+));
+$request->setBody('{\n    "_parentDN": "ou=people,dc=example,dc=com",\n    "objectClass": [\n        "top",\n        "person",\n        "organizationalPerson",\n        "inetOrgPerson"\n    ],\n    "uid": [\n        "lindajones"\n    ],\n    "cn": [\n        "Linda Jones"\n    ],\n    "sn": [\n        "Jones"\n    ]\n}');
+try {
+  $response = $request->send();
+  if ($response->getStatus() == 200) {
+    echo $response->getBody();
+  }
+  else {
+    echo 'Unexpected HTTP status: ' . $response->getStatus() . ' ' .
+    $response->getReasonPhrase();
+  }
+}
+catch(HTTP_Request2_Exception $e) {
+  echo 'Error: ' . $e->getMessage();
+}
+```
+
+```ruby
+require "uri"
+require "json"
+require "net/http"
+
+url = URI("{{apiPath}}/directory/v1")
+
+http = Net::HTTP.new(url.host, url.port);
+request = Net::HTTP::Post.new(url)
+request["Content-Type"] = "application/json"
+request["Authorization"] = "Bearer {{accessToken}}"
+request.body = JSON.dump({
+  "_parentDN": "ou=people,dc=example,dc=com",
+  "objectClass": [
+    "top",
+    "person",
+    "organizationalPerson",
+    "inetOrgPerson"
+  ],
+  "uid": [
+    "lindajones"
+  ],
+  "cn": [
+    "Linda Jones"
+  ],
+  "sn": [
+    "Jones"
+  ]
+})
+
+response = http.request(request)
+puts response.read_body
+```
+
+```swift
+let parameters = "{\n    \"_parentDN\": \"ou=people,dc=example,dc=com\",\n    \"objectClass\": [\n        \"top\",\n        \"person\",\n        \"organizationalPerson\",\n        \"inetOrgPerson\"\n    ],\n    \"uid\": [\n        \"lindajones\"\n    ],\n    \"cn\": [\n        \"Linda Jones\"\n    ],\n    \"sn\": [\n        \"Jones\"\n    ]\n}"
+let postData = parameters.data(using: .utf8)
+
+var request = URLRequest(url: URL(string: "{{apiPath}}/directory/v1")!,timeoutInterval: Double.infinity)
+request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+request.addValue("Bearer {{accessToken}}", forHTTPHeaderField: "Authorization")
+
+request.httpMethod = "POST"
+request.httpBody = postData
+
+let task = URLSession.shared.dataTask(with: request) { data, response, error in
+  guard let data = data else {
+    print(String(describing: error))
+    return
+  }
+  print(String(data: data, encoding: .utf8)!)
+}
+
+task.resume()
+```
+
+### Example Response
+
+201 Created
+
+```json
+{
+    "_dn": "entryUUID=a4fbd3ca-f7a0-42f2-af66-13f2c0dd8cd1,ou=people,dc=example,dc=com",
+    "objectClass": [
+        "top",
+        "person",
+        "organizationalPerson",
+        "inetOrgPerson"
+    ],
+    "uid": [
+        "lindajones"
+    ],
+    "cn": [
+        "Linda Jones"
+    ],
+    "sn": [
+        "Jones"
+    ],
+    "_links": {
+        "schemas": [
+            {
+                "href": "https://ds.example.com/directory/v1/schemas/inetOrgPerson"
+            }
+        ],
+        "self": {
+            "href": "https://ds.example.com/directory/v1/entryUUID=a4fbd3ca-f7a0-42f2-af66-13f2c0dd8cd1,ou=people,dc=example,dc=com"
+        }
+    }
+}
+```
+
+---
+
+---
+title: Create Entry with Controls
+description: Create a PingDirectory Server entry using the Directory REST API POST operation with LDAP controls included in the request and response
+component: pingdirectory
+page_id: pingdirectory:directory:directory-entry-apis/create-entry-with-controls
+canonical_url: https://developer.pingidentity.com/pingdirectory/directory/directory-entry-apis/create-entry-with-controls.html
+llms_txt: https://developer.pingidentity.com/pingdirectory/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-01-02
+section_ids:
+  headers: Headers
+  body: Body
+  example-request: Example Request
+  example-response: Example Response
+---
+
+# Create Entry with Controls
+
+##
+
+```none
+POST {{apiPath}}/directory/v1
+```
+
+This `POST /directory/v1` operation adds a `_controls` property to the requests and responses for these APIs. The property is an array of JSON formatted controls that are used to include additional content in LDAP requests and responses. For more information about supported controls, refer to [Controls](../controls/index.html).
+
+The sample shows a create request that includes two controls, a generate password request control and an intermediate client request control.
+
+The response body includes an additional `_controls` property that shows the two controls specified in the request. Note that the generated password request control includes the generated password in the response.
+
+When successful, the response returns a `201 Created` message.
+
+### Headers
+
+Authorization      Bearer {{accessToken}}
+
+Content-Type      application/json
+
+### Body
+
+raw ( application/json )
+
+```json
+{
+    "_dn": "uid=user1,ou=people,dc=example,dc=com",
+    "objectClass": [
+        "top",
+        "ubidPerson"
+    ],
+    "uid": "user1",
+    "userPassword": "userpassword1",
+    "cn": "UnauthorizedUserUnauthUser1",
+    "sn": "UnauthUser1",
+    "c": "United States",
+    "ubidEmailJSON": {
+        "type": "work",
+        "value": "unauth1@example.com"
+    }
+}
+```
+
+##
+
+### Example Request
+
+* cURL
+
+* C#
+
+* Go
+
+* HTTP
+
+* Java
+
+* jQuery
+
+* NodeJS
+
+* Python
+
+* PHP
+
+* Ruby
+
+* Swift
+
+```shell
+curl --location --globoff '{{apiPath}}/directory/v1' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer {{accessToken}}' \
+--data-raw '{
+    "_dn": "uid=user1,ou=people,dc=example,dc=com",
+    "objectClass": [
+        "top",
+        "ubidPerson"
+    ],
+    "uid": "user1",
+    "userPassword": "userpassword1",
+    "cn": "UnauthorizedUserUnauthUser1",
+    "sn": "UnauthUser1",
+    "c": "United States",
+    "ubidEmailJSON": {
+        "type": "work",
+        "value": "unauth1@example.com"
+    }
+}'
+```
+
+```csharp
+var options = new RestClientOptions("{{apiPath}}/directory/v1")
+{
+  MaxTimeout = -1,
+};
+var client = new RestClient(options);
+var request = new RestRequest("", Method.Post);
+request.AddHeader("Content-Type", "application/json");
+request.AddHeader("Authorization", "Bearer {{accessToken}}");
+var body = @"{" + "\n" +
+@"    ""_dn"": ""uid=user1,ou=people,dc=example,dc=com""," + "\n" +
+@"    ""objectClass"": [" + "\n" +
+@"        ""top""," + "\n" +
+@"        ""ubidPerson""" + "\n" +
+@"    ]," + "\n" +
+@"    ""uid"": ""user1""," + "\n" +
+@"    ""userPassword"": ""userpassword1""," + "\n" +
+@"    ""cn"": ""UnauthorizedUserUnauthUser1""," + "\n" +
+@"    ""sn"": ""UnauthUser1""," + "\n" +
+@"    ""c"": ""United States""," + "\n" +
+@"    ""ubidEmailJSON"": {" + "\n" +
+@"        ""type"": ""work""," + "\n" +
+@"        ""value"": ""unauth1@example.com""" + "\n" +
+@"    }" + "\n" +
+@"}";
+request.AddStringBody(body, DataFormat.Json);
+RestResponse response = await client.ExecuteAsync(request);
+Console.WriteLine(response.Content);
+```
+
+```golang
+package main
+
+import (
+  "fmt"
+  "strings"
+  "net/http"
+  "io"
+)
+
+func main() {
+
+  url := "{{apiPath}}/directory/v1"
+  method := "POST"
+
+  payload := strings.NewReader(`{
+    "_dn": "uid=user1,ou=people,dc=example,dc=com",
+    "objectClass": [
+        "top",
+        "ubidPerson"
+    ],
+    "uid": "user1",
+    "userPassword": "userpassword1",
+    "cn": "UnauthorizedUserUnauthUser1",
+    "sn": "UnauthUser1",
+    "c": "United States",
+    "ubidEmailJSON": {
+        "type": "work",
+        "value": "unauth1@example.com"
+    }
+}`)
+
+  client := &http.Client {
+  }
+  req, err := http.NewRequest(method, url, payload)
+
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  req.Header.Add("Content-Type", "application/json")
+  req.Header.Add("Authorization", "Bearer {{accessToken}}")
+
+  res, err := client.Do(req)
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  defer res.Body.Close()
+
+  body, err := io.ReadAll(res.Body)
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  fmt.Println(string(body))
+}
+```
+
+```http
+POST /directory/v1 HTTP/1.1
+Host: {{apiPath}}
+Content-Type: application/json
+Authorization: Bearer {{accessToken}}
+
+{
+    "_dn": "uid=user1,ou=people,dc=example,dc=com",
+    "objectClass": [
+        "top",
+        "ubidPerson"
+    ],
+    "uid": "user1",
+    "userPassword": "userpassword1",
+    "cn": "UnauthorizedUserUnauthUser1",
+    "sn": "UnauthUser1",
+    "c": "United States",
+    "ubidEmailJSON": {
+        "type": "work",
+        "value": "unauth1@example.com"
+    }
+}
+```
+
+```java
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+MediaType mediaType = MediaType.parse("application/json");
+RequestBody body = RequestBody.create(mediaType, "{\n    \"_dn\": \"uid=user1,ou=people,dc=example,dc=com\",\n    \"objectClass\": [\n        \"top\",\n        \"ubidPerson\"\n    ],\n    \"uid\": \"user1\",\n    \"userPassword\": \"userpassword1\",\n    \"cn\": \"UnauthorizedUserUnauthUser1\",\n    \"sn\": \"UnauthUser1\",\n    \"c\": \"United States\",\n    \"ubidEmailJSON\": {\n        \"type\": \"work\",\n        \"value\": \"unauth1@example.com\"\n    }\n}");
+Request request = new Request.Builder()
+  .url("{{apiPath}}/directory/v1")
+  .method("POST", body)
+  .addHeader("Content-Type", "application/json")
+  .addHeader("Authorization", "Bearer {{accessToken}}")
+  .build();
+Response response = client.newCall(request).execute();
+```
+
+```javascript
+var settings = {
+  "url": "{{apiPath}}/directory/v1",
+  "method": "POST",
+  "timeout": 0,
+  "headers": {
+    "Content-Type": "application/json",
+    "Authorization": "Bearer {{accessToken}}"
+  },
+  "data": JSON.stringify({
+    "_dn": "uid=user1,ou=people,dc=example,dc=com",
+    "objectClass": [
+      "top",
+      "ubidPerson"
+    ],
+    "uid": "user1",
+    "userPassword": "userpassword1",
+    "cn": "UnauthorizedUserUnauthUser1",
+    "sn": "UnauthUser1",
+    "c": "United States",
+    "ubidEmailJSON": {
+      "type": "work",
+      "value": "unauth1@example.com"
+    }
+  }),
+};
+
+$.ajax(settings).done(function (response) {
+  console.log(response);
+});
+```
+
+```javascript
+var request = require('request');
+var options = {
+  'method': 'POST',
+  'url': '{{apiPath}}/directory/v1',
+  'headers': {
+    'Content-Type': 'application/json',
+    'Authorization': 'Bearer {{accessToken}}'
+  },
+  body: JSON.stringify({
+    "_dn": "uid=user1,ou=people,dc=example,dc=com",
+    "objectClass": [
+      "top",
+      "ubidPerson"
+    ],
+    "uid": "user1",
+    "userPassword": "userpassword1",
+    "cn": "UnauthorizedUserUnauthUser1",
+    "sn": "UnauthUser1",
+    "c": "United States",
+    "ubidEmailJSON": {
+      "type": "work",
+      "value": "unauth1@example.com"
+    }
+  })
+
+};
+request(options, function (error, response) {
+  if (error) throw new Error(error);
+  console.log(response.body);
+});
+```
+
+```python
+import requests
+import json
+
+url = "{{apiPath}}/directory/v1"
+
+payload = json.dumps({
+  "_dn": "uid=user1,ou=people,dc=example,dc=com",
+  "objectClass": [
+    "top",
+    "ubidPerson"
+  ],
+  "uid": "user1",
+  "userPassword": "userpassword1",
+  "cn": "UnauthorizedUserUnauthUser1",
+  "sn": "UnauthUser1",
+  "c": "United States",
+  "ubidEmailJSON": {
+    "type": "work",
+    "value": "unauth1@example.com"
+  }
+})
+headers = {
+  'Content-Type': 'application/json',
+  'Authorization': 'Bearer {{accessToken}}'
+}
+
+response = requests.request("POST", url, headers=headers, data=payload)
+
+print(response.text)
+```
+
+```php
+<?php
+require_once 'HTTP/Request2.php';
+$request = new HTTP_Request2();
+$request->setUrl('{{apiPath}}/directory/v1');
+$request->setMethod(HTTP_Request2::METHOD_POST);
+$request->setConfig(array(
+  'follow_redirects' => TRUE
+));
+$request->setHeader(array(
+  'Content-Type' => 'application/json',
+  'Authorization' => 'Bearer {{accessToken}}'
+));
+$request->setBody('{\n    "_dn": "uid=user1,ou=people,dc=example,dc=com",\n    "objectClass": [\n        "top",\n        "ubidPerson"\n    ],\n    "uid": "user1",\n    "userPassword": "userpassword1",\n    "cn": "UnauthorizedUserUnauthUser1",\n    "sn": "UnauthUser1",\n    "c": "United States",\n    "ubidEmailJSON": {\n        "type": "work",\n        "value": "unauth1@example.com"\n    }\n}');
+try {
+  $response = $request->send();
+  if ($response->getStatus() == 200) {
+    echo $response->getBody();
+  }
+  else {
+    echo 'Unexpected HTTP status: ' . $response->getStatus() . ' ' .
+    $response->getReasonPhrase();
+  }
+}
+catch(HTTP_Request2_Exception $e) {
+  echo 'Error: ' . $e->getMessage();
+}
+```
+
+```ruby
+require "uri"
+require "json"
+require "net/http"
+
+url = URI("{{apiPath}}/directory/v1")
+
+http = Net::HTTP.new(url.host, url.port);
+request = Net::HTTP::Post.new(url)
+request["Content-Type"] = "application/json"
+request["Authorization"] = "Bearer {{accessToken}}"
+request.body = JSON.dump({
+  "_dn": "uid=user1,ou=people,dc=example,dc=com",
+  "objectClass": [
+    "top",
+    "ubidPerson"
+  ],
+  "uid": "user1",
+  "userPassword": "userpassword1",
+  "cn": "UnauthorizedUserUnauthUser1",
+  "sn": "UnauthUser1",
+  "c": "United States",
+  "ubidEmailJSON": {
+    "type": "work",
+    "value": "unauth1@example.com"
+  }
+})
+
+response = http.request(request)
+puts response.read_body
+```
+
+```swift
+let parameters = "{\n    \"_dn\": \"uid=user1,ou=people,dc=example,dc=com\",\n    \"objectClass\": [\n        \"top\",\n        \"ubidPerson\"\n    ],\n    \"uid\": \"user1\",\n    \"userPassword\": \"userpassword1\",\n    \"cn\": \"UnauthorizedUserUnauthUser1\",\n    \"sn\": \"UnauthUser1\",\n    \"c\": \"United States\",\n    \"ubidEmailJSON\": {\n        \"type\": \"work\",\n        \"value\": \"unauth1@example.com\"\n    }\n}"
+let postData = parameters.data(using: .utf8)
+
+var request = URLRequest(url: URL(string: "{{apiPath}}/directory/v1")!,timeoutInterval: Double.infinity)
+request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+request.addValue("Bearer {{accessToken}}", forHTTPHeaderField: "Authorization")
+
+request.httpMethod = "POST"
+request.httpBody = postData
+
+let task = URLSession.shared.dataTask(with: request) { data, response, error in
+  guard let data = data else {
+    print(String(describing: error))
+    return
+  }
+  print(String(data: data, encoding: .utf8)!)
+}
+
+task.resume()
+```
+
+### Example Response
+
+201 Created
+
+```json
+{
+    "_links": {
+        "schemas": [
+            {
+                "href": "https://ds.example.com/directory/v1/schemas/inetOrgPerson"
+            }
+        ],
+        "self": {
+            "href": "https://ds.example.com/directory/v1/uid=johnsmith,ou=people,dc=example,dc=com"
+        }
+    },
+    "objectClass": [
+        "top",
+        "inetOrgPerson",
+        "organizationalPerson",
+        "person"
+    ],
+    "sn": [
+        "Smith"
+    ],
+    "cn": [
+        "John"
+    ],
+    "givenName": [
+        "John"
+    ],
+    "title": [
+        "TheDescriptionForJohn"
+    ],
+    "uid": [
+        "johnsmith"
+    ],
+    "_dn": "uid=johnsmith,ou=people,dc=example,dc=com",
     "_controls": [
         {
-            "oid": "1.3.6.1.4.1.30221.2.5.19",
-            "criticality": true,
+            "oid": "1.3.6.1.4.1.30221.2.5.2",
+            "control-name": "Intermediate Client Response Control",
+            "criticality": false,
             "value-json": {
-                "application-name": "22, A Million",
-                "application-version": "22.1000000.0",
-                "code-location": "authenticateUser",
-                "request-purpose": "It might be over soon"
+                "server-name": "PingDirectory",
+                "server-session-id": "conn=16872",
+                "server-response-id": "op=1"
             }
         },
         {
-            "oid": "1.3.6.1.4.1.30221.2.5.2",
-            "criticality": true,
+            "oid": "1.3.6.1.4.1.30221.2.5.59",
+            "control-name": "Generate Password Response Control",
+            "criticality": false,
             "value-json": {
-                "downstream-client-address": "6.6.6",
-                "downstream-client-secure": true
+                "generated-password": "349T86abwRt",
+                "must-change-password": false
+            }
+        }
+    ]
+}
+```
+
+---
+
+---
+title: Delete an Entry
+description: Delete a PingDirectory Server entry identified by its distinguished name using the Directory REST API DELETE operation
+component: pingdirectory
+page_id: pingdirectory:directory:directory-entry-apis/delete-an-entry
+canonical_url: https://developer.pingidentity.com/pingdirectory/directory/directory-entry-apis/delete-an-entry.html
+llms_txt: https://developer.pingidentity.com/pingdirectory/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-01-02
+section_ids:
+  headers: Headers
+  example-request: Example Request
+  example-response: Example Response
+---
+
+# Delete an Entry
+
+##
+
+```none
+DELETE {{apiPath}}/directory/v1/{{dn}}
+```
+
+The following sample shows the `DELETE /directory/v1/{{dn}}` operation to delete the entry specified by its distinguished name from the directory.
+
+When successful, the response returns a `204 NO CONTENT` message.
+
+|   |                                                                                                                                                                            |
+| - | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | Only one entry can be deleted in a delete operation. Subtree delete is not supported. Delete operations on an entry with children results in a `400 BAD REQUEST` response. |
+
+### Headers
+
+Authorization      Bearer {{accessToken}}
+
+##
+
+### Example Request
+
+* cURL
+
+* C#
+
+* Go
+
+* HTTP
+
+* Java
+
+* jQuery
+
+* NodeJS
+
+* Python
+
+* PHP
+
+* Ruby
+
+* Swift
+
+```shell
+curl --location --globoff --request DELETE '{{apiPath}}/directory/v1/{{dn}}' \
+--header 'Authorization: Bearer {{accessToken}}'
+```
+
+```csharp
+var options = new RestClientOptions("{{apiPath}}/directory/v1/{{dn}}")
+{
+  MaxTimeout = -1,
+};
+var client = new RestClient(options);
+var request = new RestRequest("", Method.Delete);
+request.AddHeader("Authorization", "Bearer {{accessToken}}");
+RestResponse response = await client.ExecuteAsync(request);
+Console.WriteLine(response.Content);
+```
+
+```golang
+package main
+
+import (
+  "fmt"
+  "net/http"
+  "io"
+)
+
+func main() {
+
+  url := "{{apiPath}}/directory/v1/{{dn}}"
+  method := "DELETE"
+
+  client := &http.Client {
+  }
+  req, err := http.NewRequest(method, url, nil)
+
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  req.Header.Add("Authorization", "Bearer {{accessToken}}")
+
+  res, err := client.Do(req)
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  defer res.Body.Close()
+
+  body, err := io.ReadAll(res.Body)
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  fmt.Println(string(body))
+}
+```
+
+```http
+DELETE /directory/v1/{{dn}} HTTP/1.1
+Host: {{apiPath}}
+Authorization: Bearer {{accessToken}}
+```
+
+```java
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+MediaType mediaType = MediaType.parse("text/plain");
+RequestBody body = RequestBody.create(mediaType, "");
+Request request = new Request.Builder()
+  .url("{{apiPath}}/directory/v1/{{dn}}")
+  .method("DELETE", body)
+  .addHeader("Authorization", "Bearer {{accessToken}}")
+  .build();
+Response response = client.newCall(request).execute();
+```
+
+```javascript
+var settings = {
+  "url": "{{apiPath}}/directory/v1/{{dn}}",
+  "method": "DELETE",
+  "timeout": 0,
+  "headers": {
+    "Authorization": "Bearer {{accessToken}}"
+  },
+};
+
+$.ajax(settings).done(function (response) {
+  console.log(response);
+});
+```
+
+```javascript
+var request = require('request');
+var options = {
+  'method': 'DELETE',
+  'url': '{{apiPath}}/directory/v1/{{dn}}',
+  'headers': {
+    'Authorization': 'Bearer {{accessToken}}'
+  }
+};
+request(options, function (error, response) {
+  if (error) throw new Error(error);
+  console.log(response.body);
+});
+```
+
+```python
+import requests
+
+url = "{{apiPath}}/directory/v1/{{dn}}"
+
+payload = {}
+headers = {
+  'Authorization': 'Bearer {{accessToken}}'
+}
+
+response = requests.request("DELETE", url, headers=headers, data=payload)
+
+print(response.text)
+```
+
+```php
+<?php
+require_once 'HTTP/Request2.php';
+$request = new HTTP_Request2();
+$request->setUrl('{{apiPath}}/directory/v1/{{dn}}');
+$request->setMethod(HTTP_Request2::METHOD_DELETE);
+$request->setConfig(array(
+  'follow_redirects' => TRUE
+));
+$request->setHeader(array(
+  'Authorization' => 'Bearer {{accessToken}}'
+));
+try {
+  $response = $request->send();
+  if ($response->getStatus() == 200) {
+    echo $response->getBody();
+  }
+  else {
+    echo 'Unexpected HTTP status: ' . $response->getStatus() . ' ' .
+    $response->getReasonPhrase();
+  }
+}
+catch(HTTP_Request2_Exception $e) {
+  echo 'Error: ' . $e->getMessage();
+}
+```
+
+```ruby
+require "uri"
+require "net/http"
+
+url = URI("{{apiPath}}/directory/v1/{{dn}}")
+
+http = Net::HTTP.new(url.host, url.port);
+request = Net::HTTP::Delete.new(url)
+request["Authorization"] = "Bearer {{accessToken}}"
+
+response = http.request(request)
+puts response.read_body
+```
+
+```swift
+var request = URLRequest(url: URL(string: "{{apiPath}}/directory/v1/{{dn}}")!,timeoutInterval: Double.infinity)
+request.addValue("Bearer {{accessToken}}", forHTTPHeaderField: "Authorization")
+
+request.httpMethod = "DELETE"
+
+let task = URLSession.shared.dataTask(with: request) { data, response, error in
+  guard let data = data else {
+    print(String(describing: error))
+    return
+  }
+  print(String(data: data, encoding: .utf8)!)
+}
+
+task.resume()
+```
+
+### Example Response
+
+204 No Content
+
+```json
+```
+
+---
+
+---
+title: Delete an Entry with Controls
+description: Delete a PingDirectory Server entry using the Directory REST API DELETE operation with LDAP controls included in the request and response
+component: pingdirectory
+page_id: pingdirectory:directory:directory-entry-apis/delete-an-entry-with-controls
+canonical_url: https://developer.pingidentity.com/pingdirectory/directory/directory-entry-apis/delete-an-entry-with-controls.html
+llms_txt: https://developer.pingidentity.com/pingdirectory/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-01-02
+section_ids:
+  headers: Headers
+  body: Body
+  example-request: Example Request
+  example-response: Example Response
+---
+
+# Delete an Entry with Controls
+
+##
+
+```none
+DELETE {{apiPath}}/directory/v1/{{dn}}
+```
+
+This `DELETE /directory/v1/{{dn}}` operation adds a `_controls` property to the requests and responses for these APIs. The property is an array of JSON formatted controls that are used to include additional content in LDAP requests and responses. For more information about supported controls, refer to [Controls](../controls/index.html).
+
+When successful, the response for a DELETE with controls returns a `200` status message.
+
+|   |                                                                                                                                                                            |
+| - | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | Only one entry can be deleted in a delete operation. Subtree delete is not supported. Delete operations on an entry with children results in a `400 BAD REQUEST` response. |
+
+### Headers
+
+Authorization      Bearer {{accessToken}}
+
+Content-Type      application/json
+
+### Body
+
+raw ( application/json )
+
+```json
+{
+    "_controls": [
+        {
+            "oid": "1.3.6.1.1.13.1",
+            "control-name": "Pre-Read Request Control",
+            "criticality": false,
+            "value-json": {
+                "attributes": [
+                    "uid",
+                    "givenName",
+                    "sn",
+                    "cn"
+                ]
             }
         }
     ]
@@ -1985,29 +4346,22 @@ raw ( application/json )
 * Swift
 
 ```shell
-curl --location --globoff '{{apiPath}}/directory/v1/passwordRequirements' \
+curl --location --globoff --request DELETE '{{apiPath}}/directory/v1/{{dn}}' \
 --header 'Content-Type: application/json' \
 --header 'Authorization: Bearer {{accessToken}}' \
 --data '{
-    "operationType": "administrativeReset",
-    "userDN": "uid=jimbob,ou=people,dc=example,dc=com",
     "_controls": [
         {
-            "oid": "1.3.6.1.4.1.30221.2.5.19",
-            "criticality": true,
+            "oid": "1.3.6.1.1.13.1",
+            "control-name": "Pre-Read Request Control",
+            "criticality": false,
             "value-json": {
-                "application-name": "22, A Million",
-                "application-version": "22.1000000.0",
-                "code-location": "authenticateUser",
-                "request-purpose": "It might be over soon"
-            }
-        },
-        {
-            "oid": "1.3.6.1.4.1.30221.2.5.2",
-            "criticality": true,
-            "value-json": {
-                "downstream-client-address": "6.6.6",
-                "downstream-client-secure": true
+                "attributes": [
+                    "uid",
+                    "givenName",
+                    "sn",
+                    "cn"
+                ]
             }
         }
     ]
@@ -2015,34 +4369,27 @@ curl --location --globoff '{{apiPath}}/directory/v1/passwordRequirements' \
 ```
 
 ```csharp
-var options = new RestClientOptions("{{apiPath}}/directory/v1/passwordRequirements")
+var options = new RestClientOptions("{{apiPath}}/directory/v1/{{dn}}")
 {
   MaxTimeout = -1,
 };
 var client = new RestClient(options);
-var request = new RestRequest("", Method.Post);
+var request = new RestRequest("", Method.Delete);
 request.AddHeader("Content-Type", "application/json");
 request.AddHeader("Authorization", "Bearer {{accessToken}}");
 var body = @"{" + "\n" +
-@"    ""operationType"": ""administrativeReset""," + "\n" +
-@"    ""userDN"": ""uid=jimbob,ou=people,dc=example,dc=com""," + "\n" +
 @"    ""_controls"": [" + "\n" +
 @"        {" + "\n" +
-@"            ""oid"": ""1.3.6.1.4.1.30221.2.5.19""," + "\n" +
-@"            ""criticality"": true," + "\n" +
+@"            ""oid"": ""1.3.6.1.1.13.1""," + "\n" +
+@"            ""control-name"": ""Pre-Read Request Control""," + "\n" +
+@"            ""criticality"": false," + "\n" +
 @"            ""value-json"": {" + "\n" +
-@"                ""application-name"": ""22, A Million""," + "\n" +
-@"                ""application-version"": ""22.1000000.0""," + "\n" +
-@"                ""code-location"": ""authenticateUser""," + "\n" +
-@"                ""request-purpose"": ""It might be over soon""" + "\n" +
-@"            }" + "\n" +
-@"        }," + "\n" +
-@"        {" + "\n" +
-@"            ""oid"": ""1.3.6.1.4.1.30221.2.5.2""," + "\n" +
-@"            ""criticality"": true," + "\n" +
-@"            ""value-json"": {" + "\n" +
-@"                ""downstream-client-address"": ""6.6.6""," + "\n" +
-@"                ""downstream-client-secure"": true" + "\n" +
+@"                ""attributes"": [" + "\n" +
+@"                    ""uid""," + "\n" +
+@"                    ""givenName""," + "\n" +
+@"                    ""sn""," + "\n" +
+@"                    ""cn""" + "\n" +
+@"                ]" + "\n" +
 @"            }" + "\n" +
 @"        }" + "\n" +
 @"    ]" + "\n" +
@@ -2064,29 +4411,22 @@ import (
 
 func main() {
 
-  url := "{{apiPath}}/directory/v1/passwordRequirements"
-  method := "POST"
+  url := "{{apiPath}}/directory/v1/{{dn}}"
+  method := "DELETE"
 
   payload := strings.NewReader(`{
-    "operationType": "administrativeReset",
-    "userDN": "uid=jimbob,ou=people,dc=example,dc=com",
     "_controls": [
         {
-            "oid": "1.3.6.1.4.1.30221.2.5.19",
-            "criticality": true,
+            "oid": "1.3.6.1.1.13.1",
+            "control-name": "Pre-Read Request Control",
+            "criticality": false,
             "value-json": {
-                "application-name": "22, A Million",
-                "application-version": "22.1000000.0",
-                "code-location": "authenticateUser",
-                "request-purpose": "It might be over soon"
-            }
-        },
-        {
-            "oid": "1.3.6.1.4.1.30221.2.5.2",
-            "criticality": true,
-            "value-json": {
-                "downstream-client-address": "6.6.6",
-                "downstream-client-secure": true
+                "attributes": [
+                    "uid",
+                    "givenName",
+                    "sn",
+                    "cn"
+                ]
             }
         }
     ]
@@ -2120,31 +4460,24 @@ func main() {
 ```
 
 ```http
-POST /directory/v1/passwordRequirements HTTP/1.1
+DELETE /directory/v1/{{dn}} HTTP/1.1
 Host: {{apiPath}}
 Content-Type: application/json
 Authorization: Bearer {{accessToken}}
 
 {
-    "operationType": "administrativeReset",
-    "userDN": "uid=jimbob,ou=people,dc=example,dc=com",
     "_controls": [
         {
-            "oid": "1.3.6.1.4.1.30221.2.5.19",
-            "criticality": true,
+            "oid": "1.3.6.1.1.13.1",
+            "control-name": "Pre-Read Request Control",
+            "criticality": false,
             "value-json": {
-                "application-name": "22, A Million",
-                "application-version": "22.1000000.0",
-                "code-location": "authenticateUser",
-                "request-purpose": "It might be over soon"
-            }
-        },
-        {
-            "oid": "1.3.6.1.4.1.30221.2.5.2",
-            "criticality": true,
-            "value-json": {
-                "downstream-client-address": "6.6.6",
-                "downstream-client-secure": true
+                "attributes": [
+                    "uid",
+                    "givenName",
+                    "sn",
+                    "cn"
+                ]
             }
         }
     ]
@@ -2155,10 +4488,10 @@ Authorization: Bearer {{accessToken}}
 OkHttpClient client = new OkHttpClient().newBuilder()
   .build();
 MediaType mediaType = MediaType.parse("application/json");
-RequestBody body = RequestBody.create(mediaType, "{\n    \"operationType\": \"administrativeReset\",\n    \"userDN\": \"uid=jimbob,ou=people,dc=example,dc=com\",\n    \"_controls\": [\n        {\n            \"oid\": \"1.3.6.1.4.1.30221.2.5.19\",\n            \"criticality\": true,\n            \"value-json\": {\n                \"application-name\": \"22, A Million\",\n                \"application-version\": \"22.1000000.0\",\n                \"code-location\": \"authenticateUser\",\n                \"request-purpose\": \"It might be over soon\"\n            }\n        },\n        {\n            \"oid\": \"1.3.6.1.4.1.30221.2.5.2\",\n            \"criticality\": true,\n            \"value-json\": {\n                \"downstream-client-address\": \"6.6.6\",\n                \"downstream-client-secure\": true\n            }\n        }\n    ]\n}");
+RequestBody body = RequestBody.create(mediaType, "{\n    \"_controls\": [\n        {\n            \"oid\": \"1.3.6.1.1.13.1\",\n            \"control-name\": \"Pre-Read Request Control\",\n            \"criticality\": false,\n            \"value-json\": {\n                \"attributes\": [\n                    \"uid\",\n                    \"givenName\",\n                    \"sn\",\n                    \"cn\"\n                ]\n            }\n        }\n    ]\n}");
 Request request = new Request.Builder()
-  .url("{{apiPath}}/directory/v1/passwordRequirements")
-  .method("POST", body)
+  .url("{{apiPath}}/directory/v1/{{dn}}")
+  .method("DELETE", body)
   .addHeader("Content-Type", "application/json")
   .addHeader("Authorization", "Bearer {{accessToken}}")
   .build();
@@ -2167,33 +4500,26 @@ Response response = client.newCall(request).execute();
 
 ```javascript
 var settings = {
-  "url": "{{apiPath}}/directory/v1/passwordRequirements",
-  "method": "POST",
+  "url": "{{apiPath}}/directory/v1/{{dn}}",
+  "method": "DELETE",
   "timeout": 0,
   "headers": {
     "Content-Type": "application/json",
     "Authorization": "Bearer {{accessToken}}"
   },
   "data": JSON.stringify({
-    "operationType": "administrativeReset",
-    "userDN": "uid=jimbob,ou=people,dc=example,dc=com",
     "_controls": [
       {
-        "oid": "1.3.6.1.4.1.30221.2.5.19",
-        "criticality": true,
+        "oid": "1.3.6.1.1.13.1",
+        "control-name": "Pre-Read Request Control",
+        "criticality": false,
         "value-json": {
-          "application-name": "22, A Million",
-          "application-version": "22.1000000.0",
-          "code-location": "authenticateUser",
-          "request-purpose": "It might be over soon"
-        }
-      },
-      {
-        "oid": "1.3.6.1.4.1.30221.2.5.2",
-        "criticality": true,
-        "value-json": {
-          "downstream-client-address": "6.6.6",
-          "downstream-client-secure": true
+          "attributes": [
+            "uid",
+            "givenName",
+            "sn",
+            "cn"
+          ]
         }
       }
     ]
@@ -2208,32 +4534,25 @@ $.ajax(settings).done(function (response) {
 ```javascript
 var request = require('request');
 var options = {
-  'method': 'POST',
-  'url': '{{apiPath}}/directory/v1/passwordRequirements',
+  'method': 'DELETE',
+  'url': '{{apiPath}}/directory/v1/{{dn}}',
   'headers': {
     'Content-Type': 'application/json',
     'Authorization': 'Bearer {{accessToken}}'
   },
   body: JSON.stringify({
-    "operationType": "administrativeReset",
-    "userDN": "uid=jimbob,ou=people,dc=example,dc=com",
     "_controls": [
       {
-        "oid": "1.3.6.1.4.1.30221.2.5.19",
-        "criticality": true,
+        "oid": "1.3.6.1.1.13.1",
+        "control-name": "Pre-Read Request Control",
+        "criticality": false,
         "value-json": {
-          "application-name": "22, A Million",
-          "application-version": "22.1000000.0",
-          "code-location": "authenticateUser",
-          "request-purpose": "It might be over soon"
-        }
-      },
-      {
-        "oid": "1.3.6.1.4.1.30221.2.5.2",
-        "criticality": true,
-        "value-json": {
-          "downstream-client-address": "6.6.6",
-          "downstream-client-secure": true
+          "attributes": [
+            "uid",
+            "givenName",
+            "sn",
+            "cn"
+          ]
         }
       }
     ]
@@ -2250,28 +4569,21 @@ request(options, function (error, response) {
 import requests
 import json
 
-url = "{{apiPath}}/directory/v1/passwordRequirements"
+url = "{{apiPath}}/directory/v1/{{dn}}"
 
 payload = json.dumps({
-  "operationType": "administrativeReset",
-  "userDN": "uid=jimbob,ou=people,dc=example,dc=com",
   "_controls": [
     {
-      "oid": "1.3.6.1.4.1.30221.2.5.19",
-      "criticality": True,
+      "oid": "1.3.6.1.1.13.1",
+      "control-name": "Pre-Read Request Control",
+      "criticality": False,
       "value-json": {
-        "application-name": "22, A Million",
-        "application-version": "22.1000000.0",
-        "code-location": "authenticateUser",
-        "request-purpose": "It might be over soon"
-      }
-    },
-    {
-      "oid": "1.3.6.1.4.1.30221.2.5.2",
-      "criticality": True,
-      "value-json": {
-        "downstream-client-address": "6.6.6",
-        "downstream-client-secure": True
+        "attributes": [
+          "uid",
+          "givenName",
+          "sn",
+          "cn"
+        ]
       }
     }
   ]
@@ -2281,7 +4593,7 @@ headers = {
   'Authorization': 'Bearer {{accessToken}}'
 }
 
-response = requests.request("POST", url, headers=headers, data=payload)
+response = requests.request("DELETE", url, headers=headers, data=payload)
 
 print(response.text)
 ```
@@ -2290,8 +4602,8 @@ print(response.text)
 <?php
 require_once 'HTTP/Request2.php';
 $request = new HTTP_Request2();
-$request->setUrl('{{apiPath}}/directory/v1/passwordRequirements');
-$request->setMethod(HTTP_Request2::METHOD_POST);
+$request->setUrl('{{apiPath}}/directory/v1/{{dn}}');
+$request->setMethod(HTTP_Request2::METHOD_DELETE);
 $request->setConfig(array(
   'follow_redirects' => TRUE
 ));
@@ -2299,7 +4611,7 @@ $request->setHeader(array(
   'Content-Type' => 'application/json',
   'Authorization' => 'Bearer {{accessToken}}'
 ));
-$request->setBody('{\n    "operationType": "administrativeReset",\n    "userDN": "uid=jimbob,ou=people,dc=example,dc=com",\n    "_controls": [\n        {\n            "oid": "1.3.6.1.4.1.30221.2.5.19",\n            "criticality": true,\n            "value-json": {\n                "application-name": "22, A Million",\n                "application-version": "22.1000000.0",\n                "code-location": "authenticateUser",\n                "request-purpose": "It might be over soon"\n            }\n        },\n        {\n            "oid": "1.3.6.1.4.1.30221.2.5.2",\n            "criticality": true,\n            "value-json": {\n                "downstream-client-address": "6.6.6",\n                "downstream-client-secure": true\n            }\n        }\n    ]\n}');
+$request->setBody('{\n    "_controls": [\n        {\n            "oid": "1.3.6.1.1.13.1",\n            "control-name": "Pre-Read Request Control",\n            "criticality": false,\n            "value-json": {\n                "attributes": [\n                    "uid",\n                    "givenName",\n                    "sn",\n                    "cn"\n                ]\n            }\n        }\n    ]\n}');
 try {
   $response = $request->send();
   if ($response->getStatus() == 200) {
@@ -2320,32 +4632,25 @@ require "uri"
 require "json"
 require "net/http"
 
-url = URI("{{apiPath}}/directory/v1/passwordRequirements")
+url = URI("{{apiPath}}/directory/v1/{{dn}}")
 
 http = Net::HTTP.new(url.host, url.port);
-request = Net::HTTP::Post.new(url)
+request = Net::HTTP::Delete.new(url)
 request["Content-Type"] = "application/json"
 request["Authorization"] = "Bearer {{accessToken}}"
 request.body = JSON.dump({
-  "operationType": "administrativeReset",
-  "userDN": "uid=jimbob,ou=people,dc=example,dc=com",
   "_controls": [
     {
-      "oid": "1.3.6.1.4.1.30221.2.5.19",
-      "criticality": true,
+      "oid": "1.3.6.1.1.13.1",
+      "control-name": "Pre-Read Request Control",
+      "criticality": false,
       "value-json": {
-        "application-name": "22, A Million",
-        "application-version": "22.1000000.0",
-        "code-location": "authenticateUser",
-        "request-purpose": "It might be over soon"
-      }
-    },
-    {
-      "oid": "1.3.6.1.4.1.30221.2.5.2",
-      "criticality": true,
-      "value-json": {
-        "downstream-client-address": "6.6.6",
-        "downstream-client-secure": true
+        "attributes": [
+          "uid",
+          "givenName",
+          "sn",
+          "cn"
+        ]
       }
     }
   ]
@@ -2356,10 +4661,381 @@ puts response.read_body
 ```
 
 ```swift
-let parameters = "{\n    \"operationType\": \"administrativeReset\",\n    \"userDN\": \"uid=jimbob,ou=people,dc=example,dc=com\",\n    \"_controls\": [\n        {\n            \"oid\": \"1.3.6.1.4.1.30221.2.5.19\",\n            \"criticality\": true,\n            \"value-json\": {\n                \"application-name\": \"22, A Million\",\n                \"application-version\": \"22.1000000.0\",\n                \"code-location\": \"authenticateUser\",\n                \"request-purpose\": \"It might be over soon\"\n            }\n        },\n        {\n            \"oid\": \"1.3.6.1.4.1.30221.2.5.2\",\n            \"criticality\": true,\n            \"value-json\": {\n                \"downstream-client-address\": \"6.6.6\",\n                \"downstream-client-secure\": true\n            }\n        }\n    ]\n}"
+let parameters = "{\n    \"_controls\": [\n        {\n            \"oid\": \"1.3.6.1.1.13.1\",\n            \"control-name\": \"Pre-Read Request Control\",\n            \"criticality\": false,\n            \"value-json\": {\n                \"attributes\": [\n                    \"uid\",\n                    \"givenName\",\n                    \"sn\",\n                    \"cn\"\n                ]\n            }\n        }\n    ]\n}"
 let postData = parameters.data(using: .utf8)
 
-var request = URLRequest(url: URL(string: "{{apiPath}}/directory/v1/passwordRequirements")!,timeoutInterval: Double.infinity)
+var request = URLRequest(url: URL(string: "{{apiPath}}/directory/v1/{{dn}}")!,timeoutInterval: Double.infinity)
+request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+request.addValue("Bearer {{accessToken}}", forHTTPHeaderField: "Authorization")
+
+request.httpMethod = "DELETE"
+request.httpBody = postData
+
+let task = URLSession.shared.dataTask(with: request) { data, response, error in
+  guard let data = data else {
+    print(String(describing: error))
+    return
+  }
+  print(String(data: data, encoding: .utf8)!)
+}
+
+task.resume()
+```
+
+### Example Response
+
+200 OK
+
+```json
+{
+    "_controls": [
+        {
+            "oid": "1.3.6.1.1.13.1",
+            "control-name": "Pre-Read Response Control",
+            "criticality": false,
+            "value-json": {
+                "_dn": "uid=johnsmith,ou=People,dc=example,dc=com",
+                "sn": [
+                    "Smith"
+                ],
+                "givenName": [
+                    "John"
+                ],
+                "cn": [
+                    "John Smith"
+                ],
+                "uid": [
+                    "johnsmith"
+                ]
+            }
+        }
+    ]
+}
+```
+
+---
+
+---
+title: Deliver one time password
+description: Generate a one-time password and deliver it to a user out of band using the PingDirectory Directory REST API
+component: pingdirectory
+page_id: pingdirectory:directory:extended-operations/deliver-one-time-password/deliver-one-time-password
+canonical_url: https://developer.pingidentity.com/pingdirectory/directory/extended-operations/deliver-one-time-password/deliver-one-time-password.html
+llms_txt: https://developer.pingidentity.com/pingdirectory/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-01-02
+section_ids:
+  headers: Headers
+  body: Body
+  example-request: Example Request
+  example-response: Example Response
+---
+
+# Deliver one time password
+
+##
+
+```none
+POST {{apiPath}}/directory/v1/deliverOneTimePassword
+```
+
+The deliver one-time password (OTP) extended operation uses the `POST /directory/v1/deliverOneTimePassword` endpoint to generate an OTP and deliver it to the user out of band.
+
+### Headers
+
+Authorization      Bearer {{accessToken}}
+
+Content-Type      application/json
+
+### Body
+
+raw ( application/json )
+
+```json
+{
+    "dn": "uid=jimbob,ou=people,dc=example,dc=com",
+    "staticPassword": "password",
+    "preferredDeliveryMechanisms": [
+        "Local File",
+        "SMS"
+    ]
+}
+```
+
+##
+
+### Example Request
+
+* cURL
+
+* C#
+
+* Go
+
+* HTTP
+
+* Java
+
+* jQuery
+
+* NodeJS
+
+* Python
+
+* PHP
+
+* Ruby
+
+* Swift
+
+```shell
+curl --location --globoff '{{apiPath}}/directory/v1/deliverOneTimePassword' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer {{accessToken}}' \
+--data '{
+    "dn": "uid=jimbob,ou=people,dc=example,dc=com",
+    "staticPassword": "password",
+    "preferredDeliveryMechanisms": [
+        "Local File",
+        "SMS"
+    ]
+}'
+```
+
+```csharp
+var options = new RestClientOptions("{{apiPath}}/directory/v1/deliverOneTimePassword")
+{
+  MaxTimeout = -1,
+};
+var client = new RestClient(options);
+var request = new RestRequest("", Method.Post);
+request.AddHeader("Content-Type", "application/json");
+request.AddHeader("Authorization", "Bearer {{accessToken}}");
+var body = @"{" + "\n" +
+@"    ""dn"": ""uid=jimbob,ou=people,dc=example,dc=com""," + "\n" +
+@"    ""staticPassword"": ""password""," + "\n" +
+@"    ""preferredDeliveryMechanisms"": [" + "\n" +
+@"        ""Local File""," + "\n" +
+@"        ""SMS""" + "\n" +
+@"    ]" + "\n" +
+@"}";
+request.AddStringBody(body, DataFormat.Json);
+RestResponse response = await client.ExecuteAsync(request);
+Console.WriteLine(response.Content);
+```
+
+```golang
+package main
+
+import (
+  "fmt"
+  "strings"
+  "net/http"
+  "io"
+)
+
+func main() {
+
+  url := "{{apiPath}}/directory/v1/deliverOneTimePassword"
+  method := "POST"
+
+  payload := strings.NewReader(`{
+    "dn": "uid=jimbob,ou=people,dc=example,dc=com",
+    "staticPassword": "password",
+    "preferredDeliveryMechanisms": [
+        "Local File",
+        "SMS"
+    ]
+}`)
+
+  client := &http.Client {
+  }
+  req, err := http.NewRequest(method, url, payload)
+
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  req.Header.Add("Content-Type", "application/json")
+  req.Header.Add("Authorization", "Bearer {{accessToken}}")
+
+  res, err := client.Do(req)
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  defer res.Body.Close()
+
+  body, err := io.ReadAll(res.Body)
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  fmt.Println(string(body))
+}
+```
+
+```http
+POST /directory/v1/deliverOneTimePassword HTTP/1.1
+Host: {{apiPath}}
+Content-Type: application/json
+Authorization: Bearer {{accessToken}}
+
+{
+    "dn": "uid=jimbob,ou=people,dc=example,dc=com",
+    "staticPassword": "password",
+    "preferredDeliveryMechanisms": [
+        "Local File",
+        "SMS"
+    ]
+}
+```
+
+```java
+OkHttpClient client = new OkHttpClient().newBuilder()
+  .build();
+MediaType mediaType = MediaType.parse("application/json");
+RequestBody body = RequestBody.create(mediaType, "{\n    \"dn\": \"uid=jimbob,ou=people,dc=example,dc=com\",\n    \"staticPassword\": \"password\",\n    \"preferredDeliveryMechanisms\": [\n        \"Local File\",\n        \"SMS\"\n    ]\n}");
+Request request = new Request.Builder()
+  .url("{{apiPath}}/directory/v1/deliverOneTimePassword")
+  .method("POST", body)
+  .addHeader("Content-Type", "application/json")
+  .addHeader("Authorization", "Bearer {{accessToken}}")
+  .build();
+Response response = client.newCall(request).execute();
+```
+
+```javascript
+var settings = {
+  "url": "{{apiPath}}/directory/v1/deliverOneTimePassword",
+  "method": "POST",
+  "timeout": 0,
+  "headers": {
+    "Content-Type": "application/json",
+    "Authorization": "Bearer {{accessToken}}"
+  },
+  "data": JSON.stringify({
+    "dn": "uid=jimbob,ou=people,dc=example,dc=com",
+    "staticPassword": "password",
+    "preferredDeliveryMechanisms": [
+      "Local File",
+      "SMS"
+    ]
+  }),
+};
+
+$.ajax(settings).done(function (response) {
+  console.log(response);
+});
+```
+
+```javascript
+var request = require('request');
+var options = {
+  'method': 'POST',
+  'url': '{{apiPath}}/directory/v1/deliverOneTimePassword',
+  'headers': {
+    'Content-Type': 'application/json',
+    'Authorization': 'Bearer {{accessToken}}'
+  },
+  body: JSON.stringify({
+    "dn": "uid=jimbob,ou=people,dc=example,dc=com",
+    "staticPassword": "password",
+    "preferredDeliveryMechanisms": [
+      "Local File",
+      "SMS"
+    ]
+  })
+
+};
+request(options, function (error, response) {
+  if (error) throw new Error(error);
+  console.log(response.body);
+});
+```
+
+```python
+import requests
+import json
+
+url = "{{apiPath}}/directory/v1/deliverOneTimePassword"
+
+payload = json.dumps({
+  "dn": "uid=jimbob,ou=people,dc=example,dc=com",
+  "staticPassword": "password",
+  "preferredDeliveryMechanisms": [
+    "Local File",
+    "SMS"
+  ]
+})
+headers = {
+  'Content-Type': 'application/json',
+  'Authorization': 'Bearer {{accessToken}}'
+}
+
+response = requests.request("POST", url, headers=headers, data=payload)
+
+print(response.text)
+```
+
+```php
+<?php
+require_once 'HTTP/Request2.php';
+$request = new HTTP_Request2();
+$request->setUrl('{{apiPath}}/directory/v1/deliverOneTimePassword');
+$request->setMethod(HTTP_Request2::METHOD_POST);
+$request->setConfig(array(
+  'follow_redirects' => TRUE
+));
+$request->setHeader(array(
+  'Content-Type' => 'application/json',
+  'Authorization' => 'Bearer {{accessToken}}'
+));
+$request->setBody('{\n    "dn": "uid=jimbob,ou=people,dc=example,dc=com",\n    "staticPassword": "password",\n    "preferredDeliveryMechanisms": [\n        "Local File",\n        "SMS"\n    ]\n}');
+try {
+  $response = $request->send();
+  if ($response->getStatus() == 200) {
+    echo $response->getBody();
+  }
+  else {
+    echo 'Unexpected HTTP status: ' . $response->getStatus() . ' ' .
+    $response->getReasonPhrase();
+  }
+}
+catch(HTTP_Request2_Exception $e) {
+  echo 'Error: ' . $e->getMessage();
+}
+```
+
+```ruby
+require "uri"
+require "json"
+require "net/http"
+
+url = URI("{{apiPath}}/directory/v1/deliverOneTimePassword")
+
+http = Net::HTTP.new(url.host, url.port);
+request = Net::HTTP::Post.new(url)
+request["Content-Type"] = "application/json"
+request["Authorization"] = "Bearer {{accessToken}}"
+request.body = JSON.dump({
+  "dn": "uid=jimbob,ou=people,dc=example,dc=com",
+  "staticPassword": "password",
+  "preferredDeliveryMechanisms": [
+    "Local File",
+    "SMS"
+  ]
+})
+
+response = http.request(request)
+puts response.read_body
+```
+
+```swift
+let parameters = "{\n    \"dn\": \"uid=jimbob,ou=people,dc=example,dc=com\",\n    \"staticPassword\": \"password\",\n    \"preferredDeliveryMechanisms\": [\n        \"Local File\",\n        \"SMS\"\n    ]\n}"
+let postData = parameters.data(using: .utf8)
+
+var request = URLRequest(url: URL(string: "{{apiPath}}/directory/v1/deliverOneTimePassword")!,timeoutInterval: Double.infinity)
 request.addValue("application/json", forHTTPHeaderField: "Content-Type")
 request.addValue("Bearer {{accessToken}}", forHTTPHeaderField: "Authorization")
 
@@ -2387,58 +5063,85 @@ task.resume()
         "value": 0,
         "name": "success"
     },
-    "passwordQualityRequirements": [],
-    "mustChangePassword": "false",
-    "_controls": [
-        {
-            "oid": "1.3.6.1.4.1.30221.2.5.2",
-            "control-name": "Intermediate Client Response Control",
-            "criticality": false,
-            "value-json": {
-                "server-name": "PingDirectory",
-                "server-session-id": "conn=-1403",
-                "server-response-id": "op=61007"
-            }
-        }
-    ]
+    "deliveryMechanism": "Local File",
+    "recipientDN": "uid=jimbob,ou=People,dc=example,dc=com",
+    "recipientID": "/var/folders/example-folder/one-time-password.txt"
 }
 ```
 
 ---
 
 ---
-title: Get Password Quality Requirements
-description: The Get Password Quality Requirements extended operation is applicable for user-facing applications that allow users to create accounts or change passwords. This operation enables applications to display a list of the requirements that the new password must satisfy at the initial password request.
+title: Deliver One Time Password
+description: The deliver one-time password extended operation is used to indicate that the server should generate a one-time password for a user, store it in the user's entry, and deliver it to the user through a method like email or SMS. This operation is heavily based on the DeliverOneTimePasswordExtendedRequest class in the LDAP SDK.
 component: pingdirectory
-page_id: pingdirectory:directory:extended-operations/get-password-quality-requirements/index
-canonical_url: https://developer.pingidentity.com/pingdirectory/directory/extended-operations/get-password-quality-requirements/index.html
+page_id: pingdirectory:directory:extended-operations/deliver-one-time-password/index
+canonical_url: https://developer.pingidentity.com/pingdirectory/directory/extended-operations/deliver-one-time-password/index.html
 llms_txt: https://developer.pingidentity.com/pingdirectory/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: 2026-01-02
 ---
 
-# Get Password Quality Requirements
+# Deliver One Time Password
 
-The Get Password Quality Requirements extended operation is applicable for user-facing applications that allow users to create accounts or change passwords. This operation enables applications to display a list of the requirements that the new password must satisfy at the initial password request.
+The deliver one-time password extended operation is used to indicate that the server should generate a one-time password for a user, store it in the user's entry, and deliver it to the user through a method like email or SMS. This operation is heavily based on the [DeliverOneTimePasswordExtendedRequest](https://docs.ldap.com/ldap-sdk/docs/javadoc/index.html?com/unboundid/ldap/sdk/unboundidds/extensions/DeliverOneTimePasswordExtendedRequest.html) class in the LDAP SDK.
 
-The Get Password Quality Requirements extended operation is not a standard LDAP operation and has been developed internally for use within PingDirectory products. Its implementation in the Directory REST API is based on the following classes in the UnboundID LDAP SDK:
+The request body is a JSON object with the following fields:
 
-* [GetPasswordQualityRequirementsExtendedRequest](https://docs.ldap.com/ldap-sdk/docs/javadoc/index.html?com/unboundid/ldap/sdk/unboundidds/extensions/GetPasswordQualityRequirementsExtendedRequest.html)
+* `dn`
 
-* [GetPasswordQualityRequirementsExtendedResult](https://docs.ldap.com/ldap-sdk/docs/javadoc/index.html?com/unboundid/ldap/sdk/unboundidds/extensions/GetPasswordQualityRequirementsExtendedResult.html)
+  An optional string field whose value is the full DN of the user that is attempting to authenticate. Exactly one of the `dn` and username fields must be present.
 
-* [GetPasswordQualityRequirementsExtendedOperation]()
+* `username`
 
-The API method exists to serves as a translation layer between the client's HTTP request and Directory's internal LDAP operations. For more information on the LDAP Get Password Quality Requirements extended operation, refer to the LDAP [GetPasswordQualityRequirementsExtendedRequest](https://docs.ldap.com/ldap-sdk/docs/javadoc/index.html?com/unboundid/ldap/sdk/unboundidds/extensions/GetPasswordQualityRequirementsExtendedRequest.html) documentation. The LDAP get password quality requirements extended request has an OID of "1.3.6.1.4.1.30221.2.6.43".
+  An optional string field whose value is the username for the user that is attempting to authenticate. Exactly one of the `dn` and `username` fields must be present.
+
+* `staticPassword`
+
+  A mandatory string field whose value is the static password for the target user.
+
+* `preferredDeliveryMechanisms`
+
+  An optional string array field whose values are the names of the OTP delivery mechanisms that the client wants to use, in order from most preferred to least preferred. The names that are available for use depends on the server's configuration. If this is not provided, then the server will automatically choose a delivery mechanism for the user.
+
+The response body is created from the [deliver one-time password extended result](https://docs.ldap.com/ldap-sdk/docs/javadoc/index.html?com/unboundid/ldap/sdk/unboundidds/extensions/DeliverOneTimePasswordExtendedResult.html). The response is a JSON object with the following fields:
+
+* `resultCode`
+
+  A mandatory JSON object that contains the following fields:
+
+  * `value` — The integer value for the LDAP result code. This is required.
+
+  * `name` — A name for the LDAP result code. This is optional but recommended.
+
+* `diagnosticMessage`
+
+  An optional string field that holds a human-readable message with additional information about the operation.
+
+* `deliveryMechanism`
+
+  An optional string field that holds the name of the delivery mechanism that was used to send the one-time password to the user. This will be present if the one-time password was successfully sent.
+
+* `recipientDN`
+
+  An optional string field that holds the DN of the user for whom the password was generated and delivered. This will be present if the one-time password was successfully sent.
+
+* `recipientID`
+
+  An optional string field that holds the delivery mechanism-specific identifier to which the one-time password was sent, like an email address if the password was delivered via email or a mobile phone number of the password was delivered by SMS. This will be present if the one-time password was successfully sent, and if the delivery mechanism used to send it provided a recipient ID.
+
+* `deliveryMessage`
+
+  An optional string field that holds a message that may provide additional information about the one-time password delivery attempt.
 
 ---
 
 ---
-title: Get Schema for the objectclass
-description: Retrieve the schema associated with a specified objectClass value using the PingDirectory Directory REST API
+title: Deregister YubiKey OTP device
+description: Revoke a registered YubiKey OTP device for a user using the PingDirectory Directory REST API
 component: pingdirectory
-page_id: pingdirectory:directory:schemas-apis/get-schema-for-the-objectclass
-canonical_url: https://developer.pingidentity.com/pingdirectory/directory/schemas-apis/get-schema-for-the-objectclass.html
+page_id: pingdirectory:directory:extended-operations/deregister-yubikey-otp-device/deregister-yubikey-otp-device
+canonical_url: https://developer.pingidentity.com/pingdirectory/directory/extended-operations/deregister-yubikey-otp-device/deregister-yubikey-otp-device.html
 llms_txt: https://developer.pingidentity.com/pingdirectory/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: 2026-01-02
@@ -2448,15 +5151,15 @@ section_ids:
   example-response: Example Response
 ---
 
-# Get Schema for the objectclass
+# Deregister YubiKey OTP device
 
 ##
 
 ```none
-GET {{apiPath}}/directory/v1/schemas/ubidPerson
+POST {{apiPath}}/directory/v1/{{dn}}/deregisterYubiKeyOTPDevice
 ```
 
-The `GET /directory/v1/schemas/{objectclass}` endpoint returns the `schema` associated with the `objectClass` value of `ubidPerson` specified in the request URL.
+The deregister YubiKey OTP device extended operation uses the `POST /directory/v1/{{dn}}/deregisterYubiKeyOTPDevice` endpoint to revoke a YubiKey device for a particular user.
 
 ### Headers
 
@@ -2489,17 +5192,17 @@ Authorization      Bearer {{accessToken}}
 * Swift
 
 ```shell
-curl --location --globoff '{{apiPath}}/directory/v1/schemas/ubidPerson' \
+curl --location --globoff --request POST '{{apiPath}}/directory/v1/{{dn}}/deregisterYubiKeyOTPDevice' \
 --header 'Authorization: Bearer {{accessToken}}'
 ```
 
 ```csharp
-var options = new RestClientOptions("{{apiPath}}/directory/v1/schemas/ubidPerson")
+var options = new RestClientOptions("{{apiPath}}/directory/v1/{{dn}}/deregisterYubiKeyOTPDevice")
 {
   MaxTimeout = -1,
 };
 var client = new RestClient(options);
-var request = new RestRequest("", Method.Get);
+var request = new RestRequest("", Method.Post);
 request.AddHeader("Authorization", "Bearer {{accessToken}}");
 RestResponse response = await client.ExecuteAsync(request);
 Console.WriteLine(response.Content);
@@ -2516,8 +5219,8 @@ import (
 
 func main() {
 
-  url := "{{apiPath}}/directory/v1/schemas/ubidPerson"
-  method := "GET"
+  url := "{{apiPath}}/directory/v1/{{dn}}/deregisterYubiKeyOTPDevice"
+  method := "POST"
 
   client := &http.Client {
   }
@@ -2546,7 +5249,7 @@ func main() {
 ```
 
 ```http
-GET /directory/v1/schemas/ubidPerson HTTP/1.1
+POST /directory/v1/{{dn}}/deregisterYubiKeyOTPDevice HTTP/1.1
 Host: {{apiPath}}
 Authorization: Bearer {{accessToken}}
 ```
@@ -2557,8 +5260,8 @@ OkHttpClient client = new OkHttpClient().newBuilder()
 MediaType mediaType = MediaType.parse("text/plain");
 RequestBody body = RequestBody.create(mediaType, "");
 Request request = new Request.Builder()
-  .url("{{apiPath}}/directory/v1/schemas/ubidPerson")
-  .method("GET", body)
+  .url("{{apiPath}}/directory/v1/{{dn}}/deregisterYubiKeyOTPDevice")
+  .method("POST", body)
   .addHeader("Authorization", "Bearer {{accessToken}}")
   .build();
 Response response = client.newCall(request).execute();
@@ -2566,8 +5269,8 @@ Response response = client.newCall(request).execute();
 
 ```javascript
 var settings = {
-  "url": "{{apiPath}}/directory/v1/schemas/ubidPerson",
-  "method": "GET",
+  "url": "{{apiPath}}/directory/v1/{{dn}}/deregisterYubiKeyOTPDevice",
+  "method": "POST",
   "timeout": 0,
   "headers": {
     "Authorization": "Bearer {{accessToken}}"
@@ -2582,8 +5285,8 @@ $.ajax(settings).done(function (response) {
 ```javascript
 var request = require('request');
 var options = {
-  'method': 'GET',
-  'url': '{{apiPath}}/directory/v1/schemas/ubidPerson',
+  'method': 'POST',
+  'url': '{{apiPath}}/directory/v1/{{dn}}/deregisterYubiKeyOTPDevice',
   'headers': {
     'Authorization': 'Bearer {{accessToken}}'
   }
@@ -2597,14 +5300,14 @@ request(options, function (error, response) {
 ```python
 import requests
 
-url = "{{apiPath}}/directory/v1/schemas/ubidPerson"
+url = "{{apiPath}}/directory/v1/{{dn}}/deregisterYubiKeyOTPDevice"
 
 payload = {}
 headers = {
   'Authorization': 'Bearer {{accessToken}}'
 }
 
-response = requests.request("GET", url, headers=headers, data=payload)
+response = requests.request("POST", url, headers=headers, data=payload)
 
 print(response.text)
 ```
@@ -2613,8 +5316,8 @@ print(response.text)
 <?php
 require_once 'HTTP/Request2.php';
 $request = new HTTP_Request2();
-$request->setUrl('{{apiPath}}/directory/v1/schemas/ubidPerson');
-$request->setMethod(HTTP_Request2::METHOD_GET);
+$request->setUrl('{{apiPath}}/directory/v1/{{dn}}/deregisterYubiKeyOTPDevice');
+$request->setMethod(HTTP_Request2::METHOD_POST);
 $request->setConfig(array(
   'follow_redirects' => TRUE
 ));
@@ -2640,10 +5343,10 @@ catch(HTTP_Request2_Exception $e) {
 require "uri"
 require "net/http"
 
-url = URI("{{apiPath}}/directory/v1/schemas/ubidPerson")
+url = URI("{{apiPath}}/directory/v1/{{dn}}/deregisterYubiKeyOTPDevice")
 
 http = Net::HTTP.new(url.host, url.port);
-request = Net::HTTP::Get.new(url)
+request = Net::HTTP::Post.new(url)
 request["Authorization"] = "Bearer {{accessToken}}"
 
 response = http.request(request)
@@ -2651,10 +5354,10 @@ puts response.read_body
 ```
 
 ```swift
-var request = URLRequest(url: URL(string: "{{apiPath}}/directory/v1/schemas/ubidPerson")!,timeoutInterval: Double.infinity)
+var request = URLRequest(url: URL(string: "{{apiPath}}/directory/v1/{{dn}}/deregisterYubiKeyOTPDevice")!,timeoutInterval: Double.infinity)
 request.addValue("Bearer {{accessToken}}", forHTTPHeaderField: "Authorization")
 
-request.httpMethod = "GET"
+request.httpMethod = "POST"
 
 let task = URLSession.shared.dataTask(with: request) { data, response, error in
   guard let data = data else {
@@ -2673,1092 +5376,9 @@ task.resume()
 
 ```json
 {
-    "$schema": "http://json-schema.org/draft-07/schema#",
-    "title": "ubidPerson",
-    "classType": "structural",
-    "parent": "top",
-    "required": [
-        "objectClass"
-    ],
-    "type": "object",
-    "properties": {
-        "objectClass": {
-            "type": "array",
-            "items": {
-                "type": "string"
-            },
-            "contains": {
-                "const": "ubidPerson"
-            },
-            "description": "New objects of this type must include the 'ubidPerson' objectClass value. Returned entries will include the complete objectClass hierarchy: [top, ubidPerson]"
-        },
-        "audio": {
-            "type": "array",
-            "items": {
-                "type": "string",
-                "format": "Octet String"
-            }
-        },
-        "authPassword": {
-            "type": "array",
-            "items": {
-                "type": "string",
-                "format": "Authentication Password Syntax"
-            },
-            "description": "password authentication information"
-        },
-        "businessCategory": {
-            "type": "array",
-            "items": {
-                "type": "string",
-                "format": "Directory String"
-            }
-        },
-
-        ...
-
-    "additionalProperties": false,
-    "_links": {
-        "self": {
-            "href": "https://ds.example.com/directory/v1/schemas/ubidPerson"
-        },
-        "parent": {
-            "href": "https://ds.example.com/directory/v1/schemas/top"
-        }
-    }
-}
-```
-
----
-
----
-title: Getting Started
-description: Authenticate requests to the PingDirectory REST API with basic auth or OAuth 2.0 bearer tokens, map OAuth scopes to ACIs, and sync PingDirectoryProxy encryption settings.
-component: pingdirectory
-page_id: pingdirectory:directory:getting-started/index
-canonical_url: https://developer.pingidentity.com/pingdirectory/directory/getting-started/index.html
-llms_txt: https://developer.pingidentity.com/pingdirectory/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: 2026-09-14
-section_ids:
-  authentication-types: Authentication types
-  access-control: Access control
-  create-the-request: Create the request
-  request-header: Request header
-  request-body: Request body
----
-
-# Getting Started
-
-Requesters can authenticate using any of two authentication types, and the requester may have either a privileged or unprivileged identity that determines the activity scope.
-
-## Authentication types
-
-The Directory REST API supports the following authentication types:
-
-* **Basic authentication**
-
-  Requests are authenticated using a username and password or an encoded API token contained in the `Authorization` header. The user credentials can be collected interactively from the user, or they can represent the client itself.
-
-  Here is a sample of a request using an API token:
-
-  ```none
-  GET /directory/v1/uid=lindajones,ou=people,dc=example,dc=com HTTP/1.1
-  Authorization: Basic dWlkPXVzZXIuMCxvdT1wZW9wbGUsZGM9ZXhhbXBsZSxkYz1jb206cGFzc3dvcmQ=
-  ```
-
-* **Bearer token**
-
-  Requests are authenticated using an access token contained in the `Authorization` header. The access token is obtained through an authorization server, such as PingFederate. Here is a sample:
-
-  ```none
-  GET /directory/v1/uid=lindajones,ou=people,dc=example,dc=com HTTP/1.1
-  Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtp...
-  ```
-
-  When bearer token authentication is used, the access token used must include a scope that the directory service is configured to accept. Additionally, the directory service may be configured to require that the access token include a specific audience claim.
-
-  |   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-  | - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-  |   | When using a proxied configuration, PingDirectoryProxy can forward OAuth scopes to PingDirectory for REST API requests that use OAuth bearer tokens. For this to work, both the proxy and the target servers must use identical encryption settings definitions.If their settings differ, you must export the definition from the proxy server and import it into the target servers. For more information, refer to [Exporting encryption settings definitions](https://docs.pingidentity.com/pingdirectory/latest/pingdirectory_server_administration_guide/pd_ds_export_encryption_settings_defs.html) and [Importing encryption settings definitions](https://docs.pingidentity.com/pingdirectory/latest/pingdirectory_server_administration_guide/pd_ds_import_encryption_settings_defs.html). |
-
-  You can define ACIs in PingDirectory that map to specific scopes. When users make requests to Directory REST API endpoints using OAuth 2.0 bearer tokens that include configured scopes, PingDirectory can apply the ACIs associated with those scopes and grant the appropriate permissions.
-
-## Access control
-
-To help isolate access to admin credentials in authentication workflows, you can use OAuth scopes to enforce access control instructions (ACIs) for users authenticating to specific Directory REST API endpoints.
-
-Invoking ACIs using OAuth scopes applies to all REST API endpoints except for the following:
-
-* `GET /directory/v1/`
-
-* `GET /directory/v1/schemas`
-
-* `GET /directory/v1/schemas/{schema}`
-
-Making requests to the Directory REST API with a given user is similar to making an LDAP request with the same user and is subject to the same ACI restrictions. Authenticated users can have full or partial access to the Directory service based on the permissions allowed for that user. In other words, scopes are granted dynamically, and are not explicitly stated in the bearer token. The client sending the bearer token in their request is granted permissions by the access token validator at the time of the request.
-
-To enable this feature, define the ACIs to include the desired OAuth scopes. The following example allows all authenticated users with the OAuth scope `example:scope` to perform the Get Password Quality Requirements extended operation:
-
-```none
-(extop="1.3.6.1.4.1.30221.2.6.43")(version 3.0; acl "Extended op permissions for get password quality requirements"; allow (read) oauthscope="example:scope";)
-[source]
-```
-
-Learn more in [Managing the Directory REST API](https://docs.pingidentity.com/pingdirectory/latest/pingdirectory_server_administration_guide/pd_ds_directory_rest_api.html) and [Using OAuth scopes for ACI rules with the REST API](https://docs.pingidentity.com/pingdirectory/latest/pingdirectory_server_administration_guide/pd_ds_use_oauth_scopes_aci_rest_api.html) in the PingDirectory admin guide.
-
-|   |                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
-| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-|   | For security reasons, the PingDirectory REST API never returns the `userPassword` or `authPassword` properties in a response. For example, if you set a user's password using `PUT` with `"userPassword": ["passw0rd"]`, the response does not show the userPassword property or its value. Likewise, if you run a `GET` request with `includeAttribute = userPassword`, the response does not include the `userPassword` property or its value. |
-
-## Create the request
-
-The following information illustrates how to construct a typical API request.
-
-### Request header
-
-The API request header contains the authentication information you must provide to make a call to any Directory REST API resource. The `Authorization` parameter takes the user credentials or the full bearer token as its value, which contains the authorization information needed to access the requested resource.
-
-The following sample shows the API request header (`-H 'Authorization: Bearer`) with a base64url-encoded bearer token as its parameter value.
-
-```none
-curl -X "GET" "https://<server>/directory/v1/{{dn}}" \
-     -H 'Content-Type: application/json' \
-     -H 'Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9...'
-[source]
-```
-
-The request header also shows an additional parameter or note:
-
-* `Content-Type`
-
-  In the header of a `PATCH`, `PUT`, or `POST` request, this parameter identifies the media type of the request data sent to the server. For most Directory API calls, the Content-Type is `application/json`.
-
-### Request body
-
-The API request body for `POST`, `PATCH`, or `PUT` requests provides the attribute values needed to complete the *create* or *update* operation. For example, to update an LDAP entry, the `PUT` operation requires values for the `attr1` and `attr2` attributes in the request body:
-
-```none
-{
-  "attr1": "value1",
-  "attr2": "value2"
-}
-```
-
----
-
----
-title: Hard delete request control
-description: Add the hard delete request control to a Directory REST API delete request to override soft delete policies and permanently remove an entry
-component: pingdirectory
-page_id: pingdirectory:directory:controls/hard-delete-request-control
-canonical_url: https://developer.pingidentity.com/pingdirectory/directory/controls/hard-delete-request-control.html
-llms_txt: https://developer.pingidentity.com/pingdirectory/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: 2026-08-11
----
-
-# Hard delete request control
-
-This control can be included in a [delete request](../directory-entry-apis/delete-an-entry-with-controls.html) to override any soft delete policies and remove the target entry from the server completely. Learn more about soft delete policies in [Soft delete request control](soft-delete-request-control.html).
-
-The following example shows the JSON encoding for the control:
-
-```json
-{
-    "oid":"1.3.6.1.4.1.30221.2.5.22",
-    "control-name":"Hard Delete Request Control",
-    "criticality":true,
-}
-```
-
----
-
----
-title: Ignore NO-USER-MODIFICATION request control
-description: Add the ignore NO-USER-MODIFICATION request control to a Directory REST API add request to set attributes marked NO-USER-MODIFICATION in the schema
-component: pingdirectory
-page_id: pingdirectory:directory:controls/ignore-no-user-modification-request-control
-canonical_url: https://developer.pingidentity.com/pingdirectory/directory/controls/ignore-no-user-modification-request-control.html
-llms_txt: https://developer.pingidentity.com/pingdirectory/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: 2026-08-11
----
-
-# Ignore NO-USER-MODIFICATION request control
-
-The proprietary ignore NO-USER-MODIFICATION request control may be included in an add request to indicate that the server should allow the client to set all of the provided attributes, even if some of the attribute types are defined with the NO-USER-MODIFICATION constraint in the schema. The control has an OID of 1.3.6.1.4.1.30221.2.5.5, and it does not take a value.
-
-The following sample shows the JSON encoding for the control:
-
-```json
-{
-    oid":"1.3.6.1.4.1.30221.2.5.5",
-    "control-name":"Ignore NO-USER-MODIFICATION Request Control",
-    "criticality":false
-}
-```
-
----
-
----
-title: Intermediate client request control
-description: Add the intermediate client request control to a Directory REST API request to pass downstream client information or an alternate authorization identity
-component: pingdirectory
-page_id: pingdirectory:directory:controls/intermediate-client-request-control
-canonical_url: https://developer.pingidentity.com/pingdirectory/directory/controls/intermediate-client-request-control.html
-llms_txt: https://developer.pingidentity.com/pingdirectory/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: 2026-08-11
----
-
-# Intermediate client request control
-
-The proprietary intermediate client request control may be included in any type of request, and may serve a few different purposes:
-
-* It may indicate that the request originated from a downstream client, in which case the control may provide additional information about interaction with that client and any other intermediate systems.
-
-* It indicates that the server should provide information about its processing of the operation (along with information from any other upstream servers) that can be used to correlate information about the processing of the operation across multiple systems.
-
-* It can be used to request that the operation be processed with an alternative authorization identity. In this respect, it is similar to the proxied authorization v1 or v2 request control, except the intermediate client control allows multiple authorization requests to be nested.
-
-The intermediate client request control has an OID of 1.3.6.1.4.1.30221.2.5.2, and it takes a value. The following fields may be present in the `value-json` representation of the value:
-
-* `downstream-request`: An optional JSON object field whose value is the representation of information from a downstream client. If present, the fields that may be included in this JSON object are the same fields that may be included in the `value-json` object of the intermediate client request control (optionally including yet another nested `downstream-request` field).
-
-* `downstream-client-address`: An optional string field whose value is the address of the immediate client from which the request was received. For example, the Directory Proxy Server uses this field to pass the address of the end LDAP client to the backend Directory Server used to process the request.
-
-* `downstream-client-secure`: An optional Boolean field whose value indicates whether communication with the immediate downstream client is using a secure channel. For example, the Directory Proxy Server uses this field to indicate to the backend Directory Server whether the communication between the end LDAP client and the Directory Proxy Server is secure.
-
-* `client-identity`: An optional string field whose value contains the authorization identity of a user under whose authority the operation should be processed. For example, the Directory Proxy Server uses this field to indicate that the operation should be processed using the authorization identity of the end LDAP client rather than as the account the Directory Proxy Server uses to authenticate itself to the backend Directory Server.
-
-* `client-name`: An optional string field whose value contains the name of the application that generated this control. For example, the Directory Proxy Server uses this field to indicate that the request has passed through the Directory Proxy Server.
-
-* `client-session-id`: An optional string field whose value contains an identifier that this client is using to reference the current communication session with a downstream client. For example, the Directory Proxy Server uses this field to hold the connection ID that it has assigned to the connection it is using to communicate with the end LDAP client.
-
-* `client-request-id`: An optional string field whose value contains an identifier that this client is using to reference the current request from a downstream client. For example, the Directory Proxy Server uses this field to hold the operation ID it has assigned to the operation being forwarded to the backend Directory Server.
-
-The following sample shows the JSON encoding for the control:
-
-```json
-{
-    "oid":"1.3.6.1.4.1.30221.2.5.2",
-    "control-name":"Intermediate Client Request Control",
-    "criticality":false,
-    "value-json": {
-        "downstream-client-address":"1.2.3.4",
-        "downstream-client-secure":true,
-        "client-identity":"dn:uid=jdoe,ou=People,dc=example,dc=com",
-        "client-name":"PingDirectoryProxy",
-        "client-session-id":"conn=1234",
-        "client-request-id":"op=56"
-    }
-}
-```
-
----
-
----
-title: Intermediate client response control
-description: Read the intermediate client response control in a Directory REST API response for processing information from the current and upstream servers
-component: pingdirectory
-page_id: pingdirectory:directory:controls/intermediate-client-response-control
-canonical_url: https://developer.pingidentity.com/pingdirectory/directory/controls/intermediate-client-response-control.html
-llms_txt: https://developer.pingidentity.com/pingdirectory/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: 2026-08-11
----
-
-# Intermediate client response control
-
-This control may be included the response to a request that contains an intermediate client request control, and it may be used to provide information about the processing performed by the current server and any upstream servers. The control has an OID of 1.3.6.1.4.1.30221.2.5.2, and it takes a value. The following fields may be present in the `value-json` representation of the value:
-
-* `upstream-response`: An optional JSON object field whose value provides information about processing performed by a server that is upstream from the one with which the client is communicating. If present, the fields of this JSON object are the same as the fields of the `value-json` object (potentially including another nested `upstream-response` object).
-
-* `upstream-server-address`: An optional string field whose value is the address of an upstream server to which the requested operation was forwarded. For example, if the Directory Proxy Server receives a request that contains an intermediate client request control, it will use this field in the intermediate client response control it returns to provide the address of the backend Directory Server to which the operation was forwarded.
-
-* `upstream-server-secure`: An optional Boolean field used to indicate whether communication with an upstream server occurred over a secure communication channel. For example, if the Directory Proxy Server receives a request that contains an intermediate client request control, it will use this field in the intermediate client response control it returns to indicate whether its communication with the backend Directory Server is secure.
-
-* `server-name`: An optional string field whose value is the name of the application used to process the request. For example, the Directory Server uses this field to indicate that the operation was processed by the Directory Server.
-
-* `server-session-id`: An optional string field whose value is an identifier that the server has assigned to the communication session with the downstream client. For example, the Directory Server uses this field to specify the connection ID it has assigned to the client connection.
-
-* `server-response-id`: An optional string whose value is an identifier that the server has assigned to the request from the downstream client. For example, the Directory Server uses this field to specify the operation ID it has assigned to the client request.
-
-The following represents an example JSON encoding for the control:
-
-```json
-{ "oid":"1.3.6.1.4.1.30221.2.5.2",
-  "control-name":"Intermediate Client Response Control",
-  "criticality":false,
-  "value-json":{ "server-name":"PingDirectory",
-                 "server-session-id":"conn=1234",
-                 "server-request-id":"op=56" } }
-```
-
----
-
----
-title: Join request control
-description: Add the join request control to a Directory REST API search request to return related entries alongside each search result entry
-component: pingdirectory
-page_id: pingdirectory:directory:controls/join-request-control
-canonical_url: https://developer.pingidentity.com/pingdirectory/directory/controls/join-request-control.html
-llms_txt: https://developer.pingidentity.com/pingdirectory/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: 2026-08-11
----
-
-# Join request control
-
-The proprietary join request control can be included in a search request to indicate that each search result entry may include a corresponding join result control with information from one or more other entries that are in some way related to (for example, "joined with") that search result entry. The control has an OID of 1.3.6.1.4.1.30221.2.5.9, and it takes a value. The following fields may be present in the `value-json` representation of the value:
-
-* `join-rule`: A mandatory JSON object field that provides the primary criteria to use when selecting entries to be joined with each search result entry. This is described in detail below.
-
-* `base-dn-type`: A mandatory string field that indicates how the server should determine the base DN to use for joined entries. Only entries matching or below the join base DN (and within the join scope) may be joined with search result entries. This field must have one of the following values:
-
-  * `use-search-base-dn` : Indicates that the server should use the base DN from the associated search request as the join base DN.
-
-  * `use-source-entry-dn`: Indicates that the server should use the DN of the associated search result entry as the join base DN.
-
-  * `use-custom-base-dn`: Indicates that the server should use the specific base DN specified in the base-dn-value field as the join base DN.
-
-* `base-dn-value`: An optional string field whose value is the base DN that should be used for joined entries. This field must be present if the `base-dn-type` value is `use-custom-base-dn`; otherwise, it must be absent.
-
-* `scope`: An optional string field whose value is the scope to use for joined entries. If this is not provided, then the scope from the associated search request will be used. Otherwise, it must have one of the following values (which match the allowed searchScope values in the Directory REST API):
-
-  * `baseObject`: Indicates that only the entry specified as the join base DN may be joined with the search result entry.
-
-  * `singleLevel`: Indicates that only entries immediately below the join base DN (but not the join base entry itself, nor any entries more than one level below it) may be joined with the search result entry.
-
-  * `wholeSubtree`: Indicates that the join base entry or any of its subordinates (to any depth) may be joined with the search result entry.
-
-  * `subordinateSubtree`: Indicates that any entries below the join base entry (to any depth), but not the join base entry itself, may be joined with the search result entry.
-
-* `alias-dereferencing-behavior`: An optional string field whose value is the behavior to use when dereferencing any aliases encountered during join processing. Note that while the LDAP version of the join request control does allow this element to be present, the Ping Identity Directory Server does not support aliases, so it has no purpose and should generally be omitted. However, if a value is provided, then its value must be one of "neverDerefAliases", "derefInSearching", "derefInFindingBaseObj", or "derefAlways".
-
-* `size-limit`: An optional integer field that specifies the maximum number of entries that may be joined with any single search result entry. If this is not specified, the size limit from the search request will be used as the join size limit. Note that the server will impose a maximum join size limit of no more than 1000 entries (and possibly smaller than that, based on resource limits in place for the requester), so the server may use a smaller size limit than the one requested by the client.
-
-* `filter`: An optional string field whose value is the string representation of a search filter that entries will be required to match in order to be joined with a search result entry.
-
-* `attributes`: An optional array field whose values are strings that represent the names of the attributes that should be included in joined entries. If this field is not provided, or if its value is an empty array, then the server behaves as if all user attributes and no operational attributes had been requested.
-
-* `require-match`: A mandatory Boolean field that indicates whether a search result entry will be required to be joined with one or more other entries to be included in the set of search results. If this field has a value of `true`, then a search result entry that is not joined with any other entries will not be returned to the client. If this field has a value of `false`, then search result entries that match the original search request criteria may be returned even if they are not joined with any other entries.
-
-* `nested-join`: An optional JSON object field that may be used to specify nested join criteria, in which each joined entry may itself be joined with other entries. If this is specified, then the fields of this JSON object are the same as those that may be used in the `value-json` element (including another `nested-join` field if desired).
-
-The main criteria used to identify entries that should be joined with each search result entry is specified using the join rule. The supported join rule types are:
-
-* `DN Join`: Indicates that the search result entry includes an attribute whose values are the DNs of the entries to be joined with it. If this type of join is to be used, then the `join-rule` JSON object may include the following fields:
-
-  * `type`: A mandatory string field that indicates the join rule type. For a DN join, the value must be "dn".
-
-  * `source-attribute`: A mandatory string field whose value is the name of the attribute in the source entry whose values are the DNs of the entries to be joined with that entry.
-
-* `Reverse DN Join`: Indicates that the entries to be joined with a search result entry include an attribute in which one of the values is the DN of the search result entry. If this type of join is to be used, then the `join-rule` JSON object may include the following fields:
-
-  * `type`: A mandatory string field that indicates the join rule type. For a reverse DN join, the value must be "reverse-dn".
-
-  * `target-attribute`: A mandatory string field whose value is the name of the attribute in the entries to be joined in which one of the values is the DN of the source entry.
-
-* `Equality Join`: Indicates that the entries to be joined with a search result entry must include an attribute with a value that matches the value of a corresponding attribute in the source entry. If this type of join is to be used, then the `join-rule` JSON object may include the following fields:
-
-  * `type`: A mandatory string field that indicates the join rule type. For an equality join, the value must be "equality".
-
-  * `source-attribute`: A mandatory string field whose value is the name of the attribute in the source entry that must have at least one value that matches a value in the target attribute.
-
-  * `target-attribute`: A mandatory string field whose value is the name of the attribute in the entries to be joined that must match at least one value from the source attribute.
-
-  * `match-all`: A mandatory Boolean field that indicates how to handle multi-valued source attributes. If this field has a value of `true`, then an entry will be joined with the source entry only if the target attribute contains all of the values of the source attribute. If it has a value of `false`, then an entry may be joined with the source entry as long as at least one of the values of the source attribute is present in the target attribute.
-
-* `Contains Join`: Indicates that the entries to be joined with a search result entry must include an attribute with a value that contains (or is equal to) a value from a corresponding attribute in the source entry. That is, at least one value from an attribute in the source entry must be a substring of a value of a specified attribute in the target entry. If this type of join is to be used, then the `join-rule` JSON object may include the following fields:
-
-  * `type`: A mandatory string field that indicates the join rule type. For a contains join, the value must be "contains".
-
-  * `source-attribute`: A mandatory string field whose value is the name of the attribute in the source entry that must have at least one value that matches or is a substring of a value in the target attribute.
-
-  * `target-attribute`: A mandatory string field whose value is the name of the attribute in the entries to be joined that must contain at least one value that matches or contains a substring that matches a value from the source entry.
-
-  * `match-all`: A mandatory Boolean field that indicates how to handle multi-valued source attributes. If this field has a value of `true`, then an entry will be joined with the source entry only if the target attribute contains has values in which all of the source attribute values are present as substrings. If this field is absent, or if it is present with a value of `false`, then an entry may be joined with the source entry as long as at least one of the values of the target attribute contains at least one of the values of the source attribute as a substring.
-
-* `AND Join`: Indicates that the entries to be joined with a search result entry must match multiple sets of nested join rules. If this type of join is to be used, then the `join-rule` JSON object may include the following fields:
-
-  * `type`: A mandatory string field that indicates the join rule type. For an AND join, the value must be "and".
-
-  * `rules`: A mandatory, non-empty array field whose values are JSON objects that represent the nested join rules that will all be required to match a given entry for that entry to be joined with the source entry.
-
-* `OR Join`: Indicates that the entries to be joined with a search result entry must match at least one of a given set of nested join rules. If this type of join is to be used, then the `join-rule` JSON object may include the following fields:
-
-  * `type`: A mandatory string field that indicates the join rule type. For an OR join, the value must be "or".
-
-  * `rules`: A mandatory, non-empty array field whose values are JSON objects that represent the nested join rules of which at least one must match a given entry for that entry to be joined with the source entry.
-
-The following sample shows the JSON encoding for the control:
-
-```json
-{
-    "oid":"1.3.6.1.4.1.30221.2.5.9",
-    "control-name":"Join Request Control",
-    "criticality":false,
-    "value-json": {
-        "join-rule": {
-            "type":"dn",
-            "attribute":"manager"
-        },
-        "base-dn-type":"use-custom-base-dn",
-        "base-dn-value":"ou=People,dc=example,dc=com",
-        "scope":"wholeSubtree",
-        "size-limit":10,
-        "attributes": [
-            "givenName",
-            "sn",
-            "cn",
-            "mail"
-        ],
-        "require-match":false
-    }
-}
-```
-
----
-
----
-title: Join result control
-description: Read the join result control returned with a search result entry to get the set of entries joined with it
-component: pingdirectory
-page_id: pingdirectory:directory:controls/join-result-control
-canonical_url: https://developer.pingidentity.com/pingdirectory/directory/controls/join-result-control.html
-llms_txt: https://developer.pingidentity.com/pingdirectory/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: 2026-08-11
----
-
-# Join result control
-
-This control can be included in a search result entry in response to a join request control in order to provide a set of entries that are related to that search result entry. The control has an OID of 1.3.6.1.4.1.30221.2.5.9, and it takes a value. The following fields may be present in the `value-json` representation of the value:
-
-* `result-code`: An integer field whose value is the numeric representation of the LDAP result code for the join processing.
-
-* `matched-dn`: An optional string field that can be used to provide a matched DN for the join processing. If the join base entry does not exist, this may be the closest ancestor to that entry that actually does exist.
-
-* `diagnostic-message`: An optional string field that can be used to provide additional information about the join processing.
-
-* `referral-urls`: An optional array field whose values are strings that represent referral URLs encountered while resolving the join base entry.
-
-* `joined-entries`: An array field whose values are JSON objects that represent entries that were joined with the search result entry. The format of these JSON objects is essentially the same as the format used for search result entries in the Directory REST API, with the string "`_dn`" field used to hold each entry's DN, and a separate string array field for each attribute in the entry. If there are nested join results, then the "`_nested-join-results`" array field may provide a set of JSON objects whose values are the entries joined with that join entry, using the same fields as the joined-entries field (including another "`_nested-join-results`" field, if appropriate).
-
-The following represents an example JSON encoding for the control:
-
-```json
-{ "oid":"1.3.6.1.4.1.30221.2.5.9",
-  "control-name":"Join Result Control",
-  "criticality":false,
-  "value-json":{ "result-code":0,
-                 "joined-entries":[ { "_dn":"uid=jdoe,ou=People,dc=example,dc=com",
-                                      "uid":[ "jdoe" ],
-                                      "givenName":[ "John" ],
-                                      "sn":[ "Doe" ],
-                                      "cn":[ "John Doe" ],
-                                      "mail":[ "jdoe@example.com" ] } ] } }
-```
-
----
-
----
-title: List All Entries
-description: Retrieve a paginated list of entries under a subtree of an entry with a specified search scope using the PingDirectory Directory REST API
-component: pingdirectory
-page_id: pingdirectory:directory:subtree-apis/list-all-entries
-canonical_url: https://developer.pingidentity.com/pingdirectory/directory/subtree-apis/list-all-entries.html
-llms_txt: https://developer.pingidentity.com/pingdirectory/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: 2026-01-02
-section_ids:
-  headers: Headers
-  example-request: Example Request
-  example-response: Example Response
----
-
-# List All Entries
-
-##
-
-```none
-GET {{apiPath}}/directory/v1/{{dn}}/subtree?searchScope=wholeSubtree&limit=100
-```
-
-To retrieve a list of entries under a subtree of an entry, use the `{{dn}}/subtree` endpoint. This endpoint requires the `searchScope` parameter. The supported search scopes are:
-
-* `baseObject`
-
-  Returns only the object directly described by the base DN.
-
-* `singleLevel`
-
-  Returns only the entries that are immediate children of the base entry.
-
-* `wholeSubtree`
-
-  Returns the base entry and all of its descendants.
-
-* `subordinateSubtree`
-
-  Returns the descendants of the base entry, but not the base entry itself.
-
-All list requests are paged. The `limit` parameter specifies the page size. However, the page size can be smaller than requested, either because the server has a configured maximum page size or because you have reached the last page and there are not enough entries to fill the page.
-
-The `next` link enables navigation forward from the current page to the next page. The directory service does not support a `previous` link to move backward from the current page.
-
-The `size` value on the returned object shows the actual number of entries returned in the request.
-
-The sample shows the `GET /directory/v1/{{dn}}/subtree+` operation to return the base entry and all of its descendants.
-
-|   |                                                                                                                                                                                                                                                                                                                                                                                      |
-| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-|   | The `searchScope` parameter value is encoded in the cursor parameter in the next link URL. The search scope does not need to be provided on subsequent requests. This endpoint also accepts the `includeAttributes` and `excludeAttributes` query parameters. For more information about these query parameters, refer to [Get an entry](../directory-entry-apis/get-an-entry.html). |
-
-### Headers
-
-Authorization      Bearer {{accessToken}}
-
-##
-
-### Example Request
-
-* cURL
-
-* C#
-
-* Go
-
-* HTTP
-
-* Java
-
-* jQuery
-
-* NodeJS
-
-* Python
-
-* PHP
-
-* Ruby
-
-* Swift
-
-```shell
-curl --location --globoff '{{apiPath}}/directory/v1/{{dn}}/subtree?searchScope=wholeSubtree&limit=100' \
---header 'Authorization: Bearer {{accessToken}}'
-```
-
-```csharp
-var options = new RestClientOptions("{{apiPath}}/directory/v1/{{dn}}/subtree?searchScope=wholeSubtree&limit=100")
-{
-  MaxTimeout = -1,
-};
-var client = new RestClient(options);
-var request = new RestRequest("", Method.Get);
-request.AddHeader("Authorization", "Bearer {{accessToken}}");
-RestResponse response = await client.ExecuteAsync(request);
-Console.WriteLine(response.Content);
-```
-
-```golang
-package main
-
-import (
-  "fmt"
-  "net/http"
-  "io"
-)
-
-func main() {
-
-  url := "{{apiPath}}/directory/v1/{{dn}}/subtree?searchScope=wholeSubtree&limit=100"
-  method := "GET"
-
-  client := &http.Client {
-  }
-  req, err := http.NewRequest(method, url, nil)
-
-  if err != nil {
-    fmt.Println(err)
-    return
-  }
-  req.Header.Add("Authorization", "Bearer {{accessToken}}")
-
-  res, err := client.Do(req)
-  if err != nil {
-    fmt.Println(err)
-    return
-  }
-  defer res.Body.Close()
-
-  body, err := io.ReadAll(res.Body)
-  if err != nil {
-    fmt.Println(err)
-    return
-  }
-  fmt.Println(string(body))
-}
-```
-
-```http
-GET /directory/v1/{{dn}}/subtree?searchScope=wholeSubtree&limit=100 HTTP/1.1
-Host: {{apiPath}}
-Authorization: Bearer {{accessToken}}
-```
-
-```java
-OkHttpClient client = new OkHttpClient().newBuilder()
-  .build();
-MediaType mediaType = MediaType.parse("text/plain");
-RequestBody body = RequestBody.create(mediaType, "");
-Request request = new Request.Builder()
-  .url("{{apiPath}}/directory/v1/{{dn}}/subtree?searchScope=wholeSubtree&limit=100")
-  .method("GET", body)
-  .addHeader("Authorization", "Bearer {{accessToken}}")
-  .build();
-Response response = client.newCall(request).execute();
-```
-
-```javascript
-var settings = {
-  "url": "{{apiPath}}/directory/v1/{{dn}}/subtree?searchScope=wholeSubtree&limit=100",
-  "method": "GET",
-  "timeout": 0,
-  "headers": {
-    "Authorization": "Bearer {{accessToken}}"
-  },
-};
-
-$.ajax(settings).done(function (response) {
-  console.log(response);
-});
-```
-
-```javascript
-var request = require('request');
-var options = {
-  'method': 'GET',
-  'url': '{{apiPath}}/directory/v1/{{dn}}/subtree?searchScope=wholeSubtree&limit=100',
-  'headers': {
-    'Authorization': 'Bearer {{accessToken}}'
-  }
-};
-request(options, function (error, response) {
-  if (error) throw new Error(error);
-  console.log(response.body);
-});
-```
-
-```python
-import requests
-
-url = "{{apiPath}}/directory/v1/{{dn}}/subtree?searchScope=wholeSubtree&limit=100"
-
-payload = {}
-headers = {
-  'Authorization': 'Bearer {{accessToken}}'
-}
-
-response = requests.request("GET", url, headers=headers, data=payload)
-
-print(response.text)
-```
-
-```php
-<?php
-require_once 'HTTP/Request2.php';
-$request = new HTTP_Request2();
-$request->setUrl('{{apiPath}}/directory/v1/{{dn}}/subtree?searchScope=wholeSubtree&limit=100');
-$request->setMethod(HTTP_Request2::METHOD_GET);
-$request->setConfig(array(
-  'follow_redirects' => TRUE
-));
-$request->setHeader(array(
-  'Authorization' => 'Bearer {{accessToken}}'
-));
-try {
-  $response = $request->send();
-  if ($response->getStatus() == 200) {
-    echo $response->getBody();
-  }
-  else {
-    echo 'Unexpected HTTP status: ' . $response->getStatus() . ' ' .
-    $response->getReasonPhrase();
-  }
-}
-catch(HTTP_Request2_Exception $e) {
-  echo 'Error: ' . $e->getMessage();
-}
-```
-
-```ruby
-require "uri"
-require "net/http"
-
-url = URI("{{apiPath}}/directory/v1/{{dn}}/subtree?searchScope=wholeSubtree&limit=100")
-
-http = Net::HTTP.new(url.host, url.port);
-request = Net::HTTP::Get.new(url)
-request["Authorization"] = "Bearer {{accessToken}}"
-
-response = http.request(request)
-puts response.read_body
-```
-
-```swift
-var request = URLRequest(url: URL(string: "{{apiPath}}/directory/v1/{{dn}}/subtree?searchScope=wholeSubtree&limit=100")!,timeoutInterval: Double.infinity)
-request.addValue("Bearer {{accessToken}}", forHTTPHeaderField: "Authorization")
-
-request.httpMethod = "GET"
-
-let task = URLSession.shared.dataTask(with: request) { data, response, error in
-  guard let data = data else {
-    print(String(describing: error))
-    return
-  }
-  print(String(data: data, encoding: .utf8)!)
-}
-
-task.resume()
-```
-
-### Example Response
-
-200 OK
-
-```json
-{
-  "size": 100,
-  "_embedded": {
-    "entries": [
-      {
-        "_dn": "uid=lindajones,ou=people,dc=example,dc=com",
-        "objectClass": [ "top", "person", "organizationalPerson", "inetOrgPerson" ],
-        "uid": ["lindajones"],
-        "cn": ["Linda Jones"],
-        "sn": ["Jones"],
-        "_links": {
-          "schemas": [
-            {
-              "href": "https://ds.example.com/directory/v1/schemas/inetOrgPerson"
-            }
-          ],
-          "self": {
-            "href": "https://ds.example.com/directory/v1/uid=lindajones,ou=people,dc=example,dc=com"
-          }
-        }
-      },
-
-      ... 99 more entries ...
-
-    ]
-  },
-  "_links": {
-    "self": {
-      "href": "https://ds.example.com/directory/v1/ou=people,dc=example,dc=com/subtree?searchScope=wholeSubtree&limit=100"
-    },
-    "next": {
-      "href": "https://ds.example.com/directory/v1/ou=people,dc=example,dc=com/subtree?limit=100&cursor=eyJjb29raWUiOiJ1c2VyMTAiLCJmaWx0ZXIiOiIiLCJzY29wZSI6Indob2xlU3VidHJlZSJ9"
-    }
-  }
-}
-```
-
----
-
----
-title: List All Entries (Filter Entries)
-description: Filter subtree search results using a SCIM filter parameter with the PingDirectory Directory REST API
-component: pingdirectory
-page_id: pingdirectory:directory:subtree-apis/list-all-entries-filter-entries
-canonical_url: https://developer.pingidentity.com/pingdirectory/directory/subtree-apis/list-all-entries-filter-entries.html
-llms_txt: https://developer.pingidentity.com/pingdirectory/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: 2026-01-02
-section_ids:
-  headers: Headers
-  example-request: Example Request
-  example-response: Example Response
----
-
-# List All Entries (Filter Entries)
-
-##
-
-```none
-GET {{apiPath}}/directory/v1/{{dn}}/subtree?searchScope%3DwholeSubtree%26filter%3DobjectClass%20eq%20%22person%22%20and%20sn%20eq%20%22Jones%22
-```
-
-The `GET /directory/v1/{{dn}}/subtree` endpoint supports a SCIM filtering parameter to limit the returned result set to those entries meeting the specified criteria. For example, the request below uses the filter `objectClass eq "person" and sn eq "Jones"` to search for all people with the last name of `Jones`.
-
-```none
-curl -X "GET" "https://ds.example.com/directory/v1/ou=people,dc=example,dc=com/subtree?searchScope=wholeSubtree&filter=objectClass%20eq%20%22person%22%20and%20sn%20eq%20%22Jones%22" \
--H 'Content-type: application/json' \
--H 'Authorization: Bearer accessToken'
-```
-
-In the Authorization request header field, the `accessToken` value is your full base64url-encoded JSON web token generated by the authentication service.
-
-Filtering is done before pagination of the response data. The filter parameter is encoded into the `cursor` pagination parameter; it only needs to be provided in the first request.
-
-For more information about filtering, refer to [Conventions](../conventions.html).
-
-### Headers
-
-Authorization      Bearer {{accessToken}}
-
-##
-
-### Example Request
-
-* cURL
-
-* C#
-
-* Go
-
-* HTTP
-
-* Java
-
-* jQuery
-
-* NodeJS
-
-* Python
-
-* PHP
-
-* Ruby
-
-* Swift
-
-```shell
-curl --location --globoff '{{apiPath}}/directory/v1/{{dn}}/subtree?searchScope%3DwholeSubtree%26filter%3DobjectClass%20eq%20%22person%22%20and%20sn%20eq%20%22Jones%22=' \
---header 'Authorization: Bearer {{accessToken}}'
-```
-
-```csharp
-var options = new RestClientOptions("{{apiPath}}/directory/v1/{{dn}}/subtree?searchScope%3DwholeSubtree%26filter%3DobjectClass%20eq%20%22person%22%20and%20sn%20eq%20%22Jones%22=")
-{
-  MaxTimeout = -1,
-};
-var client = new RestClient(options);
-var request = new RestRequest("", Method.Get);
-request.AddHeader("Authorization", "Bearer {{accessToken}}");
-RestResponse response = await client.ExecuteAsync(request);
-Console.WriteLine(response.Content);
-```
-
-```golang
-package main
-
-import (
-  "fmt"
-  "net/http"
-  "io"
-)
-
-func main() {
-
-  url := "{{apiPath}}/directory/v1/{{dn}}/subtree?searchScope%3DwholeSubtree%26filter%3DobjectClass%20eq%20%22person%22%20and%20sn%20eq%20%22Jones%22="
-  method := "GET"
-
-  client := &http.Client {
-  }
-  req, err := http.NewRequest(method, url, nil)
-
-  if err != nil {
-    fmt.Println(err)
-    return
-  }
-  req.Header.Add("Authorization", "Bearer {{accessToken}}")
-
-  res, err := client.Do(req)
-  if err != nil {
-    fmt.Println(err)
-    return
-  }
-  defer res.Body.Close()
-
-  body, err := io.ReadAll(res.Body)
-  if err != nil {
-    fmt.Println(err)
-    return
-  }
-  fmt.Println(string(body))
-}
-```
-
-```http
-GET /directory/v1/{{dn}}/subtree?searchScope%3DwholeSubtree%26filter%3DobjectClass%20eq%20%22person%22%20and%20sn%20eq%20%22Jones%22= HTTP/1.1
-Host: {{apiPath}}
-Authorization: Bearer {{accessToken}}
-```
-
-```java
-OkHttpClient client = new OkHttpClient().newBuilder()
-  .build();
-MediaType mediaType = MediaType.parse("text/plain");
-RequestBody body = RequestBody.create(mediaType, "");
-Request request = new Request.Builder()
-  .url("{{apiPath}}/directory/v1/{{dn}}/subtree?searchScope%3DwholeSubtree%26filter%3DobjectClass%20eq%20%22person%22%20and%20sn%20eq%20%22Jones%22=")
-  .method("GET", body)
-  .addHeader("Authorization", "Bearer {{accessToken}}")
-  .build();
-Response response = client.newCall(request).execute();
-```
-
-```javascript
-var settings = {
-  "url": "{{apiPath}}/directory/v1/{{dn}}/subtree?searchScope%3DwholeSubtree%26filter%3DobjectClass%20eq%20%22person%22%20and%20sn%20eq%20%22Jones%22=",
-  "method": "GET",
-  "timeout": 0,
-  "headers": {
-    "Authorization": "Bearer {{accessToken}}"
-  },
-};
-
-$.ajax(settings).done(function (response) {
-  console.log(response);
-});
-```
-
-```javascript
-var request = require('request');
-var options = {
-  'method': 'GET',
-  'url': '{{apiPath}}/directory/v1/{{dn}}/subtree?searchScope%3DwholeSubtree%26filter%3DobjectClass%20eq%20%22person%22%20and%20sn%20eq%20%22Jones%22=',
-  'headers': {
-    'Authorization': 'Bearer {{accessToken}}'
-  }
-};
-request(options, function (error, response) {
-  if (error) throw new Error(error);
-  console.log(response.body);
-});
-```
-
-```python
-import requests
-
-url = "{{apiPath}}/directory/v1/{{dn}}/subtree?searchScope%3DwholeSubtree%26filter%3DobjectClass%20eq%20%22person%22%20and%20sn%20eq%20%22Jones%22="
-
-payload = {}
-headers = {
-  'Authorization': 'Bearer {{accessToken}}'
-}
-
-response = requests.request("GET", url, headers=headers, data=payload)
-
-print(response.text)
-```
-
-```php
-<?php
-require_once 'HTTP/Request2.php';
-$request = new HTTP_Request2();
-$request->setUrl('{{apiPath}}/directory/v1/{{dn}}/subtree?searchScope%3DwholeSubtree%26filter%3DobjectClass%20eq%20%22person%22%20and%20sn%20eq%20%22Jones%22=');
-$request->setMethod(HTTP_Request2::METHOD_GET);
-$request->setConfig(array(
-  'follow_redirects' => TRUE
-));
-$request->setHeader(array(
-  'Authorization' => 'Bearer {{accessToken}}'
-));
-try {
-  $response = $request->send();
-  if ($response->getStatus() == 200) {
-    echo $response->getBody();
-  }
-  else {
-    echo 'Unexpected HTTP status: ' . $response->getStatus() . ' ' .
-    $response->getReasonPhrase();
-  }
-}
-catch(HTTP_Request2_Exception $e) {
-  echo 'Error: ' . $e->getMessage();
-}
-```
-
-```ruby
-require "uri"
-require "net/http"
-
-url = URI("{{apiPath}}/directory/v1/{{dn}}/subtree?searchScope%3DwholeSubtree%26filter%3DobjectClass%20eq%20%22person%22%20and%20sn%20eq%20%22Jones%22=")
-
-http = Net::HTTP.new(url.host, url.port);
-request = Net::HTTP::Get.new(url)
-request["Authorization"] = "Bearer {{accessToken}}"
-
-response = http.request(request)
-puts response.read_body
-```
-
-```swift
-var request = URLRequest(url: URL(string: "{{apiPath}}/directory/v1/{{dn}}/subtree?searchScope%3DwholeSubtree%26filter%3DobjectClass%20eq%20%22person%22%20and%20sn%20eq%20%22Jones%22=")!,timeoutInterval: Double.infinity)
-request.addValue("Bearer {{accessToken}}", forHTTPHeaderField: "Authorization")
-
-request.httpMethod = "GET"
-
-let task = URLSession.shared.dataTask(with: request) { data, response, error in
-  guard let data = data else {
-    print(String(describing: error))
-    return
-  }
-  print(String(data: data, encoding: .utf8)!)
-}
-
-task.resume()
-```
-
-### Example Response
-
-200 OK
-
-```json
-{
-    "_links": {
-        "self": {
-            "href": "https://ds.example.com/directory/v1/ou=people,dc=example,dc=com/subtree?searchScope=wholeSubtree&ldapFilter=objectClass%20eq%20%22person%22%20and%20sn%20eq%20%22Jones%22"
-        }
-    },
-    "size": 1,
-    "_embedded": {
-        "entries": [
-            {
-                "_dn": "uid=lindajones,ou=people,dc=example,dc=com",
-                "objectClass": [
-                    "top",
-                    "person",
-                    "organizationalPerson",
-                    "inetOrgPerson"
-                ],
-                "uid": [
-                    "lindajones"
-                ],
-                "cn": [
-                    "Linda Jones"
-                ],
-                "sn": [
-                    "Jones"
-                ],
-                "_links": {
-                    "schemas": [
-                        {
-                            "href": "https://ds.example.com/directory/v1/schemas/inetOrgPerson"
-                        }
-                    ],
-                    "self": {
-                        "href": "https://ds.example.com/directory/v1/uid=lindajones,ou=people,dc=example,dc=com"
-                    }
-                }
-            }
-        ]
+    "resultCode": {
+        "value": 0,
+        "name": "success"
     }
 }
 ```

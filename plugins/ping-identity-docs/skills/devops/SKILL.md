@@ -33,10 +33,10 @@ Explains how to build a PingFederate server profile from a running deployment us
 | Deployment: deploy, kubernetes, cluster | deployment | https://developer.pingidentity.com/devops/deployment/*.md | references/snapshots/deployment.md |
 | Reference: product, container, learn | reference | https://developer.pingidentity.com/devops/reference/*.md | references/snapshots/reference.md |
 | Home: devops, identity, content | home | https://developer.pingidentity.com/devops/home/*.md | references/snapshots/home.md |
-| Get Started: deploy, example, stack | get-started | https://developer.pingidentity.com/devops/get-started/*.md | live-only |
-| Contact Us: community, devops, identity | contact-us | https://developer.pingidentity.com/devops/contact-us/*.md | live-only |
-| Docker Builds: docker, builds, image | docker-builds | https://developer.pingidentity.com/devops/docker-builds/*.md | live-only |
-| Devops Landing Page.Md: devops, identity, configuration | devops-landing-page.md | https://developer.pingidentity.com/devops/devops-landing-page.md | live-only |
+| Get Started: deploy, example, stack | get-started | https://developer.pingidentity.com/devops/get-started/*.md | references/snapshots/get-started.md |
+| Contact Us: community, devops, identity | contact-us | https://developer.pingidentity.com/devops/contact-us/*.md | references/snapshots/contact-us.md |
+| Docker Builds: docker, builds, image | docker-builds | https://developer.pingidentity.com/devops/docker-builds/*.md | references/snapshots/docker-builds.md |
+| Devops Landing Page.Md: devops, identity, configuration | devops-landing-page.md | https://developer.pingidentity.com/devops/devops-landing-page.md | references/snapshots/devops-landing-page-md.md |
 | Overview.Md: overview, configuration, deployment | overview.md | https://developer.pingidentity.com/devops/overview.md | references/snapshots/overview-md.md |
 | Readme.Md: configuration, covering, deployment | README.md | https://developer.pingidentity.com/devops/README.md | references/snapshots/readme-md.md |
 

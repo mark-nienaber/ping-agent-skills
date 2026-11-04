@@ -2147,6 +2147,515 @@ Perform the following steps to configure journey session allowlisting:
 ---
 
 ---
+title: Key aliases and passwords
+description: Create and manage key aliases and passwords for PingAM keystores, including creating new key aliases, copying keys between keystores, and changing key and keystore passwords
+component: pingam
+version: 8.1
+page_id: pingam:security:configuring-keys
+canonical_url: https://docs.pingidentity.com/pingam/8.1/security/configuring-keys.html
+llms_txt: https://docs.pingidentity.com/pingam/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-10-09T12:30:49Z
+keywords: ["Security", "Setup &amp; Configuration"]
+page_aliases: ["security-guide:configuring-keys.adoc"]
+section_ids:
+  creating-new-keys: Create key aliases
+  create-signing-keys-new-keystore: Create a keystore and key aliases for keystore-type secret stores
+  key-usage-requirements: The keyUsage extension
+  create-signing-keys: Create key aliases in an existing keystore
+  changing-uss-keys: Create self-service key aliases
+  keys-copying: Copy key aliases between keystores
+  changing-key-passwords: Change key alias passwords
+  changing-keystore-password: Change keystore passwords
+---
+
+# Key aliases and passwords
+
+You might need to create new key aliases because you're using additional AM features, or because you're installing a new environment. In either case, consider these points:
+
+* First, review the list of AM features to understand which features use the AM keystore and which ones don't.
+
+  Find more information in [AM features that use keys](features-with-keys.html).
+
+* Avoid sharing certificates between features when possible, even if this means you must configure multiple different keystores or secret stores.
+
+* Make sure keystores, key aliases, and certificates are maintained on every instance; in a site environment, every instance has its own keystore files.
+
+* Make sure keystores and secret stores are in the same location across all instances in the site.
+
+The following table lists the tasks related to managing key aliases in your environment:
+
+| Task                                                                                                                                                                                                                                                                                              | Resources                                                |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------- |
+| Create a new key alias in an existing keystore or in a new keystore.	A suitable certificate must exist in the keystore before you map secrets to that keystore. If you change the default mapping before installing the required certificates, the features that require those secrets will fail. | [Create key aliases](#creating-new-keys)                 |
+| Copy key aliases between keystores; for example, when configuring IDM's provisioning.                                                                                                                                                                                                             | [Copy key aliases between keystores](#keys-copying)      |
+| Change key alias passwords.                                                                                                                                                                                                                                                                       | [Change key alias passwords](#changing-key-passwords)    |
+| Change keystore passwords.                                                                                                                                                                                                                                                                        | [Change keystore passwords](#changing-keystore-password) |
+
+## Create key aliases
+
+Several AM features require key aliases for signing and encryption. AM provides default key aliases for all features.
+
+|   |                                                                                                  |
+| - | ------------------------------------------------------------------------------------------------ |
+|   | Don't use the default key aliases, keys, keystores, or secret stores in production environments. |
+
+You can create key aliases in a new keystore that will be configured later as the AM keystore, or you can create key aliases in the existing AM keystore:
+
+* [Create a keystore and key aliases for keystore-type secret stores](#create-signing-keys-new-keystore)
+
+* [Create key aliases in an existing keystore](#create-signing-keys)
+
+* [Create self-service key aliases](#changing-uss-keys)
+
+### Create a keystore and key aliases for keystore-type secret stores
+
+These instructions are for keystore-type secret stores. Find information on creating a new AM keystore in [The AM keystore](am-keystore.html).
+
+1. Obtain a new key from your certificate authority and add it to a new keystore, or generate a self-signed key in a new keystore.
+
+   |   |                                                                                                                                                                                                                                |
+   | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+   |   | A suitable certificate must exist in the keystore *before* you map secrets to that keystore. If you change the default mapping before installing the required certificates, the features that require those secrets will fail. |
+
+   This example creates an asymmetric key pair and self-signed certificate, with alias `newkey` in a new keystore file named `keystoreA.jceks`. The RSA algorithm is used to generate the key pair.
+
+   |   |                                                                             |
+   | - | --------------------------------------------------------------------------- |
+   |   | In production environments you should use the strongest possible algorithm. |
+
+   ```bash
+   $ cd /path/to/am/security/keystores/
+   $ keytool \
+   -genkeypair \
+   -alias newkey \
+   -keyalg RSA \
+   -keysize 2048 \
+   -validity 730 \
+   -storetype JCEKS \
+   -dname 'CN=newkey' \
+   -keystore keystoreA.jceks
+   Enter keystore password:
+   Reenter new password:
+   Enter key password for <newkey> (RETURN if same as keystore password):
+   Reenter new password:
+   ```
+
+   Take note of the passwords. You need to make them available within another secret store; for example, by using a file system volume secret store, as shown below:
+
+   * Go to the directory that the filesystem volume secret store will point to.
+
+     For example, `/path/to/am/security/secrets/mydir`.
+
+     You can use different methods to encode the content of the files. Consider creating a directory for each encoding method you plan to use.
+
+   * Create two files, one for the keystore password, and another for the password of the keys inside the keystore.
+
+     The files will contain the encoded passwords expected by the file system secret volume store.
+
+     For example, if you chose `Base64 encoded` as the encoding, you must base64-encode the passwords, and then add them to their respective files.
+
+     For example:
+
+     ```bash
+     $ echo -n bmV3c3RvcmVwYXNzd29yZA== > keystoreA_storepass
+     $ echo -n bmV3a2V5cGFzc3dvcmQ= > keystoreA_keypass
+     ```
+
+     |   |                                                                                                                                                                                                         |
+     | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+     |   | Use `echo -n` to avoid inserting hidden trailing newline characters. Even if the `keytool` command is able to use the password in the file, AM may not be able to open the keystore or the key aliases. |
+
+   * Make sure the password files have read-only permission for their owner.
+
+     For example:
+
+     ```bash
+     $ chmod 400 keystoreA_storepass
+     $ chmod 400 keystoreA_keypass
+     ```
+
+2. Create any other keys and keystores required by your environment by repeating the steps in this procedure and/or following the steps in [Create key aliases in an existing keystore](#create-signing-keys).
+
+3. Ensure that password files and keystores are maintained on every instance in your environment. Every AM instance has its own keystores and password files.
+
+4. Configure the keystore in a keystore-type secret store.
+
+   See [Keystore secret stores](secret-stores.html#keystores-secret-store).
+
+   To configure the file system secret store too, see [File system secret volumes](secret-stores.html#file-system-secret-volumes).
+
+#### The `keyUsage` extension
+
+When AM retrieves a key from a secret store, it checks the certificate's `keyUsage` extension to verify the key is permitted for the intended purpose:
+
+* Keys used for **signing** must have `digitalSignature` in their `keyUsage` extension.
+
+* Keys used for **encryption** must have `dataEncipherment` in their `keyUsage` extension.
+
+* The `keyEncipherment` extension is used for encrypting other cryptographic keys or secrets during key transport or key wrapping.
+
+If the `keyUsage` extension is present but doesn't include the required usage, AM rejects the key and the operation fails. If you've enabled [debug logging](../monitoring/debug-logging.html), you'll see a message similar to the following in the logs:
+
+```none
+Constraint allowedKeyUsage=[sign] for purpose Purpose{...} is not satisfied by secret SigningKey{...keyUsages=[wrap key, unwrap key]}
+```
+
+Certificates **without** a `keyUsage` extension aren't restricted and can be used for any purpose.
+
+To avoid this issue, either omit the `keyUsage` extension from your certificates, or ensure the extension includes the correct values for the intended use.
+
+> **Collapse: Default keyUsage requirements for AM features**
+>
+> | Feature                                 | Purpose                             | Accepted `keyUsage`                                                                                                                             |
+> | --------------------------------------- | ----------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+> | OAuth 2.0 / OIDC token signing          | Signing                             | `digitalSignature`                                                                                                                              |
+> | OAuth 2.0 / OIDC token encryption (JWE) | Key transport / key agreement       | `keyEncipherment` (RSA-based `alg`, e.g. `RSA-OAEP-256`); `keyAgreement` (ECDH-ES variants); not applicable for symmetric `alg` (`dir`, `A*KW`) |
+> | SAML 2.0 assertion signing              | Signing                             | `digitalSignature`                                                                                                                              |
+> | SAML 2.0 assertion encryption           | Key transport                       | `keyEncipherment`                                                                                                                               |
+> | Client-side session signing             | Signing                             | `digitalSignature`                                                                                                                              |
+> | Client-side session encryption          | Key transport (or symmetric)        | `keyEncipherment` when an RSA key is configured; not applicable when a symmetric AES key is used (default)                                      |
+> | Remote Consent signing                  | Signing                             | `digitalSignature`                                                                                                                              |
+> | Remote Consent encryption               | Key transport / key agreement       | `keyEncipherment` (RSA-based, default `RSA-OAEP-256`); `keyAgreement` (ECDH-ES)                                                                 |
+> | Self-service token signing              | Signing                             | `digitalSignature`                                                                                                                              |
+> | Self-service token encryption           | Key transport / key agreement       | `keyEncipherment` (RSA-based); `keyAgreement` (ECDH-ES); not applicable when a symmetric key is used                                            |
+> | Persistent cookie node signing          | Signing                             | `digitalSignature`                                                                                                                              |
+> | Persistent cookie node encryption       | Symmetric (default) / key transport | Not applicable for the default symmetric AES key; `keyEncipherment` if an RSA key is configured                                                 |
+
+|   |                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| - | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | AM-issued JWEs and SAML 2.0 encrypted assertions both rely on asymmetric **key transport** (RSA) or **key agreement** (ECDH), never on direct public-key data encryption. Certificates therefore need `keyEncipherment` for RSA-based algorithms (`RSA1_5`, `RSA-OAEP`, `RSA-OAEP-256`) and `keyAgreement` for ECDH-ES variants. For symmetric keys stored with an associated certificate, `dataEncipherment` satisfies the encryption constraint. |
+
+### Create key aliases in an existing keystore
+
+Perform the following steps to create new key aliases in an existing keystore. For example, the AM keystore:
+
+1. Change directories to the keystore location, for example, `/path/to/am/security/keystores/`.
+
+2. Acquire a new key from your certificate authority, or generate a new self-signed key.
+
+   When you create or import a new key, the `keytool` command adds the new alias to the specified keystore if it exists, or creates a new keystore if it does not exist.
+
+   This example creates a self-signed key alias in the AM keystore, `am_keystore.jceks`, with a new asymmetric RSA key alias called `mynewkey`.
+
+   Note than in production environments you should use the strongest algorithm you can use.
+
+   ```bash
+   $ cd /path/to/am/security/keystores/
+   $ keytool \
+   -genkeypair \
+   -alias mynewkey \
+   -keyalg RSA \
+   -keysize 2048 \
+   -validity 730 \
+   -storetype JCEKS \
+   -dname 'CN=mynewkey' \
+   -keystore am_keystore.jceks
+   Enter keystore password: Enter the password in the .keystore_storepass file.
+   Enter key password for <mynewkey> (RETURN if same as keystore password): Enter the password in the .keystore_keypass file.
+   Reenter new password: Enter the password in the .keystore_keypass file.
+   ```
+
+   Remember:
+
+   * The contents of the password files of the AM keystore are in cleartext.
+
+   * The contents of the password files in a file system volume secret store are *not* in cleartext by default. This means that you need to decode them before you can use them in the `keytool` command.
+
+3. Ensure that password files and keystores are maintained on every instance in your environment.
+
+   Every AM instance has its own keystores and password files.
+
+4. (AM keystore) Restart the AM instances affected by the configuration changes to use the new key aliases.
+
+5. Configure the new key aliases in AM.
+
+   For a list of features that use key aliases and links to their relevant sections, see [AM features that use keys](features-with-keys.html).
+
+### Create self-service key aliases
+
+User self-service requires a key pair for encryption and a signing secret key to be available in the AM keystore before configuring any of its features. Follow the steps in this procedure to create new key aliases for the user self-service features in the AM keystore:
+
+1. Acquire a new key from your certificate authority, or generate new self-signed keys.
+
+   The password of the new keys for the user self-service features must match the passwords of those keys already present in the keystore, and configured in the `/path/to/am/security/secrets/default/.am_keystore_keypass` file.
+
+   This example generates a self-signed key for encryption and a new signing secret key in the `am_keystore.jceks` keystore, but you could also import CA-provided keys to the keystore.
+
+   * Create the new self-signed encryption key alias:
+
+     ```bash
+     $ cd /path/to/am/security/keystores/
+     $ keytool \
+     -genkeypair \
+     -alias newenckey \
+     -keyalg RSA \
+     -keysize 2048 \
+     -validity 730 \
+     -storetype JCEKS \
+     -dname 'CN=newenckey' \
+     -keystore am_keystore.jceks
+     Enter keystore password: Enter the password in the .am_keystore_storepass file.
+     Enter key password for <newenckey> (RETURN if same as keystore password): Enter the password in the .am_keystore_keypass file.
+     Reenter new password: Enter the password in the .am_keystore_keypass file.
+     ```
+
+   * Create the new signing secret key alias:
+
+     ```bash
+     $ cd /path/to/am/security/keystores/
+     $ keytool \
+     -genseckey \
+     -alias newsigkey \
+     -keyalg HmacSHA256 \
+     -keysize 256 \
+     -storetype JCEKS \
+     -keystore am_keystore.jceks
+     Enter keystore password: Enter the password in the .am_keystore_storepass file.
+     Enter key password for <newsigkey> (RETURN if same as keystore password): Enter the password in the .am_keystore_keypass file.
+     Reenter new password: Enter the password in the .am_keystore_keypass file.
+     ```
+
+2. Ensure that password files and keystores are maintained on every instance in your environment.
+
+   Every AM instance has its own keystores and password files.
+
+3. Restart the AM instances affected by the configuration changes.
+
+4. Configure user self-service to use the new keys.
+
+   For instructions, see [Create a user self-service instance](../user-self-service/configuring-uss.html#create-uss-service).
+
+## Copy key aliases between keystores
+
+Some AM features require access to the key aliases used by other components of the Ping Advanced Identity Software. For example, the IDM Provisioning feature requires access to the key aliases that IDM uses to sign and encrypt data.
+
+This section covers copying key aliases from the keystore of a Ping Advanced Identity Software component to AM's default keystore.
+
+1. Use the `keytool` command to export the required key from the source keystore into a temporary keystore:
+
+   ```bash
+   $ keytool -importkeystore -srcstoretype jceks -srcalias "myKeyAlias" \
+   -deststoretype jceks -destalias "myKeyAlias" \
+   -srckeystore "/path/to/openidm/security/keystore.jceks" \
+   -destkeystore "/path/to/openidm/security/temp_keystore.jceks" \
+   -srckeypass "changeit" \
+   -srcstorepass "changeit" \
+   -destkeypass "myT3mPK3yP4ssword" \
+   -deststorepass "myT3mPK3yP4ssword"
+   ```
+
+   This command exports the `myKeyAlias` key alias, specified by the `srcalias` argument, to a temporary keystore file `/path/to/openidm/security/temp_keystore.jceks`. The store and key password is set to `myT3mPK3yP4ssword`. You need to use the temporary passwords when importing to the AM instance.
+
+2. Move the temporary keystore file created in the previous step, in this example `temp_keystore.jceks`, to the filesystem of the target AM server.
+
+3. On the target AM server, import the key alias into the AM keystore:
+
+   ```bash
+   $ keytool -importkeystore -srcstoretype jceks -srcalias "myKeyAlias" \
+   -deststoretype jceks -destalias "myKeyAlias" \
+   -srckeystore "/path/to/am/security/keystores/temp_keystore.jceks" \
+   -destkeystore "/path/to/am/security/keystores/am_keystore.jceks" \
+   -srckeypass "myT3mPK3yP4ssword" \
+   -srcstorepass "myT3mPK3yP4ssword" \
+   -destkeypass:file "/path/to/am/security/secrets/default/.am_keystore_keypass" \
+   -deststorepass:file "/path/to/am/security/secrets/default/.am_keystore_storepass"
+   ```
+
+   This command imports the key alias from the temporary `temp_keystore.jceks` keystore file, which was copied from the IDM instance, into the AM keystore. The command also sets the passwords to match those used by the default AM keystore.
+
+4. Repeat the previous steps to copy any additional key aliases from the source keystore to the destination keystore.
+
+5. Restart the AM instance for the key change to take effect.
+
+   The AM instance will now be able to correctly encrypt, decrypt, sign or verify data and share it with the source Ping Advanced Identity Software component.
+
+## Change key alias passwords
+
+Decrypting a key alias in a keystore requires a password. This password is initially specified when you generate the key, or when you import the key into a keystore, but you might need to update the password at a later time.
+
+1. Back up your keystore and password files.
+
+2. Depending on the location of the key alias whose password you are changing, perform one of the following steps:
+
+   1. To change the password that opens the **AM keystore**:
+
+      Replace the old password in the `.am_keystore_keypass` file with the new one:
+
+      ```bash
+      $ echo -n newpassword > /path/to/am/security/secrets/default/.am_keystore_keypass
+      ```
+
+      |   |                                                                                                                                                                                                                                                        |
+      | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+      |   | Use `echo -n` to avoid inserting hidden trailing newline characters. Even if the `keytool` command can use the password in the file, AM may not be able to use the key aliases if there are hidden, trailing, newline characters in the password file. |
+
+   2. To change the password that opens a **secret store**:
+
+      Replace the old password in the secret containing it with the new one. If the secret is a file in a file system volume secret store, ensure that the new password is encoded appropriately.
+
+      For example, for base64-encoded passwords, use the following command:
+
+      ```bash
+      $ echo -n bmV3a2V5cGFzc3dvcmQ= > keystoreA_keypass
+      ```
+
+   3. To change a password value used to decrypt a **PEM-formatted secret**:
+
+      Encode the new password using the https\://am.example.com:8443/am/encode.jsp page, and write the result to a file system secret or environment variable that uses the `am.global.services.secrets.pem.decryption` secret label:
+
+      * File system secret
+
+      * Environment variable
+
+      ```bash
+      $ echo -n AQICmX1ntZv3XETMgDo+0zFynC8UMGJgop+K > am.global.services.secrets.pem.decryption
+      ```
+
+      ```bash
+      $ export AM_GLOBAL_SERVICES_SECRET_PEM_DECRYPTION=AQICmX1ntZv3XETMgDo+0zFynC8UMGJgop+K
+      ```
+
+3. Depending on the location of the secret, perform one of the following steps to update the secret's password to match the value you configured in the previous step:
+
+   1. To change the password of key aliases in the **AM Keystore**:
+
+      Use the `keytool` command to change the password of each of the key aliases, for example:
+
+      ```bash
+      $ keytool -keypasswd -storetype JCEKS -keystore /path/to/am/security/keystores/am_keystore.jceks -alias mykey
+      Enter keystore password: Enter the password in the .am_keystore_storepass file
+      New key password for <mykey> Enter the password in the .am_keystore_keypass file
+      Re-enter new key password for <mykey> Enter the password in the .am_keystore_keypass file
+      ```
+
+      Remember to change the password of the `configstorepwd` alias. If you don't do this, you won't be able to start AM.
+
+      |   |                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+      | - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+      |   | * You can use the `keytool` command to list the keys and password strings in the AM keystore. For example:
+
+        ```bash
+        $ keytool -list -storetype JCEKS -keystore /path/to/am/security/keystores/am_keystore.jceks
+        ```
+
+      * If you store the configuration store password in a [BCFKS keystore](fips.html#manage-bcfks-keystores), the alias appears as `configStorePwd` in the keystore. Aliases in BCFKS keystores are case-sensitive. |
+
+   2. To change the password of key aliases in a **secret store**:
+
+      Use the `keytool` command to change the password of each key alias, for example:
+
+      ```bash
+      $ keytool -keypasswd -storetype JCEKS -keystore /path/to/am/security/keystores/keystoreA.jceks -alias mykey
+      Enter keystore password: Enter the password in the keystoreA_storepass file
+      New key password for <mykey> Enter the password in the keystoreA_keypass file
+      Re-enter new key password for <mykey> Enter the password in the keystoreA_keypass file
+      ```
+
+      Secrets in file system volume secret stores are, by default:
+
+      ```bash
+      $ `keytool -keypasswd -storetype JCEKS -keystore /path/to/am/security/keystores/keystoreA.jceks -alias mykey
+      Enter keystore password: Enter the password in the keystoreA_storepass file
+      New key password for <mykey> Enter the password in the keystoreA_keypass file
+      Re-enter new key password for <mykey> Enter the password in the keystoreA_keypass file
+      ```
+
+      Secrets in file system volume secret stores are, by default, *not* in cleartext. You need to decode them before using them with the `keytool` command.
+
+      |   |                                                                                                                                                                                                 |
+      | - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+      |   | You can list the keys and password strings contained in a secret store using this command:```bash
+      $ keytool -list -storetype JCEKS -keystore /path/to/am/security/keystores/keystoreA.jceks
+      ``` |
+
+   3. To change the password of a **PEM-formatted secret**:
+
+      Use the `openssl` command to open, and then export the secret alias with a new password:
+
+      ```bash
+      $ openssl rsa -aes256 -in originalkey.pem -out new_password_key.pem
+      Enter pass phrase for originalkey.pem: Enter the original password
+      writing RSA key
+      Enter PEM pass phrase: Enter the new password
+      Verifying - Enter PEM pass phrase: Re-enter new password
+      ```
+
+      |   |                                                          |
+      | - | -------------------------------------------------------- |
+      |   | The algorithm you specify must match the input PEM file. |
+
+      When completed, overwrite the original PEM file with the replacement, for example:
+
+      ```bash
+      $ mv new_password_key.pem originalkey.pem
+      ```
+
+4. If you also need to change the keystore password, see [Change keystore passwords](#changing-keystore-password).
+
+5. Ensure that password files and keystores are maintained on every instance in your environment.
+
+   Every AM instance has its own keystores and password files.
+
+6. (AM keystore) Restart the AM instances affected by the configuration changes.
+
+## Change keystore passwords
+
+Decrypting and viewing the contents of a keystore requires a password. This password is specified by the user at the time the keystore is created, but you might need to update the password at a later time.
+
+1. (AM keystore) Replace the old password in the `.am_keystore_storepass` file with the new one:
+
+   ```bash
+   $ echo -n newpassword > /path/to/am/security/secrets/default/.am_keystore_storepass
+   ```
+
+   |   |                                                                                                                                                                                                                                                             |
+   | - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+   |   | Use `echo -n` to avoid inserting hidden trailing newline characters. Even if the `keytool` command is able to use the password in the file, AM may not be able to use the key aliases if there are hidden trailing newline characters in the password file. |
+
+2. (Secret stores) Replace the old password in the secret containing it with the new one.
+
+   If the secret is a file in a file system volume secret store, ensure that the new password is encoded appropriately.
+
+   For example, base64-encode the password, and add it to the file:
+
+   ```bash
+   $ echo -n bmV3c3RvcmVwYXNzd29yZA== > keystoreA_storepass
+   ```
+
+3. Change the password of the keystore:
+
+   * AM keystore
+
+   * Secret stores
+
+   ```bash
+   $ keytool -storepasswd -storetype JCEKS -keystore /path/to/am/security/keystores/am_keystore.jceks
+   Enter keystore password: Enter the password in the .am_keystore_storepass file.
+   New keystore password: Enter the new password.
+   Re-enter new keystore password:
+   ```
+
+   ```bash
+   $ keytool -storepasswd -storetype JCEKS -keystore /path/to/am/security/keystores/keystoreA.jceks
+   Enter keystore password: Enter the password in the keystoreA_storepass file.
+   New keystore password: Enter the new password.
+   Re-enter new keystore password:
+   ```
+
+   Secrets in file system volume secret stores are, by default, *not* in cleartext. You need to decode them before using them with the `keytool` command.
+
+4. If you also need to change the key aliases' password, see [Change keystore passwords](#changing-keystore-password).
+
+5. Ensure that password files and keystores are maintained on every instance in your environment.
+
+   Each AM instance has its own keystores and password files.
+
+6. (AM keystore only) Restart the AM instance or instances affected by the configuration changes.
+
+---
+
+---
 title: Limit the size of the request body
 description: Configure PingAM to reject HTTP requests exceeding the maximum allowed body size to prevent denial of service attacks
 component: pingam
@@ -2189,138 +2698,3 @@ To change the default value, perform the following steps:
 > If the property you want to add or edit is already configured, click on the pencil ([icon: pencil-alt, set=fas]) button to edit it. When you are finished, click on the tick ([icon: check, set=fas]) button.
 >
 > Click Save Changes.
-
----
-
----
-title: Secrets, certificates, and keys
-description: Manage encryption keys, signing certificates, and secret stores in PingAM to protect sensitive data and validate network communication across your deployment
-component: pingam
-version: 8.1
-page_id: pingam:security:secrets-certs-keys
-canonical_url: https://docs.pingidentity.com/pingam/8.1/security/secrets-certs-keys.html
-llms_txt: https://docs.pingidentity.com/pingam/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: 2026-10-19T15:00:46Z
-keywords: ["Security", "Setup &amp; Configuration"]
-page_aliases: ["security-guide:secrets-certs-keys.adoc"]
-section_ids:
-  about-default-keystores-secrets: Default keystores and secret stores
-  about-default-keystores: Default JCEKS and JKS keystores
-  default-secret-stores: Default secret stores
-  tasks-configure-keystores: Configure keystores and secret stores
----
-
-# Secrets, certificates, and keys
-
-**Encryption** lets you protect sensitive data, encoding it in such a way that only authorized parties can access it.
-
-**Signing** lets the receiver of data validate the sender's identity and ensures that the data hasn't been tampered with.
-
-AM depends on signing and encryption to protect network communication and to keep data confidential and unalterable. In turn, signing and encryption depend on keys or secrets that are generated using cryptographic algorithms.
-
-AM uses the following methods to store keys or secrets:
-
-* The AM keystore
-
-  The default AM keystore is used by certain features, and during AM startup.
-
-  You can configure the default keystore globally, so its configuration is shared by all AM instances in a deployment, or per individual server.
-
-* AM secret stores
-
-  Secret stores are repositories for cryptographic keys and credentials. You can configure them globally, or per realm.
-
-  Secret stores can be JVM system properties, key aliases stored in keystores or HSMs, or files stored in filesystems or secret volumes.
-
-  |   |                                                                                                                                                                                                                                     |
-  | - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-  |   | Most AM features use the *secrets API* (secret stores). Using the traditional AM keystore for these features isn't supported. You can, however, configure the AM keystore as a secret store and continue to use the keys inside it. |
-
-## Default keystores and secret stores
-
-During installation, AM creates a JKS and a JCEKS keystore with several self-signed certificates for demo and test purposes.
-
-The AM keystore and the default keystore-type secret store use the JCEKS keystore. The JKS keystore isn't used by default and can be safely deleted.
-
-|   |                                                                                                  |
-| - | ------------------------------------------------------------------------------------------------ |
-|   | Don't use the default key aliases, keys, keystores, or secret stores in production environments. |
-
-### Default JCEKS and JKS keystores
-
-This table lists the contents of the default keystores, generated when AM starts up.
-
-|                                                | JCEKS                                                                                                                                                                                                                                                                                                                                   | JKS                                               |
-| ---------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------- |
-| **Used by default in AM?**                     | Yes(1)                                                                                                                                                                                                                                                                                                                                  | No                                                |
-| **Default path**                               | `/path/to/am/security/keystores/keystore.jceks`                                                                                                                                                                                                                                                                                         | `/path/to/am/security/keystores/keystore.jks`     |
-| **Where is its password stored?**(2)           | `/path/to/am/security/secrets/default/.storepass`                                                                                                                                                                                                                                                                                       | `/path/to/am/security/secrets/default/.storepass` |
-| **Which test aliases does it contain?**        | `es256test` (ECDSA key) `es384test` (ECDSA key) `es512test` (ECDSA key) `hmacsigningtest` (Symmetric HMAC key) `directenctest` (Symmetric Direct AES encryption key) `rsajwtsigningkey` (Asymmetric RSA key) `selfserviceenctest` (Asymmetric RSA key) `selfservicesigntest` (Symmetric secret signing key) `test` (Asymmetric RSA key) | `test` (Asymmetric RSA key)                       |
-| **Which password strings does it contain?**    | `configstorepwd`(3)                                                                                                                                                                                                                                                                                                                     | None                                              |
-| **Where is the private key password file?**(4) | `/path/to/am/security/secrets/default/.keypass`                                                                                                                                                                                                                                                                                         | `/path/to/am/security/secrets/default/.keypass`   |
-
-(1) New AM installations use the JCEKS keystore as the default keystore.
-
-(2) The password of the JCEKS and JKS keystores is a random-generated string stored in cleartext.
-
-(3) The value of the `configstorepwd` is a string. It's the password of the configuration store and is accessed during AM startup. If you store the configuration store password in a [BCFKS keystore](fips.html#manage-bcfks-keystores), the alias appears as `configStorePwd` in the keystore. Aliases in BCFKS keystores are case-sensitive.
-
-(4) The default password for all the key aliases in the JCEKS and JKS keystores is `changeit` stored in cleartext.
-
-### Default secret stores
-
-* `default-keystore`. This keystore-type secret store is mapped to the default JCEKS keystore.
-
-  It contains [secret label mappings](secret-label-mappings.html) for several of the AM features that use keys.
-
-* `default-password-store`. This filesystem-type secret store is mapped to `/path/to/am/security/secrets/encrypted`
-
-  It provides the passwords to open the `default-keystore` secret store:
-
-  * The `storepass` file contains the encrypted password of the keystore.
-
-  * The `entrypass` file contains the encrypted password of the keys inside the keystore.
-
-  |   |                                                                                                                                                                                                                                                                                                                                                                                                      |
-  | - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-  |   | These password files look similar to those of the default JCEKS keystore; however, the password files for the JCEKS keystore are in cleartext, and the password files for the default secret store are encrypted with AM's encryption key.Remember that the keystore file is the same, so if you change the passwords for the JCEKS keystore, you must also change them in the default secret store. |
-
-## Configure keystores and secret stores
-
-The default keystores and secret stores are sufficient for testing and demonstrating AM features.
-
-For production and pre-production environments, configure the keystores and secret stores that your environment needs, *before* you configure the AM features that use them.
-
-> **Collapse: Keystores and secret stores in production**
->
-> ![High-level steps to configure keystores and secret stores in production environments](_images/new-install-keystore-config.svg)
->
-> 1. Create a new keystore to use as the AM keystore. Delete the default keystores and the default secret stores.
->
->    AM will use the new keystore to start up.
->
->    Configure different keys for different features when possible.
->
-> 2. Create separate secret stores for each AM feature you're using.
->
->    For example, create one for SAML 2.0 secrets, and a different one for OAuth 2.0 secrets.
->
->    Use *different* passwords for keystores and secret stores. This reduces the risk of compromised keys or secrets if a malicious user is able to gain access to one of the passwords.
->
->    Keystore secret stores require at least one other secret store to provide the password of the keystore, and the password for the keys. For example, a file system volume secret store.
->
-> 3. Configure AM features to use your custom key aliases and secrets.
-
-The following table guides you through the tasks you need to perform to configure the keys and secrets AM requires:
-
-| Task                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             | Resources                                                                                                                                                                                                                      |
-| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **Understand AM's secret needs**Review the list of features that use keys in AM, and their possible keystore and secrets configurations.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | * [AM features that use keys](features-with-keys.html)                                                                                                                                                                         |
-| **Create and configure a new AM keystore**Create and configure a new AM keystore, that will also serve as the AM bootstrap keystore. Delete the default keystores and secret stores.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             | - [The AM keystore](am-keystore.html)                                                                                                                                                                                          |
-| **Create secrets, as needed**Create as many keystores, key aliases, and/or secrets as required in your environment, based on the information you learned when you reviewed the list on the first task. You will configure them in AM in the next steps.Keys and secrets protect the credentials, tokens, and other sensitive information that your environment needs to send and receive. Therefore, ensure that keys and secrets are protected and only shared when required. This may result in configuring multiple keystores and/or secret stores for different features.Don't reuse passwords between keystores or secret stores. This reduces the risk of compromised keys or secrets, if a malicious user is able to gain access to one of the passwords. | * [Key aliases and passwords](configuring-keys.html)                                                                                                                                                                           |
-| **Configure secret stores in AM**Create new secret stores to map the new keys you created in previous tasks, for example, those for the OAuth 2.0 providers.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     | - [Secret stores](secret-stores.html)                                                                                                                                                                                          |
-| **Make keystores and secret stores available to all AM instances**                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               | Keystores and secret stores must be available in the same location across all AM instances.This step might mean mounting a filesystem with the required files across the instances, installing cryptographic cards, and so on. |
-| **Configure key aliases and secrets in AM**Change the default key aliases and secrets to the new ones you have created.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          | * [Change default key aliases](change-signing-key.html)
-
-* [Map and rotate secrets](secret-mapping.html)                                                                                                                       |
