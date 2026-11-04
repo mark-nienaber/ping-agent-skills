@@ -30,18 +30,13 @@ Each generated docset package contains:
 
 ## Install
 
-### Claude Code Marketplace
+### Claude Code (manual)
+
+There is no Claude Code marketplace install for this repository. Clone it and link the skills into `~/.claude/skills/` with the setup script:
 
 ```bash
-/plugin marketplace add mark-nienaber/ping-agent-skills
-/plugin install ping-identity-docs@ping-agent-skills
-```
-
-The marketplace plugin exposes only `ping-docs`, so installing it does not add 56 docset descriptions to every turn.
-
-### Claude Code Local
-
-```bash
+git clone https://github.com/mark-nienaber/ping-agent-skills.git
+cd ping-agent-skills
 scripts/setup-claude.sh                          # install consolidated ping-docs
 scripts/setup-claude.sh pingam pingoneaic        # install selected docset skills instead
 scripts/setup-claude.sh --all-docsets            # compatibility/testing only
@@ -50,6 +45,8 @@ scripts/setup-claude.sh --push /path/to/project  # copy into <project>/.claude/s
 ```
 
 Symlinks are the default so local syncs and regenerated skills are visible immediately. Use `--copy` or `--push` for remote machines or environments where symlinks are not suitable.
+
+The consolidated `ping-docs` skill is the default. It exposes one trigger, so it does not add 56 docset descriptions to every turn. Re-run `scripts/setup-claude.sh` after adding or removing docsets so the links stay current.
 
 ### Codex
 
@@ -162,11 +159,10 @@ Use the broader scope when a question crosses layers, for example:
 
 ## Composition With `pingidentity/agent-plugins`
 
-Install both when you want product routing plus exact documentation depth:
+Install both when you want product routing plus exact documentation depth. Add the umbrella marketplace in Claude Code, then install this repository manually (see [Claude Code (manual)](#claude-code-manual)):
 
 ```text
 /plugin marketplace add pingidentity/agent-plugins
-/plugin marketplace add mark-nienaber/ping-agent-skills
 ```
 
 | Task type | Umbrella skill | Deep layer |
