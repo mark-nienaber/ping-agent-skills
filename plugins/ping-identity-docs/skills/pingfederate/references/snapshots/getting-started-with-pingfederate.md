@@ -918,11 +918,11 @@ To open the administrative console:
 
 2. Start a web browser.
 
-3. Go to https\://*\<pf\_host>*:9999/.
+3. Go to https\://*\<pf_host>*:9999/.
 
-   |   |                                                                                                                                                                                                                                                                                                                                                                                                             |
-   | - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-   |   | For PingFederate 10.1 and earlier, the administrative console is accessed at https\://*\<pf\_host>*:9999/pingfederate/app.*\<pf\_host>* is the network address of your PingFederate server. It can be an IP address, a host name, or a fully qualified domain name. It must be reachable from your computer.`9999` is the default value of the `pf.admin.https.port` property in the `run.properties` file. |
+   |   |                                                                                                                                                                                                                                                                                                                                                                                                           |
+   | - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+   |   | For PingFederate 10.1 and earlier, the administrative console is accessed at https\://*\<pf_host>*:9999/pingfederate/app.*\<pf_host>* is the network address of your PingFederate server. It can be an IP address, a host name, or a fully qualified domain name. It must be reachable from your computer.`9999` is the default value of the `pf.admin.https.port` property in the `run.properties` file. |
 
 ---
 
@@ -1007,11 +1007,11 @@ The setup wizard guides you through the following steps:
 
 1. Start the PingFederate server. For more information, see [Starting and stopping PingFederate](pf_start_stop_pf.html)
 
-2. In your browser, go to https\://*\<pf\_host>*:9999/pingfederate/app. The setup wizard opens.
+2. In your browser, go to https\://*\<pf_host>*:9999/pingfederate/app. The setup wizard opens.
 
-   |   |                                                                                                                                                                                                                                                                                   |
-   | - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-   |   | *\<pf\_host>* is the network address of your PingFederate server. It can be an IP address, a host name, or a fully qualified domain name. It must be reachable from your computer.`9999` is the default value of the `pf.admin.https.port` property in the `run.properties` file. |
+   |   |                                                                                                                                                                                                                                                                                  |
+   | - | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+   |   | *\<pf_host>* is the network address of your PingFederate server. It can be an IP address, a host name, or a fully qualified domain name. It must be reachable from your computer.`9999` is the default value of the `pf.admin.https.port` property in the `run.properties` file. |
 
 3. Follow the instructions in the wizard.
 
@@ -1034,7 +1034,7 @@ page_id: pingfederate:getting_started_with_pingfederate:pf_start_stop_pf
 canonical_url: https://docs.pingidentity.com/pingfederate/13.1/getting_started_with_pingfederate/pf_start_stop_pf.html
 llms_txt: https://docs.pingidentity.com/pingfederate/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: July 8, 2026
+revdate: October 7, 2026
 section_ids:
   starting-and-stopping-pingfederate-on-windows: Starting and stopping PingFederate on Windows
   starting-and-stopping-pingfederate-as-an-application: Starting and stopping PingFederate as an application
@@ -1104,6 +1104,12 @@ To restart PingFederate:
 
 ## Starting and stopping PingFederate on Linux
 
+There are two ways to start and stop PingFederate on Linux:
+
+`bin/run.sh` launches PingFederate as a foreground application in the current terminal session. Console outputs are streamed to the terminal, and the application terminates when the terminal session ends. This method is useful for interactive use during application or plugin development and testing or troubleshooting your PingFederate deployment.
+
+`sbin/pingfederate-run.sh` launches PingFederate as a background service. Console outputs are logged in the `stdout.log` and `stderr.log` files. The server continues running after the initiating terminal session closes. This method is intended for production deployments and long-running or unattended environments.
+
 ### Starting and stopping PingFederate as an application
 
 To start PingFederate:
@@ -1136,21 +1142,27 @@ To restart PingFederate:
 
 To start PingFederate:
 
-1. Open a terminal window.
+1. Open a terminal session.
 
-2. Enter the system-dependent service command to start PingFederate.
+2. Go to `<pingfed_install>/pingfederate/sbin`.
+
+3. Run `pingfederate-run.sh`.
+
+To check the status of PingFederate:
+
+1. Open a terminal session.
+
+2. Go to `<pingfed_install>/pingfederate/sbin`.
+
+3. Run `pingfederate-status.sh`.
 
 To stop PingFederate:
 
-1. Open a terminal window.
+1. Open a terminal session.
 
-2. Enter the system-dependent service command to stop PingFederate.
+2. Go to `<pingfed_install>/pingfederate/sbin`.
 
-To restart PingFederate:
-
-1. Open a terminal window.
-
-2. Enter the system-dependent service command to restart PingFederate.
+3. Run `pingfederate-shutdown.sh`.
 
 ---
 

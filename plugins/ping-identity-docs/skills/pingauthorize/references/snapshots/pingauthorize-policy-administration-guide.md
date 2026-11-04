@@ -1,13 +1,13 @@
 ---
 title: Actions
-description: Actions represent arbitrary values that a typical authorization request might ask to perform on a specific resource, such as view or update.
+description: Define actions in PingAuthorize to represent the operations that users can perform on a resource.
 component: pingauthorize
 version: 11.1
 page_id: pingauthorize:pingauthorize_policy_administration_guide:paz_actions
 canonical_url: https://docs.pingidentity.com/pingauthorize/11.1/pingauthorize_policy_administration_guide/paz_actions.html
 llms_txt: https://docs.pingidentity.com/pingauthorize/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: May 22, 2024
+revdate: 2026-08-18T21:47:29Z
 ---
 
 # Actions
@@ -48,14 +48,14 @@ Common actions you might want to configure in the PingAuthorize Policy Editor ar
 
 ---
 title: Adding a named condition
-description: Add named conditions to reuse conditional logic across attributes and policies.
+description: Add named conditions in the PingAuthorize Policy Editor to reuse conditional logic across attributes and policies.
 component: pingauthorize
 version: 11.1
 page_id: pingauthorize:pingauthorize_policy_administration_guide:paz_named_conditions
 canonical_url: https://docs.pingidentity.com/pingauthorize/11.1/pingauthorize_policy_administration_guide/paz_named_conditions.html
 llms_txt: https://docs.pingidentity.com/pingauthorize/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: June 11, 2026
+revdate: 2026-06-11T18:03:10Z
 section_ids:
   steps: Steps
   choose-from: Choose from:
@@ -105,9 +105,9 @@ For example, consider a named condition that compares the account status receive
 
    ### Choose from:
 
-   * **All**: Invokes the condition when all of the conditions are true. If one condition evaluates to false, evaluation stops and the remaining conditions are not executed. This is equivalent to an `AND` Boolean operator between conditions.
+   * **All**: Invokes the condition when all the conditions are true. If one condition evaluates to false, evaluation stops and the remaining conditions are not executed. This is equivalent to an `AND` Boolean operator between conditions.
 
-   * **Any**: Invokes the condition when at least one of the conditions is true. If one condition evlautes to true, evaluation stops and the remaining conditions are not executed. This is equivalent to an `OR` Boolean operator between conditions.
+   * **Any**: Invokes the condition when at least one of the conditions is true. If one condition evaluates to true, evaluation stops and the remaining conditions are not executed. This is equivalent to an `OR` Boolean operator between conditions.
 
    * **None**: Invokes the condition when none of the conditions are true. This is equivalent to a `NOT` Boolean operator between conditions.
 
@@ -203,14 +203,14 @@ To allow the user to modify a set of attributes limited to an allow list and ret
 
 ---
 title: Adding targets to a policy
-description: Add targets to identify the requests to which the policy applies its fine-grained authorization logic. If no targets are attached to a policy, the policy applies to all requests. To make a policy only apply for all requests to a certain database, for example, add the database domain as a target.
+description: "Add targets to a policy to specify which requests the policy's authorization logic applies to."
 component: pingauthorize
 version: 11.1
 page_id: pingauthorize:pingauthorize_policy_administration_guide:paz_add_targets_policy
 canonical_url: https://docs.pingidentity.com/pingauthorize/11.1/pingauthorize_policy_administration_guide/paz_add_targets_policy.html
 llms_txt: https://docs.pingidentity.com/pingauthorize/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: June 30, 2023
+revdate: 2023-06-30T00:00:00Z
 section_ids:
   steps: Steps
   example: Example
@@ -248,14 +248,14 @@ The following graph shows how the server evaluates the group of targets.
 
 ---
 title: Allowing attributes to be modified by administrators
-description: To allow any attribute to be modified, such as for an administrator account, the policy decision point (PDP) does not need to check the impactedAttributes attribute.
+description: Configure the policy decision point to allow modifications to any attribute for administrator accounts.
 component: pingauthorize
 version: 11.1
 page_id: pingauthorize:pingauthorize_policy_administration_guide:paz_allow_attrs_mod
 canonical_url: https://docs.pingidentity.com/pingauthorize/11.1/pingauthorize_policy_administration_guide/paz_allow_attrs_mod.html
 llms_txt: https://docs.pingidentity.com/pingauthorize/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: July 10, 2023
+revdate: 2023-07-10T00:00:00Z
 section_ids:
   about-this-task: About this task
   steps: Steps
@@ -279,14 +279,14 @@ To create a policy that allows an administrator to modify any attributes, comple
 
 ---
 title: Attribute caching
-description: The policy decision point (PDP) and the PingAuthorize Policy Editor support caching for attributes. The ability to cache resolved attributes can deliver significant performance gains for the PDP.
+description: Configure attribute caching in PingAuthorize to improve policy decision point performance.
 component: pingauthorize
 version: 11.1
 page_id: pingauthorize:pingauthorize_policy_administration_guide:paz_attr_caching
 canonical_url: https://docs.pingidentity.com/pingauthorize/11.1/pingauthorize_policy_administration_guide/paz_attr_caching.html
 llms_txt: https://docs.pingidentity.com/pingauthorize/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: June 29, 2026
+revdate: 2026-06-29T00:00:00Z
 section_ids:
   caching-strategies: Caching strategies
   caching-behavior: Caching behavior
@@ -326,14 +326,14 @@ Attribute caching uses a one-level approach where cache entries are stored and r
 
 ---
 title: Attribute interpolation
-description: With attribute interpolation, you reference an attribute in a field. The system resolves the value of the referenced attribute, replacing the reference with the value itself.
+description: "Use attribute interpolation in PingAuthorize to reference an attribute's resolved value directly within a field."
 component: pingauthorize
 version: 11.1
 page_id: pingauthorize:pingauthorize_policy_administration_guide:paz_attribute_interpolation
 canonical_url: https://docs.pingidentity.com/pingauthorize/11.1/pingauthorize_policy_administration_guide/paz_attribute_interpolation.html
 llms_txt: https://docs.pingidentity.com/pingauthorize/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: October 7, 2022
+revdate: 2022-10-07T00:00:00Z
 section_ids:
   about-this-task: About this task
   steps: Steps
@@ -363,14 +363,14 @@ You can use attribute interpolation in any field that has the label icon, shown 
 
 ---
 title: Attribute name, description, and location
-description: You can give attributes any name that is unique and does not contain a period (.).
+description: Set the context for PingAuthorize attributes to organize them and make their purpose easily understandable.
 component: pingauthorize
 version: 11.1
 page_id: pingauthorize:pingauthorize_policy_administration_guide:paz_attr_name_desc_loc
 canonical_url: https://docs.pingidentity.com/pingauthorize/11.1/pingauthorize_policy_administration_guide/paz_attr_name_desc_loc.html
 llms_txt: https://docs.pingidentity.com/pingauthorize/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: June 5, 2023
+revdate: 2026-08-10T00:00:00Z
 ---
 
 # Attribute name, description, and location
@@ -387,20 +387,20 @@ To ensure that the system can interpolate the attribute, avoid the following cha
 
 You can give the attribute a description to help policy editors understand the attribute's purpose. This description is only displayed when a user navigates to the attribute.
 
-You can change the location of an attribute in the attribute tree using the Parent field.
+You can change the location of an attribute in the attribute tree using the **Parent** field.
 
 ---
 
 ---
 title: Attributes
-description: Attributes provide the context that enables fine-grained policies.
+description: Understand how PingAuthorize attributes provide the contextual data that drives fine-grained authorization policies.
 component: pingauthorize
 version: 11.1
 page_id: pingauthorize:pingauthorize_policy_administration_guide:paz_attributes
 canonical_url: https://docs.pingidentity.com/pingauthorize/11.1/pingauthorize_policy_administration_guide/paz_attributes.html
 llms_txt: https://docs.pingidentity.com/pingauthorize/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: July 29, 2022
+revdate: 2022-07-29T00:00:00Z
 ---
 
 # Attributes
@@ -415,14 +415,14 @@ The system resolves an attribute only when its value is required as part of the 
 
 ---
 title: Branch changes and history
-description: "After creating branches to organize your organizations' distinct work contexts, you can commit changes to policies and the Trust Framework, revert unwanted changes, or create snapshots of important policy states."
+description: Perform version control by committing, reverting, snapshotting, and merging policy changes in PingAuthorize Policy Editor branches.
 component: pingauthorize
 version: 11.1
 page_id: pingauthorize:pingauthorize_policy_administration_guide:paz_managing_change_history
 canonical_url: https://docs.pingidentity.com/pingauthorize/11.1/pingauthorize_policy_administration_guide/paz_managing_change_history.html
 llms_txt: https://docs.pingidentity.com/pingauthorize/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: June 16, 2025
+revdate: 2025-06-16T18:03:10Z
 ---
 
 # Branch changes and history
@@ -443,14 +443,14 @@ Learn more about branch changes and history:
 
 ---
 title: Combining algorithms
-description: Policies can combine multiple rules to produce a Permit, Deny, Indeterminate, or Not Applicable decision.
+description: Use combining algorithms to evaluate multiple PingAuthorize policy rules into a single Permit, Deny, Indeterminate, or Not Applicable decision.
 component: pingauthorize
 version: 11.1
 page_id: pingauthorize:pingauthorize_policy_administration_guide:paz_rules_combine_algs
 canonical_url: https://docs.pingidentity.com/pingauthorize/11.1/pingauthorize_policy_administration_guide/paz_rules_combine_algs.html
 llms_txt: https://docs.pingidentity.com/pingauthorize/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: May 23, 2025
+revdate: 2025-05-23T16:45:12Z
 section_ids:
   ca_evaluate_all: Evaluate all
   example-detecting-fraud-with-full-rule-visibility: "Example: Detecting fraud with full rule visibility"
@@ -516,14 +516,14 @@ Without **Evaluate All** selected, the combining algorithm stops evaluating when
 
 ---
 title: Committing changes
-description: To save your policy and Trust Framework changes, commit your changes.
+description: Commit your policy and Trust Framework changes in the Policy Editor to save them and prepare for deployment package creation.
 component: pingauthorize
 version: 11.1
 page_id: pingauthorize:pingauthorize_policy_administration_guide:paz_commit_changes
 canonical_url: https://docs.pingidentity.com/pingauthorize/11.1/pingauthorize_policy_administration_guide/paz_commit_changes.html
 llms_txt: https://docs.pingidentity.com/pingauthorize/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: June 17, 2025
+revdate: 2025-06-17T00:00:00Z
 section_ids:
   steps: Steps
 ---
@@ -552,14 +552,14 @@ After you commit changes, you can create a deployment package from the commit. L
 
 ---
 title: Conditional targets (Applies to)
-description: "You can use conditional targets to extend the capability of the \"Applies to\" concept when creating attribute-based access control (ABAC) rules and policies."
+description: Use conditional targets in PingAuthorize to scope policies and rules to requests that meet specific attribute conditions.
 component: pingauthorize
 version: 11.1
 page_id: pingauthorize:pingauthorize_policy_administration_guide:paz_conditional_targets
 canonical_url: https://docs.pingidentity.com/pingauthorize/11.1/pingauthorize_policy_administration_guide/paz_conditional_targets.html
 llms_txt: https://docs.pingidentity.com/pingauthorize/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: June 30, 2023
+revdate: 2023-06-30T00:00:00Z
 ---
 
 # Conditional targets (Applies to)
@@ -607,7 +607,7 @@ page_id: pingauthorize:pingauthorize_policy_administration_guide:paz_conditions
 canonical_url: https://docs.pingidentity.com/pingauthorize/11.1/pingauthorize_policy_administration_guide/paz_conditions.html
 llms_txt: https://docs.pingidentity.com/pingauthorize/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: June 30, 2026
+revdate: 2026-06-30T00:00:00Z
 section_ids:
   paz_combining_conditions: Combining conditions
   condition_comparators: Condition comparators
@@ -699,7 +699,7 @@ page_id: pingauthorize:pingauthorize_policy_administration_guide:paz_connecting_
 canonical_url: https://docs.pingidentity.com/pingauthorize/11.1/pingauthorize_policy_administration_guide/paz_connecting_a_service.html
 llms_txt: https://docs.pingidentity.com/pingauthorize/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: June 29, 2026
+revdate: 2026-06-29T00:00:00Z
 section_ids:
   steps: Steps
   choose-from: Choose from:
@@ -853,14 +853,14 @@ Service connections in PingAuthorize enable you to augment authorization events 
 
 ---
 title: Copying elements
-description: To build your authorization logic more quickly and accurately, you can make editable copies of many of your Policy Editor entities.
+description: Copy policies, rules, statements, and library entities in the Policy Editor to build authorization logic more quickly.
 component: pingauthorize
 version: 11.1
 page_id: pingauthorize:pingauthorize_policy_administration_guide:paz_entity_copy
 canonical_url: https://docs.pingidentity.com/pingauthorize/11.1/pingauthorize_policy_administration_guide/paz_entity_copy.html
 llms_txt: https://docs.pingidentity.com/pingauthorize/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: June 13, 2024
+revdate: 2026-08-31T19:56:29Z
 section_ids:
   about-this-task: About this task
   steps: Steps
@@ -873,11 +873,11 @@ To build your authorization logic more quickly and accurately, you can make edit
 
 ## About this task
 
-Within the Policies and Trust Framework pages, you can copy whole definitions, policies, rules, statements, and Library entities. See the following table for page-specific capabilities and limitations.
+Within the **Policies** and **Trust Framework** pages, you can copy whole definitions, policies, rules, statements, and **Library** entities. See the following table for page-specific capabilities and limitations.
 
-| Policy Editorpage                      | Capabilities and limitations                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
-| -------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Trust Framework                        | * You can copy any definition.
+| Policy Editor page                                 | Capabilities and limitations                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| -------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Trust Framework**                                | * You can copy any definition.
 
 * With the exception of resolvers, you can't copy a portion of a definition.
 
@@ -885,57 +885,57 @@ Within the Policies and Trust Framework pages, you can copy whole definitions, p
 
 * When you copy a definition that contains child definitions, only the parent definition is duplicated.
 
-* You can't copy definition hierarchy trees.                                                                                                                         |
-| Policies                               | - You can copy any policy, rule, or statement.
+* You can't copy definition hierarchy trees.                                                                                                                                                     |
+| **Policies**                                       | - You can copy any policy, rule, or statement.
 
 - You can't copy policy sets.
 
 - You can't copy targets, conditions, or properties within a policy or rule.
 
-- When you copy policies containing rules, targets, or statements belonging to the Library, these entities get reused in the new policy, not copied.
+- When you copy policies containing rules, targets, or statements belonging to the **Library**, these entities get reused in the new policy, not copied.
 
-- When you copy rules or statements within a policy, you must save the policy.                                                                                                             |
-| Library                                | * On the Library tab, you can copy top-level Library rules, targets, and statements.
+- When you copy rules or statements within a policy, you must save the policy.                                                                                                                                     |
+| **Library**                                        | * On the **Library** tab, you can copy top-level **Library** rules, targets, and statements.
 
   * You can also copy statements within rules.
 
   * You can't copy targets within rules.
 
-* You can copy Library rules and statements at their point of use.
+* You can copy **Library** rules and statements at their point of use.
 
-  * When you make copies of Library entities within rules or policies, the copies display at the point of use and on the Library tab.
+  * When you make copies of **Library** entities within rules or policies, the copies display at the point of use and on the **Library** tab.
 
-* Where relevant, the copying capabilities and limitations listed for the Policies page apply to Library entities. |
-| Trust Framework, Policies, and Library | - You can't use Make Copy in the tree structure view.
+* Where relevant, the copying capabilities and limitations listed for the **Policies** page apply to **Library** entities. |
+| **Trust Framework**, **Policies**, and **Library** | - You can't use **Make Copy** in the tree structure view.
 
-- You must save any unsaved changes to an entity before making a copy.                                                                                                                                                                                                                                                                                                                                                                                 |
+- You must save any unsaved changes to an entity before making a copy.                                                                                                                                                                                                                                                                                                                                                                                                         |
 
 ## Steps
 
-1. To create a copy of a Policy Editor entity, click Make Copy in the hamburger menu.
+1. To create a copy of a Policy Editor entity, click **Make Copy** in the hamburger menu.
 
    ![Screen capture of using Make Copy to copy an attribute in the Trust Framework.](_images/eti1686766224950.png)
 
    ### Result:
 
-   The Policy Editor creates a duplicate of the entity and its contents. The new duplicate's name is formed by adding the prefix \[Copy of] to the original name, as in the following image.
+   The Policy Editor creates a duplicate of the entity and its contents. The new duplicate's name is formed by adding the prefix **\[Copy of]** to the original name, as in the following image:
 
    ![Screen capture of a duplicate Trust Framework attribute created using Make Copy.](_images/vcx1686767993451.png)
 
-2. **Optional:** Make edits to the new entity.
+2. (Optional) Make edits to the new entity.
 
 ---
 
 ---
 title: Creating a branch
-description: Create a branch to start an independent line of policy development. You can create a branch at the root level, import a snapshot as a new branch, or base a subbranch on a commit in an existing branch.
+description: Create a Policy Editor branch to start an independent line of policy development at the root level, as a subbranch, or from a snapshot.
 component: pingauthorize
 version: 11.1
 page_id: pingauthorize:pingauthorize_policy_administration_guide:paz_create_branch
 canonical_url: https://docs.pingidentity.com/pingauthorize/11.1/pingauthorize_policy_administration_guide/paz_create_branch.html
 llms_txt: https://docs.pingidentity.com/pingauthorize/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: June 25, 2025
+revdate: 2026-08-12T13:27:21
 page_aliases: ["paz_create_top_level_branch"]
 section_ids:
   creating-a-root-branch: Creating a root branch
@@ -963,7 +963,7 @@ Create a root branch to begin a new line of policy development from scratch.
 
 1. In the Policy Editor, go to **Branch Manager > Version Control**.
 
-2. From the **[icon: plus, set=fa]**menu, select **Create new root branch**.
+2. In the **[icon: plus, set=fa]**menu, select **Create new root branch**.
 
    ![Screen capture of the Create new root branch option in the Branch Manager's Version Control configuration.](_images/paz-branch-manager-create-new-root-branch.png)
 
@@ -1026,64 +1026,36 @@ The system creates a new subbranch with the selected commit as the branch point.
 ---
 
 ---
-title: Creating a partial snapshot export
-description: Create a partial export to build an export snapshot of specifically selected entities from the Trust Framework, Policy Sets, and the Library.
-component: pingauthorize
-version: 11.1
-page_id: pingauthorize:pingauthorize_policy_administration_guide:paz_create_partial_export
-canonical_url: https://docs.pingidentity.com/pingauthorize/11.1/pingauthorize_policy_administration_guide/paz_create_partial_export.html
-llms_txt: https://docs.pingidentity.com/pingauthorize/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: June 28, 2023
-section_ids:
-  steps: Steps
----
-
-# Creating a partial snapshot export
-
-Create a partial export to build an export snapshot of specifically selected entities from the Trust Framework, Policy Sets, and the Library.
-
-## Steps
-
-1. Click Branch Manager.
-
-2. Click Export Partial Snapshot.
-
-3. Select the desired items from the list on the left.
-
-4. Click Add selection to Snapshot at the top of the pane on the left.
-
-   This step adds the entity to the Selected entities list. The exported snapshot automatically includes all dependencies so you do not need to explicitly select each individual dependency.
-
-5. Click Export.
-
----
-
----
 title: Creating a policy to control the set of actions for a specific resource
-description: For a given resource, control the outcomes (deny or permit) of actions on the resource.
+description: Control the outcomes (deny or permit) of actions on a given resource.
 component: pingauthorize
 version: 11.1
 page_id: pingauthorize:pingauthorize_policy_administration_guide:paz_create_policy_control_actions
 canonical_url: https://docs.pingidentity.com/pingauthorize/11.1/pingauthorize_policy_administration_guide/paz_create_policy_control_actions.html
 llms_txt: https://docs.pingidentity.com/pingauthorize/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: December 9, 2025
+revdate: 2026-09-02T15:16:50Z
 section_ids:
   steps: Steps
 ---
 
 # Creating a policy to control the set of actions for a specific resource
 
-For a given resource, control the outcomes (deny or permit) of actions on the resource. In particular, the policy focuses on the Users resource and then denies deletes but permits retrieves.
+This policy controls the outcomes (deny or permit) of actions on a given resource. In particular, the policy:
+
+* Focuses on the Users resource
+
+* Denies the delete action
+
+* Permits the retrieve action
 
 ## Steps
 
 1. In the Policy Editor, go to **Policies** in the left pane and then click **Policies** along the top.
 
-2. From the **[icon: plus, set=fa]**menu, select **Add Policy**.
+2. In the **[icon: plus, set=fa]**menu, select **Add Policy**.
 
-3. For the name, replace **Untitled** with `Control actions for the User resource`.
+3. For the name, replace **Untitled** with `Control actions for the Users resource`.
 
 4. Click the **[icon: plus, set=fa]**next to **Applies to**.
 
@@ -1145,7 +1117,7 @@ For a given resource, control the outcomes (deny or permit) of actions on the re
 
 8. Add a rule to permit the retrieval of User resources.
 
-   1. Click **[icon: plus, set=fa]Add Rule.**
+   1. Click **[icon: plus, set=fa]Add Rule**.
 
    2. For the name, replace **Untitled** with `Action: retrieve`.
 
@@ -1178,20 +1150,20 @@ page_id: pingauthorize:pingauthorize_policy_administration_guide:paz_create_poli
 canonical_url: https://docs.pingidentity.com/pingauthorize/11.1/pingauthorize_policy_administration_guide/paz_create_policy_modify.html
 llms_txt: https://docs.pingidentity.com/pingauthorize/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: December 9, 2025
+revdate: 2026-09-02T15:16:50Z
 section_ids:
   steps: Steps
 ---
 
 # Creating a policy to dynamically modify a resource based on the SCIM resource type
 
-Given an attribute defined in multiple resource types, modify the attribute differently depending on the resource type. In particular, this policy focuses on the retrieve action and changes the `cn` attribute to one value for the Users resource type and to another value for the Devices resource type.
+This policy modifies an attribute defined in multiple resource types differently depending on the resource type. In particular, this policy focuses on the retrieve action and changes the `cn` attribute to one value for the Users resource type and to another value for the Devices resource type.
 
 ## Steps
 
 1. In the Policy Editor, go to **Policies** in the left pane and then click **Policies** along the top.
 
-2. From the **[icon: plus, set=fa]**menu, select **Add Policy**.
+2. In the **[icon: plus, set=fa]**menu, select **Add Policy**.
 
 3. For the name, replace **Untitled** with `Modify cn attribute based on the resource type`.
 
@@ -1207,7 +1179,7 @@ Given an attribute defined in multiple resource types, modify the attribute diff
 
 7. Add a rule for the Users resource.
 
-   1. Click **[icon: plus, set=fa]Add Rule.**
+   1. Click **[icon: plus, set=fa]Add Rule**.
 
    2. For the name, replace **Untitled** with `If resource type is Users`.
 
@@ -1241,7 +1213,7 @@ Given an attribute defined in multiple resource types, modify the attribute diff
 
 8. Add a rule for the Devices resource.
 
-   1. Click **[icon: plus, set=fa]Add Rule.**
+   1. Click **[icon: plus, set=fa]Add Rule**.
 
    2. For the name, replace **Untitled** with `If resource type is Devices`.
 
@@ -1274,3 +1246,107 @@ Given an attribute defined in multiple resource types, modify the attribute diff
       ![Screen capture of the rule for the Devices resource, configured as specified](_images/cpw1610652291758.png)
 
 9. Send test requests to the SCIM service, and verify data using the Policy Editor's Decision Visualiser.
+
+---
+
+---
+title: Creating a policy to permit or deny the creation of resources
+description: Create a policy that permits or denies resource creation based on resource type in the Policy Editor.
+component: pingauthorize
+version: 11.1
+page_id: pingauthorize:pingauthorize_policy_administration_guide:paz_create_policy_permit_deny
+canonical_url: https://docs.pingidentity.com/pingauthorize/11.1/pingauthorize_policy_administration_guide/paz_create_policy_permit_deny.html
+llms_txt: https://docs.pingidentity.com/pingauthorize/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-09-02T15:16:50Z
+section_ids:
+  steps: Steps
+---
+
+# Creating a policy to permit or deny the creation of resources
+
+This policy allows the creation of one resource type but not another. In particular, the policy focuses on the create action and then allows the creation of Device resources but denies the creation of User resources.
+
+## Steps
+
+1. In the Policy Editor, go to **Policies** in the left pane and then click **Policies** along the top.
+
+2. In the **[icon: plus, set=fa]**menu, select **Add Policy**.
+
+3. For the name, replace **Untitled** with `User can only create Device resources`.
+
+4. Click the **[icon: plus, set=fa]**next to **Applies to**.
+
+5. Click **Add definitions and targets, or drag from Components** and add the **create** action.
+
+6. Set **Combining Algorithm** to **Unless one decision is deny, the decision will be permit**.
+
+7. Add a rule to allow the creation of Device resources.
+
+   1. Click **[icon: plus, set=fa]Add Rule**.
+
+   2. For the name, replace **Untitled** with `Permit the creation of Device resources`.
+
+   3. Click **[icon: plus, set=fa]Comparison**.
+
+   4. In the first field, click the **A** to toggle to an **R**, and from that field's drop-down list, select **Service**.
+
+   5. In the second field, select **Equals**.
+
+   6. In the third field, select the **SCIM2.Devices** service.
+
+   7. Click **Save changes**.
+
+      You should have a screen similar to the following one for the policy and this rule.
+
+      ![Screen capture of the Policies tab with the User can only create Device resources policy showing, configured as specified](_images/jxo1687903704287.png)
+
+8. Add a rule to deny the creation of User resources.
+
+   1. Click **[icon: plus, set=fa]Add Rule**.
+
+   2. For the name, replace **Untitled** with `Deny the creation of User resources`.
+
+   3. Set **Effect** to **Deny**.
+
+   4. Click **[icon: plus, set=fa]Comparison**.
+
+   5. In the first field, click the **A** to toggle to an **R**, and from that field's drop-down list, select **Service**.
+
+   6. In the second field, select **Equals**.
+
+   7. In the third field, select the **SCIM2.Users** service.
+
+   8. Add statements to provide a custom message.
+
+      1. Within the rule, click **Show Statements**.
+
+      2. Click **[icon: plus, set=fa]**next to **Statements**.
+
+      3. Click **[icon: plus, set=fa]Add Statement > Denied Reason**.
+
+      4. For the name, specify `denied-reason`.
+
+      5. Set **Applies To** to **Deny**.
+
+      6. In the **Payload** field:
+
+         * Remove
+
+           `Example:`
+
+         * Change
+
+           `Human-readable error message`
+
+           to
+
+           `System has restricted the ability to create User resources`
+
+   9. Click **Save changes**.
+
+      You should have a screen similar to the following one for the second rule.
+
+      ![Screen capture of the Deny the creation of User resources rule and its statement, configured as specified](_images/onu1687904009376.png)
+
+9. Send test requests to the SCIM service and verify data using the Policy Editor's Decision Visualiser.

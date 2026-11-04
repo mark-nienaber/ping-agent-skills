@@ -1,12 +1,12 @@
 ---
 title: AuthenticID Connector
-description: The AuthenticID connector lets you use AuthenticID for identity verification in your PingOne DaVinci flow.
+description: Configure the AuthenticID connector in PingOne DaVinci to verify identities using document scanning and selfie capture via CFAir or CFWeb
 component: connectors
 page_id: connectors::authenticid_connector
 canonical_url: https://docs.pingidentity.com/connectors/authenticid_connector.html
 llms_txt: https://docs.pingidentity.com/connectors/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: August 16, 2024
+revdate: 2026-07-09T00:00:00Z
 section_ids:
   setup: Setup
   resources: Resources
@@ -41,7 +41,7 @@ The connector supports the AuthenticID CFAir and CFWeb services.
 
 For CFAir, the connector can upload a previously captured identity document and selfie images to AuthenticID.
 
-For CFWeb, the connector allows you to direct users to a unique verification URL where they will submit their driver license or passport along with a selfie photo. After AuthenticID verifies the user's identity, it sends the results to DaVinci where you can branch your flow accordingly.
+For CFWeb, the connector allows you to direct users to a unique verification URL where they will submit their driver license or passport along with a selfie photo. After AuthenticID verifies the user's identity, it sends the results to PingOne DaVinci where you can branch your flow accordingly.
 
 To make sure a camera is available to scan the documents and take photos, the user typically completes the verification process on a mobile device, either in a web browser or using a mobile app:
 
@@ -67,13 +67,13 @@ To make sure a camera is available to scan the documents and take photos, the us
 
 Learn more in the following:
 
-* DaVinci documentation:
+* PingOne DaVinci documentation:
 
   * [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html)
 
   * [Using connectors securely](https://docs.pingidentity.com/davinci/connectors/davinci_using_connectors_securely.html)
 
-  * [Using DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html)
+  * [Using PingOne DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html)
 
 ### Requirements
 
@@ -89,7 +89,7 @@ To use the connector, you'll need:
 
 ### Configuring the AuthenticID connector
 
-Add the connector in DaVinci as shown in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html), then configure it as follows.
+Add the connector in PingOne DaVinci as shown in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html), then configure it as follows.
 
 #### Connector configuration
 
@@ -141,7 +141,7 @@ If you're satisfied with your existing document and selfie image capture experie
 
 Both capabilities allow you to associate the images with an existing AuthenticID transaction ID to build a profile.
 
-Download the [Identity verification with AuthenticID CFAir](https://marketplace.pingone.com/item/identity-verification-with-authenticid-cfair-davinci-flow) flow template. Learn more in [Using DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html).
+Download the [Identity verification with AuthenticID CFAir](https://marketplace.pingone.com/item/identity-verification-with-authenticid-cfair-davinci-flow) flow template. Learn more in [Using PingOne DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html).
 
 ### Verifying identities with CFWeb
 
@@ -151,7 +151,7 @@ In this flow, you use AuthenticID to generate a unique verification URL and show
 
 This flow uses the **AuthenticID** connector to create a "challenge". This lets you pause the main flow on the QR code while a secondary flow continues the verification process. When the verification process is complete, you use a [Challenge](challenge_connector.html) connector to trigger the main flow to continue. Learn more about this technique,in [Challenge](challenge_connector.html) connector.
 
-1. Download the [AuthenticID Identity verification with CFWeb](https://marketplace.pingone.com/item/authenticid-identity-verification-with-cfweb-davinci-flow) flow template. Learn more in [Using DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html).
+1. Download the [AuthenticID Identity verification with CFWeb](https://marketplace.pingone.com/item/authenticid-identity-verification-with-cfweb-davinci-flow) flow template. Learn more in [Using PingOne DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html).
 
 2. (Optional) Customize the document verification QR code prompt:
 
@@ -759,7 +759,7 @@ Verify the authenticity of an identity document with the AuthenticID API solutio
 >
 >       * Pass1 object
 >
->         * result\_inlier object
+>         * result_inlier object
 >
 >           * angle number
 >
@@ -777,7 +777,7 @@ Verify the authenticity of an identity document with the AuthenticID API solutio
 >
 >       * Pass2 object
 >
->         * result\_inlier object
+>         * result_inlier object
 >
 >           * angle integer
 >
@@ -795,11 +795,11 @@ Verify the authenticity of an identity document with the AuthenticID API solutio
 >
 >     * DocumentEncoding object
 >
->       * Label\_29 string
+>       * Label_29 string
 >
->       * Label\_27 string
+>       * Label_27 string
 >
->       * Label\_28 string
+>       * Label_28 string
 >
 >       * GivenName string
 >
@@ -807,57 +807,57 @@ Verify the authenticity of an identity document with the AuthenticID API solutio
 >
 >       * Version string
 >
->       * Label\_21 string
+>       * Label_21 string
 >
->       * Label\_22 string
+>       * Label_22 string
 >
->       * Label\_20 string
+>       * Label_20 string
 >
->       * Label\_25 string
+>       * Label_25 string
 >
->       * Label\_26 string
+>       * Label_26 string
 >
->       * Label\_23 string
+>       * Label_23 string
 >
->       * Label\_24 string
+>       * Label_24 string
 >
->       * Label\_38 string
+>       * Label_38 string
 >
->       * processed\_image\_height string
+>       * processed_image_height string
 >
->       * Label\_39 string
+>       * Label_39 string
 >
->       * Label\_32 string
+>       * Label_32 string
 >
->       * Label\_33 string
+>       * Label_33 string
 >
->       * processed\_image\_width string
+>       * processed_image_width string
 >
->       * Label\_30 string
+>       * Label_30 string
 >
->       * Label\_31 string
+>       * Label_31 string
 >
->       * Label\_36 string
+>       * Label_36 string
 >
->       * Label\_37 string
+>       * Label_37 string
 >
->       * Label\_34 string
+>       * Label_34 string
 >
 >       * BirthDate string
 >
->       * Label\_35 string
+>       * Label_35 string
 >
 >       * Sex string
 >
 >       * Height string
 >
->       * Label\_18 string
+>       * Label_18 string
 >
->       * Label\_19 string
+>       * Label_19 string
 >
->       * Label\_16 string
+>       * Label_16 string
 >
->       * Label\_17 string
+>       * Label_17 string
 >
 >       * Address2 string
 >
@@ -867,35 +867,35 @@ Verify the authenticity of an identity document with the AuthenticID API solutio
 >
 >       * DocumentNumber string
 >
->       * Label\_2 string
+>       * Label_2 string
 >
->       * Label\_10 string
+>       * Label_10 string
 >
->       * Label\_7 string
+>       * Label_7 string
 >
->       * Label\_11 string
+>       * Label_11 string
 >
->       * Label\_8 string
+>       * Label_8 string
 >
->       * Label\_9 string
+>       * Label_9 string
 >
->       * Label\_14 string
+>       * Label_14 string
 >
->       * Label\_3 string
+>       * Label_3 string
 >
 >       * Surname string
 >
->       * Label\_15 string
+>       * Label_15 string
 >
->       * Label\_4 string
+>       * Label_4 string
 >
->       * Label\_12 string
+>       * Label_12 string
 >
->       * Label\_5 string
+>       * Label_5 string
 >
->       * Label\_13 string
+>       * Label_13 string
 >
->       * Label\_6 string
+>       * Label_6 string
 >
 >       * FullName string
 >
@@ -1021,7 +1021,7 @@ Verify the authenticity of an identity document with the AuthenticID API solutio
 >
 >     * DocumentRiskConditions object
 >
->       * DQL\_Default\_Results object
+>       * DQL_Default_Results object
 >
 >     * SegmentName string
 >
@@ -1557,55 +1557,55 @@ Match selfie to document with CFAir.
 >
 >     * SelfieRiskConditions object
 >
->       * DQL\_Default\_Results object
+>       * DQL_Default_Results object
 >
->         * DQL\_Series\_9000\_Result string
+>         * DQL_Series_9000_Result string
 >
->         * DQL\_FRScore1\_Final\_Result\_Reason string
+>         * DQL_FRScore1_Final_Result_Reason string
 >
->         * DQL\_FRScore1\_Final\_Result string
+>         * DQL_FRScore1_Final_Result string
 >
->         * DQL\_Selfie1\_Score\_Result string
+>         * DQL_Selfie1_Score_Result string
 >
->         * DQL\_Series\_9200\_Result string
+>         * DQL_Series_9200_Result string
 >
->         * DQL\_FRScore\_Final\_Result string
+>         * DQL_FRScore_Final_Result string
 >
->         * DQL\_FarSelfie\_Usable\_Result\_Reason string
+>         * DQL_FarSelfie_Usable_Result_Reason string
 >
->         * DQL\_Selfie1\_Usable\_Result\_Reason string
+>         * DQL_Selfie1_Usable_Result_Reason string
 >
->         * DQL\_Selfie1Liveness\_Result string
+>         * DQL_Selfie1Liveness_Result string
 >
->         * DQL\_FarSelfie\_Liveness\_Result\_Reason null
+>         * DQL_FarSelfie_Liveness_Result_Reason null
 >
->         * DQL\_FarSelfie\_Liveness\_Result string
+>         * DQL_FarSelfie_Liveness_Result string
 >
->         * DQL\_Version string
+>         * DQL_Version string
 >
->         * DQL\_Series\_9100\_Result string
+>         * DQL_Series_9100_Result string
 >
->         * DQL\_Selfie1\_Score\_Result\_Reason string
+>         * DQL_Selfie1_Score_Result_Reason string
 >
->         * DQL\_Series\_9500\_Result string
+>         * DQL_Series_9500_Result string
 >
->         * DQL\_Headshot\_Usable\_Result string
+>         * DQL_Headshot_Usable_Result string
 >
->         * DQL\_Final\_EnrollFace\_Result null
+>         * DQL_Final_EnrollFace_Result null
 >
->         * DQL\_FarSelfie\_Usable\_Result string
+>         * DQL_FarSelfie_Usable_Result string
 >
->         * DQL\_Headshot\_Usable\_Result\_Reason string
+>         * DQL_Headshot_Usable_Result_Reason string
 >
->         * DQL\_Final\_EnrollFace\_Which\_Result string
+>         * DQL_Final_EnrollFace_Which_Result string
 >
->         * DQL\_Series\_9400\_Result string
+>         * DQL_Series_9400_Result string
 >
->         * DQL\_Selfie2Liveness\_Result string
+>         * DQL_Selfie2Liveness_Result string
 >
->         * DQL\_Selfie1\_Usable\_Result string
+>         * DQL_Selfie1_Usable_Result string
 >
->         * DQL\_Selfie1Liveness\_Result\_Reason string
+>         * DQL_Selfie1Liveness_Result_Reason string
 >
 >     * SegmentName string
 >

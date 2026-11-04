@@ -3,8 +3,8 @@ title: PingID
 description: PingID is a cloud-based, adaptive multi-factor authentication (MFA) solution that is part of PingOne for Workforce, a comprehensive cloud authentication authority.
 component: pingid
 page_id: pingid::pid_landing_page
-canonical_url: http://docs.pingidentity.com/pingid/pid_landing_page.html
-llms_txt: http://docs.pingidentity.com/pingid/llms.txt
+canonical_url: https://docs.pingidentity.com/pingid/pid_landing_page.html
+llms_txt: https://docs.pingidentity.com/pingid/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: May 18, 2023
 section_ids:
@@ -38,7 +38,7 @@ The PingID documentation contains everything you need to know as an administrato
 
 * [The PingID dashboard](pingid_service_management/pid_dashboard.html)
 
-* [Starting a PingOne trial](http://docs.pingidentity.com/pingone/getting_started_with_pingone/p1_start_a_p1_trial.html)
+* [Starting a PingOne trial](https://docs.pingidentity.com/pingone/getting_started_with_pingone/p1_start_a_p1_trial.html)
 
 ## Use PingID (Admin)
 
@@ -80,25 +80,25 @@ The PingID documentation contains everything you need to know as an administrato
 
 ## Use PingID (End User)
 
-* [Pairing a device with PingID](http://docs.pingidentity.com/pingid-user-guide/secure_authentication_with_pingid/ug_pairing_a_device_with_pid.html)
+* [Pairing a device with PingID](https://docs.pingidentity.com/pingid-user-guide/secure_authentication_with_pingid/ug_pairing_a_device_with_pid.html)
 
-* [PingID authentication for the web](http://docs.pingidentity.com/pingid-user-guide/secure_authentication_with_pingid/pid_ug_authentication_for_the_web.html)
+* [PingID authentication for the web](https://docs.pingidentity.com/pingid-user-guide/secure_authentication_with_pingid/pid_ug_authentication_for_the_web.html)
 
-* [PingID authentication for VPN](http://docs.pingidentity.com/pingid-user-guide/secure_authentication_with_pingid/pid_ug_authentication_for_vpn.html)
+* [PingID authentication for VPN](https://docs.pingidentity.com/pingid-user-guide/secure_authentication_with_pingid/pid_ug_authentication_for_vpn.html)
 
-* [PingID authentication for Windows login](http://docs.pingidentity.com/pingid-user-guide/secure_authentication_with_pingid/ug_pid_authentication_for_windows_login.html)
+* [PingID authentication for Windows login](https://docs.pingidentity.com/pingid-user-guide/secure_authentication_with_pingid/ug_pid_authentication_for_windows_login.html)
 
-* [PingID authentication for Mac login](http://docs.pingidentity.com/pingid-user-guide/secure_authentication_with_pingid/pid_ug_mac_login_auth.html)
+* [PingID authentication for Mac login](https://docs.pingidentity.com/pingid-user-guide/secure_authentication_with_pingid/pid_ug_mac_login_auth.html)
 
-* [Managing your devices](http://docs.pingidentity.com/pingid-user-guide/managing_your_devices/pid_manage_your_devices.html)
+* [Managing your devices](https://docs.pingidentity.com/pingid-user-guide/managing_your_devices/pid_manage_your_devices.html)
 
-* [Transferring PingID mobile app authentication to a different device](http://docs.pingidentity.com/pingid-user-guide/managing_your_devices/pid_transfer_mobile_app_to_different_device.html)
+* [Transferring PingID mobile app authentication to a different device](https://docs.pingidentity.com/pingid-user-guide/managing_your_devices/pid_transfer_mobile_app_to_different_device.html)
 
-* [PingID mobile app management](http://docs.pingidentity.com/pingid-user-guide/managing_your_devices/pid_mobile_app_management_two.html)
+* [PingID mobile app management](https://docs.pingidentity.com/pingid-user-guide/managing_your_devices/pid_mobile_app_management_two.html)
 
-* [PingID desktop app management](http://docs.pingidentity.com/pingid-user-guide/managing_your_devices/pid_desktop_app_management.html)
+* [PingID desktop app management](https://docs.pingidentity.com/pingid-user-guide/managing_your_devices/pid_desktop_app_management.html)
 
-* [Handling a lost, broken, or stolen device situation](http://docs.pingidentity.com/pingid-user-guide/managing_your_devices/pid_ug_a_lost_or_stolen_device_situation.html)
+* [Handling a lost, broken, or stolen device situation](https://docs.pingidentity.com/pingid-user-guide/managing_your_devices/pid_ug_a_lost_or_stolen_device_situation.html)
 
 ## Learn More
 

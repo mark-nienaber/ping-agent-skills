@@ -1,11 +1,12 @@
 ---
 title: Configuration Management
-description: The Configuration Management service gives you a secure and flexible approach to automating (promoting) configurations across multiple environments, enabling the seamless creation, updating, and deletion of resources while supporting dynamic configurations through variable management. Resource dependencies are maintained, ensuring smooth cross-environment transitions and promotions. Auditing and reporting enhance oversight and compliance.
+description: Describes the early access PingOne Configuration Management service for promoting configurations across environments, including snapshots, promotions, and variables
 component: pingone-api-ea
-page_id: pingone-api-ea:platform:early-access/configuration-management
-canonical_url: https://developer.pingidentity.com/pingone-api-ea/platform/early-access/configuration-management.html
+page_id: pingone-api-ea:platform:early-access/configuration-management/index
+canonical_url: https://developer.pingidentity.com/pingone-api-ea/platform/early-access/configuration-management/index.html
 llms_txt: https://developer.pingidentity.com/pingone-api-ea/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-11
 section_ids:
   special-handling: Resources requiring special handling
   secrets-and-passwords: Secrets and passwords
@@ -35,7 +36,7 @@ To use the Configuration Management service you need to have the Environment Adm
 
 * If desired, use promotion variables to dynamically substitute different property values for a configuration resource included in a promotion operation.
 
-* Use the promotion plan returned by the [Read One Promotion](configuration-management/promotions/get-one-promotion.html) or [Read All Promotions](configuration-management/promotions/get-all-promotions.html) to move the configuration from the source environment to the target environment.
+* Use the promotion plan returned by the [Read One Promotion](promotions/get-one-promotion.html) or [Read All Promotions](promotions/get-all-promotions.html) to move the configuration from the source environment to the target environment.
 
 |   |                                                                                                                                                                                                                                                                                                                                                                                                                                     |
 | - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -51,13 +52,13 @@ To use the Configuration Management service you need to have the Environment Adm
 
 The Configuration Management service is comprised of these sub-services:
 
-* [Snapshots](configuration-management/snapshots.html)
+* [Snapshots](snapshots/index.html)
 
-* [Promotions](configuration-management/promotions.html)
+* [Promotions](promotions/index.html)
 
-* [Promotion Variables](configuration-management/promotion-variables.html)
+* [Promotion Variables](promotion-variables/index.html)
 
-* [Promotion Configuration](configuration-management/promotion-configuration.html)
+* [Promotion Configuration](promotion-configuration/index.html)
 
 ## Resources requiring special handling
 
@@ -69,7 +70,7 @@ Some resources can't be promoted. Excluded resources generally fall into the fol
 
 * Roles and permissions: While you can promote resources that require permissions or roles, the administrative access to them isn't promoted. This includes administrator role assignment and application role assignments. After the resource is promoted, you must manually assign the appropriate roles and permissions to the resource in the target environment.
 
-You'll find a complete list of excluded resources in [Excluded Resources](configuration-management/promotions/excluded-resources.html).
+You'll find a complete list of excluded resources in [Excluded Resources](promotions/excluded-resources.html).
 
 ### Secrets and passwords
 
@@ -149,12 +150,13 @@ Refer to [Postman and the PingOne APIs](https://developer.pingidentity.com/pingo
 
 ---
 title: Create Custom Push Provider
-description: This example uses the pushDeliverySettings endpoint to create a custom sender for push notifications.
+description: Create a custom push notification provider using the early access pushDeliverySettings endpoint in PingOne
 component: pingone-api-ea
 page_id: pingone-api-ea:platform:early-access/push-delivery-settings/create_custom_push_provider
 canonical_url: https://developer.pingidentity.com/pingone-api-ea/platform/early-access/push-delivery-settings/create_custom_push_provider.html
 llms_txt: https://developer.pingidentity.com/pingone-api-ea/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-07-05
 section_ids:
   headers: Headers
   body: Body
@@ -197,7 +199,7 @@ The variable `${push-data}` represents the relevant data provided by PingOne so 
 > | `requests.method`             | String | Required  |
 > | `requests.url`                | String | Required  |
 >
-> Refer to the [Push delivery data model](../push-delivery-settings.html#push-delivery-data-model) for full property descriptions.
+> Refer to the [Push delivery data model](index.html#push-delivery-data-model) for full property descriptions.
 
 ### Headers
 
@@ -694,11 +696,13 @@ task.resume()
 
 ---
 title: Create Promotion
+description: Create a PingOne promotion to move configuration resources from a source environment to a target environment
 component: pingone-api-ea
 page_id: pingone-api-ea:platform:early-access/configuration-management/promotions/create-promotion
 canonical_url: https://developer.pingidentity.com/pingone-api-ea/platform/early-access/configuration-management/promotions/create-promotion.html
 llms_txt: https://developer.pingidentity.com/pingone-api-ea/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-05-29
 section_ids:
   headers: Headers
   body: Body
@@ -710,8 +714,6 @@ section_ids:
 
 ##
 
- 
-
 ```none
 POST {{apiPath}}/v1/environments/{{envID}}/promotions
 ```
@@ -722,7 +724,7 @@ When you create a promotion, you've the option to specify a snapshot of the conf
 
 > **Collapse: Request Model**
 >
-> For complete property descriptions, refer to [Promotions](../promotions.html).
+> For complete property descriptions, refer to [Promotions](index.html).
 >
 > | Property            | Type        | Required |
 > | ------------------- | ----------- | -------- |
@@ -1193,11 +1195,13 @@ task.resume()
 
 ---
 title: Create Snapshot
+description: Generate a snapshot of a PingOne configuration resource for use in a promotion
 component: pingone-api-ea
 page_id: pingone-api-ea:platform:early-access/configuration-management/snapshots/create-snapshot
 canonical_url: https://developer.pingidentity.com/pingone-api-ea/platform/early-access/configuration-management/snapshots/create-snapshot.html
 llms_txt: https://developer.pingidentity.com/pingone-api-ea/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-05-29
 section_ids:
   headers: Headers
   body: Body
@@ -1208,8 +1212,6 @@ section_ids:
 # Create Snapshot
 
 ##
-
- 
 
 ```none
 POST {{apiPath}}/v1/environments/{{envID}}/snapshots
@@ -1229,7 +1231,7 @@ The configuration resource, and optionally all of its dependencies (using the `e
 
 > **Collapse: Request Model**
 >
-> For property descriptions, refer to [Snapshot](../snapshots.html).
+> For property descriptions, refer to [Snapshot](index.html).
 >
 > | Property          | Type   | Required |
 > | ----------------- | ------ | -------- |
@@ -1534,11 +1536,14 @@ task.resume()
 
 ---
 title: Create Variable Declaration
+description: Declare a promotion variable, binding a variable definition to a configuration resource attribute for a PingOne promotion
 component: pingone-api-ea
-page_id: pingone-api-ea:platform:early-access/configuration-management/promotion-variables/create-variable-declaration
-canonical_url: https://developer.pingidentity.com/pingone-api-ea/platform/early-access/configuration-management/promotion-variables/create-variable-declaration.html
+page_id: pingone-api-ea:platform:early-access/configuration-management/promotion-variables/variable-declarations/create-variable-declaration
+canonical_url: https://developer.pingidentity.com/pingone-api-ea/platform/early-access/configuration-management/promotion-variables/variable-declarations/create-variable-declaration.html
 llms_txt: https://developer.pingidentity.com/pingone-api-ea/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-07-17
+page_aliases: ["platform:early-access/promotion-variables/create-variable-declaration.adoc"]
 section_ids:
   headers: Headers
   body: Body
@@ -1550,13 +1555,11 @@ section_ids:
 
 ##
 
- 
-
 ```none
 POST {{apiPath}}/v1/environments/{{envID}}/promotionVariableDeclarations
 ```
 
-Use the POST `{{apiPath}}/v1/environments/{{envID}}/promotionVariableDeclarations` request to declare (assign a value to) a promotion variable for use in the specified environment. You must first have defined the promotion variable using the [Create Variable Definition](create-variable-definition.html) request.
+Use the POST `{{apiPath}}/v1/environments/{{envID}}/promotionVariableDeclarations` request to declare (assign a value to) a promotion variable for use in the specified environment. You must first have defined the promotion variable using the [Create Variable Definition](../variable-definitions/create-variable-definition.html) request.
 
 |   |                                                                                                                                                                                                                                                                                                                                                                      |
 | - | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -1893,11 +1896,14 @@ task.resume()
 
 ---
 title: Create Variable Definition
+description: Define a promotion variable value to substitute for a configuration resource property in a PingOne promotion
 component: pingone-api-ea
-page_id: pingone-api-ea:platform:early-access/configuration-management/promotion-variables/create-variable-definition
-canonical_url: https://developer.pingidentity.com/pingone-api-ea/platform/early-access/configuration-management/promotion-variables/create-variable-definition.html
+page_id: pingone-api-ea:platform:early-access/configuration-management/promotion-variables/variable-definitions/create-variable-definition
+canonical_url: https://developer.pingidentity.com/pingone-api-ea/platform/early-access/configuration-management/promotion-variables/variable-definitions/create-variable-definition.html
 llms_txt: https://developer.pingidentity.com/pingone-api-ea/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-07-17
+page_aliases: ["platform:early-access/promotion-variables/create-variable-definition.adoc"]
 section_ids:
   headers: Headers
   body: Body
@@ -1910,17 +1916,15 @@ section_ids:
 
 ##
 
- 
-
 ```none
 POST {{apiPath}}/v1/environments/{{envID}}/promotionVariableDefinitions
 ```
 
-Use the POST `{{apiPath}}/v1/environments/{{envID}}/promotionVariableDefinitions` request to define a promotion variable to be used in the specified environment. At this point, the promotion variable isn't associated with a configuration resource property. The next step is to use the [Create Variable Declaration](create-variable-declaration.html) request to associate the promotion variable you've defined with a configuration resource property.
+Use the POST `{{apiPath}}/v1/environments/{{envID}}/promotionVariableDefinitions` request to define a promotion variable to be used in the specified environment. At this point, the promotion variable isn't associated with a configuration resource property. The next step is to use the [Create Variable Declaration](../variable-declarations/create-variable-declaration.html) request to associate the promotion variable you've defined with a configuration resource property.
 
 > **Collapse: Request Model**
 >
-> Refer to [Promotion Variables](variable-definitions.html) for complete property descriptions.
+> Refer to [Promotion Variables](index.html) for complete property descriptions.
 >
 > | Property      | Type    | Required |
 > | ------------- | ------- | -------- |
@@ -2268,11 +2272,13 @@ task.resume()
 
 ---
 title: Delete Promotion
+description: Delete the specified PingOne promotion
 component: pingone-api-ea
 page_id: pingone-api-ea:platform:early-access/configuration-management/promotions/delete-promotion
 canonical_url: https://developer.pingidentity.com/pingone-api-ea/platform/early-access/configuration-management/promotions/delete-promotion.html
 llms_txt: https://developer.pingidentity.com/pingone-api-ea/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-05-05
 section_ids:
   headers: Headers
   example-request: Example Request
@@ -2281,8 +2287,6 @@ section_ids:
 # Delete Promotion
 
 ##
-
- 
 
 ```none
 DELETE {{apiPath}}/v1/environments/{{envID}}/promotions/{{promotionID}}
@@ -2503,11 +2507,14 @@ task.resume()
 
 ---
 title: Delete Variable Declaration
+description: Delete a promotion variable declaration in a PingOne environment
 component: pingone-api-ea
-page_id: pingone-api-ea:platform:early-access/configuration-management/promotion-variables/delete-variable-declaration
-canonical_url: https://developer.pingidentity.com/pingone-api-ea/platform/early-access/configuration-management/promotion-variables/delete-variable-declaration.html
+page_id: pingone-api-ea:platform:early-access/configuration-management/promotion-variables/variable-declarations/delete-variable-declaration
+canonical_url: https://developer.pingidentity.com/pingone-api-ea/platform/early-access/configuration-management/promotion-variables/variable-declarations/delete-variable-declaration.html
 llms_txt: https://developer.pingidentity.com/pingone-api-ea/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-07-17
+page_aliases: ["platform:early-access/promotion-variables/delete-variable-declaration.adoc"]
 section_ids:
   headers: Headers
   example-request: Example Request
@@ -2516,8 +2523,6 @@ section_ids:
 # Delete Variable Declaration
 
 ##
-
- 
 
 ```none
 DELETE {{apiPath}}/v1/environments/{{envID}}/promotionVariableDeclarations/e2450d85-1233-45fc-87eb-cd6903f624fa
@@ -2738,11 +2743,14 @@ task.resume()
 
 ---
 title: Delete Variable Definition
+description: Delete a promotion variable definition in a PingOne environment
 component: pingone-api-ea
-page_id: pingone-api-ea:platform:early-access/configuration-management/promotion-variables/delete-variable-definition
-canonical_url: https://developer.pingidentity.com/pingone-api-ea/platform/early-access/configuration-management/promotion-variables/delete-variable-definition.html
+page_id: pingone-api-ea:platform:early-access/configuration-management/promotion-variables/variable-definitions/delete-variable-definition
+canonical_url: https://developer.pingidentity.com/pingone-api-ea/platform/early-access/configuration-management/promotion-variables/variable-definitions/delete-variable-definition.html
 llms_txt: https://developer.pingidentity.com/pingone-api-ea/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-07-17
+page_aliases: ["platform:early-access/promotion-variables/delete-variable-definition.adoc"]
 section_ids:
   headers: Headers
   example-request: Example Request
@@ -2751,8 +2759,6 @@ section_ids:
 # Delete Variable Definition
 
 ##
-
- 
 
 ```none
 DELETE {{apiPath}}/v1/environments/{{envID}}/promotionVariableDefinitions/{{definitionName}}
@@ -2973,30 +2979,32 @@ task.resume()
 
 ---
 title: Early Access
-description: These early access features are available for preview purposes only, and are not covered under standard Support SLAs. You can open support cases for feedback, bug reports, configuration questions, or other inquiries related to early access features, but resolution times for these cases will vary. These cases often require collaboration with our Engineering and Product teams, so timelines might exceed the usual SLAs for your Support package.
+description: Describes support expectations for PingOne early access features, which are preview-only and not covered under standard Support SLAs
 component: pingone-api-ea
-page_id: pingone-api-ea:platform:early-access
-canonical_url: https://developer.pingidentity.com/pingone-api-ea/platform/early-access.html
+page_id: pingone-api-ea:platform:early-access/index
+canonical_url: https://developer.pingidentity.com/pingone-api-ea/platform/early-access/index.html
 llms_txt: https://developer.pingidentity.com/pingone-api-ea/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-11
 ---
 
 # Early Access
 
 These early access features are available for preview purposes only, and are not covered under standard Support SLAs. You can open support cases for feedback, bug reports, configuration questions, or other inquiries related to early access features, but resolution times for these cases will vary. These cases often require collaboration with our Engineering and Product teams, so timelines might exceed the usual SLAs for your Support package.
 
-We encourage you to use any of the early access features you find applicable. You'll need to enable each feature you'd like to use.
+We encourage you to use any of the early access features you find applicable. You'll need to enable each feature you'd like to use. Refer to [Early Access Features](https://developer.pingidentity.com/pingone-api/platform/environments/early-access-features/index.html) for instructions.
 
 ---
 
 ---
 title: Excluded Resources
-description: Currently, not all resources, services, or products can be used in a promotion operation.
+description: Lists the PingOne products, services, and resources that are excluded or currently unsupported for promotion operations
 component: pingone-api-ea
 page_id: pingone-api-ea:platform:early-access/configuration-management/promotions/excluded-resources
 canonical_url: https://developer.pingidentity.com/pingone-api-ea/platform/early-access/configuration-management/promotions/excluded-resources.html
 llms_txt: https://developer.pingidentity.com/pingone-api-ea/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-11
 section_ids:
   excluded-products-or-services: Excluded products or services
   excluded-resources: Excluded resources
@@ -3036,9 +3044,9 @@ These resources are expected to never be supported for promotion:
 
 * Application Signons Statistics
 
-* Certificates (Refer to [Resources requiring special handling](../../configuration-management.html#special-handling).)
+* Certificates (Refer to [Resources requiring special handling](../index.html#special-handling).)
 
-* Connectors (Refer to [Resources requiring special handling](../../configuration-management.html#special-handling).)
+* Connectors (Refer to [Resources requiring special handling](../index.html#special-handling).)
 
 * Dashboards
 
@@ -3203,13 +3211,47 @@ These resources will be supported for promotion, but are not currently:
 ---
 
 ---
-title: Platform SSO APIs - Early Access
-description: The PingOne early access APIs are available to you when you enable the early access features. When enabled, the features apply only to a specified environment. You select the features to enable, and can remove the feature from the specified environment at any time during the early access period.
+title: MCP Server
+description: Describes the early access PingOne MCP Settings API for managing Model Context Protocol access in an environment
 component: pingone-api-ea
-page_id: pingone-api-ea:platform:introduction
-canonical_url: https://developer.pingidentity.com/pingone-api-ea/platform/introduction.html
+page_id: pingone-api-ea:platform:early-access/mcp-server/index
+canonical_url: https://developer.pingidentity.com/pingone-api-ea/platform/early-access/mcp-server/index.html
 llms_txt: https://developer.pingidentity.com/pingone-api-ea/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-09-01
+section_ids:
+  mcp-server-data-model: MCP Server data model
+---
+
+# MCP Server
+
+|   |                                                                                                                                                       |
+| - | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | This information is provided as part of the early-access program. API details described here might change before the official release of the feature. |
+
+The MCP Settings API allows administrators to manage the configuration of the PingOne Model Context Protocol (MCP) server for a specific environment.
+
+By default, the MCP server is disabled. Using these endpoints, you can enable the MCP server, which allows authorized external Large Language Model (LLM) clients to discover and execute [tools](https://developer.pingidentity.com/build-with-ai/pingone-mcp-server/p1-available-tools.html) within your PingOne environment.
+
+## MCP Server data model
+
+| Property         | Type    | Required | Mutable   | Description                                                                           |
+| ---------------- | ------- | -------- | --------- | ------------------------------------------------------------------------------------- |
+| `environment.id` | String  | Required | Immutable | The UUID of the environment to which the MCP Server settings apply.                   |
+| `enabled`        | Boolean | Required | Mutable   | Specifies whether the MCP server is enabled for the environment. Defaults to `false`. |
+
+---
+
+---
+title: Platform SSO APIs - Early Access
+description: Explains how to enable PingOne early access APIs for a specific environment and remove them at any time during the early access period
+component: pingone-api-ea
+page_id: pingone-api-ea:platform:index
+canonical_url: https://developer.pingidentity.com/pingone-api-ea/platform/index.html
+llms_txt: https://developer.pingidentity.com/pingone-api-ea/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-11
+page_aliases: ["introduction.adoc"]
 ---
 
 # Platform SSO APIs - Early Access
@@ -3220,12 +3262,13 @@ The PingOne early access APIs are available to you when you enable the early acc
 
 ---
 title: Promotion Configuration
-description: The promotionConfiguration endpoint sets and reads default target environment to be used for promotions. When you know that you'll be working with a specific target environment, you can set this environment as the default for the promotions you're doing.
+description: Describes the PingOne promotionConfiguration endpoint for setting and reading the default target environment used for promotions
 component: pingone-api-ea
-page_id: pingone-api-ea:platform:early-access/configuration-management/promotion-configuration
-canonical_url: https://developer.pingidentity.com/pingone-api-ea/platform/early-access/configuration-management/promotion-configuration.html
+page_id: pingone-api-ea:platform:early-access/configuration-management/promotion-configuration/index
+canonical_url: https://developer.pingidentity.com/pingone-api-ea/platform/early-access/configuration-management/promotion-configuration/index.html
 llms_txt: https://developer.pingidentity.com/pingone-api-ea/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-11
 section_ids:
   promotionConfig-model: Promotion Configuration data model
 ---
@@ -3245,19 +3288,20 @@ The `promotionConfiguration` endpoint sets and reads default target environment 
 
 ---
 title: Promotion Mappings
-description: The Promotion Mappings operations enable you to track the mappings used by the Promotions service from the source environment to one or more target environment. This is particularly important if you've allowed the Promotions service to automatically generate the mappings when you created the promotion. Refer to Create Promotion for more information.
+description: Explains how PingOne Promotion Mappings operations track the mapping of source environment resources to target environment resources
 component: pingone-api-ea
-page_id: pingone-api-ea:platform:early-access/configuration-management/promotion-mappings
-canonical_url: https://developer.pingidentity.com/pingone-api-ea/platform/early-access/configuration-management/promotion-mappings.html
+page_id: pingone-api-ea:platform:early-access/configuration-management/promotion-mappings/index
+canonical_url: https://developer.pingidentity.com/pingone-api-ea/platform/early-access/configuration-management/promotion-mappings/index.html
 llms_txt: https://developer.pingidentity.com/pingone-api-ea/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-11
 section_ids:
   promotion-mappings-model: Promotion Mappings data model
 ---
 
 # Promotion Mappings
 
-The Promotion Mappings operations enable you to track the mappings used by the Promotions service from the source environment to one or more target environment. This is particularly important if you've allowed the Promotions service to automatically generate the mappings when you created the promotion. Refer to [Create Promotion](promotions/create-promotion.html) for more information.
+The Promotion Mappings operations enable you to track the mappings used by the Promotions service from the source environment to one or more target environment. This is particularly important if you've allowed the Promotions service to automatically generate the mappings when you created the promotion. Refer to [Create Promotion](../promotions/create-promotion.html) for more information.
 
 ## Promotion Mappings data model
 
@@ -3271,12 +3315,13 @@ The Promotion Mappings operations enable you to track the mappings used by the P
 
 ---
 title: Promotion Variables
-description: Use promotion variables to account for environment-specific differences, such as third-party integrations or URLs. You can specify configuration resource property values for either the source or target environment. The source environment property values will be substituted for the target environment property values by the promotion.
+description: Explains how to use promotion variables to substitute environment-specific property values, such as URLs, during a PingOne configuration promotion
 component: pingone-api-ea
-page_id: pingone-api-ea:platform:early-access/configuration-management/promotion-variables
-canonical_url: https://developer.pingidentity.com/pingone-api-ea/platform/early-access/configuration-management/promotion-variables.html
+page_id: pingone-api-ea:platform:early-access/configuration-management/promotion-variables/index
+canonical_url: https://developer.pingidentity.com/pingone-api-ea/platform/early-access/configuration-management/promotion-variables/index.html
 llms_txt: https://developer.pingidentity.com/pingone-api-ea/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-11
 ---
 
 # Promotion Variables
@@ -3285,17 +3330,17 @@ Use promotion variables to account for environment-specific differences, such as
 
 A promotion changes only the corresponding target environment property values with the promotion variables you set for the source environment. If you do not set any promotion variables, the configuration resource or resources that you specify for the source or target environment will be used as is, and cannot be changed during the promotion operation.
 
-|   |                                                                                                                                                                                                                                    |
-| - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | Not all properties for configuration resources can be used as promotion variables. Refer to [Variable Resources](promotion-variables/variable-resources.html) for the listing of supported configuration resources and properties. |
+|   |                                                                                                                                                                                                                      |
+| - | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | Not all properties for configuration resources can be used as promotion variables. Refer to [Variable Resources](variable-resources/index.html) for the listing of supported configuration resources and properties. |
 
 To use promotion variables, you need to:
 
 1. Specify the configuration resource to be promoted in a snapshot.
 
-2. Define the variable or variables to be used for a source or target environment configuration resource property. Refer to [Variable Definitions](promotion-variables/variable-definitions.html).
+2. Define the variable or variables to be used for a source or target environment configuration resource property. Refer to [Variable Definitions](variable-definitions/index.html).
 
-3. Declare the variables to be used by the promotion operation. Refer to [Variable Declarations](promotion-variables/variable-declarations.html).
+3. Declare the variables to be used by the promotion operation. Refer to [Variable Declarations](variable-declarations/index.html).
 
 A few things to be aware of:
 
@@ -3309,12 +3354,13 @@ A few things to be aware of:
 
 ---
 title: Promotions
-description: A promotion includes, at a minimum, source and target environment references, automatically generated source and target snapshots, the resource or resources to promote to the target environment, and a promotion plan for the promotion operation. You need to have the Environment Admin role for both the source and target environments. You can optionally include a specific source environment snapshot to use, as well as a mapping of the source environment configuration resource or resources to the target environment configuration resource or resources.
+description: Describes PingOne promotions, which move configuration resources from a source environment to a target environment, and how to roll one back
 component: pingone-api-ea
-page_id: pingone-api-ea:platform:early-access/configuration-management/promotions
-canonical_url: https://developer.pingidentity.com/pingone-api-ea/platform/early-access/configuration-management/promotions.html
+page_id: pingone-api-ea:platform:early-access/configuration-management/promotions/index
+canonical_url: https://developer.pingidentity.com/pingone-api-ea/platform/early-access/configuration-management/promotions/index.html
 llms_txt: https://developer.pingidentity.com/pingone-api-ea/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-11
 section_ids:
   promotions-model: Promotions data model
   rolling-back-a-promotion: Rolling back a promotion
@@ -3329,9 +3375,9 @@ A promotion includes, at a minimum, source and target environment references, au
 | - | ---------------------------------------------------------------------------------------------- |
 |   | Currently, you can promote configurations only to environments within the same PingOne tenant. |
 
-A PingOne admin having Environment Admin permissions can review the promotion plan, and update the promotion mapping and variable definitions or declarations as needed. The promotion plan is then regenerated based on the updates. Use the [Read One Promotion](promotions/get-one-promotion.html) or [Read All Promotions](promotions/get-all-promotions.html) to view the promotion plan.
+A PingOne admin having Environment Admin permissions can review the promotion plan, and update the promotion mapping and variable definitions or declarations as needed. The promotion plan is then regenerated based on the updates. Use the [Read One Promotion](get-one-promotion.html) or [Read All Promotions](get-all-promotions.html) to view the promotion plan.
 
-If you do not set any promotion variables, the configuration resource or resources that you specify for the source or target environment will be used as is, and cannot be changed during the promotion operation. Refer to [Promotion Variables](promotion-variables.html) for more information.
+If you do not set any promotion variables, the configuration resource or resources that you specify for the source or target environment will be used as is, and cannot be changed during the promotion operation. Refer to [Promotion Variables](../promotion-variables/index.html) for more information.
 
 When you choose to start the promotion operation, the promotion plan supplies the promotion operation instructions to the Promotions service. The Promotions service then:
 
@@ -3388,12 +3434,13 @@ You can roll back promotions as needed (whether they failed or were successful),
 
 ---
 title: Push Delivery Settings
-description: This information is provided as part of the early-access program. API details described here might change before the official release of the feature.
+description: Describes the early access pushDeliverySettings endpoint for defining a custom gateway to send PingOne push notifications through your own provider
 component: pingone-api-ea
-page_id: pingone-api-ea:platform:early-access/push-delivery-settings
-canonical_url: https://developer.pingidentity.com/pingone-api-ea/platform/early-access/push-delivery-settings.html
+page_id: pingone-api-ea:platform:early-access/push-delivery-settings/index
+canonical_url: https://developer.pingidentity.com/pingone-api-ea/platform/early-access/push-delivery-settings/index.html
 llms_txt: https://developer.pingidentity.com/pingone-api-ea/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-11
 section_ids:
   push-delivery-data-model: Push delivery data model
 ---
@@ -3426,7 +3473,7 @@ You can define up to three custom push senders.
 | `authentication.grantType`                  | String | Optional  | Mutable   | The grant type used. Relevant for custom providers that require OAuth 2 authentication. Set to `JWT_BEARER` for JWT-based authentication, and to `CLIENT_CREDENTIALS` for authentication based on client ID and secret. If not specified in the request, the default value is `CLIENT_CREDENTIALS`.                                                                                                               |
 | `authentication.headerName`                 | String | Required  | Mutable   | The name of the custom header used for authentication. Required when `authentication.method`=`CUSTOM_HEADER`                                                                                                                                                                                                                                                                                                      |
 | `authentication.headerValue`                | String | Required  | Mutable   | The value to use for the custom header used for authentication. Required when `authentication.method`=`CUSTOM_HEADER`                                                                                                                                                                                                                                                                                             |
-| `authentication.method`                     | String | Required  | Mutable   | The custom provider account's authentication method. Possible values:\* BASIC - username/password\* BEARER - bearer token\* OAUTH2 - OAuth 2\* CUSTOM\_HEADER - authentication using a custom header                                                                                                                                                                                                              |
+| `authentication.method`                     | String | Required  | Mutable   | The custom provider account's authentication method. Possible values:\* BASIC - username/password\* BEARER - bearer token\* OAUTH2 - OAuth 2\* CUSTOM_HEADER - authentication using a custom header                                                                                                                                                                                                               |
 | `authentication.password`                   | String | Required  | Mutable   | The password for the custom provider account. Required when `authentication.method`=`BASIC`                                                                                                                                                                                                                                                                                                                       |
 | `authentication.scopes`                     | Array  | Optional  | Mutable   | When `authentication.method` is set to OAUTH2, use `scopes` to specify the capabilities that the issued token should have, for example, `["push:send"]`.                                                                                                                                                                                                                                                          |
 | `authentication.username`                   | String | Required  | Mutable   | The username for the custom provider account. Required when `authentication.method`=`BASIC`                                                                                                                                                                                                                                                                                                                       |
@@ -3444,12 +3491,13 @@ You can define up to three custom push senders.
 
 ---
 title: Read All Custom Push Providers
-description: This example uses the pushDeliverySettings endpoint to return the information for all the custom push providers defined for the PingOne environment.
+description: Return the custom push notification providers defined for a PingOne environment using the early access pushDeliverySettings endpoint
 component: pingone-api-ea
 page_id: pingone-api-ea:platform:early-access/push-delivery-settings/get_custom_push_providers
 canonical_url: https://developer.pingidentity.com/pingone-api-ea/platform/early-access/push-delivery-settings/get_custom_push_providers.html
 llms_txt: https://developer.pingidentity.com/pingone-api-ea/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-07-05
 section_ids:
   headers: Headers
   example-request: Example Request
@@ -3812,11 +3860,13 @@ task.resume()
 
 ---
 title: Read All Promotions
+description: Return the details for all PingOne promotions, with optional filtering by status
 component: pingone-api-ea
 page_id: pingone-api-ea:platform:early-access/configuration-management/promotions/get-all-promotions
 canonical_url: https://developer.pingidentity.com/pingone-api-ea/platform/early-access/configuration-management/promotions/get-all-promotions.html
 llms_txt: https://developer.pingidentity.com/pingone-api-ea/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-05-26
 section_ids:
   headers: Headers
   example-request: Example Request
@@ -3826,8 +3876,6 @@ section_ids:
 # Read All Promotions
 
 ##
-
-   
 
 ```none
 GET {{apiPath}}/v1/environments/{{envID}}/promotions
@@ -4496,482 +4544,5 @@ task.resume()
         ]
     },
     "size": 10
-}
-```
-
----
-
----
-title: Read All Snapshot Versions
-component: pingone-api-ea
-page_id: pingone-api-ea:platform:early-access/configuration-management/snapshots/get-all-snapshot-versions
-canonical_url: https://developer.pingidentity.com/pingone-api-ea/platform/early-access/configuration-management/snapshots/get-all-snapshot-versions.html
-llms_txt: https://developer.pingidentity.com/pingone-api-ea/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-section_ids:
-  headers: Headers
-  example-request: Example Request
-  example-response: Example Response
----
-
-# Read All Snapshot Versions
-
-##
-
-   
-
-```none
-GET {{apiPath}}/v1/environments/{{envID}}/snapshots/{{configResourceID}}/versions
-```
-
-Use GET `{{apiPath}}/v1/environments/{{envID}}/snapshots/{{configResourceID}}/versions` to return the version information for all versions of the snapshot of the specified configuration resource.
-
-Any `configuration` attributes specified that contain sensitive information in plain text (such as, display names, client secrets, passwords) are masked in the response, and aren't available to any caller, even administrators. Refer to [Snapshots data model](../snapshots.html#snaphots-model).
-
-### Headers
-
-Authorization      Bearer {{accessToken}}
-
-##
-
-### Example Request
-
-* cURL
-
-* C#
-
-* Go
-
-* HTTP
-
-* Java
-
-* jQuery
-
-* NodeJS
-
-* Python
-
-* PHP
-
-* Ruby
-
-* Swift
-
-```shell
-curl --location --globoff '{{apiPath}}/v1/environments/{{envID}}/snapshots/{{configResourceID}}/versions' \
---header 'Authorization: Bearer {{accessToken}}'
-```
-
-```csharp
-var options = new RestClientOptions("{{apiPath}}/v1/environments/{{envID}}/snapshots/{{configResourceID}}/versions")
-{
-  MaxTimeout = -1,
-};
-var client = new RestClient(options);
-var request = new RestRequest("", Method.Get);
-request.AddHeader("Authorization", "Bearer {{accessToken}}");
-RestResponse response = await client.ExecuteAsync(request);
-Console.WriteLine(response.Content);
-```
-
-```golang
-package main
-
-import (
-  "fmt"
-  "net/http"
-  "io"
-)
-
-func main() {
-
-  url := "{{apiPath}}/v1/environments/{{envID}}/snapshots/{{configResourceID}}/versions"
-  method := "GET"
-
-  client := &http.Client {
-  }
-  req, err := http.NewRequest(method, url, nil)
-
-  if err != nil {
-    fmt.Println(err)
-    return
-  }
-  req.Header.Add("Authorization", "Bearer {{accessToken}}")
-
-  res, err := client.Do(req)
-  if err != nil {
-    fmt.Println(err)
-    return
-  }
-  defer res.Body.Close()
-
-  body, err := io.ReadAll(res.Body)
-  if err != nil {
-    fmt.Println(err)
-    return
-  }
-  fmt.Println(string(body))
-}
-```
-
-```http
-GET /v1/environments/{{envID}}/snapshots/{{configResourceID}}/versions HTTP/1.1
-Host: {{apiPath}}
-Authorization: Bearer {{accessToken}}
-```
-
-```java
-OkHttpClient client = new OkHttpClient().newBuilder()
-  .build();
-MediaType mediaType = MediaType.parse("text/plain");
-RequestBody body = RequestBody.create(mediaType, "");
-Request request = new Request.Builder()
-  .url("{{apiPath}}/v1/environments/{{envID}}/snapshots/{{configResourceID}}/versions")
-  .method("GET", body)
-  .addHeader("Authorization", "Bearer {{accessToken}}")
-  .build();
-Response response = client.newCall(request).execute();
-```
-
-```javascript
-var settings = {
-  "url": "{{apiPath}}/v1/environments/{{envID}}/snapshots/{{configResourceID}}/versions",
-  "method": "GET",
-  "timeout": 0,
-  "headers": {
-    "Authorization": "Bearer {{accessToken}}"
-  },
-};
-
-$.ajax(settings).done(function (response) {
-  console.log(response);
-});
-```
-
-```javascript
-var request = require('request');
-var options = {
-  'method': 'GET',
-  'url': '{{apiPath}}/v1/environments/{{envID}}/snapshots/{{configResourceID}}/versions',
-  'headers': {
-    'Authorization': 'Bearer {{accessToken}}'
-  }
-};
-request(options, function (error, response) {
-  if (error) throw new Error(error);
-  console.log(response.body);
-});
-```
-
-```python
-import requests
-
-url = "{{apiPath}}/v1/environments/{{envID}}/snapshots/{{configResourceID}}/versions"
-
-payload = {}
-headers = {
-  'Authorization': 'Bearer {{accessToken}}'
-}
-
-response = requests.request("GET", url, headers=headers, data=payload)
-
-print(response.text)
-```
-
-```php
-<?php
-require_once 'HTTP/Request2.php';
-$request = new HTTP_Request2();
-$request->setUrl('{{apiPath}}/v1/environments/{{envID}}/snapshots/{{configResourceID}}/versions');
-$request->setMethod(HTTP_Request2::METHOD_GET);
-$request->setConfig(array(
-  'follow_redirects' => TRUE
-));
-$request->setHeader(array(
-  'Authorization' => 'Bearer {{accessToken}}'
-));
-try {
-  $response = $request->send();
-  if ($response->getStatus() == 200) {
-    echo $response->getBody();
-  }
-  else {
-    echo 'Unexpected HTTP status: ' . $response->getStatus() . ' ' .
-    $response->getReasonPhrase();
-  }
-}
-catch(HTTP_Request2_Exception $e) {
-  echo 'Error: ' . $e->getMessage();
-}
-```
-
-```ruby
-require "uri"
-require "net/http"
-
-url = URI("{{apiPath}}/v1/environments/{{envID}}/snapshots/{{configResourceID}}/versions")
-
-http = Net::HTTP.new(url.host, url.port);
-request = Net::HTTP::Get.new(url)
-request["Authorization"] = "Bearer {{accessToken}}"
-
-response = http.request(request)
-puts response.read_body
-```
-
-```swift
-var request = URLRequest(url: URL(string: "{{apiPath}}/v1/environments/{{envID}}/snapshots/{{configResourceID}}/versions")!,timeoutInterval: Double.infinity)
-request.addValue("Bearer {{accessToken}}", forHTTPHeaderField: "Authorization")
-
-request.httpMethod = "GET"
-
-let task = URLSession.shared.dataTask(with: request) { data, response, error in
-  guard let data = data else {
-    print(String(describing: error))
-    return
-  }
-  print(String(data: data, encoding: .utf8)!)
-}
-
-task.resume()
-```
-
-### Example Response
-
-200 OK
-
-```json
-{
-    "_links": {
-        "self": {
-            "href": "https://api.pingone.com/v1/environments/abfba8f6-49eb-49f5-a5d9-80ad5c98f9f6/snapshots/0b7795ac-c589-4311-82bd-b1a9caff7a6a/versions"
-        }
-    },
-    "_embedded": {
-        "snapshots": [
-            {
-                "_links": {
-                    "environment": {
-                        "href": "https://api.pingone.com/v1/environments/abfba8f6-49eb-49f5-a5d9-80ad5c98f9f6"
-                    },
-                    "self": {
-                        "href": "https://api.pingone.com/v1/environments/abfba8f6-49eb-49f5-a5d9-80ad5c98f9f6/snapshots/0b7795ac-c589-4311-82bd-b1a9caff7a6a/versions/ab00b05b-26d3-4de1-9c17-74a08adc238e"
-                    }
-                },
-                "id": "c47e8abf-e830-4bb4-9fe0-260895ce326e",
-                "environment": {
-                    "id": "abfba8f6-49eb-49f5-a5d9-80ad5c98f9f6"
-                },
-                "snapshotId": "ab00b05b-26d3-4de1-9c17-74a08adc238e",
-                "resource": {
-                    "id": "0b7795ac-c589-4311-82bd-b1a9caff7a6a"
-                },
-                "createdAt": "2024-09-09T14:43:55.346Z",
-                "startedAt": "2024-09-09T14:43:55.482Z",
-                "completedAt": "2024-09-09T14:43:55.538Z",
-                "versionedAt": "2021-10-08T18:00:20.458Z",
-                "status": "COMPLETE",
-                "resourceUrl": "https://api.pingone.com/v1/environments/abfba8f6-49eb-49f5-a5d9-80ad5c98f9f6/populations/0b7795ac-c589-4311-82bd-b1a9caff7a6a",
-                "configuration": {
-                    "_links": {
-                        "self": {
-                            "href": "https://api.pingone.com/v1/environments/abfba8f6-49eb-49f5-a5d9-80ad5c98f9f6/populations/0b7795ac-c589-4311-82bd-b1a9caff7a6a"
-                        },
-                        "environment": {
-                            "href": "https://api.pingone.com/v1/environments/abfba8f6-49eb-49f5-a5d9-80ad5c98f9f6"
-                        }
-                    },
-                    "id": "0b7795ac-c589-4311-82bd-b1a9caff7a6a",
-                    "environment": {
-                        "id": "abfba8f6-49eb-49f5-a5d9-80ad5c98f9f6"
-                    },
-                    "name": "ApplicationPopulation_1633716020",
-                    "description": "Population for application users",
-                    "userCount": 1,
-                    "createdAt": "2021-10-08T18:00:20.458Z",
-                    "updatedAt": "2021-10-08T18:00:20.458Z",
-                    "default": false
-                }
-            },
-            {
-                "_links": {
-                    "environment": {
-                        "href": "https://api.pingone.com/v1/environments/abfba8f6-49eb-49f5-a5d9-80ad5c98f9f6"
-                    },
-                    "self": {
-                        "href": "https://api.pingone.com/v1/environments/abfba8f6-49eb-49f5-a5d9-80ad5c98f9f6/snapshots/0b7795ac-c589-4311-82bd-b1a9caff7a6a/versions/79451a5d-8a8f-49be-800a-67f396eb81ed"
-                    }
-                },
-                "id": "51edcd76-6b3e-4ddf-9bf3-44f81f415129",
-                "environment": {
-                    "id": "abfba8f6-49eb-49f5-a5d9-80ad5c98f9f6"
-                },
-                "snapshotId": "79451a5d-8a8f-49be-800a-67f396eb81ed",
-                "resource": {
-                    "id": "0b7795ac-c589-4311-82bd-b1a9caff7a6a"
-                },
-                "createdAt": "2024-09-09T13:58:17.675Z",
-                "startedAt": "2024-09-09T13:58:17.881Z",
-                "completedAt": "2024-09-09T13:58:28.827Z",
-                "versionedAt": "2021-10-08T18:00:20.458Z",
-                "status": "COMPLETE",
-                "resourceUrl": "https://api.pingone.com/v1/environments/abfba8f6-49eb-49f5-a5d9-80ad5c98f9f6/populations/0b7795ac-c589-4311-82bd-b1a9caff7a6a",
-                "configuration": {
-                    "_links": {
-                        "self": {
-                            "href": "https://api.pingone.com/v1/environments/abfba8f6-49eb-49f5-a5d9-80ad5c98f9f6/populations/0b7795ac-c589-4311-82bd-b1a9caff7a6a"
-                        },
-                        "environment": {
-                            "href": "https://api.pingone.com/v1/environments/abfba8f6-49eb-49f5-a5d9-80ad5c98f9f6"
-                        }
-                    },
-                    "id": "0b7795ac-c589-4311-82bd-b1a9caff7a6a",
-                    "environment": {
-                        "id": "abfba8f6-49eb-49f5-a5d9-80ad5c98f9f6"
-                    },
-                    "name": "ApplicationPopulation_1633716020",
-                    "description": "Population for application users",
-                    "userCount": 1,
-                    "createdAt": "2021-10-08T18:00:20.458Z",
-                    "updatedAt": "2021-10-08T18:00:20.458Z",
-                    "default": false
-                }
-            },
-            {
-                "_links": {
-                    "environment": {
-                        "href": "https://api.pingone.com/v1/environments/abfba8f6-49eb-49f5-a5d9-80ad5c98f9f6"
-                    },
-                    "self": {
-                        "href": "https://api.pingone.com/v1/environments/abfba8f6-49eb-49f5-a5d9-80ad5c98f9f6/snapshots/0b7795ac-c589-4311-82bd-b1a9caff7a6a/versions/73a64c05-d67d-49fb-8430-9dc86634e528"
-                    }
-                },
-                "id": "1377ce69-9d42-4e1a-952a-9d00031b4b71",
-                "environment": {
-                    "id": "abfba8f6-49eb-49f5-a5d9-80ad5c98f9f6"
-                },
-                "snapshotId": "73a64c05-d67d-49fb-8430-9dc86634e528",
-                "resource": {
-                    "id": "0b7795ac-c589-4311-82bd-b1a9caff7a6a"
-                },
-                "createdAt": "2024-09-06T14:42:36.795Z",
-                "startedAt": "2024-09-06T14:42:36.839Z",
-                "completedAt": "2024-09-06T14:42:45.470Z",
-                "versionedAt": "2021-10-08T18:00:20.458Z",
-                "status": "COMPLETE",
-                "resourceUrl": "https://api.pingone.com/v1/environments/abfba8f6-49eb-49f5-a5d9-80ad5c98f9f6/populations/0b7795ac-c589-4311-82bd-b1a9caff7a6a",
-                "configuration": {
-                    "_links": {
-                        "self": {
-                            "href": "https://api.pingone.com/v1/environments/abfba8f6-49eb-49f5-a5d9-80ad5c98f9f6/populations/0b7795ac-c589-4311-82bd-b1a9caff7a6a"
-                        },
-                        "environment": {
-                            "href": "https://api.pingone.com/v1/environments/abfba8f6-49eb-49f5-a5d9-80ad5c98f9f6"
-                        }
-                    },
-                    "id": "0b7795ac-c589-4311-82bd-b1a9caff7a6a",
-                    "environment": {
-                        "id": "abfba8f6-49eb-49f5-a5d9-80ad5c98f9f6"
-                    },
-                    "name": "ApplicationPopulation_1633716020",
-                    "description": "Population for application users",
-                    "userCount": 1,
-                    "createdAt": "2021-10-08T18:00:20.458Z",
-                    "updatedAt": "2021-10-08T18:00:20.458Z",
-                    "default": false
-                }
-            },
-            {
-                "_links": {
-                    "environment": {
-                        "href": "https://api.pingone.com/v1/environments/abfba8f6-49eb-49f5-a5d9-80ad5c98f9f6"
-                    },
-                    "self": {
-                        "href": "https://api.pingone.com/v1/environments/abfba8f6-49eb-49f5-a5d9-80ad5c98f9f6/snapshots/0b7795ac-c589-4311-82bd-b1a9caff7a6a/versions/c719a926-dee7-4026-b2f6-70f569c9d60d"
-                    }
-                },
-                "id": "7606c962-8b7a-4fb0-aa90-7e97b4953b7c",
-                "environment": {
-                    "id": "abfba8f6-49eb-49f5-a5d9-80ad5c98f9f6"
-                },
-                "snapshotId": "c719a926-dee7-4026-b2f6-70f569c9d60d",
-                "resource": {
-                    "id": "0b7795ac-c589-4311-82bd-b1a9caff7a6a"
-                },
-                "createdAt": "2024-09-06T14:37:30.903Z",
-                "startedAt": "2024-09-06T14:37:30.962Z",
-                "completedAt": "2024-09-06T14:37:44.004Z",
-                "versionedAt": "2021-10-08T18:00:20.458Z",
-                "status": "COMPLETE",
-                "resourceUrl": "https://api.pingone.com/v1/environments/abfba8f6-49eb-49f5-a5d9-80ad5c98f9f6/populations/0b7795ac-c589-4311-82bd-b1a9caff7a6a",
-                "configuration": {
-                    "_links": {
-                        "self": {
-                            "href": "https://api.pingone.com/v1/environments/abfba8f6-49eb-49f5-a5d9-80ad5c98f9f6/populations/0b7795ac-c589-4311-82bd-b1a9caff7a6a"
-                        },
-                        "environment": {
-                            "href": "https://api.pingone.com/v1/environments/abfba8f6-49eb-49f5-a5d9-80ad5c98f9f6"
-                        }
-                    },
-                    "id": "0b7795ac-c589-4311-82bd-b1a9caff7a6a",
-                    "environment": {
-                        "id": "abfba8f6-49eb-49f5-a5d9-80ad5c98f9f6"
-                    },
-                    "name": "ApplicationPopulation_1633716020",
-                    "description": "Population for application users",
-                    "userCount": 1,
-                    "createdAt": "2021-10-08T18:00:20.458Z",
-                    "updatedAt": "2021-10-08T18:00:20.458Z",
-                    "default": false
-                }
-            },
-            {
-                "_links": {
-                    "environment": {
-                        "href": "https://api.pingone.com/v1/environments/abfba8f6-49eb-49f5-a5d9-80ad5c98f9f6"
-                    },
-                    "self": {
-                        "href": "https://api.pingone.com/v1/environments/abfba8f6-49eb-49f5-a5d9-80ad5c98f9f6/snapshots/0b7795ac-c589-4311-82bd-b1a9caff7a6a/versions/cc64ea07-1da0-4bf8-b487-5c178667d8c8"
-                    }
-                },
-                "id": "d443b74c-542c-4ec4-b0b7-20a5e68a2882",
-                "environment": {
-                    "id": "abfba8f6-49eb-49f5-a5d9-80ad5c98f9f6"
-                },
-                "snapshotId": "cc64ea07-1da0-4bf8-b487-5c178667d8c8",
-                "resource": {
-                    "id": "0b7795ac-c589-4311-82bd-b1a9caff7a6a"
-                },
-                "createdAt": "2024-09-06T14:24:54.035Z",
-                "startedAt": "2024-09-06T14:24:54.080Z",
-                "completedAt": "2024-09-06T14:25:08.706Z",
-                "versionedAt": "2021-10-08T18:00:20.458Z",
-                "status": "COMPLETE",
-                "resourceUrl": "https://api.pingone.com/v1/environments/abfba8f6-49eb-49f5-a5d9-80ad5c98f9f6/populations/0b7795ac-c589-4311-82bd-b1a9caff7a6a",
-                "configuration": {
-                    "_links": {
-                        "self": {
-                            "href": "https://api.pingone.com/v1/environments/abfba8f6-49eb-49f5-a5d9-80ad5c98f9f6/populations/0b7795ac-c589-4311-82bd-b1a9caff7a6a"
-                        },
-                        "environment": {
-                            "href": "https://api.pingone.com/v1/environments/abfba8f6-49eb-49f5-a5d9-80ad5c98f9f6"
-                        }
-                    },
-                    "id": "0b7795ac-c589-4311-82bd-b1a9caff7a6a",
-                    "environment": {
-                        "id": "abfba8f6-49eb-49f5-a5d9-80ad5c98f9f6"
-                    },
-                    "name": "ApplicationPopulation_1633716020",
-                    "description": "Population for application users",
-                    "userCount": 1,
-                    "createdAt": "2021-10-08T18:00:20.458Z",
-                    "updatedAt": "2021-10-08T18:00:20.458Z",
-                    "default": false
-                }
-            }
-        ]
-    },
-    "size": 5
 }
 ```

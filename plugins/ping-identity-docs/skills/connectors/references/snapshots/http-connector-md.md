@@ -1,12 +1,12 @@
 ---
 title: HTTP Connector
-description: This powerful and versatile connector lets you show custom HTML pages, make REST application programming interface (API) calls, and more in your DaVinci orchestration flow.
+description: Configure the PingOne DaVinci HTTP connector to show custom HTML pages, make REST API calls, and build custom user interfaces in your flow
 component: connectors
 page_id: connectors::http_connector
 canonical_url: https://docs.pingidentity.com/connectors/http_connector.html
 llms_txt: https://docs.pingidentity.com/connectors/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: August 19, 2024
+revdate: 2026-07-09T00:00:00Z
 section_ids:
   setup: Setup
   configuring-the-http-connector: Configuring the HTTP connector
@@ -44,7 +44,7 @@ section_ids:
 
 This powerful and versatile connector lets you show custom HTML pages, make REST application programming interface (API) *(tooltip: \<div class="paragraph">
 \<p>A specification of interactions available for building software to access an application or service.\</p>
-\</div>)* calls, and more in your DaVinci orchestration flow.
+\</div>)* calls, and more in your PingOne DaVinci orchestration flow.
 
 Use it to create a custom HTML message, show flow progress, or send custom responses in an API-triggered flow. You can use the messages as quick placeholders to help you sketch out a new flow. If you want to craft a memorable user experience, use the **Custom HTML Template** capability to create complete HTML pages with your own structure, style, and scripts.
 
@@ -54,7 +54,7 @@ Because this connector allows you to quickly add API calls and user interfaces, 
 
 ### Configuring the HTTP connector
 
-In DaVinci, add an **HTTP** connection. Learn more in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html).
+In PingOne DaVinci, add an **HTTP** connection. Learn more in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html).
 
 #### Connector configuration
 
@@ -128,9 +128,9 @@ The **HTML Template** field lets you read and modify the HTML for your page.
 
 * To access a variety of useful tools, right-click the field when you're in syntax highlighting mode (dark background). |
 
-|   |                                                                                                                                                                                                                                                                                                                                                                                       |
-| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | For security reasons, the **HTML** field only allows certain HTML elements. You can find the elements on the allow list in the [DOMPurify allow list](https://github.com/cure53/DOMPurify/blob/2.3.6/src/tags.js).Note that custom HTML elements from the `svgDisallowed` and `mathMlDisallowed` lists are not allowed.These restrictions apply to all custom HTML fields in DaVinci. |
+|   |                                                                                                                                                                                                                                                                                                                                                                                               |
+| - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | For security reasons, the **HTML** field only allows certain HTML elements. You can find the elements on the allow list in the [DOMPurify allow list](https://github.com/cure53/DOMPurify/blob/2.3.6/src/tags.js).Note that custom HTML elements from the `svgDisallowed` and `mathMlDisallowed` lists are not allowed.These restrictions apply to all custom HTML fields in PingOne DaVinci. |
 
 If you want your HTML to include values from elsewhere in your flow, switch back to the initial view (white background), click **{}**, and then select the variable that holds the value you want.
 
@@ -395,21 +395,27 @@ The Deck of Cards API documentation specifies the following URL to draw five car
 
 ### Send Success JSON Response
 
-Send a successful response.
+End an API or widget flow with a successful response, or end a subflow and send a successful result to the parent flow.
 
 > **Collapse: Show details**
 >
 > * Properties
 >
-> - - returnRequestParameters toggleSwitch
->   - Additional Fields in the Response selectNameValueListColumn
+> - Return Request Parameters toggleSwitch
 >
->   Use this section to add additional fields to the response
+>   When enabled, the original request parameters are included in the response payload.
 >
-> - * additionalFieldsName textField
->   * Validate the additional properties toggleSwitch
+> - Additional Properties List selectNameValueListColumn
 >
->   The flow will fail if the validation is failed.
+>   Define a list of values to include in the response. These values are contained in a single property.
+>
+> - Additional Properties Name textField
+>
+>   Define a name for the field that contains the Additional Properties List, such as "additionalProperties". This setting does not apply when this capability is used in a subflow.
+>
+> - Validate the additional properties toggleSwitch
+>
+>   When enabled, DaVinci validates the data types of the additional properties. This setting does not apply when this capability is used in a subflow.
 >
 > - Signed Response toggleSwitch
 >
@@ -421,19 +427,25 @@ Send a successful response.
 
 ### Send Error JSON Response
 
-Send an error response.
+End an API or widget flow with an error response, or end a subflow and send an error result to the parent flow.
 
 > **Collapse: Show details**
 >
 > * Properties
 >
-> - - returnRequestParameters toggleSwitch
->   - Additional Fields in the Response selectNameValueListColumn
+> - Return Request Parameters toggleSwitch
 >
->   Use this section to add additional fields to the response
+>   When enabled, the original request parameters are included in the response payload.
 >
-> - * additionalFieldsName textField
->   * Signed Response toggleSwitch
+> - Additional Properties List selectNameValueListColumn
+>
+>   Define a list of values to include in the response. These values are contained in a single property.
+>
+> - Additional Properties Name textField
+>
+>   Define a name for the field that contains the Additional Properties List, such as "additionalProperties". This setting does not apply when this capability is used in a subflow.
+>
+> - Signed Response toggleSwitch
 >
 >   Sign the response as JWT using your company's private keys. Signatures can be validated using JWKS public keys in the Company section.
 >
@@ -443,7 +455,7 @@ Send an error response.
 
 ### Send Custom JSON Response
 
-Send a custom response.
+End an API flow with a custom HTTP response.
 
 > **Collapse: Show details**
 >
@@ -530,7 +542,7 @@ Extend the functionality of the DaVinci platform by invoking any third party ser
 >
 > - outputSchema codeEditor
 >
->   Follow example for JSON schema.
+>   Define an output schema.
 >
 > - * Keep API output if the validation failed toggleSwitch
 >   * Error Response Content Type dropdownWithCreate
@@ -557,7 +569,7 @@ Extend the functionality of the DaVinci platform by invoking any third party ser
 >
 > - Timeout (ms) textField
 >
->   Timeout for API call. Leave blank to not have timeout.
+>   The amount of time in milliseconds before the request times out, such as "3000". Leave blank to use the maximum timeout of 29000 ms.
 >
 > * output object
 >
@@ -608,17 +620,17 @@ Create an HTML page using this customizable template.
 >
 >   Add sk-component skrecaptcha to use this feature.
 >
-> - Form validation rules validationRules
+> - Form Validation Rules validationRules
 >
->   Rules to check to validate form inputs
+>   Define validation rules for the form inputs, such as format, minimum length, or whether the input is required.
 >
 > - inputSchema codeEditor
 >
->   Follow example for JSON schema.
+>   Define a standardized set of variables to use in your HTML using JSON schema. For details, see the HTTP connector documentation.
 >
 > - outputSchema codeEditor
 >
->   Follow example for JSON schema.
+>   Define an output schema.
 >
 > - * formFieldsList formFieldsList
 >   * challenge textField
@@ -668,12 +680,6 @@ Create a QR code that contains a URL.
 Use this capability in conjunction with Polling in Custom HTTP capabilities.
 
 > **Collapse: Show details**
->
-> * Properties
->
-> - Node ID of the UI node (Optional) textField
->
->   In advanced scenarios, it might be required to specify the Node ID of the UI node where polling in enabled. When a Node ID is not entered (default behavior), polling will continue on the current UI node.
 
 ### Simulate Latency
 

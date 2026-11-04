@@ -7,6 +7,7 @@ page_id: pingam:amster:preface
 canonical_url: https://docs.pingidentity.com/pingam/8.1/amster/preface.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 page_aliases: ["index.adoc", "user-guide:preface.adoc"]
 ---
 
@@ -49,6 +50,7 @@ page_id: pingam:amster:usage-examples
 canonical_url: https://docs.pingidentity.com/pingam/8.1/amster/usage-examples.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 page_aliases: ["user-guide:amster-usage-examples.adoc"]
 section_ids:
   clone-example: Clone an PingAM instance
@@ -144,6 +146,7 @@ page_id: pingam:amster:config-expressions
 canonical_url: https://docs.pingidentity.com/pingam/8.1/amster/config-expressions.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 page_aliases: ["user-guide:amster-usage-expressions.adoc"]
 section_ids:
   working-with-expressions: Expressions
@@ -523,6 +526,7 @@ page_id: pingam:amster:connect-am
 canonical_url: https://docs.pingidentity.com/pingam/8.1/amster/connect-am.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 page_aliases: ["user-guide:amster-connecting.adoc"]
 section_ids:
   interactive-login: Interactive login connections
@@ -682,6 +686,7 @@ page_id: pingam:amster:transport-keys
 canonical_url: https://docs.pingidentity.com/pingam/8.1/amster/transport-keys.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 page_aliases: ["user-guide:amster-transport-keys.adoc"]
 section_ids:
   generate-new-key: Generate and install a new transport key
@@ -796,6 +801,7 @@ page_id: pingam:amster:export-config
 canonical_url: https://docs.pingidentity.com/pingam/8.1/amster/export-config.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 page_aliases: ["user-guide:amster-export-config.adoc"]
 section_ids:
   export-data-examples: Examples
@@ -917,6 +923,7 @@ page_id: pingam:amster:import-config
 canonical_url: https://docs.pingidentity.com/pingam/8.1/amster/import-config.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 page_aliases: ["user-guide:amster-import-config.adoc"]
 section_ids:
   import-data-examples: Example
@@ -1053,6 +1060,7 @@ page_id: pingam:amster:install-amster
 canonical_url: https://docs.pingidentity.com/pingam/8.1/amster/install-amster.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 page_aliases: ["user-guide:amster-install.adoc"]
 section_ids:
   sec-prerequisites: Prerequisites
@@ -1228,6 +1236,7 @@ page_id: pingam:amster:integrate-amster
 canonical_url: https://docs.pingidentity.com/pingam/8.1/amster/integrate-amster.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 page_aliases: ["user-guide:amster-integration.adoc"]
 ---
 
@@ -1260,6 +1269,7 @@ page_id: pingam:amster:scripts
 canonical_url: https://docs.pingidentity.com/pingam/8.1/amster/scripts.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 page_aliases: ["user-guide:amster-usage-scripts.adoc"]
 section_ids:
   amster-errors-scripts: Check for errors when running in scripts
@@ -1523,6 +1533,7 @@ page_id: pingam:amster:introduction
 canonical_url: https://docs.pingidentity.com/pingam/8.1/amster/introduction.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 page_aliases: ["user-guide:amster-introduction.adoc"]
 ---
 

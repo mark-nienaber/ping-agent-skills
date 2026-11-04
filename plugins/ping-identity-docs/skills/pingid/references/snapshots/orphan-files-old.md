@@ -2,8 +2,8 @@
 description: PingAccess
 component: pingid
 page_id: pingid:_orphan_files_old:common_product_keydefs_old2
-canonical_url: http://docs.pingidentity.com/pingid/_orphan_files_old/common_product_keydefs_old2.html
-llms_txt: http://docs.pingidentity.com/pingid/llms.txt
+canonical_url: https://docs.pingidentity.com/pingid/_orphan_files_old/common_product_keydefs_old2.html
+llms_txt: https://docs.pingidentity.com/pingid/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 ---
 

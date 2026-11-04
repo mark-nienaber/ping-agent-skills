@@ -27,18 +27,18 @@ All the pre-runtime architectural and setup tasks necessary to prepare the PingF
 
 | Task category | Guide slug | Live URL pattern | Snapshot |
 |---|---|---|---|
-| Administrators Reference Guide: adding, administrative, adapter | administrators_reference_guide | https://docs.pingidentity.com/pingfederate/13.1/administrators_reference_guide/*.md | references/snapshots/administrators-reference-guide.md |
-| Introduction To Pingfederate: multiple, bridging, about | introduction_to_pingfederate | https://docs.pingidentity.com/pingfederate/13.1/introduction_to_pingfederate/*.md | references/snapshots/introduction-to-pingfederate.md |
+| Administrators Reference Guide: adding, adapter, administrative | administrators_reference_guide | https://docs.pingidentity.com/pingfederate/13.1/administrators_reference_guide/*.md | references/snapshots/administrators-reference-guide.md |
 | Release Notes: pingfederate, february, december | release_notes | https://docs.pingidentity.com/pingfederate/13.1/release_notes/*.md | references/snapshots/release-notes.md |
-| Developers Reference Guide: authentication, authorization, enabling | developers_reference_guide | https://docs.pingidentity.com/pingfederate/13.1/developers_reference_guide/*.md | references/snapshots/developers-reference-guide.md |
-| Server Clustering Guide: service, active, administrative | server_clustering_guide | https://docs.pingidentity.com/pingfederate/13.1/server_clustering_guide/*.md | references/snapshots/server-clustering-guide.md |
+| Introduction To Pingfederate: multiple, bridging, about | introduction_to_pingfederate | https://docs.pingidentity.com/pingfederate/13.1/introduction_to_pingfederate/*.md | references/snapshots/introduction-to-pingfederate.md |
+| Developers Reference Guide: authentication, enabling, endpoint | developers_reference_guide | https://docs.pingidentity.com/pingfederate/13.1/developers_reference_guide/*.md | references/snapshots/developers-reference-guide.md |
+| Server Clustering Guide: cluster, service, active | server_clustering_guide | https://docs.pingidentity.com/pingfederate/13.1/server_clustering_guide/*.md | references/snapshots/server-clustering-guide.md |
 | Sdk Developers Guide: developing, adapters, authentication | sdk_developers_guide | https://docs.pingidentity.com/pingfederate/13.1/sdk_developers_guide/*.md | references/snapshots/sdk-developers-guide.md |
 | Upgrading Pingfederate: upgrade, pingfederate, considerations | upgrading_pingfederate | https://docs.pingidentity.com/pingfederate/13.1/upgrading_pingfederate/*.md | references/snapshots/upgrading-pingfederate.md |
 | Getting Started With Pingfederate: pingfederate, console, integrating | getting_started_with_pingfederate | https://docs.pingidentity.com/pingfederate/13.1/getting_started_with_pingfederate/*.md | references/snapshots/getting-started-with-pingfederate.md |
 | Performance Tuning Guide: tuning, jvm, memoryoptions | performance_tuning_guide | https://docs.pingidentity.com/pingfederate/13.1/performance_tuning_guide/*.md | references/snapshots/performance-tuning-guide.md |
 | Installing And Uninstalling Pingfederate: pingfederate, installing, windows | installing_and_uninstalling_pingfederate | https://docs.pingidentity.com/pingfederate/13.1/installing_and_uninstalling_pingfederate/*.md | references/snapshots/installing-and-uninstalling-pingfederate.md |
 | Pingfederate Monitoring Guide: connecting, monitoring, jmx | pingfederate_monitoring_guide | https://docs.pingidentity.com/pingfederate/13.1/pingfederate_monitoring_guide/*.md | references/snapshots/pingfederate-monitoring-guide.md |
-| Root: pingfederate | root | https://docs.pingidentity.com/pingfederate/13.1/*.md | live-only |
+| Root: pingfederate | root | https://docs.pingidentity.com/pingfederate/13.1/*.md | references/snapshots/root.md |
 
 ## Composition
 

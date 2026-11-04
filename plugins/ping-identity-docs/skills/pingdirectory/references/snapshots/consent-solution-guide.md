@@ -1,6 +1,6 @@
 ---
 title: Authentication methods
-description: The Consent Service supports the following HTTP authentication methods and the use of token validators for authorization.
+description: Overview of the HTTP authentication methods and access token validators that the PingDirectory Consent Service supports.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:consent_solution_guide:pd_cs_authn_methods
@@ -69,7 +69,7 @@ If the PingDirectory server is configured with at least one access token validat
 
 ---
 title: Authorization
-description: The Consent Service's distinction between privileged and unprivileged requesters determines the type of operations that can be performed by requesters.
+description: Understand how the PingDirectory Consent Service distinguishes privileged and unprivileged requesters and the operations each type can perform.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:consent_solution_guide:pd_cs_authorization
@@ -121,7 +121,7 @@ If basic authentication is used, the following checks are performed:
 
 ---
 title: Configuration overview
-description: Your Consent Service configuration can vary depending on client application capabilities, authentication methods used, and other factors.
+description: Overview of the factors that determine how to set up and configure the Consent Service in a PingDirectory server.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:consent_solution_guide:pd_cs_config_overview
@@ -149,7 +149,7 @@ By default, the Consent Service is not enabled. The setup and configuration proc
 
 ---
 title: Configuration reference
-description: Use this section as a reference for information about the Consent Service properties and configuration.
+description: Reference for the PingDirectory Consent Service properties and configuration options used for application integration.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:consent_solution_guide:pd_cs_config_reference
@@ -169,7 +169,7 @@ There are many configuration options for the Consent Service and application int
 
 ---
 title: Configuring an identity mapper
-description: The Consent Service uses identity mappers to map requester identities, subject values, and actor values to distinguished names (DNs).
+description: Understand how the PingDirectory Consent Service uses identity mappers for requesters and consent record values, with configuration examples.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:consent_solution_guide:pd_cs_config_identity_mapper
@@ -261,7 +261,7 @@ $ bin/dsconfig create-identity-mapper \
 
 ---
 title: Configuring basic authentication
-description: Disable or enable basic authentication and configure an identity mapper for basic authentication.
+description: Configure basic authentication for the PingDirectory Consent Service, including disabling or enabling it and setting its identity mapper.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:consent_solution_guide:pd_cs_config_basic_authn
@@ -342,7 +342,7 @@ By default, basic authentication is enabled. The settings are configured in the 
 
 ---
 title: Configuring bearer token authentication
-description: Configure an access token validator.
+description: Configure an access token validator for bearer token authentication to the PingDirectory Consent Service.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:consent_solution_guide:pd_cs_config_bearer_token_authn
@@ -407,14 +407,14 @@ Configure an access token validator.
 
 ---
 title: Configuring Consent Service scopes
-description: Configure the privileged-consent-scope and unprivileged-consent-scope for the Consent Service.
+description: Configure the privileged and unprivileged consent scopes that the PingDirectory Consent Service requires in access tokens.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:consent_solution_guide:pd_cs_config_consent_service_scopes
 canonical_url: https://docs.pingidentity.com/pingdirectory/11.1/consent_solution_guide/pd_cs_config_consent_service_scopes.html
 llms_txt: https://docs.pingidentity.com/pingdirectory/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: September 13, 2023
+revdate: 2026-08-19T00:00:00Z
 section_ids:
   about-this-task: About this task
   steps: Steps
@@ -423,7 +423,7 @@ section_ids:
 
 # Configuring Consent Service scopes
 
-Configure the` privileged-consent-scope` and `unprivileged-consent-scope` for the Consent Service.
+Configure the `privileged-consent-scope` and `unprivileged-consent-scope` for the Consent Service.
 
 ## About this task
 
@@ -445,7 +445,7 @@ The Consent Service only accepts an access token with a scope that it is configu
 
 ## Steps
 
-* Configure the` privileged-consent-scope` and `unprivileged-consent-scope` for the Consent Service.
+* Configure the `privileged-consent-scope` and `unprivileged-consent-scope` for the Consent Service.
 
   ### Example:
 
@@ -459,7 +459,7 @@ The Consent Service only accepts an access token with a scope that it is configu
 
 ---
 title: Configuring the Consent Service
-description: This section provides information for installing and configuring the components to support the Consent Service.
+description: Topics for installing and configuring the components that support the Consent Service in a PingDirectory server environment.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:consent_solution_guide:pd_cs_config_consent_service
@@ -493,7 +493,7 @@ For more configuration information, see [PingDataSync Server Administration Guid
 
 ---
 title: Consent API overview
-description: PingDirectory and PingDirectoryProxy provide a REST application programming interface (API) for managing an individual's consent to handle their data.
+description: "Overview of the PingDirectory Consent API, a REST API for capturing, confirming, and managing an individual's consent to handle their data."
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:consent_solution_guide:pd_cs_consent_api_overview
@@ -525,19 +525,19 @@ Learn more in the [PingDirectory Consent API Reference](https://developer.pingid
 
 ---
 title: Consent definitions and localizations
-description: The Consent Service requires consent definitions and localizations, which collect and share a use's data and define the purpose for collecting and sharing this data.
+description: Understand the consent definitions and localizations that the PingDirectory Consent Service requires to prompt users for consent.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:consent_solution_guide:pd_cs_consent_defs_localization
 canonical_url: https://docs.pingidentity.com/pingdirectory/11.1/consent_solution_guide/pd_cs_consent_defs_localization.html
 llms_txt: https://docs.pingidentity.com/pingdirectory/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: September 13, 2023
+revdate: 2026-08-19T00:00:00Z
 ---
 
 # Consent definitions and localizations
 
-The Consent Service requires consent definitions and localizations, which collect and share a use's data and define the purpose for collecting and sharing this data.
+The Consent Service requires consent definitions and localizations, which collect and share a user's data and define the purpose for collecting and sharing this data.
 
 Companies can centrally manage the language used when prompting a user to give consent to ensure a consistent user experience across multiple applications, such as mobile and web.
 
@@ -555,7 +555,7 @@ Each consent definition must have one or more localizations. A localization is a
 
 ---
 title: Consent Service overview
-description: The Consent Service is an HTTP-based REST API hosted by the PingDirectory server or by the PingDirectoryProxy server.
+description: Overview of the Consent Service hosted by a PingDirectory or PingDirectoryProxy server, including its features and the terms used throughout this guide.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:consent_solution_guide:pd_cs_consent_service_overview
@@ -613,7 +613,7 @@ The following terms are used throughout this guide:
 
 ---
 title: Correlating user and consent data
-description: An organization that has been granted consent by a group of users can perform an LDAP search so that they can use the consent data in the aggregate.
+description: Use an ldapsearch join to correlate consent record entries with user entries in a PingDirectory server and retrieve user attributes in the aggregate.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:consent_solution_guide:pd_cs_correlate_user_consent_data
@@ -695,7 +695,7 @@ Every consent record contains a `subject` field, the user whose data is collecte
 
 ---
 title: Creating a consent definition and localization
-description: Create and update a consent definition and localization.
+description: Create and update a consent definition and its localization in a PingDirectory server using dsconfig.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:consent_solution_guide:pd_cs_create_consent_def_localization
@@ -757,7 +757,7 @@ Create and update a consent definition and localization.
 
 ---
 title: Creating a container entry for consent records
-description: Each consent record is a distinct entry in the PingDirectory server. The Consent Service requires that these entries are stored under a common base distinguished name (DN).
+description: Create the container entry that serves as the base DN for storing consent records in a PingDirectory server.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:consent_solution_guide:pd_cs_create_container_entry_consent_records
@@ -807,7 +807,7 @@ To choose a different location to store consent records:
 
 ---
 title: Creating an internal service account
-description: Create an internal LDAP connection to operate against consent records that are stored as LDAP entries.
+description: Create a service account with the access and privileges that the PingDirectory Consent Service requires for its internal LDAP connection.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:consent_solution_guide:pd_cs_create_internal_service_acct
@@ -896,7 +896,7 @@ For more information about configuring access, see [Managing access control](../
 
 ---
 title: Error cases
-description: The following topic discusses troubleshooting possible error cases and solutions.
+description: Troubleshoot common PingDirectory Consent Service error cases, including an unavailable service, insufficient rights, and search limits.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:consent_solution_guide:pd_cs_error_cases
@@ -954,7 +954,7 @@ The Consent Service caps the maximum number of records that can be returned in a
 
 ---
 title: Example configuration scenarios
-description: Review the following client application scenarios to determine how to configure the Consent Service to meet your business needs.
+description: Example client application scenarios, with configuration steps, for setting up the PingDirectory Consent Service to meet different business needs.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:consent_solution_guide:pd_cs_config_scenarios
@@ -1015,21 +1015,21 @@ Configuration for this scenario includes:
 
 ---
 title: General Consent Service configuration
-description: The Consent Service configuration is used to control authorization behavior and determines where consent records are stored in the PingDirectory server.
+description: Configure the PingDirectory Consent Service properties that control authorization behavior and consent record storage, with a property reference table.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:consent_solution_guide:pd_cs_general_consent_service_config
 canonical_url: https://docs.pingidentity.com/pingdirectory/11.1/consent_solution_guide/pd_cs_general_consent_service_config.html
 llms_txt: https://docs.pingidentity.com/pingdirectory/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: September 13, 2023
+revdate: 2026-08-19T00:00:00Z
 ---
 
 # General Consent Service configuration
 
 The Consent Service configuration is used to control authorization behavior and determines where consent records are stored in the PingDirectory server.
 
-You configure the Consent Service properties using the `dsconfig set-consent-service-prop` command. You can use the Consent Service configuration script to configure the Consent Service properties, as show in the following example.
+You configure the Consent Service properties using the `dsconfig set-consent-service-prop` command. You can use the Consent Service configuration script to configure the Consent Service properties, as shown in the following example.
 
 ```shell
 $ bin/dsconfig set-consent-service-prop \
@@ -1068,14 +1068,14 @@ For the Consent Service to report itself as available to clients:
 
 ---
 title: How applications use the Consent API
-description: The following example illustrates both consent capture and consent enforcement using the Consent API.
+description: Walk through an example user journey showing how an application captures and enforces consent using the PingDirectory Consent API.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:consent_solution_guide:pd_cs_how_apps_use_consent_api
 canonical_url: https://docs.pingidentity.com/pingdirectory/11.1/consent_solution_guide/pd_cs_how_apps_use_consent_api.html
 llms_txt: https://docs.pingidentity.com/pingdirectory/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: September 13, 2023
+revdate: 2026-08-19T00:00:00Z
 ---
 
 # How applications use the Consent API
@@ -1088,7 +1088,7 @@ This example follows a user's journey on a website during which the company must
 
 2. The application wants to record the page visit but first checks if the user has granted consent to do so.
 
-3. The application makes a call to the Consent API to determine if the `browsing-behavior` consent record exists for this user and whether consent been granted.
+3. The application makes a call to the Consent API to determine if the `browsing-behavior` consent record exists for this user and whether consent has been granted.
 
 4. The API returns a result indicating that no consent record exists.
 

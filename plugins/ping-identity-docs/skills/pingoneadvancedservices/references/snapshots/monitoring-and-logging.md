@@ -2,12 +2,15 @@
 title: Monitoring and logging
 description: With PingOne Advanced Services, your organization has its own dedicated cloud network that you can define, without having to manage cloud resources, containers, networking, scaling, healing, and backup and restoration.
 component: pingoneadvancedservices
+version: 2.2
 page_id: pingoneadvancedservices:monitoring_and_logging:p1as_monitoring_logging
-canonical_url: https://docs.pingidentity.com/pingoneadvancedservices/monitoring_and_logging/p1as_monitoring_logging.html
+canonical_url: https://docs.pingidentity.com/pingoneadvancedservices/2.2/monitoring_and_logging/p1as_monitoring_logging.html
+llms_txt: https://docs.pingidentity.com/pingoneadvancedservices/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: August 19, 2025
-page_aliases: ["p1as_product_logs.adoc", "p1as_platform_monitoring.adoc", "p1as_migrating.adoc", "p1as_log_streaming.adoc", "p1as_app_monitoring.adoc"]
+page_aliases: ["index.adoc"]
 section_ids:
-  _platform_monitoring: Platform monitoring
+  p1as_platform_monitoring: Platform monitoring
   p1as_app_monitoring: Application monitoring and alerts
   section_ql4_rkn_cxb: PingFederate alerts
   section_yvf_skn_cxb: PingDirectory alerts
@@ -36,7 +39,7 @@ You can also subscribe to receive alerts from PingOne Advanced Services, which w
 
 Learn more:
 
-* [Platform monitoring](#_platform_monitoring)
+* [Platform monitoring](#p1as_platform_monitoring)
 
 * [Application monitoring and alerts](#p1as_app_monitoring)
 
@@ -339,7 +342,7 @@ This file contains the following information:
 
 * **log or message**: Ping Identity applications generate logs and all other types of applications and sidecars.
 
-* **log\_type**: Provides internal labels for all events sent to the pipeline.
+* **log_type**: Provides internal labels for all events sent to the pipeline.
 
 * **time**: Date and time when the log was captured, which could be different from the date and time it was generated.
 
@@ -351,7 +354,7 @@ This file contains the following information:
 
 * **stream**: The name of the stream where the log was captured, and will either be stdout (standard output) or stderr (standard error).
 
-* **log\_group**: This internal label will always be "application".
+* **log_group**: This internal label will always be "application".
 
 If you do not apply filters and opt to use the default output configuration, a variety of differences exist:
 

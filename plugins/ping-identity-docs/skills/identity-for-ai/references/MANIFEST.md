@@ -2,37 +2,41 @@
 
 - Product: Identity for AI
 - Version: current
-- Sync date: 2026-07-03
+- Sync date: 2026-11-03
 - Source: https://developer.pingidentity.com/identity-for-ai/llms.txt
-- Guides discovered: 7
-- Guides captured: 7
-- Guides fully captured: 4
-- Guides partially captured: 3
+- Guides discovered: 9
+- Guides captured: 9
+- Guides fully captured: 9
+- Guides partially captured: 0
 - Guides without snapshots: 0
-- Total pages indexed: 21
-- Total snapshot pages captured: 7
+- Total pages indexed: 39
+- Total snapshot pages captured: 39
 
 ## Source URLs
 
 | Snapshot | Source type | Source URL | Pages indexed | Pages captured | Coverage |
 |---|---|---|---|---|---|
-| agents.md | page | https://developer.pingidentity.com/identity-for-ai/agents/idai-computer-using-agents.md | 12 | 1 | partial |
-| use-cases.md | page | https://developer.pingidentity.com/identity-for-ai/use-cases/idai-securing-agents-pingfed.md | 3 | 1 | partial |
-| identity.md | page | https://developer.pingidentity.com/identity-for-ai/identity/idai-agent-types.md | 2 | 1 | partial |
-| getting-started.md | page | https://developer.pingidentity.com/identity-for-ai/getting-started/idai-what-is-identity-for-ai.md | 1 | 1 | full |
-| glossary.md | page | https://developer.pingidentity.com/identity-for-ai/glossary/idai-glossary.md | 1 | 1 | full |
-| index-md.md | page | https://developer.pingidentity.com/identity-for-ai/index.md | 1 | 1 | full |
-| release-notes.md | page | https://developer.pingidentity.com/identity-for-ai/release-notes/idai-whats-new.md | 1 | 1 | full |
+| protocols.md | assembled | https://developer.pingidentity.com/identity-for-ai/llms.txt | 16 | 16 | full |
+| integrations.md | assembled | https://developer.pingidentity.com/identity-for-ai/llms.txt | 9 | 9 | full |
+| identity.md | assembled | https://developer.pingidentity.com/identity-for-ai/llms.txt | 4 | 4 | full |
+| agents.md | assembled | https://developer.pingidentity.com/identity-for-ai/llms.txt | 3 | 3 | full |
+| use-cases.md | assembled | https://developer.pingidentity.com/identity-for-ai/llms.txt | 3 | 3 | full |
+| getting-started.md | assembled | https://developer.pingidentity.com/identity-for-ai/llms.txt | 1 | 1 | full |
+| glossary.md | assembled | https://developer.pingidentity.com/identity-for-ai/llms.txt | 1 | 1 | full |
+| index-md.md | assembled | https://developer.pingidentity.com/identity-for-ai/llms.txt | 1 | 1 | full |
+| release-notes.md | assembled | https://developer.pingidentity.com/identity-for-ai/llms.txt | 1 | 1 | full |
 
 ## Checksums
 
 | File | SHA-256 |
 |---|---|
-| llms.txt | 6feb9e09ff6d371d4060a31acc5c51d0e1ccfe51b03d0be2b45c482436e9c2d4 |
-| snapshots/agents.md | ce2078d6945501af6ae7eb08553c36064ca847f357fd72ff708ef6f471f2e28e |
-| snapshots/use-cases.md | 64bb4906b72a46f6148a1c83af1aaa16ca29b519289353be35268a10a37a7dbc |
-| snapshots/identity.md | e54dcf315174db0d1a0f2cba1e7cb16cff7006098e263020d2554ebca4e6e2a4 |
-| snapshots/getting-started.md | a213eb654d277902fa8d176d796f1549bce1a82ccab687412c770943a7d738f4 |
-| snapshots/glossary.md | 3cd640e0809e4d9bea67df7b85640cf0e4d4644180c56286293865feb7d5fbdb |
-| snapshots/index-md.md | ad0843922ef4b79ae46d8f2730ab824b95012e70dfbef7d77fa01a4ca12b2e9e |
-| snapshots/release-notes.md | 00e30a9d93a2241f05a605f45218c3ef0e6d77d5eacc0c907a30801c900d1eae |
+| llms.txt | 3b49ad9dcec3611c5de2f675ef7eabfc4f9edc60322fc8d8a9365b6f308d0a76 |
+| snapshots/protocols.md | 93256b6f4b56aeb1d448f21e1c84809e5d5c36ca083a83722582c139f95d7325 |
+| snapshots/integrations.md | ecfbcf9cd6721ec3a485b9d49241d9eca3ffb3f455eb780e73da8859fbe9e06a |
+| snapshots/identity.md | cb86ea7776b660f3e6057399ca8624e0c17511ef6f18b7bf5598873c6eda37ab |
+| snapshots/agents.md | b5c716bbf6684667551489bff286f2f9add49ce0525e02232b5211aeb2cd3c43 |
+| snapshots/use-cases.md | 9bcceca869760deb7e609f04c6efe11e1e22fef717f06326e7cba5d0d4bf1305 |
+| snapshots/getting-started.md | 2dd28526f022f4a7b22746f80f4bb82c76e45598f91027eabffb2bda6bd97693 |
+| snapshots/glossary.md | 298a2e832213c83fed1e5bd95095658e9bb94e161d4f7cf52d6478a1e46787f8 |
+| snapshots/index-md.md | 6cc99839130cb381046a1cf49bb5eace9d009309a2a339310fa7dbd86e19e7e3 |
+| snapshots/release-notes.md | 43596bcc715c40eb075d9e121e7589d980e8ae7d129388a073488142329c875f |

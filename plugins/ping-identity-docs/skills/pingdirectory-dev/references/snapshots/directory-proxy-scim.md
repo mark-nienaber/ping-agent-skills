@@ -1,9 +1,12 @@
 ---
 title: Authentication
-description: Authenticate PingDirectory and PingDirectoryProxy SCIM 2.0 API requests with an OAuth 2.0 access (bearer) token, as defined by RFC 6750. Obtain the bearer token through an OAuth 2 authorization server, such as PingFederate. Add the bearer token to the Authorization header of your requests.
+description: Explains how to authenticate PingDirectory and PingDirectoryProxy SCIM 2.0 API requests using an OAuth 2.0 bearer access token
 component: pingdirectory
 page_id: pingdirectory:directory-proxy-scim:authentication
 canonical_url: https://developer.pingidentity.com/pingdirectory/directory-proxy-scim/authentication.html
+llms_txt: https://developer.pingidentity.com/pingdirectory/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-11
 ---
 
 # Authentication
@@ -34,10 +37,13 @@ If the access token is missing, expired, or invalid, the server responds with a 
 
 ---
 title: Authorization
-description: For Authentication, you provide an OAuth 2.0 access (bearer) token. That bearer token controls access to which resources and attributes are returned. It does this through a scope that an administrator configures on the server that contains the data. What this means is that regardless of whether you use PingDirectory or PingDirectoryProxy as the endpoint server, you always configure access controls on the PingDirectory server. For more information on configuring SCIM 2.0 on PingDirectory, refer to Configuring SCIM 2.0 on Your Server.
+description: Explains how OAuth 2.0 scopes and PingDirectory access controls determine which SCIM 2.0 resources and attributes a request can access
 component: pingdirectory
 page_id: pingdirectory:directory-proxy-scim:authorization
 canonical_url: https://developer.pingidentity.com/pingdirectory/directory-proxy-scim/authorization.html
+llms_txt: https://developer.pingidentity.com/pingdirectory/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-11
 ---
 
 # Authorization
@@ -80,10 +86,13 @@ Based on access control configuration, you may be allowed to access a resource b
 
 ---
 title: Create a User
-description: The POST /scim/v2/Users endpoint creates a new user resource, providing a complete representation of the resource in the request body. Read-only attributes such as meta can be omitted.
+description: Create a new user resource using a POST request against the PingDirectory or PingDirectoryProxy SCIM 2.0 Users endpoint
 component: pingdirectory
 page_id: pingdirectory:directory-proxy-scim:user-profile-endpoints/create-a-user
 canonical_url: https://developer.pingidentity.com/pingdirectory/directory-proxy-scim/user-profile-endpoints/create-a-user.html
+llms_txt: https://developer.pingidentity.com/pingdirectory/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-01-02
 section_ids:
   headers: Headers
   body: Body
@@ -594,10 +603,13 @@ task.resume()
 
 ---
 title: Data Types and Resources
-description: The PingDirectory and PingDirectoryProxy SCIM 2.0 APIs use the data types and resource format specified by the SCIM 2.0 schema standard, RFC 7643.
+description: Describes the SCIM 2.0 data types, resource format, schemas, and common attributes used by the PingDirectory and PingDirectoryProxy SCIM 2.0 APIs
 component: pingdirectory
 page_id: pingdirectory:directory-proxy-scim:data-types-and-resources
 canonical_url: https://developer.pingidentity.com/pingdirectory/directory-proxy-scim/data-types-and-resources.html
+llms_txt: https://developer.pingidentity.com/pingdirectory/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-11
 section_ids:
   scim-data-types: SCIM data types
   scim-resource-format: SCIM resource format
@@ -709,10 +721,13 @@ Some SCIM responses, such as search responses, contain multiple resources. These
 
 ---
 title: Delete a User
-description: The DELETE /scim/v2/Users/{{id}} endpoint removes the user specified by the ID in the request URL.
+description: Delete a user resource by ID using a DELETE request against the PingDirectory or PingDirectoryProxy SCIM 2.0 Users endpoint
 component: pingdirectory
 page_id: pingdirectory:directory-proxy-scim:user-profile-endpoints/delete-a-user
 canonical_url: https://developer.pingidentity.com/pingdirectory/directory-proxy-scim/user-profile-endpoints/delete-a-user.html
+llms_txt: https://developer.pingidentity.com/pingdirectory/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-01-02
 section_ids:
   headers: Headers
   example-request: Example Request
@@ -971,10 +986,13 @@ task.resume()
 
 ---
 title: Errors
-description: Like all other responses, errors are returned as SCIM responses with a media type of application/scim+json.
+description: Describes the SCIM 2.0 error response format, fields, and password update error details returned by the PingDirectory and PingDirectoryProxy APIs
 component: pingdirectory
 page_id: pingdirectory:directory-proxy-scim:errors
 canonical_url: https://developer.pingidentity.com/pingdirectory/directory-proxy-scim/errors.html
+llms_txt: https://developer.pingidentity.com/pingdirectory/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-11
 section_ids:
   password-update-errors: Password update errors
 ---
@@ -1035,10 +1053,13 @@ If an error response is returned because of a password update failure, an additi
 
 ---
 title: Group search configuration
-description: Follow the steps below to configure the directory/proxy to use the SCIM2 API to search for groups or determine the members of a particular group.
+description: Explains how to configure PingDirectory or PingDirectoryProxy to search for groups and retrieve group members using the SCIM 2.0 API
 component: pingdirectory
 page_id: pingdirectory:directory-proxy-scim:group-search-configuration
 canonical_url: https://developer.pingidentity.com/pingdirectory/directory-proxy-scim/group-search-configuration.html
+llms_txt: https://developer.pingidentity.com/pingdirectory/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-11
 ---
 
 # Group search configuration
@@ -1120,10 +1141,13 @@ Sample response:
 
 ---
 title: Overview
-description: The PingDirectory and PingDirectoryProxy SCIM 2.0 APIs are a set of REST interfaces based on the SCIM (System for Cross-domain Identity Management) 2.0 standard. With these APIs, you can:
+description: Describes the PingDirectory and PingDirectoryProxy SCIM 2.0 REST APIs, their capabilities, and the encryption configuration required to enable them
 component: pingdirectory
 page_id: pingdirectory:directory-proxy-scim:overview
 canonical_url: https://developer.pingidentity.com/pingdirectory/directory-proxy-scim/overview.html
+llms_txt: https://developer.pingidentity.com/pingdirectory/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-09-15
 ---
 
 # Overview
@@ -1148,9 +1172,9 @@ With SCIM 2.0, any type of data is called a resource type. One or more schemas s
 
 To use these APIs, you must configure PingDirectory or PingDirectoryProxy for SCIM 2.0. You can set up PingDirectory as a stand-alone server. Whereas, you must set up PingDirectoryProxy with an external PingDirectory server.
 
-|   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
-| - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | To configure either server for SCIM 2.0, you must enable encryption. If you configure PingDirectoryProxy as the SCIM 2.0 server, then it and its backend servers need to be using the same encryption settings definition. For more information on importing and exporting encryption settings definitions, refer to [Encrypting Sensitive Data](https://docs.pingidentity.com/pingdirectory/latest/pingdirectory_server_administration_guide/pd_ds_encrypt_sensitive_data.html). |
+|   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | To configure either server for SCIM 2.0, you must enable encryption. If you configure PingDirectoryProxy as the SCIM 2.0 server, the PingDirectoryProxy server and the target PingDirectory servers must have the same encryption settings definition.If the encryption settings definitions do not match, you must export the PingDirectoryProxy encryption settings definition and import it into the target PingDirectory servers. For more information, refer to [Exporting encryption settings definitions](https://docs.pingidentity.com/pingdirectory/latest/pingdirectory_server_administration_guide/pd_ds_export_encryption_settings_defs.html) and [Importing encryption settings definitions](https://docs.pingidentity.com/pingdirectory/latest/pingdirectory_server_administration_guide/pd_ds_import_encryption_settings_defs.html). |
 
 For more information on configuring PingDirectory for SCIM 2.0, refer to [Configuring SCIM 2.0 on Your Server](https://docs.pingidentity.com/pingdirectory/latest/pingdirectory_server_administration_guide/pd_ds_config_scim_2_server.html). For more information on configuring PingDirectoryProxy for SCIM 2.0, refer to the [PingDirectoryProxy Server Administration Guide](https://docs.pingidentity.com/pingdirectory/latest/pingdirectoryproxy_server_administration_guide/pd_proxy_intro_pdproxy_server.html).
 
@@ -1162,22 +1186,26 @@ These topics provide the following information about the PingDirectory and PingD
 
 * [Authentication](authentication.html): Authentication requirement to access SCIM APIs.
 
-* [Requests and responses](requests-and-responses.html): SCIM API requests and responses.
+* [Requests and responses](requests-and-responses/index.html): SCIM API requests and responses.
 
 * [Errors](errors.html): SCIM 2.0 errors.
 
-* [Service metadata endpoints](service-metadata-endpoints.html): SCIM 2.0 service metadata endpoints.
+* [Service metadata endpoints](service-metadata-endpoints/index.html): SCIM 2.0 service metadata endpoints.
 
-* [User profile endpoints](user-profile-endpoints.html): SCIM 2.0 user profile endpoints.
+* [User profile endpoints](user-profile-endpoints/index.html): SCIM 2.0 user profile endpoints.
 
 ---
 
 ---
 title: PingDirectory and PingDirectoryProxy SCIM 2.0 API Reference
-description: Before you read the PingDirectory and PingDirectoryProxy SCIM 2.0 API topics or use the API, review the following:
+description: Lists prerequisite reading, including administration guides and RFCs, to review before using the PingDirectory and PingDirectoryProxy SCIM 2.0 APIs
 component: pingdirectory
-page_id: pingdirectory:directory-proxy-scim:introduction
-canonical_url: https://developer.pingidentity.com/pingdirectory/directory-proxy-scim/introduction.html
+page_id: pingdirectory:directory-proxy-scim:index
+canonical_url: https://developer.pingidentity.com/pingdirectory/directory-proxy-scim/index.html
+llms_txt: https://developer.pingidentity.com/pingdirectory/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-11
+page_aliases: ["introduction.adoc"]
 ---
 
 # PingDirectory and PingDirectoryProxy SCIM 2.0 API Reference
@@ -1206,10 +1234,13 @@ In addition, ensure you are familiar with HTTP headers, methods, and response co
 
 ---
 title: Read a SCIM Service Provider Configuration
-description: The GET /scim/v2/ServiceProviderConfig endpoint returns read-only metadata indicating the server's OAuth 2.0 authentication scheme and its support for optional or configurable SCIM features.
+description: "Retrieve read-only metadata about the PingDirectory or PingDirectoryProxy SCIM 2.0 server's authentication scheme and supported features"
 component: pingdirectory
 page_id: pingdirectory:directory-proxy-scim:service-metadata-endpoints/read-a-scim-service-provider-configuration
 canonical_url: https://developer.pingidentity.com/pingdirectory/directory-proxy-scim/service-metadata-endpoints/read-a-scim-service-provider-configuration.html
+llms_txt: https://developer.pingidentity.com/pingdirectory/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-01-02
 section_ids:
   headers: Headers
   example-request: Example Request
@@ -1487,10 +1518,13 @@ task.resume()
 
 ---
 title: Read One SCIM Resource Type
-description: The GET /scim/v2/ResourceTypes/{{id}} endpoint retrieves a specific SCIM resource type, specified by its ID.
+description: Retrieve a specific SCIM 2.0 resource type by ID from the PingDirectory or PingDirectoryProxy ResourceTypes endpoint
 component: pingdirectory
 page_id: pingdirectory:directory-proxy-scim:service-metadata-endpoints/read-a-scim-resource-type
 canonical_url: https://developer.pingidentity.com/pingdirectory/directory-proxy-scim/service-metadata-endpoints/read-a-scim-resource-type.html
+llms_txt: https://developer.pingidentity.com/pingdirectory/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-01-02
 section_ids:
   headers: Headers
   example-request: Example Request
@@ -1748,10 +1782,13 @@ task.resume()
 
 ---
 title: Read One SCIM Schema
-description: The GET /scim/v2/Schemas/{{id}} endpoint retrieves a specific SCIM schema, specified by its ID, which is always a URN.
+description: Retrieve a specific SCIM 2.0 schema by its URN from the PingDirectory or PingDirectoryProxy Schemas endpoint
 component: pingdirectory
 page_id: pingdirectory:directory-proxy-scim:service-metadata-endpoints/read-a-scim-schema
 canonical_url: https://developer.pingidentity.com/pingdirectory/directory-proxy-scim/service-metadata-endpoints/read-a-scim-schema.html
+llms_txt: https://developer.pingidentity.com/pingdirectory/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-01-02
 section_ids:
   headers: Headers
   example-request: Example Request
@@ -2021,10 +2058,13 @@ task.resume()
 
 ---
 title: Read One User
-description: The GET /scim/v2/Users/{{id}} endpoint retrieves information for the user specified by the ID in the request URL.
+description: Retrieve a user resource by ID using a GET request against the PingDirectory or PingDirectoryProxy SCIM 2.0 Users endpoint
 component: pingdirectory
 page_id: pingdirectory:directory-proxy-scim:user-profile-endpoints/read-a-user
 canonical_url: https://developer.pingidentity.com/pingdirectory/directory-proxy-scim/user-profile-endpoints/read-a-user.html
+llms_txt: https://developer.pingidentity.com/pingdirectory/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-01-02
 section_ids:
   headers: Headers
   example-request: Example Request
@@ -2320,10 +2360,13 @@ task.resume()
 
 ---
 title: Read SCIM Resource Types
-description: The GET /scim/v2/ResourceTypes endpoint returns all of the SCIM resource types configured for use on this server. Use this information to determine the endpoint, core schema, and extension schemas of any resource types supported by the server.
+description: List all SCIM 2.0 resource types configured on the PingDirectory or PingDirectoryProxy server, including their endpoints and schemas
 component: pingdirectory
 page_id: pingdirectory:directory-proxy-scim:service-metadata-endpoints/read-scim-resource-types
 canonical_url: https://developer.pingidentity.com/pingdirectory/directory-proxy-scim/service-metadata-endpoints/read-scim-resource-types.html
+llms_txt: https://developer.pingidentity.com/pingdirectory/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-01-02
 section_ids:
   headers: Headers
   example-request: Example Request
@@ -2591,10 +2634,13 @@ task.resume()
 
 ---
 title: Read SCIM Schemas
-description: The GET /scim/v2/Schemas endpoint lists the SCIM schemas configured for use on this server. These schemas define the various attributes available to resource types.
+description: List all SCIM 2.0 schemas configured on the PingDirectory or PingDirectoryProxy server and the attributes they define
 component: pingdirectory
 page_id: pingdirectory:directory-proxy-scim:service-metadata-endpoints/read-scim-schemas
 canonical_url: https://developer.pingidentity.com/pingdirectory/directory-proxy-scim/service-metadata-endpoints/read-scim-schemas.html
+llms_txt: https://developer.pingidentity.com/pingdirectory/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-01-02
 section_ids:
   headers: Headers
   example-request: Example Request
@@ -2872,10 +2918,13 @@ task.resume()
 
 ---
 title: READ search group members by group display name
-description: Use the GET /Groups endpoint to filter for matching group member resources.
+description: "Search for a group's members by the group's display name using the PingDirectory or PingDirectoryProxy SCIM 2.0 Groups endpoint"
 component: pingdirectory
 page_id: pingdirectory:directory-proxy-scim:user-profile-endpoints/get-read-search-group-members-display-name
 canonical_url: https://developer.pingidentity.com/pingdirectory/directory-proxy-scim/user-profile-endpoints/get-read-search-group-members-display-name.html
+llms_txt: https://developer.pingidentity.com/pingdirectory/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-01-02
 section_ids:
   prerequisites: Prerequisites
   headers: Headers
@@ -3172,10 +3221,13 @@ task.resume()
 
 ---
 title: READ search group members by group entry ID
-description: The GET /Groups/{{groupEntryID}} endpoint returns a group's members by performing a GET request with a specified group entry ID.
+description: "Retrieve a group's members by group entry ID using the PingDirectory or PingDirectoryProxy SCIM 2.0 Groups endpoint"
 component: pingdirectory
 page_id: pingdirectory:directory-proxy-scim:user-profile-endpoints/get-read-search-group-members-entry-id
 canonical_url: https://developer.pingidentity.com/pingdirectory/directory-proxy-scim/user-profile-endpoints/get-read-search-group-members-entry-id.html
+llms_txt: https://developer.pingidentity.com/pingdirectory/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-01-02
 section_ids:
   prerequisites: Prerequisites
   headers: Headers
@@ -3472,10 +3524,13 @@ task.resume()
 
 ---
 title: Requests and Responses
-description: Each resource has an identifier. The resource type name (Users) is combined with the identifier (5caa81af-ec05-41ff-a709-c7378007a99c) to uniquely identify the resource to the PingDirectory or PingDirectoryProxy Server. For example:
+description: Describes SCIM 2.0 request and response formatting, resource updates, attribute selection, filtering, and pagination for PingDirectory and PingDirectoryProxy
 component: pingdirectory
-page_id: pingdirectory:directory-proxy-scim:requests-and-responses
-canonical_url: https://developer.pingidentity.com/pingdirectory/directory-proxy-scim/requests-and-responses.html
+page_id: pingdirectory:directory-proxy-scim:requests-and-responses/index
+canonical_url: https://developer.pingidentity.com/pingdirectory/directory-proxy-scim/requests-and-responses/index.html
+llms_txt: https://developer.pingidentity.com/pingdirectory/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-11
 section_ids:
   http-request-headers: HTTP request headers
   updating-resources: Updating resources
@@ -3506,7 +3561,7 @@ All requests and responses use UTF-8 character encoding and are formatted as JSO
 
 ## Updating resources
 
-SCIM resources are modified using the `PUT` and `PATCH` methods, described in sections 3.5.1 and 3.5.2 of [RFC 7644](https://datatracker.ietf.org/doc/html/rfc7644). For examples, refer to [User profile endpoints](user-profile-endpoints.html).
+SCIM resources are modified using the `PUT` and `PATCH` methods, described in sections 3.5.1 and 3.5.2 of [RFC 7644](https://datatracker.ietf.org/doc/html/rfc7644). For examples, refer to [User profile endpoints](../user-profile-endpoints/index.html).
 
 | HTTP method | Description                                                  |
 | ----------- | ------------------------------------------------------------ |
@@ -3663,10 +3718,13 @@ The client can provide pagination parameters to page through search result sets.
 
 ---
 title: Search User Profile (GET)
-description: The GET /scim/v2/Users endpoint filters for matching user resources by performing a GET and providing a filter query parameter. Pagination parameters can also be provided.A client can filter for matching resources by performing a GET and providing a filter query parameter, as described above. Pagination parameters can also be provided.
+description: Search for user resources matching a filter using a GET request against the PingDirectory or PingDirectoryProxy SCIM 2.0 Users endpoint
 component: pingdirectory
 page_id: pingdirectory:directory-proxy-scim:user-profile-endpoints/get-read-search-users
 canonical_url: https://developer.pingidentity.com/pingdirectory/directory-proxy-scim/user-profile-endpoints/get-read-search-users.html
+llms_txt: https://developer.pingidentity.com/pingdirectory/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-01-02
 section_ids:
   headers: Headers
   example-request: Example Request
@@ -3978,10 +4036,13 @@ task.resume()
 
 ---
 title: Search User Profile (POST)
-description: The POST /scim/v2/Users/.search endpoint filters for matching user resources by performing a POST against the special .search endpoint and providing a filter value. Pagination directives can also be provided.
+description: Search for user resources matching a filter using a POST request against the SCIM 2.0 Users .search endpoint
 component: pingdirectory
 page_id: pingdirectory:directory-proxy-scim:user-profile-endpoints/post-read-search-users
 canonical_url: https://developer.pingidentity.com/pingdirectory/directory-proxy-scim/user-profile-endpoints/post-read-search-users.html
+llms_txt: https://developer.pingidentity.com/pingdirectory/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-01-02
 section_ids:
   headers: Headers
   body: Body

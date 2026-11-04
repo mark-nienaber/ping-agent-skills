@@ -341,7 +341,7 @@ Configure PingOne to authorize external access to the Policy Editor.
 
 6. On the **Configuration** tab, click the **Pencil** icon to edit the settings.
 
-7. In the **PKCE Enforcement** list in the **Grant Type** section, select **S256\_REQUIRED**.
+7. In the **PKCE Enforcement** list in the **Grant Type** section, select **S256_REQUIRED**.
 
 8. In the **Redirect URIs** field, enter a redirect URL that follows the format `https://<pap.hostname:port>/idp-callback`.
 
@@ -519,7 +519,7 @@ The following example configuration assumes that any authenticated user can acce
 
    13. On the **LDAP Filter** tab, in the **Filter** field, enter `uid=${USER_KEY}` to match the PingDirectory sample data with the authenticating user information.
 
-       ![Screen capture of the LDAP Filter tab on the Access Token Attribute Mapping window with a Filter field entry of uid=${USER\_KEY}](_images/sta1638917408619.png)
+       ![Screen capture of the LDAP Filter tab on the Access Token Attribute Mapping window with a Filter field entry of uid=${USER_KEY}](_images/sta1638917408619.png)
 
    14. Click **Next** and **Save** on the **Summary** tab.
 
@@ -555,7 +555,7 @@ The following example configuration assumes that any authenticated user can acce
 
    24. Go to **Authentication > OAuth > IdP Adapter Grant Mapping** and create a new Form Adapter Mapping, fulfilling the contracts for `USER_NAME` and `USER_KEY` with the **username** form field. Click **Next** and **Save** on the **Summary** tab.
 
-       ![Screen capture of the Contract Fulfillment tab on the IdP Adapter Grant Mapping window, with the USER\_KEY and USER\_NAME contracts set to a Source of Adapter and a Value of username](_images/rjp1638944892132.png)
+       ![Screen capture of the Contract Fulfillment tab on the IdP Adapter Grant Mapping window, with the USER_KEY and USER_NAME contracts set to a Source of Adapter and a Value of username](_images/rjp1638944892132.png)
 
    25. Because this PingFederate instance uses a different domain from the Policy Editor, you must modify the PingFederate CORS settings. Go to **System → OAuth Settings → Authorization Server Settings**. In the **Cross-Origin Resource Sharing Settings** section, enter the domain for the Policy Editor in the **Allowed Origin** field. Click **Add** and then **Save**.
 

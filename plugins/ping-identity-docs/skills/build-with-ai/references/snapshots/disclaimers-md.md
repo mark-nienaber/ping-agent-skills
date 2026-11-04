@@ -6,7 +6,7 @@ page_id: build-with-ai::disclaimers
 canonical_url: https://developer.pingidentity.com/build-with-ai/disclaimers.html
 llms_txt: https://developer.pingidentity.com/build-with-ai/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: June 9, 2026
+revdate: 2026-09-21T00:00:00Z
 keywords: ["disclaimers", "limitations", "security", "LLM", "AI", "MCP", "warnings"]
 section_ids:
   data-privacy-and-llm-providers: Data privacy and LLM providers
@@ -25,7 +25,7 @@ The MCP servers, agent skills, and other AI tooling on this site are powerful to
 | - | --------------------------------------------------------------------------------------------------------------------------------- |
 |   | All data returned from MCP tools might be sent to your LLM provider. Only use these tools with trusted MCP clients and AI agents. |
 
-When an AI agent calls an MCP tool, the tool response (including any Ping Identity environment data it returns) is passed back to your AI agent as context. Depending on your AI agent and inference configuration, this data may be included in prompts sent to a third-party LLM provider.
+When an AI agent calls an MCP tool, the tool response (including any Ping Identity environment data it returns) is passed back to your AI agent as context. Depending on your AI agent and inference configuration, this data might be included in prompts sent to a third-party LLM provider.
 
 This includes:
 
@@ -45,7 +45,7 @@ Review the sensitivity of your environment data before using these tools with a 
 
 Results vary based on the model you are using, the quality of your prompts, and the context available to the agent.
 
-* **Different models produce different results.** A prompt that works well with one LLM may produce incomplete, incorrect, or unexpected output with another.
+* **Different models produce different results.** A prompt that works well with one LLM might produce incomplete, incorrect, or unexpected output with another.
 
 * **Agent skills improve grounding but do not guarantee accuracy.** Skills load domain expertise into the agent, but the agent still interprets that knowledge and can make mistakes.
 

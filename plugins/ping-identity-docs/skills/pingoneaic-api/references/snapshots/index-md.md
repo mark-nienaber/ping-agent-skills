@@ -4,6 +4,8 @@ description: Learn about configuring AIC APIs.
 component: pingoneaic-api
 page_id: pingoneaic-api::index
 canonical_url: https://developer.pingidentity.com/pingoneaic-api/index.html
+llms_txt: https://developer.pingidentity.com/pingoneaic-api/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: December 18, 2025
 keywords: ["PingOne Advanced Identity Cloud", "Advanced Identity Cloud", "release notes", "what's new", "Advanced Identity Cloud REST API", "Advanced Identity Cloud API"]
 section_ids:

@@ -1,9 +1,11 @@
 ---
 title: PingID API Error Codes
-description: 200
+description: PingID API return status values and descriptions
 component: pingid-api
 page_id: pingid-api::pid_c_PingIDapiErrorCodes
 canonical_url: https://developer.pingidentity.com/pingid-api/pid_c_PingIDapiErrorCodes.html
+llms_txt: https://developer.pingidentity.com/pingid-api/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
   successful-error-responses: Successful Error Responses
   client-error-codes: Client Error Codes

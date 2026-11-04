@@ -97,6 +97,16 @@ curl \
 
   The TCP connection timeout for new HTTP connections, in seconds. The default timeout is 10 seconds.
 
+* []()`pooledConnectionTtl` (integer)
+
+  Specifies the maximum time to live (TTL), in milliseconds, for pooled HTTP connections. Connections in the pool older than the TTL aren't reused. The default value of `-1` means pooled connections don't expire.
+
+  Set a TTL when a remote service or an intermediary, such as a load balancer, closes long-lived connections. For example, after an idle timeout or when the connection reaches a maximum age. Stale connections left in the pool can cause request failures. Set the TTL lower than the shortest connection lifetime your infrastructure imposes, so the pool retires connections before the remote end can close them.
+
+  |   |                                                                                                                                                                                                                                         |
+  | - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+  |   | The value must be a number of milliseconds. Unlike the `socketTimeout` and `connectionTimeout` properties, this property doesn't accept duration values. A value such as `"1 s"` can prevent the external REST service from activating. |
+
 * `reuseConnections` (boolean, true or false)
 
   Specifies whether HTTP connections should be kept alive and reused for additional requests. By default, connections will be reused if possible.
@@ -129,6 +139,120 @@ curl \
   | `ALLOW_ALL` | The external REST service does not attempt to match the URL hostname to the SSL certificate Common Name as part of its validation process. |
 
   If you do not set this property, the behavior is to validate hostnames (the equivalent of setting `"hostnameVerifier": "STRICT"`). In production environments, you *should* set this property to `STRICT`.
+
+* []()`userAgent` (string)
+
+  Specifies the value of the `User-Agent` header for requests made by the external REST service. If not set, the `"PingIdentity"` value applies by default.
+
+  Overriding the default `User-Agent` helps you:
+
+  * **Improve logging and auditing**: Allow downstream Security Operations (SecOps) teams to easily identify, attribute, and filter Advanced Identity Cloud traffic in Security Information and Event Management (SIEM) logs. For example, `"MyCompany-AIC/1.0"` gives SecOps a consistent tag to search and filter on.
+
+  * **Avoid bot-detection false positives**: Prevent Web Application Firewalls (WAFs) and third-party APIs from blocking or rate-limiting generic requests as automated bot traffic. For example, `"MyCompany-AIC/1.0 (fraud check)"` identifies a specific integration instead of resembling a generic script default.
+
+  * **Differentiate environments**: Distinguish between sandbox and production integration calls on receiving endpoints by including environment-specific tags. For example, set the value to `"MyCompany-AIC/1.0 (sandbox)"` in your sandbox environment and to `"MyCompany-AIC/1.0"` in your production environment.
+
+  * **Obfuscate underlying systems in use**: The default `"PingIdentity"` value doesn't disclose the HTTP client implementation or version to receiving endpoints. For even greater obfuscation, set a custom value. For example, set the value to `"batch-sync/1.0"`.
+
+    You can set this value in the following ways, listed highest to lowest precedence:
+
+  * Per-request, using the `User-Agent` header in the `headers` parameter:
+
+    Example request
+
+    ```
+    curl \
+    --header "Authorization: Bearer <access-token>" \
+    --request POST \
+    --header "Content-Type: application/json" \
+    --header "Accept-API-Version: resource=1.0" \
+    --data '{
+      "url": "http://echo-http-requests.appspot.com/echo?status=200&Content-Type=application%2Fjson&body=%5B%7B%22key%22%3A%22value%22%7D%5D",
+      "method": "GET",
+      "headers": {
+        "User-Agent": "MyCompany-AIC/1.0"
+      }
+    }' \
+      "https://<tenant-env-fqdn>/openidm/external/rest?_action=call"
+    ```
+
+    > **Collapse: Show example response**
+    >
+    > ```json
+    > {
+    >   "request": {
+    >     "body": "",
+    >     "created": "2026-02-25 21:29:20.253693",
+    >     "headers": {
+    >       "Content-Type": "application/json; charset=\"utf-8\"",
+    >       "Host": "echo-http-requests.appspot.com",
+    >       "Traceparent": "00-3daffaa2187dd81345f37b1837661a26-65404f3040d5b362-00",
+    >       "User-Agent": "MyCompany-AIC/1.0",
+    >       "X-Cloud-Trace-Context": "3daffaa2187dd81345f37b1837661a26/7295918465004974946",
+    >       "X-Forgerock-Transactionid": "31fa216a-333e-4e25-9ba0-2c073794121b-387/0"
+    >     },
+    >     "http_version": "HTTP/1.1",
+    >     "method": "GET",
+    >     "query_string": "status=200&Content-Type=application%2Fjson&body=%5B%7B%22key%22%3A%22value%22%7D%5D",
+    >     "remote_address": "203.0.113.47",
+    >     "url": "http://echo-http-requests.appspot.com/echo?status=200&Content-Type=application%2Fjson&body=%5B%7B%22key%22%3A%22value%22%7D%5D"
+    >   },
+    >   "status": "OK"
+    > }
+    > ```
+
+  * Globally, by setting the `userAgent` property in the external REST configuration:
+
+    You can set the `userAgent` property to an Environment Secrets and Variables (ESV) configuration placeholder, for example `"&{esv.user.agent}"`, instead of a static value. This keeps the configuration itself identical across environments while the ESV resolves to the different sandbox and production values described earlier. Learn more in [Configure placeholders to use with ESVs](../tenants/configuration-placeholders.html).
+
+    |   |                                                                                                                                                                                                                                                                          |
+    | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+    |   | Use only printable ASCII characters, and avoid control characters, which can break header parsing. If your value contains spaces or punctuation, ensure your tooling quotes it correctly in JSON or shell syntax ([RFC 9110](https://www.rfc-editor.org/info/rfc9110/)). |
+
+    Example request
+
+    ```
+    curl \
+    --header "Authorization: Bearer <access-token>" \
+    --header "Accept-API-Version: resource=1.0" \
+    --header "Content-Type: application/json" \
+    --request PUT \
+    --data '{
+      "socketTimeout": "10 s",
+      "connectionTimeout": "10 s",
+      "reuseConnections": true,
+      "retryRequests": true,
+      "maxConnections": 64,
+      "tlsVersion": "TLSv1.2",
+      "userAgent": "&{esv.user.agent}",
+      "proxy": {
+        "proxyUri": "",
+        "userName": "",
+        "password": ""
+      }
+    }' \
+    "https://<tenant-env-fqdn>/openidm/config/external.rest"
+    ```
+
+    > **Collapse: Show example response**
+    >
+    > ```json
+    > {
+    >   "_id": "external.rest",
+    >   "socketTimeout": "10 s",
+    >   "connectionTimeout": "10 s",
+    >   "reuseConnections": true,
+    >   "retryRequests": true,
+    >   "maxConnections": 64,
+    >   "tlsVersion": "TLSv1.2",
+    >   "userAgent": "&{esv.user.agent}",
+    >   "proxy": {
+    >     "proxyUri": "",
+    >     "userName": "",
+    >     "password": ""
+    >   }
+    > }
+    > ```
 
 ## Invocation parameters
 
@@ -214,7 +338,7 @@ The following parameters are passed in the resource API parameters map. These pa
 
   The authentication type, and the details with which to authenticate.
 
-  IDM supports the following authentication types:
+  Advanced Identity Cloud supports the following authentication types:
 
   * `basic` authentication with a username and password, for example:
 
@@ -241,7 +365,7 @@ The following parameters are passed in the resource API parameters map. These pa
 
 The external REST service supports any arbitrary payload (currently in stringified format). If the response is anything other than JSON, a JSON message object is returned:
 
-* For text-compatible (non-JSON) content, IDM returns a JSON object similar to the following:
+* For text-compatible (non-JSON) content, Advanced Identity Cloud returns a JSON object similar to the following:
 
   ```json
   {

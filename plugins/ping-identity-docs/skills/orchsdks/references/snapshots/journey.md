@@ -36,7 +36,7 @@ The tutorial also requires a configured server.
 
 * Android
 
-  This sample requires at least Android 10 - API level 29.
+  This sample requires at least Android 11 - API level 30.
 
   For more information, refer to [Supported operating systems and browsers](../../compatibility.html#supported-os).
 
@@ -383,7 +383,7 @@ The tutorial also requires a configured server.
 
 * iOS
 
-  This sample app is compatible with iOS 16 and later.
+  This sample app is compatible with iOS 17 and later.
 
 ## Prerequisites
 
@@ -1229,11 +1229,11 @@ The tutorial also requires a configured server.
 
 * iOS
 
-  This sample app requires iOS 16.0 or later.
+  This sample app requires iOS 17.0 or later.
 
 * Android
 
-  This sample app requires Android 10 (API level 29) or later.
+  This sample app requires Android 11 (API level 30) or later.
 
 ## Prerequisites
 
@@ -1243,7 +1243,7 @@ The React Native development environment must be fully configured before you beg
 
   Install [Node.js](https://nodejs.org/) version 20 or later.
 
-  This project uses Yarn 4 workspaces. Install Yarn by running:
+  This project uses Yarn. Install Yarn by running:
 
   ```shell
   corepack enable
@@ -1257,7 +1257,13 @@ The React Native development environment must be fully configured before you beg
 
 * Ruby and Bundler (iOS only)
 
-  Ruby is required to manage CocoaPods. Install [Bundler](https://bundler.io/) with:
+  Ruby 3.3.6 or later is required to manage CocoaPods.
+
+  |   |                                                                                                                                                                                                |
+  | - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+  |   | macOS ships with an older version of Ruby that is not compatible with this project.Install a current version using [rbenv](https://rbenv.org/) or a similar version manager before continuing. |
+
+  Install [Bundler](https://bundler.io/) with:
 
   ```shell
   gem install bundler
@@ -1736,7 +1742,7 @@ It enables applications to bind cryptographic keys to a device and restrict acce
 
 You need to create an authentication journey in your server using the appropriate nodes to enable device binding.
 
-The nodes you can use for device binding Journeys include the follows:
+The relevant nodes to use for device binding Journeys are as follows:
 
 * [Device Binding node](https://docs.pingidentity.com/auth-node-ref/latest/device-binding.html)
 
@@ -1873,7 +1879,7 @@ To install these modules into your Android app:
 
    ```gradle
    dependencies {
-     implementation("com.pingidentity.sdk:binding:2.0.1")
+     implementation("com.pingidentity.sdk:binding:2.2.0")
    }
    ```
 
@@ -1905,8 +1911,8 @@ To install these modules into your Android app:
 
    ```gradle
    dependencies {
-     implementation("com.pingidentity.sdk:binding:2.0.1")
-     implementation("com.pingidentity.sdk:binding-ui:2.0.1")
+     implementation("com.pingidentity.sdk:binding:2.2.0")
+     implementation("com.pingidentity.sdk:binding-ui:2.2.0")
    }
    ```
 
@@ -1928,9 +1934,9 @@ To install these modules into your Android app:
 
    ```gradle
    dependencies {
-     implementation("com.pingidentity.sdk:binding:2.0.1")
-     implementation("com.pingidentity.sdk:binding-ui:2.0.1")
-     implementation("com.pingidentity.sdk:binding-migration:2.0.1")
+     implementation("com.pingidentity.sdk:binding:2.2.0")
+     implementation("com.pingidentity.sdk:binding-ui:2.2.0")
+     implementation("com.pingidentity.sdk:binding-migration:2.2.0")
    }
    ```
 
@@ -1938,9 +1944,9 @@ To install these modules into your Android app:
 
    ```gradle
    dependencies {
-     implementation("com.pingidentity.sdk:binding:2.0.1")
-     implementation("com.pingidentity.sdk:binding-ui:2.0.1")
-     implementation("com.pingidentity.sdk:binding-migration:2.0.1")
+     implementation("com.pingidentity.sdk:binding:2.2.0")
+     implementation("com.pingidentity.sdk:binding-ui:2.2.0")
+     implementation("com.pingidentity.sdk:binding-migration:2.2.0")
      implementation("org.bouncycastle:bcpkix-jdk18on:1.82"
    }
    ```
@@ -2264,7 +2270,7 @@ It enables applications to bind cryptographic keys to a device and restrict acce
 
 You need to create an authentication journey in your server using the appropriate nodes to enable device binding.
 
-The nodes you can use for device binding Journeys include the follows:
+The relevant nodes to use for device binding Journeys are as follows:
 
 * [Device Binding node](https://docs.pingidentity.com/auth-node-ref/latest/device-binding.html)
 
@@ -2948,7 +2954,7 @@ The Device Binding module provides secure device registration and authentication
 
 You need to create an authentication journey in your server using the appropriate nodes to enable device binding.
 
-The nodes you can use for device binding Journeys include the follows:
+The relevant nodes to use for device binding Journeys are as follows:
 
 * [Device Binding node](https://docs.pingidentity.com/auth-node-ref/latest/device-binding.html)
 
@@ -3508,7 +3514,7 @@ To install the module into your Android app:
 
    ```gradle
    dependencies {
-       implementation("com.pingidentity.device:device-profile:2.0.1")
+       implementation("com.pingidentity.device:device-profile:2.2.0")
    }
    ```
 
@@ -3655,7 +3661,7 @@ The **device-profile** module provides the following collectors:
 | `BrowserCollector`   | Collects the user-agent string of the default browser on the device.Example data returned by the `BrowserCollector````json
 {
     "browser": {
-        "userAgent": "Mozilla/5.0 (Linux; Android 10; Pixel 4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.106 Mobile Safari/537.36"
+        "userAgent": "Mozilla/5.0 (Linux; Android 11; Pixel 8) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.106 Mobile Safari/537.36"
     }
 }
 ```                                                                                                                                                                 |
@@ -4556,7 +4562,7 @@ section_ids:
   supported-servers: Supported server versions
   supported-os: Supported operating systems and browsers
   webviews_unsupported_journey: JavaScript Compatibility with WebViews
-  supported-journey-fields: Supported Nodes and Callbacks
+  supported-journey-fields: Supported authentication nodes and callbacks
   supported_authentication_journey_callbacks: Supported authentication journey callbacks
 ---
 
@@ -4594,21 +4600,21 @@ The Orchestration SDK for Android supports the following versions of the Android
 
 **Supported Android versions and original release dates**
 
-| Release    | API Levels | Released        |
+| Release    | API Levels | Release date    |
 | ---------- | ---------- | --------------- |
+| Android 17 | 37         | June, 2026      |
 | Android 16 | 36         | August, 2025    |
 | Android 15 | 35         | September, 2024 |
 | Android 14 | 34         | October, 2023   |
 | Android 13 | 33         | March, 2022     |
 | Android 12 | 31, 32     | October, 2021   |
 | Android 11 | 30         | September, 2020 |
-| Android 10 | 29         | September, 2019 |
 
 |   |                                                                                                                                                                                                                                                                                                        |
 | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 |   | We have updated how we determine which Android versions form our support policy for the Orchestration SDK for Android.The support policy is as follows:- Every public major release of Android within the last 6 years.
 
-  For example, this would mean support for **Android 10** and later versions. |
+  For example, this would mean support for **Android 11** and later versions. |
 
 **Supported browsers on Android**
 
@@ -4618,18 +4624,18 @@ The Orchestration SDK for iOS supports the following versions of the iOS operati
 
 **Supported iOS versions and original release dates**
 
-| Release | Released        |
+| Release | Release date    |
 | ------- | --------------- |
+| iOS 27  | September, 2026 |
 | iOS 26  | September, 2025 |
 | iOS 18  | September, 2024 |
 | iOS 17  | September, 2023 |
-| iOS 16  | September, 2022 |
 
 |   |                                                                                                                                                                                                                                                                                        |
 | - | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 |   | We have updated how we determine which iOS versions form our support policy for the Orchestration SDK for iOS.The support policy is as follows:- Every public major release of iOS within the last 3 years.
 
-  For example, this would mean support for **iOS 16** and later versions. |
+  For example, this would mean support for **iOS 17** and later versions. |
 
 **Supported browsers on iOS**
 
@@ -4659,7 +4665,7 @@ The Orchestration SDK for React Native requires React Native 0.80.1 or later and
 
 **Supported Android versions and original release dates**
 
-| Release    | API Levels | Released        |
+| Release    | API Levels | Release date    |
 | ---------- | ---------- | --------------- |
 | Android 16 | 36         | August, 2025    |
 | Android 15 | 35         | September, 2024 |
@@ -4667,18 +4673,16 @@ The Orchestration SDK for React Native requires React Native 0.80.1 or later and
 | Android 13 | 33         | March, 2022     |
 | Android 12 | 31, 32     | October, 2021   |
 | Android 11 | 30         | September, 2020 |
-| Android 10 | 29         | September, 2019 |
 
 **iOS**
 
 **Supported iOS versions and original release dates**
 
-| Release | Released        |
+| Release | Release date    |
 | ------- | --------------- |
 | iOS 26  | September, 2025 |
 | iOS 18  | September, 2024 |
 | iOS 17  | September, 2023 |
-| iOS 16  | September, 2022 |
 
 ### JavaScript Compatibility with WebViews
 
@@ -4696,7 +4700,7 @@ We also do not support or test usage with any wrappers around WebViews.
 
 Whilst you might be able to implement simple use-cases using the Orchestration SDK for JavaScript within a WebView, we recommend that you use an alternative such as opening a full browser, or using an in-app instance of a full browser such as [Custom Tabs](https://developer.android.com/develop/ui/views/layout/webapps/overview-of-android-custom-tabs) for Android or [SFSafariViewController](https://developer.apple.com/documentation/safariservices/sfsafariviewcontroller) for iOS.
 
-## Supported Nodes and Callbacks
+## Supported authentication nodes and callbacks
 
 The Journey modules support the following nodes and callbacks:
 
@@ -4708,37 +4712,38 @@ The Orchestration SDKs support the following authentication journey callbacks wh
 
 * PingAM
 
-| Callback name                                 | Callback description                                                                                                                                                                                               | Android                                          | iOS                        | JavaScript                 | React Native               |
-| --------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------ | -------------------------- | -------------------------- | -------------------------- |
-| `BooleanAttributeInputCallback`               | Collects true or false.                                                                                                                                                                                            | [icon: check, set=fas] Yes                       | [icon: check, set=fas] Yes | [icon: check, set=fas] Yes | [icon: check, set=fas] Yes |
-| `ChoiceCallback`                              | Collects single user input from available choices, retrieves selected choice from user interaction.                                                                                                                | [icon: check, set=fas] Yes                       | [icon: check, set=fas] Yes | [icon: check, set=fas] Yes | [icon: check, set=fas] Yes |
-| `ConfirmationCallback`                        | Retrieve a selected option from a list of options.                                                                                                                                                                 | [icon: check, set=fas] Yes                       | [icon: check, set=fas] Yes | [icon: check, set=fas] Yes | [icon: check, set=fas] Yes |
-| `ConsentMappingCallback`                      | Prompts the user to consent to share their profile data.                                                                                                                                                           | [icon: check, set=fas] Yes                       | [icon: x, set=fas] No      | [icon: x, set=fas] No      | [icon: check, set=fas] Yes |
-| `DeviceBindingCallback`                       | Cryptographically bind a mobile device to a user account.                                                                                                                                                          | [icon: check, set=fas] Yes                       | [icon: check, set=fas] Yes | [icon: x, set=fas] No      | [icon: check, set=fas] Yes |
-| `DeviceProfileCallback`                       | Collects meta and/or location data about the authenticating device.                                                                                                                                                | [icon: check, set=fas] Yes                       | [icon: check, set=fas] Yes | [icon: check, set=fas] Yes | [icon: check, set=fas] Yes |
-| `DeviceSigningVerifierCallback`               | Verify ownership of a bound device by signing a challenge.                                                                                                                                                         | [icon: check, set=fas] Yes                       | [icon: check, set=fas] Yes | [icon: x, set=fas] No      | [icon: check, set=fas] Yes |
-| `HiddenValueCallback`                         | Returns form values that are not visually rendered to the end user.                                                                                                                                                | [icon: check, set=fas] Yes                       | [icon: check, set=fas] Yes | [icon: check, set=fas] Yes | [icon: check, set=fas] Yes |
-| `IdPCallback`                                 | Provides the information required for connecting to an identity provider (IDP) for social sign-on.                                                                                                                 | [icon: check, set=fas] Yes                       | [icon: check, set=fas] Yes | [icon: check, set=fas] Yes | [icon: check, set=fas] Yes |
-| `KbaCreateCallback`                           | Collects knowledge-based answers. For example, the name of your first pet.                                                                                                                                         | [icon: check, set=fas] Yes                       | [icon: check, set=fas] Yes | [icon: check, set=fas] Yes | [icon: check, set=fas] Yes |
-| `MetadataCallback` [(1)](#webauthn-callback)  | Injects key-value metadata into the authentication process.For example, the [WebAuthn](#webauthn-callback) nodes use this callback to return the data the SDK requires to perform authentication and registration. | [icon: check, set=fas] Yes                       | [icon: check, set=fas] Yes | [icon: check, set=fas] Yes | [icon: check, set=fas] Yes |
-| `NameCallback`                                | Collects a username.                                                                                                                                                                                               | [icon: check, set=fas] Yes                       | [icon: check, set=fas] Yes | [icon: check, set=fas] Yes | [icon: check, set=fas] Yes |
-| `NumberAttributeInputCallback`                | Collects a number.                                                                                                                                                                                                 | [icon: check, set=fas] Yes                       | [icon: check, set=fas] Yes | [icon: check, set=fas] Yes | [icon: check, set=fas] Yes |
-| `PasswordCallback`                            | Collects a password or one-time pass code.                                                                                                                                                                         | [icon: check, set=fas] Yes                       | [icon: check, set=fas] Yes | [icon: check, set=fas] Yes | [icon: check, set=fas] Yes |
-| `PingOneProtectEvaluationCallback`            | Collects captured contextual data from the client to perform risk evaluations.                                                                                                                                     | [icon: check, set=fas] Yes                       | [icon: check, set=fas] Yes | [icon: check, set=fas] Yes | [icon: x, set=fas] No      |
-| `PingOneProtectInitializeCallback`            | Instructs the client to start capturing contextual data for risk evaluations                                                                                                                                       | [icon: check, set=fas] Yes                       | [icon: check, set=fas] Yes | [icon: check, set=fas] Yes | [icon: x, set=fas] No      |
-| `PollingWaitCallback`                         | Instructs the client to wait for the given period and resubmit the request.                                                                                                                                        | [icon: check, set=fas] Yes                       | [icon: check, set=fas] Yes | [icon: check, set=fas] Yes | [icon: check, set=fas] Yes |
-| `ReCaptchaCallback`                           | Provides data required to use a CAPTCHA in your apps.                                                                                                                                                              | [icon: check, set=fas] Yes [(2)](#play-services) | [icon: check, set=fas] Yes | [icon: check, set=fas] Yes | [icon: x, set=fas] No      |
-| `ReCaptchaEnterpriseCallback`                 | Provides data required to use reCAPTCHA Enterprise in your apps.                                                                                                                                                   | [icon: check, set=fas] Yes [(2)](#play-services) | [icon: check, set=fas] Yes | [icon: check, set=fas] Yes | [icon: x, set=fas] No      |
-| `RedirectCallback`                            | Redirects the user's browser or user-agent.                                                                                                                                                                        | [icon: x, set=fas] No                            | [icon: x, set=fas] No      | [icon: check, set=fas] Yes | [icon: x, set=fas] No      |
-| `SelectIdPCallback`                           | Provides a list of identity providers (IDPs) users can choose from to perform social sign-on.                                                                                                                      | [icon: check, set=fas] Yes                       | [icon: check, set=fas] Yes | [icon: check, set=fas] Yes | [icon: check, set=fas] Yes |
-| `StringAttributeInputCallback`                | Collects the values of attributes for use elsewhere in a tree.                                                                                                                                                     | [icon: check, set=fas] Yes                       | [icon: check, set=fas] Yes | [icon: check, set=fas] Yes | [icon: check, set=fas] Yes |
-| `SuspendedTextOutputCallback`                 | Pause and resume authentication, sometimes known as "magic links".                                                                                                                                                 | [icon: check, set=fas] Yes                       | [icon: check, set=fas] Yes | [icon: check, set=fas] Yes | [icon: check, set=fas] Yes |
-| `TermsAndConditionsCallback`                  | Collects a user's acceptance of the configured Terms & Conditions.                                                                                                                                                 | [icon: check, set=fas] Yes                       | [icon: check, set=fas] Yes | [icon: check, set=fas] Yes | [icon: check, set=fas] Yes |
-| `TextInputCallback`                           | Collects text input from the end user. For example, a nickname for their account.                                                                                                                                  | [icon: check, set=fas] Yes                       | [icon: check, set=fas] Yes | [icon: check, set=fas] Yes | [icon: check, set=fas] Yes |
-| `TextOutputCallback`                          | Provides a message to be displayed to a user with a given message type.                                                                                                                                            | [icon: check, set=fas] Yes                       | [icon: check, set=fas] Yes | [icon: check, set=fas] Yes | [icon: check, set=fas] Yes |
-| `TextOutputCallback`*(`messageType` === `4`)* | Some nodes use the `TextOutputCallback` callback to include JavaScript that is intended to be run on the client.In this case the `mesageType` property equals `4`.                                                 | [icon: x, set=fas] No                            | [icon: x, set=fas] No      | [icon: check, set=fas] Yes | [icon: x, set=fas] No      |
-| `ValidatedCreatePasswordCallback`             | Collects a password value with optional password policy validation.                                                                                                                                                | [icon: check, set=fas] Yes                       | [icon: check, set=fas] Yes | [icon: check, set=fas] Yes | [icon: check, set=fas] Yes |
-| `ValidatedCreateUsernameCallback`             | Collects a username value with optional username policy validation.                                                                                                                                                | [icon: check, set=fas] Yes                       | [icon: check, set=fas] Yes | [icon: check, set=fas] Yes | [icon: check, set=fas] Yes |
+| Callback name                                    | Callback description                                                                                                                                                                                               | Android                                          | iOS                        | JavaScript                 | React Native               |
+| ------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------ | -------------------------- | -------------------------- | -------------------------- |
+| `BooleanAttributeInputCallback`                  | Collects true or false.                                                                                                                                                                                            | [icon: check, set=fas] Yes                       | [icon: check, set=fas] Yes | [icon: check, set=fas] Yes | [icon: check, set=fas] Yes |
+| `ChoiceCallback`                                 | Collects single user input from available choices, retrieves selected choice from user interaction.                                                                                                                | [icon: check, set=fas] Yes                       | [icon: check, set=fas] Yes | [icon: check, set=fas] Yes | [icon: check, set=fas] Yes |
+| `ConfirmationCallback`                           | Retrieve a selected option from a list of options.                                                                                                                                                                 | [icon: check, set=fas] Yes                       | [icon: check, set=fas] Yes | [icon: check, set=fas] Yes | [icon: check, set=fas] Yes |
+| `ConsentMappingCallback`                         | Prompts the user to consent to share their profile data.                                                                                                                                                           | [icon: check, set=fas] Yes                       | [icon: x, set=fas] No      | [icon: x, set=fas] No      | [icon: check, set=fas] Yes |
+| `DeviceBindingCallback`                          | Cryptographically bind a mobile device to a user account.                                                                                                                                                          | [icon: check, set=fas] Yes                       | [icon: check, set=fas] Yes | [icon: x, set=fas] No      | [icon: check, set=fas] Yes |
+| `DeviceProfileCallback`                          | Collects meta and/or location data about the authenticating device.                                                                                                                                                | [icon: check, set=fas] Yes                       | [icon: check, set=fas] Yes | [icon: check, set=fas] Yes | [icon: check, set=fas] Yes |
+| `DeviceSigningVerifierCallback`                  | Verify ownership of a bound device by signing a challenge.                                                                                                                                                         | [icon: check, set=fas] Yes                       | [icon: check, set=fas] Yes | [icon: x, set=fas] No      | [icon: check, set=fas] Yes |
+| `HiddenValueCallback`                            | Returns form values that are not visually rendered to the end user.                                                                                                                                                | [icon: check, set=fas] Yes                       | [icon: check, set=fas] Yes | [icon: check, set=fas] Yes | [icon: check, set=fas] Yes |
+| `IdPCallback`                                    | Provides the information required for connecting to an identity provider (IDP) for social sign-on.                                                                                                                 | [icon: check, set=fas] Yes                       | [icon: check, set=fas] Yes | [icon: check, set=fas] Yes | [icon: check, set=fas] Yes |
+| `KbaCreateCallback`                              | Collects knowledge-based answers. For example, the name of your first pet.                                                                                                                                         | [icon: check, set=fas] Yes                       | [icon: check, set=fas] Yes | [icon: check, set=fas] Yes | [icon: check, set=fas] Yes |
+| `MetadataCallback` [(1)](#webauthn-callback)     | Injects key-value metadata into the authentication process.For example, the [WebAuthn](#webauthn-callback) nodes use this callback to return the data the SDK requires to perform authentication and registration. | [icon: check, set=fas] Yes                       | [icon: check, set=fas] Yes | [icon: check, set=fas] Yes | [icon: check, set=fas] Yes |
+| `NameCallback`                                   | Collects a username.                                                                                                                                                                                               | [icon: check, set=fas] Yes                       | [icon: check, set=fas] Yes | [icon: check, set=fas] Yes | [icon: check, set=fas] Yes |
+| `NumberAttributeInputCallback`                   | Collects a number.                                                                                                                                                                                                 | [icon: check, set=fas] Yes                       | [icon: check, set=fas] Yes | [icon: check, set=fas] Yes | [icon: check, set=fas] Yes |
+| `PasswordCallback`                               | Collects a password or one-time pass code.                                                                                                                                                                         | [icon: check, set=fas] Yes                       | [icon: check, set=fas] Yes | [icon: check, set=fas] Yes | [icon: check, set=fas] Yes |
+| `PingOneProtectEvaluationCallback`               | Collects captured contextual data from the client to perform risk evaluations.                                                                                                                                     | [icon: check, set=fas] Yes                       | [icon: check, set=fas] Yes | [icon: check, set=fas] Yes | [icon: x, set=fas] No      |
+| `PingOneProtectInitializeCallback`               | Instructs the client to start capturing contextual data for risk evaluations                                                                                                                                       | [icon: check, set=fas] Yes                       | [icon: check, set=fas] Yes | [icon: check, set=fas] Yes | [icon: x, set=fas] No      |
+| `PollingWaitCallback`                            | Instructs the client to wait for the given period and resubmit the request.                                                                                                                                        | [icon: check, set=fas] Yes                       | [icon: check, set=fas] Yes | [icon: check, set=fas] Yes | [icon: check, set=fas] Yes |
+| `PingOneRecognizeCallback` [(3)](#recognize-idc) | Performs biometric enrollment or authentication with PingOne Recognize.                                                                                                                                            | [icon: check, set=fas] Yes                       | [icon: check, set=fas] Yes | [icon: check, set=fas] Yes | [icon: x, set=fas] No      |
+| `ReCaptchaCallback`                              | Provides data required to use a CAPTCHA in your apps.                                                                                                                                                              | [icon: x, set=fas] No                            | [icon: x, set=fas] No      | [icon: check, set=fas] Yes | [icon: x, set=fas] No      |
+| `ReCaptchaEnterpriseCallback`                    | Provides data required to use reCAPTCHA Enterprise in your apps.                                                                                                                                                   | [icon: check, set=fas] Yes [(2)](#play-services) | [icon: check, set=fas] Yes | [icon: check, set=fas] Yes | [icon: x, set=fas] No      |
+| `RedirectCallback`                               | Redirects the user's browser or user-agent.                                                                                                                                                                        | [icon: x, set=fas] No                            | [icon: x, set=fas] No      | [icon: check, set=fas] Yes | [icon: x, set=fas] No      |
+| `SelectIdPCallback`                              | Provides a list of identity providers (IDPs) users can choose from to perform social sign-on.                                                                                                                      | [icon: check, set=fas] Yes                       | [icon: check, set=fas] Yes | [icon: check, set=fas] Yes | [icon: check, set=fas] Yes |
+| `StringAttributeInputCallback`                   | Collects the values of attributes for use elsewhere in a tree.                                                                                                                                                     | [icon: check, set=fas] Yes                       | [icon: check, set=fas] Yes | [icon: check, set=fas] Yes | [icon: check, set=fas] Yes |
+| `SuspendedTextOutputCallback`                    | Pause and resume authentication, sometimes known as "magic links".                                                                                                                                                 | [icon: check, set=fas] Yes                       | [icon: check, set=fas] Yes | [icon: check, set=fas] Yes | [icon: check, set=fas] Yes |
+| `TermsAndConditionsCallback`                     | Collects a user's acceptance of the configured Terms & Conditions.                                                                                                                                                 | [icon: check, set=fas] Yes                       | [icon: check, set=fas] Yes | [icon: check, set=fas] Yes | [icon: check, set=fas] Yes |
+| `TextInputCallback`                              | Collects text input from the end user. For example, a nickname for their account.                                                                                                                                  | [icon: check, set=fas] Yes                       | [icon: check, set=fas] Yes | [icon: check, set=fas] Yes | [icon: check, set=fas] Yes |
+| `TextOutputCallback`                             | Provides a message to be displayed to a user with a given message type.                                                                                                                                            | [icon: check, set=fas] Yes                       | [icon: check, set=fas] Yes | [icon: check, set=fas] Yes | [icon: check, set=fas] Yes |
+| `TextOutputCallback`*(`messageType` === `4`)*    | Some nodes use the `TextOutputCallback` callback to include JavaScript that is intended to be run on the client.In this case the `mesageType` property equals `4`.                                                 | [icon: x, set=fas] No                            | [icon: x, set=fas] No      | [icon: check, set=fas] Yes | [icon: x, set=fas] No      |
+| `ValidatedCreatePasswordCallback`                | Collects a password value with optional password policy validation.                                                                                                                                                | [icon: check, set=fas] Yes                       | [icon: check, set=fas] Yes | [icon: check, set=fas] Yes | [icon: check, set=fas] Yes |
+| `ValidatedCreateUsernameCallback`                | Collects a username value with optional username policy validation.                                                                                                                                                | [icon: check, set=fas] Yes                       | [icon: check, set=fas] Yes | [icon: check, set=fas] Yes | [icon: check, set=fas] Yes |
 
 > **Collapse: Show the nodes that might return each callback**
 >
@@ -4809,34 +4814,37 @@ The Orchestration SDKs support the following authentication journey callbacks wh
 > | `PollingWaitCallback`                   | * [Combined MFA Registration node](https://docs.pingidentity.com/auth-node-ref/latest/combined-mfa-registration.html)
 >
 > * [Push Registration node](https://docs.pingidentity.com/auth-node-ref/latest/push-registration.html)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
-> | `ReCaptchaCallback`                     | - [CAPTCHA node](https://docs.pingidentity.com/auth-node-ref/latest/captcha.html)
+> | `PingOneRecognizeCallback`              | - [](https://docs.pingidentity.com/auth-node-ref/latest/pingone/pingone-recognize-authentication.html)[PingOne Recognize Authentication node](https://docs.pingidentity.com/auth-node-ref/latest/pingone/pingone-recognize-authentication.html)
 >
-> - [Legacy CAPTCHA node (deprecated)](https://docs.pingidentity.com/auth-node-ref/latest/legacy-captcha.html)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
-> | `ReCaptchaEnterpriseCallback`           | * [reCAPTCHA Enterprise node](https://docs.pingidentity.com/auth-node-ref/latest/recaptcha-enterprise.html)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-> | `RedirectCallback`                      | - [Provision IDM Account node](https://docs.pingidentity.com/auth-node-ref/latest/am-only/provision-IDM-account.html)
+> - [](https://docs.pingidentity.com/auth-node-ref/latest/pingone/pingone-recognize-enrollment.html)[PingOne Recognize Enrollment node](https://docs.pingidentity.com/auth-node-ref/latest/pingone/pingone-recognize-enrollment.html)                                                                                                                                                                                                                                                                                                                                           |
+> | `ReCaptchaCallback`                     | * [CAPTCHA node](https://docs.pingidentity.com/auth-node-ref/latest/captcha.html)
 >
-> - [Identity Assertion node](https://docs.pingidentity.com/auth-node-ref/latest/identity-assertion-node.html)
+> * [Legacy CAPTCHA node (deprecated)](https://docs.pingidentity.com/auth-node-ref/latest/legacy-captcha.html)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+> | `ReCaptchaEnterpriseCallback`           | - [reCAPTCHA Enterprise node](https://docs.pingidentity.com/auth-node-ref/latest/recaptcha-enterprise.html)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+> | `RedirectCallback`                      | * [Provision IDM Account node](https://docs.pingidentity.com/auth-node-ref/latest/am-only/provision-IDM-account.html)
 >
-> - [Social Provider Handler node](https://docs.pingidentity.com/auth-node-ref/latest/social-provider-handler.html)                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-> | `SelectIdPCallback`                     | * [Select Identity Provider node](https://docs.pingidentity.com/auth-node-ref/latest/select-identity-provider.html)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-> | `StringAttributeInputCallback`          | - [Attribute Collector node](https://docs.pingidentity.com/auth-node-ref/latest/attribute-collector.html)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
-> | `SuspendedTextOutputCallback`           | * [Email Suspend node](https://docs.pingidentity.com/auth-node-ref/latest/email-suspend.html)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
-> | `TermsAndConditionsCallback`            | - [Accept Terms and Conditions node](https://docs.pingidentity.com/auth-node-ref/latest/accept-terms-and-conditions.html)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
-> | `TextInputCallback`                     | * [Configuration Provider node](https://docs.pingidentity.com/auth-node-ref/latest/config-provider.html)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-> | `TextOutputCallback`                    | - [Create Password node](https://docs.pingidentity.com/auth-node-ref/latest/am-only/create-password.html)
+> * [Identity Assertion node](https://docs.pingidentity.com/auth-node-ref/latest/identity-assertion-node.html)
 >
-> - [Display Username node](https://docs.pingidentity.com/auth-node-ref/latest/display-username.html)
+> * [Social Provider Handler node](https://docs.pingidentity.com/auth-node-ref/latest/social-provider-handler.html)                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+> | `SelectIdPCallback`                     | - [Select Identity Provider node](https://docs.pingidentity.com/auth-node-ref/latest/select-identity-provider.html)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+> | `StringAttributeInputCallback`          | * [Attribute Collector node](https://docs.pingidentity.com/auth-node-ref/latest/attribute-collector.html)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+> | `SuspendedTextOutputCallback`           | - [Email Suspend node](https://docs.pingidentity.com/auth-node-ref/latest/email-suspend.html)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+> | `TermsAndConditionsCallback`            | * [Accept Terms and Conditions node](https://docs.pingidentity.com/auth-node-ref/latest/accept-terms-and-conditions.html)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+> | `TextInputCallback`                     | - [Configuration Provider node](https://docs.pingidentity.com/auth-node-ref/latest/config-provider.html)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+> | `TextOutputCallback`                    | * [Create Password node](https://docs.pingidentity.com/auth-node-ref/latest/am-only/create-password.html)
 >
-> - [LDAP Decision node](https://docs.pingidentity.com/auth-node-ref/latest/ldap-decision.html)
+> * [Display Username node](https://docs.pingidentity.com/auth-node-ref/latest/display-username.html)
 >
-> - [Message node](https://docs.pingidentity.com/auth-node-ref/latest/message.html)
+> * [LDAP Decision node](https://docs.pingidentity.com/auth-node-ref/latest/ldap-decision.html)
 >
-> - [MFA Registration Options node](https://docs.pingidentity.com/auth-node-ref/latest/mfa-registration-options.html)                                                                                                                                                                                                                                                                                                          |
-> | `TextOutputCallback (messageType == 4)` | * [WebAuthn Authentication node](https://docs.pingidentity.com/auth-node-ref/latest/webauthn-authentication.html)
+> * [Message node](https://docs.pingidentity.com/auth-node-ref/latest/message.html)
 >
-> * [WebAuthn Registration node](https://docs.pingidentity.com/auth-node-ref/latest/webauthn-registration.html)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
-> | `ValidatedPasswordCallback`             | - [Platform Password node](https://docs.pingidentity.com/auth-node-ref/latest/platform-password.html)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
-> | `ValidatedUsernameCallback`             | * [Platform Username node](https://docs.pingidentity.com/auth-node-ref/latest/platform-username.html)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+> * [MFA Registration Options node](https://docs.pingidentity.com/auth-node-ref/latest/mfa-registration-options.html)                                                                                                                                                                                                                                                                                                          |
+> | `TextOutputCallback (messageType == 4)` | - [WebAuthn Authentication node](https://docs.pingidentity.com/auth-node-ref/latest/webauthn-authentication.html)
+>
+> - [WebAuthn Registration node](https://docs.pingidentity.com/auth-node-ref/latest/webauthn-registration.html)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+> | `ValidatedCreatePasswordCallback`       | * [Platform Password node](https://docs.pingidentity.com/auth-node-ref/latest/platform-password.html)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+> | `ValidatedCreateUsernameCallback`       | - [Platform Username node](https://docs.pingidentity.com/auth-node-ref/latest/platform-username.html)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
 
 > **Collapse: Show the callbacks each node might return**
 >
@@ -4844,49 +4852,51 @@ The Orchestration SDKs support the following authentication journey callbacks wh
 >
 > The actual callbacks a node returns depends on its configuration. It might not return all the callbacks listed in this table.
 >
-> |                                                                                                                                   |                                                                                                      |
-> | --------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
-> | Auth node                                                                                                                         | Callbacks the node might return                                                                      |
-> | [Accept Terms and Conditions node](https://docs.pingidentity.com/auth-node-ref/latest/accept-terms-and-conditions.html)           | `TermsAndConditionsCallback`                                                                         |
-> | [Amster Jwt Decision node](https://docs.pingidentity.com/auth-node-ref/latest/am-only/amster-jwt-decision.html)                   | `HiddenValueCallback`                                                                                |
-> | [Attribute Collector node](https://docs.pingidentity.com/auth-node-ref/latest/attribute-collector.html)                           | `BooleanAttributeInputCallback``NumberAttributeInputCallback``StringAttributeInputCallback`          |
-> | [CAPTCHA node](https://docs.pingidentity.com/auth-node-ref/latest/captcha.html)                                                   | `ReCaptchaCallback`                                                                                  |
-> | [Choice Collector node](https://docs.pingidentity.com/auth-node-ref/latest/choice-collector.html)                                 | `ChoiceCallback`                                                                                     |
-> | [Combined MFA Registration node](https://docs.pingidentity.com/auth-node-ref/latest/combined-mfa-registration.html)               | `PollingWaitCallback`                                                                                |
-> | [Configuration Provider node](https://docs.pingidentity.com/auth-node-ref/latest/config-provider.html)                            | `NameCallback``TextInputCallback`                                                                    |
-> | [Consent Collector node](https://docs.pingidentity.com/auth-node-ref/latest/consent-collector.html)                               | `ConsentMappingCallback`                                                                             |
-> | [Create Password node](https://docs.pingidentity.com/auth-node-ref/latest/am-only/create-password.html)                           | `PasswordCallback``TextOutputCallback`                                                               |
-> | [Datastore Decision node](https://docs.pingidentity.com/auth-node-ref/latest/data-store-decision.html)                            | `NameCallback``PasswordCallback`                                                                     |
-> | [Device Binding node](https://docs.pingidentity.com/auth-node-ref/latest/device-binding.html)                                     | `DeviceBindingCallback`                                                                              |
-> | [Device Profile Collector node](https://docs.pingidentity.com/auth-node-ref/latest/device-profile-collector.html)                 | `DeviceProfileCallback`                                                                              |
-> | [Device Signing Verifier node](https://docs.pingidentity.com/auth-node-ref/latest/device-signing-verifier.html)                   | `DeviceSigningVerifierCallback`                                                                      |
-> | [Display Username node](https://docs.pingidentity.com/auth-node-ref/latest/display-username.html)                                 | `TextOutputCallback`                                                                                 |
-> | [Email Suspend node](https://docs.pingidentity.com/auth-node-ref/latest/email-suspend.html)                                       | `SuspendedTextOutputCallback`                                                                        |
-> | [Identity Assertion node](https://docs.pingidentity.com/auth-node-ref/latest/identity-assertion-node.html)                        | `RedirectCallback`                                                                                   |
-> | [KBA Definition node](https://docs.pingidentity.com/auth-node-ref/latest/kba-definition.html)                                     | `KbaCreateCallback`                                                                                  |
-> | [KBA Verification node](https://docs.pingidentity.com/auth-node-ref/latest/kba-verification.html)                                 | `PasswordCallback`                                                                                   |
-> | [LDAP Decision node](https://docs.pingidentity.com/auth-node-ref/latest/ldap-decision.html)                                       | `ConfirmationCallback``PasswordCallback``TextOutputCallback`                                         |
-> | [Legacy CAPTCHA node (deprecated)](https://docs.pingidentity.com/auth-node-ref/latest/legacy-captcha.html)                        | `ReCaptchaCallback`                                                                                  |
-> | [Message node](https://docs.pingidentity.com/auth-node-ref/latest/message.html)                                                   | `ConfirmationCallback``TextOutputCallback`                                                           |
-> | [MFA Registration Options node](https://docs.pingidentity.com/auth-node-ref/latest/mfa-registration-options.html)                 | `ConfirmationCallback``TextOutputCallback`                                                           |
-> | [OATH Registration node](https://docs.pingidentity.com/auth-node-ref/latest/oath-registration.html)                               | `ConfirmationCallback`                                                                               |
-> | [OATH Token Verifier node](https://docs.pingidentity.com/auth-node-ref/latest/oath-token-verifier.html)                           | `ConfirmationCallback``NameCallback`                                                                 |
-> | [One-time Password Collector Decision node](https://docs.pingidentity.com/auth-node-ref/latest/otp-collector-decision.html)       | `PasswordCallback`                                                                                   |
-> | [Password Collector node](https://docs.pingidentity.com/auth-node-ref/latest/am-only/password-collector.html)                     | `PasswordCallback`                                                                                   |
-> | [PingOne Protect Evaluation node](https://docs.pingidentity.com/auth-node-ref/latest/pingone/pingone-protect-evaluation.html)     | `PingOneProtectEvaluationCallback`                                                                   |
-> | [PingOne Protect Initialization node](https://docs.pingidentity.com/auth-node-ref/latest/pingone/pingone-protect-initialize.html) | `PingOneProtectInitializeCallback`                                                                   |
-> | [Platform Password node](https://docs.pingidentity.com/auth-node-ref/latest/platform-password.html)                               | `PasswordCallback``ValidatedPasswordCallback`                                                        |
-> | [Platform Username node](https://docs.pingidentity.com/auth-node-ref/latest/platform-username.html)                               | `NameCallback``ValidatedUsernameCallback`                                                            |
-> | [Polling Wait node](https://docs.pingidentity.com/auth-node-ref/latest/polling-wait.html)                                         | `ConfirmationCallback`                                                                               |
-> | [Provision IDM Account node](https://docs.pingidentity.com/auth-node-ref/latest/am-only/provision-IDM-account.html)               | `RedirectCallback`                                                                                   |
-> | [Push Registration node](https://docs.pingidentity.com/auth-node-ref/latest/push-registration.html)                               | `PollingWaitCallback`                                                                                |
-> | [Push Wait node](https://docs.pingidentity.com/auth-node-ref/latest/push-wait.html)                                               | `ConfirmationCallback``HiddenValueCallback`                                                          |
-> | [reCAPTCHA Enterprise node](https://docs.pingidentity.com/auth-node-ref/latest/recaptcha-enterprise.html)                         | `ReCaptchaEnterpriseCallback`                                                                        |
-> | [Select Identity Provider node](https://docs.pingidentity.com/auth-node-ref/latest/select-identity-provider.html)                 | `SelectIdPCallback`                                                                                  |
-> | [Social Provider Handler node](https://docs.pingidentity.com/auth-node-ref/latest/social-provider-handler.html)                   | `IdPCallback``RedirectCallback`                                                                      |
-> | [Username Collector node](https://docs.pingidentity.com/auth-node-ref/latest/am-only/username-collector.html)                     | `NameCallback`                                                                                       |
-> | [WebAuthn Authentication node](https://docs.pingidentity.com/auth-node-ref/latest/webauthn-authentication.html)                   | `ConfirmationCallback``HiddenValueCallback``MetaDataCallback``TextOutputCallback (messageType == 4)` |
-> | [WebAuthn Registration node](https://docs.pingidentity.com/auth-node-ref/latest/webauthn-registration.html)                       | `HiddenValueCallback``MetaDataCallback``TextOutputCallback (messageType == 4)`                       |
+> |                                                                                                                                                                                                                                               |                                                                                                      |
+> | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+> | Auth node                                                                                                                                                                                                                                     | Callbacks the node might return                                                                      |
+> | [Accept Terms and Conditions node](https://docs.pingidentity.com/auth-node-ref/latest/accept-terms-and-conditions.html)                                                                                                                       | `TermsAndConditionsCallback`                                                                         |
+> | [Amster Jwt Decision node](https://docs.pingidentity.com/auth-node-ref/latest/am-only/amster-jwt-decision.html)                                                                                                                               | `HiddenValueCallback`                                                                                |
+> | [Attribute Collector node](https://docs.pingidentity.com/auth-node-ref/latest/attribute-collector.html)                                                                                                                                       | `BooleanAttributeInputCallback``NumberAttributeInputCallback``StringAttributeInputCallback`          |
+> | [CAPTCHA node](https://docs.pingidentity.com/auth-node-ref/latest/captcha.html)                                                                                                                                                               | `ReCaptchaCallback`                                                                                  |
+> | [Choice Collector node](https://docs.pingidentity.com/auth-node-ref/latest/choice-collector.html)                                                                                                                                             | `ChoiceCallback`                                                                                     |
+> | [Combined MFA Registration node](https://docs.pingidentity.com/auth-node-ref/latest/combined-mfa-registration.html)                                                                                                                           | `PollingWaitCallback`                                                                                |
+> | [Configuration Provider node](https://docs.pingidentity.com/auth-node-ref/latest/config-provider.html)                                                                                                                                        | `NameCallback``TextInputCallback`                                                                    |
+> | [Consent Collector node](https://docs.pingidentity.com/auth-node-ref/latest/consent-collector.html)                                                                                                                                           | `ConsentMappingCallback`                                                                             |
+> | [Create Password node](https://docs.pingidentity.com/auth-node-ref/latest/am-only/create-password.html)                                                                                                                                       | `PasswordCallback``TextOutputCallback`                                                               |
+> | [Datastore Decision node](https://docs.pingidentity.com/auth-node-ref/latest/data-store-decision.html)                                                                                                                                        | `NameCallback``PasswordCallback`                                                                     |
+> | [Device Binding node](https://docs.pingidentity.com/auth-node-ref/latest/device-binding.html)                                                                                                                                                 | `DeviceBindingCallback`                                                                              |
+> | [Device Profile Collector node](https://docs.pingidentity.com/auth-node-ref/latest/device-profile-collector.html)                                                                                                                             | `DeviceProfileCallback`                                                                              |
+> | [Device Signing Verifier node](https://docs.pingidentity.com/auth-node-ref/latest/device-signing-verifier.html)                                                                                                                               | `DeviceSigningVerifierCallback`                                                                      |
+> | [Display Username node](https://docs.pingidentity.com/auth-node-ref/latest/display-username.html)                                                                                                                                             | `TextOutputCallback`                                                                                 |
+> | [Email Suspend node](https://docs.pingidentity.com/auth-node-ref/latest/email-suspend.html)                                                                                                                                                   | `SuspendedTextOutputCallback`                                                                        |
+> | [Identity Assertion node](https://docs.pingidentity.com/auth-node-ref/latest/identity-assertion-node.html)                                                                                                                                    | `RedirectCallback`                                                                                   |
+> | [KBA Definition node](https://docs.pingidentity.com/auth-node-ref/latest/kba-definition.html)                                                                                                                                                 | `KbaCreateCallback`                                                                                  |
+> | [KBA Verification node](https://docs.pingidentity.com/auth-node-ref/latest/kba-verification.html)                                                                                                                                             | `PasswordCallback`                                                                                   |
+> | [LDAP Decision node](https://docs.pingidentity.com/auth-node-ref/latest/ldap-decision.html)                                                                                                                                                   | `ConfirmationCallback``PasswordCallback``TextOutputCallback`                                         |
+> | [Legacy CAPTCHA node (deprecated)](https://docs.pingidentity.com/auth-node-ref/latest/legacy-captcha.html)                                                                                                                                    | `ReCaptchaCallback`                                                                                  |
+> | [Message node](https://docs.pingidentity.com/auth-node-ref/latest/message.html)                                                                                                                                                               | `ConfirmationCallback``TextOutputCallback`                                                           |
+> | [MFA Registration Options node](https://docs.pingidentity.com/auth-node-ref/latest/mfa-registration-options.html)                                                                                                                             | `ConfirmationCallback``TextOutputCallback`                                                           |
+> | [OATH Registration node](https://docs.pingidentity.com/auth-node-ref/latest/oath-registration.html)                                                                                                                                           | `ConfirmationCallback`                                                                               |
+> | [OATH Token Verifier node](https://docs.pingidentity.com/auth-node-ref/latest/oath-token-verifier.html)                                                                                                                                       | `ConfirmationCallback``NameCallback`                                                                 |
+> | [One-time Password Collector Decision node](https://docs.pingidentity.com/auth-node-ref/latest/otp-collector-decision.html)                                                                                                                   | `PasswordCallback`                                                                                   |
+> | [Password Collector node](https://docs.pingidentity.com/auth-node-ref/latest/am-only/password-collector.html)                                                                                                                                 | `PasswordCallback`                                                                                   |
+> | [PingOne Protect Evaluation node](https://docs.pingidentity.com/auth-node-ref/latest/pingone/pingone-protect-evaluation.html)                                                                                                                 | `PingOneProtectEvaluationCallback`                                                                   |
+> | [PingOne Protect Initialization node](https://docs.pingidentity.com/auth-node-ref/latest/pingone/pingone-protect-initialize.html)                                                                                                             | `PingOneProtectInitializeCallback`                                                                   |
+> | [](https://docs.pingidentity.com/auth-node-ref/latest/pingone/pingone-recognize-authentication.html)[PingOne Recognize Authentication node](https://docs.pingidentity.com/auth-node-ref/latest/pingone/pingone-recognize-authentication.html) | `PingOneRecognizeCallback`                                                                           |
+> | [](https://docs.pingidentity.com/auth-node-ref/latest/pingone/pingone-recognize-enrollment.html)[PingOne Recognize Enrollment node](https://docs.pingidentity.com/auth-node-ref/latest/pingone/pingone-recognize-enrollment.html)             | `PingOneRecognizeCallback`                                                                           |
+> | [Platform Password node](https://docs.pingidentity.com/auth-node-ref/latest/platform-password.html)                                                                                                                                           | `PasswordCallback``ValidatedCreatePasswordCallback`                                                  |
+> | [Platform Username node](https://docs.pingidentity.com/auth-node-ref/latest/platform-username.html)                                                                                                                                           | `NameCallback``ValidatedCreateUsernameCallback`                                                      |
+> | [Polling Wait node](https://docs.pingidentity.com/auth-node-ref/latest/polling-wait.html)                                                                                                                                                     | `ConfirmationCallback`                                                                               |
+> | [Provision IDM Account node](https://docs.pingidentity.com/auth-node-ref/latest/am-only/provision-IDM-account.html)                                                                                                                           | `RedirectCallback`                                                                                   |
+> | [Push Registration node](https://docs.pingidentity.com/auth-node-ref/latest/push-registration.html)                                                                                                                                           | `PollingWaitCallback`                                                                                |
+> | [Push Wait node](https://docs.pingidentity.com/auth-node-ref/latest/push-wait.html)                                                                                                                                                           | `ConfirmationCallback``HiddenValueCallback`                                                          |
+> | [reCAPTCHA Enterprise node](https://docs.pingidentity.com/auth-node-ref/latest/recaptcha-enterprise.html)                                                                                                                                     | `ReCaptchaEnterpriseCallback`                                                                        |
+> | [Select Identity Provider node](https://docs.pingidentity.com/auth-node-ref/latest/select-identity-provider.html)                                                                                                                             | `SelectIdPCallback`                                                                                  |
+> | [Social Provider Handler node](https://docs.pingidentity.com/auth-node-ref/latest/social-provider-handler.html)                                                                                                                               | `IdPCallback``RedirectCallback`                                                                      |
+> | [Username Collector node](https://docs.pingidentity.com/auth-node-ref/latest/am-only/username-collector.html)                                                                                                                                 | `NameCallback`                                                                                       |
+> | [WebAuthn Authentication node](https://docs.pingidentity.com/auth-node-ref/latest/webauthn-authentication.html)                                                                                                                               | `ConfirmationCallback``HiddenValueCallback``MetaDataCallback``TextOutputCallback (messageType == 4)` |
+> | [WebAuthn Registration node](https://docs.pingidentity.com/auth-node-ref/latest/webauthn-registration.html)                                                                                                                                   | `HiddenValueCallback``MetaDataCallback``TextOutputCallback (messageType == 4)`                       |
 
 (1) The [WebAuthn Authentication node](https://docs.pingidentity.com/auth-node-ref/latest/webauthn-authentication.html) and the [WebAuthn Registration node](https://docs.pingidentity.com/auth-node-ref/latest/webauthn-registration.html) both use a `MetaDataCallback` when the Return challenge as JavaScript is *NOT* enabled.
 
@@ -4895,6 +4905,423 @@ You must *not* enable this option when handling WebAuthn journeys with the Orche
 The Orchestration SDK for JavaScript handles either the `MetaDataCallback` or the JavaScript-based payload.
 
 (2) Requires the presence of [Google Play Services](https://developers.google.com/android/guides/overview).
+
+(3) PingOne Recognize is only available in PingOne Advanced Identity Cloud; it is not supported in PingAM journeys.
+
+---
+
+---
+title: Completing backchannel authentication transactions
+description: Learn how to use the SDKs to complete an AIC or AM backchannel authentication transaction started by a third party on behalf of your user.
+component: orchsdks
+page_id: orchsdks:journey:use-cases/backchannel-auth/index
+canonical_url: https://developer.pingidentity.com/orchsdks/journey/use-cases/backchannel-auth/index.html
+llms_txt: https://developer.pingidentity.com/orchsdks/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: Thu, 16 Jul 2026 00:00:00 +0000
+keywords: ["PingOne Advanced Identity Cloud", "PingAM", "Journeys", "Backchannel Authentication", "Transactional Authentication", "Android", "iOS", "SDK"]
+section_ids:
+  why_use_backchannel_authentication: Why use backchannel authentication?
+  how_the_transaction_works: How the transaction works
+  get_started: Get Started
+---
+
+# Completing backchannel authentication transactions
+
+[icon: circle-check, set=far]PingOne Advanced Identity Cloud [icon: circle-check, set=far]PingAM [icon: android, set=fab]Android [icon: apple, set=fab]iOS
+
+Advanced Identity Cloud and PingAM support a server-initiated, backchannel authentication pattern. A third-party federation service starts an authentication transaction on behalf of a user, and can provide some of the credentials. The user then completes that transaction by following an authentication journey in your app.
+
+|   |                                                                                                                                                                                                                                                                      |
+| - | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | This is not OIDC Client-Initiated Backchannel Authentication (CIBA).This page covers a proprietary backchannel authentication mechanism in Advanced Identity Cloud and PingAM, a transactional authentication pattern that is unrelated to the OIDC CIBA grant type. |
+
+## Why use backchannel authentication?
+
+Some scenarios require a party other than the user's own device to initiate authentication. For example:
+
+* A service that already recognizes the user, such as a banking backend evaluating a large funds transfer, determines that the requested operation is too risky for the user's current authentication level, and needs to step them up to a stronger one before proceeding.
+
+* A partner or federated service already holds context about the user and wants to trigger an authentication journey without asking them to re-enter identifying details.
+
+* A backend system needs the user to confirm or approve an action, and wants to route that confirmation through an authentication journey rather than build a custom approval flow.
+
+In each case, the transaction is created on the server before your app is involved, and your app's job is to complete the resulting journey.
+
+## How the transaction works
+
+A backchannel authentication transaction begins and ends on the server; your app only gets involved in the middle to handle the authentication journey.
+
+Figure 1. Summary of the backchannel authentication transaction flow
+
+The full lifecycle looks like this:
+
+1. A federation service calls Advanced Identity Cloud's or PingAM's backchannel initialization endpoint, providing details such as the journey to run and the subject (user) it's for.
+
+2. The server creates a transaction and returns a transaction ID together with a backchannel transaction URI that encodes that transaction ID.
+
+3. The federation service delivers the backchannel transaction URI to your app.
+
+   How your app receives that URI is an implementation detail for you to decide, such as a deep link, a push notification payload, or a custom transport your backend already uses.
+
+4. Your app passes the backchannel transaction URI to the SDK, which uses it to contact the server and start the journey associated with that transaction.
+
+5. The server starts the authentication journey.
+
+6. Your user completes the journey as normal, interacting with your app.
+
+7. On successful completion, the journey reports success to the server.
+
+8. The server returns a session to your app. The federation service can separately check the transaction's status and outcome.
+
+The Orchestration SDKs only handle steps 4 through 8: starting the journey from the backchannel transaction URI, and letting your user complete it. Initiating the transaction, and checking its outcome afterwards, happens entirely on the server side, outside of the Orchestration SDKs.
+
+To learn about configuring and initializing backchannel authentication, refer to the following pages:
+
+* PingOne Advanced Identity Cloud
+
+  * [Backchannel authentication](https://docs.pingidentity.com/pingoneaic/am-authentication/backchannel-authentication.html)
+
+* PingAM
+
+  * [Backchannel authentication](https://docs.pingidentity.com/pingam/8.1/am-authentication/backchannel-authentication.html)
+
+## Get Started
+
+[icon: android, set=fab, size=3x]
+
+#### [Android](android-backchannel-auth.html)
+
+Complete a backchannel authentication transaction in an Android app.
+
+[icon: apple, set=fab, size=3x]
+
+#### [iOS](ios-backchannel-auth.html)
+
+Complete a backchannel authentication transaction in an iOS app.
+
+---
+
+---
+title: Completing backchannel authentication transactions on Android
+description: Learn how to use the Ping Identity SDK for Android to complete a backchannel authentication transaction from a backchannel transaction URI.
+component: orchsdks
+page_id: orchsdks:journey:use-cases/backchannel-auth/android-backchannel-auth
+canonical_url: https://developer.pingidentity.com/orchsdks/journey/use-cases/backchannel-auth/android-backchannel-auth.html
+llms_txt: https://developer.pingidentity.com/orchsdks/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: Fri, 17 Jul 2026 00:00:00 +0000
+keywords: ["PingOne Advanced Identity Cloud", "PingAM", "Journeys", "Android", "Backchannel Authentication", "Transactional Authentication", "SDK"]
+section_ids:
+  android_backchannel_module: Step 1. Installing the Journey module
+  step_2_configuring_the_journey_module: Step 2. Configuring the Journey module
+  step_3_completing_a_journey_using_a_backchannel_transaction_uri: Step 3. Completing a journey using a backchannel transaction URI
+---
+
+# Completing backchannel authentication transactions on Android
+
+[icon: circle-check, set=far]PingOne Advanced Identity Cloud [icon: circle-check, set=far]PingAM [icon: android, set=fab]Android
+
+A federation service that starts a backchannel authentication transaction on behalf of your user receives a backchannel transaction URI from PingOne Advanced Identity Cloud or PingAM, and is responsible for forwarding that URI to your app, for example over a push notification, a deep link, or another transport of your choosing.
+
+The backchannel URI carries the details of the transaction as query parameters, for example:
+
+```none
+https://openam-forgerock-sdks.forgeblocks.com/am/UI/Login?realm=%2Falpha&authIndexType=transaction&authIndexValue=1bb31b1d-6b5f-4d5f-9a2f-6a6a7f6a2b3e
+```
+
+Use the **Journey** module's `start(backchannelUri:configure:)` method to complete the transaction on receipt of the URI.
+
+The method extracts the transaction details from the backchannel transaction URI and drives the associated journey to completion, just like the standard `start()` method described in [Starting an authentication journey on Android](../../usage/android/04-starting-an-authentication-journey.html).
+
+## Step 1. Installing the Journey module
+
+To install the **Journey** module into your Android project:
+
+1. In the **Project** tree view of your Android Studio project, open the `build.gradle.kts` file.
+
+2. In the `dependencies` section, add the `journey` module as a dependency:
+
+   ```gradle
+   dependencies {
+       implementation("com.pingidentity.sdks:journey:2.2.0")
+   }
+   ```
+
+## Step 2. Configuring the Journey module
+
+Import `com.pingidentity.journey.Journey`, then call `Journey()`, providing the Advanced Identity Cloud or PingAM server you want to target:
+
+Configuring the Journey module
+
+```kotlin
+import com.pingidentity.journey.Journey
+
+val journey = Journey {
+    serverUrl = "https://openam-forgerock-sdks.forgeblocks.com/am"
+    realm = "alpha"
+    cookie = "ch15fefc5407912"
+}
+```
+
+For the full range of configuration options available, see [Configuring the Journey module on Android](../../usage/android/03-configuring-the-journey-module.html).
+
+|   |                                                                                                                                                                                                                                                                                                            |
+| - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | The Orchestration SDK uses the `serverUrl` and `realm` you provide when configuring `Journey`, rather than the host or `realm` parameter encoded in the backchannel transaction URI.This means a malicious or malformed backchannel transaction URI cannot redirect the SDK to contact a different server. |
+
+## Step 3. Completing a journey using a backchannel transaction URI
+
+Pass the backchannel transaction URI to `start()` to start the journey the server configured for the transaction:
+
+Starting a journey from a backchannel transaction URI on Android
+
+```kotlin
+// backchannelUri is the value your app received from the federation service.
+var node = journey.start(backchannelUri = backchannelUri)
+```
+
+You can optionally apply parameters to `start()`:
+
+Adding parameters when starting a journey from a backchannel transaction URI
+
+```kotlin
+var node = journey.start(backchannelUri = backchannelUri) {
+    forceAuth = true
+    noSession = true
+}
+```
+
+The parameters you might use in the `start()` method includes the following:
+
+* *forceAuth*
+
+  Set this parameter to `true` to force traversal of an authentication journey, even if the user already has a valid session.
+
+  Default is `false`.
+
+* *noSession*
+
+  Set this parameter to `true` to prevent the authentication journey from issuing a new session token upon successful completion.
+
+  Default is `false`.
+
+Handle the returned `node` in exactly the same way as any other journey, as described in [Navigating an authentication journey on Android](../../usage/android/05-navigating-an-authentication-journey.html). A transaction that has expired, was already completed, or wasn't found returns an `ErrorNode` carrying the server's message.
+
+Starting a journey and handling the returned node on Android
+
+```kotlin
+// backchannelUri is the value your app received from the federation service.
+val node = journey.start(backchannelUri = backchannelUri)
+
+when (node) {
+    is ContinueNode -> {
+        // Provide input to any callbacks in the journey, such as a username and password
+        node.callbacks.forEach { callback ->
+            when (callback) {
+                is NameCallback -> callback.name = "demo"
+                is PasswordCallback -> callback.password = "5tr0ngP@S5w0rd!!"
+                // Handle other callback types as they are introduced
+            }
+        }
+
+        // Proceed to the next node with the provided input
+        val nextNode = node.next()
+    }
+    is ErrorNode -> {
+        // Handle server-side errors, such as an expired or already-completed transaction
+        val errorMessage = node.message
+    }
+    is FailureNode -> {
+        // Handle unexpected errors, such as network issues or a missing JourneyConfig
+        val errorCause = node.cause
+    }
+    is SuccessNode -> {
+        // Authentication successful, retrieve the session
+        val session = node.session
+    }
+}
+```
+
+---
+
+---
+title: Completing backchannel authentication transactions on iOS
+description: Learn how to use the Ping Identity SDK for iOS to complete a backchannel authentication transaction from a backchannel transaction URI.
+component: orchsdks
+page_id: orchsdks:journey:use-cases/backchannel-auth/ios-backchannel-auth
+canonical_url: https://developer.pingidentity.com/orchsdks/journey/use-cases/backchannel-auth/ios-backchannel-auth.html
+llms_txt: https://developer.pingidentity.com/orchsdks/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: Thu, 16 Jul 2026 00:00:00 +0000
+keywords: ["PingOne Advanced Identity Cloud", "PingAM", "Journeys", "iOS", "Backchannel Authentication", "Transactional Authentication", "SDK"]
+section_ids:
+  ios_backchannel_module: Step 1. Installing the Journey module
+  step_2_configuring_the_journey_module: Step 2. Configuring the Journey module
+  step_3_completing_a_journey_using_a_backchannel_transaction_uri: Step 3. Completing a journey using a backchannel transaction URI
+---
+
+# Completing backchannel authentication transactions on iOS
+
+[icon: circle-check, set=far]PingOne Advanced Identity Cloud [icon: circle-check, set=far]PingAM [icon: apple, set=fab]iOS
+
+A federation service that starts a backchannel authentication transaction on behalf of your user receives a backchannel transaction URI from PingOne Advanced Identity Cloud or PingAM, and is responsible for forwarding that URI to your app, for example over a push notification, a deep link, or another transport of your choosing.
+
+The backchannel URI carries the details of the transaction as query parameters, for example:
+
+```none
+https://openam-forgerock-sdks.forgeblocks.com/am/UI/Login?realm=%2Falpha&authIndexType=transaction&authIndexValue=1bb31b1d-6b5f-4d5f-9a2f-6a6a7f6a2b3e
+```
+
+Use the **Journey** module's `start(backchannelUri:configure:)` method to complete the transaction on receipt of the URI.
+
+The method extracts the transaction details from the backchannel transaction URI and drives the associated journey to completion, just like the standard `start()` method described in [Starting an authentication journey on iOS](../../usage/ios/04-starting-an-authentication-journey.html).
+
+## Step 1. Installing the Journey module
+
+To install the **Journey** module for iOS, use Swift Package Manager (SPM) or CocoaPods to add the dependency to your project.
+
+* SPM (Swift Package Manager)
+
+* CocoaPods
+
+You can install packages by using SPM (Swift Package Manager) on the iOS project.
+
+1. In Xcode, in the Project Navigator, right-click your project, and then click Add Package Dependencies…​.
+
+2. In the **Search or Enter Package URL** field, enter the URL of the repo containing the Orchestration SDK for iOS, `https://github.com/ForgeRock/ping-ios-sdk.git`.
+
+3. In **Add to Project**, select the name of your project, and then click **Add Package**.
+
+   Xcode shows a dialog containing the libraries available for iOS.
+
+4. Select the `PingJourney` library, and in the **Add to Target** column select the name of your project.
+
+5. Repeat the previous step for any other packages you want to use in your project.
+
+6. Click **Add Package**.
+
+   Xcode displays the chosen packages and any prerequisites they might have in the **Package Dependencies** pane of the Project Navigator.
+
+1) If you don't already have CocoaPods, install the [latest version](https://guides.cocoapods.org/using/getting-started.html).
+
+2) If you don't already have a Podfile, in a terminal window, run the following command to create a new [Podfile](https://guides.cocoapods.org/syntax/podfile.html):
+
+   ```
+   pod init
+   ```
+
+3) Add the following lines to your Podfile:
+
+   ```
+   pod 'PingJourney'
+   ```
+
+4) Run the following command to install pods:
+
+   ```
+   pod install
+   ```
+
+## Step 2. Configuring the Journey module
+
+Import `PingJourney`, then call `Journey.createJourney()`, providing the Advanced Identity Cloud or PingAM server you want to target:
+
+Configuring the Journey module
+
+```swift
+import PingJourney
+
+let journey = Journey.createJourney { config in
+    config.serverUrl = "https://openam-forgerock-sdks.forgeblocks.com/am"
+    config.realm = "alpha"
+    config.cookie = "ch15fefc5407912"
+}
+```
+
+For the full range of configuration options available, see [Configuring the Journey module on iOS](../../usage/ios/03-configuring-the-journey-module.html).
+
+|   |                                                                                                                                                                                                                                                                                                            |
+| - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | The Orchestration SDK uses the `serverUrl` and `realm` you provide when configuring `Journey`, rather than the host or `realm` parameter encoded in the backchannel transaction URI.This means a malicious or malformed backchannel transaction URI cannot redirect the SDK to contact a different server. |
+
+## Step 3. Completing a journey using a backchannel transaction URI
+
+Pass the backchannel transaction URI to `start(backchannelUri:configure:)` to start the journey the server configured for the transaction:
+
+Starting a journey from a backchannel transaction URI on iOS
+
+```swift
+// backchannelUri is the value your app received from the federation service.
+let node = await journey.start(backchannelUri: backchannelUri)
+```
+
+You can optionally apply parameters to `start()`:
+
+Adding parameters when starting a journey from a backchannel transaction URI
+
+```swift
+let node = await journey.start(backchannelUri: backchannelUri) { options in
+    options.forceAuth = true
+    options.noSession = true
+}
+```
+
+The parameters you might use in the `start(backchannelUri:configure:)` method includes the following:
+
+* *forceAuth*
+
+  Set this parameter to `true` to force traversal of an authentication journey, even if the user already has a valid session.
+
+  Default is `false`.
+
+* *noSession*
+
+  Set this parameter to `true` to prevent the authentication journey from issuing a new session token upon successful completion.
+
+  Default is `false`.
+
+Handle the returned `node` in exactly the same way as any other journey, as described in [Navigating an authentication journey on iOS](../../usage/ios/05-navigating-an-authentication-journey.html). A transaction that has expired, was already completed, or wasn't found returns an `ErrorNode` carrying the server's message.
+
+Starting a journey and handling the returned node on iOS
+
+```swift
+// backchannelUri is the value your app received from the federation service.
+let node = await journey.start(backchannelUri: backchannelUri)
+
+switch node {
+case let continueNode as ContinueNode:
+    // Provide input to any callbacks in the journey, such as a username and password
+    continueNode.callbacks.forEach { callback in
+        switch callback {
+        case let nameCallback as NameCallback:
+            nameCallback.name = "demo"
+        case let passwordCallback as PasswordCallback:
+            passwordCallback.password = "5tr0ngP@S5w0rd!!"
+        default:
+            break
+        }
+    }
+
+    // Proceed to the next node with the provided input
+    let nextNode = await continueNode.next()
+
+case let errorNode as ErrorNode:
+    // Handle server-side errors, such as an expired or already-completed transaction
+    print("Transaction error: \(errorNode.message)")
+
+case let failureNode as FailureNode:
+    // Handle unexpected errors, such as network issues or a missing JourneyConfig
+    print("Failure: \(failureNode.cause)")
+
+case let successNode as SuccessNode:
+    // Authentication successful, retrieve the session
+    let session = successNode.session
+
+default:
+    break
+}
+```
 
 ---
 
@@ -4950,7 +5377,7 @@ page_id: orchsdks:journey:use-cases/oath/react-native/index
 canonical_url: https://developer.pingidentity.com/orchsdks/journey/use-cases/oath/react-native/index.html
 llms_txt: https://developer.pingidentity.com/orchsdks/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: Wed, 03 Jun 2026 11:00:37 +0100
+revdate: Thu, 25 Sep 2026 10:00:00 +0100
 keywords: ["Journey", "Flows", "Tutorial", "Source Code", "Integration", "SDK", "React Native"]
 section_ids:
   step_1_installing_the_module: Step 1. Installing the module
@@ -4967,7 +5394,7 @@ section_ids:
   error_codes: Error codes
   step_6_closing_the_oath_client: Step 6. Closing the OATH client
   health-check-policies: Enabling OATH device health check policies
-  handling_device_health_check_policy_violations: Handling device health check policy violations
+  handling-policy-violations: Handling device health check policy violations
 ---
 
 # Configure a React Native app for OATH MFA
@@ -5304,23 +5731,23 @@ try {
 
 ### Error codes
 
-| Error code                    | Platform | Description                                                                            |
-| ----------------------------- | -------- | -------------------------------------------------------------------------------------- |
-| `OATH_CLEANUP_FAILED`         | iOS      | Native cleanup failed internally. Not thrown from `close()` — iOS always resolves.     |
-| `OATH_CODE_GENERATION_FAILED` | Both     | The native SDK could not generate a code for this credential.                          |
-| `OATH_CREDENTIAL_LOCKED`      | Both     | The credential is locked by a device policy; code generation is not allowed.           |
-| `OATH_CREDENTIAL_NOT_FOUND`   | Both     | No credential with the given ID exists in the native store.                            |
-| `OATH_DUPLICATE_CREDENTIAL`   | Both     | A credential with the same ID already exists in the native store.                      |
-| `OATH_INITIALIZATION_FAILED`  | Both     | The native OATH session could not be created during `createOathClient`.                |
-| `OATH_INVALID_PARAMETER`      | Both     | A method argument has an invalid value.                                                |
-| `OATH_INVALID_URI`            | Both     | The provided `otpauth://` URI could not be parsed.                                     |
-| `OATH_MISSING_PARAMETER`      | iOS      | A required method argument was not provided.                                           |
-| `OATH_POLICY_VIOLATION`       | Both     | The operation was blocked by a device health check policy.                             |
-| `OATH_STATE_ERROR`            | Both     | A method was called after `close()`, or the client is in an unexpected internal state. |
-| `OATH_STORAGE_ACCESS_DENIED`  | iOS      | The app does not have permission to access the native credential store.                |
-| `OATH_STORAGE_CORRUPTED`      | iOS      | Stored credential data is corrupted and cannot be read.                                |
-| `OATH_STORAGE_FAILURE`        | Both     | The native credential store encountered an unspecified I/O error.                      |
-| `OATH_UNKNOWN_ERROR`          | Both     | An unexpected error occurred that does not map to a specific code.                     |
+| Error code                    | Platform | Description                                                                                                                                                                                                      |
+| ----------------------------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `OATH_CLEANUP_FAILED`         | iOS      | Native cleanup failed internally. Not thrown from `close()` — iOS always resolves.                                                                                                                               |
+| `OATH_CODE_GENERATION_FAILED` | Both     | The native SDK could not generate a code for this credential.                                                                                                                                                    |
+| `OATH_CREDENTIAL_LOCKED`      | Both     | The credential is locked by a device policy; code generation is not allowed.                                                                                                                                     |
+| `OATH_CREDENTIAL_NOT_FOUND`   | Both     | No credential with the given ID exists in the native store.                                                                                                                                                      |
+| `OATH_DUPLICATE_CREDENTIAL`   | Both     | A credential with the same ID already exists in the native store.                                                                                                                                                |
+| `OATH_INITIALIZATION_FAILED`  | Both     | The native OATH session could not be created during `createOathClient`.                                                                                                                                          |
+| `OATH_INVALID_PARAMETER`      | Both     | A method argument has an invalid value.                                                                                                                                                                          |
+| `OATH_INVALID_URI`            | Both     | The provided `otpauth://` URI could not be parsed.                                                                                                                                                               |
+| `OATH_MISSING_PARAMETER`      | iOS      | A required method argument was not provided.                                                                                                                                                                     |
+| `OATH_POLICY_VIOLATION`       | Both     | Credential registration was blocked by a device health check policy. See [Handling device health check policy violations](#handling-policy-violations) for how to identify the violated policy on each platform. |
+| `OATH_STATE_ERROR`            | Both     | A method was called after `close()`, or the client is in an unexpected internal state.                                                                                                                           |
+| `OATH_STORAGE_ACCESS_DENIED`  | iOS      | The app does not have permission to access the native credential store.                                                                                                                                          |
+| `OATH_STORAGE_CORRUPTED`      | iOS      | Stored credential data is corrupted and cannot be read.                                                                                                                                                          |
+| `OATH_STORAGE_FAILURE`        | Both     | The native credential store encountered an unspecified I/O error.                                                                                                                                                |
+| `OATH_UNKNOWN_ERROR`          | Both     | An unexpected error occurred that does not map to a specific code.                                                                                                                                               |
 
 ## Step 6. Closing the OATH client
 
@@ -5346,7 +5773,9 @@ Close the OATH client when the component is dismissed, for example in a `useEffe
 
 The **OATH** module gates one-time passcode generation behind device health check policies.
 
-When a policy is violated, calling `generateCode()` or `generateCodeWithValidity()` throws `OathError` with code `OATH_POLICY_VIOLATION` instead of returning a code.
+When a policy is violated, calling `addCredentialFromUri()` throws `OathError` with code `OATH_POLICY_VIOLATION` instead of returning the credential.
+
+If a previously registered credential becomes non-compliant, it is locked. Calling `generateCode()` or `generateCodeWithValidity()` then throws `OathError` with code `OATH_CREDENTIAL_LOCKED`. Read `credential.lockingPolicy` to identify the policy that locked the credential.
 
 To enable device health check policies, configure a policy evaluator before creating the OATH client:
 
@@ -5381,26 +5810,81 @@ const oathClient = await createOathClient({
 
 ### Handling device health check policy violations
 
-When a policy blocks code generation, catch `OATH_POLICY_VIOLATION` and display a contextual message:
+When registration is blocked by a policy, the thrown `OathError` has code `OATH_POLICY_VIOLATION`.
+
+The policy that blocked the registration is either `biometricAvailable` or `deviceTampering`, the two policy kinds from [Enabling OATH device health check policies](#health-check-policies).
+
+The set of policy kinds is open-ended, and native SDKs may add more in future releases, so handle unknown policy names with a fallback.
+
+The platforms deliver the name of the violated policy differently:
+
+* On Android, the `violatedPolicy` property identifies the violated policy.
+
+* On iOS, this property is not available. Instead, parse the policy name from the error message, which has the following form:
+
+  ```
+  "Policy '<name>' violation: ...".
+  ```
+
+The following example handles a policy violation on both platforms.
+
+1. On Android, it reads the policy name from the `violatedPolicy` property.
+
+2. On iOS, it extracts the policy name from the error message.
+
+3. If the policy name is not recognized, it falls back to displaying the raw error message.
 
 Handling a device health check policy violation
 
 ```typescript
 import { OathError } from '@ping-identity/rn-oath';
 
+// Extract the policy name from the iOS error message
+// ("Policy '<name>' violation: ...").
+function extractPolicyName(message: string): string | undefined {
+  const match = message.match(/Policy '(.+?)' violation/);
+  return match ? match[1] : undefined;
+}
+
+// Declared with `let` outside the try block so it stays in
+// scope for the generateCode call in the next step.
+let credential;
+
 try {
-  const code = await oathClient.generateCode(credential.id);
+  credential = await oathClient.addCredentialFromUri(uri);
 } catch (err) {
-  if (err instanceof OathError) {
-    if (err.code === 'OATH_POLICY_VIOLATION') {
-      // Inform the user why the code cannot be generated
-      setErrorMessage('This code cannot be generated on this device. Enroll biometrics or use an unmodified device.');
+  if (err instanceof OathError && err.code === 'OATH_POLICY_VIOLATION') {
+    // Android sets violatedPolicy; iOS does not, so extract it
+    // from the message. Fall back to the raw message if neither
+    // is available.
+    const policyName = err.violatedPolicy ?? extractPolicyName(err.message);
+    if (policyName === 'biometricAvailable') {
+      setErrorMessage('Enroll biometrics to register this credential.');
+    } else if (policyName === 'deviceTampering') {
+      setErrorMessage('This credential cannot be registered on a modified device.');
     } else {
       setErrorMessage(err.message);
     }
   }
 }
+
+// Registration can fail, for example, when a policy blocks it,
+// so only generate a code if a credential was created.
+if (credential) {
+  try {
+    const code = await oathClient.generateCode(credential.id);
+  } catch (err) {
+    if (err instanceof OathError && err.code === 'OATH_CREDENTIAL_LOCKED') {
+      const { lockingPolicy } = await oathClient.getCredential(credential.id);
+      setErrorMessage(`This credential is locked by policy: ${lockingPolicy}.`);
+    }
+  }
+}
 ```
+
+|   |                                                                                                                                                                                               |
+| - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | The `violatedPolicy` property is a convenience, and existing code that identifies policy violations by branching on the `OATH_POLICY_VIOLATION` error code alone continues to work unchanged. |
 
 ---
 
@@ -5428,10 +5912,6 @@ section_ids:
 
 Complete the following steps to configure a React Native app to perform social sign-on with an external identity provider (IdP).
 
-|   |                                                                                                                                                                                                                                                                                     |
-| - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | Where a provider's native SDK is available on a platform, the **External IdP** module uses it to give users a smooth, integrated sign-in experience.Where no native SDK is available, the module falls back to a browser redirect flow using the URI scheme you register in step 2. |
-
 ## [Before you begin](../before-you-begin.html)
 
 Ensure that you have completed the prerequisites before starting the numbered steps on this page below.
@@ -5454,7 +5934,7 @@ Register a URI scheme on Android and iOS so the OS can route provider redirects 
 
 ## [Step 3. Configuring native provider SDKs](03_configuring_native_provider_sdks.html)
 
-Add and configure the native SDK for each provider you want to support.
+Add and configure the native SDK for each provider you want to support. The React Native **External IdP** module requires the native SDK for each provider you support.
 
 [**Start step 3**[icon: chevrons-right, set=fas, size=xs]](03_configuring_native_provider_sdks.html)
 
@@ -5513,7 +5993,7 @@ To add the core dependencies for OATH MFA:
 2. In the `dependencies` section, add the **OATH** module:
 
    ```gradle
-   implementation("com.pingidentity.sdks:mfa:oath:2.0.1")
+   implementation("com.pingidentity.sdks:mfa:oath:2.2.0")
    ```
 
 ## Step 2. Initializing the OATH Client
@@ -5968,7 +6448,7 @@ You need to have configured Apple, Facebook, and Google as external identity pro
 
 ## [Step 1. Adding core dependencies](01_adding_core_dependencies.html)
 
-These dependencies provide core support for social sign-on. These are the minimum required dependencies for redirecting users to the IdP for authentication.
+These dependencies provide core support for social sign-on.
 
 [**Start step 1**[icon: chevrons-right, set=fas, size=xs]](01_adding_core_dependencies.html)
 
@@ -5986,640 +6466,6 @@ Learn how to authenticate your users with the external IdPs you have configured 
 
 ## [Step 4. Customizing the user experience](04_customize_the_user_experience.html)
 
-You can optionally tweak the user experience for authenticating with an external IdP.
+Embed the native SDK libraries for the providers you support, and tweak the user experience for authenticating with an external IdP.
 
 [**Start step 4**[icon: chevrons-right, set=fas, size=xs]](04_customize_the_user_experience.html)
-
----
-
----
-title: Configure an iOS app for OATH MFA
-description: Configure an iOS app to support OATH-based MFA using the OATH module, covering dependencies, client initialization, credential management, and passcode generation
-component: orchsdks
-page_id: orchsdks:journey:use-cases/oath/ios/index
-canonical_url: https://developer.pingidentity.com/orchsdks/journey/use-cases/oath/ios/index.html
-llms_txt: https://developer.pingidentity.com/orchsdks/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: Tue, 25 Mar 2025 11:00:37 +0100
-keywords: ["DaVinci", "Flows", "Tutorial", "Source Code", "Integration", "SDK", "iOS"]
-section_ids:
-  step_1_adding_core_dependencies: Step 1. Adding core dependencies
-  swift_package_manager: Swift Package Manager
-  cocoapods: CocoaPods
-  step_2_initializing_the_oath_client: Step 2. Initializing the OATH Client
-  step_3_managing_oath_credentials: Step 3. Managing OATH credentials
-  creating_oath_credentials: Creating OATH credentials
-  getting_oath_credentials: Getting OATH credentials
-  updating_oath_credentials: Updating OATH credentials
-  deleting_oath_credentials: Deleting OATH credentials
-  step_4_generating_oath_based_one_time_passcodes: Step 4. Generating OATH-based one-time passcodes
-  generating_hotp_codes: Generating HOTP codes
-  generating_totp_codes: Generating TOTP codes
-  step_5_closing_the_oath_client: Step 5. Closing the OATH client
-  handling_errors: Handling errors
-  storage: Customizing credential storage
-  customizing_the_default_keychain_based_storage: Customizing the default keychain-based storage
-  implementing_your_own_storage_mechanism: Implementing your own storage mechanism
----
-
-# Configure an iOS app for OATH MFA
-
-[icon: circle-check, set=far]PingOne Advanced Identity Cloud [icon: circle-check, set=far]PingAM [icon: apple, set=fab]iOS
-
-This page guides you through configuring your iOS application to support OATH-based Multi-Factor Authentication (MFA) using the **OATH** module.
-
-It covers dependency setup, OATH client initialization, credential management, passcode generation, and custom storage options.
-
-## Step 1. Adding core dependencies
-
-You can use Swift Package Manager (SPM) or CocoaPods to add dependencies to your iOS project.
-
-### Swift Package Manager
-
-1. With your project open in **Xcode**, select File > Add Package Dependencies.
-
-2. In the search bar, enter the Orchestration SDK for iOS repository URL: `https://github.com/ForgeRock/ping-ios-sdk`.
-
-3. Select the `ping-ios-sdk` package, and then click Add Package.
-
-4. In the Choose Package Products dialog, ensure that the `PingOath` library is added to your target project.
-
-5. Click Add Package.
-
-6. In your project, import the relevant dependencies:
-
-   ```swift
-   import PingOath
-   ```
-
-### CocoaPods
-
-1. If you do not already have CocoaPods, install the [latest version](https://guides.cocoapods.org/using/getting-started.html).
-
-2. If you do not already have a Podfile, in a terminal window, run the following command to create a new [Podfile](https://guides.cocoapods.org/syntax/podfile.html):
-
-   ```
-   pod init
-   ```
-
-3. Add the relevant dependencies to your Podfile:
-
-   ```
-   pod 'PingOath'
-   ```
-
-4. Run the following command to install pods:
-
-   ```
-   pod install
-   ```
-
-## Step 2. Initializing the OATH Client
-
-To use the **OATH** module you must initialize the OATH client in your application by calling the `createClient()` method:
-
-Initializing the OATH client with default config
-
-```swift
-// Create an OATH client
-let client = try await OathClient.createClient { config in
-    config.logger = LogManager.logger
-    config.enableCredentialCache = false
-}
-```
-
-The properties you can use to customize OATH client configuration are as follows:
-
-* *enableCredentialCache*
-
-  Whether to enable in-memory caching of credentials.
-
-  By default, this is set to `false` for security reasons, as an attacker could potentially access cached credentials from memory dumps.
-
-* *timeout*
-
-  The timeout for network operations, in seconds.
-
-  Default value is `15`.
-
-* *storage*
-
-  The storage implementation to use for OATH credentials.
-
-  If `nil`, the default `OathKeychainStorage` is used.
-
-  Learn more in [Customizing credential storage](#storage).
-
-* *policyEvaluator*
-
-  The policy evaluator to use for credential policy validation.
-
-  If `nil`, the default `MfaPolicyEvaluator` is used.
-
-* *encryptionEnabled*
-
-  Whether data encryption is enabled for storing credentials.
-
-  Default is `true`.
-
-* *logger*
-
-  The logger instance used for logging messages.
-
-  Defaults to a global logger instance.
-
-  Learn more in [Logging](../../../customization/logging/index.html).
-
-## Step 3. Managing OATH credentials
-
-The **OATH** module relies on a set of credentials, that you can create, retrieve, update, and delete.
-
-The credentials contain details such as the service and user they relate to, and details about how to generate the HOTP or TOTP key.
-
-### Creating OATH credentials
-
-The OATH module lets the user register their device for OATH-based multi-factor authentication (MFA).
-
-The information required to register a device is contained in a specially-encoded URI, which your client application decodes to create the credentials.
-
-This URI is often delivered by QR codes that the client can scan, or directly in the callback output by the [OATH Registration node](https://docs.pingidentity.com/auth-node-ref/latest/oath-registration.html).
-
-Use the `addCredentialFromUri()` method to create OATH credentials and register an MFA device:
-
-Creating OATH credentials
-
-```swift
-let uri = "otpauth://hotp/Example:user@example.com?secret=JBSWY3DPEHPK3PXP&counter=0"
-
-let credential = try await client.addCredentialFromUri(uri)
-```
-
-### Getting OATH credentials
-
-You can get a list of all the registered OATH credentials, or get an individual credential, by passing the credential ID as a parameter.
-
-* All OATH credentials
-
-* Specific OATH credential
-
-Getting all OATH credentials
-
-```swift
-do {
-    let credentials = try await Task.detached(priority: .userInitiated) {
-        try await client.getCredentials()
-    }.value
-} catch {
-    throw AppError.oathError("Failed to load credentials: \(error.localizedDescription)")
-}
-```
-
-Getting a specific OATH credential
-
-```swift
-let credential = try await Task.detached(priority: .userInitiated) {
-    try await client.getCredential(credentialId)
-}.value
-```
-
-### Updating OATH credentials
-
-You can update the properties of a stored credential with new values, by using the `saveCredential()` method. Pass the updated credential object into the method as a parameter:
-
-Updating an OATH credential
-
-```swift
-for credential in credentials {
-    var updated = credential
-    updated.displayIssuer = "Example.com Checking Account"
-    updated.displayAccountName = "Babs Jensen"
-    _ = try await client.saveCredential(updated)
-}
-```
-
-### Deleting OATH credentials
-
-Use the `deleteCredential()` method to remove individual credentials from the client device. Pass the credential ID into the method as a parameter:
-
-Deleting an OATH credential
-
-```swift
-do {
-    let removed = try await Task.detached(priority: .userInitiated) {
-        try await client.deleteCredential(credentialId)
-    }.value
-    return removed
-} catch {
-    throw AppError.oathError("Failed to remove credential: \(error.localizedDescription)")
-}
-```
-
-## Step 4. Generating OATH-based one-time passcodes
-
-To perform OATH-based multi-factor authentication the user needs to enter the correct one-time passcode.
-
-Your client app needs to generate these one-time passcodes and display them to the user.
-
-### Generating HOTP codes
-
-Use the `generateCode` method to create an HOTP code using the details within the specified credential:
-
-Generating an HOTP for an OATH credential
-
-```swift
-// Generate code (counter increments automatically)
-let code1 = try await client.generateCode(hotpCredential.id)  // Counter = 1
-let code2 = try await client.generateCode(hotpCredential.id)  // Counter = 2
-```
-
-### Generating TOTP codes
-
-For TOTP codes, the `code` object you generate contains timing and progress information that you can use to customize the user interface:
-
-Generating a TOTP with timing and progress information
-
-```swift
-// Get code with timing and validity information
-let codeInfo = try await client.generateCodeWithValidity(credential.id)
-
-print("Code: \(codeInfo.code)")
-print("Time remaining: \(codeInfo.timeRemaining) seconds")
-print("Progress: \(codeInfo.progress * 100)%")
-```
-
-## Step 5. Closing the OATH client
-
-You can close the client, clean up any temporary files, and regain the memory used by calling the `close()` method:
-
-Closing an OATH client
-
-```swift
-// Close the OATH client and clean up
-try await client.close()
-```
-
-## Handling errors
-
-The **OATH** module provides comprehensive error handling:
-
-Handling errors
-
-```swift
-do {
-    let credential = try await client.addCredentialFromUri(uri)
-} catch let error as OathError {
-    switch error {
-    case .invalidUri(let message):
-        print("Invalid URI: \(message)")
-    case .credentialNotFound(let id):
-        print("Credential not found: \(id)")
-    case .credentialLocked(let id):
-        print("Credential is locked: \(id)")
-    case .codeGenerationFailed(let message, let underlying):
-        print("Code generation failed: \(message)")
-    case .initializationFailed(let message, let underlying):
-        print("Client initialization failed: \(message)")
-    }
-} catch let error as OathStorageError {
-    switch error {
-    case .storageFailure(let message, let underlying):
-        print("Storage error: \(message)")
-    }
-}
-```
-
-## Customizing credential storage
-
-The **OATH** module needs to store the credentials it uses on the client device.
-
-By default, it uses an iOS keychain services-based implementation, which you can customize.
-
-You can also provide your own storage mechanism, by implementing the `OathStorage` interface.
-
-### Customizing the default keychain-based storage
-
-The **OATH** module uses the `OathKeychainStorage` implementation for storing OATH credentials by default.
-
-You can customize this keychain-based default as follows:
-
-Customizing the `OathKeychainStorage` implementation
-
-```swift
-// Create a custom storage instance with specific parameters
-let customStorage = OathKeychainStorage(
-    service: "com.myapp.oath",
-    accessGroup: "group.myapp",
-    accessibility: kSecAttrAccessibleWhenUnlockedThisDeviceOnly
-)
-
-// Create the client with the custom storage
-let client = try await OathClient.createClient { config in
-    config.storage = customStorage
-    config.enableCredentialCache = false
-}
-```
-
-The properties you can customize are as follows:
-
-* `service`
-
-  The keychain service identifier.
-
-  Defaults to "com.pingidentity.oath".
-
-* `accessGroup`
-
-  Optional keychain access group for shared access.
-
-* `accessibility`
-
-  Keychain accessibility level.
-
-  Defaults to `kSecAttrAccessibleWhenUnlockedThisDeviceOnly`.
-
-### Implementing your own storage mechanism
-
-You can implement a custom storage solution as alternative to the default `OathKeychainStorage` by implementing the `OathStorage` interface:
-
-Implementing custom OATH credential storage
-
-```swift
-class MyCustomStorage: OathStorage {
-
-  func storeOathCredential(_ credential: OathCredential) async throws {
-    // Store an OATH credential.
-  }
-
-  func retrieveOathCredential(credentialId: String) async throws -> OathCredential? {
-    // Retrieve an OATH credential by its ID.
-  }
-
-  func getAllOathCredentials() async throws -> [OathCredential] {
-    // Get all OATH credentials.
-  }
-
-  func removeOathCredential(credentialId: String) async throws -> Bool {
-    // Remove an OATH credential by its ID.
-  }
-
-  func clearOathCredentials() async throws {
-    // Clear all OATH credentials from the storage.
-  }
-}
-```
-
----
-
----
-title: Configure an iOS app for social sign-on
-description: Configure an iOS app to perform social sign-on with external identity providers using PingOne Advanced Identity Cloud or PingAM
-component: orchsdks
-page_id: orchsdks:journey:use-cases/external-idp/ios/index
-canonical_url: https://developer.pingidentity.com/orchsdks/journey/use-cases/external-idp/ios/index.html
-llms_txt: https://developer.pingidentity.com/orchsdks/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: Tue, 25 Mar 2025 11:00:37 +0100
-keywords: ["PingOne", "DaVinci", "Flows", "Setup &amp; Configuration", "Source Code", "Use Case", "SDK", "IdP"]
-section_ids:
-  before_you_begin: Before you begin
-  step_1_adding_core_dependencies: Step 1. Adding core dependencies
-  step_2_handling_uri_schemes: Step 2. Handling URI schemes
-  step_3_authenticating_with_external_idps: Step 3. Authenticating with external IdPs
-  step_4_customizing_the_user_experience: Step 4. Customizing the user experience
----
-
-# Configure an iOS app for social sign-on
-
-[icon: circle-check, set=far]PingOne Advanced Identity Cloud [icon: circle-check, set=far]PingAM [icon: apple, set=fab]iOS
-
-Complete the following high-level tasks to configure an Android client app to perform social sign-on with an external identity provider (IdP):
-
-## [Before you begin](../before-you-begin.html)
-
-Ensure that you have completed the prerequisites before starting the numbered steps on this page below.
-
-You need to have configured Apple, Facebook, and Google as external identity providers in PingOne Advanced Identity Cloud or PingAM, and set up the social authentication journeys your client app will step through.
-
-[**Complete prerequisites**[icon: chevrons-right, set=fas, size=xs]](../before-you-begin.html)
-
-## [Step 1. Adding core dependencies](01_adding_core_dependencies.html)
-
-These dependencies provide core support for social sign-on. These are the minimum required dependencies for redirecting users to the IdP for authentication.
-
-[**Start step 1**[icon: chevrons-right, set=fas, size=xs]](01_adding_core_dependencies.html)
-
-## [Step 2. Handling URI schemes](02_handling_uri_schemes.html)
-
-You must configure your Android app to open when the server redirects the user after authentication.
-
-[**Start step 2**[icon: chevrons-right, set=fas, size=xs]](02_handling_uri_schemes.html)
-
-## [Step 3. Authenticating with external IdPs](03_authenticate_with_external_idps.html)
-
-Learn how to authenticate your users with the external IdPs you have configured in your authentication journeys.
-
-[**Start step 3**[icon: chevrons-right, set=fas, size=xs]](03_authenticate_with_external_idps.html)
-
-## [Step 4. Customizing the user experience](04_customize_the_user_experience.html)
-
-You can optionally tweak the user experience for authenticating with an external IdP.
-
-[**Start step 4**[icon: chevrons-right, set=fas, size=xs]](04_customize_the_user_experience.html)
-
----
-
----
-title: Configuring a Journey client in React Native
-description: Configure the Journey client in React Native using createJourneyClient() to connect to your PingOne Advanced Identity Cloud or PingAM server
-component: orchsdks
-page_id: orchsdks:journey:usage/react-native/03-configuring-the-journey-module
-canonical_url: https://developer.pingidentity.com/orchsdks/journey/usage/react-native/03-configuring-the-journey-module.html
-llms_txt: https://developer.pingidentity.com/orchsdks/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: Wed, 6 May 2026 00:00:00 +0000
-keywords: ["OAuth 2.0", "OpenID Connect", "Setup &amp; Configuration", "Source Code", "Integration", "SDK", "React Native"]
-section_ids:
-  integrating_the_oidc_module: Integrating the OIDC Module
----
-
-# Configuring a Journey client in React Native
-
-[icon: circle-check, set=far]PingOne Advanced Identity Cloud [icon: circle-check, set=far]PingAM [icon: react, set=fab]React Native
-
-* [Prepare](01-configuring-the-server.html)
-
-* [Install](02-installing-the-journey-module.html)
-
-* **Configure**
-
-* [Start](04-starting-an-authentication-journey.html)
-
-* [Navigate](05-navigating-an-authentication-journey.html)
-
-* [Manage](06-handling-sessions.html)
-
-***
-
-You must configure a **Journey** client to connect to your Advanced Identity Cloud or PingAM server.
-
-To configure a client, call the `createJourneyClient()` factory function and provide the configuration options as follows:
-
-Configuring the createJourneyClient factory
-
-```typescript
-import { createJourneyClient } from '@ping-identity/rn-journey';
-import { logger } from '@ping-identity/rn-logger';
-
-// Optionally, set the log level to 'debug'
-const debugLogger = logger({ level: 'debug' });
-
-const journeyClient = createJourneyClient({
-  serverUrl: 'https://openam-forgerock-sdks.forgeblocks.com/am',
-  realm: 'alpha',
-  cookie: 'ch15fefc5407912',
-  timeout: 5000,
-  logger: debugLogger,
-});
-```
-
-Update the following properties with values that match your environment:
-
-* *serverUrl*
-
-  The URL of the Access Management service on your server. This is the only required property.
-
-  * *Advanced Identity Cloud example:*
-
-    `https://openam-forgerock-sdks.forgeblocks.com/am`
-
-  * *PingAM example:*
-
-    `https://openam.example.com:8443/openam`
-
-* *realm*
-
-  The realm containing your users and configuration.
-
-  Usually `root` for PingAM and `alpha` or `bravo` for Advanced Identity Cloud.
-
-* *cookie*
-
-  The name of the cookie your PingOne Advanced Identity Cloud tenant uses to store SSO tokens in client browsers.
-
-  * On a self-hosted PingAM server this value is usually `iPlanetDirectoryPro`.
-
-  * On Advanced Identity Cloud tenants, the cookie name is a random string of characters, such as `ch15fefc5407912`.
-
-    > **Collapse: How do I find my PingOne Advanced Identity Cloud cookie name?**
-    >
-    > To locate the cookie name in an PingOne Advanced Identity Cloud tenant:
-    >
-    > 1. Navigate to Tenant settings > Global Settings
-    >
-    > 2. Copy the value of the Cookie property.
-
-* *timeout*
-
-  The maximum time, in milliseconds, that the client waits for a response from the server.
-
-  Default is `5000` (5 seconds).
-
-* *logger*
-
-  Optionally, specify the logger instance to use to output messages from the Orchestration SDK.
-
-  Pass the `level` parameter to the instance to configure the amount of detail the Orchestration SDK outputs. Choose from, `debug`, `info`, `warn`, `error`, or `none`.
-
-## Integrating the OIDC Module
-
-You can choose to integrate the **oidc** module into your client configuration, to obtain and manage OpenID Connect 1.0 tokens on behalf of the user.
-
-To integrate the **oidc** module, add the configuration when instantiating the journey client, as follows:
-
-Integrating the `oidc` module with the `journey` client
-
-```typescript
-import { createJourneyClient } from '@ping-identity/rn-journey';
-
-const journeyClient = createJourneyClient({
-    serverUrl: 'https://openam-forgerock-sdks.forgeblocks.com/am',
-    realm: 'alpha',
-    cookie: 'ch15fefc5407912',
-    modules: {
-        oidc: {
-          clientId: 'sdkPublicClient',
-          discoveryEndpoint: 'https://openam-forgerock-sdks.forgeblocks.com/am/oauth2/realms/alpha/.well-known/openid-configuration',
-          scopes: ['openid', 'email', 'address', 'profile'],
-          redirectUri: 'com.example.demo://oauth2redirect'
-        }
-    }
-});
-```
-
-Update the following properties with values that match your environment:
-
-* *clientId*
-
-  The client ID from your OAuth 2.0 application.
-
-  For example, `sdkPublicClient`
-
-* *discoveryEndpoint*
-
-  The `.well-known` endpoint from your server.
-
-  > **Collapse: How do I find my PingOne Advanced Identity Cloud  URL?**
-  >
-  > You can view the `.well-known` endpoint for an OAuth 2.0 client in the PingOne Advanced Identity Cloud admin console:
-  >
-  > 1. Log in to your PingOne Advanced Identity Cloud administration console.
-  >
-  > 2. Click Applications, and then select the OAuth 2.0 client you created earlier. For example, sdkPublicClient.
-  >
-  > 3. On the Sign On tab, in the Client Credentials section, copy the Discovery URI value.
-  >
-  >    For example, `https://openam-forgerock-sdks.forgeblocks.com/am/oauth2/alpha/.well-known/openid-configuration`
-  >
-  > |   |                                                                                                                                                                                                                                                                                                                                 |
-  > | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-  > |   | If you are using a custom domain, your `.well-known` is formed as follows:`https://<custom-domain-fqdn>/.well-known/openid-configuration`Learn more in [Access OIDC configuration discovery endpoint](https://docs.pingidentity.com/pingoneaic/latest/realms/custom-domains.html#access-oidc-configuration-discovery-endpoint). |
-
-  > **Collapse: How do I find my PingAM  URL?**
-  >
-  > To form the `.well-known` URL for an PingAM server, concatenate the following information into a single URL:
-  >
-  > 1. The base URL of the PingAM component of your deployment, including the port number and deployment path.
-  >
-  >    For example, `https://openam.example.com:8443/openam`
-  >
-  > 2. The string `/oauth2`
-  >
-  > 3. The hierarchy of the realm that contains the OAuth 2.0 client.
-  >
-  >    You must specify the entire hierarchy of the realm, starting at the Top Level Realm. Prefix each realm in the hierarchy with the `realms/` keyword.
-  >
-  >    For example, `/realms/root/realms/customers`
-  >
-  >    |   |                                                                                 |
-  >    | - | ------------------------------------------------------------------------------- |
-  >    |   | If you omit the realm hierarchy, the top level `ROOT` realm is used by default. |
-  >
-  > 4. The string `/.well-known/openid-configuration`
-  >
-  > For example, `https://openam.example.com:8443/openam/oauth2/realms/root/.well-known/openid-configuration`
-
-  For example, `https://openam-forgerock-sdks.forgeblocks.com/am/oauth2/realms/alpha/.well-known/openid-configuration`
-
-* *scopes*
-
-  The scopes you added to your OAuth 2.0 application.
-
-  For example, `'openid', 'email', 'address', 'profile'`
-
-* *redirectUri*
-
-  The `redirect_uri` as configured in the OAuth 2.0 client profile.
-
-  This value must exactly match a value configured in your OAuth 2.0 client.
-
-  For example, `com.example.demo://oauth2redirect`

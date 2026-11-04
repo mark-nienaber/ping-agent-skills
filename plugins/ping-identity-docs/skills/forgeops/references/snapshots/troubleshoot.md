@@ -1,12 +1,133 @@
 ---
-title: Ingress issues
-description: If the pods in a ForgeOps deployment are starting successfully, but you can't reach the services in those pods, you probably have ingress issues.
+title: <code>kubectl</code> shell autocompletion
+description: Enable kubectl shell autocompletion in Bash or Zsh
 component: forgeops
-version: 2026.2
-page_id: forgeops:troubleshoot:ingress
-canonical_url: https://docs.pingidentity.com/forgeops/2026.2/troubleshoot/ingress.html
+version: 2026.3
+page_id: forgeops:troubleshoot:tab-completion
+canonical_url: https://docs.pingidentity.com/forgeops/2026.3/troubleshoot/tab-completion.html
 llms_txt: https://docs.pingidentity.com/forgeops/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2024-10-04T14:12:10Z
+---
+
+# `kubectl` shell autocompletion
+
+The kubectl shell autocompletion extension lets you extend the Tab key completion feature of Bash and Zsh shells to the kubectl commands. While not a troubleshooting tool, this extension can make troubleshooting easier, because it lets you enter kubectl commands more easily.
+
+For more information about the Kubernetes autocompletion extension, see [Enabling shell autocompletion](https://kubernetes.io/docs/tasks/kubectl/install/#enabling-shell-autocompletion) in the Kubernetes documentation.
+
+Note that to install the autocompletion extension in Bash, you must be running version 4 or later of the Bash shell. To determine your bash shell version, run the bash --version command.
+
+---
+
+---
+title: DS diagnostic tools
+description: Understand PingDS diagnostic tools to inspect and recover PingDS pods
+component: forgeops
+version: 2026.3
+page_id: forgeops:troubleshoot:debug-tools
+canonical_url: https://docs.pingidentity.com/forgeops/2026.3/troubleshoot/debug-tools.html
+llms_txt: https://docs.pingidentity.com/forgeops/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-05T12:09:00Z
+keywords: ["Troubleshooting", "Kubernetes", "Directory Server"]
+section_ids:
+  ds-debug: Debug script
+---
+
+# DS diagnostic tools
+
+## Debug script
+
+The bin/ds-debug.sh script lets you obtain diagnostic information for any DS pod running in your cluster. It also lets you perform several cleanup and recovery operations on DS pods.
+
+Run bin/ds-debug.sh -h to refer to the command's syntax.
+
+The following bin/ds-debug.sh subcommands provide diagnostic information:
+
+| Subcommand   | Diagnostics                                                   |
+| ------------ | ------------------------------------------------------------- |
+| status       | Server details, connection handlers, backends, and disk space |
+| rstatus      | Replication status                                            |
+| idsearch     | All the DNs in the `ou=identities` branch                     |
+| monitor      | All the directory entries in the `cn=monitor` branch          |
+| list-backups | A list of the backups associated with a DS instance           |
+
+The bin/ds-debug.sh purge command purges all the backups associated with a DS instance.
+
+---
+
+---
+title: Expanded Kustomize output
+description: View the expanded Kustomize bases and overlays
+component: forgeops
+version: 2026.3
+page_id: forgeops:troubleshoot:kustomize
+canonical_url: https://docs.pingidentity.com/forgeops/2026.3/troubleshoot/kustomize.html
+llms_txt: https://docs.pingidentity.com/forgeops/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2024-10-04T14:12:10Z
+---
+
+# Expanded Kustomize output
+
+If you've modified any of the Kustomize bases and overlays that come with the `cdk` canonical configuration, you might want to consider how your changes affect deployment. Use the kustomize build command to assess how Kustomize expands your bases and overlays into YAML files.
+
+For example:
+
+```
+$ cd /path/to/forgeops/kustomize/overlay
+$ kustomize build all
+apiVersion: v1
+data:
+  IDM_ENVCONFIG_DIRS: /opt/openidm/resolver
+  LOGGING_PROPERTIES: /var/run/openidm/logging/logging.properties
+  OPENIDM_ANONYMOUS_PASSWORD: anonymous
+  OPENIDM_AUDIT_HANDLER_JSON_ENABLED: "false"
+  OPENIDM_AUDIT_HANDLER_STDOUT_ENABLED: "true"
+  OPENIDM_CLUSTER_REMOVE_OFFLINE_NODE_STATE: "true"
+  OPENIDM_CONFIG_REPO_ENABLED: "false"
+  OPENIDM_ICF_RETRY_DELAYSECONDS: "10"
+  OPENIDM_ICF_RETRY_MAXRETRIES: "12"
+  PROJECT_HOME: /opt/openidm
+  RCS_AGENT_CONNECTION_CHECK_SECONDS: "5"
+  RCS_AGENT_CONNECTION_GROUP_CHECK_SECONDS: "900"
+  RCS_AGENT_CONNECTION_TIMEOUT_SECONDS: "10"
+  RCS_AGENT_HOST: rcs-agent
+  RCS_AGENT_IDM_PRINCIPAL: idmPrincipal
+  RCS_AGENT_PATH: idm
+  RCS_AGENT_PORT: "80"
+  RCS_AGENT_USE_SSL: "false"
+  RCS_AGENT_WEBSOCKET_CONNECTIONS: "1"
+kind: ConfigMap
+metadata:
+  labels:
+    app: idm
+    app.kubernetes.io/component: idm
+    app.kubernetes.io/instance: idm
+    app.kubernetes.io/name: idm
+    app.kubernetes.io/part-of: forgerock
+    tier: middle
+  name: idm
+---
+apiVersion: v1
+data:
+  logging.properties: |
+...
+```
+
+---
+
+---
+title: Ingress issues
+description: Diagnose Kubernetes ingress issues
+component: forgeops
+version: 2026.3
+page_id: forgeops:troubleshoot:ingress
+canonical_url: https://docs.pingidentity.com/forgeops/2026.3/troubleshoot/ingress.html
+llms_txt: https://docs.pingidentity.com/forgeops/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2024-10-04T14:12:10Z
 keywords: ["Troubleshooting", "Kubernetes", "Ingress Controller"]
 ---
 
@@ -24,13 +145,14 @@ To diagnose ingress issues:
 
 ---
 title: Kubernetes logs and other diagnostics
-description: Look at pod descriptions and container log files for irregularities that indicate problems.
+description: Use the debug-logs utility to collect ForgeOps logging and other diagnostic information
 component: forgeops
-version: 2026.2
+version: 2026.3
 page_id: forgeops:troubleshoot:pods
-canonical_url: https://docs.pingidentity.com/forgeops/2026.2/troubleshoot/pods.html
+canonical_url: https://docs.pingidentity.com/forgeops/2026.3/troubleshoot/pods.html
 llms_txt: https://docs.pingidentity.com/forgeops/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-01-02T12:16:00Z
 keywords: ["Troubleshooting", "Kubernetes", "Logs"]
 section_ids:
   debug_logs_utility: debug-logs utility
@@ -81,7 +203,7 @@ Suppose you performed a ForgeOps deployment but noticed that one of the pods had
 
 1. Make sure the active namespace in your local Kubernetes context is the one that contains the component you are debugging.
 
-2. Make sure you've checked out the 2026.2.1 branch of the `forgeops` repository.
+2. Make sure you've checked out the 2026.3.2 branch of the `forgeops` repository.
 
 3. Change to the /path/to/forgeops/bin directory in your `forgeops` repository clone.
 
@@ -131,13 +253,14 @@ After you've obtained the pod descriptions and container logs, here are some act
 
 ---
 title: minikube hardware resources
-description: The minikube start command example in minikube provides a good default virtual hardware configuration for a minikube cluster running a single-instance ForgeOps deployment.
+description: Troubleshoot ForgeOps minikube deployments
 component: forgeops
-version: 2026.2
+version: 2026.3
 page_id: forgeops:troubleshoot:minikube
-canonical_url: https://docs.pingidentity.com/forgeops/2026.2/troubleshoot/minikube.html
+canonical_url: https://docs.pingidentity.com/forgeops/2026.3/troubleshoot/minikube.html
 llms_txt: https://docs.pingidentity.com/forgeops/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2025-07-16T10:28:27Z
 keywords: ["Troubleshooting", "minikube"]
 section_ids:
   cluster_configuration: Cluster configuration
@@ -148,7 +271,7 @@ section_ids:
 
 ## Cluster configuration
 
-The minikube start command example in [minikube](../setup/minikube.html) provides a good default virtual hardware configuration for a minikube cluster running a single-instance ForgeOps deployment.
+The [minikube start command](../setup/minikube.html#minikube-start) example provides a good default virtual hardware configuration for a minikube cluster running a single-instance ForgeOps deployment.
 
 ## Disk space
 
@@ -176,14 +299,66 @@ In the preceding example, 16 GB of disk space is available on the minikube clust
 ---
 
 ---
-title: Staged installation
-description: By default, the forgeops apply command installs the entire Ping Advanced Identity Software.
+title: Resolve prometheus error
+description: Resolve Prometheus error when scraping ForgeOps deployment
 component: forgeops
-version: 2026.2
-page_id: forgeops:troubleshoot:staged-deployment
-canonical_url: https://docs.pingidentity.com/forgeops/2026.2/troubleshoot/staged-deployment.html
+version: 2026.3
+page_id: forgeops:troubleshoot:monitor
+canonical_url: https://docs.pingidentity.com/forgeops/2026.3/troubleshoot/monitor.html
 llms_txt: https://docs.pingidentity.com/forgeops/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-10-15T12:09:00Z
+---
+
+# Resolve prometheus error
+
+When using Prometheus for scraping, it throws an HTTP 401 error because there are two `monitor` user entries in DS, one each for DS and IDM:
+
+* uid=monitor (cn=monitor backend) - DS built-in monitoring user
+
+* uid=monitor,ou=users,ou=internal,dc=openidm,dc=forgerock,dc=io - Created by IDM `repo.init.json` script.
+
+To overcome this issue, delete the `monitor` user entry created by IDM. Don't delete the built-in DS monitoring user, `uid=monitor` under `cn=monitor`. If your deployment has custom or legacy IDM configuration, verify that first.
+
+1. Set your local Kubernetes context to the namespace where the ForgeOps deployment is running.
+
+2. Run the forgeops info command to get the password for the directory (uid=admin) superuser.
+
+3. Back up the `ds-idrepo` data.
+
+4. Connect to a `ds-idrepo` pod in the deployment namespace:
+
+   ```
+   $ kubectl exec -it --namespace my-ns ds-idrepo-0 — bash
+   ```
+
+5. From the pod, run ldapdelete for the exact distinguished name of the `monitor` user. Enter the directory superuser password when prompted.
+
+   ```
+   bash /opt/opendj/bin/ldapdelete \
+     --hostname localhost \
+     --port 1389 \
+     --bindDN "uid=admin" \
+     --useStartTls \
+     --trustAll \
+     --noPropertiesFile \
+     "uid=monitor,ou=users,ou=internal,dc=openidm,dc=forgerock,dc=io"
+   ```
+
+6. Verify that exact DN has been deleted, and check that the deletion has replicated to the other ds-idrepo pods.
+
+---
+
+---
+title: Staged installation
+description: Install ForgeOps components in stages to isolate and troubleshoot Kubernetes deployment issues
+component: forgeops
+version: 2026.3
+page_id: forgeops:troubleshoot:staged-deployment
+canonical_url: https://docs.pingidentity.com/forgeops/2026.3/troubleshoot/staged-deployment.html
+llms_txt: https://docs.pingidentity.com/forgeops/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2025-10-13T10:58:09Z
 keywords: ["Troubleshooting", "forgeops Command"]
 section_ids:
   multiple_component_installation: Multiple component installation
@@ -345,13 +520,14 @@ $ ./forgeops apply base ds am amster --env-name my-env
 
 ---
 title: Third-party software versions
-description: The ForgeOps team recommends installing tested versions of third-party software in environments where you'll run ForgeOps deployments.
+description: Note the tested third-party software versions for ForgeOps deployments
 component: forgeops
-version: 2026.2
+version: 2026.3
 page_id: forgeops:troubleshoot:sw-versions
-canonical_url: https://docs.pingidentity.com/forgeops/2026.2/troubleshoot/sw-versions.html
+canonical_url: https://docs.pingidentity.com/forgeops/2026.3/troubleshoot/sw-versions.html
 llms_txt: https://docs.pingidentity.com/forgeops/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2025-07-16T10:28:27Z
 ---
 
 # Third-party software versions
@@ -380,13 +556,14 @@ You can use the debug-logs utility to get the versions of third-party software i
 
 ---
 title: Troubleshooting
-description: Kubernetes deployments are multi-layered and often complex.
+description: Understand how to troubleshoot ForgeOps deployments
 component: forgeops
-version: 2026.2
+version: 2026.3
 page_id: forgeops:troubleshoot:overview
-canonical_url: https://docs.pingidentity.com/forgeops/2026.2/troubleshoot/overview.html
+canonical_url: https://docs.pingidentity.com/forgeops/2026.3/troubleshoot/overview.html
 llms_txt: https://docs.pingidentity.com/forgeops/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-05T12:09:00Z
 ---
 
 # Troubleshooting
@@ -404,31 +581,32 @@ $ ./bin/forgeops version
 
 Here are some techniques you can use to troubleshoot problems with ForgeOps deployments:
 
-| Problem                                                                                 | Troubleshooting Technique                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
-| --------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Some pods don't start.                                                                  | Review [Kubernetes logs and other diagnostics](pods.html). Verify if your cluster is resource-constrained. Check for under-configured clusters by using the `kubectl describe nodes` and `kubectl get events -w` commands. Pods terminated with out of memory (OOM) errors indicate that your cluster is under-configured. Make sure that you're using [tested versions of third-party software](sw-versions.html). [Stage your installation](staged-deployment.html). Install Ping Advanced Identity Software components separately, instead of installing all the components with a single command. Staging your installation lets you make sure each component works correctly before installing the next component. |
-| All the pods have started, but you can't reach the services running in them.            | Make sure you don't have any [ingress issues](ingress.html).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-| AM doesn't work as expected.                                                            | [Set the AM logging level](https://community.forgerock.com/t/how-to-enable-and-modify-logging-level-in-forgeops-for-am.html), recreate the issue, and analyze the AM log files. [Turn on audit logging in AM.](https://community.forgerock.com/t/how-to-enable-and-modify-audit-logging-in-am-and-idm-for-forgeops.html)                                                                                                                                                                                                                                                                                                                                                                                                |
-| IDM doesn't work as expected.                                                           | [Set the IDM logging level](https://community.forgerock.com/t/how-to-enable-and-modify-logging-level-in-forgeops-for-idm.html), recreate the issue, and analyze the IDM log files. [Turn on audit logging in IDM.](https://community.forgerock.com/t/how-to-enable-and-modify-audit-logging-in-am-and-idm-for-forgeops.html)                                                                                                                                                                                                                                                                                                                                                                                            |
-| Your JVM crashed with an out of memory error, or you suspect that you've a memory leak. | [Collect and analyze Java thread dumps and heap dumps](https://support.pingidentity.com/s/article/How-do-I-collect-Java-thread-dumps-and-heap-dumps-for-troubleshooting-a-ForgeOps-deployment).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| Changes you've made to ForgeOps's Kustomize files don't work as expected.               | [Fully expand the Kustomize output](kustomize.html), and then examine the output for unintended effects.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
-| Your minikube deployment doesn't work.                                                  | Make sure that you don't have a problem with [virtual hardware requirements](minikube.html).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-| You're having name resolution or other DNS issues.                                      | Use diagnostic tools in the [debug tools container](debug-tools.html#debug-tools-container).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-| You want to run DS utilities without disturbing a DS pod.                               | Use the [bin/ds-debug.sh script](debug-tools.html#ds-debug) or DS tools in the [debug tools container](debug-tools.html#debug-tools-container).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| You want to keep the `amster` pod running to diagnose AM configuration issues.          | Use the [forgeops amster command](amster.html).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| The `kubectl` command requires too much typing.                                         | Enable [kubectl tab autocompletion](tab-completion.html).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| Problem                                                                                 | Troubleshooting Technique                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Some pods don't start.                                                                  | Review [Kubernetes logs and other diagnostics](pods.html). Verify if your cluster is resource-constrained. Check for underconfigured clusters by using the `kubectl describe nodes` and `kubectl get events -w` commands. Pods killed with out of memory (OOM) conditions indicate that your cluster is underconfigured. Make sure that you're using [tested versions of third-party software](sw-versions.html). [Stage your installation](staged-deployment.html). Install Ping Advanced Identity Software components separately, instead of installing all the components with a single command. Staging your installation lets you make sure each component works correctly before installing the next component. |
+| All the pods have started, but you can't reach the services running in them.            | Make sure you don't have any [ingress issues](ingress.html).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| AM doesn't work as expected.                                                            | [Set the AM logging level](https://support.pingidentity.com/s/article/How-To-Enable-and-Modify-Logging-Level-in-ForgeOps-for-PingAM), recreate the issue, and analyze the AM log files. [Turn on audit logging in AM.](https://support.pingidentity.com/s/article/How-To-Enable-and-Modify-Audit-logging-in-PingAM-and-PingIDM-for-ForgeOps)                                                                                                                                                                                                                                                                                                                                                                          |
+| IDM doesn't work as expected.                                                           | [Set the IDM logging level](https://support.pingidentity.com/s/article/How-To-Enable-and-Modify-Logging-Level-in-ForgeOps-for-IDM), recreate the issue, and analyze the IDM log files. [Turn on audit logging in IDM.](https://support.pingidentity.com/s/article/How-To-Enable-and-Modify-Audit-logging-in-PingAM-and-PingIDM-for-ForgeOps)                                                                                                                                                                                                                                                                                                                                                                          |
+| Your JVM crashed with an out of memory error, or you suspect that you've a memory leak. | [Collect and analyze Java thread dumps and heap dumps](https://support.pingidentity.com/s/article/How-do-I-collect-Java-thread-dumps-and-heap-dumps-for-troubleshooting-a-ForgeOps-deployment).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| Changes you've made to ForgeOps's Kustomize files don't work as expected.               | [Fully expand the Kustomize output](kustomize.html), and then examine the output for unintended effects.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| Your minikube deployment doesn't work.                                                  | Make sure that you don't have a problem with [virtual hardware requirements](minikube.html).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| You're having name resolution or other DNS issues.                                      | Use diagnostic tools in the [debug tools container](debug-tools.html).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| When using Prometheus for scraping, you notice HTTP 401 errors.                         | Remove the monitor user created by IDM as described in [Resolve prometheus error](monitor.html).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| You want to keep the `amster` pod running to diagnose AM configuration issues.          | Use the [forgeops amster command](amster.html).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| The `kubectl` command requires too much typing.                                         | Enable [kubectl tab autocompletion](tab-completion.html).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
 
 ---
 
 ---
 title: Troubleshooting the <code>amster</code> pod
-description: When ForgeOps deployments start, the amster pod starts and imports AM dynamic configuration. Once dynamic configuration is imported, the amster pod is stopped and remains in Completed status.
+description: Troubleshoot the ForgeOps amster pod
 component: forgeops
-version: 2026.2
+version: 2026.3
 page_id: forgeops:troubleshoot:amster
-canonical_url: https://docs.pingidentity.com/forgeops/2026.2/troubleshoot/amster.html
+canonical_url: https://docs.pingidentity.com/forgeops/2026.3/troubleshoot/amster.html
 llms_txt: https://docs.pingidentity.com/forgeops/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2025-12-10T08:18:53Z
 keywords: ["Troubleshooting", "Kubernetes", "Amster"]
 section_ids:
   start_the_amster_pod: Start the amster pod

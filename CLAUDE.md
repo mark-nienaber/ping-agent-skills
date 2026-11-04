@@ -12,7 +12,8 @@ This repo contains an efficient deep-documentation layer for Ping Identity Agent
 - Use only the returned `snapshot_excerpt` when `snapshot_page_status` is `present`; never open, grep, or read snapshot files directly. If the exact page is absent, the excerpt is null, or current information matters, fetch the exact live Markdown URL returned by the search.
 - Keep retrieval proportional: one primary search, at most one narrower retry, and at most two exact live-page fetches before answering or identifying the missing evidence.
 - Do not rename `scripts/docsets.yaml` slugs without updating every reference.
-- `pingcli` is registered but disabled because Ping's per-docset `llms.txt` currently returns 404 after redirect. Do not create a fake `llms.txt`.
+- `pingintelligence` and `developer-resources` are registered but disabled as of 2026-11-03: both upstream docsets now return 404 and were dropped from the root docs index. Their generated skill directories were removed.
+- `pingcli` is enabled as of 2026-11-03: Ping fixed the per-docset `llms.txt` redirect (issue #2) and the index serves v1.11 content.
 
 ## Skill Inventory
 
@@ -48,6 +49,7 @@ Generated docset data and optional skills:
 - `pingauthorize` - PingAuthorize administration and policy.
 - `pingauthorize-dev` - PingAuthorize developer/API docs.
 - `pingcentral` - PingCentral administration and application owner workflows.
+- `pingcentral-dev` - PingCentral developer/API docs.
 - `pingdirectory` - PingDirectory, PingDirectoryProxy, and PingDataSync administration.
 - `pingdirectory-dev` - PingDirectory developer APIs.
 - `pingds` - PingDS/ForgeRock DS.
@@ -57,7 +59,6 @@ Generated docset data and optional skills:
 - `pingid-api` - PingID APIs.
 - `pingid-user-guide` - PingID end-user support.
 - `pingidm` - PingIDM managed objects, sync, scripting, and REST.
-- `pingintelligence` - PingIntelligence for APIs.
 - `pingone` - PingOne administration across apps, MFA, directory, Protect, Verify, Authorize, Credentials, and DaVinci.
 - `pingone-admin-mfa-faq` - PingOne administrator MFA FAQ.
 - `pingone-api` - PingOne Platform APIs.
@@ -75,9 +76,9 @@ Generated docset data and optional skills:
 - `terraform` - Ping Terraform automation.
 - `web-agents` - PingAM Web Agents.
 
-Blocked:
+Disabled (upstream docsets retired):
 
-- `pingcli` - registry entry exists but is disabled. `https://developer.pingidentity.com/pingcli/llms.txt` currently redirects to a 404 endpoint. Tracking: https://github.com/mark-nienaber/ping-agent-skills/issues/2.
+- `pingintelligence`, `developer-resources` - registry entries kept, generation disabled; upstream endpoints return 404.
 
 ## Composition
 

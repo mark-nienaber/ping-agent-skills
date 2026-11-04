@@ -980,9 +980,9 @@ Refer to the **IdP Adapter** tab of the identity provider adapter configuration.
 - One lowercase letter
 
 - One numberThis password is included in the `agent-config.txt` file used by the application. It doesn't have to match the password you choose for the service provider adapter instance.&#xA;&#xA;The sample applications are preconfigured to use the following password:&#xA;&#xA;Changeme1 |
-| **Authentication Service** | https\://*\<pf\_host>*:*\<pf\_port>*/IdpSample/MainPage?cmd=sso                                                                                                                                                                                                                                                                                                                                 |
+| **Authentication Service** | https\://*\<pf_host>*:*\<pf_port>*/IdpSample/MainPage?cmd=sso                                                                                                                                                                                                                                                                                                                                   |
 | **Advanced Fields**        |                                                                                                                                                                                                                                                                                                                                                                                                 |
-| **Logout Service**         | https\://*\<pf\_host>*:*\<pf\_port>*/IdpSample/MainPage?cmd=slo                                                                                                                                                                                                                                                                                                                                 |
+| **Logout Service**         | https\://*\<pf_host>*:*\<pf_port>*/IdpSample/MainPage?cmd=slo                                                                                                                                                                                                                                                                                                                                   |
 
 |   |                                                                                                                                                                                                                                                                                                                                                                                    |
 | - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -1000,17 +1000,17 @@ Refer to the **Instance Configuration** tab of the service provider adapter inst
 
 - One numberThis password is included in the `agent-config.txt` file used by the application. It doesn't have to match the password you choose for the identity provider adapter instance.&#xA;&#xA;The sample applications are preconfigured to use the following password:&#xA;&#xA;Changeme1 |
 | **Advanced Fields**                 |                                                                                                                                                                                                                                                                                                                                                                                                  |
-| **Account Link Service** (Optional) | https\://*\<pf\_host>*:*\<pf\_port>*/SpSample/MainPage?cmd=accountlink                                                                                                                                                                                                                                                                                                                           |
-| **Logout Service**                  | https\://*\<pf\_host>*:*\<pf\_port>*/SpSample/MainPage?cmd=slo                                                                                                                                                                                                                                                                                                                                   |
+| **Account Link Service** (Optional) | https\://*\<pf_host>*:*\<pf_port>*/SpSample/MainPage?cmd=accountlink                                                                                                                                                                                                                                                                                                                             |
+| **Logout Service**                  | https\://*\<pf_host>*:*\<pf_port>*/SpSample/MainPage?cmd=slo                                                                                                                                                                                                                                                                                                                                     |
 
 ## Service provider default URLs
 
 See the **Default URLs** tab of the service provider configuration.
 
-| Field       | Value                                                   |
-| ----------- | ------------------------------------------------------- |
-| For SSO URL | https\://*\<pf\_host>*:*\<pf\_port>*/SpSample/MainPage/ |
-| For SLO URL | https\://*\<pf\_host>*:*\<pf\_port>*/SpSample/MainPage/ |
+| Field       | Value                                                 |
+| ----------- | ----------------------------------------------------- |
+| For SSO URL | https\://*\<pf_host>*:*\<pf_port>*/SpSample/MainPage/ |
+| For SLO URL | https\://*\<pf_host>*:*\<pf_port>*/SpSample/MainPage/ |
 
 ---
 

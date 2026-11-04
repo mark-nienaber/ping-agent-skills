@@ -7,6 +7,7 @@ page_id: auth-node-ref:am-only:amster-jwt-decision
 canonical_url: https://docs.pingidentity.com/auth-node-ref/latest/am-only/amster-jwt-decision.html
 llms_txt: https://docs.pingidentity.com/auth-node-ref/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-18T00:00:00Z
 keywords: ["Nodes &amp; Trees", "Journeys", "Amster"]
 section_ids:
   example: Example
@@ -15,6 +16,7 @@ section_ids:
   dependencies: Dependencies
   configuration: Configuration
   outputs: Outputs
+  callbacks: Callbacks
   outcomes: Outcomes
   errors: Errors
 ---
@@ -65,6 +67,10 @@ This node has no dependencies.
 
 This node doesn't change the shared state.
 
+## Callbacks
+
+The node sends a [HiddenValueCallback](https://docs.pingidentity.com/pingam/8.1/am-authentication/callbacks-interactive.html#hiddenvaluecallback) containing a one-time nonce that the Amster client must sign in a JWT using a local private key and return to the node for verification.
+
 ## Outcomes
 
 * True
@@ -90,6 +96,7 @@ page_id: auth-node-ref:am-only:create-password
 canonical_url: https://docs.pingidentity.com/auth-node-ref/latest/am-only/create-password.html
 llms_txt: https://docs.pingidentity.com/auth-node-ref/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-18T00:00:00Z
 keywords: ["Nodes &amp; Trees", "Journeys", "Authentication", "Passwords", "Social Authentication", "Social Registration", "Social Identity", "Provisioning"]
 page_aliases: ["auth-node-create-password.adoc"]
 section_ids:
@@ -148,10 +155,12 @@ page_id: auth-node-ref:am-only:debug
 canonical_url: https://docs.pingidentity.com/auth-node-ref/latest/am-only/debug.html
 llms_txt: https://docs.pingidentity.com/auth-node-ref/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-18T00:00:00Z
 keywords: ["Nodes &amp; Trees", "Journeys", "Authentication"]
 page_aliases: ["auth-node-debug.adoc"]
 section_ids:
   availability: Availability
+  callbacks: Callbacks
   outcomes: Outcomes
   configuration: Configuration
 ---
@@ -169,6 +178,20 @@ This node collects information, such as the shared node state, the identity obje
 | PingOne Advanced Identity Cloud       | No         |
 | PingAM (self-managed)                 | Yes        |
 | Ping Identity Platform (self-managed) | No         |
+
+## Callbacks
+
+The node sends the following callbacks:
+
+* `ScriptTextOutputCallback`
+
+  The node sends two instances: one loads the debug popup JavaScript library, and one runs the debug logic or auto-submits the form to proceed to the next node.
+
+* `TextOutputCallback`
+
+  Displays an informational `Debug Step` message while the scripts load.
+
+Learn more in [Supported callbacks](https://docs.pingidentity.com/pingam/8.1/am-authentication/callbacks-supported.html).
 
 ## Outcomes
 
@@ -191,6 +214,7 @@ page_id: auth-node-ref:am-only:oauth2
 canonical_url: https://docs.pingidentity.com/auth-node-ref/latest/am-only/oauth2.html
 llms_txt: https://docs.pingidentity.com/auth-node-ref/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-18T00:00:00Z
 keywords: ["Nodes &amp; Trees", "Journeys", "Authentication", "OAuth 2.0", "Social Authentication"]
 page_aliases: ["auth-node-oauth2.adoc"]
 section_ids:
@@ -254,7 +278,7 @@ org.forgerock.openam.authentication.modules.common.mapping.JsonAttributeMapper|*
 | Account Mapper Configuration             | Specifies the attribute configuration used to map the account of the user authenticated in the OAuth 2.0 provider to the local data store in AM.Valid values are in the form `provider-attr=local-attr`.Examples:```
 email=mail
 id=facebook-id
-```&#xA;&#xA;When using the org.forgerock.openam.authentication.modules.common.mapping.JsonAttributeMapper class, you can parse JSON objects in mappings using dot notation.&#xA;&#xA;For example, given a JSON payload of:&#xA;&#xA;{&#xA;  "sub" : "12345",&#xA;  "name" : {&#xA;    "first\_name" : "Demo",&#xA;    "last\_name" : "User"&#xA;  }&#xA;}&#xA;&#xA;You can create a mapper, such as name.first\_name=cn.                                                                                                                                                                                                                                                                                                                                                                                               |
+```&#xA;&#xA;When using the org.forgerock.openam.authentication.modules.common.mapping.JsonAttributeMapper class, you can parse JSON objects in mappings using dot notation.&#xA;&#xA;For example, given a JSON payload of:&#xA;&#xA;{&#xA;  "sub" : "12345",&#xA;  "name" : {&#xA;    "first_name" : "Demo",&#xA;    "last_name" : "User"&#xA;  }&#xA;}&#xA;&#xA;You can create a mapper, such as name.first_name=cn.                                                                                                                                                                                                                                                                                                                                                                                                  |
 | Attribute Mapper Configuration           | Map of OAuth 2.0 provider user account attributes to local user profile attributes, with values in the form `provider-attr=local-attr`.Examples:```
 first_name=givenname
 last_name=sn
@@ -264,7 +288,7 @@ id=facebook-id
 first_name=facebook-fname
 last_name=facebook-lname
 email=facebook-email
-```&#xA;&#xA;When using the org.forgerock.openam.authentication.modules.common.mapping.JsonAttributeMapper class, you can parse JSON objects in mappings using dot notation.&#xA;&#xA;For example, given a JSON payload of:&#xA;&#xA;{&#xA;  "sub" : "12345",&#xA;  "name" : {&#xA;    "first\_name" : "Demo",&#xA;    "last\_name" : "User"&#xA;  }&#xA;}&#xA;&#xA;You can create a mapper, such as name.first\_name=cn.                                                                                                                                                                                                                                                                                                                                              |
+```&#xA;&#xA;When using the org.forgerock.openam.authentication.modules.common.mapping.JsonAttributeMapper class, you can parse JSON objects in mappings using dot notation.&#xA;&#xA;For example, given a JSON payload of:&#xA;&#xA;{&#xA;  "sub" : "12345",&#xA;  "name" : {&#xA;    "first_name" : "Demo",&#xA;    "last_name" : "User"&#xA;  }&#xA;}&#xA;&#xA;You can create a mapper, such as name.first_name=cn.                                                                                                                                                                                                                                                                                                                                                 |
 | Save attributes in the session           | When enabled, saves the attributes in the Attribute Mapper Configuration field to the AM session.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
 | OAuth 2.0 Mix-Up Mitigation Enabled      | Controls whether the OAuth 2.0 authentication node carries out additional verification steps when it receives the authorization code from the authorization server.Specifies that the client must compare the issuer identifier of the authorization server upon registration with the issuer value returned as the `iss` response parameter. If they do not match, the client must abort the authorization process. The client must also confirm that the authorization server's response is intended for the client by comparing the client's client identifier to the value of the `client_id` response parameter.When this is enabled, set the Token Issuer property so that the validation can succeed. The authorization code response contains an issuer value (`iss`) for the client to validate.&#xA;&#xA;Refer to the authorization server's documentation for the value it uses for the issuer field.Learn more in [section 4 of OAuth 2.0 Mix-Up Mitigation Draft](https://datatracker.ietf.org/doc/html/draft-ietf-oauth-mix-up-mitigation-01#section-4). |
 | Token Issuer                             | Corresponds to the expected issuer identifier value in the `iss` field of the ID token.Example: `https://accounts.google.com`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
@@ -280,6 +304,7 @@ page_id: auth-node-ref:am-only:oidc
 canonical_url: https://docs.pingidentity.com/auth-node-ref/latest/am-only/oidc.html
 llms_txt: https://docs.pingidentity.com/auth-node-ref/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-18T00:00:00Z
 keywords: ["Nodes &amp; Trees", "Journeys", "Authentication", "OpenID Connect (OIDC)", "OAuth 2.0", "Social Authentication", "Authorization", "Account"]
 page_aliases: ["auth-node-oidc.adoc"]
 section_ids:
@@ -386,6 +411,7 @@ page_id: auth-node-ref:am-only:password-collector
 canonical_url: https://docs.pingidentity.com/auth-node-ref/latest/am-only/password-collector.html
 llms_txt: https://docs.pingidentity.com/auth-node-ref/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-04T15:27:48Z
 keywords: ["Nodes &amp; Trees", "Journeys", "Authentication", "Password"]
 page_aliases: ["auth-node-password-collector.adoc"]
 section_ids:
@@ -475,23 +501,25 @@ page_id: auth-node-ref:am-only:provision-dynamic-account
 canonical_url: https://docs.pingidentity.com/auth-node-ref/latest/am-only/provision-dynamic-account.html
 llms_txt: https://docs.pingidentity.com/auth-node-ref/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-09-01T13:00:59Z
 page_aliases: ["auth-node-provision-dynamic-account.adoc"]
 section_ids:
   example: Example
   availability: Availability
-  outcomes: Outcomes
+  inputs: Inputs
+  dependencies: Dependencies
   configuration: Configuration
+  outputs: Outputs
+  callbacks: Callbacks
+  outcomes: Outcomes
+  errors: Errors
 ---
 
 # Provision Dynamic Account node
 
-Provision an account following successful authentication by a SAML2 authentication node or the [Social Provider Handler node](../social-provider-handler.html).
+The Provision Dynamic Account node provisions an account following successful authentication by a [SAML2 Authentication node](../saml2.html) or a [Social Provider Handler node](../social-provider-handler.html).
 
-Accounts are provisioned using properties defined in the attribute mapper configuration of a social authentication or SAML2 authentication node earlier in the flow.
-
-If a password has been acquired from the user, for example, by using the [Platform Password node](../platform-password.html), it is used when provisioning the account; otherwise, a 20-character random string is used.
-
-In addition to retrieving the password from the node state, the [Provision Dynamic Account node](provision-dynamic-account.html) gets the `realm` value, and `attributes` and `userNames` from `userInfo` in the shared state. It sets the `username` attribute in the node's shared state.
+Accounts are provisioned using properties defined in the attribute mapper configuration of the SAML2 Authentication node or Social Provider Handler node earlier in the flow.
 
 ## Example
 
@@ -507,15 +535,53 @@ In this example, the node lets users who have performed social authentication us
 | PingAM (self-managed)                 | Yes        |
 | Ping Identity Platform (self-managed) | No         |
 
+## Inputs
+
+The node first attempts to retrieve user attributes from `objectAttributes` in node state. If `objectAttributes` contains attributes, the node uses them to provision the account. If it's empty, the node requires the `userInfo` shared state object, which must contain `userNames` and the mapped `attributes` used to provision the account.
+
+The node optionally uses the `password` state property. If it's not present, the node generates a random password.
+
+## Dependencies
+
+A preceding node must populate either `objectAttributes` or `userInfo` with the user's mapped attributes.
+
+Typically, `objectAttributes` is populated by the Social Provider Handler node, and `userInfo` is populated by the SAML2 Authentication node. However, other nodes or scripts might populate these state objects.
+
+Use either the [SAML2 Authentication node](../saml2.html) or the [Social Provider Handler node](../social-provider-handler.html) earlier in the journey, as required.
+
+## Configuration
+
+| Property         | Usage                                                                                                                                                   |
+| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Account Provider | The name of the class that implements the account provider.Default: `org.forgerock.openam.authentication.modules.common.mapping.DefaultAccountProvider` |
+
+## Outputs
+
+The node creates a user account with the mapped attributes and sets the `username` shared state property to the provisioned user's username.
+
+## Callbacks
+
+This node doesn't send any callbacks.
+
 ## Outcomes
 
 Single outcome path.
 
-## Configuration
+## Errors
 
-| Property         | Usage                                                                                                                                                             |
-| ---------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Account Provider | Specifies the name of the class that implements the account provider.Default: `org.forgerock.openam.authentication.modules.common.mapping.DefaultAccountProvider` |
+The node can log the following errors:
+
+* `No user information has been found in the shared state.`
+
+  A preceding node didn't set the `userInfo` shared state property.
+
+* `The user information doesn't contain the userNames. You must call a node that sets this information first`
+
+  The `userInfo` shared state object doesn't contain `userNames`.
+
+* `Unable to create user`
+
+  The account provider couldn't create the user account.
 
 ---
 
@@ -528,6 +594,7 @@ page_id: auth-node-ref:am-only:provision-IDM-account
 canonical_url: https://docs.pingidentity.com/auth-node-ref/latest/am-only/provision-IDM-account.html
 llms_txt: https://docs.pingidentity.com/auth-node-ref/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-18T00:00:00Z
 keywords: ["Nodes &amp; Trees", "Journeys", "Authentication", "Social Authentication", "Account"]
 page_aliases: ["auth-node-provision-IDM-account.adoc"]
 section_ids:
@@ -582,6 +649,7 @@ page_id: auth-node-ref:am-only:social-facebook
 canonical_url: https://docs.pingidentity.com/auth-node-ref/latest/am-only/social-facebook.html
 llms_txt: https://docs.pingidentity.com/auth-node-ref/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-18T00:00:00Z
 keywords: ["Nodes &amp; Trees", "Journeys", "Authentication", "OAuth 2.0", "Social Authentication", "Account"]
 page_aliases: ["auth-node-social-facebook.adoc"]
 section_ids:
@@ -638,8 +706,8 @@ Evaluation continues along the `Account Exists` path if an account matching the 
 | Account Provider                    | Specifies the name of the class that implements the account provider.Default: `org.forgerock.openam.authentication.modules.common.mapping.DefaultAccountProvider`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
 | Account Mapper                      | Specifies the name of the class that implements the method of locating local accounts based on the attributes returned from Facebook.Default: `org.forgerock.openam.authentication.modules.common.mapping.JsonAttributeMapper`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
 | Attribute Mapper                    | Specifies the list of fully qualified class names for implementations that map attributes from Facebook to AM profile attributes.Default: `org.forgerock.openam.authentication.modules.common.mapping.JsonAttributeMapper\|uid\|facebook-`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| Account Mapper Configuration        | Specifies the attribute configuration used to map the account of the user authenticated in the Social Facebook provider to the local data store in AM. Valid values are in the form `provider-attr=local-attr`.Default: `id=uid`.&#xA;&#xA;When using the org.forgerock.openam.authentication.modules.common.mapping.JsonAttributeMapper class, you can parse JSON objects in mappings using dot notation.&#xA;&#xA;For example, given a JSON payload of:&#xA;&#xA;{&#xA;  "sub" : "12345",&#xA;  "name" : {&#xA;    "first\_name" : "Demo",&#xA;    "last\_name" : "User"&#xA;  }&#xA;}&#xA;&#xA;You can create a mapper, such as name.first\_name=cn.                                                                                                                                                                                                                                                                                                                                              |
-| Attribute Mapper Configuration      | Map of Facebook user account attributes to local user profile attributes, with values in the form `provider-attr=local-attr`.Default: `name=cn`, `last_name=sn`, `id=uid`, `first_name=givenname`, `email=mail`.&#xA;&#xA;When using the org.forgerock.openam.authentication.modules.common.mapping.JsonAttributeMapper class, you can parse JSON objects in mappings using dot notation.&#xA;&#xA;For example, given a JSON payload of:&#xA;&#xA;{&#xA;  "sub" : "12345",&#xA;  "name" : {&#xA;    "first\_name" : "Demo",&#xA;    "last\_name" : "User"&#xA;  }&#xA;}&#xA;&#xA;You can create a mapper, such as name.first\_name=cn.                                                                                                                                                                                                                                                                                                                                                               |
+| Account Mapper Configuration        | Specifies the attribute configuration used to map the account of the user authenticated in the Social Facebook provider to the local data store in AM. Valid values are in the form `provider-attr=local-attr`.Default: `id=uid`.&#xA;&#xA;When using the org.forgerock.openam.authentication.modules.common.mapping.JsonAttributeMapper class, you can parse JSON objects in mappings using dot notation.&#xA;&#xA;For example, given a JSON payload of:&#xA;&#xA;{&#xA;  "sub" : "12345",&#xA;  "name" : {&#xA;    "first_name" : "Demo",&#xA;    "last_name" : "User"&#xA;  }&#xA;}&#xA;&#xA;You can create a mapper, such as name.first_name=cn.                                                                                                                                                                                                                                                                                                                                                 |
+| Attribute Mapper Configuration      | Map of Facebook user account attributes to local user profile attributes, with values in the form `provider-attr=local-attr`.Default: `name=cn`, `last_name=sn`, `id=uid`, `first_name=givenname`, `email=mail`.&#xA;&#xA;When using the org.forgerock.openam.authentication.modules.common.mapping.JsonAttributeMapper class, you can parse JSON objects in mappings using dot notation.&#xA;&#xA;For example, given a JSON payload of:&#xA;&#xA;{&#xA;  "sub" : "12345",&#xA;  "name" : {&#xA;    "first_name" : "Demo",&#xA;    "last_name" : "User"&#xA;  }&#xA;}&#xA;&#xA;You can create a mapper, such as name.first_name=cn.                                                                                                                                                                                                                                                                                                                                                                  |
 | Save attributes in the session      | When enabled, saves the attributes in the Attribute Mapper Configuration field to the AM session.Default: `true`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
 | OAuth 2.0 Mix-Up Mitigation Enabled | Controls whether the authentication node carries out additional verification steps when it receives the authorization code from the authorization server.Specifies that the client must compare the issuer identifier of the authorization server upon registration with the issuer value returned as the `iss` response parameter. If they do not match, the client must abort the authorization process. The client must also confirm that the authorization server's response is intended for the client by comparing the client's client identifier to the value of the `client_id` response parameter.The Token Issuer property must be entered when the OAuth 2.0 Mix-Up Mitigation feature is enabled, so that the validation can succeed. The authorization code response contains an issuer value (`iss`) for the client to validate.Learn more in [section 4 of OAuth 2.0 Mix-Up Mitigation Draft](https://datatracker.ietf.org/doc/html/draft-ietf-oauth-mix-up-mitigation-01#section-4). |
 | Token Issuer                        | Corresponds to the expected issuer identifier value in the `iss` field of the ID token.Example: `https://graph.facebook.com`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
@@ -655,6 +723,7 @@ page_id: auth-node-ref:am-only:social-google
 canonical_url: https://docs.pingidentity.com/auth-node-ref/latest/am-only/social-google.html
 llms_txt: https://docs.pingidentity.com/auth-node-ref/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-18T00:00:00Z
 keywords: ["Nodes &amp; Trees", "Journeys", "Authentication", "OAuth 2.0", "Social Authentication", "Account"]
 page_aliases: ["auth-node-social-google.adoc"]
 section_ids:
@@ -711,8 +780,8 @@ Evaluation continues along the `Account Exists` path if an account matching the 
 | Account Provider                    | Specifies the name of the class that implements the account provider.Default: `org.forgerock.openam.authentication.modules.common.mapping.DefaultAccountProvider`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
 | Account Mapper                      | Specifies the name of the class that implements the method of locating local accounts based on the attributes returned from Google.Default: `org.forgerock.openam.authentication.modules.common.mapping.JsonAttributeMapper`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
 | Attribute Mapper                    | Specifies the list of fully qualified class names for implementations that map attributes from Google to AM profile attributes.Default: `org.forgerock.openam.authentication.modules.common.mapping.JsonAttributeMapper\|iplanet-am-user-alias-list\|google-`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-| Account Mapper Configuration        | Specifies the attribute configuration used to map the account of the user authenticated in the Social Google provider to the local data store in AM. Valid values are in the form `provider-attr=local-attr`.Default: `sub=uid`.&#xA;&#xA;When using the org.forgerock.openam.authentication.modules.common.mapping.JsonAttributeMapper class, you can parse JSON objects in mappings using dot notation.&#xA;&#xA;For example, given a JSON payload of:&#xA;&#xA;{&#xA;  "sub" : "12345",&#xA;  "name" : {&#xA;    "first\_name" : "Demo",&#xA;    "last\_name" : "User"&#xA;  }&#xA;}&#xA;&#xA;You can create a mapper, such as name.first\_name=cn.                                                                                                                                                                                                                                                                                                                                               |
-| Attribute Mapper Configuration      | Map of Google user account attributes to local user profile attributes, with values in the form `provider-attr=local-attr`.Default: `sub=uid`, `name=cn`, `given_name=givenName`, `family_name=sn`, `email=mail`.&#xA;&#xA;When using the org.forgerock.openam.authentication.modules.common.mapping.JsonAttributeMapper class, you can parse JSON objects in mappings using dot notation.&#xA;&#xA;For example, given a JSON payload of:&#xA;&#xA;{&#xA;  "sub" : "12345",&#xA;  "name" : {&#xA;    "first\_name" : "Demo",&#xA;    "last\_name" : "User"&#xA;  }&#xA;}&#xA;&#xA;You can create a mapper, such as name.first\_name=cn.                                                                                                                                                                                                                                                                                                                                                              |
+| Account Mapper Configuration        | Specifies the attribute configuration used to map the account of the user authenticated in the Social Google provider to the local data store in AM. Valid values are in the form `provider-attr=local-attr`.Default: `sub=uid`.&#xA;&#xA;When using the org.forgerock.openam.authentication.modules.common.mapping.JsonAttributeMapper class, you can parse JSON objects in mappings using dot notation.&#xA;&#xA;For example, given a JSON payload of:&#xA;&#xA;{&#xA;  "sub" : "12345",&#xA;  "name" : {&#xA;    "first_name" : "Demo",&#xA;    "last_name" : "User"&#xA;  }&#xA;}&#xA;&#xA;You can create a mapper, such as name.first_name=cn.                                                                                                                                                                                                                                                                                                                                                  |
+| Attribute Mapper Configuration      | Map of Google user account attributes to local user profile attributes, with values in the form `provider-attr=local-attr`.Default: `sub=uid`, `name=cn`, `given_name=givenName`, `family_name=sn`, `email=mail`.&#xA;&#xA;When using the org.forgerock.openam.authentication.modules.common.mapping.JsonAttributeMapper class, you can parse JSON objects in mappings using dot notation.&#xA;&#xA;For example, given a JSON payload of:&#xA;&#xA;{&#xA;  "sub" : "12345",&#xA;  "name" : {&#xA;    "first_name" : "Demo",&#xA;    "last_name" : "User"&#xA;  }&#xA;}&#xA;&#xA;You can create a mapper, such as name.first_name=cn.                                                                                                                                                                                                                                                                                                                                                                 |
 | Save attributes in the session      | When enabled, saves the attributes in the Attribute Mapper Configuration field to the AM session.Default: `true`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
 | OAuth 2.0 Mix-Up Mitigation Enabled | Controls whether the authentication node carries out additional verification steps when it receives the authorization code from the authorization server.Specifies that the client must compare the issuer identifier of the authorization server upon registration with the issuer value returned as the `iss` response parameter. If they do not match, the client must abort the authorization process. The client must also confirm that the authorization server's response is intended for the client by comparing the client's client identifier to the value of the `client_id` response parameter.The Token Issuer property must be entered when the OAuth 2.0 Mix-Up Mitigation feature is enabled, so that the validation can succeed. The authorization code response contains an issuer value (`iss`) for the client to validate.Learn more in [section 4 of OAuth 2.0 Mix-Up Mitigation Draft](https://datatracker.ietf.org/doc/html/draft-ietf-oauth-mix-up-mitigation-01#section-4). |
 | Token Issuer                        | Corresponds to the expected issuer identifier value in the `iss` field of the ID token.Example: `https://accounts.google.com`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
@@ -728,6 +797,7 @@ page_id: auth-node-ref:am-only:social-ignore-profile
 canonical_url: https://docs.pingidentity.com/auth-node-ref/latest/am-only/social-ignore-profile.html
 llms_txt: https://docs.pingidentity.com/auth-node-ref/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-04T15:27:48Z
 keywords: ["Nodes &amp; Trees", "Journeys", "Authentication", "Social Authentication", "Single Sign-on (SSO)"]
 page_aliases: ["auth-node-social-ignore-profile.adoc"]
 section_ids:
@@ -773,6 +843,7 @@ page_id: auth-node-ref:am-only:username-collector
 canonical_url: https://docs.pingidentity.com/auth-node-ref/latest/am-only/username-collector.html
 llms_txt: https://docs.pingidentity.com/auth-node-ref/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-18T00:00:00Z
 keywords: ["Nodes &amp; Trees", "Journeys", "Authentication"]
 page_aliases: ["auth-node-username-collector.adoc"]
 section_ids:

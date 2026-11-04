@@ -72,9 +72,9 @@ Create an adapter instance to make the username attribute available in your serv
 
 3. On the **Mapping Method** tab, click **Next**.
 
-4. On the **Attribute Contract Fulfillment** tab, on the **SAML\_SUBJECT** line, in the **Source** list, select **Adapter**.
+4. On the **Attribute Contract Fulfillment** tab, on the **SAML_SUBJECT** line, in the **Source** list, select **Adapter**.
 
-5. On the **SAML\_SUBJECT** line, in the **Value** list, select **username**. Click **Next**.
+5. On the **SAML_SUBJECT** line, in the **Value** list, select **username**. Click **Next**.
 
 6. On the **Issuance Critera** tab, click **Next**.
 
@@ -112,7 +112,7 @@ Learn more in [NetScaler as a SAML SP](https://docs.citrix.com/en-us/netscaler/1
 
 3. In the **Server** list, select the server that you created in [Creating an authentication server in Citrix](pf_citrix_adc_integration_creating_an_authentication_server_in_citrix.html).
 
-4. In the **Expression** section, in the **Saved Policy Expressions** list, select **ns\_true**. Click **Create**.
+4. In the **Expression** section, in the **Saved Policy Expressions** list, select **ns_true**. Click **Create**.
 
 ---
 

@@ -6,7 +6,7 @@ license: MIT
 
 # Configuration Guides
 
-Configuration Guides documentation is indexed in the bundled llms.txt and live Ping Markdown pages.
+Assign the Grafana Admin role to users via PingOne SAML assertion attribute mapping during authentication.
 
 ## Live source of truth
 
@@ -27,18 +27,18 @@ Configuration Guides documentation is indexed in the bundled llms.txt and live P
 
 | Task category | Guide slug | Live URL pattern | Snapshot |
 |---|---|---|---|
-| Amazon: amazon, grafana, managed | amazon | https://docs.pingidentity.com/configuration_guides/amazon/*.md | references/snapshots/amazon.md |
-| Github: configuring, enterprise, github | github | https://docs.pingidentity.com/configuration_guides/github/*.md | references/snapshots/github.md |
-| Salesforce: salesforce, sign, configure | salesforce | https://docs.pingidentity.com/configuration_guides/salesforce/*.md | references/snapshots/salesforce.md |
-| Tableau: configuring, tableau, pingfederate | tableau | https://docs.pingidentity.com/configuration_guides/tableau/*.md | references/snapshots/tableau.md |
-| Atlassian Cloud: atlassian, cloud, configuring | atlassian_cloud | https://docs.pingidentity.com/configuration_guides/atlassian_cloud/*.md | references/snapshots/atlassian-cloud.md |
-| Bamboohr: bamboohr, configuring, saml | bamboohr | https://docs.pingidentity.com/configuration_guides/bamboohr/*.md | references/snapshots/bamboohr.md |
-| Box: box, configuring, saml | box | https://docs.pingidentity.com/configuration_guides/box/*.md | references/snapshots/box.md |
-| Coupa: configuring, coupa, saml | coupa | https://docs.pingidentity.com/configuration_guides/coupa/*.md | references/snapshots/coupa.md |
-| Docusign: configuring, docusign, saml | docusign | https://docs.pingidentity.com/configuration_guides/docusign/*.md | references/snapshots/docusign.md |
-| Dropbox: configuring, dropbox, saml | dropbox | https://docs.pingidentity.com/configuration_guides/dropbox/*.md | references/snapshots/dropbox.md |
-| Egnyte: configuring, egnyte, saml | egnyte | https://docs.pingidentity.com/configuration_guides/egnyte/*.md | references/snapshots/egnyte.md |
-| Evernote: configuring, evernote, saml | evernote | https://docs.pingidentity.com/configuration_guides/evernote/*.md | references/snapshots/evernote.md |
+| Amazon: grafana, amazon, managed | amazon | https://docs.pingidentity.com/configuration_guides/amazon/*.md | references/snapshots/amazon.md |
+| Github: enterprise, github, initiated | github | https://docs.pingidentity.com/configuration_guides/github/*.md | references/snapshots/github.md |
+| Salesforce: initiated, salesforce, sign | salesforce | https://docs.pingidentity.com/configuration_guides/salesforce/*.md | references/snapshots/salesforce.md |
+| Tableau: tableau, initiated, pingfederate | tableau | https://docs.pingidentity.com/configuration_guides/tableau/*.md | references/snapshots/tableau.md |
+| Atlassian Cloud: atlassian, cloud, saml | atlassian_cloud | https://docs.pingidentity.com/configuration_guides/atlassian_cloud/*.md | references/snapshots/atlassian-cloud.md |
+| Bamboohr: bamboohr, saml, sso | bamboohr | https://docs.pingidentity.com/configuration_guides/bamboohr/*.md | references/snapshots/bamboohr.md |
+| Box: box, initiated, saml | box | https://docs.pingidentity.com/configuration_guides/box/*.md | references/snapshots/box.md |
+| Coupa: coupa, initiated, saml | coupa | https://docs.pingidentity.com/configuration_guides/coupa/*.md | references/snapshots/coupa.md |
+| Docusign: docusign, initiated, saml | docusign | https://docs.pingidentity.com/configuration_guides/docusign/*.md | references/snapshots/docusign.md |
+| Dropbox: dropbox, initiated, saml | dropbox | https://docs.pingidentity.com/configuration_guides/dropbox/*.md | references/snapshots/dropbox.md |
+| Egnyte: egnyte, initiated, saml | egnyte | https://docs.pingidentity.com/configuration_guides/egnyte/*.md | references/snapshots/egnyte.md |
+| Evernote: evernote, initiated, saml | evernote | https://docs.pingidentity.com/configuration_guides/evernote/*.md | references/snapshots/evernote.md |
 
 ## Composition
 

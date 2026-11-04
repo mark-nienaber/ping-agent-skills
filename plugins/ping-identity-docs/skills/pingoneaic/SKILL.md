@@ -27,18 +27,18 @@ Home page for PingOne Advanced Identity Cloud documentation, linking to release 
 
 | Task category | Guide slug | Live URL pattern | Snapshot |
 |---|---|---|---|
-| Identity Governance: access, create, certification | identity-governance | https://docs.pingidentity.com/pingoneaic/identity-governance/*.md | references/snapshots/identity-governance.md |
-| Release Notes: channel, changelog, identity | release-notes | https://docs.pingidentity.com/pingoneaic/release-notes/*.md | references/snapshots/release-notes.md |
-| Am Oauth2: authorization, oauth, oauth2 | am-oauth2 | https://docs.pingidentity.com/pingoneaic/am-oauth2/*.md | references/snapshots/am-oauth2.md |
-| Tenants: email, configure, configuration | tenants | https://docs.pingidentity.com/pingoneaic/tenants/*.md | references/snapshots/tenants.md |
+| Identity Governance: access, configure, management | identity-governance | https://docs.pingidentity.com/pingoneaic/identity-governance/*.md | references/snapshots/identity-governance.md |
+| Release Notes: channel, changelog, regular | release-notes | https://docs.pingidentity.com/pingoneaic/release-notes/*.md | references/snapshots/release-notes.md |
+| Tenants: configure, email, admin | tenants | https://docs.pingidentity.com/pingoneaic/tenants/*.md | references/snapshots/tenants.md |
 | App Management: identity, advanced, cloud | app-management | https://docs.pingidentity.com/pingoneaic/app-management/*.md | references/snapshots/app-management.md |
-| Am Authentication: authentication, configure, rest | am-authentication | https://docs.pingidentity.com/pingoneaic/am-authentication/*.md | references/snapshots/am-authentication.md |
+| Am Oauth2: authorization, oauth, oauth2 | am-oauth2 | https://docs.pingidentity.com/pingoneaic/am-oauth2/*.md | references/snapshots/am-oauth2.md |
 | Idm Objects: objects, managed, rest | idm-objects | https://docs.pingidentity.com/pingoneaic/idm-objects/*.md | references/snapshots/idm-objects.md |
+| Am Authentication: authentication, authenticate, configure | am-authentication | https://docs.pingidentity.com/pingoneaic/am-authentication/*.md | references/snapshots/am-authentication.md |
 | Am Scripting: scripts, scripting, bindings | am-scripting | https://docs.pingidentity.com/pingoneaic/am-scripting/*.md | references/snapshots/am-scripting.md |
-| Idm Synchronization: synchronization, data, objects | idm-synchronization | https://docs.pingidentity.com/pingoneaic/idm-synchronization/*.md | references/snapshots/idm-synchronization.md |
 | Use Cases: identity, advanced, cloud | use-cases | https://docs.pingidentity.com/pingoneaic/use-cases/*.md | references/snapshots/use-cases.md |
+| Idm Synchronization: synchronization, data, objects | idm-synchronization | https://docs.pingidentity.com/pingoneaic/idm-synchronization/*.md | references/snapshots/idm-synchronization.md |
+| Am Saml2: saml, federation, identities | am-saml2 | https://docs.pingidentity.com/pingoneaic/am-saml2/*.md | references/snapshots/am-saml2.md |
 | Am Oidc1: connect, openid, oauth2 | am-oidc1 | https://docs.pingidentity.com/pingoneaic/am-oidc1/*.md | references/snapshots/am-oidc1.md |
-| Identities: identity, advanced, configure | identities | https://docs.pingidentity.com/pingoneaic/identities/*.md | references/snapshots/identities.md |
 
 ## Composition
 

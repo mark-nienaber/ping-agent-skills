@@ -4,6 +4,8 @@ description: Learn about new PingOne Advanced Identity Cloud API updates.
 component: pingoneaic-api
 page_id: pingoneaic-api::changelog
 canonical_url: https://developer.pingidentity.com/pingoneaic-api/changelog.html
+llms_txt: https://developer.pingidentity.com/pingoneaic-api/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: December 13, 2025
 keywords: ["PingOne Advanced Identity Cloud", "Advanced Identity Cloud", "release notes", "what's new", "Advanced Identity Cloud REST API", "Advanced Identity Cloud API"]
 section_ids:

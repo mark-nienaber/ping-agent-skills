@@ -1,10 +1,12 @@
 ---
 title: Identity for AI
-description: "Ping Identity's comprehensive Identity for AI solution secures, manages, and governs AI systems and data."
+description: "Landing page for Identity for AI documentation covering Ping Identity's comprehensive solution for AI agent security, governance, and identity management."
 component: identity-for-ai
 page_id: identity-for-ai::index
 canonical_url: https://developer.pingidentity.com/identity-for-ai/index.html
-revdate: May 13, 2026
+llms_txt: https://developer.pingidentity.com/identity-for-ai/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-09-16T00:06:46Z
 keywords: ["Identity for AI", "ai identity", "ai security", "ai governance", "ai compliance"]
 ---
 
@@ -28,21 +30,33 @@ Start your Identity for AI journey
 
 [icon: smart_toy, set=material, size=3x]
 
-#### [AI agents](agents/idai-what-are-agents.html)
+#### [Agent fundamentals](agents/idai-what-are-agents.html)
 
 Learn about AI agents
 
 [icon: verified_user, set=material, size=3x]
 
-#### [Agent identity](identity/idai-agent-types.html)
+#### [Agent identity and access](identity/idai-agent-types.html)
 
-Classify and secure AI agents
+Classify and secure agents and MCP servers
+
+[icon: code, set=material, size=3x]
+
+#### [Protocols](protocols/idai-what-is-mcp.html)
+
+Learn about AI-related protocols
 
 [icon: puzzle, set=far, size=3x]
 
-#### [Use Cases](use-cases/idai-securing-digital-assistants.html)
+#### [Use cases](use-cases/idai-securing-digital-assistants.html)
 
 Secure digital assistants
+
+[icon: code-merge, set=far, size=3x]
+
+#### [Integrations](integrations/idai-securing-aws-ping.html)
+
+Integrate and secure agentic platforms
 
 [icon: arrow-down-a-z, set=far, size=3x]
 

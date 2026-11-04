@@ -1,12 +1,13 @@
 ---
 title: AWS
-description: Before you can perform a ForgeOps deployment on a Kubernetes cluster running on AWS, you must complete these prerequisite tasks:
+description: Set up AWS and local tools to deploy ForgeOps on Amazon EKS
 component: forgeops
-version: 2026.2
+version: 2026.3
 page_id: forgeops:setup:aws
-canonical_url: https://docs.pingidentity.com/forgeops/2026.2/setup/aws.html
+canonical_url: https://docs.pingidentity.com/forgeops/2026.3/setup/aws.html
 llms_txt: https://docs.pingidentity.com/forgeops/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-07-08T12:29:00Z
 section_ids:
   aws-repositories: forgeops and forgeops-extras repositories
   aws-third-party-software: Third-party software
@@ -51,14 +52,14 @@ Get the `forgeops` and `forgeops-extras` repositories:
 
    Both repositories are public; you do not need credentials to clone them.
 
-2. Check out the `forgeops` repository's `2026.2.1` tag:
+2. Check out the `forgeops` repository's `2026.3.2` tag:
 
    ```
    $ cd /path/to/forgeops
-   $ git checkout 2026.2.1
+   $ git checkout 2026.3.2
    ```
 
-   Depending on your organization's repository strategy, you might need to clone the repository from a fork. You might also need to create a working branch from the `2026.2.1` tag of your fork. Learn more about [Repository Updates here](../start/repositories.html#forgeops-updates).
+   Depending on your organization's repository strategy, you might need to clone the repository from a fork. You might also need to create a working branch from the `2026.3.2` tag of your fork. Learn more about [Repository Updates here](../start/repositories.html#forgeops-updates).
 
 3. Check out the `forgeops-extras` repository's `main` branch:
 
@@ -71,7 +72,7 @@ Get the `forgeops` and `forgeops-extras` repositories:
 
 Before performing a ForgeOps deployment, obtain third-party software and install it on your local computer.
 
-ForgeOps team recommends that you install third-party software using [Homebrew](https://brew.sh/) on macOS and Linux'\[[1](#_footnotedef_1 "View footnote.")]' .
+ForgeOps team recommends that you install third-party software using [Homebrew](https://brew.sh/) on macOS and Linux\[[1](#_footnotedef_1 "View footnote.")] .
 
 The versions listed in the following table have been validated for ForgeOps deployments on Amazon Web Services. Earlier and later versions will *probably* work. If you want to try using versions that are not in the table, it is your responsibility to validate them.
 
@@ -342,13 +343,14 @@ Set up hostname resolution for the Ping Advanced Identity Software servers you'l
 
 ---
 title: Azure
-description: Before you can perform a ForgeOps deployment on a Kubernetes cluster running on Azure], you must complete these prerequisite tasks:
+description: Set up Azure and local tools to deploy ForgeOps on Azure Kubernetes Service (AKS)
 component: forgeops
-version: 2026.2
+version: 2026.3
 page_id: forgeops:setup:azure
-canonical_url: https://docs.pingidentity.com/forgeops/2026.2/setup/azure.html
+canonical_url: https://docs.pingidentity.com/forgeops/2026.3/setup/azure.html
 llms_txt: https://docs.pingidentity.com/forgeops/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-07-08T12:29:00Z
 section_ids:
   azure-repositories: forgeops and forgeops-extras repositories
   azure-third-party-software: Third-party software
@@ -393,14 +395,14 @@ Get the `forgeops` and `forgeops-extras` repositories:
 
    Both repositories are public; you do not need credentials to clone them.
 
-2. Check out the `forgeops` repository's `2026.2.1` tag:
+2. Check out the `forgeops` repository's `2026.3.2` tag:
 
    ```
    $ cd /path/to/forgeops
-   $ git checkout 2026.2.1
+   $ git checkout 2026.3.2
    ```
 
-   Depending on your organization's repository strategy, you might need to clone the repository from a fork. You might also need to create a working branch from the `2026.2.1` tag of your fork. Learn more about [Repository Updates here](../start/repositories.html#forgeops-updates).
+   Depending on your organization's repository strategy, you might need to clone the repository from a fork. You might also need to create a working branch from the `2026.3.2` tag of your fork. Learn more about [Repository Updates here](../start/repositories.html#forgeops-updates).
 
 3. Check out the `forgeops-extras` repository's `main` branch:
 
@@ -413,7 +415,7 @@ Get the `forgeops` and `forgeops-extras` repositories:
 
 Before performing a ForgeOps deployment, obtain third-party software and install it on your local computer.
 
-ForgeOps team recommends that you install third-party software using [Homebrew](https://brew.sh/) on macOS and Linux'\[[1](#_footnotedef_1 "View footnote.")]' .
+ForgeOps team recommends that you install third-party software using [Homebrew](https://brew.sh/) on macOS and Linux\[[1](#_footnotedef_1 "View footnote.")] .
 
 The versions listed in the following table have been validated for ForgeOps deployments on Microsoft Azure. Earlier and later versions will *probably* work. If you want to try using versions that are not in the table, it is your responsibility to validate them.
 
@@ -631,13 +633,14 @@ Set up hostname resolution for the Ping Advanced Identity Software servers you'l
 
 ---
 title: Google Cloud
-description: Before you can perform a ForgeOps deployment on a Kubernetes cluster running on Google Cloud, you must complete these prerequisite tasks:
+description: Set up Google Cloud and local tools to deploy ForgeOps on Google Kubernetes Engine (GKE)
 component: forgeops
-version: 2026.2
+version: 2026.3
 page_id: forgeops:setup:google-cloud
-canonical_url: https://docs.pingidentity.com/forgeops/2026.2/setup/google-cloud.html
+canonical_url: https://docs.pingidentity.com/forgeops/2026.3/setup/google-cloud.html
 llms_txt: https://docs.pingidentity.com/forgeops/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-07-08T12:29:00Z
 section_ids:
   gcp-repositories: forgeops and forgeops-extras repositories
   gcp-third-party-software: Third-party software
@@ -682,14 +685,14 @@ Get the `forgeops` and `forgeops-extras` repositories:
 
    Both repositories are public; you do not need credentials to clone them.
 
-2. Check out the `forgeops` repository's `2026.2.1` tag:
+2. Check out the `forgeops` repository's `2026.3.2` tag:
 
    ```
    $ cd /path/to/forgeops
-   $ git checkout 2026.2.1
+   $ git checkout 2026.3.2
    ```
 
-   Depending on your organization's repository strategy, you might need to clone the repository from a fork. You might also need to create a working branch from the `2026.2.1` tag of your fork. Learn more about [Repository Updates here](../start/repositories.html#forgeops-updates).
+   Depending on your organization's repository strategy, you might need to clone the repository from a fork. You might also need to create a working branch from the `2026.3.2` tag of your fork. Learn more about [Repository Updates here](../start/repositories.html#forgeops-updates).
 
 3. Check out the `forgeops-extras` repository's `main` branch:
 
@@ -702,7 +705,7 @@ Get the `forgeops` and `forgeops-extras` repositories:
 
 Before performing a ForgeOps deployment, obtain third-party software and install it on your local computer.
 
-ForgeOps team recommends that you install third-party software using [Homebrew](https://brew.sh/) on macOS and Linux'\[[1](#_footnotedef_1 "View footnote.")]' .
+ForgeOps team recommends that you install third-party software using [Homebrew](https://brew.sh/) on macOS and Linux\[[1](#_footnotedef_1 "View footnote.")] .
 
 The versions listed in the following table have been validated for ForgeOps deployments on Google Cloud. Earlier and later versions will *probably* work. If you want to try using versions that are not in the table, it is your responsibility to validate them.
 
@@ -723,7 +726,7 @@ Install the following third-party software:
 | * Setup tools (Python)                  | 82.0.1  | `python-setuptools`                                         |
 | - Terraform                             | 1.12.2  | `terraform`                                                 |
 | **Additionally on Google GKE**          |         |                                                             |
-| * Google Cloud SDK                      | 569.0.0 | `gcloud-cli` (cask)\[[1](#_footnotedef_1 "View footnote.")] |
+| * Google Cloud CLI                      | 569.0.0 | `gcloud-cli` (cask)\[[1](#_footnotedef_1 "View footnote.")] |
 
 ### Python `venv`
 
@@ -930,13 +933,14 @@ Set up hostname resolution for the Ping Advanced Identity Software servers you'l
 
 ---
 title: minikube
-description: Before you can perform a ForgeOps deployment on a Kubernetes cluster running on minikube, you must complete these prerequisite tasks:
+description: Set up minikube and local tools to deploy ForgeOps on a single-node minikube cluster
 component: forgeops
-version: 2026.2
+version: 2026.3
 page_id: forgeops:setup:minikube
-canonical_url: https://docs.pingidentity.com/forgeops/2026.2/setup/minikube.html
+canonical_url: https://docs.pingidentity.com/forgeops/2026.3/setup/minikube.html
 llms_txt: https://docs.pingidentity.com/forgeops/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-23T12:17:10Z
 section_ids:
   repository: forgeops repository
   minikube-third-party-software: Third-party software
@@ -967,7 +971,7 @@ Before you can [perform a ForgeOps deployment on a Kubernetes cluster running on
 | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 |   | Learn more about configuring GitHub notifications [here](https://docs.github.com/en/account-and-profile/managing-subscriptions-and-notifications-on-github/setting-up-notifications/configuring-notifications) so you can get notified on ForgeOps releases. |
 
-Before you can perform a ForgeOps deployment, you must first get the `forgeops` repository and check out the `2026.2.1` tag you want to use:
+Before you can perform a ForgeOps deployment, you must first get the `forgeops` repository and check out the `2026.3.2` tag you want to use:
 
 1. Clone the `forgeops` repository. For example:
 
@@ -977,20 +981,20 @@ Before you can perform a ForgeOps deployment, you must first get the `forgeops` 
 
    The `forgeops` repository is a public Git repository. You do not need credentials to clone it.
 
-2. Check out the `2026.2.1` tag:
+2. Check out the `2026.3.2` tag:
 
    ```
    $ cd forgeops
-   $ git checkout 2026.2.1
+   $ git checkout 2026.3.2
    ```
 
-Depending on your organization's repository strategy, you might need to clone the repository from a fork. You might also need to create a working branch from the `2026.2.1` tag. Learn more in [Repository Updates](../start/repositories.html#forgeops-updates).
+Depending on your organization's repository strategy, you might need to clone the repository from a fork. You might also need to create a working branch from the `2026.3.2` tag. Learn more in [Repository Updates](../start/repositories.html#forgeops-updates).
 
 ## Third-party software
 
 Before performing a ForgeOps deployment, obtain third-party software and install it on your local computer.
 
-ForgeOps team recommends that you install third-party software using [Homebrew](https://brew.sh/) on macOS and Linux'\[[1](#_footnotedef_1 "View footnote.")]' .
+ForgeOps team recommends that you install third-party software using [Homebrew](https://brew.sh/) on macOS and Linux\[[1](#_footnotedef_1 "View footnote.")] .
 
 The versions listed in this section have been validated for ForgeOps deployments on minikube. Earlier and later versions will *probably* work. If you want to try using versions that are not in the table, it is your responsibility to validate them.
 
@@ -1112,7 +1116,7 @@ Set up hostname resolution for the Ping Advanced Identity Software servers you'l
 
 1. Determine the minikube ingress controller's IP address.
 
-   * If minikube is using the Docker driver on macOS system'\[[3](#_footnotedef_3 "View footnote.")]' , use `127.0.0.1` as the ingress IP address.
+   * If minikube is using the Docker driver on macOS system\[[3](#_footnotedef_3 "View footnote.")] , use `127.0.0.1` as the ingress IP address.
 
    * If minikube is running the Hyperkit driver on Intel-based macOS system or on a Linux system, get the IP address by running the minikube ip command:
 
@@ -1145,13 +1149,14 @@ Set up hostname resolution for the Ping Advanced Identity Software servers you'l
 
 ---
 title: Setup overview
-description: Before performing a ForgeOps deployment, you must perform some setup tasks in your local computer, create a Kubernetes cluster (or have access to an existing cluster), and configure your local machine to access the cluster.
+description: Prepare local tools and Kubernetes clusters on Google Cloud, AWS, Azure, or minikube for ForgeOps deployments
 component: forgeops
-version: 2026.2
+version: 2026.3
 page_id: forgeops:setup:overview
-canonical_url: https://docs.pingidentity.com/forgeops/2026.2/setup/overview.html
+canonical_url: https://docs.pingidentity.com/forgeops/2026.3/setup/overview.html
 llms_txt: https://docs.pingidentity.com/forgeops/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-22T16:57:07Z
 ---
 
 # Setup overview
@@ -1160,26 +1165,9 @@ Before performing a ForgeOps deployment, you must perform some setup tasks in yo
 
 The specific tasks you'll need to do vary depending on the platform on which you run Kubernetes:
 
-[icon: google, set=fab, size=3x]
-
-#### [Google Cloud](https://docs.pingidentity.com/forgeops/2026.2/setup/google-cloud.html)
-
-Set up your local computer to deploy ForgeOps on Google Cloud.
-
-[icon: aws, set=fab, size=3x]
-
-#### [AWS](https://docs.pingidentity.com/forgeops/2026.2/setup/aws.html)
-
-Set up your local computer to deploy ForgeOps on AWS.
-
-[icon: microsoft, set=fab, size=3x]
-
-#### [Azure](https://docs.pingidentity.com/forgeops/2026.2/setup/azure.html)
-
-Set up your local computer to deploy ForgeOps on Azure.
-
-[icon: empire, set=fab, size=3x]
-
-#### [minikube](https://docs.pingidentity.com/forgeops/2026.2/setup/minikube.html)
-
-Set up your local computer to deploy ForgeOps on minikube.
+| Topic                                                   | Description                                                    |
+| ------------------------------------------------------- | -------------------------------------------------------------- |
+| [icon: google, set=fa][Google Cloud](google-cloud.html) | Set up your local computer to deploy ForgeOps on Google Cloud. |
+| [icon: aws, set=fa][AWS](aws.html)                      | Set up your local computer to deploy ForgeOps on AWS.          |
+| [icon: microsoft, set=fa][Azure](azure.html)            | Set up your local computer to deploy ForgeOps on Azure.        |
+| [icon: empire, set=fa][minikube](minikube.html)         | Set up your local computer to deploy ForgeOps on minikube.     |

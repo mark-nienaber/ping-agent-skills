@@ -2,8 +2,12 @@
 title: Securing AI agents with PingOne Advanced Services
 description: Instructions on configuring AI use cases with PingOne Advanced Services.
 component: pingoneadvancedservices
+version: 2.2
 page_id: pingoneadvancedservices:securing_AI_agents:p1as_secure_AI_agents
-canonical_url: https://docs.pingidentity.com/pingoneadvancedservices/securing_AI_agents/p1as_secure_AI_agents.html
+canonical_url: https://docs.pingidentity.com/pingoneadvancedservices/2.2/securing_AI_agents/p1as_secure_AI_agents.html
+llms_txt: https://docs.pingidentity.com/pingoneadvancedservices/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+page_aliases: ["index.adoc"]
 ---
 
 # Securing AI agents with PingOne Advanced Services

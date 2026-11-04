@@ -77,15 +77,15 @@ The following section describes the steps for configuring service provider (SP)-
 
 4. In the **Sign in URL** field, enter the PingFederate SSO Application endpoint.
 
-   https\://*pf\_host*:*pf\_port*/idp/startSSO.ping?PartnerSpId=*connection\_id*
+   https\://*pf_host*:*pf_port*/idp/startSSO.ping?PartnerSpId=*connection_id*
 
    where:
 
-   * *pf\_host* is the machine running the PingFederate server.
+   * *pf_host* is the machine running the PingFederate server.
 
-   * *pf\_port* is the PingFederate port (default value: 9031).
+   * *pf_port* is the PingFederate port (default value: 9031).
 
-   * *connection\_id* is the connection ID of the SP connection, for example, [https://www.dropbox.com/](https://www.dropbox.com/%29).
+   * *connection_id* is the connection ID of the SP connection, for example, [https://www.dropbox.com/](https://www.dropbox.com/%29).
 
 5. Import the signing certificate into the X.509 certificate field.
 
@@ -147,7 +147,7 @@ To allow PingFederate to act as an identity provider (IdP) and manage users in D
 
    1. On the **Browser SSO > SAML Profiles** tab, select the **IDP-Initiated SSO** and **SP-Initiated SSO** checkboxes.
 
-   2. On the **Browser SSO > Assertion Creation > Attribute Contract** tab, in the **SAML\_SUBJECT** row, select **urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress** in the **Subject Name Format** list.
+   2. On the **Browser SSO > Assertion Creation > Attribute Contract** tab, in the **SAML_SUBJECT** row, select **urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress** in the **Subject Name Format** list.
 
    3. On the **Browser SSO > Protocol Settings > Allowable SAML Bindings** tab, select the **Post** and **Redirect** checkboxes. Click **Next**.
 

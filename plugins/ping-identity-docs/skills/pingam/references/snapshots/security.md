@@ -7,6 +7,7 @@ page_id: pingam:security:account-lockout
 canonical_url: https://docs.pingidentity.com/pingam/8.1/security/account-lockout.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 keywords: ["Security", "Identities", "Features"]
 page_aliases: ["security-guide:account-lockout.adoc"]
 section_ids:
@@ -129,6 +130,7 @@ page_id: pingam:security:additional-cookie-considerations
 canonical_url: https://docs.pingidentity.com/pingam/8.1/security/additional-cookie-considerations.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 keywords: ["Security", "Sessions"]
 page_aliases: ["security-guide:additional-cookie-considerations.adoc"]
 ---
@@ -162,6 +164,7 @@ page_id: pingam:security:features-with-keys
 canonical_url: https://docs.pingidentity.com/pingam/8.1/security/features-with-keys.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-10-22T11:32:06Z
 keywords: ["Security", "OAuth 2.0", "SAML 2.0", "Features"]
 page_aliases: ["security-guide:features-with-keys.adoc"]
 ---
@@ -192,9 +195,7 @@ Certain features *require* secret stores and some support either secret mechanis
 
   * **IDM user self-registration**
 
-    Requires copying signing and encryption keys from IDM into the AM keystore.
-
-    Learn more in [Delegate user self-registration to IDM](../user-self-service/configuring-user-self-registration.html#configure-user-self-registration-idm).
+    Requires AM and IDM to share the signing and encryption keys used for the self-service client token. If using the default IDM keys, copy `openidm-selfservice-key` and `selfservice` from the IDM keystore into the AM default keystore.
 
 * Features that use secret stores
 
@@ -234,7 +235,7 @@ Certain features *require* secret stores and some support either secret mechanis
 
     You could also require a key to sign exported metadata.
 
-    Learn more in [Sign and encrypt messages](../am-saml2/saml2-encryption.html). You can find a list of the secret label mappings in [Secret label default mappings](secret-mapping.html#secret-label-mappings).
+    Learn more in [Sign and encrypt messages](../am-saml2/saml2-encryption.html). You can find a list of the secret label mappings in [Secret label default mappings](secret-label-mappings.html).
 
   * **Persistent cookie nodes**
 
@@ -287,6 +288,7 @@ page_id: pingam:security:change-signing-key
 canonical_url: https://docs.pingidentity.com/pingam/8.1/security/change-signing-key.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-10-19T15:00:46Z
 keywords: ["Security", "Setup &amp; Configuration"]
 page_aliases: ["security-guide:change-signing-key.adoc"]
 ---
@@ -315,19 +317,19 @@ To replace the default key aliases:
 
      To change the default mapping for the Persistent Cookie node, go to Realms > *realm name* > Authentication > Settings > Security. Replace the `test` key alias in the Persistent Cookie Encryption Certificate Alias field with the alias you created for persistent cookies in your secret stores.
 
-     You can find more information about the secret labels used by this feature in [Secret label mappings for persistent cookies](secret-mapping.html#secrets-persistent-cookie).
+     You can find more information about the secret labels used by this feature in [Secret label mappings for persistent cookies](secret-label-mappings.html#secrets-persistent-cookie-nodes).
 
    * OAuth 2.0 and OpenID Connect providers
 
-     Review the list of secret labels and their defaults [here](secret-mapping.html#oauth2-default-secret-IDs) and [here](secret-mapping.html#oidc-social-registration-secret-IDs).
+     Review the list of secret labels and their defaults [here](secret-label-mappings.html#oauth2-default-secret-IDs) and [here](secret-label-mappings.html#oidc-social-registration-secret-IDs).
 
    * SAML 2.0 hosted providers
 
-     Review the list of secret labels and their defaults [here](secret-mapping.html#saml2-default-secret-IDs).
+     Review the list of secret labels and their defaults [here](secret-label-mappings.html#saml2-default-secret-IDs).
 
    * Client-side sessions
 
-     Review the list of secret labels and their defaults [here](secret-mapping.html#secrets-client-based-sessions-encryption) and [here](secret-mapping.html#secrets-client-based-sessions-signing).
+     Review the list of secret labels and their defaults [here](secret-label-mappings.html#secrets-client-based-sessions-encryption) and [here](secret-label-mappings.html#secrets-client-based-sessions-signing).
 
    * User self-service
 
@@ -347,7 +349,7 @@ To replace the default key aliases:
 
    * Authentication trees
 
-     Authentication trees use the secret label specified in [Secret label mappings for encrypting authentication trees' secure state data](secret-mapping.html#secrets-authn-trees-transient-encryption).
+     Authentication trees use the secret label specified in [Secret label mappings for encrypting authentication trees' secure state data](secret-label-mappings.html#secrets-authn-trees-transient-encryption).
 
      |   |                                                                                                                                            |
      | - | ------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -355,7 +357,7 @@ To replace the default key aliases:
 
    * IoT
 
-     The IoT Service uses the secret labels specified in [Secret label mappings for the IoT trusted JWT issuer](secret-mapping.html#secrets-am-services-iot-jwt-issuer-signing).
+     The IoT Service uses the secret labels specified in [Secret label mappings for the IoT trusted JWT issuer](secret-label-mappings.html#secrets-am-services-iot-jwt-issuer-signing).
 
 ---
 
@@ -368,6 +370,7 @@ page_id: pingam:security:changing-cookie-domain
 canonical_url: https://docs.pingidentity.com/pingam/8.1/security/changing-cookie-domain.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 keywords: ["Security", "Setup &amp; Configuration"]
 page_aliases: ["security-guide:changing-cookie-domain.adoc"]
 ---
@@ -413,6 +416,7 @@ page_id: pingam:security:change-name-of-SSO-cookie
 canonical_url: https://docs.pingidentity.com/pingam/8.1/security/change-name-of-SSO-cookie.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 keywords: ["Security", "Sessions", "Authentication", "Setup &amp; Configuration"]
 page_aliases: ["security-guide:change-name-of-SSO-cookie.adoc"]
 ---
@@ -450,6 +454,7 @@ page_id: pingam:security:change-amlbcookie-name
 canonical_url: https://docs.pingidentity.com/pingam/8.1/security/change-amlbcookie-name.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 keywords: ["Security", "Sessions", "Setup &amp; Configuration"]
 page_aliases: ["security-guide:change-amlbcookie-name.adoc"]
 ---
@@ -481,6 +486,7 @@ page_id: pingam:security:session-state-configure-cookie-security
 canonical_url: https://docs.pingidentity.com/pingam/8.1/security/session-state-configure-cookie-security.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 keywords: ["Security", "Setup &amp; Configuration", "Sessions"]
 page_aliases: ["security-guide:session-state-configure-cookie-security.adoc"]
 section_ids:
@@ -589,7 +595,7 @@ Follow these steps to encrypt the JWT:
 
       * Configure one of the following paddings in the `org.forgerock.openam.session.stateless.rsa.padding` advanced server property:
 
-        **RSA1\_5**. RSA with PKCS#1 v1.5 padding.\
+        **RSA1_5**. RSA with PKCS#1 v1.5 padding.\
         **RSA-OAEP**. RSA with OAEP and SHA-1.\
         **RSA-OAEP-256**. RSA with OAEP padding and SHA-256.
 
@@ -701,6 +707,7 @@ page_id: pingam:security:reverse-proxy
 canonical_url: https://docs.pingidentity.com/pingam/8.1/security/reverse-proxy.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 keywords: ["Security", "Deployment", "Setup &amp; Configuration"]
 page_aliases: ["security-guide:reverse-proxy.adoc"]
 section_ids:
@@ -920,6 +927,7 @@ page_id: pingam:security:enable-cors-support
 canonical_url: https://docs.pingidentity.com/pingam/8.1/security/enable-cors-support.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 keywords: ["Security", "Setup &amp; Configuration", "Features"]
 page_aliases: ["security-guide:enable-cors-support.adoc"]
 section_ids:
@@ -1423,6 +1431,7 @@ page_id: pingam:security:control-maximum-size-decompressed-JWT
 canonical_url: https://docs.pingidentity.com/pingam/8.1/security/control-maximum-size-decompressed-JWT.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 keywords: ["Security", "OAuth 2.0", "OpenID Connect (OIDC)", "Setup &amp; Configuration"]
 page_aliases: ["security-guide:control-maximum-size-decompressed-JWT.adoc"]
 ---
@@ -1472,6 +1481,7 @@ page_id: pingam:security:custom-quota-exhaustion-action
 canonical_url: https://docs.pingidentity.com/pingam/8.1/security/custom-quota-exhaustion-action.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-05-05T14:22:10Z
 keywords: ["Security", "Sessions", "Setup &amp; Configuration"]
 page_aliases: ["security-guide:custom-quota-exhaustion-action.adoc"]
 section_ids:
@@ -1577,6 +1587,7 @@ page_id: pingam:security:am-ports-used
 canonical_url: https://docs.pingidentity.com/pingam/8.1/security/am-ports-used.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 keywords: ["Administration", "Monitoring", "Ports"]
 page_aliases: ["reference:am-ports-used.adoc", "security-guide:am-ports-used.adoc"]
 ---
@@ -1613,6 +1624,7 @@ page_id: pingam:security:fips
 canonical_url: https://docs.pingidentity.com/pingam/8.1/security/fips.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 keywords: ["Security", "Bouncy Castle FIPS", "Keystores", "Cryptographic Keys", "Secrets", "JSON", "Configuration", "JVM"]
 section_ids:
   download-bouncy-castle-libraries: Download the Bouncy Castle libraries
@@ -1780,6 +1792,7 @@ page_id: pingam:security:general-security
 canonical_url: https://docs.pingidentity.com/pingam/8.1/security/general-security.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 keywords: ["Security", "Setup &amp; Configuration", "Deployment"]
 page_aliases: ["security-guide:general-security.adoc"]
 section_ids:
@@ -1802,7 +1815,7 @@ This list does not intend to show you best practices in network and system admin
 
 Security vulnerabilities are the reason why you should keep your operating systems, web and application servers, and any other application in your environment up to date. Knowledge of vulnerabilities spread fast across malicious users, who would not hesitate in trying to exploit them.
 
-Ping Identity maintains a list of [security advisories](https://backstage.pingidentity.com/knowledge/advisories/feed/AWxfnseig-tyvndie93SE) you should follow. You should also follow similar lists from all your vendors.
+Ping Identity maintains a list of [security advisories](https://support.pingidentity.com/s/product-roadmap?product=pingam\&tabset-84e58=3) you should follow. You should also follow similar lists from all your vendors.
 
 ## Keep up to date on cryptographic methods and algorithms
 
@@ -1893,6 +1906,7 @@ page_id: pingam:security:sec-rest-httponly
 canonical_url: https://docs.pingidentity.com/pingam/8.1/security/sec-rest-httponly.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 keywords: ["Security", "Setup &amp; Configuration"]
 page_aliases: ["security-guide:sec-rest-httponly.adoc"]
 section_ids:
@@ -1942,6 +1956,7 @@ page_id: pingam:security:using-pem-keys
 canonical_url: https://docs.pingidentity.com/pingam/8.1/security/using-pem-keys.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-10-09T12:30:49Z
 keywords: ["Security", "Setup &amp; Configuration"]
 page_aliases: ["security-guide:using-pem-keys.adoc"]
 ---
@@ -2061,14 +2076,14 @@ AM supports loading certificates, keys, and secrets in [PEM format](https://data
 
    * Encode the password using the `https://am.example.com:8443/am/encode.jsp` page.
 
-   * Write the result to a file system secret, or environment variable, that maps to the `am.global.services.secret.pem.decryption` secret label:
+   * Write the result to a file system secret, or environment variable, that maps to the `am.global.services.secrets.pem.decryption` secret label:
 
      * File system secret
 
      * Environment variable
 
      ```bash
-     $ echo -n AQICmX1ntZv3XETMgDo+0zFynC8UMGJgop+K > am.global.services.secret.pem.decryption
+     $ echo -n AQICmX1ntZv3XETMgDo+0zFynC8UMGJgop+K > am.global.services.secrets.pem.decryption
      ```
 
      ```bash
@@ -2096,6 +2111,7 @@ page_id: pingam:security:auth-session-whitelist
 canonical_url: https://docs.pingidentity.com/pingam/8.1/security/auth-session-whitelist.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 keywords: ["Security", "Sessions", "Authentication", "Setup &amp; Configuration"]
 page_aliases: ["security-guide:auth-session-whitelist.adoc"]
 section_ids:
@@ -2139,11 +2155,13 @@ page_id: pingam:security:configuring-keys
 canonical_url: https://docs.pingidentity.com/pingam/8.1/security/configuring-keys.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-10-09T12:30:49Z
 keywords: ["Security", "Setup &amp; Configuration"]
 page_aliases: ["security-guide:configuring-keys.adoc"]
 section_ids:
   creating-new-keys: Create key aliases
   create-signing-keys-new-keystore: Create a keystore and key aliases for keystore-type secret stores
+  key-usage-requirements: The keyUsage extension
   create-signing-keys: Create key aliases in an existing keystore
   changing-uss-keys: Create self-service key aliases
   keys-copying: Copy key aliases between keystores
@@ -2153,13 +2171,13 @@ section_ids:
 
 # Key aliases and passwords
 
-You might need to create new key aliases because you are using additional AM features, or because you are installing a new environment. In either case, consider these points:
+You might need to create new key aliases because you're using additional AM features, or because you're installing a new environment. In either case, consider these points:
 
-* First, review the list of AM features to understand which features use the AM keystore and which ones do not.
+* First, review the list of AM features to understand which features use the AM keystore and which ones don't.
 
-  For more information, see [AM features that use keys](features-with-keys.html).
+  Find more information in [AM features that use keys](features-with-keys.html).
 
-* Avoid sharing certificates between features when possible, even if this means you need to configure multiple different keystores or secret stores.
+* Avoid sharing certificates between features when possible, even if this means you must configure multiple different keystores or secret stores.
 
 * Make sure keystores, key aliases, and certificates are maintained on every instance; in a site environment, every instance has its own keystore files.
 
@@ -2176,7 +2194,11 @@ The following table lists the tasks related to managing key aliases in your envi
 
 ## Create key aliases
 
-Several AM features require key aliases for signing and encryption. AM provides default key aliases for all features, but you should create new key aliases in production.
+Several AM features require key aliases for signing and encryption. AM provides default key aliases for all features.
+
+|   |                                                                                                  |
+| - | ------------------------------------------------------------------------------------------------ |
+|   | Don't use the default key aliases, keys, keystores, or secret stores in production environments. |
 
 You can create key aliases in a new keystore that will be configured later as the AM keystore, or you can create key aliases in the existing AM keystore:
 
@@ -2188,7 +2210,7 @@ You can create key aliases in a new keystore that will be configured later as th
 
 ### Create a keystore and key aliases for keystore-type secret stores
 
-These instructions are for keystore-type secret stores. To create a new AM keystore, see [The AM keystore](am-keystore.html) instead.
+These instructions are for keystore-type secret stores. Find information on creating a new AM keystore in [The AM keystore](am-keystore.html).
 
 1. Obtain a new key from your certificate authority and add it to a new keystore, or generate a self-signed key in a new keystore.
 
@@ -2262,6 +2284,47 @@ These instructions are for keystore-type secret stores. To create a new AM keyst
    See [Keystore secret stores](secret-stores.html#keystores-secret-store).
 
    To configure the file system secret store too, see [File system secret volumes](secret-stores.html#file-system-secret-volumes).
+
+#### The `keyUsage` extension
+
+When AM retrieves a key from a secret store, it checks the certificate's `keyUsage` extension to verify the key is permitted for the intended purpose:
+
+* Keys used for **signing** must have `digitalSignature` in their `keyUsage` extension.
+
+* Keys used for **encryption** must have `dataEncipherment` in their `keyUsage` extension.
+
+* The `keyEncipherment` extension is used for encrypting other cryptographic keys or secrets during key transport or key wrapping.
+
+If the `keyUsage` extension is present but doesn't include the required usage, AM rejects the key and the operation fails. If you've enabled [debug logging](../monitoring/debug-logging.html), you'll see a message similar to the following in the logs:
+
+```none
+Constraint allowedKeyUsage=[sign] for purpose Purpose{...} is not satisfied by secret SigningKey{...keyUsages=[wrap key, unwrap key]}
+```
+
+Certificates **without** a `keyUsage` extension aren't restricted and can be used for any purpose.
+
+To avoid this issue, either omit the `keyUsage` extension from your certificates, or ensure the extension includes the correct values for the intended use.
+
+> **Collapse: Default keyUsage requirements for AM features**
+>
+> | Feature                                 | Purpose                             | Accepted `keyUsage`                                                                                                                             |
+> | --------------------------------------- | ----------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+> | OAuth 2.0 / OIDC token signing          | Signing                             | `digitalSignature`                                                                                                                              |
+> | OAuth 2.0 / OIDC token encryption (JWE) | Key transport / key agreement       | `keyEncipherment` (RSA-based `alg`, e.g. `RSA-OAEP-256`); `keyAgreement` (ECDH-ES variants); not applicable for symmetric `alg` (`dir`, `A*KW`) |
+> | SAML 2.0 assertion signing              | Signing                             | `digitalSignature`                                                                                                                              |
+> | SAML 2.0 assertion encryption           | Key transport                       | `keyEncipherment`                                                                                                                               |
+> | Client-side session signing             | Signing                             | `digitalSignature`                                                                                                                              |
+> | Client-side session encryption          | Key transport (or symmetric)        | `keyEncipherment` when an RSA key is configured; not applicable when a symmetric AES key is used (default)                                      |
+> | Remote Consent signing                  | Signing                             | `digitalSignature`                                                                                                                              |
+> | Remote Consent encryption               | Key transport / key agreement       | `keyEncipherment` (RSA-based, default `RSA-OAEP-256`); `keyAgreement` (ECDH-ES)                                                                 |
+> | Self-service token signing              | Signing                             | `digitalSignature`                                                                                                                              |
+> | Self-service token encryption           | Key transport / key agreement       | `keyEncipherment` (RSA-based); `keyAgreement` (ECDH-ES); not applicable when a symmetric key is used                                            |
+> | Persistent cookie node signing          | Signing                             | `digitalSignature`                                                                                                                              |
+> | Persistent cookie node encryption       | Symmetric (default) / key transport | Not applicable for the default symmetric AES key; `keyEncipherment` if an RSA key is configured                                                 |
+
+|   |                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| - | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | AM-issued JWEs and SAML 2.0 encrypted assertions both rely on asymmetric **key transport** (RSA) or **key agreement** (ECDH), never on direct public-key data encryption. Certificates therefore need `keyEncipherment` for RSA-based algorithms (`RSA1_5`, `RSA-OAEP`, `RSA-OAEP-256`) and `keyAgreement` for ECDH-ES variants. For symmetric keys stored with an associated certificate, `dataEncipherment` satisfies the encryption constraint. |
 
 ### Create key aliases in an existing keystore
 
@@ -2439,14 +2502,14 @@ Decrypting a key alias in a keystore requires a password. This password is initi
 
    3. To change a password value used to decrypt a **PEM-formatted secret**:
 
-      Encode the new password using the https\://am.example.com:8443/am/encode.jsp page, and write the result to a file system secret or environment variable that uses the `am.global.services.secret.pem.decryption` secret label:
+      Encode the new password using the https\://am.example.com:8443/am/encode.jsp page, and write the result to a file system secret or environment variable that uses the `am.global.services.secrets.pem.decryption` secret label:
 
       * File system secret
 
       * Environment variable
 
       ```bash
-      $ echo -n AQICmX1ntZv3XETMgDo+0zFynC8UMGJgop+K > am.global.services.secret.pem.decryption
+      $ echo -n AQICmX1ntZv3XETMgDo+0zFynC8UMGJgop+K > am.global.services.secrets.pem.decryption
       ```
 
       ```bash
@@ -2601,6 +2664,7 @@ page_id: pingam:security:limit-request-body-size
 canonical_url: https://docs.pingidentity.com/pingam/8.1/security/limit-request-body-size.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 keywords: ["Security", "Setup &amp; Configuration"]
 page_aliases: ["security-guide:limit-request-body-size.adoc"]
 ---

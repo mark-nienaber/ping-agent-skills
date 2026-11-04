@@ -4,6 +4,8 @@ description: To access the Identity Governance REST API endpoints, you generate 
 component: pingoneaic-api
 page_id: pingoneaic-api:identity-governance:rest-api/endpoints/rest-iga-access-token
 canonical_url: https://developer.pingidentity.com/pingoneaic-api/identity-governance/rest-api/endpoints/rest-iga-access-token.html
+llms_txt: https://developer.pingidentity.com/pingoneaic-api/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 keywords: ["access token", "REST API", "authentication", "authorization", "OAuth 2.0", "JWT", "service account", "identity governance"]
 section_ids:
   task1-create-a-custom-application-for-client-credentials: "Task 1: Create a custom application for client credentials"
@@ -410,6 +412,8 @@ description: Identity Governance has many features, including access requests, t
 component: pingoneaic-api
 page_id: pingoneaic-api:identity-governance:rest-api/endpoints/rest-iga
 canonical_url: https://developer.pingidentity.com/pingoneaic-api/identity-governance/rest-api/endpoints/rest-iga.html
+llms_txt: https://developer.pingidentity.com/pingoneaic-api/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 keywords: ["REST API", "API reference", "endpoints", "identity governance", "access requests", "certification", "workflows"]
 section_ids:
   yaml-file: YAML file

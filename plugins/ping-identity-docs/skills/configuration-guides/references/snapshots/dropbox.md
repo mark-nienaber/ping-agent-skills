@@ -1,9 +1,11 @@
 ---
 title: Configuring SAML SSO with Dropbox and PingFederate
-description: Learn how to configure SAML SSO with Dropbox and PingFederate.
+description: Configure SAML SSO with Dropbox and PingFederate — IdP-initiated and SP-initiated sign-on
 component: configuration_guides
 page_id: configuration_guides:dropbox:config_saml_dropbox_pf
 canonical_url: https://docs.pingidentity.com/configuration_guides/dropbox/config_saml_dropbox_pf.html
+llms_txt: https://docs.pingidentity.com/configuration_guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: May 16, 2024
 section_ids:
   create-a-pingfederate-sp-connection-for-dropbox: Create a PingFederate SP connection for Dropbox
@@ -100,10 +102,12 @@ For example: `https://PingFederate-Hostname:PingFederate-Port/idp/startSSO.ping?
 
 ---
 title: Configuring SAML SSO with Dropbox and PingOne for Enterprise
-description: Learn how to configure SAML SSO with Dropbox and PingOne for Enterprise.
+description: Configure SAML SSO with Dropbox and PingOne for Enterprise — IdP-initiated and SP-initiated sign-on
 component: configuration_guides
 page_id: configuration_guides:dropbox:config_saml_dropbox_p14e
 canonical_url: https://docs.pingidentity.com/configuration_guides/dropbox/config_saml_dropbox_p14e.html
+llms_txt: https://docs.pingidentity.com/configuration_guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: May 16, 2024
 section_ids:
   create-a-pingone-for-enterprise-application-for-dropbox: Create a PingOne for Enterprise application for Dropbox

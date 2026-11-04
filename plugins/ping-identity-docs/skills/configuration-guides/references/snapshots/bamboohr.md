@@ -1,9 +1,11 @@
 ---
 title: Configuring SAML SSO with BambooHR and PingFederate
-description: The following table details the required and optional attributes to be configured in the assertion attribute contract.
+description: Configure SAML SSO with BambooHR and PingFederate — assertion attribute contract
 component: configuration_guides
 page_id: configuration_guides:bamboohr:config_saml_bamboohr_pf
 canonical_url: https://docs.pingidentity.com/configuration_guides/bamboohr/config_saml_bamboohr_pf.html
+llms_txt: https://docs.pingidentity.com/configuration_guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: May 6, 2024
 section_ids:
   about-this-task: About this task
@@ -109,10 +111,12 @@ The following table details the references that are used within this guide which
 
 ---
 title: Configuring SAML SSO with BambooHR and PingOne for Enterprise
-description: The following table details the required and optional attributes to configure in the assertion attribute contract.
+description: Configure SAML SSO with BambooHR and PingOne for Enterprise — assertion attribute contract
 component: configuration_guides
 page_id: configuration_guides:bamboohr:config_saml_bamboohr_p1
 canonical_url: https://docs.pingidentity.com/configuration_guides/bamboohr/config_saml_bamboohr_p1.html
+llms_txt: https://docs.pingidentity.com/configuration_guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: May 20, 2024
 section_ids:
   about-this-task: About this task

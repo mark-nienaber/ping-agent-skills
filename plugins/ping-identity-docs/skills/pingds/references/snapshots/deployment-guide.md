@@ -7,7 +7,7 @@ page_id: pingds:deployment-guide:plans
 canonical_url: https://docs.pingidentity.com/pingds/8.1/deployment-guide/plans.html
 llms_txt: https://docs.pingidentity.com/pingds/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: 2025-12-09T13:43:30Z
+revdate: 2026-06-01T09:22:01Z
 keywords: ["Architecture", "Backup &amp; Restore", "Customization", "Depoyment", "Extensibility", "Integration", "LDAP", "Performance"]
 section_ids:
   plan-training: Team training
@@ -923,7 +923,7 @@ page_id: pingds:deployment-guide:preface
 canonical_url: https://docs.pingidentity.com/pingds/8.1/deployment-guide/preface.html
 llms_txt: https://docs.pingidentity.com/pingds/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: 2025-10-22T14:42:39Z
+revdate: 2026-06-01T09:22:01Z
 keywords: ["Architecture", "Deployment", "LDAP"]
 page_aliases: ["index.adoc"]
 ---
@@ -979,7 +979,7 @@ page_id: pingds:deployment-guide:checklists
 canonical_url: https://docs.pingidentity.com/pingds/8.1/deployment-guide/checklists.html
 llms_txt: https://docs.pingidentity.com/pingds/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: 2025-10-22T14:42:39Z
+revdate: 2026-06-01T09:22:01Z
 keywords: ["Architecture", "Deployment", "Features", "Integration", "LDAP"]
 section_ids:
   checklist-initiation: Initiate the project
@@ -1072,7 +1072,7 @@ page_id: pingds:deployment-guide:patterns
 canonical_url: https://docs.pingidentity.com/pingds/8.1/deployment-guide/patterns.html
 llms_txt: https://docs.pingidentity.com/pingds/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: 2025-10-22T14:42:39Z
+revdate: 2026-06-01T09:22:01Z
 keywords: ["Architecture", "Deployment", "Features", "Integration", "LDAP", "Performance"]
 section_ids:
   patterns-ha: High availability
@@ -1560,7 +1560,7 @@ page_id: pingds:deployment-guide:about-components
 canonical_url: https://docs.pingidentity.com/pingds/8.1/deployment-guide/about-components.html
 llms_txt: https://docs.pingidentity.com/pingds/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: 2025-10-22T14:42:39Z
+revdate: 2026-06-01T09:22:01Z
 keywords: ["Architecture", "Deployment", "Features", "LDAP"]
 section_ids:
   about-ds: Directory servers
@@ -1887,7 +1887,7 @@ page_id: pingds:deployment-guide:project
 canonical_url: https://docs.pingidentity.com/pingds/8.1/deployment-guide/project.html
 llms_txt: https://docs.pingidentity.com/pingds/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: 2025-10-22T14:42:39Z
+revdate: 2026-06-01T09:22:01Z
 keywords: ["Architecture", "Backup &amp; Restore", "Customization", "Deployment", "Extensibility", "Integration", "LDAP", "Performance"]
 section_ids:
   importance-needs-assessemnt: Needs assessment
@@ -2068,7 +2068,7 @@ page_id: pingds:deployment-guide:prerequisites
 canonical_url: https://docs.pingidentity.com/pingds/8.1/deployment-guide/prerequisites.html
 llms_txt: https://docs.pingidentity.com/pingds/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: 2025-10-22T14:42:39Z
+revdate: 2026-06-01T09:22:01Z
 keywords: ["Architecture", "Deployment", "Integration", "LDAP", "Performance"]
 section_ids:
   size-systems: Sizing systems

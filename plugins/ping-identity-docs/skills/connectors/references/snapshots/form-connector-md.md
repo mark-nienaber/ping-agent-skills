@@ -1,12 +1,12 @@
 ---
 title: Form Connector
-description: The Form connector lets you include branded forms and messages in your PingOne DaVinci flow.
+description: Configure the Form connector to include branded PingOne forms and messages in PingOne DaVinci flows using the drag-and-drop form builder
 component: connectors
 page_id: connectors::form_connector
 canonical_url: https://docs.pingidentity.com/connectors/form_connector.html
 llms_txt: https://docs.pingidentity.com/connectors/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: May 27, 2025
+revdate: 2026-07-15T00:00:00Z
 page_aliases: ["forms_connector.adoc"]
 section_ids:
   setup: Setup
@@ -20,10 +20,11 @@ section_ids:
   including-a-form-in-a-flow: Including a form in a flow
   branching-from-show-form-outcomes: Branching from Show Form outcomes
   configuring-conditional-component-visibility: Configuring conditional component visibility
+  configuring-fido2-client-error-routing: Configuring FIDO2 client error routing
   showing-a-message-with-your-branding: Showing a message with your branding
   capabilities: Capabilities
-  customForm: Show Form
-  showForm: Show Form (New)
+  customForm: Show Form (Legacy)
+  showForm: Show Form
   customMessage: Show Branded Message
 ---
 
@@ -49,13 +50,13 @@ Learn more in the following documentation:
 
 * [PingOne Forms](https://docs.pingidentity.com/pingone/user_experience/p1_forms.html)
 
-* DaVinci documentation:
+* PingOne DaVinci documentation:
 
   * [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html)
 
   * [Using connectors securely](https://docs.pingidentity.com/davinci/connectors/davinci_using_connectors_securely.html)
 
-  * [Using DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html)
+  * [Using PingOne DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html)
 
 ### Requirements
 
@@ -73,7 +74,7 @@ If you want to include a branded message in your flow, configure your branding i
 
 ### Setting up the Form connector
 
-In DaVinci, add a Form connector. For help, refer to [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html).
+In PingOne DaVinci, add a Form connector. For help, refer to [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html).
 
 This connector doesn't have a configuration at the environment level. You configure it in your flow instead.
 
@@ -85,9 +86,9 @@ The **Show Form** capability lets you present any form that you create with the 
 
 Learn more about creating forms in [Creating a form](https://docs.pingidentity.com/pingone/user_experience/p1_creating_form.html).
 
-To add a form to a DaVinci flow:
+To add a form to a PingOne DaVinci flow:
 
-1. In your DaVinci flow, add the Form connector.
+1. In your PingOne DaVinci flow, add the Form connector.
 
 2. Select the **Show Form** capability.
 
@@ -119,7 +120,7 @@ When you select a form, the **Show Form** node generates its outcomes from the c
 
   * Links
 
-  * Submit methods (for example, submit button, polling component, FIDO2 button, or MFA device selection)
+  * Submit methods (for example, submit button, polling component, FIDO2 button, or multi-factor authentication (MFA) device selection)
 
 * You can branch directly from each outcome.
 
@@ -129,11 +130,11 @@ When you select a form, the **Show Form** node generates its outcomes from the c
 
 ### Configuring conditional component visibility
 
-You can configure a form in your PingOne admin console with conditional component visibility. Learn more in [Configuring conditional component visibility](https://docs.pingidentity.com/pingone/user_experience/p1_configuring_conditional_component_visibility.html). When you include a form with conditional component visibility with the **Show Form** capability, you configure conditional visibility for user-facing forms in your DaVinci flow with the Form connector.
+You can configure a form in your PingOne admin console with conditional component visibility. Learn more in [Configuring conditional component visibility](https://docs.pingidentity.com/pingone/user_experience/p1_configuring_conditional_component_visibility.html). Use the **Show Form** capability to include the form in your PingOne DaVinci flow. The Form connector then applies the conditional visibility you configured.
 
 To configure conditional component visibility:
 
-1. In your DaVinci flow, add the Form connector.
+1. In your PingOne DaVinci flow, add the Form connector.
 
 2. Select the **Show Form** capability.
 
@@ -144,6 +145,47 @@ To configure conditional component visibility:
 5. For each **Key**, select a variable from your flow that will act as a Boolean to show or hide the components associated with the key.
 
 6. Click **Apply**.
+
+### Configuring FIDO2 client error routing
+
+When a form contains a FIDO2 component, the **Show Form (Legacy)** capability includes a **Use Legacy FIDO2 Error Handling** toggle. This toggle controls how client-side FIDO2/WebAuthn errors are surfaced in your flow. Enable **Use Legacy FIDO2 Error Handling** for easier decisioning based on client-side FIDO2 errors.
+
+| Toggle state       | Behavior                                                                                                                  |
+| ------------------ | ------------------------------------------------------------------------------------------------------------------------- |
+| Disabled (default) | Client-side FIDO2 errors continue to the success (true) path. Backward-compatible with existing flows.                    |
+| Enabled            | Client-side FIDO2 errors are routed to the false branch as a typed `error` object. This is the recommended configuration. |
+
+|   |                                                                                                                           |
+| - | ------------------------------------------------------------------------------------------------------------------------- |
+|   | For the **Show Form** capability, client-side FIDO2 errors are always routed to the error outcome. No toggle is required. |
+
+When a FIDO2 client-side error occurs and **Use Legacy FIDO2 Error Handling** is enabled, the `error` output on the false branch contains:
+
+| Field     | Description                                                                           |
+| --------- | ------------------------------------------------------------------------------------- |
+| `name`    | DOMException error name, such as `NotAllowedError`, `AbortError`, or `SecurityError`. |
+| `code`    | Legacy numeric error code, where applicable.                                          |
+| `message` | Human-readable description of the error.                                              |
+
+Common error names include:
+
+* `NotAllowedError`: The user cancelled the operation.
+
+* `SecurityError`: The relying party ID doesn't match the current origin.
+
+* `AbortError`: The operation was aborted.
+
+* `InvalidStateError`: The authenticator is in an invalid state.
+
+You can find the full list in the [Web IDL DOMException spec](https://webidl.spec.whatwg.org/#idl-DOMException-error-names).
+
+To configure flow branching on FIDO2 client errors:
+
+1. Connect the false branch of the **Show Form (Legacy)** node to your error-handling logic.
+
+2. Use `error.name` to route to specific paths. For example, branch on `NotAllowedError` to prompt the user to try again, or on `SecurityError` to display a security warning.
+
+3. Use `error.code` and `error.message` for logging or additional user-facing context.
 
 ### Showing a message with your branding
 
@@ -165,7 +207,7 @@ The **Show Branded Message** capability lets you show the user a message within 
 
 ## Capabilities
 
-### Show Form
+### Show Form (Legacy)
 
 Show a form from the drag-and-drop form builder.
 
@@ -179,7 +221,7 @@ Show a form from the drag-and-drop form builder.
 >
 > - Form dropDown required
 >
->   The form to show. You can add forms in your PingOne environment. For a dynamic value or to use a form that isn't listed, select "Use Form ID".
+>   The form to show. You can add forms in PingOne > User Experience > Forms.
 >
 > - * Forms link
 >   * Link with PingOne User toggleSwitch
@@ -199,6 +241,15 @@ Show a form from the drag-and-drop form builder.
 > - Initial Field Values keyValueList
 >
 >   Optionally provide a value to pre-populate the fields in your form. Users can keep the pre-populated value or change it before submitting the form.
+>
+> - * Image sectionLabel
+>   * Image URLs keyValueList
+>
+>   The URL for the image to show, such as "https\://example.com/image.jpg".
+>
+> - Hyperlink URLs keyValueList
+>
+>   The URL for the image hyperlink, such as "https\://example.com/sign-up".
 >
 > - Dynamic Text keyValueList
 >
@@ -233,9 +284,20 @@ Show a form from the drag-and-drop form builder.
 >
 >   The port number to use when connecting to the PingID Device Trust Agent. If left blank, the default port 9400 will be used.
 >
-> - Enable IAF Detection toggleSwitch
+> - Enable IAF Detection (Experimental) toggleSwitch
 >
 >   Identify the agent used to access the application and detect if it is an IAF (Intelligent Automation Framework) agent.
+>
+> - * Agreement sectionLabel
+>   * Agreement dropDown required
+>
+>   The agreement to show to the user. For a dynamic agreement, select Use Agreement ID and enter a value in the Agreement ID field.
+>
+>   * Use Agreement ID (Default)
+>
+> - Agreement ID textField
+>
+>   Enter the ID of the agreement to show, such as "68373acc-c0ef-4258-b69d-8152320a8237". This allows you to show a different agreement depending on the flow context
 >
 > - * Social Login sectionLabel
 >   * Application Return URL textField
@@ -259,7 +321,7 @@ Show a form from the drag-and-drop form builder.
 >
 > - Custom Authentication Method List textField required
 >
->   The list of MFA authentication methods that you want to make available to the user, such as "EMAIL,TOTP". To allow all devices, enter "EMAIL, MOBILE, SMS, VOICE, TOTP, FIDO2, MAGIC\_LINK". Separate multiple values with a comma.
+>   The list of MFA authentication methods that you want to make available to the user, such as "EMAIL,TOTP". To allow all devices, enter "EMAIL, MOBILE, SMS, VOICE, TOTP, FIDO2, MAGIC_LINK, YUBIKEY, OATH_TOKEN, WHATSAPP, PINGID_DESKTOP_GEN2". Separate multiple values with a comma.
 >
 > - Enable Magic Link Authentication toggleSwitch
 >
@@ -293,6 +355,11 @@ Show a form from the drag-and-drop form builder.
 >
 >   Select a challenge variable from your flow, such as from a Challenge or Flow Conductor node. When this challenge is completed in another branch of the flow, the main flow continues past the form.
 >
+> - * QR Code sectionLabel
+>   * QR Code Contents textField required
+>
+>   The URL, app link, code, or other string to represent in the QR code, such as "https\://example.com", "myapp\://section/page", or "123a-45b-678c".
+>
 > * default object
 >
 >   * language string
@@ -312,6 +379,10 @@ Show a form from the drag-and-drop form builder.
 >     * populationId string
 >
 >     * formData array
+>
+>     * imageUrls array
+>
+>     * hyperlinkUrls array
 >
 >     * enableRisk boolean
 >
@@ -369,7 +440,7 @@ Show a form from the drag-and-drop form builder.
 >
 >     * buttonValue string
 
-### Show Form (New)
+### Show Form
 
 Show an interactive form and branch the flow based on the outcome.
 
@@ -383,7 +454,7 @@ Show an interactive form and branch the flow based on the outcome.
 >
 > - Form dropDown required
 >
->   The form to show. You can add forms in your PingOne environment. For a dynamic value or to use a form that isn't listed, select "Use Form ID".
+>   The form to show. You can add forms in PingOne > User Experience > Forms.
 >
 > - * Forms link
 >   * Link with PingOne User toggleSwitch
@@ -403,6 +474,15 @@ Show an interactive form and branch the flow based on the outcome.
 > - Initial Field Values keyValueList
 >
 >   Optionally provide a value to pre-populate the fields in your form. Users can keep the pre-populated value or change it before submitting the form.
+>
+> - * Image sectionLabel
+>   * Image URLs keyValueList
+>
+>   The URL for the image to show, such as "https\://example.com/image.jpg".
+>
+> - Hyperlink URLs keyValueList
+>
+>   The URL for the image hyperlink, such as "https\://example.com/sign-up".
 >
 > - Dynamic Text keyValueList
 >
@@ -437,9 +517,20 @@ Show an interactive form and branch the flow based on the outcome.
 >
 >   The port number to use when connecting to the PingID Device Trust Agent. If left blank, the default port 9400 will be used.
 >
-> - Enable IAF Detection toggleSwitch
+> - Enable IAF Detection (Experimental) toggleSwitch
 >
 >   Identify the agent used to access the application and detect if it is an IAF (Intelligent Automation Framework) agent.
+>
+> - * Agreement sectionLabel
+>   * Agreement dropDown required
+>
+>   The agreement to show to the user. For a dynamic agreement, select Use Agreement ID and enter a value in the Agreement ID field.
+>
+>   * Use Agreement ID (Default)
+>
+> - Agreement ID textField
+>
+>   Enter the ID of the agreement to show, such as "68373acc-c0ef-4258-b69d-8152320a8237". This allows you to show a different agreement depending on the flow context
 >
 > - * Social Login sectionLabel
 >   * Application Return URL textField
@@ -463,7 +554,7 @@ Show an interactive form and branch the flow based on the outcome.
 >
 > - Custom Authentication Method List textField required
 >
->   The list of MFA authentication methods that you want to make available to the user, such as "EMAIL,TOTP". To allow all devices, enter "EMAIL, MOBILE, SMS, VOICE, TOTP, FIDO2, MAGIC\_LINK". Separate multiple values with a comma.
+>   The list of MFA authentication methods that you want to make available to the user, such as "EMAIL,TOTP". To allow all devices, enter "EMAIL, MOBILE, SMS, VOICE, TOTP, FIDO2, MAGIC_LINK, YUBIKEY, OATH_TOKEN, WHATSAPP, PINGID_DESKTOP_GEN2". Separate multiple values with a comma.
 >
 > - Enable Magic Link Authentication toggleSwitch
 >
@@ -493,6 +584,11 @@ Show an interactive form and branch the flow based on the outcome.
 >
 >   Select a challenge variable from your flow, such as from a Challenge or Flow Conductor node. When this challenge is completed in another branch of the flow, the main flow continues past the form.
 >
+> - * QR Code sectionLabel
+>   * QR Code Contents textField required
+>
+>   The URL, app link, code, or other string to represent in the QR code, such as "https\://example.com", "myapp\://section/page", or "123a-45b-678c".
+>
 > * default object
 >
 >   * language string
@@ -512,6 +608,10 @@ Show an interactive form and branch the flow based on the outcome.
 >     * populationId string
 >
 >     * formData array
+>
+>     * imageUrls array
+>
+>     * hyperlinkUrls array
 >
 >     * enableRisk boolean
 >

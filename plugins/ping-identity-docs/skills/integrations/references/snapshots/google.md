@@ -228,7 +228,7 @@ The following is the change history for the Google Login Integration Kit.
 
 ## Version 1.0.1 - May 2015
 
-* Added support for openid\_id parameter.
+* Added support for openid_id parameter.
 
 * Security enhancements.
 
@@ -493,8 +493,8 @@ To enable SSO to an application within the PingFederate domain, configure an ada
 
    |                |                                                         |
    | -------------- | ------------------------------------------------------- |
-   | *pf\_host*     | The host name or IP address of the PingFederate server. |
-   | *pf\_port*     | The port number of the PingFederate server.             |
+   | *pf_host*      | The host name or IP address of the PingFederate server. |
+   | *pf_port*      | The port number of the PingFederate server.             |
    | *IdpAdapterId* | The instance ID of the IdP adapter instance.            |
    | *SpAdapterId*  | The instance ID of the SP adapter instance.             |
 
@@ -531,8 +531,8 @@ To enable SSO to a service provider (SP) outside the PingFederate domain, config
 
    |                |                                                         |
    | -------------- | ------------------------------------------------------- |
-   | *pf\_host*     | The host name or IP address of the PingFederate server. |
-   | *pf\_port*     | The port number of the PingFederate server.             |
+   | *pf_host*      | The host name or IP address of the PingFederate server. |
+   | *pf_port*      | The port number of the PingFederate server.             |
    | *ConnectionId* | The ID of the SP connection.                            |
 
 ---

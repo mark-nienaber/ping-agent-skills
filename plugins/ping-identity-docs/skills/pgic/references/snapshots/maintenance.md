@@ -4,6 +4,8 @@ description: After Ping Government Identity Cloud is implemented, it's important
 component: pgic
 page_id: pgic:maintenance:pgic_mainentance
 canonical_url: http://docs.pingidentity.com/pgic/maintenance/pgic_mainentance.html
+llms_txt: http://docs.pingidentity.com/pgic/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 ---
 
 # Ongoing network maintenance

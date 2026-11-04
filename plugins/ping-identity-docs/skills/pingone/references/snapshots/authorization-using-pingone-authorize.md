@@ -6,7 +6,7 @@ page_id: pingone:authorization_using_pingone_authorize:p1az_adding_decision_endp
 canonical_url: https://docs.pingidentity.com/pingone/authorization_using_pingone_authorize/p1az_adding_decision_endpoints.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: June 15, 2026
+revdate: 2026-08-25T15:08:03Z
 section_ids:
   steps: Steps
   result: Result:
@@ -22,21 +22,23 @@ Add PingOne Authorize endpoints for stages that align with your organization's p
 
 2. Click **[icon: plus, set=fa]Add Endpoint**.
 
-3. Enter an endpoint **Name** and a **Description** that reflects the endpoint's role in the deployment process.
+3. Enter a **Name** and a **Description** that reflects the endpoint's role in the deployment process.
 
    The maximum name length is 256 characters.
 
-   ![Screen capture of the Creating New Decision Endpoint window.](_images/ttq1638497876819.png)
+4. In the **Module** list, select the module that contains the authorization version you want to deploy to the endpoint.
 
-4. If you want to deploy a particular version of a policy to the endpoint, clear the **Use latest** checkbox and select the version in the **Policy Version** list.
+   ![Screen capture of the Creating New Decision Endpoint window.](_images/p1az-add-decision-endpoint.png)
+
+5. If you want to deploy a particular version of a policy to the endpoint, clear the **Use latest** checkbox and select the version in the **Policy Version** list.
 
    If you don't deploy a particular version, the endpoint uses the latest policy version. **Use latest** republishes the latest version each time a request is made to the endpoint and can cause a slower system response.
 
-   |   |                                                                                |
-   | - | ------------------------------------------------------------------------------ |
-   |   | You should only enable **Use latest** during policy development and debugging. |
+   |   |                                                                                                                                                                                                                                     |
+   | - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+   |   | Only enable **Use latest** during policy development and debugging. **Use latest** endpoints are rate-limited to one request per second. Sending production traffic to these endpoints will result in `429 REQUEST_LIMITED` errors. |
 
-5. Select the **Record recent decisions** checkbox to keep track of the last 20 [recent decisions](p1az_recent_decisions.html) made for the endpoint during the last 24 hours.
+6. Select the **Record recent decisions** checkbox to keep track of the last 20 [recent decisions](p1az_recent_decisions.html) made for the endpoint during the last 24 hours.
 
    This allows you to visualize and examine recent decisions.
 
@@ -44,11 +46,61 @@ Add PingOne Authorize endpoints for stages that align with your organization's p
    | - | --------------------------------------------------------------------------------------------------------------------- |
    |   | This can cause a slower system response. You should only enable this setting during policy development and debugging. |
 
-6. Click **Save**.
+7. Click **Save**.
 
    ### Result:
 
    The new endpoint is added to the **Decision Endpoints** page. New endpoints are listed in alphabetical order after the three default endpoints.
+
+---
+
+---
+title: Adding a module in PingOne Authorize
+description: Add an authorization module to create an independent subdivision of Trust Framework definitions, policies, and version history.
+component: pingone
+page_id: pingone:authorization_using_pingone_authorize:p1az_creating_modules
+canonical_url: https://docs.pingidentity.com/pingone/authorization_using_pingone_authorize/p1az_creating_modules.html
+llms_txt: https://docs.pingidentity.com/pingone/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-10-21T15:32:08Z
+section_ids:
+  steps: Steps
+  next-steps: Next steps
+---
+
+# Adding a module in PingOne Authorize
+
+Add a module to create an independent division of Trust Framework definitions, policies, and version history.
+
+You can add up to 100 [custom](p1az_modules.html#p1az-custom-modules) modules in each environment, in addition to the system-owned **Default** and API service modules.
+
+|   |                                                                                                                                                                                                   |
+| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | To add an API service module, [create](p1az_add_api_service.html) an API service and enable [custom policies](p1az_adding_custom_policies_for_api_services_and_operations.html) for that service. |
+
+You can edit the name and description of custom modules after creating them.
+
+## Steps
+
+1. In the PingOne admin console, go to **Authorization > Modules**.
+
+2. On the **Custom** tab, click the **[icon: plus, set=fa]**icon next to **Modules**.
+
+3. Enter a **Name** that identifies the module.
+
+   Each module in the environment must have a unique name.
+
+4. (Optional) Enter a **Description** of the module's purpose.
+
+   ![Screen capture showing the Name and Description fields in the Create New Module panel.](_images/p1az-create-module.png)
+
+5. Click **Save**.
+
+## Next steps
+
+Add authorization resources on the module's **Trust Framework** and **Policies** pages to define the module's authorization logic.
+
+Learn more in [Trust Framework](p1az_trust_framework.html) and [Authorization policies](p1az_policies.html).
 
 ---
 
@@ -60,7 +112,7 @@ page_id: pingone:authorization_using_pingone_authorize:p1_az_adding_named_condit
 canonical_url: https://docs.pingidentity.com/pingone/authorization_using_pingone_authorize/p1_az_adding_named_conditions.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: April 27, 2026
+revdate: 2026-08-12T14:23:53-0500
 section_ids:
   steps: Steps
   choose-from: Choose from:
@@ -80,9 +132,11 @@ For example, consider a named condition that compares the account status receive
 
 1. In the PingOne admin console, go to **Authorization > Trust Framework**.
 
-2. On the **Conditions** tab, click the **[icon: plus, set=fa]**icon.
+2. In the **Module** list, select the module in which you want to add the named condition.
 
-3. Define general information for the named condition:
+3. On the **Conditions** tab, click the **[icon: plus, set=fa]**icon.
+
+4. Define general information for the named condition:
 
    1. Enter a unique **Name** for the condition.
 
@@ -100,23 +154,23 @@ For example, consider a named condition that compares the account status receive
 
       Nesting groups related conditions together. You can move the condition to another location in the tree by selecting a different parent condition. To remove nesting, click the **Delete** icon and leave the **Parent** blank.
 
-4. To add a comparison to the condition, click **[icon: plus, set=fa]Comparison**.
+5. To add a comparison to the condition, click **[icon: plus, set=fa]Comparison**.
 
    ![Screen capture showing Condition Builder fields, including the Select an Attribute list, the default Equals comparator. and the constant value input field with the Switch to attribute button.](_images/iid1685466689353.png)
 
-5. Select an attribute to use in the comparison, select a comparator, and then enter a constant or click the **Switch to Attribute** (![fba1676849235443](_images/fba1676849235443.png)) icon to select an attribute.
+6. Select an attribute to use in the comparison, select a comparator, and then enter a constant or click the **Switch to Attribute** (![fba1676849235443](_images/fba1676849235443.png)) icon to select an attribute.
 
    |   |                                                                                                                                                                                                                                                                                                                                       |
    | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
    |   | When you select an attribute, you can select a property that's grayed out to [generate an attribute](p1_az_generating_attributes.html) that resolves against the parent attribute's JSON schema. If the property is nested, generate an attribute for the property above first and then generate an attribute for the child property. |
 
-6. To nest a comparison under another comparison, click **[icon: plus, set=fa]Group**.
+7. To nest a comparison under another comparison, click **[icon: plus, set=fa]Group**.
 
    Subgroups allow more permutations in comparisons. To remove nesting while keeping the comparison, click **Ungroup**.
 
-7. To add a named condition, click **[icon: plus, set=fa]Named Condition**, select a named condition, and then select **is True** or **is False**.
+8. To add a named condition, click **[icon: plus, set=fa]Named Condition**, select a named condition, and then select **is True** or **is False**.
 
-8. To combine multiple conditions, named conditions, or groups, select one of the following options.
+9. To combine multiple conditions, named conditions, or groups, select one of the following options.
 
    ### Choose from:
 
@@ -126,11 +180,11 @@ For example, consider a named condition that compares the account status receive
 
    * **None**: Invokes the condition when none of the conditions are true. This is like adding a `NOT` Boolean operator.
 
-9. Click **Save Changes**.
+10. Click **Save Changes**.
 
-   |   |                                                                                                                                                                                                                                                                                                        |
-   | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-   |   | You can copy a named condition defined on the **Conditions** tab for reuse by selecting **Make Copy** from the hamburger menu of that condition. If you copy a named condition with children, only the parent is duplicated. You can't copy a named condition at its point of use in a rule or policy. |
+    |   |                                                                                                                                                                                                                                                                                                        |
+    | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+    |   | You can copy a named condition defined on the **Conditions** tab for reuse by selecting **Make Copy** from the hamburger menu of that condition. If you copy a named condition with children, only the parent is duplicated. You can't copy a named condition at its point of use in a rule or policy. |
 
 ---
 
@@ -142,9 +196,8 @@ page_id: pingone:authorization_using_pingone_authorize:p1az_adding_policy_or_pol
 canonical_url: https://docs.pingidentity.com/pingone/authorization_using_pingone_authorize/p1az_adding_policy_or_policy_set.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: June 15, 2026
+revdate: 2026-09-14T22:02:49Z
 section_ids:
-  about-this-task: About this task
   steps: Steps
   choose-from: Choose from:
 ---
@@ -153,17 +206,17 @@ section_ids:
 
 Add PingOne Authorize policies to define the circumstances under which users can access certain resources.
 
-## About this task
-
 It's helpful to frame your policies in terms of what is permitted or denied.
 
 Use policy sets to group policies and organize them hierarchically.
 
 ## Steps
 
-1. Go to **Authorization > Policies**.
+1. In the PingOne admin console, go to **Authorization > Policies**.
 
-2. Click the **[icon: plus, set=fa]**icon and select one of the following:
+2. In the **Module** list, select the module in which you want to add a policy or policy set.
+
+3. Click the **[icon: plus, set=fa]**icon and select one of the following:
 
    ### Choose from:
 
@@ -171,7 +224,7 @@ Use policy sets to group policies and organize them hierarchically.
 
    * **Add Policy**: Add policies to logically group rules and other policies.
 
-3. In the **Name** field, enter a name relevant to the business rule that you are modeling.
+4. In the **Name** field, enter a name relevant to the business rule that you are modeling.
 
    |   |                                                                                            |
    | - | ------------------------------------------------------------------------------------------ |
@@ -179,19 +232,19 @@ Use policy sets to group policies and organize them hierarchically.
 
    ![Screen capture of the policy name showing the red dot indicating unsaved changes.](_images/guy1637366184509.png)
 
-4. In **Applies When**, add [targets](p1az_policy_targets.html) to define when the policy is applied in decision requests.
+5. In **Applies When**, add [targets](p1az_policy_targets.html) to define when the policy is applied in decision requests.
 
    |   |                                                                                   |
    | - | --------------------------------------------------------------------------------- |
    |   | You cannot copy **Applies When** conditions for reuse in other policies or rules. |
 
-5. Add rules, [conditions](p1az_conditions.html), and [statements](p1az_policy_statements.html).
+6. Add rules, [conditions](p1az_conditions.html), and [statements](p1az_policy_statements.html).
 
    |   |                                                                                                                    |
    | - | ------------------------------------------------------------------------------------------------------------------ |
    |   | Use the hamburger menu next to the rule **Name** field to add **Applies When** conditions and statements to rules. |
 
-6. **Optional:** Select the **Disable** check box to disable your policy or policy set.
+7. (Optional) Select the **Disable** checkbox to disable your policy or policy set.
 
    If you disable the policy, the decision engine skips it in evaluation and produces a `Not Applicable` decision.
 
@@ -199,11 +252,11 @@ Use policy sets to group policies and organize them hierarchically.
    | - | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
    |   | You can also disable rules. If a rule is unreachable because of the rule structure and combining algorithm, disabling that rule has no effect on the final decision. |
 
-7. Click **Save changes**.
+8. Click **Save changes**.
 
-   |   |                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-   | - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-   |   | To copy a policy or rule for reuse, select **Make Copy** from the hamburger menu of that policy element. You cannot make copies of policy sets.If you copy policies containing **Library** rules or statements, those **Library** elements are reused in the new policy, not copied. For example, if you copy a policy that contains a custom rule, which in turn contains a **Library** statement, the rule is copied but the statement is reused. |
+   |   |                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+   | - | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+   |   | To copy a policy or rule for reuse, select **Make Copy** from the hamburger menu of that policy element. You can't make copies of policy sets.If you copy policies containing **Library** rules or statements, those **Library** elements are reused in the new policy, not copied. For example, if you copy a policy that contains a custom rule, which in turn contains a **Library** statement, the rule is copied but the statement is reused. |
 
 ---
 
@@ -215,7 +268,7 @@ page_id: pingone:authorization_using_pingone_authorize:p1az_adding_worker_app
 canonical_url: https://docs.pingidentity.com/pingone/authorization_using_pingone_authorize/p1az_adding_worker_app.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: June 15, 2026
+revdate: 2026-07-20T00:00:00Z
 section_ids:
   steps: Steps
   result: Result:
@@ -296,7 +349,7 @@ page_id: pingone:authorization_using_pingone_authorize:p1_az_adding_application_
 canonical_url: https://docs.pingidentity.com/pingone/authorization_using_pingone_authorize/p1_az_adding_application_roles.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: June 15, 2026
+revdate: 2026-07-20T00:00:00Z
 section_ids:
   before-you-begin: Before you begin
   about-this-task: About this task
@@ -376,7 +429,7 @@ page_id: pingone:authorization_using_pingone_authorize:p1az_tutorial_adding_an_a
 canonical_url: https://docs.pingidentity.com/pingone/authorization_using_pingone_authorize/p1az_tutorial_adding_an_attribute.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: July 6, 2026
+revdate: 2026-07-06T00:00:00Z
 section_ids:
   steps: Steps
   result: Result:
@@ -455,7 +508,7 @@ page_id: pingone:authorization_using_pingone_authorize:p1_az_adding_attributes
 canonical_url: https://docs.pingidentity.com/pingone/authorization_using_pingone_authorize/p1_az_adding_attributes.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: April 27, 2026
+revdate: 2026-08-12T13:49:45-0500
 section_ids:
   before-you-begin: Before you begin
   steps: Steps
@@ -480,7 +533,9 @@ Before adding attributes:
 
    1. In the PingOne admin console, go to **Authorization > Trust Framework**.
 
-   2. On the **Attributes** tab, click the **[icon: plus, set=fa]**icon.
+   2. In the **Module** list, select the module in which you want to add the attribute.
+
+   3. On the **Attributes** tab, click the **[icon: plus, set=fa]**icon.
 
 2. Define general information for the attribute:
 
@@ -528,7 +583,7 @@ page_id: pingone:authorization_using_pingone_authorize:p1_az_adding_external_oau
 canonical_url: https://docs.pingidentity.com/pingone/authorization_using_pingone_authorize/p1_az_adding_external_oauth_servers.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: September 5, 2025
+revdate: 2026-10-02T18:06:59Z
 keywords: ["external OAuth client;external token issuer"]
 section_ids:
   before-you-begin: Before you begin
@@ -617,7 +672,7 @@ page_id: pingone:authorization_using_pingone_authorize:p1az_tutorial_adding_and_
 canonical_url: https://docs.pingidentity.com/pingone/authorization_using_pingone_authorize/p1az_tutorial_adding_and_testing_policies.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: June 15, 2026
+revdate: 2026-06-15T00:00:00Z
 section_ids:
   tutorial-add-policy: Adding a policy
   steps: Steps
@@ -745,10 +800,9 @@ page_id: pingone:authorization_using_pingone_authorize:p1az_adding_custom_polici
 canonical_url: https://docs.pingidentity.com/pingone/authorization_using_pingone_authorize/p1az_adding_custom_policies_for_api_services_and_operations.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: December 2, 2025
+revdate: 2026-10-26T21:53:14Z
 section_ids:
   before-you-begin: Before you begin
-  about-this-task: About this task
   steps: Steps
   choose-from: Choose from:
 ---
@@ -757,27 +811,21 @@ section_ids:
 
 With an API gateway integration, you can define custom policies that target inbound requests and outbound responses for API services and operations.
 
-## Before you begin
+Custom policies control access to APIs in complex authorization scenarios. When you enable custom policies for an API service, PingOne Authorize creates a system-owned [module](p1az_modules.html) and generates a policy tree that reflects the service and its operations. You can't rename, rearrange, or delete the policy sets and policies that PingOne Authorize generates. You can add your own custom policies to the **Custom** policy sets in the tree.
 
-If custom policies are not enabled for your API service, enable them by clicking **Enable Custom Policies** on the API service's **Overview** tab.
+The tree structure is organized as follows:
 
-## About this task
-
-Custom policies control access to APIs in complex authorization scenarios. When you enable custom policies for an API service, PingOne Authorize generates a policy tree for the API service. The tree structure is system-owned and reflects the API service and its operations. You can't modify the policy sets and policies in the tree, but you can add your own custom policies to **Custom** policy sets in the tree.
-
-The tree structure is organized as follows.
-
-![Screen capture showing the API Service policy set for the Meme Game.](_images/fqa1690825789014.png)
+![Screen capture showing the API Service policy set for the Meme Game.](_images/p1az-meme-game-api-service-tree.png)
 
 Top-level policy sets include:
 
-* **API Service *\<Name>***: This is the top level policy set for the API service. It serves as a container for everything nested underneath it.
+* **API Service \<Name>**: This is the top-level policy set for the API service. It serves as a container for everything nested underneath it.
 
 * **API Service and Operations**: This policy set ensures that combining algorithms work correctly for AAM rules and policies.
 
 The next level contains the request and response policies and policy sets for each API service.
 
-![Screen capture showing the Inbound Request policy set for the Meme Game API Service.](_images/gky1690825877262.png)
+![Screen capture showing the Inbound Request policy set for the Meme Game API Service.](_images/p1az-meme-game-api-service-inbound.png)
 
 These include:
 
@@ -789,13 +837,13 @@ These include:
 
 * **Outbound Response**: This policy set is a container for rules and custom policies that target outbound responses from the API service. Its children have the same structure as the **Inbound Request** policy set.
 
-Each operation under the API service shares a similar structure.
+Each operation under the API service shares a similar structure:
 
-![Screen capture showing the Get Memes of Another User Operation policy set for the Meme Game API Service.](_images/qyu1690825978459.png)
+![Screen capture showing the Get Memes of Another User Operation policy set for the Meme Game API Service.](_images/p1az-meme-game-api-service-get-meme-operation.png)
 
 Operation policies and policy sets include:
 
-* **Operation *\<Name>***: This is the top level policy set for the operation. It serves as a container for everything nested underneath it.
+* **Operation \<Name>**: This is the top-level policy set for the operation. It serves as a container for everything nested underneath it.
 
 * **Inbound Request**: This policy set is a container for rules and custom policies that target inbound requests for the specific operation.
 
@@ -805,13 +853,21 @@ Operation policies and policy sets include:
 
 * **Outbound Response**: This policy set is a container for rules and custom policies that target outbound responses from the specific operation. It has nested children for **Basic Rules** and **Custom** policies.
 
+## Before you begin
+
+If custom policies aren't enabled for your API service, enable them by clicking **Enable Custom Policies** on the API service's **Overview** tab.
+
 ## Steps
 
-1. Go to **Authorization > Policies**, and expand the **API Access Management** policy tree, then expand the policy tree for your API service.
+1. In the PingOne admin console, go to **Authorization > Policies**, and select your API service's module in the **Module** list.
+
+   |   |                                                                                                                                                                                       |
+   | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+   |   | You can also go to **Authorization > API Services**, select the API service, and click the **policy tree** link on the **Overview** tab to open the policy tree for that API service. |
 
    For example, consider an API service that protects health records and an API operation to get the records. You want to write a policy that allows a user to view only their own health records.
 
-   ![Screen capture showing the policy tree with the Health Records API Service policy set expanded to show child policy sets.](_images/cbm1697230764873.png)
+   ![Screen capture showing the policy tree with the Health Records API Service policy set expanded to show child policy sets.](_images/p1az-health-records-api-service-overview.png)
 
 2. In the policy tree, select the **Custom** policy set nested under the request or response that you want the policy to target:
 
@@ -827,13 +883,13 @@ Operation policies and policy sets include:
 
    For the health records example, you would select the **Custom** policy set for inbound requests to the operation.
 
-   ![Screen capture showing the Custom policy set for inbound requests to the GET Records operation nested under the Health Records API Service policy set.](_images/wqz1697231037161.png)
+   ![Screen capture showing the Custom policy set for inbound requests to the GET Records operation nested under the Health Records API Service policy set.](_images/p1az-health-records-api-service-custom-policy.png)
 
 3. Click the **[icon: plus, set=fa]**icon and select **Add Policy**.
 
-4. In the **Name** field, enter a name relevant to the business rule that you are modeling.
+4. In the **Name** field, enter a name relevant to the business rule that you're modeling.
 
-   ![Screen capture showing the User identity check policy Name and Description fields.](_images/lsf1697231232345.png)
+   ![Screen capture showing the User identity check policy Name and Description fields.](_images/p1az-api-service-user-identity-check-policy.png)
 
 5. Add rules, [conditions](p1az_conditions.html), and [statements](p1az_policy_statements.html) to the policy as needed.
 
@@ -858,6 +914,83 @@ Operation policies and policy sets include:
 ---
 
 ---
+title: Adding custom policies for MCP servers
+description: Define custom policies that target inbound requests for MCP servers.
+component: pingone
+page_id: pingone:authorization_using_pingone_authorize:p1az_adding_custom_policies_mcp_server
+canonical_url: https://docs.pingidentity.com/pingone/authorization_using_pingone_authorize/p1az_adding_custom_policies_mcp_server.html
+llms_txt: https://docs.pingidentity.com/pingone/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-10-27T23:28:29Z
+section_ids:
+  steps: Steps
+---
+
+# Adding custom policies for MCP servers
+
+Define custom policies that target inbound requests for MCP servers.
+
+Custom policies control access to MCP servers in complex authorization scenarios. When you create an MCP server, PingOne Authorize creates a system-owned module and generates a policy tree that reflects the server. You can't rename, rearrange, or delete the policy sets and policies that PingOne Authorize generates. You can add your own custom policies to the **Custom** policy sets in the tree.
+
+|   |                                                                                   |
+| - | --------------------------------------------------------------------------------- |
+|   | Custom policies are enabled by default for all MCP servers and can't be disabled. |
+
+Top-level policy sets include:
+
+* **API service \<Name>**: This is the top-level policy for the MCP server. It serves as a container for everything nested underneath it.
+
+* **API service and Operations**: This policy set ensures that combining algorithms work correctly for API Access Management rules and policies.
+
+  |   |                                                                                                                       |
+  | - | --------------------------------------------------------------------------------------------------------------------- |
+  |   | MCP servers don't have operations. Policies that you add target all requests to the MCP server, including tool calls. |
+
+The next level contains the policy sets that target requests to the MCP server:
+
+* **Inbound Request**: This policy set is a container for rules and custom policies that target inbound requests for the MCP server.
+
+  * **Custom**: This policy set is where you add your own custom policies that target inbound requests for the MCP server.
+
+  |   |                                                                                                                                                           |
+  | - | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+  |   | API Access Management doesn't support outbound response policies for MCP servers. You can add custom policies only to the **Inbound Request** policy set. |
+
+## Steps
+
+1. In the PingOne admin console, go to **Authorization > Policies**, and select the MCP server's module in the **Module** list.
+
+   |   |                                                                                                                                                                                            |
+   | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+   |   | You can also go to **Authorization > MCP Servers**, select the MCP server, and click the **policy tree** link on the **Overview** tab to open the policy tree for the MCP server's module. |
+
+2. In the policy tree, select the **Custom** policy set nested under the MCP server's **Inbound Request** policy set.
+
+   This is where you add policies that are evaluated for every request that the MCP server receives. For example, a policy that challenges a client whose access token doesn't include the scopes required for a tool call.
+
+3. Click the **[icon: plus, set=fa]**and select **Add Policy**.
+
+4. In the **Name** field, enter a name for the policy.
+
+5. Add rules, [conditions](p1az_conditions.html), and [statements](p1az_policy_statements.html) to the policy as needed.
+
+   For example, to challenge MCP clients whose access token doesn't include the scopes required for a tool call, add an [auth-challenge statement](p1az_statement_templates.html#p1az_auth_challenge_templates) from the **Respond with Protected Resource Metadata Scope Challenge** template. The challenge lists the required scopes and directs the client to the PRM document for the MCP server.
+
+   The following rule uses the built-in `PingOne.API Access Management.Identity.Access Token.Scopes` attribute to deny requests that don't include the `transactions:approve` scope:
+
+   ![Screen capture showing a rule that denies requests to the MCP server that don't include the transactions:approve scope.](_images/p1az-mcp-scope-rule.png)
+
+   The following policy statement uses the **Respond with Protected Resource Metadata Scope Challenge** template to challenge clients with the required scope:
+
+   ![Screen capture showing a policy statement that challenges clients whose access token doesn't include the required scope.](_images/p1az-prm-statement-example.png)
+
+6. Click **Save changes**.
+
+7. To deploy the policy, [deploy the MCP server](p1az_deploying_mcp_servers.html).
+
+---
+
+---
 title: Adding repetition settings to an authorization attribute
 description: Add repetition settings to an attribute to resolve attribute values from a collection.
 component: pingone
@@ -865,7 +998,7 @@ page_id: pingone:authorization_using_pingone_authorize:p1_az_adding_repetition_s
 canonical_url: https://docs.pingidentity.com/pingone/authorization_using_pingone_authorize/p1_az_adding_repetition_settings_to_attributes.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: January 15, 2026
+revdate: 2026-07-20T00:00:00Z
 section_ids:
   before-you-begin: Before you begin
   steps: Steps
@@ -895,25 +1028,27 @@ For example, consider the following attribute that retrieves a collection of pay
 
 ## Steps
 
-1. Go to **Authorization > Trust Framework** and click the **Attributes** tab.
+1. In the PingOne admin console, go to **Authorization > Trust Framework**.
 
-2. Select the attribute to which you want to add repetition settings.
+2. In the **Module** list, select the module that contains the attribute to which you want to add repetition settings.
 
-3. Click the hamburger menu in the **Name** field and select **Add repetition settings**.
+3. On the **Attributes** tab, select the attribute to which you want to add repetition settings.
 
-4. In the **Repeat for each item of** list in the **Repetition Settings** section, select a repetition source attribute.
+4. Click the hamburger menu in the **Name** field and select **Add repetition settings**.
+
+5. In the **Repeat for each item of** list in the **Repetition Settings** section, select a repetition source attribute.
 
    ![Screen capture showing the Repeat for each item of field in the Repetition Settings section of an attribute.](_images/mve1677452499260.png)
 
-5. Expand **Resolvers** and click **[icon: plus, set=fa]Add Resolver**.
+6. Expand **Resolvers** and click **[icon: plus, set=fa]Add Resolver**.
 
-6. In the **Resolver type** list, select **Current Repetition Value**.
+7. In the **Resolver type** list, select **Current Repetition Value**.
 
    This resolves the attribute against individual items in the collection.
 
    ![Screen capture showing the Resolver type set to Current Repetition Value and a Value Processor with a JSON Path processor expression that gets the transaction amount.](_images/p1az-repetition-settings-resolver.png)
 
-7. Click **Save changes**.
+8. Click **Save changes**.
 
 ---
 
@@ -925,7 +1060,7 @@ page_id: pingone:authorization_using_pingone_authorize:p1_az_adding_resolvers_to
 canonical_url: https://docs.pingidentity.com/pingone/authorization_using_pingone_authorize/p1_az_adding_resolvers_to_attributes.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: June 15, 2026
+revdate: 2026-06-15T00:00:00Z
 section_ids:
   before-you-begin: Before you begin
   steps: Steps
@@ -1011,7 +1146,7 @@ page_id: pingone:authorization_using_pingone_authorize:p1az_adding_statements_to
 canonical_url: https://docs.pingidentity.com/pingone/authorization_using_pingone_authorize/p1az_adding_statements_to_policies_and_rules.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: September 11, 2025
+revdate: 2026-09-21T20:13:36Z
 section_ids:
   steps: Steps
   choose-from: Choose from:
@@ -1033,9 +1168,11 @@ You can drag collapsed statements to rearrange them and change the order in whic
 
 ## Steps
 
-1. In the PingOne admin console, go to **Authorization > Policies**, and click a policy or [add a new policy](p1az_adding_policy_or_policy_set.html).
+1. In the PingOne admin console, go to **Authorization > Policies**.
 
-2. Do one of the following to add a statement.
+2. In the **Module** list, select the module in which you want to add a statement, and then click a policy or [add a new policy](p1az_adding_policy_or_policy_set.html).
+
+3. Do one of the following to add a statement.
 
    ### Choose from:
 
@@ -1049,9 +1186,9 @@ You can drag collapsed statements to rearrange them and change the order in whic
 
      * You can add statements to individual rules the same way that you add them to policies. To add a statement to a rule, click the hamburger menu next to the rule **Name** field and select **Add Statement**. Then click **[icon: plus, set=fa]Add Statement** or drag a statement template from the **Library** to the **Statement** section in the rule. |
 
-3. Enter a **Name** and an optional **Description** for the statement.
+4. Enter a **Name** and an optional **Description** for the statement.
 
-4. (Optional) Select the **Obligatory** checkbox to make the statement a required condition for authorization.
+5. (Optional) Select the **Obligatory** checkbox to make the statement a required condition for authorization.
 
    PingOne Authorize handles obligations differently in dynamic authorization and API Access Management:
 
@@ -1063,13 +1200,13 @@ You can drag collapsed statements to rearrange them and change the order in whic
      | - | --------------------------------------------------------------------------------------------------------------------------- |
      |   | If a non-obligatory statement can't be fulfilled, the decision service logs an error and continues the decision evaluation. |
 
-5. Enter a statement **Code** to identify the type of statement.
+6. Enter a statement **Code** to identify the type of statement.
 
    If you pulled in a statement template, use the default code populated from the template. Otherwise, enter your own code. For example, you can enter a code such as `MFA_REQ` or `APPROVE` to return a statement code to a DaVinci flow.
 
    Learn more about built-in statement codes and payloads in [Statement templates](p1az_statement_templates.html).
 
-6. In the **Create** list, select the kinds of decisions produced by the policy or rule that will create the statement.
+7. In the **Create** list, select the kinds of decisions produced by the policy or rule that will create the statement.
 
    Statements can apply to `Permit`, `Deny`, `Permit or Deny`, or `Indeterminate` decisions. Select **When Applicable** if the statement applies to any of these. This is the default option.
 
@@ -1079,7 +1216,7 @@ You can drag collapsed statements to rearrange them and change the order in whic
 
    ![Screen capture showing an Include Attributes statement with a name, description, code, and payload. The statement applies to Permit decisions.](_images/zle1666983441336.png)
 
-7. In the **Attach to final decision** list, select an option for how the statement propagates through the decision tree and whether it's returned in the overall decision response.
+8. In the **Attach to final decision** list, select an option for how the statement propagates through the decision tree and whether it's returned in the overall decision response.
 
    ### Choose from:
 
@@ -1089,7 +1226,7 @@ You can drag collapsed statements to rearrange them and change the order in whic
 
    * **Always**: The statement is always returned, unless there's an error in the associated decision.
 
-8. (Optional) In the **Payload** field, enter JSON parameters that govern the actions that the decision point performs when it applies the statement.
+9. (Optional) In the **Payload** field, enter JSON parameters that govern the actions that the decision point performs when it applies the statement.
 
    Payloads can include static or interpolated data and provide instructions for things such as filtering and transforming headers, query parameters, and request and response bodies. You can find payload examples in [Statement templates](p1az_statement_templates.html).
 
@@ -1097,11 +1234,11 @@ You can drag collapsed statements to rearrange them and change the order in whic
    | - | ---------------------------------------------------------------------------------------------------------------------------------- |
    |   | To experiment with JSONPath expressions, use a JSONPath evaluator, such as the [JSONPath Online Evaluator](https://jsonpath.com/). |
 
-9. (Optional) To include attributes relevant to the statement in the decision response, drag one or more attributes from the **Components** tab to the **Attach** field.
+10. (Optional) To include attributes relevant to the statement in the decision response, drag one or more attributes from the **Components** tab to the **Attach** field.
 
-10. (Optional) To add the statement to the **Library** as a reusable component, click the hamburger menu next to the **Obligatory** checkbox and select **Add to library**.
+11. (Optional) To add the statement to the **Library** as a reusable component, click the hamburger menu next to the **Obligatory** checkbox and select **Add to library**.
 
-11. Click **Save changes**.
+12. Click **Save changes**.
 
 ## Next steps
 
@@ -1119,10 +1256,11 @@ page_id: pingone:authorization_using_pingone_authorize:p1az_adding_p1az_service_
 canonical_url: https://docs.pingidentity.com/pingone/authorization_using_pingone_authorize/p1az_adding_p1az_service_to_your_environment.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: June 15, 2026
+revdate: 2026-06-15T00:00:00Z
 section_ids:
   before-you-begin: Before you begin
   steps: Steps
+  result: Result
 ---
 
 # Adding the PingOne Authorize service to your environment
@@ -1143,15 +1281,15 @@ To get started with PingOne Authorize, add the service to your PingOne environme
 
 1. In your PingOne environment, go to **Overview**.
 
-2. Next to **Services**, click the **[icon: plus, set=fa]**icon.
+2. Next to **Environment Capabilities**, click the **Plus** icon ([icon: plus, set=fa]).
 
-3. Click **[icon: plus, set=fa]Add** to add the **PingOne Authorize** service.
+3. In the **Add a Capability** list, locate **PingOne Authorize** and click **[icon: plus, set=fa]Add**.
 
-   ![Screen capture showing PingOne Authorize in the Add a Service list.](_images/tam1638807778818.png)
+   ![Screen capture showing PingOne Authorize in the Add a Capability list.](_images/p1az-in-add-capability-list.png)
 
-4. In the **Add a Service** window, click **Finish**.
+## Result
 
-   PingOne Authorize is displayed in the left navigation pane.
+**Authorization** is displayed in the sidebar.
 
 ---
 
@@ -1163,7 +1301,7 @@ page_id: pingone:authorization_using_pingone_authorize:p1_az_adding_processors_t
 canonical_url: https://docs.pingidentity.com/pingone/authorization_using_pingone_authorize/p1_az_adding_processors_to_attributes.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: January 15, 2026
+revdate: 2026-01-15T00:00:00Z
 section_ids:
   before-you-begin: Before you begin
   steps: Steps
@@ -1210,7 +1348,7 @@ page_id: pingone:authorization_using_pingone_authorize:p1_az_adding_value_settin
 canonical_url: https://docs.pingidentity.com/pingone/authorization_using_pingone_authorize/p1_az_adding_value_settings_to_attributes.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: June 15, 2026
+revdate: 2026-06-15T00:00:00Z
 section_ids:
   before-you-begin: Before you begin
   steps: Steps
@@ -1254,10 +1392,12 @@ page_id: pingone:authorization_using_pingone_authorize:p1_az_api_access_manageme
 canonical_url: https://docs.pingidentity.com/pingone/authorization_using_pingone_authorize/p1_az_api_access_management.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: December 2, 2025
+revdate: 2026-09-29T18:41:38Z
 keywords: ["access control;API access"]
 section_ids:
   key-components: Key components
+  api-service: API service
+  api-gateway: API gateway
   getting-started: Getting started
   p1_aam_wf_p1sso: Using API Access Management with PingOne SSO as the token source
   before-you-begin: Before you begin
@@ -1284,9 +1424,17 @@ Use [built-in rules](p1az_add_api_service_operations.html) to get started with a
 
 ## Key components
 
+API Access Management involves the following components.
+
+### API service
+
 An [API service](p1az_api_services.html) is a logical container in PingOne Authorize that represents a related set of API operations you want to protect. API Access Management rejects requests that don't match any API service's base URL.
 
-As a basic form of access control, API Access Management validates tokens issued by PingOne SSO and external token sources such as PingOne Advanced Identity Cloud and PingOne Advanced Services. API Access Management rejects requests without a valid access token. Learn more about access control with external token sources in [External OAuth servers in PingOne Authorize](p1_az_external_oauth_servers.html).
+When you enable [custom policies](p1az_adding_custom_policies_for_api_services_and_operations.html) for an API service, PingOne Authorize automatically creates a corresponding [module](p1az_modules.html) for that service with its own policy tree. All API service modules share a Trust Framework with the **Default** module.
+
+As a basic form of access control, API Access Management validates tokens issued by PingOne SSO and external token sources, such as PingOne Advanced Identity Cloud and PingOne Advanced Services. API Access Management rejects requests without a valid access token. Learn more about access control with external token sources in [External OAuth servers in PingOne Authorize](p1_az_external_oauth_servers.html).
+
+### API gateway
 
 An [API gateway](p1az_api_gateways.html) is the bridge between your protected API and PingOne Authorize. A PingOne Authorize integration kit works alongside your API gateway to intercept incoming API calls and enforce your authorization policies. Ping Identity provides [integration kits](https://marketplace.pingone.com/browse?products=authorize\&contentType=integrations) for the following popular third-party gateways:
 
@@ -1334,6 +1482,10 @@ Make sure your PingOne environment includes PingOne SSO and PingOne Authorize.
 
    * [Define custom policies](p1az_adding_custom_policies_for_api_services_and_operations.html).
 
+     |   |                                                                                                                                                                       |
+     | - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+     |   | Enabling custom policies for an API service creates a corresponding module for that service. You can view this module on the **Managed** tab on the **Modules** page. |
+
 5. [Add an application](../applications/p1_applications_add_applications.html) in PingOne that represents an API client.
 
 6. Use the client application to make a request to the protected API.
@@ -1378,6 +1530,10 @@ Make sure your PingOne environment includes PingOne SSO and PingOne Authorize.
    | - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
    |   | You can use built-in attributes based on access token claims in your policies. Learn more about these attributes in [Access token-related attributes](p1_az_built_in_attributes.html#p1-token-attributes). |
 
+   |   |                                                                                                                                                                       |
+   | - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+   |   | Enabling custom policies for an API service creates a corresponding module for that service. You can view this module on the **Managed** tab on the **Modules** page. |
+
 7. Use the client application to make a request to the protected API.
 
    The request is routed through your API gateway and the integration kit, and then PingOne Authorize evaluates relevant policies and returns an authorization decision that permits or denies access to the requested API resource.
@@ -1394,7 +1550,7 @@ page_id: pingone:authorization_using_pingone_authorize:p1az_api_gateways
 canonical_url: https://docs.pingidentity.com/pingone/authorization_using_pingone_authorize/p1az_api_gateways.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: June 6, 2025
+revdate: 2025-06-06T00:00:00Z
 ---
 
 # API gateways
@@ -1408,109 +1564,3 @@ PingOne Authorize also integrates natively with PingGateway, enabling you to app
 For seamless policy-based access control for your HTTP APIs, configure an integration with PingOne Authorize to have your API gateway enforce authorization rules managed in PingOne Authorize. In addition to configuring an API gateway integration, you can [edit](p1az_edit_api_gateway.html) or [delete](p1az_delete_api_gateway.html) an API gateway, or [rotate a gateway credential](p1az_rotating_gateway_credential.html).
 
 Learn more about how traffic flows through an API gateway and PingOne Authorize in [How API Access Management works](p1az_introduction.html#section_lvy_vgt_zsb).
-
----
-
----
-title: API services
-description: An API service is the fundamental unit of access control in PingOne Authorize that represents the API you want to protect.
-component: pingone
-page_id: pingone:authorization_using_pingone_authorize:p1az_api_services
-canonical_url: https://docs.pingidentity.com/pingone/authorization_using_pingone_authorize/p1az_api_services.html
-llms_txt: https://docs.pingidentity.com/pingone/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: September 5, 2025
-section_ids:
-  access-control-policies: Access control policies
-  token-management: Token management
-  pingone-sso-token-source: PingOne SSO token source
-  external-token-source: External token source
-  policy-deployment: Policy deployment
----
-
-# API services
-
-An API service is the fundamental unit of access control in PingOne Authorize that represents the API you want to protect.
-
-## Access control policies
-
-To control access to your APIs, you can use built-in access control rules and custom policies. Built-in access control rules grant access based on:
-
-* Authorized scopes
-
-* User membership in groups
-
-* User permissions
-
-* Authentication policy
-
-* Time since last authentication
-
-Learn more about these rules in [Defining operations for protected actions](p1az_add_api_service_operations.html).
-
-For more complex access control scenarios, you can define custom policies in the **API Access Management** policy tree. Learn more in [Adding custom policies for API services and operations](p1az_adding_custom_policies_for_api_services_and_operations.html).
-
-## Token management
-
-An API service groups related API operations into a protected domain, such as https\://example-api-domain.com, that clients access with a single access token. When you [define an API service](p1az_add_api_service.html), you can use PingOne SSO to issue access tokens and manage users for the API service, or you can use external token sources such as PingOne Advanced Services or PingOne Advanced Identity Cloud.
-
-### PingOne SSO token source
-
-If you use PingOne SSO to issue tokens for the API service, PingOne Authorize works with PingOne resources and applications to manage access control for your API. You can configure access control rules that are tightly integrated with PingOne. You can also define custom policies that handle more complex authorization scenarios.
-
-Each API service is associated with a PingOne resource. This resource is a representation of your API for OAuth authorization purposes. Resources have scopes that are used in access token configuration. Scopes determine which resources a client can access. PingOne Authorize uses scopes to:
-
-* Ensure that the access token presented by a client was issued for your API. In this basic access control check, PingOne Authorize verifies that the audience claim in the access token for the client request matches the audience value configured for the API service's associated resource.
-
-  |   |                                                                                                                                                                                                                                                                                            |
-  | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-  |   | After you define an API service, make sure that you [add a PingOne application](../applications/p1_applications_add_applications.html) that's allowed to access your protected API service. To allow access, grant the application the same scope that you configured for the API service. |
-
-* Determine the extent of access allowed to a client. For example, your API might require a `user:read` scope for reading user data and a `user:write` scope for modifying user data. You can configure a built-in access control rule to perform authorized scope checks.
-
-When authorizing an HTTP request, if the request's access token includes a subject, PingOne Authorize automatically populates the built-in [`PingOne.User`](p1_az_built_in_attributes.html) attribute with the requesting user's data.
-
-### External token source
-
-If access tokens come from an external token source, PingOne Authorize validates the access token and inspects its claims. You can use the claims in custom policies to secure your APIs with claims-based access control. You can't use built-in access control rules when tokens come from external sources.
-
-PingOne Authorize doesn't automatically provide identity information about the requesting user in built-in user attributes when tokens come from an external source. Instead, if the request's access token includes a subject claim, you can use the `PingOne.API Access Management.Identity.Access Token.Subject` attribute to resolve user identity information from an external directory. Learn more in [API Access Management attributes](p1_az_built_in_attributes.html).
-
-Learn more about external token sources in [External OAuth servers in PingOne Authorize](p1_az_external_oauth_servers.html).
-
-## Policy deployment
-
-Each API service has a system-owned [decision endpoint](p1az_decision_endpoints.html) that provides an environment for managing and deploying authorization policies relevant to the API service. The decision endpoint is created when you deploy the API service for the first time, and it has the same name as the API service. Learn more in [Deploying an API service](p1az_deploying_api_services.html).
-
----
-
----
-title: Application roles
-description: Application roles in PingOne Authorize group permissions by function to control user access to application resources.
-component: pingone
-page_id: pingone:authorization_using_pingone_authorize:p1_az_application_roles
-canonical_url: https://docs.pingidentity.com/pingone/authorization_using_pingone_authorize/p1_az_application_roles.html
-llms_txt: https://docs.pingidentity.com/pingone/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: June 15, 2026
----
-
-# Application roles
-
-Application roles provide a way to group permissions by function and assign them to users.
-
-Application roles are collections of [application permissions](../applications/p1_application_permissions.html). When you assign a user to a role, you grant the user all of the permissions for that role.
-
-|   |                                                                                                                                                                                                                                                                                                                                                   |
-| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | PingOne [administrator roles](../directory/p1_roles.html) are collections of permissions that give PingOne admins access to resources in the PingOne admin console, such as organizations, environments, and identities.Application roles help you manage access to the application resources developed by your organization's engineering teams. |
-
-You can assign the same permission to multiple roles. For example, at a bank, both an account administrator and loan officer could have permission to view accounts.
-
-You can also assign multiple roles to the same user. For example, at a small regional bank, Jim might be both an account administrator and a loan officer.
-
-You can assign users to roles when you create an application role or when you edit a user. Learn more in [Adding an application role](p1_az_adding_application_roles.html) and [Managing user roles](../directory/p1_manage_user_roles.html).
-
-|   |                                                                          |
-| - | ------------------------------------------------------------------------ |
-|   | Roles and permissions are currently scoped to an environment in PingOne. |

@@ -4,6 +4,8 @@ description: You need an access token to authenticate to the following Advanced 
 component: pingoneaic-api
 page_id: pingoneaic-api::authenticate-to-rest-api-with-access-token
 canonical_url: https://developer.pingidentity.com/pingoneaic-api/authenticate-to-rest-api-with-access-token.html
+llms_txt: https://developer.pingidentity.com/pingoneaic-api/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 keywords: ["Integration", "REST API", "Authentication"]
 section_ids:
   get-an-access-token: Get an access token

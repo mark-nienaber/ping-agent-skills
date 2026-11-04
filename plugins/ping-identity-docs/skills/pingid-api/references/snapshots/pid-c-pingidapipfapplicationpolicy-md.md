@@ -1,9 +1,11 @@
 ---
 title: PingID Application Policy Management API for PingFederate
-description: PingID allows organizations to create web authentication policies, and apply them to one or more applications, or one or more user groups, or both. See Manage app and group lists in the PingID admin guide.
+description: PingID Application Policy Management API for PingFederate
 component: pingid-api
 page_id: pingid-api::pid_c_PingIDapiPFapplicationPolicy
 canonical_url: https://developer.pingidentity.com/pingid-api/pid_c_PingIDapiPFapplicationPolicy.html
+llms_txt: https://developer.pingidentity.com/pingid-api/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
   pingfederate-application-policy-api: PingFederate Application Policy API
   addapplication: AddApplication

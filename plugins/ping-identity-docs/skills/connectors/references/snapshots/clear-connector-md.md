@@ -1,12 +1,12 @@
 ---
 title: CLEAR Connector
-description: The CLEAR connector lets you verify users using CLEAR's hosted identity verification UI in your PingOne DaVinci flow.
+description: "Configure the CLEAR connector in PingOne DaVinci to redirect users to CLEAR's hosted verification UI and retrieve verified identity results"
 component: connectors
 page_id: connectors::clear_connector
 canonical_url: https://docs.pingidentity.com/connectors/clear_connector.html
 llms_txt: https://docs.pingidentity.com/connectors/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: July 14, 2025
+revdate: 2026-07-09T00:00:00Z
 section_ids:
   setup: Setup
   resources: Resources
@@ -32,13 +32,13 @@ The connector redirects users to CLEAR for identity verification and receives th
 
 You can find more information and setup help in the following:
 
-* DaVinci documentation:
+* PingOne DaVinci documentation:
 
   * [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html)
 
   * [Using connectors securely](https://docs.pingidentity.com/davinci/connectors/davinci_using_connectors_securely.html)
 
-  * [Using DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html)
+  * [Using PingOne DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html)
 
 ### Requirements
 
@@ -52,13 +52,13 @@ To use the connector, you'll need:
 
 ### Configuring the CLEAR connector
 
-Add the connector in DaVinci as shown in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html), then configure it as follows.
+Add the connector in PingOne DaVinci as shown in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html), then configure it as follows.
 
 #### Connector configuration
 
 | Setting                             | Description                                                                                                                                      |
 | ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **DaVinci Redirect URL**            | The DaVinci redirect URL for this connector. This value is provided automatically as a read-only field.                                          |
+| **PingOne DaVinci Redirect URL**    | The PingOne DaVinci redirect URL for this connector. This value is provided automatically as a read-only field.                                  |
 | **Application Return To URL**       | The URL where the user is redirected after completing the CLEAR verification flow. If not provided, CLEAR uses a default completion page.        |
 | **API Key**                         | Your CLEAR API Key used to authenticate requests to the CLEAR API.                                                                               |
 | **Initial Verification Project ID** | The CLEAR project ID used for initial identity verification of new users.                                                                        |
@@ -177,43 +177,43 @@ Redirect user to CLEAR
 >
 >   * id string
 >
->   * object\_name string
+>   * object_name string
 >
 >   * authenticated boolean
 >
->   * authentication\_methods array
+>   * authentication_methods array
 >
->   * activated\_authentication\_methods array
+>   * activated_authentication_methods array
 >
 >   * checks array
 >
->   * completed\_at number
+>   * completed_at number
 >
->   * created\_at number
+>   * created_at number
 >
 >   * email string
 >
->   * expires\_at number
+>   * expires_at number
 >
->   * fields\_to\_collect array
+>   * fields_to_collect array
 >
 >   * ip array
 >
 >   * phone string
 >
->   * redirect\_url string
+>   * redirect_url string
 >
 >   * status string
 >
 >   * token string
 >
->   * updated\_at number
+>   * updated_at number
 >
->   * user\_agent array
+>   * user_agent array
 >
->   * user\_created boolean
+>   * user_created boolean
 >
->   * user\_id string
+>   * user_id string
 >
 >   * traits object
 >
@@ -227,7 +227,7 @@ Redirect user to CLEAR
 >
 >       * state string
 >
->       * postal\_code string
+>       * postal_code string
 >
 >       * country string
 >
@@ -241,15 +241,15 @@ Redirect user to CLEAR
 >
 >     * email string
 >
->     * first\_name string
+>     * first_name string
 >
->     * last\_name string
+>     * last_name string
 >
->     * middle\_name string
+>     * middle_name string
 >
->     * second\_family\_name string
+>     * second_family_name string
 >
->     * full\_last\_name string
+>     * full_last_name string
 >
 >     * phone string
 >
@@ -257,21 +257,21 @@ Redirect user to CLEAR
 >
 >     * ssn9 string
 >
->     * identification\_number string
+>     * identification_number string
 >
->     * identification\_type string
+>     * identification_type string
 >
 >     * document object
 >
 >       * nationality string
 >
->       * document\_type string
+>       * document_type string
 >
->       * issuing\_country string
+>       * issuing_country string
 >
->       * document\_number string
+>       * document_number string
 >
->       * date\_of\_expiry object
+>       * date_of_expiry object
 >
 >         * day number
 >
@@ -281,7 +281,7 @@ Redirect user to CLEAR
 >
 >       * gender string
 >
->       * date\_of\_birth object
+>       * date_of_birth object
 >
 >         * day number
 >
@@ -289,31 +289,31 @@ Redirect user to CLEAR
 >
 >         * year number
 >
->       * first\_name string
+>       * first_name string
 >
->       * last\_name string
+>       * last_name string
 >
->       * middle\_name string
+>       * middle_name string
 >
->     * document\_front string
+>     * document_front string
 >
->     * document\_back string
+>     * document_back string
 >
->     * face\_scan\_preview string
+>     * face_scan_preview string
 >
->   * project\_id string
+>   * project_id string
 >
->   * custom\_fields object
+>   * custom_fields object
 >
->   * user\_profile\_information object
+>   * user_profile_information object
 >
 >     * name object
 >
->       * first\_name string
+>       * first_name string
 >
->       * last\_name string
+>       * last_name string
 >
->       * middle\_name string
+>       * middle_name string
 >
 >     * dob string
 >
@@ -329,14 +329,14 @@ Redirect user to CLEAR
 >
 >       * state string
 >
->       * postal\_code string
+>       * postal_code string
 >
 >       * country string
 >
 >     * email string
 >
->   * user\_profile\_match\_status string
+>   * user_profile_match_status string
 >
->   * idv\_status string
+>   * idv_status string
 >
 >   * sessions array

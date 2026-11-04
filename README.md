@@ -13,11 +13,12 @@ When network access exists, answer content comes from the selected live Ping pag
 
 ## Coverage
 
-- 57 docsets registered in `scripts/docsets.yaml`; 56 enabled.
+- 58 docsets registered in `scripts/docsets.yaml`; 56 enabled, 2 disabled.
 - One consolidated runtime skill under `plugins/ping-identity-docs/runtime-skills/ping-docs/`.
 - 56 generated docset packages under `plugins/ping-identity-docs/skills/`, used as searchable data and optional product-specific installs.
-- `pingcli` disabled: `https://developer.pingidentity.com/pingcli/llms.txt` redirects to a 404. Tracking: https://github.com/mark-nienaber/ping-agent-skills/issues/2.
-- Snapshot footprint ~39 MB; indexes add ~8 MB.
+- `pingcli` enabled again: the upstream per-docset `llms.txt` redirect issue was fixed and v1.11 content serves normally (https://github.com/mark-nienaber/ping-agent-skills/issues/2).
+- `developer-resources` and `pingintelligence` disabled and uninstalled: both upstream docsets now return 404 and are gone from the root index.
+- Snapshot footprint ~55 MB; indexes add ~14 MB.
 - Numeric-version docsets pinned via `preferred_version` in `scripts/docsets.yaml`.
 
 Each generated docset package contains:
@@ -153,11 +154,11 @@ Use the broader scope when a question crosses layers, for example:
 
 ## Skill Inventory
 
-**docs.pingidentity.com:** `auth-node-ref`, `autonomous-identity`, `configuration-guides`, `connectors`, `davinci`, `developer-resources`, `enterprise-connect`, `forgeops`, `glossary`, `identity-governance`, `identity-reporting`, `integrations`, `java-agents`, `licensing-guide`, `openicf`, `pgic`, `pingaccess`, `pingam`, `pingauthorize`, `pingcentral`, `pingdirectory`, `pingds`, `pingfederate`, `pinggateway`, `pingid`, `pingid-user-guide`, `pingidm`, `pingintelligence`, `pingone`, `pingone-admin-mfa-faq`, `pingone-solutions`, `pingoneadvancedservices`, `pingoneaic`, `pingoneforenterprise`, `platform`, `privilege`, `recognize`, `sdks`, `solution-guides`, `web-agents`.
+**docs.pingidentity.com:** `auth-node-ref`, `autonomous-identity`, `configuration-guides`, `connectors`, `davinci`, `enterprise-connect`, `forgeops`, `glossary`, `identity-governance`, `identity-reporting`, `integrations`, `java-agents`, `licensing-guide`, `openicf`, `pgic`, `pingaccess`, `pingam`, `pingauthorize`, `pingcentral`, `pingdirectory`, `pingds`, `pingfederate`, `pinggateway`, `pingid`, `pingid-user-guide`, `pingidm`, `pingone`, `pingone-admin-mfa-faq`, `pingone-solutions`, `pingoneadvancedservices`, `pingoneaic`, `pingoneforenterprise`, `platform`, `privilege`, `recognize`, `sdks`, `solution-guides`, `web-agents`.
 
-**developer.pingidentity.com:** `build-with-ai`, `config-automation-management-sdks`, `config-automation-promotion`, `devops`, `helm`, `identity-for-ai`, `login-widget`, `orchsdks`, `p14e-directory-api`, `pingauthorize-dev`, `pingdirectory-dev`, `pingid-api`, `pingone-api`, `pingone-api-ea`, `pingoneaic-api`, `terraform`.
+**developer.pingidentity.com:** `build-with-ai`, `config-automation-management-sdks`, `config-automation-promotion`, `devops`, `helm`, `identity-for-ai`, `login-widget`, `orchsdks`, `p14e-directory-api`, `pingauthorize-dev`, `pingcentral-dev`, `pingcli`, `pingdirectory-dev`, `pingid-api`, `pingone-api`, `pingone-api-ea`, `pingoneaic-api`, `terraform`.
 
-**Disabled:** `pingcli`, because the upstream `llms.txt` endpoint redirects to 404.
+**Disabled:** `developer-resources` and `pingintelligence`, because both upstream docsets now return 404 and were removed from the root docs index.
 
 ## Composition With `pingidentity/agent-plugins`
 
@@ -324,7 +325,7 @@ Snapshots are committed for offline safety, never as the preferred online answer
 - **No search results:** add the Ping product, version, error, endpoint, or policy term. The retriever deliberately abstains on unrelated or underspecified requests.
 - **Live fetch returns 404:** Ping may have moved a page. Snapshot fallback should still provide local context. Run `scripts/sync-docset.sh <slug>` to refresh.
 - **Snapshot missing:** check `references/MANIFEST.md` for the captured source type and run `scripts/sync-docset.sh <slug>`.
-- **`pingcli` skill absent:** disabled by design because the upstream endpoint currently redirects to 404.
+- **`pingcli` skill absent:** re-enabled and generated; install with `scripts/setup-claude.sh pingcli`.
 
 ## Source Of Truth
 

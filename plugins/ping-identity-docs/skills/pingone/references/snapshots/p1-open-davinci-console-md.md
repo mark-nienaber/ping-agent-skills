@@ -1,12 +1,12 @@
 ---
 title: DaVinci
-description: If you have a license for PingOne DaVinci, click DaVinci to open the DaVinci console.
+description: Open the DaVinci console from PingOne to build orchestration flows.
 component: pingone
 page_id: pingone::p1_open_davinci_console
 canonical_url: https://docs.pingidentity.com/pingone/p1_open_davinci_console.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: November 15, 2023
+revdate: 2026-07-30T00:00:00Z
 ---
 
 # DaVinci

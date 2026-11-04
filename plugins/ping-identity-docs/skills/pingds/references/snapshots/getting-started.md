@@ -7,7 +7,7 @@ page_id: pingds:getting-started:directory-services
 canonical_url: https://docs.pingidentity.com/pingds/8.1/getting-started/directory-services.html
 llms_txt: https://docs.pingidentity.com/pingds/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: 2025-10-22T14:42:39Z
+revdate: 2026-06-01T09:22:01Z
 keywords: ["Evaluation", "LDAP"]
 section_ids:
   ldap-directory-history: LDAP history
@@ -364,7 +364,7 @@ page_id: pingds:getting-started:best-practices
 canonical_url: https://docs.pingidentity.com/pingds/8.1/getting-started/best-practices.html
 llms_txt: https://docs.pingidentity.com/pingds/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: 2025-10-22T14:42:39Z
+revdate: 2026-06-01T09:22:01Z
 keywords: ["Evaluation", "LDAP"]
 section_ids:
   authenticate-correctly: Authenticate correctly
@@ -559,7 +559,7 @@ page_id: pingds:getting-started:glossary
 canonical_url: https://docs.pingidentity.com/pingds/8.1/getting-started/glossary.html
 llms_txt: https://docs.pingidentity.com/pingds/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: 2025-10-22T14:42:39Z
+revdate: 2026-06-01T09:22:01Z
 ---
 
 # Glossary
@@ -927,7 +927,7 @@ page_id: pingds:getting-started:install
 canonical_url: https://docs.pingidentity.com/pingds/8.1/getting-started/install.html
 llms_txt: https://docs.pingidentity.com/pingds/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: 2025-12-09T13:43:30Z
+revdate: 2026-06-01T09:22:01Z
 keywords: ["Evaluation", "Install", "LDAP"]
 section_ids:
   before-you-start: Prepare for installation
@@ -984,17 +984,17 @@ section_ids:
    * Zsh
 
    ```console
-   $ unzip ~/Downloads/DS-8.1.1.zip -d /path/to
+   $ unzip ~/Downloads/DS-8.1.2.zip -d /path/to
    ```
 
    ```powershell
-   Expand-Archive DS-8.1.1.zip C:\path\to
+   Expand-Archive DS-8.1.2.zip C:\path\to
    ```
 
    This example installs DS files with the cross-platform zip. When using the native installer, refer to [Use the Windows MSI](../install-guide/install-files.html#install-files-msi).
 
    ```console
-   $ unzip ~/Downloads/DS-8.1.1.zip -d /path/to
+   $ unzip ~/Downloads/DS-8.1.2.zip -d /path/to
    ```
 
 2. Generate and save a deployment ID using the deployment ID password of your choice.
@@ -1306,7 +1306,7 @@ page_id: pingds:getting-started:acis
 canonical_url: https://docs.pingidentity.com/pingds/8.1/getting-started/acis.html
 llms_txt: https://docs.pingidentity.com/pingds/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: 2025-10-22T14:42:39Z
+revdate: 2026-06-01T09:22:01Z
 keywords: ["Authorization", "Evaluation", "LDAP"]
 section_ids:
   about-acis: About ACIs
@@ -2266,7 +2266,7 @@ page_id: pingds:getting-started:rest
 canonical_url: https://docs.pingidentity.com/pingds/8.1/getting-started/rest.html
 llms_txt: https://docs.pingidentity.com/pingds/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: 2025-10-22T14:42:39Z
+revdate: 2026-06-01T09:22:01Z
 keywords: ["Evaluation", "LDAP", "REST API"]
 section_ids:
   before-rest: Prepare
@@ -3093,7 +3093,7 @@ page_id: pingds:getting-started:ldap
 canonical_url: https://docs.pingidentity.com/pingds/8.1/getting-started/ldap.html
 llms_txt: https://docs.pingidentity.com/pingds/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: 2025-10-22T14:42:39Z
+revdate: 2026-06-01T09:22:01Z
 keywords: ["Evaluation", "LDAP"]
 section_ids:
   search-ldap: Search
@@ -3561,7 +3561,7 @@ page_id: pingds:getting-started:replication
 canonical_url: https://docs.pingidentity.com/pingds/8.1/getting-started/replication.html
 llms_txt: https://docs.pingidentity.com/pingds/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: 2025-10-22T14:42:39Z
+revdate: 2026-06-01T09:22:01Z
 keywords: ["Evaluation", "Replication", "LDAP"]
 section_ids:
   setup-repl: Add a replica
@@ -3599,7 +3599,7 @@ The following example demonstrates the process:
 
 ```bash
 # Unpack files for a second, replica server in a different folder:
-cd ~/Downloads && unzip ~/Downloads/DS-8.1.1.zip && mv opendj /path/to/replica
+cd ~/Downloads && unzip ~/Downloads/DS-8.1.2.zip && mv opendj /path/to/replica
 
 # Set up a second, replica server:
 /path/to/replica/setup \
@@ -3621,7 +3621,7 @@ cd ~/Downloads && unzip ~/Downloads/DS-8.1.1.zip && mv opendj /path/to/replica
 
 ```powershell
 # Unpack files for a second, replica server in a different folder:
-Expand-Archive DS-8.1.1.zip C:\Temp
+Expand-Archive DS-8.1.2.zip C:\Temp
 Rename-Item -Path C:\Temp\opendj -NewName C:\Temp\replica
 Move-Item C:\Temp\replica C:\path\to
 
@@ -3645,7 +3645,7 @@ C:\path\to\replica\setup.bat `
 
 ```zsh
 # Unpack files for a second, replica server in a different folder:
-cd ~/Downloads && unzip ~/Downloads/DS-8.1.1.zip && mv opendj /path/to/replica
+cd ~/Downloads && unzip ~/Downloads/DS-8.1.2.zip && mv opendj /path/to/replica
 
 # Set up a second, replica server:
 /path/to/replica/setup \
@@ -4082,7 +4082,7 @@ page_id: pingds:getting-started:performance
 canonical_url: https://docs.pingidentity.com/pingds/8.1/getting-started/performance.html
 llms_txt: https://docs.pingidentity.com/pingds/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: 2025-10-22T14:42:39Z
+revdate: 2026-06-01T09:22:01Z
 keywords: ["Evaluation", "Performance", "LDAP"]
 section_ids:
   perfs-mods: Measure modification rates
@@ -4479,7 +4479,7 @@ page_id: pingds:getting-started:further
 canonical_url: https://docs.pingidentity.com/pingds/8.1/getting-started/further.html
 llms_txt: https://docs.pingidentity.com/pingds/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: 2026-01-27T13:21:24Z
+revdate: 2026-06-01T09:22:01Z
 keywords: ["Evaluation", "LDAP"]
 section_ids:
   further-replication: Learn about replication
@@ -4533,8 +4533,6 @@ The [UnboundID LDAP SDK for Java](https://github.com/pingidentity/ldapsdk) is a 
 ## Try third-party tools
 
 LDAP is a standard protocol, and so you can use LDAP-compliant third-party tools to manage directory data:
-
-* [Admin4](http://www.admin4.org/)
 
 * [Apache Directory Studio](https://directory.apache.org/studio/)
 
@@ -4591,7 +4589,7 @@ page_id: pingds:getting-started:preface
 canonical_url: https://docs.pingidentity.com/pingds/8.1/getting-started/preface.html
 llms_txt: https://docs.pingidentity.com/pingds/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: 2025-10-22T14:42:39Z
+revdate: 2026-06-01T09:22:01Z
 keywords: ["Evaluation", "LDAP"]
 page_aliases: ["index.adoc"]
 ---

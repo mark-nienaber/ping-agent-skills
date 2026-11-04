@@ -7,7 +7,7 @@ page_id: pingds:security-guide:pwp-about
 canonical_url: https://docs.pingidentity.com/pingds/8.1/security-guide/pwp-about.html
 llms_txt: https://docs.pingidentity.com/pingds/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: 2025-10-22T14:42:39Z
+revdate: 2026-06-01T09:22:01Z
 keywords: ["Features", "LDAP", "Security", "Setup &amp; Configuration"]
 section_ids:
   pwp-per-server: Per-server password policies
@@ -240,16 +240,16 @@ Object class: `ds-pwp-password-policy`
 
 Object class: `ds-pwp-attribute-value-validator`
 
-| Attribute                                       | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-| ----------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `ds-pwp-attribute-value-test-reversed-password` | Whether this password validator should test the reversed value of the provided password as well as the order in which it was given.Default: false.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| `ds-pwp-attribute-value-match-attribute`        | Name(s) of the attribute(s) whose values should be checked to determine whether they match the provided password.If no values are provided, then the server checks if the proposed password matches the value of any user attribute in the user's entry. The server does not check values of operational attributes.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
-| `ds-pwp-attribute-value-check-substrings`       | Whether this password validator is to match portions of the password string against attribute values and portions of attribute values against the password string.When false, the server checks whether the entire password matches any user attribute values. When true, the server checks whether the password contains portions of attribute values and whether the attribute values contain portions of the password.Consider the case of Babs Jensen (`uid: bjensen`) changing her password. The following table describes the effects of the settings:Setting	New Password	Password Modification Result&#xA;&#xA;ds-pwp-attribute-value-check-substrings: false&#xA;&#xA;&#x9;&#xA;&#xA;bjense&#xA;&#xA;&#x9;&#xA;&#xA;Success&#xA;&#xA;&#xA;&#xA;&#xA;ds-pwp-attribute-value-check-substrings: false&#xA;&#xA;&#x9;&#xA;&#xA;bjensen&#xA;&#xA;&#x9;&#xA;&#xA;Failure: 19 (Constraint Violation)&#xA;&#xA;&#xA;&#xA;&#xA;ds-pwp-attribute-value-check-substrings: false&#xA;&#xA;&#x9;&#xA;&#xA;bjensens&#xA;&#xA;&#x9;&#xA;&#xA;Success&#xA;&#xA;&#xA;&#xA;&#xA;ds-pwp-attribute-value-check-substrings: true&#xA;&#xA;&#x9;&#xA;&#xA;bjense&#xA;&#xA;&#x9;&#xA;&#xA;Failure: 19 (Constraint Violation)&#xA;&#xA;&#xA;&#xA;&#xA;ds-pwp-attribute-value-check-substrings: true&#xA;&#xA;&#x9;&#xA;&#xA;bjensen&#xA;&#xA;&#x9;&#xA;&#xA;Failure: 19 (Constraint Violation)&#xA;&#xA;&#xA;&#xA;&#xA;ds-pwp-attribute-value-check-substrings: true&#xA;&#xA;&#x9;&#xA;&#xA;bjensens&#xA;&#xA;&#x9;&#xA;&#xA;Failure: 19 (Constraint Violation)In summary:- `bjense` is allowed when the setting is false because the password does not exactly match and rejected when the setting is true because Babs's user ID contains the password.
+| Attribute                                       | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| ----------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ds-pwp-attribute-value-test-reversed-password` | Whether this password validator should test the reversed value of the provided password as well as the order in which it was given.Default: false.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| `ds-pwp-attribute-value-match-attribute`        | Name(s) of the attribute(s) whose values should be checked to determine whether they match the provided password.If no values are provided, then the server checks if the proposed password matches the value of any user attribute in the user's entry. The server does not check values of operational attributes.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| `ds-pwp-attribute-value-check-substrings`       | Whether this password validator is to match portions of the password string against attribute values and portions of attribute values against the password string.When false, the server checks whether the entire password matches any user attribute values. When true, the server checks whether the password contains portions of attribute values and whether the attribute values contain portions of the password.Consider the case of Babs Jensen (`uid: bjensen`) changing her password. The following table describes the effects of the settings:Setting	New Password	Password Modification Result&#xA;&#xA;&#xA;ds-pwp-attribute-value-check-substrings: false&#xA;&#xA;&#x9;&#xA;&#xA;bjense&#xA;&#xA;&#x9;&#xA;&#xA;Success&#xA;&#xA;&#xA;&#xA;&#xA;ds-pwp-attribute-value-check-substrings: false&#xA;&#xA;&#x9;&#xA;&#xA;bjensen&#xA;&#xA;&#x9;&#xA;&#xA;Failure: 19 (Constraint Violation)&#xA;&#xA;&#xA;&#xA;&#xA;ds-pwp-attribute-value-check-substrings: false&#xA;&#xA;&#x9;&#xA;&#xA;bjensens&#xA;&#xA;&#x9;&#xA;&#xA;Success&#xA;&#xA;&#xA;&#xA;&#xA;ds-pwp-attribute-value-check-substrings: true&#xA;&#xA;&#x9;&#xA;&#xA;bjense&#xA;&#xA;&#x9;&#xA;&#xA;Failure: 19 (Constraint Violation)&#xA;&#xA;&#xA;&#xA;&#xA;ds-pwp-attribute-value-check-substrings: true&#xA;&#xA;&#x9;&#xA;&#xA;bjensen&#xA;&#xA;&#x9;&#xA;&#xA;Failure: 19 (Constraint Violation)&#xA;&#xA;&#xA;&#xA;&#xA;ds-pwp-attribute-value-check-substrings: true&#xA;&#xA;&#x9;&#xA;&#xA;bjensens&#xA;&#xA;&#x9;&#xA;&#xA;Failure: 19 (Constraint Violation)In summary:- `bjense` is allowed when the setting is false because the password does not exactly match and rejected when the setting is true because Babs's user ID contains the password.
 
 - `bjensen` is rejected in both cases because the password exactly matches and contains Babs's user ID.
 
 - `bjensens` is allowed when the setting is false because the password does not exactly match and rejected when the setting is true because the password contains Babs's user ID.Default: false. |
-| `ds-pwp-attribute-value-min-substring-length`   | The minimal length of the substring within the password when substring checking is enabled.Default: 0.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| `ds-pwp-attribute-value-min-substring-length`   | The minimal length of the substring within the password when substring checking is enabled.Default: 0.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
 
 ### Character set attributes
 
@@ -429,7 +429,7 @@ page_id: pingds:security-guide:access
 canonical_url: https://docs.pingidentity.com/pingds/8.1/security-guide/access.html
 llms_txt: https://docs.pingidentity.com/pingds/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: 2025-10-22T14:42:39Z
+revdate: 2026-06-01T09:22:01Z
 keywords: ["Authorization", "Features", "LDAP", "Security", "Setup &amp; Configuration"]
 section_ids:
   access-mechanisms: Access control mechanisms
@@ -1528,7 +1528,7 @@ page_id: pingds:security-guide:admin
 canonical_url: https://docs.pingidentity.com/pingds/8.1/security-guide/admin.html
 llms_txt: https://docs.pingidentity.com/pingds/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: 2025-10-22T14:42:39Z
+revdate: 2026-06-01T09:22:01Z
 keywords: ["Authorization", "Features", "LDAP", "Security", "Setup &amp; Configuration"]
 section_ids:
   admin-roles: Administrative access
@@ -1980,7 +1980,7 @@ page_id: pingds:security-guide:pwp-assign
 canonical_url: https://docs.pingidentity.com/pingds/8.1/security-guide/pwp-assign.html
 llms_txt: https://docs.pingidentity.com/pingds/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: 2025-10-22T14:42:39Z
+revdate: 2026-06-01T09:22:01Z
 keywords: ["Features", "LDAP", "Security", "Setup &amp; Configuration"]
 section_ids:
   assign-pwp-to-individual: Assign a password policy to a user
@@ -2279,7 +2279,7 @@ page_id: pingds:security-guide:auth
 canonical_url: https://docs.pingidentity.com/pingds/8.1/security-guide/auth.html
 llms_txt: https://docs.pingidentity.com/pingds/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: 2025-10-22T14:42:39Z
+revdate: 2026-06-01T09:22:01Z
 keywords: ["Authentication", "Features", "LDAP", "Security", "Setup &amp; Configuration"]
 section_ids:
   auth-anonymous-access: Anonymous access
@@ -3554,7 +3554,7 @@ page_id: pingds:security-guide:clients
 canonical_url: https://docs.pingidentity.com/pingds/8.1/security-guide/clients.html
 llms_txt: https://docs.pingidentity.com/pingds/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: 2025-10-22T14:42:39Z
+revdate: 2026-06-01T09:22:01Z
 keywords: ["Features", "LDAP", "Security"]
 section_ids:
   handle-input-securely: Handle input securely
@@ -3617,7 +3617,7 @@ page_id: pingds:security-guide:pwp-configure
 canonical_url: https://docs.pingidentity.com/pingds/8.1/security-guide/pwp-configure.html
 llms_txt: https://docs.pingidentity.com/pingds/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: 2025-10-22T14:42:39Z
+revdate: 2026-06-01T09:22:01Z
 keywords: ["Features", "LDAP", "Security", "Setup &amp; Configuration"]
 section_ids:
   default-pwp: Adjust the default password policy
@@ -4087,7 +4087,7 @@ page_id: pingds:security-guide:pki
 canonical_url: https://docs.pingidentity.com/pingds/8.1/security-guide/pki.html
 llms_txt: https://docs.pingidentity.com/pingds/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: 2025-10-22T14:42:39Z
+revdate: 2026-06-01T09:22:01Z
 keywords: ["Features", "LDAP", "Security", "Setup &amp; Configuration"]
 section_ids:
   about-deployment-ids: Deployment IDs
@@ -4316,7 +4316,7 @@ page_id: pingds:security-guide:data
 canonical_url: https://docs.pingidentity.com/pingds/8.1/security-guide/data.html
 llms_txt: https://docs.pingidentity.com/pingds/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: 2025-10-14T11:03:55Z
+revdate: 2026-06-01T09:22:01Z
 keywords: ["Features", "LDAP", "Security", "Setup &amp; Configuration"]
 ---
 
@@ -4536,7 +4536,7 @@ page_id: pingds:security-guide:web-applications
 canonical_url: https://docs.pingidentity.com/pingds/8.1/security-guide/web-applications.html
 llms_txt: https://docs.pingidentity.com/pingds/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: 2025-10-22T14:42:39Z
+revdate: 2026-06-01T09:22:01Z
 keywords: ["LDAP", "REST API", "Security", "Setup &amp; Configuration"]
 section_ids:
   find-app-server-doc: Container security settings
@@ -4600,7 +4600,7 @@ page_id: pingds:security-guide:java
 canonical_url: https://docs.pingidentity.com/pingds/8.1/security-guide/java.html
 llms_txt: https://docs.pingidentity.com/pingds/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: 2025-10-22T14:42:39Z
+revdate: 2026-06-01T09:22:01Z
 keywords: ["Features", "Security", "Setup &amp; Configuration"]
 ---
 
@@ -4637,7 +4637,7 @@ page_id: pingds:security-guide:key-management
 canonical_url: https://docs.pingidentity.com/pingds/8.1/security-guide/key-management.html
 llms_txt: https://docs.pingidentity.com/pingds/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: 2026-04-29T12:00:00Z
+revdate: 2026-06-01T09:22:01Z
 keywords: ["Features", "LDAP", "Security", "Setup &amp; Configuration"]
 section_ids:
   update_keys: Update keys
@@ -5345,7 +5345,7 @@ page_id: pingds:security-guide:pwp-subentries
 canonical_url: https://docs.pingidentity.com/pingds/8.1/security-guide/pwp-subentries.html
 llms_txt: https://docs.pingidentity.com/pingds/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: 2025-10-22T14:42:39Z
+revdate: 2026-06-01T09:22:01Z
 keywords: ["Features", "LDAP", "Security", "Setup &amp; Configuration"]
 ---
 
@@ -5399,7 +5399,7 @@ page_id: pingds:security-guide:os
 canonical_url: https://docs.pingidentity.com/pingds/8.1/security-guide/os.html
 llms_txt: https://docs.pingidentity.com/pingds/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: 2025-10-22T14:42:39Z
+revdate: 2026-06-01T09:22:01Z
 keywords: ["Security", "Setup &amp; Configuration"]
 section_ids:
   os-patches: System updates
@@ -5517,7 +5517,7 @@ page_id: pingds:security-guide:passwords
 canonical_url: https://docs.pingidentity.com/pingds/8.1/security-guide/passwords.html
 llms_txt: https://docs.pingidentity.com/pingds/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: 2025-10-22T14:42:39Z
+revdate: 2026-06-01T09:22:01Z
 keywords: ["Features", "LDAP", "Security"]
 section_ids:
   test-password-policies: Test password policies
@@ -5558,7 +5558,7 @@ page_id: pingds:security-guide:pki-hsm
 canonical_url: https://docs.pingidentity.com/pingds/8.1/security-guide/pki-hsm.html
 llms_txt: https://docs.pingidentity.com/pingds/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: 2026-02-12T14:50:39Z
+revdate: 2026-06-01T09:22:01Z
 keywords: ["Features", "LDAP", "Security", "Setup &amp; Configuration", "Standards"]
 section_ids:
   pki-hsm-prepare: Prepare the HSM and keys
@@ -5867,7 +5867,7 @@ page_id: pingds:security-guide:pwp-samples
 canonical_url: https://docs.pingidentity.com/pingds/8.1/security-guide/pwp-samples.html
 llms_txt: https://docs.pingidentity.com/pingds/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: 2025-10-22T14:42:39Z
+revdate: 2026-06-01T09:22:01Z
 keywords: ["Features", "LDAP", "Security", "Setup &amp; Configuration"]
 section_ids:
   example-lock-after-repeated-bind-failures: Lock accounts after repeated bind failures
@@ -6210,7 +6210,7 @@ page_id: pingds:security-guide:connections
 canonical_url: https://docs.pingidentity.com/pingds/8.1/security-guide/connections.html
 llms_txt: https://docs.pingidentity.com/pingds/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: 2025-10-22T14:42:39Z
+revdate: 2026-06-01T09:22:01Z
 keywords: ["Features", "LDAP", "Security", "Setup &amp; Configuration"]
 section_ids:
   connections-security: About secure connections
@@ -6807,7 +6807,7 @@ page_id: pingds:security-guide:preface
 canonical_url: https://docs.pingidentity.com/pingds/8.1/security-guide/preface.html
 llms_txt: https://docs.pingidentity.com/pingds/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: 2025-10-22T14:42:39Z
+revdate: 2026-06-01T09:22:01Z
 keywords: ["LDAP", "Security"]
 page_aliases: ["index.adoc"]
 ---
@@ -6871,7 +6871,7 @@ page_id: pingds:security-guide:features
 canonical_url: https://docs.pingidentity.com/pingds/8.1/security-guide/features.html
 llms_txt: https://docs.pingidentity.com/pingds/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: 2025-10-22T14:42:39Z
+revdate: 2026-06-01T09:22:01Z
 keywords: ["Features", "LDAP", "Security"]
 section_ids:
   encryption-and-digests: Encryption and digests

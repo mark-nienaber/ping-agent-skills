@@ -1,30 +1,30 @@
 # Snapshot Manifest - platform
 
 - Product: Ping Platform
-- Version: 8
-- Sync date: 2026-07-03
+- Version: 8.1
+- Sync date: 2026-11-03
 - Source: https://docs.pingidentity.com/platform/llms.txt
 - Guides discovered: 3
 - Guides captured: 3
-- Guides fully captured: 1
-- Guides partially captured: 2
+- Guides fully captured: 2
+- Guides partially captured: 1
 - Guides without snapshots: 0
 - Total pages indexed: 28
-- Total snapshot pages captured: 3
+- Total snapshot pages captured: 27
 
 ## Source URLs
 
 | Snapshot | Source type | Source URL | Pages indexed | Pages captured | Coverage |
 |---|---|---|---|---|---|
-| sample-setup.md | page | https://docs.pingidentity.com/platform/8/sample-setup/overview.md | 21 | 1 | partial |
-| platform-guide.md | page | https://docs.pingidentity.com/platform/8/platform-guide/edge-security.md | 6 | 1 | partial |
-| release-notes.md | page | https://docs.pingidentity.com/platform/8/release-notes/preface.md | 1 | 1 | full |
+| sample-setup.md | assembled | https://docs.pingidentity.com/platform/llms.txt | 21 | 20 | partial |
+| platform-guide.md | assembled | https://docs.pingidentity.com/platform/llms.txt | 6 | 6 | full |
+| release-notes.md | assembled | https://docs.pingidentity.com/platform/llms.txt | 1 | 1 | full |
 
 ## Checksums
 
 | File | SHA-256 |
 |---|---|
-| llms.txt | cfd211b1d8aea0770a5431c4b92773030239742731e99beffd036dae20b2bdff |
-| snapshots/sample-setup.md | 21938e2040f63b130a145027f23510dbdc2d60abca97550489fa3d0ed324c1e7 |
-| snapshots/platform-guide.md | 917a5b4cba130143eca961d0a7bd7c1fa7fa20a06824d9d44c5e2000d74f6e1c |
-| snapshots/release-notes.md | 18521a8c2814b10810fd2ee67d60c4a4a9734cd81b78d3df23ca13aae3b64e4c |
+| llms.txt | 1fe711f450db0d245ea3e9dc3351fa82a2d6f87f3e41f9bafdfb31a6dca63e80 |
+| snapshots/sample-setup.md | 21e38b183727e52327bd27a583693ac7614950065c467b8386979ee03fb6a988 |
+| snapshots/platform-guide.md | d9b8fdd4609737c64ecb257a0dc3526e8302acd166d5f9bc2732570b6c47909e |
+| snapshots/release-notes.md | a9b9d43cafe9add51abd3c36445a87f6491cf88e7a6a620721e392f7205f138f |

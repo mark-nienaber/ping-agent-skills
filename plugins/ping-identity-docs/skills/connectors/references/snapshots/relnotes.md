@@ -1,12 +1,12 @@
 ---
 title: April 2023
-description: New Form Connector
+description: Release notes for PingOne DaVinci connectors for April 2023
 component: connectors
 page_id: connectors::relnotes/archive/2023-04-April
 canonical_url: https://docs.pingidentity.com/connectors/relnotes/archive/2023-04-April.html
 llms_txt: https://docs.pingidentity.com/connectors/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: January 16, 2026
+revdate: 2026-07-09T00:00:00Z
 section_ids:
   april-22: April 22
   the-forms-connector-is-now-available: The Forms connector is now available
@@ -64,13 +64,13 @@ We've enhanced the [PingID Connector](../../pid_connector.html) to enable the us
 
 ---
 title: April 2024
-description: New Form Connector
+description: Release notes for PingOne DaVinci connectors for April 2024
 component: connectors
 page_id: connectors::relnotes/archive/2024-04-April
 canonical_url: https://docs.pingidentity.com/connectors/relnotes/archive/2024-04-April.html
 llms_txt: https://docs.pingidentity.com/connectors/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: January 16, 2026
+revdate: 2026-07-09T00:00:00Z
 section_ids:
   april-30: April 30
   specify-branding-and-theme-for-forms-within-the-pingone-forms-connector: Specify branding and theme for forms within the PingOne Forms Connector
@@ -95,7 +95,7 @@ Additionally, you can also select **Use Theme ID** and paste the unique Theme ID
 
 Improved PingOne Connector
 
-The following [PingOne Connector](../../p1_connector.html) capabilities now update the `p1userid` global variable in DaVinci with the user ID when the user is successfully found:
+The following [PingOne Connector](../../p1_connector.html) capabilities now update the `p1userid` global variable in PingOne DaVinci with the user ID when the user is successfully found:
 
 * **Find User**
 
@@ -129,13 +129,13 @@ You can use the [PingOne Advanced Identity Cloud Login Connector](../../p1_advan
 
 ---
 title: April 2025
-description: Fixed Splunk Connector
+description: Release notes for PingOne DaVinci connectors for April 2025
 component: connectors
 page_id: connectors::relnotes/archive/2025-04-April
 canonical_url: https://docs.pingidentity.com/connectors/relnotes/archive/2025-04-April.html
 llms_txt: https://docs.pingidentity.com/connectors/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: January 15, 2026
+revdate: 2026-07-09T00:00:00Z
 section_ids:
   april-30: April 30
   the-splunk-connector-now-respects-localized-error-messages: The Splunk Connector now respects localized error messages
@@ -173,7 +173,7 @@ Improved PingOne Connector
 
 The [PingOne Connector](../../p1_connector.html) **Authenticate User via Kerberos** capability now supports the selection of a user type, regardless of whether user migration is enabled or not.
 
-The ability to select a user type without user migration allows you to create DaVinci flows to offer seamless SSO authentication experience to users provisioned from Microsoft Active Directory into PingOne through an [LDAP gateway provisioning connection](https://docs.pingidentity.com/pingone/integrations/p1_create_provisioning_connection_gateway.html) and an [inbound rule](https://docs.pingidentity.com/pingone/integrations/p1_create_inbound_provisioning_rule_gateway.html).
+The ability to select a user type without user migration allows you to create PingOne DaVinci flows to offer seamless SSO authentication experience to users provisioned from Microsoft Active Directory into PingOne through an [LDAP gateway provisioning connection](https://docs.pingidentity.com/pingone/integrations/p1_create_provisioning_connection_gateway.html) and an [inbound rule](https://docs.pingidentity.com/pingone/integrations/p1_create_inbound_provisioning_rule_gateway.html).
 
 |   |                                                                           |
 | - | ------------------------------------------------------------------------- |
@@ -191,13 +191,13 @@ The [Location Policy Connector](../../location_policy_connector.html) **Allow by
 
 ---
 title: April 2026
-description: New PingOne Connector
+description: PingOne DaVinci connector release notes for April 2026
 component: connectors
 page_id: connectors::relnotes/2026-04-April
 canonical_url: https://docs.pingidentity.com/connectors/relnotes/2026-04-April.html
 llms_txt: https://docs.pingidentity.com/connectors/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: March 31, 2026
+revdate: 2026-07-09T00:00:00Z
 section_ids:
   april-1: April 1
   ability-to-notify-users-of-successful-account-creation: Ability to notify users of successful account creation
@@ -228,13 +228,13 @@ You can manage notification templates in PingOne. Learn more in [Notification Te
 
 ---
 title: August 2023
-description: New PingOne Connector
+description: Release notes for PingOne DaVinci connectors for August 2023
 component: connectors
 page_id: connectors::relnotes/archive/2023-08-August
 canonical_url: https://docs.pingidentity.com/connectors/relnotes/archive/2023-08-August.html
 llms_txt: https://docs.pingidentity.com/connectors/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: January 16, 2026
+revdate: 2026-07-09T00:00:00Z
 section_ids:
   august-29: August 29
   search-for-users-with-a-custom-scim-filter: Search for users with a custom SCIM filter
@@ -258,7 +258,7 @@ You can now provide your own filter by toggling on the new **Custom SCIM Filter*
 
 Improved PingOne Connector
 
-The [PingOne Connector](../../p1_connector.html) **Create User** and **Update User** capabilities mappings no longer pass empty values to PingOne. Previously, PingOne sent an error to DaVinci due to empty values.
+The [PingOne Connector](../../p1_connector.html) **Create User** and **Update User** capabilities mappings no longer pass empty values to PingOne. Previously, PingOne sent an error to PingOne DaVinci due to empty values.
 
 If a field is included with no value, the connector would normally pass it to PingOne as an empty string. If no field or value is included, the connector would normally pass it as a null value. Now, these values are omitted and not passed as empty values.
 
@@ -266,19 +266,19 @@ If a field is included with no value, the connector would normally pass it to Pi
 
 Fixed PingID Connector
 
-When using the legacy [PingID Connector](../../pid_connector.html) in a DaVinci flow, there was a problem if the **User Groups** field contained more than 100 characters. This 100-character limit has been removed.
+When using the legacy [PingID Connector](../../pid_connector.html) in a PingOne DaVinci flow, there was a problem if the **User Groups** field contained more than 100 characters. This 100-character limit has been removed.
 
 ---
 
 ---
 title: August 2025
-description: Improved HTTP Connector
+description: Release notes for PingOne DaVinci connectors for August 2025
 component: connectors
 page_id: connectors::relnotes/2025-08-August
 canonical_url: https://docs.pingidentity.com/connectors/relnotes/2025-08-August.html
 llms_txt: https://docs.pingidentity.com/connectors/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: January 16, 2026
+revdate: 2026-07-09T00:00:00Z
 section_ids:
   august-27: August 27
   added-the-ability-to-block-redirects-in-make-rest-api-call-nodes: Added the ability to block redirects in Make REST API Call nodes
@@ -307,14 +307,66 @@ The [PingOne Connector](../p1_connector.html) **Authenticate User via Kerberos**
 ---
 
 ---
+title: August 2026
+description: Release notes for PingOne DaVinci connectors for August 2026
+component: connectors
+page_id: connectors::relnotes/2026-08-August
+canonical_url: https://docs.pingidentity.com/connectors/relnotes/2026-08-August.html
+llms_txt: https://docs.pingidentity.com/connectors/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-21T00:00:00Z
+section_ids:
+  august-24: August 24
+  fido2-client-errors-now-route-to-structured-outputs-in-the-form-connector: FIDO2 client errors now route to structured outputs in the Form connector
+  august-20: August 20
+  the-pingone-recognize-connector-is-now-available-early-access: The PingOne Recognize connector is now available (early access)
+---
+
+# August 2026
+
+## August 24
+
+### FIDO2 client errors now route to structured outputs in the Form connector
+
+New Form Connector
+
+Client-side FIDO2/WebAuthn errors are now structured, typed outputs in PingOne DaVinci flows, so you can branch on specific failure conditions without custom [Functions connector](../functions_connector.html) logic.
+
+* For the **Show Form** capability, client-side errors automatically route to the error outcome as a typed `error` object containing the error `name`, `code`, and `message`.
+
+* For the **Show Form (Legacy)** capability, a new **Use Legacy FIDO2 Error Handling** toggle controls the behavior. The toggle is disabled by default. When enabled, client errors continue to the success (true) path. We recommend enabling the toggle for easier decisioning based on client-side FIDO2 errors.
+
+Learn more in [Configuring FIDO2 client error routing](../form_connector.html#configuring-fido2-client-error-routing).
+
+## August 20
+
+### The PingOne Recognize connector is now available (early access)
+
+New PingOne Recognize Connector
+
+You can use the [PingOne Recognize connector](../p1_recognize_connector.html) for the following use cases:
+
+* Enroll users with a live selfie
+
+* Enroll a user with an image
+
+* Authenticate user with a live selfie
+
+* Disenroll a user
+
+* Check a user's enrollment status
+
+---
+
+---
 title: December 2022
-description: New PingOne RADIUS Gateway Connector
+description: Release notes for PingOne DaVinci connectors for December 2022
 component: connectors
 page_id: connectors::relnotes/archive/2022-12-December
 canonical_url: https://docs.pingidentity.com/connectors/relnotes/archive/2022-12-December.html
 llms_txt: https://docs.pingidentity.com/connectors/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: January 16, 2026
+revdate: 2026-07-09T00:00:00Z
 section_ids:
   december-12: December 12
   pingone-radius-gateway-connector-now-available: PingOne RADIUS Gateway connector now available
@@ -372,13 +424,13 @@ The PingOne Forms connector lets you include these forms in your flows.
 
 ---
 title: December 2024
-description: Improved PingOne Connector
+description: Release notes for PingOne DaVinci connectors for December 2024
 component: connectors
 page_id: connectors::relnotes/archive/2024-12-December
 canonical_url: https://docs.pingidentity.com/connectors/relnotes/archive/2024-12-December.html
 llms_txt: https://docs.pingidentity.com/connectors/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: January 15, 2026
+revdate: 2026-07-09T00:00:00Z
 section_ids:
   december-11: December 11
   read-population: Read Population
@@ -410,13 +462,13 @@ Hashing a value is an effective way to verify data in your flow while keeping it
 
 ---
 title: February 2022
-description: New PingOne Connector
+description: Release notes for PingOne DaVinci connectors for February 2022
 component: connectors
 page_id: connectors::relnotes/archive/2022-02-February
 canonical_url: https://docs.pingidentity.com/connectors/relnotes/archive/2022-02-February.html
 llms_txt: https://docs.pingidentity.com/connectors/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: January 16, 2026
+revdate: 2026-07-09T00:00:00Z
 section_ids:
   february-10: February 10
   the-pingone-connector-is-now-available: The PingOne connector is now available
@@ -452,13 +504,13 @@ You can use the [PingOne Connector](../../p1_connector.html) to:
 
 ---
 title: February 2024
-description: New PingOne Connector
+description: Release notes for PingOne DaVinci connectors for February 2024
 component: connectors
 page_id: connectors::relnotes/archive/2024-02-February
 canonical_url: https://docs.pingidentity.com/connectors/relnotes/archive/2024-02-February.html
 llms_txt: https://docs.pingidentity.com/connectors/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: January 16, 2026
+revdate: 2026-07-09T00:00:00Z
 section_ids:
   february-10: February 10
   authenticate-user-through-kerberos: Authenticate user through Kerberos
@@ -504,13 +556,13 @@ You can now select whether to pass the requested authentication context using th
 
 ---
 title: February 2025
-description: New PingID Connector
+description: Release notes for PingOne DaVinci connectors for February 2025
 component: connectors
 page_id: connectors::relnotes/archive/2025-02-February
 canonical_url: https://docs.pingidentity.com/connectors/relnotes/archive/2025-02-February.html
 llms_txt: https://docs.pingidentity.com/connectors/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: January 15, 2026
+revdate: 2026-07-09T00:00:00Z
 section_ids:
   february-15: February 15
   new-read-device-authentication-policy-capability: New Read Device Authentication Policy capability
@@ -534,7 +586,7 @@ The [PingID Connector](../../pid_connector.html) **Read Device Authentication Po
 
 New PingOne Authentication Connector
 
-When authenticating users by redirecting the browser to your DaVinci flow with the [PingOne Authentication Connector](../../p1_authentication_connector.html), the DaVinci flow policy returns additional attributes to PingOne. You can now override the default format of those attributes.
+When authenticating users by redirecting the browser to your PingOne DaVinci flow with the [PingOne Authentication Connector](../../p1_authentication_connector.html), the PingOne DaVinci flow policy returns additional attributes to PingOne. You can now override the default format of those attributes.
 
 |   |                                                                                                                                                                                     |
 | - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -544,13 +596,13 @@ When authenticating users by redirecting the browser to your DaVinci flow with t
 
 ---
 title: February 2026
-description: New PingOne Connector
+description: Release notes for PingOne DaVinci connectors for February 2026
 component: connectors
 page_id: connectors::relnotes/2026-02-February
 canonical_url: https://docs.pingidentity.com/connectors/relnotes/2026-02-February.html
 llms_txt: https://docs.pingidentity.com/connectors/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: January 15, 2026
+revdate: 2026-07-09T00:00:00Z
 section_ids:
   february-11: February 11
   search-special-character-usernames-toggle: Search Special-Character Usernames toggle
@@ -570,13 +622,13 @@ Several capabilities in the [PingOne Connector](../p1_connector.html) have a new
 
 ---
 title: January 2023
-description: New PingID Connector
+description: Release notes for PingOne DaVinci connectors for January 2023
 component: connectors
 page_id: connectors::relnotes/archive/2023-01-January
 canonical_url: https://docs.pingidentity.com/connectors/relnotes/archive/2023-01-January.html
 llms_txt: https://docs.pingidentity.com/connectors/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: January 16, 2026
+revdate: 2026-07-09T00:00:00Z
 section_ids:
   january-20: January 20
   new-pingid-connector-flows: New PingID Connector flows
@@ -621,13 +673,13 @@ We've fixed an issue that caused the [Challenge Connector](../../challenge_conne
 
 ---
 title: January 2024
-description: New PingOne Scope Consent Connector
+description: Release notes for PingOne DaVinci connectors for January 2024
 component: connectors
 page_id: connectors::relnotes/archive/2024-01-January
 canonical_url: https://docs.pingidentity.com/connectors/relnotes/archive/2024-01-January.html
 llms_txt: https://docs.pingidentity.com/connectors/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: January 16, 2026
+revdate: 2026-07-09T00:00:00Z
 section_ids:
   january-14: January 14
   pingone-scope-consent-connector-now-available: PingOne Scope Consent connector now available
@@ -649,13 +701,13 @@ Use this connector to view consent records on an application or user basis, revo
 
 ---
 title: January 2025
-description: Improved PingOne Scope Consent Connector
+description: Release notes for PingOne DaVinci connectors for January 2025
 component: connectors
 page_id: connectors::relnotes/archive/2025-01-January
 canonical_url: https://docs.pingidentity.com/connectors/relnotes/archive/2025-01-January.html
 llms_txt: https://docs.pingidentity.com/connectors/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: January 15, 2026
+revdate: 2026-07-09T00:00:00Z
 section_ids:
   january-14: January 14
   simplified-get-user-consent-capability: Simplified Get User Consent capability
@@ -677,13 +729,13 @@ Now, you can always enter the applicable scope into the **Scopes** field regardl
 
 ---
 title: January 2026
-description: Improved LDAP Connector
+description: Release notes for PingOne DaVinci connectors for January 2026
 component: connectors
 page_id: connectors::relnotes/2026-01-January
 canonical_url: https://docs.pingidentity.com/connectors/relnotes/2026-01-January.html
 llms_txt: https://docs.pingidentity.com/connectors/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: January 15, 2026
+revdate: 2026-07-09T00:00:00Z
 section_ids:
   january-8: January 8
   the-ldap-connector-is-deprecating-the-format-of-three-active-directory-ad-attribute-types: The LDAP connector is deprecating the format of three Active Directory (AD) attribute types
@@ -701,7 +753,7 @@ The [LDAP Connector](../ldap_connector.html) is changing the format of Active Di
 
 Previously, these attribute values were returned in a binary format, such as `\u0001\u0005\u0000\u0000\u0000\u0000\u0000\u0005\u0015…​`. Now they are returned in a decoded, human-readable format, such as `S-1-5-21-…​`.
 
-Existing customers already using these attributes in their DaVinci environments have been notified and advised to work with their account teams or support in order to update their flows and avoid any impact.
+Existing customers already using these attributes in their PingOne DaVinci environments have been notified and advised to work with their account teams or support in order to update their flows and avoid any impact.
 
 This change is generally available today for all other customers and any new environments.
 
@@ -709,13 +761,13 @@ This change is generally available today for all other customers and any new env
 
 ---
 title: July 2023
-description: Improved PingOne MFA Connector
+description: Release notes for PingOne DaVinci connectors for July 2023
 component: connectors
 page_id: connectors::relnotes/archive/2023-07-July
 canonical_url: https://docs.pingidentity.com/connectors/relnotes/archive/2023-07-July.html
 llms_txt: https://docs.pingidentity.com/connectors/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: January 16, 2026
+revdate: 2026-07-09T00:00:00Z
 section_ids:
   july-7: July 7
   ability-to-override-mfa-policy: Ability to override MFA policy
@@ -735,13 +787,13 @@ We've enhanced the [PingOne MFA Connector](../../p1_mfa_connector.html) Policy I
 
 ---
 title: July 2025
-description: Improved Form Connector
+description: Release notes for PingOne DaVinci connectors for July 2025
 component: connectors
 page_id: connectors::relnotes/2025-07-July
 canonical_url: https://docs.pingidentity.com/connectors/relnotes/2025-07-July.html
 llms_txt: https://docs.pingidentity.com/connectors/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: January 16, 2026
+revdate: 2026-07-09T00:00:00Z
 section_ids:
   july-18: July 18
   the-show-form-capability-now-includes-conditional-component-visibility: The Show Form capability now includes conditional component visibility
@@ -755,7 +807,7 @@ section_ids:
 
 Improved Form Connector
 
-The [Form Connector](../form_connector.html) conditional component visibility allows you to create a form in PingOne Forms with components that you can configure to be hidden or shown in a user-facing form based on Boolean values pulled from your DaVinci flow. Learn more in [Configuring conditional component visibility](https://docs.pingidentity.com/pingone/user_experience/p1_configuring_conditional_component_visibility.html).
+The [Form Connector](../form_connector.html) conditional component visibility allows you to create a form in PingOne Forms with components that you can configure to be hidden or shown in a user-facing form based on Boolean values pulled from your PingOne DaVinci flow. Learn more in [Configuring conditional component visibility](https://docs.pingidentity.com/pingone/user_experience/p1_configuring_conditional_component_visibility.html).
 
 When you include a form with conditional component visibility with the Show From capability, you'll see the additional **Component Visibility** field with key-value pairs to configure which components are shown or hidden.
 
@@ -763,13 +815,13 @@ When you include a form with conditional component visibility with the Show From
 
 ---
 title: June 2022
-description: New CrowdStrike Connector
+description: Release notes for PingOne DaVinci connectors for June 2022
 component: connectors
 page_id: connectors::relnotes/archive/2022-06-June
 canonical_url: https://docs.pingidentity.com/connectors/relnotes/archive/2022-06-June.html
 llms_txt: https://docs.pingidentity.com/connectors/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: January 16, 2026
+revdate: 2026-07-09T00:00:00Z
 section_ids:
   june-23: June 23
   the-crowdstrike-connector-is-now-available: The CrowdStrike connector is now available
@@ -798,64 +850,3 @@ You can use the [CrowdStrike Connector](../../crowdstrike_connector.html) to:
 * Get the CrowdScore for an environment
 
 * Managed quarantined devices
-
----
-
----
-title: June 2023
-description: New PingOne Connector
-component: connectors
-page_id: connectors::relnotes/archive/2023-06-June
-canonical_url: https://docs.pingidentity.com/connectors/relnotes/archive/2023-06-June.html
-llms_txt: https://docs.pingidentity.com/connectors/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: January 16, 2026
-section_ids:
-  june-29: June 29
-  unlock-user-account: Unlock user account
-  new-group-crud-capabilities: New group CRUD capabilities
-  the-make-rest-api-call-capability-now-supports-mtls: The Make REST API Call capability now supports mTLS
-  added-variable-option-for-last-sign-on: Added Variable option for last sign on
----
-
-# June 2023
-
-## June 29
-
-### Unlock user account
-
-New PingOne Connector
-
-The new [PingOne Connector](../../p1_connector.html) **Unlock User** capability allows you to unlock a locked PingOne user account:
-
-### New group CRUD capabilities
-
-New PingOne Connector
-
-To support group manipulation during flows in DaVinci, we have added the following capabilities to the [PingOne Connector](../../p1_connector.html):
-
-* **Create Group**
-
-* **Read Group**
-
-* **Update Group**
-
-* **Delete Group**
-
-* **Read Group Members**
-
-These allow you to create, manage, and read groups in a PingOne environment.
-
-### The Make REST API Call capability now supports mTLS
-
-New HTTP Connector
-
-The [HTTP Connector](../../http_connector.html) now supports mTLS. The **Make REST API Call** capability includes a new **MTLS Support** field to include keys configured in PingOne. You can view and create keys in PingOne by selecting the **Certificates and Keypairs** link under the field.
-
-The default configuration is `None`, which will not use mTLS for API calls with the connector.
-
-### Added `Variable` option for last sign on
-
-New PingOne Authentication Connector
-
-The [PingOne Authentication Connector](../../p1_authentication_connector.html) **Check Session** capability now includes a `Variable` option for the **Last Sign On** field, which enables variable and parameter use.

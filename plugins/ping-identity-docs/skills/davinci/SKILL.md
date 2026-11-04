@@ -6,7 +6,7 @@ license: MIT
 
 # DaVinci
 
-Use the flow search option to find specific nodes.
+Reference for PingOne DaVinci actions, predefined node sets for registration, authentication, and account recovery available in the PingOne Marketplace.
 
 ## Live source of truth
 
@@ -27,18 +27,18 @@ Use the flow search option to find specific nodes.
 
 | Task category | Guide slug | Live URL pattern | Snapshot |
 |---|---|---|---|
-| Flows: flow, editing, adding | flows | https://docs.pingidentity.com/davinci/flows/*.md | references/snapshots/flows.md |
-| Davinci Best Practices: best, practices, subflows | davinci_best_practices | https://docs.pingidentity.com/davinci/davinci_best_practices/*.md | references/snapshots/davinci-best-practices.md |
-| Connectors: connector, connectors, adding | connectors | https://docs.pingidentity.com/davinci/connectors/*.md | references/snapshots/connectors.md |
-| Applications: flow, configuring, policy | applications | https://docs.pingidentity.com/davinci/applications/*.md | references/snapshots/applications.md |
-| Integrating Flows Into Applications: flow, launching, pingone | integrating_flows_into_applications | https://docs.pingidentity.com/davinci/integrating_flows_into_applications/*.md | references/snapshots/integrating-flows-into-applications.md |
-| Variables: variable, variables, adding | variables | https://docs.pingidentity.com/davinci/variables/*.md | references/snapshots/variables.md |
-| Use Cases: pingone, adding, authentication | use_cases | https://docs.pingidentity.com/davinci/use_cases/*.md | references/snapshots/use-cases.md |
-| Users: user, deleting, editing | users | https://docs.pingidentity.com/davinci/users/*.md | references/snapshots/users.md |
-| Usage Terms: browser, davinci, support | usage_terms | https://docs.pingidentity.com/davinci/usage_terms/*.md | references/snapshots/usage-terms.md |
-| Company Settings: company, settings | company_settings | https://docs.pingidentity.com/davinci/company_settings/*.md | references/snapshots/company-settings.md |
-| Configuring Siem Streaming: configuring, siem, streaming | configuring_siem_streaming | https://docs.pingidentity.com/davinci/configuring_siem_streaming/*.md | references/snapshots/configuring-siem-streaming.md |
-| Davinci Adding P1 Admin Users.Md: adding, admin, davinci | davinci_adding_p1_admin_users.md | https://docs.pingidentity.com/davinci/davinci_adding_p1_admin_users.md | references/snapshots/davinci-adding-p1-admin-users-md.md |
+| Flows: flow, pingone, davinci | flows | https://docs.pingidentity.com/davinci/flows/*.md | references/snapshots/flows.md |
+| Davinci Best Practices: best, practices, davinci | davinci_best_practices | https://docs.pingidentity.com/davinci/davinci_best_practices/*.md | references/snapshots/davinci-best-practices.md |
+| Connectors: connector, pingone, davinci | connectors | https://docs.pingidentity.com/davinci/connectors/*.md | references/snapshots/connectors.md |
+| Applications: flow, davinci, pingone | applications | https://docs.pingidentity.com/davinci/applications/*.md | references/snapshots/applications.md |
+| Integrating Flows Into Applications: pingone, flow, davinci | integrating_flows_into_applications | https://docs.pingidentity.com/davinci/integrating_flows_into_applications/*.md | references/snapshots/integrating-flows-into-applications.md |
+| Variables: variable, davinci, pingone | variables | https://docs.pingidentity.com/davinci/variables/*.md | references/snapshots/variables.md |
+| Use Cases: pingone, davinci, flows | use_cases | https://docs.pingidentity.com/davinci/use_cases/*.md | references/snapshots/use-cases.md |
+| Users: user, davinci, pingone | users | https://docs.pingidentity.com/davinci/users/*.md | references/snapshots/users.md |
+| Usage Terms: davinci, browser, pingone | usage_terms | https://docs.pingidentity.com/davinci/usage_terms/*.md | references/snapshots/usage-terms.md |
+| Company Settings: company, settings, behavior | company_settings | https://docs.pingidentity.com/davinci/company_settings/*.md | references/snapshots/company-settings.md |
+| Configuring Siem Streaming: davinci, pingone, siem | configuring_siem_streaming | https://docs.pingidentity.com/davinci/configuring_siem_streaming/*.md | references/snapshots/configuring-siem-streaming.md |
+| Davinci Adding P1 Admin Users.Md: admin, davinci, pingone | davinci_adding_p1_admin_users.md | https://docs.pingidentity.com/davinci/davinci_adding_p1_admin_users.md | references/snapshots/davinci-adding-p1-admin-users-md.md |
 
 ## Composition
 

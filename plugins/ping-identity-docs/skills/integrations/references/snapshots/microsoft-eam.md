@@ -33,7 +33,7 @@ You can find more information in the [Configuring OpenID Connect policies](https
 
    You can find more configuration information in [configuring policy and ID token settings](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/help_policymanagementtasklet_policymanagementstate.html) in the PingFederate documentation.
 
-3. On the **Attribute Contract** tab, make sure that the attribute contract includes `acr`, `amr`, and any optional attributes you configured into the issued id\_token:
+3. On the **Attribute Contract** tab, make sure that the attribute contract includes `acr`, `amr`, and any optional attributes you configured into the issued id_token:
 
    1. In the **Extend the Contract** section, enter `acr`.
 
@@ -348,7 +348,7 @@ To begin the integration, deploy the Microsoft EAM Integration Kit files to your
 
    Learn more about these settings in [Microsoft EAM IdP Adapter settings reference](pf_ms_eam_adapter_settings_ref.html).
 
-4. (Optional) On the **Extended Contract** tab, add any attributes you want to extract out of the **id\_token\_hint**.
+4. (Optional) On the **Extended Contract** tab, add any attributes you want to extract out of the **id_token_hint**.
 
    > **Collapse: Show or hide substeps**
    >
@@ -725,7 +725,7 @@ Field descriptions for the Microsoft EAM IdP Adapter configuration, accessible o
 >
 > | Field          | Description                                                                                                                                                                                                                            |
 > | -------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-> | **Issuer URI** | The Issuer URI used to validate the **id\_token\_hint**.The default value is `https://login.microsoftonline.com/<tenant-id>/v2.0` where *\<tenant-id>* is the value configured for the **Entra Tenant ID** field.                      |
+> | **Issuer URI** | The Issuer URI used to validate the **id_token_hint**.The default value is `https://login.microsoftonline.com/<tenant-id>/v2.0` where *\<tenant-id>* is the value configured for the **Entra Tenant ID** field.                        |
 > | **JWKS URI**   | The JWKS URI that identifies the keys used to sign the tokens.The default value is `https://login.microsoftonline.com/<tenant-id>/discovery/v2.0/keys` where *\<tenant-id>* is the value configured for the **Entra Tenant ID** field. |
 
 ---
@@ -751,7 +751,7 @@ This integration kit enables PingFederate, together with a downstream multi-fact
 \<p>An electronic authentication method where a user is granted access only after presenting two or more verification factors for authentication.\</p>
 \</div>)* adapter, to serve as a Microsoft External Authentication Method (EAM) provider.
 
-The Microsoft EAM Integration Kit processes the **id\_token\_hint** and **claims** parameters sent by Microsoft Entra ID's external authentication mechanism.
+The Microsoft EAM Integration Kit processes the **id_token_hint** and **claims** parameters sent by Microsoft Entra ID's external authentication mechanism.
 
 The integration kit extracts the `acr` and `amr` values from the **claims** parameter and sets them as input for downstream adapters in the PingFederate authentication policy. Typically, a downstream adapter like PingID uses these values to perform MFA.
 
@@ -761,7 +761,7 @@ The integration kit extracts the `acr` and `amr` values from the **claims** para
 
   When PingFederate receives an OpenID Connect (OIDC) *(tooltip: \<div class="paragraph">
   \<p>An authentication protocol built on top of OAuth that authenticates users and enables clients (relying parties) of all types to request and receive information about authenticated sessions and users. OIDC is extensible, allowing clients to use optional features such as encryption of identity data, discovery of OpenID Providers (OAuth authorization servers), and session management.\</p>
-  \</div>)* request from Microsoft Entra ID, the adapter validates the **id\_token\_hint** and extracts the `acr` and `amr` values from the **claims** parameter. You can export additional claims out of the **id\_token\_hint** as necessary.
+  \</div>)* request from Microsoft Entra ID, the adapter validates the **id_token_hint** and extracts the `acr` and `amr` values from the **claims** parameter. You can export additional claims out of the **id_token_hint** as necessary.
 
 ## Intended audience
 
@@ -822,9 +822,9 @@ The following figure demonstrates an example single sign-on (SSO) *(tooltip: \<d
 
 3. Microsoft Entra ID makes an OpenID Connect (OIDC) request to PingFederate for secondary authentication.
 
-4. PingFederate validates the OIDC request, then sets the **id\_token\_hint** and **claims** provided by Microsoft Entra ID as tracked parameters.
+4. PingFederate validates the OIDC request, then sets the **id_token_hint** and **claims** provided by Microsoft Entra ID as tracked parameters.
 
-5. The Microsoft EAM IdP Adapter picks up the **id\_token\_hint** and **claims**, validates the **id\_token\_hint**, and then sets the `sub`, `acr`, and `amr` values for downstream adapters like PingID.
+5. The Microsoft EAM IdP Adapter picks up the **id_token_hint** and **claims**, validates the **id_token_hint**, and then sets the `sub`, `acr`, and `amr` values for downstream adapters like PingID.
 
 6. The downstream adapter requests a second authentication factor from the user.
 
@@ -832,9 +832,9 @@ The following figure demonstrates an example single sign-on (SSO) *(tooltip: \<d
 
 8. The downstream adapter shares the used `amr` and `acr` values with PingFederate.
 
-9. PingFederate sends a response to Microsoft Entra ID with the id\_token, including the `sub`, `acr`, and `amr` claims required by Microsoft Entra ID.
+9. PingFederate sends a response to Microsoft Entra ID with the id_token, including the `sub`, `acr`, and `amr` claims required by Microsoft Entra ID.
 
-10. Microsoft Entra ID validates the id\_token, signature, and claims.
+10. Microsoft Entra ID validates the id_token, signature, and claims.
 
 11. Microsoft Entra ID grants the user access to the protected application.
 
@@ -884,7 +884,7 @@ Learn more in [configuring OAuth clients](https://docs.pingidentity.com/pingfede
 
 ## Next steps
 
-When configuring the OAuth Client details in Microsoft Entra ID, you must configure a redirect\_uri. Use PingFederate's authorization endpoint URL: `https://{pingfederate}/as/authorization.oauth2`.
+When configuring the OAuth Client details in Microsoft Entra ID, you must configure a redirect_uri. Use PingFederate's authorization endpoint URL: `https://{pingfederate}/as/authorization.oauth2`.
 
 ---
 
@@ -911,6 +911,6 @@ Learn more about tracked HTTP parameters in [defining authentication policies](h
 
 1. In the PingFederate admin console, go to **Authentication > Policies** and click the **Tracked HTTP Parameters** tab.
 
-2. In the **Parameter Name** field, enter **id\_token\_hint** and **claims**. Click **Add**.
+2. In the **Parameter Name** field, enter **id_token_hint** and **claims**. Click **Add**.
 
 3. Click **Save**.

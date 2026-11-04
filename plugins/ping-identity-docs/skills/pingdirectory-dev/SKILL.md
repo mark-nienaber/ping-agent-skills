@@ -6,7 +6,7 @@ license: MIT
 
 # PingDirectory (Developer)
 
-PingDirectory (Developer) documentation is indexed in the bundled llms.txt and live Ping Markdown pages.
+Shows how to use the PingDirectory REST API GET operation to retrieve a directory entry and its attributes by distinguished name.
 
 ## Live source of truth
 
@@ -27,9 +27,9 @@ PingDirectory (Developer) documentation is indexed in the bundled llms.txt and l
 
 | Task category | Guide slug | Live URL pattern | Snapshot |
 |---|---|---|---|
-| Directory: entry, change, control | directory | https://developer.pingidentity.com/pingdirectory/directory/*.md | references/snapshots/directory.md |
-| Directory Proxy Scim: read, scim, group | directory-proxy-scim | https://developer.pingidentity.com/pingdirectory/directory-proxy-scim/*.md | references/snapshots/directory-proxy-scim.md |
-| Consent: consent, read, activity | consent | https://developer.pingidentity.com/pingdirectory/consent/*.md | references/snapshots/consent.md |
+| Directory: entry, rest, pingdirectory | directory | https://developer.pingidentity.com/pingdirectory/directory/*.md | references/snapshots/directory.md |
+| Directory Proxy Scim: scim, pingdirectory, pingdirectoryproxy | directory-proxy-scim | https://developer.pingidentity.com/pingdirectory/directory-proxy-scim/*.md | references/snapshots/directory-proxy-scim.md |
+| Consent: consent, pingdirectory, read | consent | https://developer.pingidentity.com/pingdirectory/consent/*.md | references/snapshots/consent.md |
 
 ## Composition
 

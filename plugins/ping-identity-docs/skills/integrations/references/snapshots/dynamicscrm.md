@@ -90,7 +90,7 @@ section_ids:
 
 3. In the **Attribute Sources & User Lookup** screen, configure the LDAP data store that will return the upn attribute for the corresponding user, adding userPrincipalName as an additional attribute and including a filter value such as` sAMAccountName=${username}`.
 
-4. On the Attribute Contract Fulfillment screen, select **Text** as the Source for SAML\_SUBJECT and enter an unused value. Select **LDAP** as the Source for upn and select **userPrincipalName** as the value.
+4. On the Attribute Contract Fulfillment screen, select **Text** as the Source for SAML_SUBJECT and enter an unused value. Select **LDAP** as the Source for upn and select **userPrincipalName** as the value.
 
 5. Configure issuance criteria, if necessary.
 
@@ -244,9 +244,9 @@ Use the following steps to configure Dynamics CRM to consume the federation meta
 
    where:
 
-   * \<pf\_host> is the host name or IP address where PingFederate is running.
+   * \<pf_host> is the host name or IP address where PingFederate is running.
 
-   * \<pf\_port> is the port number for PingFederate.
+   * \<pf_port> is the port number for PingFederate.
 
    * \<SPConnectionID> is the ID for the PingFederate SP Connection you configured above – for example:
 
@@ -300,7 +300,7 @@ revdate: June 18, 2024
 
 * If you configure Internet-Facing Deployment in the Dynamics CRM Deployment Manager, you can ignore the following warning and still successfully complete the configuration: "The Discovery Web Service could not be accessed. The domain is unavailable or does not exist."
 
-* Active login for Dynamics CRM Outlook clients is supported only when the claims provider for the Dynamics CRM Outlook client is the same claims provider as the Dynamics CRM server. This means all Outlook client computers need to be configured to login to the SAML claims provider (which is the default behavior). In other words, the HKEY\_LOCAL\_MACHINE\Software\Policies\Microsoft\MSCRMClient\HomeRealmUrl registry key on the Outlook client computer must not be set. See [Configure Microsoft Dynamics CRM for Outlook to use Claims-based Authentication](http://technet.microsoft.com/en-us/library/gg188615.aspx) for more information (technet.microsoft.com/en-us/library/gg188615.aspx).
+* Active login for Dynamics CRM Outlook clients is supported only when the claims provider for the Dynamics CRM Outlook client is the same claims provider as the Dynamics CRM server. This means all Outlook client computers need to be configured to login to the SAML claims provider (which is the default behavior). In other words, the HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\MSCRMClient\HomeRealmUrl registry key on the Outlook client computer must not be set. See [Configure Microsoft Dynamics CRM for Outlook to use Claims-based Authentication](http://technet.microsoft.com/en-us/library/gg188615.aspx) for more information (technet.microsoft.com/en-us/library/gg188615.aspx).
 
 ---
 
@@ -327,7 +327,7 @@ section_ids:
 
 3. Click **Add Attribute Source** and configure the LDAP data source, adding `userPrincipalName` as an additional attribute and including a filter value such as `sAMAccountName=${username}`.
 
-4. On the **Attribute Contract Fulfillment** screen, select **Text** as the Source for SAML\_SUBJECT and enter an unused value. Select **LDAP** as the Source for upn and select **userPrincipalName** as the value.
+4. On the **Attribute Contract Fulfillment** screen, select **Text** as the Source for SAML_SUBJECT and enter an unused value. Select **LDAP** as the Source for upn and select **userPrincipalName** as the value.
 
 5. On the **Failsafe Attribute Source** screen, select the **Abort the SSO Transaction** option.
 

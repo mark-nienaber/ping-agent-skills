@@ -9,16 +9,13 @@
 - [Account Recovery](https://docs.pingidentity.com/recognize/mobile-sdk/mobile-sdk-account-recovery.md): This page explains what we mean by account recovery and the context required to integrate it.
 - [Add account](https://docs.pingidentity.com/recognize/user-guide/user-guide-add-account-android.md): Add your first account by scanning a QR code.
 - [Adding identifiers to authentication](https://docs.pingidentity.com/recognize/web-sdk/web-sdk-reference-authentication-identifiers.md): "Shows how to add identifiers to a PingOne Recognize authentication operation for analytics, auditing, or telemetry purposes."
-- [Authenticating in Auth0 with PingOne Recognize](https://docs.pingidentity.com/recognize/mobile-sdk/mobile-sdk-authenticating-in-auth0.md): Integrate PingOne Recognize authentication with Auth0.
 - [Authentication](https://docs.pingidentity.com/recognize/introduction/authentication.md): This page explains the use cases and deployment methods for PingOne Recognize authentication.
-- [Authentication](https://docs.pingidentity.com/recognize/user-guide/user-guide-authentication.md): Authenticate using the Keyless Authenticator.
 - [Authentication](https://docs.pingidentity.com/recognize/web-sdk/web-sdk-guide-authentication.md): "Shows how to authenticate (sign-on) a new user by comparing their current facial biometrics with the ones saved during PingOne Recognize enrollment."
 - [Browser requirements](https://docs.pingidentity.com/recognize/web-sdk/web-sdk-guide-browser-requirements.md): "Shows which web browsers are supported by the PingOne Recognize Web SDK."
 - [Camera permission flow](https://docs.pingidentity.com/recognize/web-sdk/web-sdk-reference-camera-permission.md): "Describes how PingOne Recognize authorization and enrollment handles camera permission requests."
-- [Changelog](https://docs.pingidentity.com/recognize/web-sdk/web-sdk-changelog.md): Details recent changes to the PingOne Recognize Web SDK
 - [Checking the installation completed successfully](https://docs.pingidentity.com/recognize/on-premise/on-premise-checking-installation-successful.md): This page describes how to check that the installation of PingOne Recognize on-premise was successful.
 - [Component interoperability](https://docs.pingidentity.com/recognize/idv-bridge/idv-bridge-component-interoperability.md): Describes how to use client state to authenticate PingOne Recognize users on different platforms (web or mobile).
-- [Component interoperability](https://docs.pingidentity.com/recognize/introduction/component-interoperability.md): This page outlines how customers can allow users to authenticate on different platforms (web/mobile) regardless of which component they initially enroll from by leveraging client state.
+- [Component interoperability](https://docs.pingidentity.com/recognize/introduction/component-interoperability.md): Allow users to authenticate across web and mobile platforms regardless of enrollment component by using client state.
 - [Components](https://docs.pingidentity.com/recognize/mobile-sdk/mobile-sdk-components.md): Learn about the interaction between PingOne Recognize components.
 - [Components](https://docs.pingidentity.com/recognize/on-premise/on-premise-backend-installation-components.md): Components of the PingOne Recognize backend.
 - [Components](https://docs.pingidentity.com/recognize/web-sdk/web-sdk-introduction-components.md): "Describes PingOne Recognize Web SDK components and how to use them."
@@ -31,7 +28,7 @@
 - [Enrollment](https://docs.pingidentity.com/recognize/web-sdk/web-sdk-guide-enrollment.md): "Shows how to enroll a new user by connecting their facial biometrics to PingOne Recognize account."
 - [Error handling](https://docs.pingidentity.com/recognize/web-sdk/web-sdk-reference-error-handling.md): "Explains the errors that can occur when using the PingOne Recognize Web SDK and how to handle them."
 - [Error Handling](https://docs.pingidentity.com/recognize/mobile-sdk/mobile-sdk-error-handling.md): Common errors, what they mean, and recommended next steps.
-- [Exporting the client state to authenticate the enrolled user](https://docs.pingidentity.com/recognize/idv-bridge/idv-bridge-exporting-client-state.md): Having successfully enrolled a user through IDV Bridge SaaS, it is critical that integrators export the client state to support account recovery and ongoing authentication through the Mobile SDK.
+- [Exporting the client state to authenticate the enrolled user](https://docs.pingidentity.com/recognize/idv-bridge/idv-bridge-exporting-client-state.md): Export client state after IDV Bridge SaaS enrollment to support account recovery and ongoing authentication through the Mobile SDK.
 - [External user ID](https://docs.pingidentity.com/recognize/mobile-sdk/mobile-sdk-server-api-external-user-id.md): The External Users ID endpoints of the PingOne Recognize Mobile SDK Server API let you manage external user IDs.
 - [Generating Client State](https://docs.pingidentity.com/recognize/mobile-sdk/mobile-sdk-generating-client-state.md): This page explains how to create a client state during enrollment or authentication and use it for binding a user on a new device.
 - [Getting Started with the PingOne Recognize Mobile SDK](https://docs.pingidentity.com/recognize/mobile-sdk/mobile-sdk-getting-started.md): A step-by-step guide to integrating the PingOne Recognize Mobile SDK.
@@ -55,7 +52,6 @@
 - [Lockout Policy](https://docs.pingidentity.com/recognize/mobile-sdk/mobile-sdk-lockout-policy.md): This page explains how the lockout policy works, the implications for users, and how it is configured.
 - [Logging](https://docs.pingidentity.com/recognize/mobile-sdk/mobile-sdk-logging.md): Customers can log additional data from the mobile SDK for performance monitoring, issue investigation, and analytics.
 - [Mobile SDK Authentication](https://docs.pingidentity.com/recognize/mobile-sdk/mobile-sdk-authentication.md): Learn how to authenticate users with the PingOne Recognize Mobile SDK.
-- [Mobile SDK Changelog](https://docs.pingidentity.com/recognize/mobile-sdk/mobile-sdk-changelog.md): A changelog for the PingOne Recognize Mobile SDK.
 - [Mobile SDK De-Enrollment](https://docs.pingidentity.com/recognize/mobile-sdk/mobile-sdk-de-enrollment.md): Learn how to use the PingOne Recognize Mobile SDK.
 - [Mobile SDK Enrollment](https://docs.pingidentity.com/recognize/mobile-sdk/mobile-sdk-enrollment.md): Learn how to enroll users with the PingOne Recognize Mobile SDK.
 - [Mobile SDK Guide](https://docs.pingidentity.com/recognize/mobile-sdk/mobile-sdk-guide.md): A guide to the PingOne Recognize Mobile SDK.
@@ -76,17 +72,18 @@
 - [Operations](https://docs.pingidentity.com/recognize/mobile-sdk/mobile-sdk-server-api-operations.md): The Operations endpoints of the PingOne Recognize Mobile SDK Server API let you review and manage a variety of operations for  PingOne Recognize users.
 - [Page in a folder](https://docs.pingidentity.com/recognize/folder-example/page-in-folder.md)
 - [PIN Authentication](https://docs.pingidentity.com/recognize/mobile-sdk/mobile-sdk-pin-authentication.md): Use a PIN to perform specific operations when biometric authentication is not necessary.
-- [PingOne Recognize](https://docs.pingidentity.com/recognize/pingone-recognize.md)
-- [PingOne Recognize Agent endpoints](https://docs.pingidentity.com/recognize/idv-bridge/idv-bridge-p1recognize-agent-endpoints.md)
+- [PingOne Recognize](https://docs.pingidentity.com/recognize/pingone-recognize.md): PingOne Recognize landing page linking to getting started, IDV Bridge, mobile app user guide, on-premise install, and SDKs.
+- [PingOne Recognize Agent endpoints](https://docs.pingidentity.com/recognize/idv-bridge/idv-bridge-p1recognize-agent-endpoints.md): REST API endpoints for the PingOne Recognize IDV Bridge on-premise agent: health check, offline enrollment, and online enrollment.
 - [PingOne Recognize On-Premise enrollment Web SDK authentication tutorial](https://docs.pingidentity.com/recognize/idv-bridge/idv-bridge-onprem-enrollment-websdk-authentication-tutorial.md): Tutorial for enrolling user selfies with IDV Bridge On-Premise and then authenticating those users in a web app through the Web SDK.
+- [PingOne Recognize Release Notes](https://docs.pingidentity.com/recognize/release-notes/index.md): Release notes for the PingOne Recognize product, including the Mobile SDK and Web SDK.
 - [Planning for installation](https://docs.pingidentity.com/recognize/on-premise/on-premise-planning-for-installation.md): Planning for installation of PingOne Recognize.
 - [Prerequisites](https://docs.pingidentity.com/recognize/web-sdk/web-sdk-prerequisites.md): "Describes prerequisites for using the PingOne Recognize Web SDK."
-- [Previous Releases](https://docs.pingidentity.com/recognize/release-notes/index.md)
+- [Request recognition frame](https://docs.pingidentity.com/recognize/web-sdk/web-sdk-guide-request-recognition-frame.md): "Shows how to request the recognition frame that the PingOne Recognize Web SDK returns after successful authentication or enrollment."
 - [Secret management](https://docs.pingidentity.com/recognize/mobile-sdk/mobile-sdk-secret-management.md): The Secret Management feature allows you to securely store, retrieve, update, and delete secrets during enrollment or authentication flow
 - [Signing transactions](https://docs.pingidentity.com/recognize/web-sdk/web-sdk-reference-signing-transactions.md): "Shows how to sign PingOne Recognize transaction data after successful authentication or enrollment."
 - [Telemetry](https://docs.pingidentity.com/recognize/mobile-sdk/mobile-sdk-server-api-telemetry.md): The Telemetry API of the PingOne Recognize Mobile SDK Server API lets you retrieve user metadata or specific transactions.
 - [Troubleshooting](https://docs.pingidentity.com/recognize/user-guide/user-guide-troubleshooting.md): How to troubleshoot common issues.
-- [Troubleshooting guide](https://docs.pingidentity.com/recognize/troubleshooting/troubleshooting.md)
+- [Troubleshooting guide](https://docs.pingidentity.com/recognize/troubleshooting/troubleshooting.md): Troubleshoot PingOne Recognize on-premise errors for backend services, mobile SDK error codes, alerts, and cluster scaling.
 - [UI customization](https://docs.pingidentity.com/recognize/mobile-sdk/mobile-sdk-ui-customization.md): Learn how to customize the PingOne Recognize SDK UI to create a more seamless and branded user experience in your app.
 - [User and Device Management](https://docs.pingidentity.com/recognize/mobile-sdk/mobile-sdk-user-and-device-management.md): How to manage users and devices with the PingOne Recognize SDK.
 - [User authorization](https://docs.pingidentity.com/recognize/web-sdk/web-sdk-reference-user-authorization.md): Web SDK supports a first factor provided by the integrator during the flow.

@@ -1,141 +1,144 @@
 # PingDirectory and PingDirectoryProxy SCIM 2.0 API Reference
 
+> AI agents should consult [Docs for Agents](https://developer.pingidentity.com/build-with-ai/docs-for-agents.md)
+> for guidance on navigating Ping Identity documentation.
+
 ## Pingdirectory
 
-- [API Test - Get an Entry](https://developer.pingidentity.com/pingdirectory/directory/getting-started/api-test-get-an-entry.md)
-- [Assertion request control](https://developer.pingidentity.com/pingdirectory/directory/controls/assertion-request-control.md)
-- [Assured replication request control](https://developer.pingidentity.com/pingdirectory/directory/controls/assured-replication-request-control.md)
-- [Assured replication response control](https://developer.pingidentity.com/pingdirectory/directory/controls/assured-replication-response-control.md)
-- [Authenticate](https://developer.pingidentity.com/pingdirectory/directory/authentication/authenticate.md)
-- [Authentication](https://developer.pingidentity.com/pingdirectory/directory/authentication.md)
-- [Authentication](https://developer.pingidentity.com/pingdirectory/directory-proxy-scim/authentication.md)
-- [Authorization](https://developer.pingidentity.com/pingdirectory/directory-proxy-scim/authorization.md)
-- [Change other Attributes (CN, UID, SN)](https://developer.pingidentity.com/pingdirectory/directory/directory-entry-apis/change-other-attributes-cn-uid-sn.md)
-- [Change the Naming Attribute](https://developer.pingidentity.com/pingdirectory/directory/directory-entry-apis/change-the-naming-attribute.md)
-- [Change the Parent DN](https://developer.pingidentity.com/pingdirectory/directory/directory-entry-apis/change-the-parent-dn.md)
-- [Changelog](https://developer.pingidentity.com/pingdirectory/directory/changelog.md)
-- [Consent API Activity](https://developer.pingidentity.com/pingdirectory/consent/consent-api-activity.md)
-- [Consent API Getting started](https://developer.pingidentity.com/pingdirectory/consent/consent-api-getting-started.md)
-- [Consent API Overview](https://developer.pingidentity.com/pingdirectory/consent/consent-api-overview.md)
-- [Consent API Requests](https://developer.pingidentity.com/pingdirectory/consent/consent-api-requests.md)
-- [Consent API Responses](https://developer.pingidentity.com/pingdirectory/consent/consent-api-responses.md)
-- [Controls](https://developer.pingidentity.com/pingdirectory/directory/controls.md)
-- [Conventions](https://developer.pingidentity.com/pingdirectory/directory/conventions.md)
-- [CREATE a consent](https://developer.pingidentity.com/pingdirectory/consent/consents-api/create-a-consent.md)
-- [Create a User](https://developer.pingidentity.com/pingdirectory/directory-proxy-scim/user-profile-endpoints/create-a-user.md)
-- [Create Entry](https://developer.pingidentity.com/pingdirectory/directory/directory-entry-apis/create-entry.md)
-- [Create Entry and entryUUID](https://developer.pingidentity.com/pingdirectory/directory/directory-entry-apis/create-entry-and-entryUUID.md)
-- [Create Entry with Controls](https://developer.pingidentity.com/pingdirectory/directory/directory-entry-apis/create-entry-with-controls.md)
-- [Data Types and Resources](https://developer.pingidentity.com/pingdirectory/directory-proxy-scim/data-types-and-resources.md)
-- [DELETE a consent](https://developer.pingidentity.com/pingdirectory/consent/consents-api/delete-a-consent.md)
-- [Delete a User](https://developer.pingidentity.com/pingdirectory/directory-proxy-scim/user-profile-endpoints/delete-a-user.md)
-- [Delete an Entry](https://developer.pingidentity.com/pingdirectory/directory/directory-entry-apis/delete-an-entry.md)
-- [Delete an Entry with Controls](https://developer.pingidentity.com/pingdirectory/directory/directory-entry-apis/delete-an-entry-with-controls.md)
-- [Deliver one time password](https://developer.pingidentity.com/pingdirectory/directory/extended-operations/deliver-one-time-password/deliver-one-time-password.md)
-- [Deliver One Time Password](https://developer.pingidentity.com/pingdirectory/directory/extended-operations/deliver-one-time-password.md)
-- [Deregister YubiKey OTP device](https://developer.pingidentity.com/pingdirectory/directory/extended-operations/deregister-yubikey-otp-device/deregister-yubikey-otp-device.md)
-- [Deregister YubiKey OTP Device](https://developer.pingidentity.com/pingdirectory/directory/extended-operations/deregister-yubikey-otp-device.md)
-- [Directory Entry APIs](https://developer.pingidentity.com/pingdirectory/directory/directory-entry-apis.md)
-- [Errors](https://developer.pingidentity.com/pingdirectory/directory-proxy-scim/errors.md)
-- [Exclude branch request control](https://developer.pingidentity.com/pingdirectory/directory/controls/exclude-branch-request-control.md)
-- [Extended Operations](https://developer.pingidentity.com/pingdirectory/directory/extended-operations.md)
-- [Generate Password](https://developer.pingidentity.com/pingdirectory/directory/extended-operations/generate-password.md)
-- [Generate Password](https://developer.pingidentity.com/pingdirectory/directory/extended-operations/generate-password/generate-password.md)
-- [Generate password request control](https://developer.pingidentity.com/pingdirectory/directory/controls/generate-password-request-control.md)
-- [Generate password response control](https://developer.pingidentity.com/pingdirectory/directory/controls/generate-password-response-control.md)
-- [Generate TOTP shared secret](https://developer.pingidentity.com/pingdirectory/directory/extended-operations/generate-totp-shared-secret/generate-totp-shared-secret.md)
-- [Generate TOTP Shared Secret](https://developer.pingidentity.com/pingdirectory/directory/extended-operations/generate-totp-shared-secret.md)
-- [Get All Schemas](https://developer.pingidentity.com/pingdirectory/directory/schemas-apis/get-all-schemas.md)
-- [Get an Entry](https://developer.pingidentity.com/pingdirectory/directory/directory-entry-apis/get-an-entry.md)
-- [Get an Entry (Exclude SN)](https://developer.pingidentity.com/pingdirectory/directory/directory-entry-apis/get-an-entry-exclude-sn.md)
-- [Get Current User](https://developer.pingidentity.com/pingdirectory/directory/directory-entry-apis/get-current-user.md)
-- [Get effective rights request control](https://developer.pingidentity.com/pingdirectory/directory/controls/get-effective-rights-request-control.md)
-- [Get Metadata](https://developer.pingidentity.com/pingdirectory/directory/directory-entry-apis/get-metadata.md)
-- [Get Operational Attributes](https://developer.pingidentity.com/pingdirectory/directory/schemas-apis/get-operational-attributes.md)
-- [Get Password Quality Requirements](https://developer.pingidentity.com/pingdirectory/directory/extended-operations/get-password-quality-requirements.md)
-- [Get Password Quality Requirements](https://developer.pingidentity.com/pingdirectory/directory/extended-operations/get-password-quality-requirements/get-password-quality-requirements.md)
-- [Get Schema for the objectclass](https://developer.pingidentity.com/pingdirectory/directory/schemas-apis/get-schema-for-the-objectclass.md)
-- [Getting Started](https://developer.pingidentity.com/pingdirectory/directory/getting-started.md)
-- [Group search configuration](https://developer.pingidentity.com/pingdirectory/directory-proxy-scim/group-search-configuration.md)
-- [Hard delete request control](https://developer.pingidentity.com/pingdirectory/directory/controls/hard-delete-request-control.md)
-- [Ignore NO-USER-MODIFICATION request control](https://developer.pingidentity.com/pingdirectory/directory/controls/ignore-no-user-modification-request-control.md)
-- [Intermediate client request control](https://developer.pingidentity.com/pingdirectory/directory/controls/intermediate-client-request-control.md)
-- [Intermediate client response control](https://developer.pingidentity.com/pingdirectory/directory/controls/intermediate-client-response-control.md)
-- [Join request control](https://developer.pingidentity.com/pingdirectory/directory/controls/join-request-control.md)
-- [Join result control](https://developer.pingidentity.com/pingdirectory/directory/controls/join-result-control.md)
-- [List All Entries](https://developer.pingidentity.com/pingdirectory/directory/subtree-apis/list-all-entries.md)
-- [List All Entries (Filter Entries)](https://developer.pingidentity.com/pingdirectory/directory/subtree-apis/list-all-entries-filter-entries.md)
-- [ManageDsaIT request control](https://developer.pingidentity.com/pingdirectory/directory/controls/managedsait-request-control.md)
-- [Matched values request control](https://developer.pingidentity.com/pingdirectory/directory/controls/matched-values-request-control.md)
-- [Matching entry count request control](https://developer.pingidentity.com/pingdirectory/directory/controls/matching-entry-count-request-control.md)
-- [Matching entry count response control](https://developer.pingidentity.com/pingdirectory/directory/controls/matching-entry-count-response-control.md)
-- [Name with entryUUID request control](https://developer.pingidentity.com/pingdirectory/directory/controls/name-with-entryuuid-request-control.md)
-- [No operation request control](https://developer.pingidentity.com/pingdirectory/directory/controls/no-operation-request-control.md)
-- [Operation purpose request control](https://developer.pingidentity.com/pingdirectory/directory/controls/operation-purpose-request-control.md)
-- [Overview](https://developer.pingidentity.com/pingdirectory/directory-proxy-scim/overview.md)
-- [Password Modify](https://developer.pingidentity.com/pingdirectory/directory/extended-operations/password-modify.md)
-- [Password Modify](https://developer.pingidentity.com/pingdirectory/directory/extended-operations/password-modify/password-modify.md)
-- [Password update behavior request control](https://developer.pingidentity.com/pingdirectory/directory/controls/password-update-behavior-request-control.md)
-- [Password validation details request control](https://developer.pingidentity.com/pingdirectory/directory/controls/password-validation-details-request-control.md)
-- [Password validation details response control](https://developer.pingidentity.com/pingdirectory/directory/controls/password-validation-details-response-control.md)
-- [Permissive modify request control](https://developer.pingidentity.com/pingdirectory/directory/controls/permissive-modify-request-control.md)
-- [Permit unindexed search request control](https://developer.pingidentity.com/pingdirectory/directory/controls/permit-unindexed-search-request-control.md)
-- [PingDirectory and PingDirectoryProxy SCIM 2.0 API Reference](https://developer.pingidentity.com/pingdirectory/directory-proxy-scim/introduction.md)
-- [PingDirectory Consent API Reference](https://developer.pingidentity.com/pingdirectory/consent/introduction.md)
-- [PingDirectory REST API Reference](https://developer.pingidentity.com/pingdirectory/directory/introduction.md)
-- [Post-read request control](https://developer.pingidentity.com/pingdirectory/directory/controls/post-read-request-control.md)
-- [Post-read response control](https://developer.pingidentity.com/pingdirectory/directory/controls/post-read-response-control.md)
-- [Pre-read request control](https://developer.pingidentity.com/pingdirectory/directory/controls/pre-read-request-control.md)
-- [Pre-read response control](https://developer.pingidentity.com/pingdirectory/directory/controls/pre-read-response-control.md)
-- [Proxied authorization v1 request control](https://developer.pingidentity.com/pingdirectory/directory/controls/proxied-authorization-v1-request-control.md)
-- [Proxied authorization v2 request control](https://developer.pingidentity.com/pingdirectory/directory/controls/proxied-authorization-v2-request-control.md)
-- [Purge password request control](https://developer.pingidentity.com/pingdirectory/directory/controls/purge-password-request-control.md)
-- [READ a consent](https://developer.pingidentity.com/pingdirectory/consent/consents-api/read-a-consent.md)
-- [READ a definition](https://developer.pingidentity.com/pingdirectory/consent/definitions-api/read-a-definition.md)
-- [READ a localization](https://developer.pingidentity.com/pingdirectory/consent/definitions-api/read-a-localization.md)
-- [Read a SCIM Service Provider Configuration](https://developer.pingidentity.com/pingdirectory/directory-proxy-scim/service-metadata-endpoints/read-a-scim-service-provider-configuration.md)
-- [READ consents](https://developer.pingidentity.com/pingdirectory/consent/consents-api/read-consents.md)
-- [READ definitions](https://developer.pingidentity.com/pingdirectory/consent/definitions-api/read-definitions.md)
-- [READ localizations](https://developer.pingidentity.com/pingdirectory/consent/definitions-api/read-localizations.md)
-- [Read One SCIM Resource Type](https://developer.pingidentity.com/pingdirectory/directory-proxy-scim/service-metadata-endpoints/read-a-scim-resource-type.md)
-- [Read One SCIM Schema](https://developer.pingidentity.com/pingdirectory/directory-proxy-scim/service-metadata-endpoints/read-a-scim-schema.md)
-- [Read One User](https://developer.pingidentity.com/pingdirectory/directory-proxy-scim/user-profile-endpoints/read-a-user.md)
-- [Read SCIM Resource Types](https://developer.pingidentity.com/pingdirectory/directory-proxy-scim/service-metadata-endpoints/read-scim-resource-types.md)
-- [Read SCIM Schemas](https://developer.pingidentity.com/pingdirectory/directory-proxy-scim/service-metadata-endpoints/read-scim-schemas.md)
-- [READ search group members by group display name](https://developer.pingidentity.com/pingdirectory/directory-proxy-scim/user-profile-endpoints/get-read-search-group-members-display-name.md)
-- [READ search group members by group entry ID](https://developer.pingidentity.com/pingdirectory/directory-proxy-scim/user-profile-endpoints/get-read-search-group-members-entry-id.md)
-- [Real attributes only request control](https://developer.pingidentity.com/pingdirectory/directory/controls/real-attributes-only-request-control.md)
-- [Register YubiKey OTP device](https://developer.pingidentity.com/pingdirectory/directory/extended-operations/register-yubikey-otp-device/register-yubikey-otp-device.md)
-- [Register YubiKey OTP Device](https://developer.pingidentity.com/pingdirectory/directory/extended-operations/register-yubikey-otp-device.md)
-- [Reject unindexed search request control](https://developer.pingidentity.com/pingdirectory/directory/controls/reject-unindexed-search-request-control.md)
-- [Rename an Entry, Keep Both](https://developer.pingidentity.com/pingdirectory/directory/directory-entry-apis/rename-an-entry-keep-both.md)
-- [Rename or Move an Entry](https://developer.pingidentity.com/pingdirectory/directory/directory-entry-apis/rename-or-move-an-entry.md)
-- [REPLACE a consent](https://developer.pingidentity.com/pingdirectory/consent/consents-api/replace-a-consent.md)
-- [Requests and Responses](https://developer.pingidentity.com/pingdirectory/directory-proxy-scim/requests-and-responses.md)
-- [Retire password request control](https://developer.pingidentity.com/pingdirectory/directory/controls/retire-password-request-control.md)
-- [Revoke TOTP shared secret](https://developer.pingidentity.com/pingdirectory/directory/extended-operations/revoke-totp-shared-secret/revoke-totp-shared-secret.md)
-- [Revoke TOTP Shared Secret](https://developer.pingidentity.com/pingdirectory/directory/extended-operations/revoke-totp-shared-secret.md)
-- [Schemas APIs](https://developer.pingidentity.com/pingdirectory/directory/schemas-apis.md)
-- [Search User Profile (GET)](https://developer.pingidentity.com/pingdirectory/directory-proxy-scim/user-profile-endpoints/get-read-search-users.md)
-- [Search User Profile (POST)](https://developer.pingidentity.com/pingdirectory/directory-proxy-scim/user-profile-endpoints/post-read-search-users.md)
-- [Search Users (GET)](https://developer.pingidentity.com/pingdirectory/directory-proxy-scim/requests-and-responses/get-search-users.md)
-- [Search Users (POST)](https://developer.pingidentity.com/pingdirectory/directory-proxy-scim/requests-and-responses/post-search-users.md)
-- [Search Using POST](https://developer.pingidentity.com/pingdirectory/directory/subtree-apis/search-using-post.md)
-- [Search Using POST with Controls](https://developer.pingidentity.com/pingdirectory/directory/subtree-apis/search-using-post-with-controls.md)
-- [Service Metadata Endpoints](https://developer.pingidentity.com/pingdirectory/directory-proxy-scim/service-metadata-endpoints.md)
-- [Soft delete request control](https://developer.pingidentity.com/pingdirectory/directory/controls/soft-delete-request-control.md)
-- [Soft deleted entry access request control](https://developer.pingidentity.com/pingdirectory/directory/controls/soft-deleted-entry-access-request-control.md)
-- [Subtree APIs](https://developer.pingidentity.com/pingdirectory/directory/subtree-apis.md)
-- [Suppress referential integrity updates request control](https://developer.pingidentity.com/pingdirectory/directory/controls/suppress-referential-integrity-updates-request-control.md)
-- [Undelete request control](https://developer.pingidentity.com/pingdirectory/directory/controls/undelete-request-control.md)
-- [Uniqueness request control](https://developer.pingidentity.com/pingdirectory/directory/controls/uniqueness-request-control.md)
-- [Uniqueness response control](https://developer.pingidentity.com/pingdirectory/directory/controls/uniqueness-response-control.md)
-- [UPDATE a consent](https://developer.pingidentity.com/pingdirectory/consent/consents-api/update-a-consent.md)
-- [Update Add a Member to User Attributes](https://developer.pingidentity.com/pingdirectory/directory-proxy-scim/user-profile-endpoints/update-add-a-member-to-user-attributes.md)
-- [Update All User Attributes](https://developer.pingidentity.com/pingdirectory/directory-proxy-scim/user-profile-endpoints/update-a-user.md)
-- [Update an Entry](https://developer.pingidentity.com/pingdirectory/directory/directory-entry-apis/update-an-entry.md)
-- [Update an Entry (LDAP Modify)](https://developer.pingidentity.com/pingdirectory/directory/directory-entry-apis/update-an-entry-ldap-modify.md)
-- [Update Remove a Value from User Attributes](https://developer.pingidentity.com/pingdirectory/directory-proxy-scim/user-profile-endpoints/update-remove-a-value-from-user-attributes.md)
-- [Update Replace One or More User Attributes](https://developer.pingidentity.com/pingdirectory/directory-proxy-scim/user-profile-endpoints/update-replace-one-or-more-user-attributes.md)
-- [User Profile](https://developer.pingidentity.com/pingdirectory/directory-proxy-scim/user-profile-endpoints.md)
-- [Virtual attributes only request control](https://developer.pingidentity.com/pingdirectory/directory/controls/virtual-attributes-only-request-control.md)
+- [API Test - Get an Entry](https://developer.pingidentity.com/pingdirectory/directory/getting-started/api-test-get-an-entry.md): Shows how to use the PingDirectory REST API GET operation to retrieve a directory entry and its attributes by distinguished name
+- [Assertion request control](https://developer.pingidentity.com/pingdirectory/directory/controls/assertion-request-control.md): Add the assertion request control to a Directory REST API request to process the operation only if the target entry matches a given filter
+- [Assured replication request control](https://developer.pingidentity.com/pingdirectory/directory/controls/assured-replication-request-control.md): Add the assured replication request control to a Directory REST API request to delay the response until replication requirements are satisfied
+- [Assured replication response control](https://developer.pingidentity.com/pingdirectory/directory/controls/assured-replication-response-control.md): Read the assured replication response control in a Directory REST API response to see whether local and remote assurance requirements were satisfied
+- [Authenticate](https://developer.pingidentity.com/pingdirectory/directory/authentication/authenticate.md): Documents the PingDirectory REST API POST /authenticate operation for authenticating a user with credentials and returning an access token
+- [Authentication](https://developer.pingidentity.com/pingdirectory/directory-proxy-scim/authentication.md): Explains how to authenticate PingDirectory and PingDirectoryProxy SCIM 2.0 API requests using an OAuth 2.0 bearer access token
+- [Authentication](https://developer.pingidentity.com/pingdirectory/directory/authentication/index.md): Documents the PingDirectory REST API authenticate endpoint, which supports password, TOTP, delivered OTP, and YubiKey OTP credential types to obtain an access token
+- [Authorization](https://developer.pingidentity.com/pingdirectory/directory-proxy-scim/authorization.md): Explains how OAuth 2.0 scopes and PingDirectory access controls determine which SCIM 2.0 resources and attributes a request can access
+- [Change other Attributes (CN, UID, SN)](https://developer.pingidentity.com/pingdirectory/directory/directory-entry-apis/change-other-attributes-cn-uid-sn.md): Update the cn, uid, and sn attributes on a PingDirectory Server entry along with the parent DN in a single Directory REST API request
+- [Change the Naming Attribute](https://developer.pingidentity.com/pingdirectory/directory/directory-entry-apis/change-the-naming-attribute.md): Change the naming attribute used for a PingDirectory Server entry when multiple naming attribute options are defined in the entry
+- [Change the Parent DN](https://developer.pingidentity.com/pingdirectory/directory/directory-entry-apis/change-the-parent-dn.md): Move a PingDirectory Server entry to a new parent DN using the Directory REST API, with or without also changing the RDN
+- [Changelog](https://developer.pingidentity.com/pingdirectory/directory/changelog.md): Lists changes and new features added to the PingDirectory REST API over time, including authentication and extended operation support
+- [Consent API Activity](https://developer.pingidentity.com/pingdirectory/consent/consent-api-activity.md): Walk through an open banking scenario that uses the PingDirectory Consent API to create, check, and update a consent record
+- [Consent API Getting started](https://developer.pingidentity.com/pingdirectory/consent/consent-api-getting-started.md): Learn how to construct a PingDirectory Consent API request, including the request header, request body, and response
+- [Consent API Overview](https://developer.pingidentity.com/pingdirectory/consent/consent-api-overview.md): Learn how the PingDirectory Consent API collects, enforces, manages, and audits user consents using definitions, localizations, and consent records
+- [Consent API Requests](https://developer.pingidentity.com/pingdirectory/consent/consent-api-requests.md): Learn how to authenticate to the PingDirectory Consent API and determine privileged versus unprivileged access to consent records
+- [Consent API Responses](https://developer.pingidentity.com/pingdirectory/consent/consent-api-responses.md): Learn about the HTTP response headers and status codes returned by PingDirectory Consent API operations
+- [Controls](https://developer.pingidentity.com/pingdirectory/directory/controls/index.md): Add LDAP controls to Directory REST API requests and responses using the _controls property, including OID, criticality, and value fields
+- [Conventions](https://developer.pingidentity.com/pingdirectory/directory/conventions.md): Describes conventions for the PingDirectory REST API, including HTTP methods, link expansion, response structure, filtering, error formats, and attribute tagging rules
+- [CREATE a consent](https://developer.pingidentity.com/pingdirectory/consent/consents-api/create-a-consent.md): Create a new consent record with the PingDirectory Consent API
+- [Create a User](https://developer.pingidentity.com/pingdirectory/directory-proxy-scim/user-profile-endpoints/create-a-user.md): Create a new user resource using a POST request against the PingDirectory or PingDirectoryProxy SCIM 2.0 Users endpoint
+- [Create Entry](https://developer.pingidentity.com/pingdirectory/directory/directory-entry-apis/create-entry.md): Add a new entry to PingDirectory Server using the Directory REST API POST /directory/v1 operation
+- [Create Entry and entryUUID](https://developer.pingidentity.com/pingdirectory/directory/directory-entry-apis/create-entry-and-entryUUID.md): Create a PingDirectory Server entry under a parent DN and retrieve its generated entryUUID attribute value in the response
+- [Create Entry with Controls](https://developer.pingidentity.com/pingdirectory/directory/directory-entry-apis/create-entry-with-controls.md): Create a PingDirectory Server entry using the Directory REST API POST operation with LDAP controls included in the request and response
+- [Data Types and Resources](https://developer.pingidentity.com/pingdirectory/directory-proxy-scim/data-types-and-resources.md): Describes the SCIM 2.0 data types, resource format, schemas, and common attributes used by the PingDirectory and PingDirectoryProxy SCIM 2.0 APIs
+- [DELETE a consent](https://developer.pingidentity.com/pingdirectory/consent/consents-api/delete-a-consent.md): Delete the consent record with the provided unique ID using the PingDirectory Consent API
+- [Delete a User](https://developer.pingidentity.com/pingdirectory/directory-proxy-scim/user-profile-endpoints/delete-a-user.md): Delete a user resource by ID using a DELETE request against the PingDirectory or PingDirectoryProxy SCIM 2.0 Users endpoint
+- [Delete an Entry](https://developer.pingidentity.com/pingdirectory/directory/directory-entry-apis/delete-an-entry.md): Delete a PingDirectory Server entry identified by its distinguished name using the Directory REST API DELETE operation
+- [Delete an Entry with Controls](https://developer.pingidentity.com/pingdirectory/directory/directory-entry-apis/delete-an-entry-with-controls.md): Delete a PingDirectory Server entry using the Directory REST API DELETE operation with LDAP controls included in the request and response
+- [Deliver one time password](https://developer.pingidentity.com/pingdirectory/directory/extended-operations/deliver-one-time-password/deliver-one-time-password.md): Generate a one-time password and deliver it to a user out of band using the PingDirectory Directory REST API
+- [Deliver One Time Password](https://developer.pingidentity.com/pingdirectory/directory/extended-operations/deliver-one-time-password/index.md)
+- [Deregister YubiKey OTP device](https://developer.pingidentity.com/pingdirectory/directory/extended-operations/deregister-yubikey-otp-device/deregister-yubikey-otp-device.md): Revoke a registered YubiKey OTP device for a user using the PingDirectory Directory REST API
+- [Deregister YubiKey OTP Device](https://developer.pingidentity.com/pingdirectory/directory/extended-operations/deregister-yubikey-otp-device/index.md)
+- [Directory Entry APIs](https://developer.pingidentity.com/pingdirectory/directory/directory-entry-apis/index.md): Create, read, update, and delete PingDirectory Server entries using the Directory REST API, identifying entries by distinguished name
+- [Errors](https://developer.pingidentity.com/pingdirectory/directory-proxy-scim/errors.md): Describes the SCIM 2.0 error response format, fields, and password update error details returned by the PingDirectory and PingDirectoryProxy APIs
+- [Exclude branch request control](https://developer.pingidentity.com/pingdirectory/directory/controls/exclude-branch-request-control.md): Add the exclude branch request control to a Directory REST API search request to exclude matching entries from one or more subtrees
+- [Extended Operations](https://developer.pingidentity.com/pingdirectory/directory/extended-operations/index.md): List the LDAP extended operations supported by the PingDirectory Directory REST API, such as password modify, password quality requirements, and TOTP or YubiKey OTP management
+- [Generate Password](https://developer.pingidentity.com/pingdirectory/directory/extended-operations/generate-password/generate-password.md): Generate one or more suggested passwords for a user based on a password policy using the PingDirectory Directory REST API
+- [Generate Password](https://developer.pingidentity.com/pingdirectory/directory/extended-operations/generate-password/index.md)
+- [Generate password request control](https://developer.pingidentity.com/pingdirectory/directory/controls/generate-password-request-control.md): Add the generate password request control to a Directory REST API add request to have PingDirectory Server generate a new password for the entry
+- [Generate password response control](https://developer.pingidentity.com/pingdirectory/directory/controls/generate-password-response-control.md): Read the generate password response control returned after an add request that used the generate password request control to get the generated password
+- [Generate TOTP shared secret](https://developer.pingidentity.com/pingdirectory/directory/extended-operations/generate-totp-shared-secret/generate-totp-shared-secret.md): Generate a time-based one-time shared secret for a user to exchange for a TOTP using the PingDirectory Directory REST API
+- [Generate TOTP Shared Secret](https://developer.pingidentity.com/pingdirectory/directory/extended-operations/generate-totp-shared-secret/index.md)
+- [Get All Schemas](https://developer.pingidentity.com/pingdirectory/directory/schemas-apis/get-all-schemas.md): Retrieve a list of all configured objectClass entities and their schemas using the PingDirectory Directory REST API
+- [Get an Entry](https://developer.pingidentity.com/pingdirectory/directory/directory-entry-apis/get-an-entry.md): Retrieve a PingDirectory Server entry by its distinguished name using the Directory REST API GET operation
+- [Get an Entry (Exclude SN)](https://developer.pingidentity.com/pingdirectory/directory/directory-entry-apis/get-an-entry-exclude-sn.md): Retrieve a PingDirectory Server entry using the Directory REST API GET operation while excluding the sn attribute from the response
+- [Get Current User](https://developer.pingidentity.com/pingdirectory/directory/directory-entry-apis/get-current-user.md): Retrieve the record of the currently authenticated user from PingDirectory Server using the GET /directory/v1/me alias endpoint
+- [Get effective rights request control](https://developer.pingidentity.com/pingdirectory/directory/controls/get-effective-rights-request-control.md): Add the get effective rights request control to a Directory REST API search request to return access control permissions a user has on matching entries
+- [Get Metadata](https://developer.pingidentity.com/pingdirectory/directory/directory-entry-apis/get-metadata.md): Retrieve server and API metadata, including configured schemas, from the PingDirectory Server Directory REST API base endpoint
+- [Get Operational Attributes](https://developer.pingidentity.com/pingdirectory/directory/schemas-apis/get-operational-attributes.md): Retrieve the operational attributes configured on the server using the PingDirectory Directory REST API
+- [Get Password Quality Requirements](https://developer.pingidentity.com/pingdirectory/directory/extended-operations/get-password-quality-requirements/get-password-quality-requirements.md): Retrieve the password quality requirements that apply to a new password for an add, self change, or administrative reset using the PingDirectory Directory REST API
+- [Get Password Quality Requirements](https://developer.pingidentity.com/pingdirectory/directory/extended-operations/get-password-quality-requirements/index.md)
+- [Get Schema for the objectclass](https://developer.pingidentity.com/pingdirectory/directory/schemas-apis/get-schema-for-the-objectclass.md): Retrieve the schema associated with a specified objectClass value using the PingDirectory Directory REST API
+- [Getting Started](https://developer.pingidentity.com/pingdirectory/directory/getting-started/index.md): Authenticate requests to the PingDirectory REST API with basic auth or OAuth 2.0 bearer tokens, map OAuth scopes to ACIs, and sync PingDirectoryProxy encryption settings.
+- [Group search configuration](https://developer.pingidentity.com/pingdirectory/directory-proxy-scim/group-search-configuration.md): Explains how to configure PingDirectory or PingDirectoryProxy to search for groups and retrieve group members using the SCIM 2.0 API
+- [Hard delete request control](https://developer.pingidentity.com/pingdirectory/directory/controls/hard-delete-request-control.md): Add the hard delete request control to a Directory REST API delete request to override soft delete policies and permanently remove an entry
+- [Ignore NO-USER-MODIFICATION request control](https://developer.pingidentity.com/pingdirectory/directory/controls/ignore-no-user-modification-request-control.md): Add the ignore NO-USER-MODIFICATION request control to a Directory REST API add request to set attributes marked NO-USER-MODIFICATION in the schema
+- [Intermediate client request control](https://developer.pingidentity.com/pingdirectory/directory/controls/intermediate-client-request-control.md): Add the intermediate client request control to a Directory REST API request to pass downstream client information or an alternate authorization identity
+- [Intermediate client response control](https://developer.pingidentity.com/pingdirectory/directory/controls/intermediate-client-response-control.md): Read the intermediate client response control in a Directory REST API response for processing information from the current and upstream servers
+- [Join request control](https://developer.pingidentity.com/pingdirectory/directory/controls/join-request-control.md): Add the join request control to a Directory REST API search request to return related entries alongside each search result entry
+- [Join result control](https://developer.pingidentity.com/pingdirectory/directory/controls/join-result-control.md): Read the join result control returned with a search result entry to get the set of entries joined with it
+- [List All Entries](https://developer.pingidentity.com/pingdirectory/directory/subtree-apis/list-all-entries.md): Retrieve a paginated list of entries under a subtree of an entry with a specified search scope using the PingDirectory Directory REST API
+- [List All Entries (Filter Entries)](https://developer.pingidentity.com/pingdirectory/directory/subtree-apis/list-all-entries-filter-entries.md): Filter subtree search results using a SCIM filter parameter with the PingDirectory Directory REST API
+- [ManageDsaIT request control](https://developer.pingidentity.com/pingdirectory/directory/controls/managedsait-request-control.md): Add the ManageDsaIT request control to a Directory REST API request to have PingDirectory Server treat smart referral entries as regular entries
+- [Matched values request control](https://developer.pingidentity.com/pingdirectory/directory/controls/matched-values-request-control.md): Add the matched values request control to a Directory REST API search request to return only attribute values matching a given filter
+- [Matching entry count request control](https://developer.pingidentity.com/pingdirectory/directory/controls/matching-entry-count-request-control.md): Add the matching entry count request control to a Directory REST API search request to return an estimated count of matching entries instead of the entries
+- [Matching entry count response control](https://developer.pingidentity.com/pingdirectory/directory/controls/matching-entry-count-response-control.md): Read the matching entry count response control returned for a search that used the matching entry count request control to get the estimated count
+- [Name with entryUUID request control](https://developer.pingidentity.com/pingdirectory/directory/controls/name-with-entryuuid-request-control.md): Add the name with entryUUID request control to a Directory REST API add request to replace the entry's RDN with its server-generated entryUUID
+- [No operation request control](https://developer.pingidentity.com/pingdirectory/directory/controls/no-operation-request-control.md): Add the no operation request control to a Directory REST API request to test whether an operation would succeed without applying any changes
+- [Operation purpose request control](https://developer.pingidentity.com/pingdirectory/directory/controls/operation-purpose-request-control.md): Add the operation purpose request control to a Directory REST API request to record informational details about why the request was made
+- [Overview](https://developer.pingidentity.com/pingdirectory/directory-proxy-scim/overview.md): Describes the PingDirectory and PingDirectoryProxy SCIM 2.0 REST APIs, their capabilities, and the encryption configuration required to enable them
+- [Password Modify](https://developer.pingidentity.com/pingdirectory/directory/extended-operations/password-modify/index.md)
+- [Password Modify](https://developer.pingidentity.com/pingdirectory/directory/extended-operations/password-modify/password-modify.md): Change or administratively reset a user's password using the PingDirectory Directory REST API
+- [Password update behavior request control](https://developer.pingidentity.com/pingdirectory/directory/controls/password-update-behavior-request-control.md): Add the password update behavior request control to a Directory REST API request to override default password update processing behaviors
+- [Password validation details request control](https://developer.pingidentity.com/pingdirectory/directory/controls/password-validation-details-request-control.md): Add the password validation details request control to a Directory REST API request to receive details about new password requirement validation
+- [Password validation details response control](https://developer.pingidentity.com/pingdirectory/directory/controls/password-validation-details-response-control.md): Read the password validation details response control returned for a request that used the password validation details request control
+- [Permissive modify request control](https://developer.pingidentity.com/pingdirectory/directory/controls/permissive-modify-request-control.md): Add the permissive modify request control to a Directory REST API modify request to relax constraints on adding existing or removing missing values
+- [Permit unindexed search request control](https://developer.pingidentity.com/pingdirectory/directory/controls/permit-unindexed-search-request-control.md): Add the permit unindexed search request control to a Directory REST API search request to allow an unindexed search to be processed
+- [PingDirectory and PingDirectoryProxy SCIM 2.0 API Reference](https://developer.pingidentity.com/pingdirectory/directory-proxy-scim/index.md): Lists prerequisite reading, including administration guides and RFCs, to review before using the PingDirectory and PingDirectoryProxy SCIM 2.0 APIs
+- [PingDirectory Consent API Reference](https://developer.pingidentity.com/pingdirectory/consent/index.md): Review prerequisite topics on the PingDirectory Consent Service and HTTP fundamentals before using the Consent API
+- [PingDirectory REST API Reference](https://developer.pingidentity.com/pingdirectory/directory/index.md): Introduces the PingDirectory REST API, an HTTP-based alternative to LDAP and SCIM for creating, reading, updating, and deleting directory data as JSON
+- [Post-read request control](https://developer.pingidentity.com/pingdirectory/directory/controls/post-read-request-control.md): Add the post-read request control to a Directory REST API request to return a copy of the entry as it appears after changes are applied
+- [Post-read response control](https://developer.pingidentity.com/pingdirectory/directory/controls/post-read-response-control.md): Read the post-read response control returned after a request that used the post-read request control to view the entry after changes were applied
+- [Pre-read request control](https://developer.pingidentity.com/pingdirectory/directory/controls/pre-read-request-control.md): Add the pre-read request control to a Directory REST API request to return a copy of the entry as it appeared before changes were applied
+- [Pre-read response control](https://developer.pingidentity.com/pingdirectory/directory/controls/pre-read-response-control.md): Read the pre-read response control returned after a request that used the pre-read request control to view the entry before changes were applied
+- [Proxied authorization v1 request control](https://developer.pingidentity.com/pingdirectory/directory/controls/proxied-authorization-v1-request-control.md): Add the proxied authorization V1 request control to a Directory REST API request to process it under the authority of another user identified by DN
+- [Proxied authorization v2 request control](https://developer.pingidentity.com/pingdirectory/directory/controls/proxied-authorization-v2-request-control.md): Add the proxied authorization V2 request control to a Directory REST API request to process it under the authority of another user by authorization ID
+- [Purge password request control](https://developer.pingidentity.com/pingdirectory/directory/controls/purge-password-request-control.md): Add the purge password request control to a Directory REST API modify request to completely purge a user's former password
+- [READ a consent](https://developer.pingidentity.com/pingdirectory/consent/consents-api/read-a-consent.md): Retrieve the consent record with the provided unique ID using the PingDirectory Consent API
+- [READ a definition](https://developer.pingidentity.com/pingdirectory/consent/definitions-api/read-a-definition.md): Retrieve the consent definition with the provided definition ID using the PingDirectory Consent API
+- [READ a localization](https://developer.pingidentity.com/pingdirectory/consent/definitions-api/read-a-localization.md): Retrieve a specific localization for a consent definition using the PingDirectory Consent API
+- [Read a SCIM Service Provider Configuration](https://developer.pingidentity.com/pingdirectory/directory-proxy-scim/service-metadata-endpoints/read-a-scim-service-provider-configuration.md): Retrieve read-only metadata about the PingDirectory or PingDirectoryProxy SCIM 2.0 server's authentication scheme and supported features
+- [READ consents](https://developer.pingidentity.com/pingdirectory/consent/consents-api/read-consents.md): Retrieve one or more consent records using the PingDirectory Consent API, optionally filtered by subject or actor
+- [READ definitions](https://developer.pingidentity.com/pingdirectory/consent/definitions-api/read-definitions.md): List all consent definitions present on the server using the PingDirectory Consent API
+- [READ localizations](https://developer.pingidentity.com/pingdirectory/consent/definitions-api/read-localizations.md): List all localizations for a consent definition using the PingDirectory Consent API
+- [Read One SCIM Resource Type](https://developer.pingidentity.com/pingdirectory/directory-proxy-scim/service-metadata-endpoints/read-a-scim-resource-type.md): Retrieve a specific SCIM 2.0 resource type by ID from the PingDirectory or PingDirectoryProxy ResourceTypes endpoint
+- [Read One SCIM Schema](https://developer.pingidentity.com/pingdirectory/directory-proxy-scim/service-metadata-endpoints/read-a-scim-schema.md): Retrieve a specific SCIM 2.0 schema by its URN from the PingDirectory or PingDirectoryProxy Schemas endpoint
+- [Read One User](https://developer.pingidentity.com/pingdirectory/directory-proxy-scim/user-profile-endpoints/read-a-user.md): Retrieve a user resource by ID using a GET request against the PingDirectory or PingDirectoryProxy SCIM 2.0 Users endpoint
+- [Read SCIM Resource Types](https://developer.pingidentity.com/pingdirectory/directory-proxy-scim/service-metadata-endpoints/read-scim-resource-types.md): List all SCIM 2.0 resource types configured on the PingDirectory or PingDirectoryProxy server, including their endpoints and schemas
+- [Read SCIM Schemas](https://developer.pingidentity.com/pingdirectory/directory-proxy-scim/service-metadata-endpoints/read-scim-schemas.md): List all SCIM 2.0 schemas configured on the PingDirectory or PingDirectoryProxy server and the attributes they define
+- [READ search group members by group display name](https://developer.pingidentity.com/pingdirectory/directory-proxy-scim/user-profile-endpoints/get-read-search-group-members-display-name.md): Search for a group's members by the group's display name using the PingDirectory or PingDirectoryProxy SCIM 2.0 Groups endpoint
+- [READ search group members by group entry ID](https://developer.pingidentity.com/pingdirectory/directory-proxy-scim/user-profile-endpoints/get-read-search-group-members-entry-id.md): Retrieve a group's members by group entry ID using the PingDirectory or PingDirectoryProxy SCIM 2.0 Groups endpoint
+- [Real attributes only request control](https://developer.pingidentity.com/pingdirectory/directory/controls/real-attributes-only-request-control.md): Add the real attributes only request control to a Directory REST API search request to exclude virtual attributes from returned entries
+- [Register YubiKey OTP device](https://developer.pingidentity.com/pingdirectory/directory/extended-operations/register-yubikey-otp-device/register-yubikey-otp-device.md): Register a YubiKey OTP device for a user using the PingDirectory Directory REST API
+- [Register YubiKey OTP Device](https://developer.pingidentity.com/pingdirectory/directory/extended-operations/register-yubikey-otp-device/index.md)
+- [Reject unindexed search request control](https://developer.pingidentity.com/pingdirectory/directory/controls/reject-unindexed-search-request-control.md): Add the reject unindexed search request control to a Directory REST API search request to prevent PingDirectory Server from processing unindexed searches
+- [Rename an Entry, Keep Both](https://developer.pingidentity.com/pingdirectory/directory/directory-entry-apis/rename-an-entry-keep-both.md): Rename a PingDirectory Server entry while retaining the old naming attribute value alongside the new one
+- [Rename or Move an Entry](https://developer.pingidentity.com/pingdirectory/directory/directory-entry-apis/rename-or-move-an-entry.md): Rename or move a PingDirectory Server entry to a new DN using the Directory REST API PUT operation, similar to an LDAP moddn operation
+- [REPLACE a consent](https://developer.pingidentity.com/pingdirectory/consent/consents-api/replace-a-consent.md): Update a consent record by replacing the entire resource using the PingDirectory Consent API
+- [Requests and Responses](https://developer.pingidentity.com/pingdirectory/directory-proxy-scim/requests-and-responses/index.md): Describes SCIM 2.0 request and response formatting, resource updates, attribute selection, filtering, and pagination for PingDirectory and PingDirectoryProxy
+- [Retire password request control](https://developer.pingidentity.com/pingdirectory/directory/controls/retire-password-request-control.md): Add the retire password request control to a Directory REST API request to convert a user's former password into a retired password
+- [Revoke TOTP shared secret](https://developer.pingidentity.com/pingdirectory/directory/extended-operations/revoke-totp-shared-secret/revoke-totp-shared-secret.md): Revoke a user's time-based one-time shared secret using the PingDirectory Directory REST API
+- [Revoke TOTP Shared Secret](https://developer.pingidentity.com/pingdirectory/directory/extended-operations/revoke-totp-shared-secret/index.md)
+- [Schemas APIs](https://developer.pingidentity.com/pingdirectory/directory/schemas-apis/index.md): List objectClass schemas and view schema details for a specified objectClass using the PingDirectory Directory REST API
+- [Search User Profile (GET)](https://developer.pingidentity.com/pingdirectory/directory-proxy-scim/user-profile-endpoints/get-read-search-users.md): Search for user resources matching a filter using a GET request against the PingDirectory or PingDirectoryProxy SCIM 2.0 Users endpoint
+- [Search User Profile (POST)](https://developer.pingidentity.com/pingdirectory/directory-proxy-scim/user-profile-endpoints/post-read-search-users.md): Search for user resources matching a filter using a POST request against the SCIM 2.0 Users .search endpoint
+- [Search Users (GET)](https://developer.pingidentity.com/pingdirectory/directory-proxy-scim/requests-and-responses/get-search-users.md): Search for users matching a filter using a GET request against the PingDirectory or PingDirectoryProxy SCIM 2.0 Users endpoint
+- [Search Users (POST)](https://developer.pingidentity.com/pingdirectory/directory-proxy-scim/requests-and-responses/post-search-users.md): Search for matching resources using a POST request against the SCIM 2.0 .search endpoint on PingDirectory or PingDirectoryProxy
+- [Search Using POST](https://developer.pingidentity.com/pingdirectory/directory/subtree-apis/search-using-post.md): Search a directory subtree using a POST request to avoid placing confidential information in the request URI with the PingDirectory Directory REST API
+- [Search Using POST with Controls](https://developer.pingidentity.com/pingdirectory/directory/subtree-apis/search-using-post-with-controls.md): Add request and response controls, such as join or permit unindexed search, to a subtree search using the PingDirectory Directory REST API
+- [Service Metadata Endpoints](https://developer.pingidentity.com/pingdirectory/directory-proxy-scim/service-metadata-endpoints/index.md): Describes the PingDirectory and PingDirectoryProxy SCIM 2.0 service metadata endpoints for retrieving configuration, schemas, and resource type information
+- [Soft delete request control](https://developer.pingidentity.com/pingdirectory/directory/controls/soft-delete-request-control.md): Add the soft delete request control to a Directory REST API delete request to hide an entry while allowing it to be restored later
+- [Soft deleted entry access request control](https://developer.pingidentity.com/pingdirectory/directory/controls/soft-deleted-entry-access-request-control.md): Add the soft deleted entry access request control to a Directory REST API search request to include soft-deleted entries in search results
+- [Subtree APIs](https://developer.pingidentity.com/pingdirectory/directory/subtree-apis/index.md): Retrieve or search entries under a directory subtree using GET or POST requests with the PingDirectory Directory REST API
+- [Suppress referential integrity updates request control](https://developer.pingidentity.com/pingdirectory/directory/controls/suppress-referential-integrity-updates-request-control.md): Add the suppress referential integrity updates request control to a Directory REST API request to skip referential integrity processing for an operation
+- [Undelete request control](https://developer.pingidentity.com/pingdirectory/directory/controls/undelete-request-control.md): Add the undelete request control to a Directory REST API add request to restore a soft-deleted entry and make it normally accessible again
+- [Uniqueness request control](https://developer.pingidentity.com/pingdirectory/directory/controls/uniqueness-request-control.md): Add the uniqueness request control to a Directory REST API request to enforce unique attribute value constraints for an operation
+- [Uniqueness response control](https://developer.pingidentity.com/pingdirectory/directory/controls/uniqueness-response-control.md): Read the uniqueness response control returned for a request that used the uniqueness request control to check whether validation passed
+- [UPDATE a consent](https://developer.pingidentity.com/pingdirectory/consent/consents-api/update-a-consent.md): Modify a consent record by specifying only the changed attributes using the PingDirectory Consent API
+- [Update Add a Member to User Attributes](https://developer.pingidentity.com/pingdirectory/directory-proxy-scim/user-profile-endpoints/update-add-a-member-to-user-attributes.md): Add a value to a multivalued user attribute, such as emails, using a PATCH request against the SCIM 2.0 Users endpoint
+- [Update All User Attributes](https://developer.pingidentity.com/pingdirectory/directory-proxy-scim/user-profile-endpoints/update-a-user.md): Fully replace an existing user resource using a PUT request against the PingDirectory or PingDirectoryProxy SCIM 2.0 Users endpoint
+- [Update an Entry](https://developer.pingidentity.com/pingdirectory/directory/directory-entry-apis/update-an-entry.md): Update attribute values on a PingDirectory Server entry identified by its distinguished name using the Directory REST API PUT operation
+- [Update an Entry (LDAP Modify)](https://developer.pingidentity.com/pingdirectory/directory/directory-entry-apis/update-an-entry-ldap-modify.md): Modify attributes on a PingDirectory Server entry using the Directory REST API PATCH operation, similar to an LDAP ldapmodify operation
+- [Update Remove a Value from User Attributes](https://developer.pingidentity.com/pingdirectory/directory-proxy-scim/user-profile-endpoints/update-remove-a-value-from-user-attributes.md): Remove a specific value from a multivalued user attribute, such as emails, using a PATCH request against the SCIM 2.0 Users endpoint
+- [Update Replace One or More User Attributes](https://developer.pingidentity.com/pingdirectory/directory-proxy-scim/user-profile-endpoints/update-replace-one-or-more-user-attributes.md): Add, modify, or remove specific user attributes using a PATCH request against the PingDirectory or PingDirectoryProxy SCIM 2.0 Users endpoint
+- [User Profile](https://developer.pingidentity.com/pingdirectory/directory-proxy-scim/user-profile-endpoints/index.md): Describes the PingDirectory and PingDirectoryProxy SCIM 2.0 user profile endpoints for creating, retrieving, and updating user resources
+- [Virtual attributes only request control](https://developer.pingidentity.com/pingdirectory/directory/controls/virtual-attributes-only-request-control.md): Add the virtual attributes only request control to a Directory REST API search request to exclude real attributes from returned entries

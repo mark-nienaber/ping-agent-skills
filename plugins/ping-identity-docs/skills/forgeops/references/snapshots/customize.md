@@ -1,12 +1,13 @@
 ---
 title: <code>am</code> and <code>idm</code> images
-description: "AM and IDM use two types of configuration: static configuration and dynamic configuration."
+description: Manage PingAM and PingIDM static and dynamic configuration, exports, and configuration profiles in ForgeOps
 component: forgeops
-version: 2026.2
+version: 2026.3
 page_id: forgeops:customize:fr-data
-canonical_url: https://docs.pingidentity.com/forgeops/2026.2/customize/fr-data.html
+canonical_url: https://docs.pingidentity.com/forgeops/2026.3/customize/fr-data.html
 llms_txt: https://docs.pingidentity.com/forgeops/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2025-04-16T16:53:07Z
 keywords: ["CDK", "Dynamic Configuration", "Static Configuration", "Amster", "Configuration Profile"]
 section_ids:
   static-configuration: Static configuration
@@ -93,7 +94,7 @@ You can use one or both of the following techniques to manage AM dynamic configu
 
   Note that the forgeops amster command automatically converts passwords in AM dynamic configuration to configuration expressions. Because of this, passwords in AM configuration files will not appear in cleartext. For details about how to work with dynamic configuration that has passwords and other properties specified as configuration expressions, refer to [Export Utilities and Configuration Expressions](value-substitution.html#export-config-expr).
 
-* Write REST API applications to import and export AM dynamic configuration. For more information, refer to [Rest API](https://docs.pingidentity.com/pingam/8/REST-guide/preface.html) in the AM documentation.
+* Write REST API applications to import and export AM dynamic configuration. For more information, refer to [Rest API](https://docs.pingidentity.com/pingam/8.1/REST-guide/preface.html) in the AM documentation.
 
 ### Tips for managing IDM dynamic configuration
 
@@ -141,19 +142,18 @@ Use Git to manage the directories that contain configuration profiles.
 
 ---
 title: <code>am</code> image
-description: Prior to the ForgeOps 2026.1 release, the am Docker image contained the AM configuration. In ForgeOps 2026.1 and later releases, AM configuration has been separated from the AM image into a BusyBox container that contains the configuration profiles. This lets you customize configuration changes and build only the BusyBox images.
+description: Customize PingAM configuration profiles, build BusyBox images, and redeploy PingAM in ForgeOps
 component: forgeops
-version: 2026.2
+version: 2026.3
 page_id: forgeops:customize:am
-canonical_url: https://docs.pingidentity.com/forgeops/2026.2/customize/am.html
+canonical_url: https://docs.pingidentity.com/forgeops/2026.3/customize/am.html
 llms_txt: https://docs.pingidentity.com/forgeops/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-29T17:07:16Z
 keywords: ["CDK", "Docker", "forgeops Command"]
 section_ids:
   customization_overview: Customization overview
   detailed_steps: Detailed steps
-  redeploy-am-forgeops-command: "Redeploy AM: Kustomize deployments"
-  redeploy-am-helm: "Redeploy AM: Helm deployments"
   next_step: Next step
 ---
 
@@ -258,84 +258,81 @@ Prior to the ForgeOps 2026.1 release, the `am` Docker image contained the AM con
    ``` |
 
    ```
-   $ ./forgeops config build --env-name my-env am \
-     --config-profile my-profile --push-to my-repo --tag my-am-tag
+   $ ./forgeops config build --env-name my-env \
+     --config-profile my-profile --push-to my-repo \
+     --tag my-am-tag am
    ...
    ```
 
 9. Redeploy AM using your new AM [BusyBox](# "A BusyBox container is a minimal, lightweight containerized environment that includes a compact implementation of common UNIX utilities.") image:
 
-   * If you installed the platform using the forgeops command, follow the steps in [Redeploy AM: Kustomize deployments](#redeploy-am-forgeops-command).
+   The forgeops build command calls Docker to build a new `am` Docker image and to push the image to your Docker repository. The new image includes your configuration profile. It also updates the [image defaulter](https://github.com/ForgeRock/forgeops/blob/2026.3.2/kustomize/overlay/default/image-defaulter/kustomization.yaml) file so that the next time you install AM, the forgeops apply command gets AM static configuration from your new custom Docker image.
 
-   * If you installed the platform using Helm, follow the steps in [Redeploy AM: Helm deployments](#redeploy-am-helm).
+   ![Building the new custom Docker image.](_images/cdk-build.svg)
 
-### Redeploy AM: Kustomize deployments
+   * []()Helm deployments
 
-The forgeops build command calls Docker to build a new `am` Docker image and to push the image to your Docker repository. The new image includes your configuration profile. It also updates the [image defaulter](https://github.com/ForgeRock/forgeops/blob/2026.2.1/kustomize/overlay/default/image-defaulter/kustomization.yaml) file so that the next time you install AM, the forgeops apply command gets AM static configuration from your new custom Docker image.
+   * Kustomize deployments (Deprecated)[icon: alarm-clock, set=fa]
 
-![Building the new custom Docker image.](_images/cdk-build.svg)
+   1. Locate the `Successfully tagged` message in the forgeops build output, which contains the new AM Docker image's repository and tag.
 
-1. Perform version control activities on your `forgeops` repository clone:
+   2. Redeploy AM using the new AM Docker image:
 
-   1. Run the git status command.
+      ```
+      $ helm upgrade identity-platform ./ \
+       --namespace my-namespace \
+       --values /path/to/forgeops/helm/my-env/values.yaml
+      ```
 
-   2. Review the state of the kustomize/overlay/my-env/image-defaulter/kustomization.yaml file.
+   3. Validate that AM has the expected configuration:
 
-   3. (Optional) Run the git commit command to commit changes to the image defaulter file.
+      * Run the kubectl get pods command to monitor the status of the AM pod. Wait until the pod is ready before proceeding to the next step.
 
-2. Remove AM from your ForgeOps deployment:
+      * Describe the AM pod. Locate the tag of the Docker image that Kubernetes loaded, and verify that it's your new custom Docker image's tag.
 
-   ```
-   $ ./forgeops delete am --env-name my-env
-   ... platform detected in namespace: "my-namespace".
-   Uninstalling component(s): ['am'] from namespace: "my-namespace".
-   OK to delete components? [Y/N] Y
-   service "am" deleted
-   deployment.apps "am" deleted
-   ```
+      * Start the AM admin UI and verify that your configuration changes are present.
 
-3. Redeploy AM:
+   1) Perform version control activities on your `forgeops` repository clone:
 
-   ```
-   $ ./forgeops apply am --env-name my-env
-   Checking cert-manager and related CRDs: cert-manager CRD found in cluster.
-   Checking secret-agent operator and related CRDs: secret-agent CRD found in cluster
+      1. Run the git status command.
 
-   Installing component(s): ['am'] ... from deployment manifests in ...
+      2. Review the state of the kustomize/overlay/my-env/image-defaulter/kustomization.yaml file.
 
-   service/am created
-   deployment.apps/am created
+      3. (Optional) Run the git commit command to commit changes to the image defaulter file.
 
-   Enjoy your deployment!
-   ```
+   2) Remove AM from your ForgeOps deployment:
 
-4. Validate that AM has the expected configuration:
+      ```
+      $ ./forgeops delete am --env-name my-env
+      ... platform detected in namespace: "my-namespace".
+      Uninstalling component(s): ['am'] from namespace: "my-namespace".
+      OK to delete components? [Y/N] Y
+      service "am" deleted
+      deployment.apps "am" deleted
+      ```
 
-   * Run the kubectl get pods command to monitor the status of the AM pod. Wait until the pod is ready before proceeding to the next step.
+   3) Redeploy AM:
 
-   * Describe the AM pod. Locate the tag of the Docker image that Kubernetes loaded, and verify that it's your new custom Docker image's tag.
+      ```
+      $ ./forgeops apply am --env-name my-env
+      Checking cert-manager and related CRDs: cert-manager CRD found in cluster.
+      Checking secret-agent operator and related CRDs: secret-agent CRD found in cluster
 
-   * Start the AM admin UI and verify that your configuration changes are present.
+      Installing component(s): ['am'] ... from deployment manifests in ...
 
-### Redeploy AM: Helm deployments
+      service/am created
+      deployment.apps/am created
 
-1. Locate the `Successfully tagged` message in the forgeops build output, which contains the new AM Docker image's repository and tag.
+      Enjoy your deployment!
+      ```
 
-2. Redeploy AM using the new AM Docker image:
+   4) Validate that AM has the expected configuration:
 
-   ```
-   $ helm upgrade identity-platform ./ \
-    --namespace my-namespace \
-    --values /path/to/forgeops/helm/my-env/values.yaml
-   ```
+      * Run the kubectl get pods command to monitor the status of the AM pod. Wait until the pod is ready before proceeding to the next step.
 
-3. Validate that AM has the expected configuration:
+      * Describe the AM pod. Locate the tag of the Docker image that Kubernetes loaded, and verify that it's your new custom Docker image's tag.
 
-   * Run the kubectl get pods command to monitor the status of the AM pod. Wait until the pod is ready before proceeding to the next step.
-
-   * Describe the AM pod. Locate the tag of the Docker image that Kubernetes loaded, and verify that it's your new custom Docker image's tag.
-
-   * Start the AM admin UI and verify that your configuration changes are present.
+      * Start the AM admin UI and verify that your configuration changes are present.
 
 ## Next step
 
@@ -357,13 +354,14 @@ The forgeops build command calls Docker to build a new `am` Docker image and to 
 
 ---
 title: <code>ds</code> image
-description: The ds Docker image contains the DS configuration. You can customize the DS image before deploying it in your production environment.
+description: Customize PingDS LDAP configuration, schema, and setup scripts, then build and redeploy a custom Docker image in ForgeOps
 component: forgeops
-version: 2026.2
+version: 2026.3
 page_id: forgeops:customize:ds
-canonical_url: https://docs.pingidentity.com/forgeops/2026.2/customize/ds.html
+canonical_url: https://docs.pingidentity.com/forgeops/2026.3/customize/ds.html
 llms_txt: https://docs.pingidentity.com/forgeops/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2025-07-16T10:28:27Z
 section_ids:
   detailed_steps: Detailed steps
   next_step: Next step
@@ -381,7 +379,7 @@ This section covers:
 
 * Customize LDAP configuration by including LDIF format LDAP configuration files in `ldif-ext` directory.
 
-* Customize LDAP schema by including customized schema LDIF files in the `config` directory.
+* Customize LDAP schema by including customized schema LDIF files in the `docker/ds/config/schema` directory.
 
 * Customize DS setup behavior by updating the setup and post-init runtime scripts in the `runtime-scripts` directory.
 
@@ -403,88 +401,92 @@ This section covers:
 
    * You've [set up your environment to push to your Docker registry](setup.html#docker-push).
 
-2. Perform version control activities on your `forgeops` repository clone:
+1) Perform version control activities on your `forgeops` repository clone:
 
    1. Run the git status command.
 
    2. (Optional) Run the git commit command to commit the changes.
 
-3. Add your DS customizations:
+2) Add your DS customizations:
 
-   1. Learn more at [custom LDAP configuration](https://community.forgerock.com/t/forgeops-ds-customization-guide-7-4-7-5/5525#adding-custom-ldap-configuration-3) to add LDAP configuration.
+   1. Customize the `ds-idrepo`:
 
-   2. Learn more in [custom LDAP schema](https://community.forgerock.com/t/forgeops-ds-customization-guide-7-4-7-5/5525#adding-custom-ldap-schema-4) to add LDAP schema.
+      1. Edit `setup` script in the /path/to/forgeops/docker/ds/runtime-scripts/ds-idrepo directory to set up profiles and indexes.
 
-   3. Customize DS's setup behavior in the /path/to/forgeops/docker/ds/ds-new directory:
+      2. Edit the `post-init` script to add custom configurations.
 
-      1. To set up profiles and indexes, edit the `runtime-scripts/setup` script. Learn more in [`setup` script details](https://community.forgerock.com/t/forgeops-ds-script-guide-7-4-7-5/5522#setup-15).
+   2. Customize the `ds-cts`:
 
-      2. To add custom configurations after indexes have been rebuilt, edit the `runtime-scripts/post-init` script. Learn more in [`post-init` script details](https://community.forgerock.com/t/forgeops-ds-script-guide-7-4-7-5/5522#post-init-12).
+      1. Edit `setup` script in the /path/to/forgeops/docker/ds/runtime-scripts/ds-cts directory to set up profiles and indexes.
 
-      3. To prepare the DS docker image for setup, edit the `ds-setup.sh` script. Learn more in [`ds-setup.sh` script details](https://community.forgerock.com/t/forgeops-ds-script-guide-7-4-7-5/5522#ds-setupsh-5).
+      2. Edit the `post-init` script to add custom configurations.
 
-4. [Identify the repository](setup.html#push-to) where you'll push the Docker image. You'll use this location to specify the --push-to argument value in the [build ds image](#build-ds) step.
+   3. Prepare the DS docker image for setup by editing the `ds-setup.sh` script in /path/to/forgeops/docker/ds directory.
 
-5. Decide on the DS image tag for each build of the image. You'll use this tag to specify the `--tag` argument value in the [build DS image](#build-ds) step.
+3) [Identify the repository](setup.html#push-to) where you'll push the Docker image. You'll use this location to specify the --push-to argument value in the [build DS image](#build-ds) step.
 
-6. []()Build a new DS image that includes your customization:
+4) Decide on the DS image tag for each build of the image. You'll use this tag to specify the `--tag` argument value in the [build DS image](#build-ds) step.
+
+5) []()Build a new DS image that includes your customization:
 
    ```
    $ cd /path/to/forgeops/bin
    $ ./forgeops build ds --env-name my-env --config-profile my-profile --push-to my-repo --tag my-ds-tag
    ```
 
-7. Redeploy DS using your new DS image:
+6) Redeploy DS using the new image:
 
-* Deploy using the `forgeops` command
+   * Using Helm
 
-* Deploy using Helm
+   * Using Kustomize (deprecated)[icon: alarm-clock, set=fa]
 
-The `forgeops build` command calls Docker to build a new `ds` Docker image and to push the image to your Docker repository. The new image includes your custom LDAP and schema files. It also updates the image defaulter file so that the next time you install DS, the deployed DS server includes your custom DS image.
+   1. Locate the repository and tag for the new DS Docker image from the forgeops build command output.
 
-Perform version control activities on your `forgeops` repository clone:
+   2. Delete the PVCs attached to DS pods using the kubectl delete pvc command.
 
-1. Run the git status command.
+      If the attached DS pod is running, the PVC is not deleted immediately. So you should stop the running DS pods.
 
-   Review the state of the kustomize/overlay/my-env/image-defaulter/kustomization.yaml file.
+      In another terminal window, stop the DS pods using the kubectl delete pods command. This deletes the pods and its attached PVC.
 
-2. (Optional) Run the git commit command to commit changes to the image defaulter file.
+   3. Redeploy DS using the new Docker image:
 
-3. Remove DS from your ForgeOps deployment:
+      ```
+      $ cd /path/to/forgeops/charts/identity-platform
+      $ helm upgrade identity-platform ./ \
+       --namespace my-namespace \
+       --set 'ds_idrepo.image.repository=my-repository' \
+       --set 'ds_cts.image.repository=my-repository' \
+       --set 'ds_cts.image.tag=my-ds-tag' \
+       --set 'ds_idrepo.image.tag=my-ds-tag'
+      ```
 
-   ```
-   $ ./forgeops delete ds --env-name my-env
-   ...
-   deployment.apps "ds" deleted
-   ```
+   The `forgeops build` command calls Docker to build a new `ds` Docker image and to push the image to your Docker repository. The new image includes your custom LDAP and schema files. It also updates the image defaulter file so that the next time you install DS, the deployed DS server includes your custom DS image.
 
-4. Delete the PVCs attached to DS pods using the kubectl delete pvc command.
+   Perform version control activities on your `forgeops` repository clone:
 
-5. Redeploy DS using the new Docker image:
+   1. Run the git status command.
 
-   ```
-   $ ./forgeops apply ds --env-name my-env --single-instance
-   Checking cert-manager and related CRDs: cert-manager CRD found in cluster.
-   Checking secret-agent operator and related CRDs: secret-agent CRD found in cluster
-   ```
+      Review the state of the kustomize/overlay/my-env/image-defaulter/kustomization.yaml file.
 
-1) Locate the repository and tag for the new DS Docker image from the forgeops build command output.
+   2. (Optional) Run the git commit command to commit changes to the image defaulter file.
 
-2) Delete the PVCs attached to DS pods using the kubectl delete pvc command.
+   3. Remove DS from your ForgeOps deployment:
 
-   If the attached DS pod is running, the PVC is not deleted immediately. So you should stop the running DS pods.
+      ```
+      $ ./forgeops delete ds --env-name my-env
+      ...
+      deployment.apps "ds" deleted
+      ```
 
-   In another terminal window, stop the DS pods using the kubectl delete pods command. This deletes the pods and its attached PVC.
+   4. Delete the PVCs attached to DS pods using the kubectl delete pvc command.
 
-3) Redeploy DS using the new Docker image:
+   5. Redeploy DS using the new Docker image:
 
-   ```
-   $ cd /path/to/forgeops/charts/identity-platform
-   $ helm upgrade identity-platform ./ \
-    --namespace my-namespace \
-    --set 'ds.image.repository=my-repository' \
-    --set 'ds.image.tag=my-ds-tag'
-   ```
+      ```
+      $ ./forgeops apply ds --env-name my-env
+      Checking cert-manager and related CRDs: cert-manager CRD found in cluster.
+      Checking secret-agent operator and related CRDs: secret-agent CRD found in cluster
+      ```
 
 ## Next step
 
@@ -506,19 +508,18 @@ Perform version control activities on your `forgeops` repository clone:
 
 ---
 title: <code>idm</code> image
-description: Prior to the ForgeOps 2026.1 release, the idm Docker image contained the IDM configuration. In ForgeOps 2026.1 and later releases, IDM configuration has been separated from the IDM image into a BusyBox container that contains the configuration profiles. This lets you customize configuration changes and build only the BusyBox images.
+description: Customize PingIDM configuration profiles, build BusyBox images, and redeploy PingIDM in ForgeOps
 component: forgeops
-version: 2026.2
+version: 2026.3
 page_id: forgeops:customize:idm
-canonical_url: https://docs.pingidentity.com/forgeops/2026.2/customize/idm.html
+canonical_url: https://docs.pingidentity.com/forgeops/2026.3/customize/idm.html
 llms_txt: https://docs.pingidentity.com/forgeops/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-29T17:07:16Z
 keywords: ["CDK", "Docker", "forgeops Command"]
 section_ids:
   customization_overview: Customization overview
   detailed_steps: Detailed steps
-  redeploy-idm-forgeops-command: "Redeploy IDM: Kustomize deployments"
-  redeploy-idm-helm: "Redeploy IDM: Helm deployments"
   next_step: Next step
 ---
 
@@ -560,7 +561,7 @@ Prior to the ForgeOps 2026.1 release, the `idm` Docker image contained the IDM c
 
    3. (Optional) Run the git commit command to commit changes to files that have been modified.
 
-3. Modify the IDM configuration using the REST APIs.
+3. Modify the IDM configuration using the the REST APIs.
 
    Learn more about how to access the REST APIs in [IDM Services](../deploy/access.html#idm-services-cdm).
 
@@ -626,74 +627,71 @@ Prior to the ForgeOps 2026.1 release, the `idm` Docker image contained the IDM c
    ``` |
 
    ```
-   $ ./forgeops config build --env-name my-env idm \
-     --config-profile my-profile --push-to my-repo --tag my-idm-tag
+   $ ./forgeops config build --env-name my-env \
+     --config-profile my-profile --push-to my-repo \
+     --tag my-idm-tag idm
 
    ...
    ```
 
 9. Redeploy IDM using your new IDM [BusyBox](# "A BusyBox container is a minimal, lightweight containerized environment that includes a compact implementation of common UNIX utilities.") image:
 
-   * If you installed the platform using the forgeops command, follow the steps in [Redeploy IDM: Kustomize deployments](#redeploy-idm-forgeops-command).
+   The forgeops build command calls Docker to build a new `idm` Docker image and to push the image to your Docker repository. The new image includes your configuration profile. It also updates the [image defaulter](https://github.com/ForgeRock/forgeops/blob/2026.3.2/kustomize/overlay/default/image-defaulter/kustomization.yaml) file so that the next time you install IDM, the forgeops apply command gets IDM static configuration from your new custom Docker image.
 
-   * If you installed the platform using Helm, follow the steps in [Redeploy IDM: Helm deployments](#redeploy-idm-helm).
+   ![Building the new custom Docker image.](_images/cdk-build.svg)
 
-### Redeploy IDM: Kustomize deployments
+   * Helm deployments
 
-The forgeops build command calls Docker to build a new `idm` Docker image and to push the image to your Docker repository. The new image includes your configuration profile. It also updates the [image defaulter](https://github.com/ForgeRock/forgeops/blob/2026.2.1/kustomize/overlay/default/image-defaulter/kustomization.yaml) file so that the next time you install IDM, the forgeops apply command gets IDM static configuration from your new custom Docker image.
+   * Kustomize deployments (Deprecated)[icon: alarm-clock, set=fa]
 
-![Building the new custom Docker image.](_images/cdk-build.svg)
+   1. Locate the `Successfully tagged` message in the forgeops build output, which contains the new IDM Docker image's repository and tag.
 
-1. Perform version control activities on your `forgeops` repository clone:
+   2. Redeploy IDM using the new IDM Docker image:
 
-   1. Run the git status command.
+      ```
+      $ helm upgrade identity-platform ./ \
+       --version 2026.3 --namespace my-namespace \
+       --values /path/to/forgeops/helm/my-env/values.yaml
+      ```
 
-   2. Review the state of the kustomize/overlay/my-env/image-defaulter/kustomization.yaml file.
+   3. Validate that IDM has the expected configuration:
 
-   3. (Optional) Run the git commit command to commit changes to the image defaulter file.
+      * Run the kubectl get pods command to monitor the status of the IDM pod. Wait until the pod is ready before proceeding to the next step.
 
-2. Remove IDM from your ForgeOps deployment:
+      * Describe the IDM pod. Locate the tag of the Docker image that Kubernetes loaded, and verify that it's your new custom Docker image's tag.
 
-   ```
-   $ ./forgeops delete idm --env-name my-env
-   "cdk" platform detected in namespace: "my-namespace".
-   Uninstalling component(s): ['idm'] from namespace: "my-namespace".
-   OK to delete components? [Y/N] Y
-   service "idm" deleted
-   deployment.apps "idm" deleted
-   ```
+   1) Perform version control activities on your `forgeops` repository clone:
 
-3. Redeploy IDM:
+      1. Run the git status command.
 
-   ```
-   $ ./forgeops apply idm --env-name my-env
+      2. Review the state of the kustomize/overlay/my-env/image-defaulter/kustomization.yaml file.
 
-   ...
-   ```
+      3. (Optional) Run the git commit command to commit changes to the image defaulter file.
 
-4. Validate that IDM has the expected configuration:
+   2) Remove IDM from your ForgeOps deployment:
 
-   * Run the kubectl get pods command to monitor the status of the IDM pod. Wait until the pod is ready before proceeding to the next step.
+      ```
+      $ ./forgeops delete idm --env-name my-env
+      "cdk" platform detected in namespace: "my-namespace".
+      Uninstalling component(s): ['idm'] from namespace: "my-namespace".
+      OK to delete components? [Y/N] Y
+      service "idm" deleted
+      deployment.apps "idm" deleted
+      ```
 
-   * Describe the IDM pod. Locate the tag of the Docker image that Kubernetes loaded, and verify that it's your new custom Docker image's tag.
+   3) Redeploy IDM:
 
-### Redeploy IDM: Helm deployments
+      ```
+      $ ./forgeops apply idm --env-name my-env
 
-1. Locate the `Successfully tagged` message in the forgeops build output, which contains the new IDM Docker image's repository and tag.
+      ...
+      ```
 
-2. Redeploy IDM using the new IDM Docker image:
+   4) Validate that IDM has the expected configuration:
 
-   ```
-   $ helm upgrade identity-platform ./ \
-    --version 2026.2 --namespace my-namespace \
-    --values /path/to/forgeops/helm/my-env/values.yaml
-   ```
+      * Run the kubectl get pods command to monitor the status of the IDM pod. Wait until the pod is ready before proceeding to the next step.
 
-3. Validate that IDM has the expected configuration:
-
-   * Run the kubectl get pods command to monitor the status of the AM pod. Wait until the pod is ready before proceeding to the next step.
-
-   * Describe the IDM pod. Locate the tag of the Docker image that Kubernetes loaded, and verify that it's your new custom Docker image's tag.
+      * Describe the IDM pod. Locate the tag of the Docker image that Kubernetes loaded, and verify that it's your new custom Docker image's tag.
 
 ## Next step
 
@@ -715,13 +713,14 @@ The forgeops build command calls Docker to build a new `idm` Docker image and to
 
 ---
 title: About custom images
-description: To develop customized Docker images, start with ForgeOps-provided images. Then, build your configuration profile iteratively as you customize the platform to meet your needs. Building Docker images from time to time integrates your custom configuration profile into new Docker images.
+description: Build custom Docker images for Ping Advanced Identity Software products configuration in development and production
 component: forgeops
-version: 2026.2
+version: 2026.3
 page_id: forgeops:customize:custom-images
-canonical_url: https://docs.pingidentity.com/forgeops/2026.2/customize/custom-images.html
+canonical_url: https://docs.pingidentity.com/forgeops/2026.3/customize/custom-images.html
 llms_txt: https://docs.pingidentity.com/forgeops/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-03-04T09:42:15Z
 keywords: ["CDK", "Docker"]
 section_ids:
   in_development: In development
@@ -735,11 +734,11 @@ section_ids:
 
 To develop customized Docker images, start with ForgeOps-provided images. Then, build your configuration profile iteratively as you customize the platform to meet your needs. Building Docker images from time to time integrates your custom configuration profile into new Docker images.
 
-To develop a customized DS Docker image, refer to [`ds` image](ds.html).
+* [icon: tools, set=fa]**Steps to customize the DS Docker image are being revised, and will be published soon.**
 
-To develop a customized AM Docker image, refer to [`am` image](am.html).
+* To develop a customized AM Docker image, refer to [`am` image](am.html).
 
-To develop a customized IDM Docker image, refer to [`idm` image](idm.html).
+* To develop a customized IDM Docker image, refer to [`idm` image](idm.html).
 
 ![Brief overview of containers for developers.](_images/containerization-dev.svg)
 
@@ -771,13 +770,14 @@ Learn more about how to create Docker images for production deployment of the pl
 
 ---
 title: About property value substitution
-description: "Many property values in ForgeOps deployments' canonical configuration profile are specified as configuration expressions instead of as hard-coded values. Fully-qualified domain names (FQDNs), passwords, and several other properties are all specified as configuration expressions."
+description: Configure AM and IDM property value substitution using configuration expressions for environment-specific deployment settings
 component: forgeops
-version: 2026.2
+version: 2026.3
 page_id: forgeops:customize:value-substitution
-canonical_url: https://docs.pingidentity.com/forgeops/2026.2/customize/value-substitution.html
+canonical_url: https://docs.pingidentity.com/forgeops/2026.3/customize/value-substitution.html
 llms_txt: https://docs.pingidentity.com/forgeops/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-23T12:17:10Z
 keywords: ["CDK", "Dynamic Configuration", "Static Configuration", "Amster", "Configuration Profile"]
 section_ids:
   how_property_value_substitution_works: How property value substitution works
@@ -883,7 +883,7 @@ The Secret Agent configuration computes and propagates passwords for AM dynamic 
 
 #### Limitations on property value substitution in AM
 
-AM doesn't support property value substitution for several types of configuration properties. Refer to [Property value substitution](https://docs.pingidentity.com/pingam/8/setup-guide/property-value-substitution.html) in the AM documentation for more information.
+AM doesn't support property value substitution for several types of configuration properties. Refer to [Property value substitution](https://docs.pingidentity.com/pingam/8.1/setup-guide/property-value-substitution.html) in the AM documentation for more information.
 
 ## Next step
 
@@ -905,13 +905,14 @@ AM doesn't support property value substitution for several types of configuratio
 
 ---
 title: Additional setup
-description: This page covers setup tasks that you'll need to perform before you can develop custom Docker images for the Ping Advanced Identity Software. Complete all of the tasks on this page before proceeding.
+description: Set up ForgeOps for custom Docker images, including single-instance deployments, registries, repositories, and deployment environments
 component: forgeops
-version: 2026.2
+version: 2026.3
 page_id: forgeops:customize:setup
-canonical_url: https://docs.pingidentity.com/forgeops/2026.2/customize/setup.html
+canonical_url: https://docs.pingidentity.com/forgeops/2026.3/customize/setup.html
 llms_txt: https://docs.pingidentity.com/forgeops/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2025-07-16T10:28:27Z
 keywords: ["CDK", "Mikikube", "GKE", "EKS", "AKS"]
 section_ids:
   use_a_single_instance_forgeops_deployment: Use a single-instance ForgeOps deployment
@@ -935,9 +936,9 @@ Use the following links for information about how to create single-instance Forg
 
 * [Deploy using Helm on minikube](../deploy/deploy-scenario-helm-local.html)
 
-* [Deploy using Kustomize on GKE, EKS, or AKS](../deploy/deploy-scenario-kustomize-cloud.html)
+* [Deploy using Kustomize on GKE, EKS, or AKS (Deprecated)[icon: alarm-clock, set=fa]](../deploy/deploy-scenario-kustomize-cloud.html)
 
-* [Deploy using Kustomize on minikube](../deploy/deploy-scenario-kustomize-local.html)
+* [Deploy using Kustomize on minikube (Deprecated)[icon: alarm-clock, set=fa]](../deploy/deploy-scenario-kustomize-local.html)
 
 ## Set up your environment to push to your Docker registry
 
@@ -1062,13 +1063,14 @@ $ cp -rp deploy deploy-my-environment
 
 ---
 title: Customization overview
-description: This section covers how developers build custom Docker images for the Ping Advanced Identity Software. It also contains important conceptual material that you need to understand before you start creating Docker images.
+description: Customize Ping Advanced Identity Software products Docker images and configuration profiles for development and production deployments
 component: forgeops
-version: 2026.2
+version: 2026.3
 page_id: forgeops:customize:overview
-canonical_url: https://docs.pingidentity.com/forgeops/2026.2/customize/overview.html
+canonical_url: https://docs.pingidentity.com/forgeops/2026.3/customize/overview.html
 llms_txt: https://docs.pingidentity.com/forgeops/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-03-04T09:42:15Z
 keywords: ["Docker"]
 section_ids:
   developer_checklist: Developer checklist

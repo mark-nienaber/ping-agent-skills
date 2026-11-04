@@ -1,9 +1,11 @@
 ---
 title: About ICF and ICF connectors
-description: Overview of the Identity Connector Framework (ICF), its capabilities, and how to build, use, and deploy ICF connectors with PingIDM
+description: Overview of the Identity Connector Framework (ICF), its capabilities, and how to build, use, and deploy ICF connectors
 component: openicf
 page_id: openicf:connector-dev-guide:about-icf
 canonical_url: https://docs.pingidentity.com/openicf/connector-dev-guide/about-icf.html
+llms_txt: https://docs.pingidentity.com/openicf/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
   openicf-functionality: Overview of ICF functionality
 ---
@@ -62,6 +64,8 @@ description: "Describes the ICF API configuration object and its components: obj
 component: openicf
 page_id: openicf:connector-dev-guide:api-config-object
 canonical_url: https://docs.pingidentity.com/openicf/connector-dev-guide/api-config-object.html
+llms_txt: https://docs.pingidentity.com/openicf/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 ---
 
 # API configuration object
@@ -136,6 +140,8 @@ description: How to use and implement the ICF authenticate operation in a connec
 component: openicf
 page_id: openicf:connector-dev-guide:operations/operation-authenticate
 canonical_url: https://docs.pingidentity.com/openicf/connector-dev-guide/operations/operation-authenticate.html
+llms_txt: https://docs.pingidentity.com/openicf/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
   AuthenticationApiOp-api-level-rules: Use the ICF authenticate operation
   AuthenticateOp-spi-level-rules: Implement the authenticate operation
@@ -236,6 +242,8 @@ description: How to implement the authenticate script for ICF connectors to enab
 component: openicf
 page_id: openicf:connector-dev-guide:scripts/script-authenticate
 canonical_url: https://docs.pingidentity.com/openicf/connector-dev-guide/scripts/script-authenticate.html
+llms_txt: https://docs.pingidentity.com/openicf/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 ---
 
 # Authenticate script
@@ -323,6 +331,8 @@ description: "Reference for ICF connector framework exceptions: when each is thr
 component: openicf
 page_id: openicf:connector-dev-guide:common-exceptions
 canonical_url: https://docs.pingidentity.com/openicf/connector-dev-guide/common-exceptions.html
+llms_txt: https://docs.pingidentity.com/openicf/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
   openicf-crest-exceptions: Mapping ICF Exceptions to Common REST Exceptions
 ---
@@ -458,6 +468,8 @@ description: How to implement the ICF configuration interface for connector deve
 component: openicf
 page_id: openicf:connector-dev-guide:configuration-implementation
 canonical_url: https://docs.pingidentity.com/openicf/connector-dev-guide/configuration-implementation.html
+llms_txt: https://docs.pingidentity.com/openicf/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
   operation-validate: Validate operation
   ValidateApiOp-api-level-rules: ValidateApiOp
@@ -737,6 +749,8 @@ description: How to use the ICF Maven connector archetype to scaffold a new conn
 component: openicf
 page_id: openicf:connector-dev-guide:connector-archetype
 canonical_url: https://docs.pingidentity.com/openicf/connector-dev-guide/connector-archetype.html
+llms_txt: https://docs.pingidentity.com/openicf/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
   java-connector-operations: Implement ICF operations
   java-connector-bundling: Build the Java connector
@@ -867,6 +881,8 @@ description: Hands-on guide to developing connectors using the OpenICF (ICF). IC
 component: openicf
 page_id: openicf:connector-dev-guide:preface
 canonical_url: https://docs.pingidentity.com/openicf/connector-dev-guide/preface.html
+llms_txt: https://docs.pingidentity.com/openicf/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 page_aliases: ["index.adoc"]
 ---
 
@@ -926,6 +942,8 @@ description: How to create a ConnectorInfoManager and ConnectorKey to retrieve l
 component: openicf
 page_id: openicf:connector-dev-guide:connector-info-manager
 canonical_url: https://docs.pingidentity.com/openicf/connector-dev-guide/connector-info-manager.html
+llms_txt: https://docs.pingidentity.com/openicf/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 ---
 
 # Connector info manager
@@ -970,6 +988,8 @@ description: How the ICF framework instantiates stateless, poolable, stateful, a
 component: openicf
 page_id: openicf:connector-dev-guide:framework-connector-instantiation
 canonical_url: https://docs.pingidentity.com/openicf/connector-dev-guide/framework-connector-instantiation.html
+llms_txt: https://docs.pingidentity.com/openicf/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
   connector-instantiation-basic: Instantiate a stateless, non-poolable connector
   connector-instantiation-pooled: Instantiate a stateless, poolable connector
@@ -1101,6 +1121,8 @@ description: Guide to implementing the ICF connector interface and poolable conn
 component: openicf
 page_id: openicf:connector-dev-guide:connector-implementation
 canonical_url: https://docs.pingidentity.com/openicf/connector-dev-guide/connector-implementation.html
+llms_txt: https://docs.pingidentity.com/openicf/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
   implement_a_poolable_connector_interface: Implement a poolable connector interface
 ---
@@ -1197,6 +1219,8 @@ description: Reference for the Connector Messages interface, which sets the mess
 component: openicf
 page_id: openicf:connector-dev-guide:message-catalog
 canonical_url: https://docs.pingidentity.com/openicf/connector-dev-guide/message-catalog.html
+llms_txt: https://docs.pingidentity.com/openicf/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 ---
 
 # Connector messages object
@@ -1213,6 +1237,8 @@ description: Troubleshooting guidance for ICF connectors, covering log analysis 
 component: openicf
 page_id: openicf:connector-dev-guide:troubleshooting
 canonical_url: https://docs.pingidentity.com/openicf/connector-dev-guide/troubleshooting.html
+llms_txt: https://docs.pingidentity.com/openicf/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 keywords: ["Logs", "Troubleshooting"]
 section_ids:
   logs: Logs
@@ -1220,6 +1246,10 @@ section_ids:
 ---
 
 # Connector troubleshooting
+
+Support policy
+
+Ping Identity supports the latest release of RCS and each connector. If you contact support with an issue related to RCS or a connector, you might be asked to upgrade to the latest release before troubleshooting begins.
 
 ## Logs
 
@@ -1231,7 +1261,7 @@ For more information about logging, refer to [Connector logs](../connector-refer
 
 ## Custom connector required version pattern
 
-If your custom connector configuration fails to display in the admin UI, make sure that it's using 4-digit versioning. The admin UI expects this type of version pattern. For example:
+If your custom connector configuration fails to display in the UI, make sure that it's using 4-digit versioning. The UIs expect this type of version pattern. For example:
 
 ```
 1.5.0.0
@@ -1245,6 +1275,8 @@ description: "Describes ICF connector types: basic and poolable connectors, stat
 component: openicf
 page_id: openicf:connector-dev-guide:connector-types
 canonical_url: https://docs.pingidentity.com/openicf/connector-dev-guide/connector-types.html
+llms_txt: https://docs.pingidentity.com/openicf/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 ---
 
 # Connector types
@@ -1290,6 +1322,8 @@ description: "Explains the ConnectorFacade interface: how ICF applications use C
 component: openicf
 page_id: openicf:connector-dev-guide:connector-facade
 canonical_url: https://docs.pingidentity.com/openicf/connector-dev-guide/connector-facade.html
+llms_txt: https://docs.pingidentity.com/openicf/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
   create-connector-facade: Creating a ConnectorFacade
 ---
@@ -1410,6 +1444,8 @@ description: How to implement the ICF create operation in a connector, including
 component: openicf
 page_id: openicf:connector-dev-guide:operations/operation-create
 canonical_url: https://docs.pingidentity.com/openicf/connector-dev-guide/operations/operation-create.html
+llms_txt: https://docs.pingidentity.com/openicf/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
   CreateApiOp-api-level-rules: Use the ICF create operation
   CreateOp-spi-level-rules: Implement the create operation
@@ -1505,6 +1541,8 @@ description: "Reference for the ICF connector Create script: input variables, re
 component: openicf
 page_id: openicf:connector-dev-guide:scripts/script-create
 canonical_url: https://docs.pingidentity.com/openicf/connector-dev-guide/scripts/script-create.html
+llms_txt: https://docs.pingidentity.com/openicf/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 ---
 
 # Create script
@@ -1585,6 +1623,8 @@ description: How to customize Groovy connector toolkit configuration initializat
 component: openicf
 page_id: openicf:connector-dev-guide:advanced-custom-config
 canonical_url: https://docs.pingidentity.com/openicf/connector-dev-guide/advanced-custom-config.html
+llms_txt: https://docs.pingidentity.com/openicf/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 ---
 
 # Custom configuration initialization
@@ -1605,6 +1645,8 @@ description: Reference for implementing the ICF delete operation in a connector,
 component: openicf
 page_id: openicf:connector-dev-guide:operations/operation-delete
 canonical_url: https://docs.pingidentity.com/openicf/connector-dev-guide/operations/operation-delete.html
+llms_txt: https://docs.pingidentity.com/openicf/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
   DeleteApiOp-api-level-rules: Use the ICF delete operation
   DeleteOp-spi-level-rules: Implement the delete operation
@@ -1659,6 +1701,8 @@ description: "Reference for the ICF connector delete script: input variables, ex
 component: openicf
 page_id: openicf:connector-dev-guide:scripts/script-delete
 canonical_url: https://docs.pingidentity.com/openicf/connector-dev-guide/scripts/script-delete.html
+llms_txt: https://docs.pingidentity.com/openicf/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 ---
 
 # Delete script

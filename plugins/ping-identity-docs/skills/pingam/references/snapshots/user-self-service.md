@@ -7,13 +7,33 @@ page_id: pingam:user-self-service:configuring-forgotten-password
 canonical_url: https://docs.pingidentity.com/pingam/8.1/user-self-service/configuring-forgotten-password.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-10-22T11:32:06Z
 keywords: ["Self-Service", "Password Reset"]
 page_aliases: ["user-self-service-guide:configuring-forgotten-password.adoc"]
+section_ids:
+  forgotten-password-use-cases: Common use cases
+  configure_am_for_password_reset: Configure AM for password reset
 ---
 
 # Configure forgotten password reset
 
-The forgotten password feature allows existing users to reset their passwords when they cannot remember them.
+The forgotten password feature allows existing users to reset their passwords when they can't remember them.
+
+## Common use cases
+
+Password reset recovers access to an existing account. Make sure its controls are at least as strong as the account's weakest sign-on method:
+
+* **Consumer self-service recovery**: Users reset their passwords from an emailed link without help desk involvement. With email verification enabled, the recovery link contains a single-use code, and the token lifetime bounds how long it's valid. The flow is only as secure as the user's email account; an attacker who controls the mailbox controls the reset.
+
+* **Workforce portal recovery**: Employees recover access to workforce applications. Pair it with multi-factor authentication (MFA) or other verification methods to keep the reset process as strong as the sign-on process.
+
+* **Recovery with additional checks**: Require security questions in addition to email verification. Security questions add a knowledge check, but they're a weak factor on their own because answers can be guessed, discovered, or reused.
+
+* **Email-link recovery with abuse controls**: Enable Captcha to resist automated abuse of the recovery endpoint, and Enforce password reset lockout to block password reset for a user after repeated failed security-question attempts. Lockout limits guessing, but attackers can trigger it deliberately to prevent the user from resetting their password.
+
+Learn more in [Configure knowledge-based security questions](configuring-kba.html) and [Configure the Google reCAPTCHA plugin](configuring-recaptcha.html).
+
+## Configure AM for password reset
 
 1. In the AM admin UI, go to Realms > *realm name* > Services and select the User Self-Service service.
 
@@ -25,7 +45,7 @@ The forgotten password feature allows existing users to reset their passwords wh
 
 5. Enable Email Verification to turn on the email verification service. You should keep this enabled.
 
-   Note that the recovery link AM emails to the user contains a code that can only be used once.
+   The recovery link AM emails to the user contains a code that can only be used once.
 
 6. Enable Security Questions to display security questions to the user during the forgotten password reset process. The user must have security questions defined in their profile, and must correctly answer the presented questions to be able to reset passwords.
 
@@ -72,13 +92,29 @@ page_id: pingam:user-self-service:configuring-forgotten-username
 canonical_url: https://docs.pingidentity.com/pingam/8.1/user-self-service/configuring-forgotten-username.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-10-22T11:32:06Z
 keywords: ["Self-Service"]
 page_aliases: ["user-self-service-guide:configuring-forgotten-username.adoc"]
+section_ids:
+  forgotten-username-use-cases: Common use cases
+  configure_am_for_forgotten_username_retrieval: Configure AM for forgotten username retrieval
 ---
 
 # Configure forgotten username retrieval
 
-The forgotten username feature allows existing users to retrieve their usernames when they cannot remember them.
+The forgotten username feature allows existing users to retrieve their usernames when they can't remember them.
+
+## Common use cases
+
+Retrieving a username discloses an identifier rather than changing a credential, so choose verification controls according to the risk of the accounts in your deployment:
+
+* **Sign-on identifier recovery**: Users who sign on with an opaque username rather than an email address can retrieve the username themselves instead of contacting a help desk. If users sign on with their email addresses, this feature adds little value.
+
+* **Delivering the username securely**: Enable Email Username to send the username to the address registered on the account. Use email delivery over Show Username, which returns the username to the client for display, where someone looking over the user's shoulder or viewing a shared screen could see it.
+
+* **Adding friction against enumeration**: Enable Captcha on the publicly accessible endpoint to add friction against automated probing. When no unique account matches the request, AM continues without identifying a user and doesn't send an email. Use consistent responses and additional abuse controls to reduce account-enumeration risk. Disclosing usernames aids targeted phishing and password-spraying attacks.
+
+## Configure AM for forgotten username retrieval
 
 1. In the AM admin UI, go to Realms > *realm name* > Services and select User Self-Service.
 
@@ -123,6 +159,7 @@ page_id: pingam:user-self-service:configuring-kba
 canonical_url: https://docs.pingidentity.com/pingam/8.1/user-self-service/configuring-kba.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 keywords: ["Self-Service", "Registration", "KBA"]
 page_aliases: ["user-self-service-guide:configuring-kba.adoc"]
 ---
@@ -180,6 +217,7 @@ page_id: pingam:user-self-service:configuring-email-service
 canonical_url: https://docs.pingidentity.com/pingam/8.1/user-self-service/configuring-email-service.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 keywords: ["Self-Service", "Registration", "Email"]
 page_aliases: ["user-self-service-guide:configuring-email-service.adoc"]
 section_ids:
@@ -326,6 +364,7 @@ page_id: pingam:user-self-service:configuring-recaptcha
 canonical_url: https://docs.pingidentity.com/pingam/8.1/user-self-service/configuring-recaptcha.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-10-22T11:32:06Z
 keywords: ["Self-Service", "Password Reset", "Registration"]
 page_aliases: ["user-self-service-guide:configuring-recaptcha.adoc"]
 ---
@@ -334,7 +373,7 @@ page_aliases: ["user-self-service-guide:configuring-recaptcha.adoc"]
 
 The user self-service feature supports the Google reCAPTCHA plugin, which can be placed on the Register Your Account, Reset Your Password, and Retrieve Your Username pages. The Google reCAPTCHA plugin protects your user self-service implementation from software bots.
 
-Google reCAPTCHA is the only supported plugin for user self-service. AM works with Google reCAPTCHA v2. Any other Captcha service will require a custom plugin.
+Google reCAPTCHA is the only supported plugin for user self-service. AM works with Google reCAPTCHA v2.
 
 |   |                                                                                                                                                      |
 | - | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -342,9 +381,7 @@ Google reCAPTCHA is the only supported plugin for user self-service. AM works wi
 
 1. Register your website at a Captcha provider, such as [Google reCAPTCHA](https://www.google.com/recaptcha/intro/index.html), to get your site and secret key.
 
-   When you register your site for Google reCAPTCHA, you only need to obtain the site and secret key, which you enter in the User Self-Service configuration page in the AM admin UI. You do not have to do anything with client-side integration and server-side integration. The Google reCAPTCHA plugin appears automatically on the Register Your Account, Reset Your Password, and Retrieve Your Username pages after you configure it in the AM admin UI.
-
-   ![AM supports the Google reCAPTCHA plugin to protect against software bots.](_images/google-recaptcha.png)Figure 1. Google reCAPTCHA Page
+   When you register your site for Google reCAPTCHA, you only need to obtain the site and secret key, which you enter in the User Self-Service configuration page in the AM admin UI. You don't have to do anything with client-side integration and server-side integration. The Google reCAPTCHA plugin appears automatically on the Register Your Account, Reset Your Password, and Retrieve Your Username pages after you configure it in the AM admin UI.
 
 2. In the AM admin UI, go to Realms > *realm name* > Services and select the User Self-Service service.
 
@@ -379,9 +416,11 @@ page_id: pingam:user-self-service:configuring-user-self-registration
 canonical_url: https://docs.pingidentity.com/pingam/8.1/user-self-service/configuring-user-self-registration.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-10-22T11:32:06Z
 keywords: ["Self-Service", "Registration", "Configuration &amp; Setup"]
 page_aliases: ["user-self-service-guide:configuring-user-self-registration.adoc"]
 section_ids:
+  user-self-registration-use-cases: Common use cases
   configure-user-self-registration: Configure AM for user self-registration
   user-mgmt-pwd-sec-questions: User management of passwords and security questions
 ---
@@ -389,6 +428,20 @@ section_ids:
 # Configure user registration
 
 User self-registration lets end users create their own accounts in AM.
+
+## Common use cases
+
+Match the registration controls to the account type and the risk of abuse in your deployment:
+
+* **Consumer onboarding**: New customers create accounts with an email address and a password. Email verification is the baseline control. It proves control of the mailbox but doesn't confirm the user's identity. Enable Captcha when automated account creation is a concern.
+
+* **B2B portal registration**: Partners register with their work email addresses. Open registration can't confirm the registrant's affiliation with a partner organization. Combine self-registration with an approval step or allowlist the registration domains.
+
+* **Email-verified account creation**: Enable Verify Email before User Detail so users prove control of their email address before AM collects their personal details. This verifies mailbox control before the registration form is shown, but adds a step.
+
+* **Additional registration checks**: Enable Captcha to resist automated sign-ups, and security questions to add a knowledge check.
+
+Learn more in [Configure the email service](configuring-email-service.html), [Configure the Google reCAPTCHA plugin](configuring-recaptcha.html), and [Configure knowledge-based security questions](configuring-kba.html).
 
 ## Configure AM for user self-registration
 
@@ -467,6 +520,7 @@ page_id: pingam:user-self-service:configuring-uss
 canonical_url: https://docs.pingidentity.com/pingam/8.1/user-self-service/configuring-uss.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 keywords: ["Self-Service", "Registration", "Configuration &amp; Setup"]
 page_aliases: ["user-self-service-guide:configuring-uss.adoc"]
 section_ids:
@@ -541,6 +595,7 @@ page_id: pingam:user-self-service:uss-registering-users
 canonical_url: https://docs.pingidentity.com/pingam/8.1/user-self-service/uss-registering-users.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-10-22T11:32:06Z
 keywords: ["Self-Service", "Registration", "REST API"]
 page_aliases: ["user-self-service-guide:uss-registering-users.adoc"]
 section_ids:
@@ -552,17 +607,21 @@ section_ids:
 
 The AM UI includes pages for users to register themselves. You can also create a RESTful application that uses the user self-service features.
 
-![AM's User Self-Registration basic flow with optional features disabled.](_images/user-self-registration-basic-flow.png)Figure 1. User self-registration basic flow (UI)
+The following diagram illustrates a simple user self-registration flow.
 
-> **Collapse: User self-registration flow with options (UI)**
->
-> ![AM's user self-registration supports various user flows, depending on how you configure your options.](_images/user-self-registration-flow.png)
+![Simple user self-registration flow](_images/user-self-registration-simple-flow.svg)
 
-When performing user self-service functions, you can enable one or more security methods, such as email validation, Google reCAPTCHA, knowledge-based authentication, or custom plugins. Each configured security method requires requests to be sent from AM to the client, and completed responses returned to AM to verify.
+When performing user self-service functions, you can enable one or more security methods, such as email validation, CAPTCHA, or security questions. Each configured security method requires requests to be sent from AM to the client, and completed responses returned to AM to verify.
 
 A unique token is provided in the second request to the client that must be used in any subsequent responses, so that AM can maintain the state of the user self-service process.
 
 By default, the user self-registration flow validates the email address after the user has provided their details.
+
+The controls you enable, such as email verification, CAPTCHA, or security questions, depend on the registration journeys your deployment supports and the risk each carries. Learn more in [Common use cases for user registration](configuring-user-self-registration.html#user-self-registration-use-cases).
+
+The following diagram illustrates a user self-registration flow with added controls.
+
+![User self-registration flow with added configuration](_images/user-self-registration-flow-with-options.svg)
 
 ## Register a user over REST
 
@@ -652,7 +711,7 @@ Before performing the steps in this procedure, ensure that Verify Email before U
 
    * `kbaSecurityAnswerDefinitionStage`, if knowledge-based security questions are required
 
-   For an example of Google reCAPTCHA validation, see [Retrieve forgotten usernames](uss-forgotten-username.html).
+   Find an example of Google reCAPTCHA validation in [Retrieve forgotten usernames](uss-forgotten-username.html).
 
 3. Return the information required by the next step of the registration, along with the `token` element.
 
@@ -873,27 +932,32 @@ page_id: pingam:user-self-service:uss-forgotten-password
 canonical_url: https://docs.pingidentity.com/pingam/8.1/user-self-service/uss-forgotten-password.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-10-22T11:32:06Z
 keywords: ["Self-Service", "Password Reset"]
 page_aliases: ["user-self-service-guide:uss-forgotten-password.adoc"]
+section_ids:
+  reset_a_forgotten_password_over_rest: Reset a forgotten password over REST
 ---
 
 # Reset forgotten passwords
 
 The AM UI includes pages for users to reset their forgotten passwords. You can, however, create a RESTful application to leverage the user self-service features.
 
-Forgotten password flow in the UI
-
-![The forgotten password feature supports multiple user flows, depending on how it is configured.](_images/forgotten-password-flow.png)
-
-When performing user self-service functions, you can enable one or more security methods such as email validation, Google reCAPTCHA, knowledge-based authentication, or custom plugins.
-
-Each configured security method requires particular security data that AM requests from the client for verification.
+When performing user self-service functions, you can enable one or more security methods such as email validation, CAPTCHA, or security questions. Each configured security method requires particular security data that AM requests from the client for verification.
 
 A unique token is provided in the second response to the client that must be used in any subsequent requests, so that AM can maintain the state of the user self-service process.
 
+Password reset recovers access to an existing account. Make sure its controls are at least as strong as the account's weakest sign-on method. Learn more in [Common use cases for forgotten password reset](configuring-forgotten-password.html#forgotten-password-use-cases).
+
+The following diagram illustrates a forgotten password flow.
+
+![Forgotten password flow](_images/forgotten-password-flow.svg)
+
+## Reset a forgotten password over REST
+
 1. Send a GET request to the `/selfservice/forgottenPassword` endpoint.
 
-   Notice that the request does not require any form of authentication:
+   The request doesn't require any form of authentication:
 
    ```bash
    $ curl \
@@ -965,7 +1029,7 @@ A unique token is provided in the second response to the client that must be use
 
 3. Send a POST request to AM with a `queryFilter` value in the POST data containing the username of the subject with the password to replace.
 
-   For more information on query filters, see [Query](../am-rest/rest-intro.html#about-crest-query).
+   Find more information on query filters in [Query](../am-rest/rest-intro.html#about-crest-query).
 
    ```bash
    $ curl \
@@ -1004,13 +1068,13 @@ A unique token is provided in the second response to the client that must be use
 
    If a single subject is located that matches the provided query filter, the password reset process continues.
 
-   If a subject is not found, an HTTP 400 Bad Request status is returned, along with an error message in the JSON data:
+   When no unique subject matches the query filter, the process continues without identifying a user. In that case, the security questions shown are the configured ones, not those registered on an account. Submitting answers when no user is identified returns an HTTP 400 Bad Request status:
 
    ```json
    {
        "code": 400,
        "reason": "Bad Request",
-       "message": "Unable to find account"
+       "message": "Security question answers do not match"
    }
    ```
 
@@ -1100,23 +1164,32 @@ page_id: pingam:user-self-service:uss-forgotten-username
 canonical_url: https://docs.pingidentity.com/pingam/8.1/user-self-service/uss-forgotten-username.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-10-22T11:32:06Z
 keywords: ["Self-Service"]
 page_aliases: ["user-self-service-guide:uss-forgotten-username.adoc"]
+section_ids:
+  retrieve_a_forgotten_username_over_rest: Retrieve a forgotten username over REST
 ---
 
 # Retrieve forgotten usernames
 
 The AM UI includes pages for users to recover their forgotten usernames. You can, however, create a RESTful application to leverage the user self-service features.
 
-![AM's Forgotten Username supports multiple user flows, depending on how you configure your options.](_images/forgotten-username-flow.png)Figure 1. Forgotten Username Flow (UI)
-
-When performing user self-service functions, you can enable one or more security methods, such as email validation, Google reCAPTCHA, knowledge-based authentication, or custom plugins. Each configured security method requires requests to be sent from AM to the client, and completed responses returned to AM to verify.
+When performing user self-service functions, you can enable one or more security methods, such as email validation, CAPTCHA, or security questions. Each configured security method requires requests to be sent from AM to the client, and completed responses returned to AM to verify.
 
 A unique token is provided in the second request to the client that must be used in any subsequent responses, so that AM can maintain the state of the user self-service process.
 
+The controls you enable for username retrieval depend on how users sign on and the risk of disclosing usernames in your deployment. Learn more in [Common use cases for forgotten username retrieval](configuring-forgotten-username.html#forgotten-username-use-cases).
+
+The following diagram illustrates a forgotten username flow.
+
+![Forgotten username flow](_images/forgotten-username-flow.svg)
+
+## Retrieve a forgotten username over REST
+
 1. Create a GET request to the `/selfservice/forgottenUsername` endpoint.
 
-   Notice that the request does not require any form of authentication.
+   The request doesn't require any form of authentication.
 
    ```bash
    $ curl \
@@ -1227,15 +1300,15 @@ A unique token is provided in the second request to the client that must be used
 
    If KBA is enabled, AM requests answers to the configured number of KBA questions, as in this example.
 
-   For more information on query filters, see [Query](../am-rest/rest-intro.html#about-crest-query).
+   Find more information on query filters in [Query](../am-rest/rest-intro.html#about-crest-query).
 
-   If a subject is not found, an HTTP 400 Bad Request status is returned, and an error message in the JSON data:
+   When no unique subject matches the query filter, the retrieval process continues without identifying a user. In that case, the security questions shown are the configured ones, not those registered on an account. Submitting answers when no user is identified returns an HTTP 400 Bad Request status:
 
-   ```
+   ```json
    {
        "code": 400,
        "reason": "Bad Request",
-       "message": "Unable to find account"
+       "message": "Security question answers do not match"
    }
    ```
 
@@ -1280,6 +1353,7 @@ page_id: pingam:user-self-service:about-uss
 canonical_url: https://docs.pingidentity.com/pingam/8.1/user-self-service/about-uss.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-10-22T11:32:06Z
 keywords: ["Self-Service", "Password Reset", "Registration", "KBA"]
 page_aliases: ["user-self-service-guide:about-uss.adoc"]
 ---
@@ -1294,7 +1368,7 @@ Features
 
 * User self-registration
 
-  Lets non-authenticated users register on your site. You can add security features like email verification, knowledge-based authentication (KBA) security questions, Google reCAPTCHA, and custom plugins to augment the self-registration process.
+  Lets non-authenticated users register on your site. You can add security features like email verification, knowledge-based authentication (KBA) security questions, and Google reCAPTCHA to augment the self-registration process.
 
 * Knowledge-based authentication security questions
 
@@ -1336,7 +1410,7 @@ Features
 
   Attribute allowlisting lets you specify which attributes can be set by the user during account creation.
 
-User self-registration supports a number of different user flows, depending on the security options you configure. For example, email verification, security questions, Google reCAPTCHA, and custom plugins.
+User self-registration supports a number of different user flows, depending on the security options you configure. For example, email verification, security questions, and Google reCAPTCHA.
 
 Forgotten username retrieval and forgotten password reset also support various user flows, depending on your configured security options.
 
@@ -1351,6 +1425,7 @@ page_id: pingam:user-self-service:preface
 canonical_url: https://docs.pingidentity.com/pingam/8.1/user-self-service/preface.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 keywords: ["Self-Service", "Password Reset", "Registration"]
 page_aliases: ["index.adoc", "user-self-service-guide:preface.adoc"]
 ---

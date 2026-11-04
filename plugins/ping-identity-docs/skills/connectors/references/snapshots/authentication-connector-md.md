@@ -1,14 +1,14 @@
 ---
-title: Authentication Connector
-description: The Authentication connector lets you quickly orchestrate flows in PingOne DaVinci for common authentication use cases.
+title: Authentication Use Case Connector
+description: The Authentication connector lets you quickly orchestrate flows in PingOne DaVinci for common authentication use cases
 component: connectors
 page_id: connectors::authentication_connector
 canonical_url: https://docs.pingidentity.com/connectors/authentication_connector.html
 llms_txt: https://docs.pingidentity.com/connectors/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: November 13, 2025
+revdate: 2026-07-09T00:00:00Z
 section_ids:
-  why-use-the-authentication-connector: Why use the Authentication connector?
+  why-use-the-authentication-use-case-connector: Why use the Authentication use case connector?
   setup: Setup
   resources: Resources
   using-the-connector-in-a-flow: Using the connector in a flow
@@ -32,11 +32,11 @@ section_ids:
   findUser: Find User
 ---
 
-# Authentication Connector
+# Authentication Use Case Connector
 
-The Authentication connector lets you quickly orchestrate flows in PingOne DaVinci for common authentication use cases, eliminating the need for complex subflows composed of granular nodes.
+The Authentication use case connector lets you quickly orchestrate flows in PingOne DaVinci for common authentication use cases, eliminating the need for complex subflows composed of granular nodes.
 
-The Authentication connector supports the following common user experiences:
+The Authentication use case connector supports the following common user experiences:
 
 * Authenticating users
 
@@ -50,11 +50,11 @@ The Authentication connector supports the following common user experiences:
 
 * Password change
 
-## Why use the Authentication connector?
+## Why use the Authentication use case connector?
 
-Use case connectors, such as the Authentication connector, are designed to make common integration patterns easier and faster to implement. Instead of building flows with many granular nodes ([PingOne Connector](p1_connector.html), [PingOne Authentication Connector](p1_authentication_connector.html), and [Core connectors](type/core_connectors.html)), you can achieve the same outcomes with just a few nodes. This approach significantly reduces complexity and setup time.
+Use case connectors, such as the Authentication use case connector, are designed to make common integration patterns easier and faster to implement. Instead of building flows with many granular nodes ([PingOne Connector](p1_connector.html), [PingOne Authentication Connector](p1_authentication_connector.html), and [Core connectors](type/core_connectors.html)), you can achieve the same outcomes with just a few nodes. This approach significantly reduces complexity and setup time.
 
-The Authentication connector is useful in scenarios where you want to quickly implement common authentication flow patterns without delving into the complexities of granular node configurations.
+The Authentication use case connector is useful in scenarios where you want to quickly implement common authentication flow patterns without delving into the complexities of granular node configurations.
 
 |   |                                                                                                                                                                                                                                                                                                   |
 | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -78,7 +78,7 @@ You can find information and setup help in the following:
 
 ### Account status checking
 
-In many authentication flows, checking the user's account status is a necessary step to determine if additional actions are required, such as email verification or password change. The Authentication connector's **Check Account Status** capability simplifies this process by reducing the number of nodes required to implement account status checks.
+In many authentication flows, checking the user's account status is a necessary step to determine if additional actions are required, such as email verification or password change. The Authentication use case connector's **Check Account Status** capability simplifies this process by reducing the number of nodes required to implement account status checks.
 
 |   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
 | - | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -92,13 +92,13 @@ Before checking a user's account status, you must present a form to collect user
 
 ### User authentication
 
-![DaVinci user authentication flow example with Authentication connector nodes and user-facing forms shown in sequence.](_images/connector-images/dvc-authentication-user-authentication.png)
+![DaVinci user authentication flow example with Authentication use case connector nodes and user-facing forms shown in sequence.](_images/connector-images/dvc-authentication-user-authentication.png)
 
-In the context of a larger authentication flow, user authentication is a logical starting point to verify user credentials. The Authentication connector's **Authenticate User** and **Check Account Status** capabilities simplify this process by reducing the number of nodes required to implement user authentication.
+In the context of a larger authentication flow, user authentication is a logical starting point to verify user credentials. The Authentication use case connector's **Authenticate User** and **Check Account Status** capabilities simplify this process by reducing the number of nodes required to implement user authentication.
 
-Before proceeding with user authentication with the Authentication connector, you must present a form to collect user credentials.
+Before proceeding with user authentication with the Authentication use case connector, you must present a form to collect user credentials.
 
-To use the Authentication connector for user authentication:
+To use the Authentication use case connector for user authentication:
 
 1. Add a **Authenticate User** node to check the user's credentials. This capability includes outcomes for success, error and password change.
 
@@ -108,11 +108,11 @@ To use the Authentication connector for user authentication:
 
 ### Agreement consent recording
 
-![DaVinci terms of service agreement consent flow example with Authentication connector nodes and user-facing forms shown in sequence.](_images/connector-images/dvc-authentication-tos-agreement.png)
+![DaVinci terms of service agreement consent flow example with Authentication use case connector nodes and user-facing forms shown in sequence.](_images/connector-images/dvc-authentication-tos-agreement.png)
 
-In your authentication flow, you might want to include the TOS acceptance step to ensure compliance with your organization's policies. The Authentication connector's **Accept Agreement** capability simplifies this compliance step by capturing user consent without building separate flows.
+In your authentication flow, you might want to include the TOS acceptance step to ensure compliance with your organization's policies. The Authentication use case connector's **Accept Agreement** capability simplifies this compliance step by capturing user consent without building separate flows.
 
-To user the Authentication connector for agreement consent recording:
+To use the Authentication use case connector for agreement consent recording:
 
 1. Include a **Check Account Status** node to check status.
 
@@ -122,11 +122,11 @@ To user the Authentication connector for agreement consent recording:
 
 ### Password change
 
-![DaVinci password change flow example with Authentication connector nodes and user-facing forms shown in sequence.](_images/connector-images/dvc-authentication-password-change.png)
+![DaVinci password change flow example with Authentication use case connector nodes and user-facing forms shown in sequence.](_images/connector-images/dvc-authentication-password-change.png)
 
 Password change is another helpful user experience to include in your authentication flows that enables secure password updates for users.
 
-To use the Authentication connector for password change:
+To use the Authentication use case connector for password change:
 
 1. From the **Authenticate User** node's **New Password Required** outcome, branch to a form that collects the current and new password inputs.
 
@@ -142,7 +142,7 @@ To use the Authentication connector for password change:
 
 ### User account registration
 
-![DaVinci account registration flow example with Authentication connector nodes and user-facing forms shown in sequence.](_images/connector-images/dvc-authentication-account-registration.png)
+![DaVinci account registration flow example with Authentication use case connector nodes and user-facing forms shown in sequence.](_images/connector-images/dvc-authentication-account-registration.png)
 
 User account registration is a common flow configuration that allows new users to create accounts. The Authentication connector simplifies this process by checking account status before continuing the flow.
 
@@ -152,7 +152,7 @@ Before proceeding with account registration with the Authentication connector, y
 | - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 |   | You can easily create a registration form in PingOne and implement in DaVinci with the [Form Connector](form_connector.html). Learn more in [Configuring a Registration Form](https://docs.pingidentity.com/PingOne/user_experience/p1_configuring_registration_form.html). |
 
-To use the Authentication connector for user account registration:
+To use the Authentication use case connector for user account registration:
 
 1. Add a **Register Account** node that continues from the user-facing registration form.
 
@@ -162,11 +162,11 @@ To use the Authentication connector for user account registration:
 
 ### Email verification
 
-![DaVinci email verification flow example with Authentication connector nodes and user-facing forms shown in sequence.](_images/connector-images/dvc-authentication-email-verification.png)
+![DaVinci email verification flow example with Authentication use case connector nodes and user-facing forms shown in sequence.](_images/connector-images/dvc-authentication-email-verification.png)
 
-If email verification is required for account registration, the Authentication connector's **Verification Required** outcome branches to a form to capture email OTP input. This simplifies the email verification process by reducing the number of nodes required to implement this use case.
+If email verification is required for account registration, the Authentication use case connector's **Verification Required** outcome branches to a form to capture email OTP input. This simplifies the email verification process by reducing the number of nodes required to implement this use case.
 
-To use the Authentication connector for email verification:
+To use the Authentication use case connector for email verification:
 
 1. Add a **Register Account** node that continues from the user-facing registration form.
 
@@ -180,13 +180,13 @@ To use the Authentication connector for email verification:
 
 ### Account recovery
 
-![DaVinci account recovery flow example with Authentication connector nodes and user-facing forms shown in sequence.](_images/connector-images/dvc-authentication-account-recovery.png)
+![DaVinci account recovery flow example with Authentication use case connector nodes and user-facing forms shown in sequence.](_images/connector-images/dvc-authentication-account-recovery.png)
 
-Account recovery is a critical user experience that helps users regain access to their accounts when they forget their passwords. The Authentication connector simplifies this process by combining user identification, code delivery, and password reset into fewer nodes.
+Account recovery is a critical user experience that helps users regain access to their accounts when they forget their passwords. The Authentication use case connector simplifies this process by combining user identification, code delivery, and password reset into fewer nodes.
 
-Before proceeding with account recovery with the Authentication connector, you must present a form to collect user identification information.
+Before proceeding with account recovery with the Authentication use case connector, you must present a form to collect user identification information.
 
-To use the Authentication connector for account recovery:
+To use the Authentication use case connector for account recovery:
 
 1. Use the **Recover Account - Send Recovery Code** capability to identify the user and send a recovery code by email.
 

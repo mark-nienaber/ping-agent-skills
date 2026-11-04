@@ -49,7 +49,9 @@ docsets:
     source: docs
     base_url: https://docs.pingidentity.com/developer-resources
     preferred_version: null
-    enabled: true
+    # Disabled: upstream llms.txt now returns 404 and the docset is gone from
+    # the root index at https://docs.pingidentity.com/llms.txt.
+    enabled: false
 
   - skill_slug: enterprise-connect
     label: Enterprise Connect
@@ -62,7 +64,7 @@ docsets:
     label: ForgeOps
     source: docs
     base_url: https://docs.pingidentity.com/forgeops
-    preferred_version: 2026.2
+    preferred_version: 2026.3
     enabled: true
 
   - skill_slug: glossary
@@ -146,7 +148,14 @@ docsets:
     label: PingCentral
     source: docs
     base_url: https://docs.pingidentity.com/pingcentral
-    preferred_version: 3.1.1
+    preferred_version: 3.2
+    enabled: true
+
+  - skill_slug: pingcentral-dev
+    label: PingCentral (Developer)
+    source: developer
+    base_url: https://developer.pingidentity.com/pingcentral
+    preferred_version: null
     enabled: true
 
   - skill_slug: pingdirectory
@@ -203,7 +212,9 @@ docsets:
     source: docs
     base_url: https://docs.pingidentity.com/pingintelligence
     preferred_version: 5.2
-    enabled: true
+    # Disabled: upstream llms.txt now returns 404 and the docset is gone from
+    # the root index at https://docs.pingidentity.com/llms.txt.
+    enabled: false
 
   - skill_slug: pingone-admin-mfa-faq
     label: PingOne Admin MFA FAQ
@@ -251,7 +262,7 @@ docsets:
     label: Ping Platform
     source: docs
     base_url: https://docs.pingidentity.com/platform
-    preferred_version: 8
+    preferred_version: 8.1
     enabled: true
 
   - skill_slug: privilege
@@ -365,9 +376,9 @@ docsets:
     source: developer
     base_url: https://developer.pingidentity.com/pingcli
     preferred_version: null
-    # Disabled until Ping fixes the advertised per-docset llms.txt redirect.
-    # Tracking: https://github.com/mark-nienaber/ping-agent-skills/issues/2
-    enabled: false
+    # Re-enabled: the per-docset llms.txt redirect issue was fixed upstream and
+    # the index now serves v1.11 content. Tracking: https://github.com/mark-nienaber/ping-agent-skills/issues/2
+    enabled: true
 
   - skill_slug: pingdirectory-dev
     label: PingDirectory (Developer)

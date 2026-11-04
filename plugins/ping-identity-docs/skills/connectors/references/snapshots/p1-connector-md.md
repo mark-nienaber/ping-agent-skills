@@ -1,12 +1,12 @@
 ---
 title: PingOne Connector
-description: Use the PingOne DaVinci connector to add PingOne functionality for your DaVinci flow.
+description: Use the PingOne DaVinci connector to add PingOne functionality for your PingOne DaVinci flow
 component: connectors
 page_id: connectors::p1_connector
 canonical_url: https://docs.pingidentity.com/connectors/p1_connector.html
 llms_txt: https://docs.pingidentity.com/connectors/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: May 22, 2025
+revdate: 2026-07-09T00:00:00Z
 section_ids:
   setup: Setup
   resources: Resources
@@ -36,6 +36,7 @@ section_ids:
   using-an-alternative-identifier: Using an alternative identifier
   updating-users-through-gateway: Updating users through gateway
   sending-account-creation-notifications: Sending account creation notifications
+  sending-account-updated-notifications: Sending Account updated notifications
   sending-verification-code-notification: Sending verification code notifications
   sending-password-recovery-notifications: Sending password recovery notifications
   sending-password-change-notifications: Sending password change notifications
@@ -85,7 +86,7 @@ section_ids:
 
 # PingOne Connector
 
-Use the PingOne DaVinci connector to add PingOne functionality for your DaVinci flow.
+Use the PingOne DaVinci connector to add PingOne functionality for your PingOne DaVinci flow.
 
 The PingOne connector has capabilities that you can tie together to achieve your desired outcome. The connector acts like a worker application with each capability calling one or more endpoints in PingOne using your application for authentication.
 
@@ -133,13 +134,13 @@ You can find information in, the following sections of the PingOne documentation
 
   * [Adding an application](https://docs.pingidentity.com/pingone/applications/p1_applications_add_applications.html)
 
-* DaVinci documentation:
+* PingOne DaVinci documentation:
 
   * [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html)
 
   * [Using connectors securely](https://docs.pingidentity.com/davinci/connectors/davinci_using_connectors_securely.html)
 
-  * [Using DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html)
+  * [Using PingOne DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html)
 
 ### Requirements
 
@@ -217,7 +218,7 @@ To use the appropriate capabilities, the Worker app used by the connector needs 
 
 #### Getting your application credentials
 
-Get the **Client ID** and **Client secret** from the PingOne admin console before setting up the PingOne connector in DaVinci.
+Get the **Client ID** and **Client secret** from the PingOne admin console before setting up the PingOne connector in PingOne DaVinci.
 
 1. In your PingOne environment, go to **Applications > Applications**.
 
@@ -229,7 +230,7 @@ Get the **Client ID** and **Client secret** from the PingOne admin console befor
 
 #### Getting your environment details
 
-Get your **Environment ID** and **Region** before setting up the PingOne connector in DaVinci.
+Get your **Environment ID** and **Region** before setting up the PingOne connector in PingOne DaVinci.
 
 1. In your PingOne environment, go to **Settings > Environment Properties**.
 
@@ -237,7 +238,7 @@ Get your **Environment ID** and **Region** before setting up the PingOne connect
 
 ### Setting up the PingOne connector configuration
 
-In DaVinci, add a PingOne connection. Learn more in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html) in the DaVinci documentation.
+In PingOne DaVinci, add a PingOne connection. Learn more in [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html) in the PingOne DaVinci documentation.
 
 #### Connector configuration
 
@@ -267,7 +268,7 @@ Use this flow to create authentication flows that include the ability for users 
 
 Search for **PingOne - Sign On and Password Reset** in the [Ping Identity Marketplace](https://marketplace.pingone.com/home)
 
-Learn more in [Creating an authentication flow](https://docs.pingidentity.com/davinci/use_cases/davinci_use_cases_creating_an_authentication_flow.html) in the DaVinci documentation.
+Learn more in [Creating an authentication flow](https://docs.pingidentity.com/davinci/use_cases/davinci_use_cases_creating_an_authentication_flow.html) in the PingOne DaVinci documentation.
 
 ### Registering users and setting up MFA
 
@@ -275,7 +276,7 @@ Use this flow to create registration flows with optional user enrollment to MFA.
 
 Search for **PingOne - Register with verify email and MFA enrollment** in the [Ping Identity Marketplace](https://marketplace.pingone.com/home).
 
-Learn more in [Creating an authentication flow](https://docs.pingidentity.com/davinci/use_cases/davinci_use_cases_creating_an_authentication_flow.html) in the DaVinci documentation.
+Learn more in [Creating an authentication flow](https://docs.pingidentity.com/davinci/use_cases/davinci_use_cases_creating_an_authentication_flow.html) in the PingOne DaVinci documentation.
 
 ### Authenticating users with Protect and MFA
 
@@ -283,7 +284,7 @@ Use this flow to create sign-on flows that include a password check and a condit
 
 Search for **PingOne - Sign On and Adaptive MFA** in the [Ping Identity Marketplace](https://marketplace.pingone.com/home).
 
-Learn more in [Creating an authentication flow](https://docs.pingidentity.com/davinci/use_cases/davinci_use_cases_creating_an_authentication_flow.html) in the DaVinci documentation.
+Learn more in [Creating an authentication flow](https://docs.pingidentity.com/davinci/use_cases/davinci_use_cases_creating_an_authentication_flow.html) in the PingOne DaVinci documentation.
 
 ### Registering users with agreements and verifying email
 
@@ -291,7 +292,7 @@ Use this flow to create registration flows that include email address verificati
 
 Search for **PingOne - Register with Agreements and Verify Email** in the [Ping Identity Marketplace](https://marketplace.pingone.com/home).
 
-Learn more in [Creating an authentication flow](https://docs.pingidentity.com/davinci/use_cases/davinci_use_cases_creating_an_authentication_flow.html) in the DaVinci documentation.
+Learn more in [Creating an authentication flow](https://docs.pingidentity.com/davinci/use_cases/davinci_use_cases_creating_an_authentication_flow.html) in the PingOne DaVinci documentation.
 
 ### Registering users and verifying email
 
@@ -299,7 +300,7 @@ Use this flow to create registration flows that include email address verificati
 
 Search for **PingOne - Register with Verify Email** in the [Ping Identity Marketplace](https://marketplace.pingone.com/home).
 
-Learn more in [Creating an authentication flow](https://docs.pingidentity.com/davinci/use_cases/davinci_use_cases_creating_an_authentication_flow.html) in the DaVinci documentation.
+Learn more in [Creating an authentication flow](https://docs.pingidentity.com/davinci/use_cases/davinci_use_cases_creating_an_authentication_flow.html) in the PingOne DaVinci documentation.
 
 ### Managing group memberships
 
@@ -321,9 +322,9 @@ The connector has several capabilities that allow you to manage groups.
 
   * Create a new user group in PingOne and optionally set the metadata on the group. Only the **Group Name** is required.
 
-    |   |                                                                                                                                         |
-    | - | --------------------------------------------------------------------------------------------------------------------------------------- |
-    |   | Updating a group's metadata using the **Update Group** capability on a DaVinci flow overwrites any existing metadata on PingOne Groups. |
+    |   |                                                                                                                                                 |
+    | - | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+    |   | Updating a group's metadata using the **Update Group** capability on a PingOne DaVinci flow overwrites any existing metadata on PingOne Groups. |
 
 * **Read Group**
 
@@ -381,7 +382,7 @@ For user types:
 
   * When enabled, a PingOne user account is created using attributes from Active Directory (only if the user type used to find the user is configured to migrate users upon their first authentication).
 
-  * Disable this option to support a legacy integration where DaVinci is configured as an external IdP in PingOne.
+  * Disable this option to support a legacy integration where PingOne DaVinci is configured as an external IdP in PingOne.
 
 The [example flow](https://marketplace.pingone.com/item/pingone-kerberos-authentication) uses the `PingOne` node to authenticate the user through Kerberos and evaluates as follows:
 
@@ -399,15 +400,15 @@ The [example flow](https://marketplace.pingone.com/item/pingone-kerberos-authent
 
   * No match: Flow continues to the `An Unexpected Error` node which displays a custom error message.
 
-    |   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-    | - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+    |   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+    | - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
     |   | Learn more about setting up Active Directory as a gateway in PingOne in the following:- [LDAP Gateways](https://docs.pingidentity.com/pingone/integrations/p1_ldap_gateways.html)
 
     - [Creating SPNs](https://docs.pingidentity.com/pingone/integrations/p1_creating_spns.html)
 
     - [Configuring end user browsers](https://docs.pingidentity.com/pingone/integrations/p1_configuring_end_user_browsers.html)
 
-    - [Adding a Gateway](https://docs.pingidentity.com/pingone/integrations/p1_add_ldap_gateway.html)Learn more about using the connector in a flow in [Creating an authentication flow](https://docs.pingidentity.com/davinci/use_cases/davinci_use_cases_creating_an_authentication_flow.html) in the DaVinci documentation. |
+    - [Adding a Gateway](https://docs.pingidentity.com/pingone/integrations/p1_add_ldap_gateway.html)Learn more about using the connector in a flow in [Creating an authentication flow](https://docs.pingidentity.com/davinci/use_cases/davinci_use_cases_creating_an_authentication_flow.html) in the PingOne DaVinci documentation. |
 
 ### Using an alternative identifier
 
@@ -463,11 +464,11 @@ To send an account creation notification:
 
 1. Branch from a node that presents a user-facing form to collect user information to a PingOne node with the **Create User** capability.
 
-2. In the **Create User** node, select **ACCOUNT\_OK** in the **Lifecycle status** field.
+2. In the **Create User** node, select **ACCOUNT_OK** in the **Lifecycle status** field.
 
-   |   |                                                                                                                                                                                                                                                                                                                                        |
-   | - | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-   |   | For the **ACCOUNT\_OK** option, user verification isn't required, and the user will be notified of successful account creation.For the **VERIFICATION\_REQUIRED** option, the account will be created when the user is verified. Learn more in the [Sending verification code notifications](#sending-verification-code-notification). |
+   |   |                                                                                                                                                                                                                                                                                                                                      |
+   | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+   |   | For the **ACCOUNT_OK** option, user verification isn't required, and the user will be notified of successful account creation.For the **VERIFICATION_REQUIRED** option, the account will be created when the user is verified. Learn more in the [Sending verification code notifications](#sending-verification-code-notification). |
 
 3. Select a template from PingOne that will notify the user when their account is created. If you don't select a template, the user won't be notified.
 
@@ -481,6 +482,28 @@ To send an account creation notification:
 
 Learn more in [Notification templates](https://docs.pingidentity.com/pingone/user_experience/p1_notifications.html) in the PingOne documentation.
 
+### Sending **Account updated** notifications
+
+You can use the **Update User** capability to update a user account in PingOne and send an **Account updated** notification email to that user. Notification templates are configured in the PingOne admin console in **User Experience > Notification Templates**.
+
+To send an **Account updated** notification:
+
+1. Branch from a node that presents a user-facing form to collect user information to a PingOne node with the **Update User** capability.
+
+2. Configure the following notification-related fields:
+
+   * **Notification Name**: Select the specific template configured in PingOne to use for the notification.
+
+     |   |                                                             |
+     | - | ----------------------------------------------------------- |
+     |   | If you don't select a template, the user won't be notified. |
+
+   * (optional) **Notification Locale**: Localize the notification text for any of the languages enabled in PingOne for the chosen locale.
+
+   * (optional) **Notification Variables**: Pass variables to personalize the template text. For example, you can pull a `username` variable to address in the email.
+
+Learn more in [Notification Templates](https://docs.pingidentity.com/pingone/user_experience/p1_notifications.html) in the PingOne documentation.
+
 ### Sending verification code notifications
 
 You can use the **Create User** capability to send a verification code notification. Notification templates are configured in the PingOne admin console in **User Experience > Notification Templates**.
@@ -489,7 +512,7 @@ To send a verification code notification:
 
 1. Branch from a node that presents a user-facing form to collect user information to a PingOne node with the **Create User** capability.
 
-2. In the **Create User** node, select **VERIFICATION\_REQUIRED** in the **Lifecycle status** field.
+2. In the **Create User** node, select **VERIFICATION_REQUIRED** in the **Lifecycle status** field.
 
 3. Configure the following additional fields that display to customize the user-facing notification:
 
@@ -529,9 +552,9 @@ Learn more in [Notification Templates](https://docs.pingidentity.com/pingone/use
 
 ### Sending password change notifications
 
-You can use the **Change Password** capability to notify the end user by email when their password changes. This capability uses notification templates that are created under **Password Change (End User) - DaVinci** in PingOne.
+You can use the **Change Password** capability to notify the end user by email when their password changes. This capability uses notification templates that are created under **Password Change (End User) - PingOne DaVinci** in PingOne.
 
-The **Set Password** capability uses notification templates created under **Password Change (Admin) - DaVinci** in PingOne. Use this capability when an administrator changes or resets a user's password. Configure notification templates in the PingOne console in **User Experience > Notification Templates**.
+The **Set Password** capability uses notification templates created under **Password Change (Admin) - PingOne DaVinci** in PingOne. Use this capability when an administrator changes or resets a user's password. Configure notification templates in the PingOne console in **User Experience > Notification Templates**.
 
 Learn more in [Notification Templates](https://docs.pingidentity.com/pingone/user_experience/p1_notifications.html).
 
@@ -1047,9 +1070,9 @@ Create a user with the attribute values provided.
 >
 >   Indicate whether new users must initially verify their identities through email. If they do, they will receive an email containing a verification code when their accounts are created.
 >
->   * ACCOUNT\_OK (Default)
+>   * ACCOUNT_OK (Default)
 >
->   * VERIFICATION\_REQUIRED
+>   * VERIFICATION_REQUIRED
 >
 > * default object
 >
@@ -1836,6 +1859,8 @@ Update user attributes.
 >   * headers object
 >
 >   * statusCode integer
+
+Learn more about sending a notification to users when their account is updated in [Sending account updated notifications](https://docs.pingidentity.com/connectors/p1_connector.html#sending-account-updated-notifications).
 
 ### Delete User
 

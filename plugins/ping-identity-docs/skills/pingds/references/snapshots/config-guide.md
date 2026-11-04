@@ -7,7 +7,7 @@ page_id: pingds:config-guide:idx-about
 canonical_url: https://docs.pingidentity.com/pingds/8.1/config-guide/idx-about.html
 llms_txt: https://docs.pingidentity.com/pingds/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: 2026-01-02T15:53:44Z
+revdate: 2026-06-01T09:22:01Z
 keywords: ["Features", "LDAP", "Setup &amp; Configuration"]
 section_ids:
   role_of_an_index: Role of an index
@@ -118,7 +118,7 @@ page_id: pingds:config-guide:repl-about
 canonical_url: https://docs.pingidentity.com/pingds/8.1/config-guide/repl-about.html
 llms_txt: https://docs.pingidentity.com/pingds/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: 2025-10-22T14:42:39Z
+revdate: 2026-06-01T09:22:01Z
 keywords: ["Features", "LDAP", "Replication", "Setup &amp; Configuration"]
 section_ids:
   repl-enable: Ready to replicate
@@ -294,7 +294,7 @@ page_id: pingds:config-guide:request-handling
 canonical_url: https://docs.pingidentity.com/pingds/8.1/config-guide/request-handling.html
 llms_txt: https://docs.pingidentity.com/pingds/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: 2025-10-22T14:42:39Z
+revdate: 2026-06-01T09:22:01Z
 keywords: ["LDAP", "Setup &amp; Configuration", "Troubleshooting"]
 ---
 
@@ -333,7 +333,7 @@ page_id: pingds:config-guide:repl-add-replica
 canonical_url: https://docs.pingidentity.com/pingds/8.1/config-guide/repl-add-replica.html
 llms_txt: https://docs.pingidentity.com/pingds/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: 2025-10-22T14:42:39Z
+revdate: 2026-06-01T09:22:01Z
 keywords: ["Features", "LDAP", "Replication"]
 ---
 
@@ -368,7 +368,7 @@ page_id: pingds:config-guide:admin-access
 canonical_url: https://docs.pingidentity.com/pingds/8.1/config-guide/admin-access.html
 llms_txt: https://docs.pingidentity.com/pingds/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: 2025-10-22T14:42:39Z
+revdate: 2026-06-01T09:22:01Z
 keywords: ["Features", "Setup &amp; Configuration"]
 section_ids:
   the_administration_port: The administration port
@@ -425,7 +425,7 @@ page_id: pingds:config-guide:attribute-uniqueness
 canonical_url: https://docs.pingidentity.com/pingds/8.1/config-guide/attribute-uniqueness.html
 llms_txt: https://docs.pingidentity.com/pingds/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: 2025-10-22T14:42:39Z
+revdate: 2026-06-01T09:22:01Z
 keywords: ["Features", "LDAP", "Setup &amp; Configuration"]
 section_ids:
   enable-unique-uids: Enable unique UIDs
@@ -740,7 +740,7 @@ page_id: pingds:config-guide:repl-bootstrap
 canonical_url: https://docs.pingidentity.com/pingds/8.1/config-guide/repl-bootstrap.html
 llms_txt: https://docs.pingidentity.com/pingds/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: 2025-10-22T14:42:39Z
+revdate: 2026-06-01T09:22:01Z
 keywords: ["Features", "LDAP", "Replication", "Setup &amp; Configuration"]
 section_ids:
   add-bootstrap-replication-server: Add a bootstrap replication server
@@ -828,7 +828,7 @@ page_id: pingds:config-guide:changelog
 canonical_url: https://docs.pingidentity.com/pingds/8.1/config-guide/changelog.html
 llms_txt: https://docs.pingidentity.com/pingds/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: 2025-10-22T14:42:39Z
+revdate: 2026-06-01T09:22:01Z
 keywords: ["Features", "LDAP", "Replication", "Setup &amp; Configuration"]
 section_ids:
   enable-ecl: Enable the external changelog
@@ -1259,7 +1259,7 @@ page_id: pingds:config-guide:collective-attrs
 canonical_url: https://docs.pingidentity.com/pingds/8.1/config-guide/collective-attrs.html
 llms_txt: https://docs.pingidentity.com/pingds/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: 2025-10-22T14:42:39Z
+revdate: 2026-06-01T09:22:01Z
 keywords: ["Features", "LDAP", "Setup &amp; Configuration"]
 section_ids:
   example-collective-attrs-cos: Class of service
@@ -1829,7 +1829,7 @@ page_id: pingds:config-guide:preface
 canonical_url: https://docs.pingidentity.com/pingds/8.1/config-guide/preface.html
 llms_txt: https://docs.pingidentity.com/pingds/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: 2025-10-22T14:42:39Z
+revdate: 2026-06-01T09:22:01Z
 keywords: ["Features", "LDAP", "Setup &amp; Configuration"]
 page_aliases: ["index.adoc"]
 ---
@@ -1885,7 +1885,7 @@ page_id: pingds:config-guide:idx-config
 canonical_url: https://docs.pingidentity.com/pingds/8.1/config-guide/idx-config.html
 llms_txt: https://docs.pingidentity.com/pingds/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: 2026-01-02T15:53:44Z
+revdate: 2026-06-01T09:22:01Z
 keywords: ["Features", "LDAP", "Setup &amp; Configuration"]
 section_ids:
   configure-standard-index: Standard indexes
@@ -2847,7 +2847,7 @@ page_id: pingds:config-guide:import-export
 canonical_url: https://docs.pingidentity.com/pingds/8.1/config-guide/import-export.html
 llms_txt: https://docs.pingidentity.com/pingds/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: 2025-10-22T14:42:39Z
+revdate: 2026-06-01T09:22:01Z
 keywords: ["Backup &amp; Restore", "Features", "LDAP", "Setup &amp; Configuration", "Storage"]
 section_ids:
   create-database-backend: Create a backend
@@ -3460,7 +3460,7 @@ page_id: pingds:config-guide:idx-debug
 canonical_url: https://docs.pingidentity.com/pingds/8.1/config-guide/idx-debug.html
 llms_txt: https://docs.pingidentity.com/pingds/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: 2025-10-22T14:42:39Z
+revdate: 2026-06-01T09:22:01Z
 keywords: ["LDAP", "Troubleshooting"]
 section_ids:
   how_it_looks_to_the_application: How it looks to the application
@@ -3768,7 +3768,7 @@ page_id: pingds:config-guide:repl-stop
 canonical_url: https://docs.pingidentity.com/pingds/8.1/config-guide/repl-stop.html
 llms_txt: https://docs.pingidentity.com/pingds/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: 2025-10-22T14:42:39Z
+revdate: 2026-06-01T09:22:01Z
 keywords: ["LDAP", "Replication", "Troubleshooting"]
 section_ids:
   stop-repl-temporarily: Disable replication temporarily
@@ -3902,7 +3902,7 @@ page_id: pingds:config-guide:repl-disk-space
 canonical_url: https://docs.pingidentity.com/pingds/8.1/config-guide/repl-disk-space.html
 llms_txt: https://docs.pingidentity.com/pingds/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: 2025-10-22T14:42:39Z
+revdate: 2026-06-01T09:22:01Z
 keywords: ["Features", "LDAP", "Replication", "Setup &amp; Configuration", "Troubleshooting"]
 ---
 
@@ -3955,7 +3955,7 @@ page_id: pingds:config-guide:repl-fractional
 canonical_url: https://docs.pingidentity.com/pingds/8.1/config-guide/repl-fractional.html
 llms_txt: https://docs.pingidentity.com/pingds/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: 2025-10-22T14:42:39Z
+revdate: 2026-06-01T09:22:01Z
 keywords: ["Features", "LDAP", "Replication", "Setup &amp; Configuration"]
 ---
 
@@ -4024,7 +4024,7 @@ page_id: pingds:config-guide:groups
 canonical_url: https://docs.pingidentity.com/pingds/8.1/config-guide/groups.html
 llms_txt: https://docs.pingidentity.com/pingds/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: 2025-10-22T14:42:39Z
+revdate: 2026-06-01T09:22:01Z
 keywords: ["Features", "Groups", "LDAP", "Setup &amp; Configuration"]
 section_ids:
   dynamic-groups: Dynamic groups
@@ -4730,7 +4730,7 @@ page_id: pingds:config-guide:http-access
 canonical_url: https://docs.pingidentity.com/pingds/8.1/config-guide/http-access.html
 llms_txt: https://docs.pingidentity.com/pingds/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: 2025-10-22T14:42:39Z
+revdate: 2026-09-02T11:40:14Z
 keywords: ["Features", "REST API", "Setup &amp; Configuration"]
 section_ids:
   setup-http-connection-handler: Set the HTTP port
@@ -4912,6 +4912,18 @@ These HTTP authorization mechanisms are supported:
 
   By default, DS uses the exact match identity mapper with its default configuration to map the HTTP Basic username to an LDAP `uid`. DS searches all local public naming contexts to find the user's entry based in the `uid` value. Learn more in [Identity mappers](../ldap-guide/client-auth.html#client-auth-identity-mappers).
 
+* HTTP OAuth2 Token Introspection
+
+  Handle requests as an OAuth 2.0 resource server (RS), sending requests to an external [RFC 7662](https://www.rfc-editor.org/info/rfc7662)-compliant authorization server (AS) for access token resolution.
+
+  Before you begin, register DS as an RS client of the AS.
+
+  When a DS client application presents an OAuth 2.0 access token to access an HDAP resource, DS makes a token introspection request to the AS. If the access token is valid, DS extracts the user identity and OAuth 2.0 scopes. If the access token also has the required scopes, DS maps the user identity to a directory account.
+
+  DS should make access token introspection requests over HTTPS. If necessary, configure a [Trust Manager Provider](../configref/objects-trust-manager-provider.html) to trust the AS certificate. If the AS requires mutual authentication, configure a [Key Manager Provider](../configref/objects-key-manager-provider.html) to get the DS certificate.
+
+  Learn more in [HTTP OAuth2 Authorization Mechanism](../configref/objects-http-oauth2-authorization-mechanism.html).
+
 ## Use administrative APIs
 
 The APIs for configuring and monitoring DS servers are under the following endpoints:
@@ -4969,7 +4981,7 @@ page_id: pingds:config-guide:idx-types
 canonical_url: https://docs.pingidentity.com/pingds/8.1/config-guide/idx-types.html
 llms_txt: https://docs.pingidentity.com/pingds/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: 2025-10-22T14:42:39Z
+revdate: 2026-06-01T09:22:01Z
 keywords: ["Features", "LDAP", "Setup &amp; Configuration"]
 section_ids:
   indexes-presence: Presence index
@@ -5311,7 +5323,7 @@ page_id: pingds:config-guide:indexing
 canonical_url: https://docs.pingidentity.com/pingds/8.1/config-guide/indexing.html
 llms_txt: https://docs.pingidentity.com/pingds/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: 2025-10-22T14:42:39Z
+revdate: 2026-06-01T09:22:01Z
 keywords: ["Features", "LDAP"]
 ---
 

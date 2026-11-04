@@ -1,9 +1,12 @@
 ---
 title: API Test - Get an Entry
-description: The GET /directory/v1/{{dn}} operation returns a specific directory record and its associated attributes. The distinguished name \{{dn}} of the entry is specified in the request URL.
+description: Shows how to use the PingDirectory REST API GET operation to retrieve a directory entry and its attributes by distinguished name
 component: pingdirectory
 page_id: pingdirectory:directory:getting-started/api-test-get-an-entry
 canonical_url: https://developer.pingidentity.com/pingdirectory/directory/getting-started/api-test-get-an-entry.html
+llms_txt: https://developer.pingidentity.com/pingdirectory/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-01-02
 section_ids:
   headers: Headers
   example-request: Example Request
@@ -279,10 +282,13 @@ task.resume()
 
 ---
 title: Assertion request control
-description: The standard assertion request control may be included in an add, compare, delete, modify, modify DN, or search request to indicate that the operation should only be processed if the target entry matches a given filter. The control has an OID of 1.3.6.1.1.12, and it takes a value. The following fields may be present in the value-json representation of the value:
+description: Add the assertion request control to a Directory REST API request to process the operation only if the target entry matches a given filter
 component: pingdirectory
 page_id: pingdirectory:directory:controls/assertion-request-control
 canonical_url: https://developer.pingidentity.com/pingdirectory/directory/controls/assertion-request-control.html
+llms_txt: https://developer.pingidentity.com/pingdirectory/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-11
 ---
 
 # Assertion request control
@@ -306,10 +312,13 @@ The following sample shows the JSON encoding for the control:
 
 ---
 title: Assured replication request control
-description: This control may be included in an add, delete, modify, or modify DN request to indicate that the server should delay the response for that operation until it has satisfied certain replication requirements. The control has an OID of 1.3.6.1.4.1.30221.2.5.28, and it takes a value. The following fields may be present in the value-json representation of the value:
+description: Add the assured replication request control to a Directory REST API request to delay the response until replication requirements are satisfied
 component: pingdirectory
 page_id: pingdirectory:directory:controls/assured-replication-request-control
 canonical_url: https://developer.pingidentity.com/pingdirectory/directory/controls/assured-replication-request-control.html
+llms_txt: https://developer.pingidentity.com/pingdirectory/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-11
 ---
 
 # Assured replication request control
@@ -345,10 +354,13 @@ The following sample shows the JSON encoding for the control:
 
 ---
 title: Assured replication response control
-description: This control may be used to convey the results of processing for an assured replication request control. The control has an OID of 1.3.6.1.4.1.30221.2.5.29, and it takes a value. The following fields may be present in the value-json representation of the value:
+description: Read the assured replication response control in a Directory REST API response to see whether local and remote assurance requirements were satisfied
 component: pingdirectory
 page_id: pingdirectory:directory:controls/assured-replication-response-control
 canonical_url: https://developer.pingidentity.com/pingdirectory/directory/controls/assured-replication-response-control.html
+llms_txt: https://developer.pingidentity.com/pingdirectory/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-11
 ---
 
 # Assured replication response control
@@ -419,10 +431,13 @@ The following represents an example JSON encoding for the control:
 
 ---
 title: Authenticate
-description: The POST /authenticate endpoint allows users to generate an access token by providing combinations of valid credentials depending on the authentication type that they specify in the HTTP request body. For more information, refer to Supported credential types.
+description: Documents the PingDirectory REST API POST /authenticate operation for authenticating a user with credentials and returning an access token
 component: pingdirectory
 page_id: pingdirectory:directory:authentication/authenticate
 canonical_url: https://developer.pingidentity.com/pingdirectory/directory/authentication/authenticate.html
+llms_txt: https://developer.pingidentity.com/pingdirectory/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-01-02
 section_ids:
   headers: Headers
   body: Body
@@ -438,7 +453,7 @@ section_ids:
 POST {{apiPath}}/directory/v1/authenticate
 ```
 
-The `POST /authenticate` endpoint allows users to generate an access token by providing combinations of valid credentials depending on the authentication type that they specify in the HTTP request body. For more information, refer to [Supported credential types](#supported-credential-types).
+The `POST /authenticate` endpoint allows users to generate an access token by providing combinations of valid credentials depending on the authentication type that they specify in the HTTP request body. For more information, refer to [Supported credential types](index.html#supported-credential-types).
 
 The request body may include the following fields:
 
@@ -857,10 +872,13 @@ task.resume()
 
 ---
 title: Authentication
-description: The PingDirectory REST API supports a top-level authenticate endpoint used to authenticate users.
+description: Documents the PingDirectory REST API authenticate endpoint, which supports password, TOTP, delivered OTP, and YubiKey OTP credential types to obtain an access token
 component: pingdirectory
-page_id: pingdirectory:directory:authentication
-canonical_url: https://developer.pingidentity.com/pingdirectory/directory/authentication.html
+page_id: pingdirectory:directory:authentication/index
+canonical_url: https://developer.pingidentity.com/pingdirectory/directory/authentication/index.html
+llms_txt: https://developer.pingidentity.com/pingdirectory/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-11
 section_ids:
   supported-credential-types: Supported credential types
 ---
@@ -891,7 +909,7 @@ In an `authenticate` request, the `credentials` element must be a JSON object wi
 
 * `passwordPlusTOTP`
 
-  The `passwordPlusTOTP` authentication type identifies a user with either a username or a DN and uses both a static password and a time-based one-time password (TOTP) as the credentials. For TOTP shared secret management, refer to [Generate TOTP shared secret](extended-operations/generate-totp-shared-secret/generate-totp-shared-secret.html) and [Revoke TOTP shared secret](extended-operations/revoke-totp-shared-secret/revoke-totp-shared-secret.html). The following additional fields are allowed in the `credentials` object:
+  The `passwordPlusTOTP` authentication type identifies a user with either a username or a DN and uses both a static password and a time-based one-time password (TOTP) as the credentials. For TOTP shared secret management, refer to [Generate TOTP shared secret](../extended-operations/generate-totp-shared-secret/generate-totp-shared-secret.html) and [Revoke TOTP shared secret](../extended-operations/revoke-totp-shared-secret/revoke-totp-shared-secret.html). The following additional fields are allowed in the `credentials` object:
 
   * `dn` — An optional string field whose value is the full DN of the user that is attempting to authenticate. Exactly one of the `dn` and `username` fields must be present.
 
@@ -903,7 +921,7 @@ In an `authenticate` request, the `credentials` element must be a JSON object wi
 
 * `passwordPlusDeliveredOTP`
 
-  The `passwordPlusDeliveredOTP` authentication type identifies a user with either a username or a DN and uses both a static password and a one-time password that has been delivered to the user through a method like email or SMS. The one-time password will be valid for a limited period of time, and it will only be valid for a single authentication attempt. This authentication type uses the [deliver one-time password extended operation](extended-operations/deliver-one-time-password/deliver-one-time-password.html).
+  The `passwordPlusDeliveredOTP` authentication type identifies a user with either a username or a DN and uses both a static password and a one-time password that has been delivered to the user through a method like email or SMS. The one-time password will be valid for a limited period of time, and it will only be valid for a single authentication attempt. This authentication type uses the [deliver one-time password extended operation](../extended-operations/deliver-one-time-password/deliver-one-time-password.html).
 
   Once the deliver one-time password extended request has been used and the one-time password has been generated and delivered to the user, the `authenticate` endpoint can be used to authenticate with that one-time password. The following additional fields are allowed in the `credentials` object:
 
@@ -915,7 +933,7 @@ In an `authenticate` request, the `credentials` element must be a JSON object wi
 
 * `passwordPlusYubiKeyOTP`
 
-  The `passwordPlusYubiKeyOTP` authentication type identifies a user with either a username or a DN and uses both a static password and one-time password generated by a YubiKey device as the credentials. For information on YubiKey device management, refer to [Register YubiKey OTP device](extended-operations/register-yubikey-otp-device/register-yubikey-otp-device.html) and [Deregister YubiKey OTP device](extended-operations/deregister-yubikey-otp-device/deregister-yubikey-otp-device.html). The following additional fields are allowed in the `credentials` object:
+  The `passwordPlusYubiKeyOTP` authentication type identifies a user with either a username or a DN and uses both a static password and one-time password generated by a YubiKey device as the credentials. For information on YubiKey device management, refer to [Register YubiKey OTP device](../extended-operations/register-yubikey-otp-device/register-yubikey-otp-device.html) and [Deregister YubiKey OTP device](../extended-operations/deregister-yubikey-otp-device/deregister-yubikey-otp-device.html). The following additional fields are allowed in the `credentials` object:
 
   * `dn` — An optional string field whose value is the full DN of the user that is attempting to authenticate. Exactly one of the `dn` and `username` fields must be present.
 
@@ -929,10 +947,13 @@ In an `authenticate` request, the `credentials` element must be a JSON object wi
 
 ---
 title: Change other Attributes (CN, UID, SN)
-description: You can also modify other attributes in addition to the parent DN in this request.
+description: Update the cn, uid, and sn attributes on a PingDirectory Server entry along with the parent DN in a single Directory REST API request
 component: pingdirectory
 page_id: pingdirectory:directory:directory-entry-apis/change-other-attributes-cn-uid-sn
 canonical_url: https://developer.pingidentity.com/pingdirectory/directory/directory-entry-apis/change-other-attributes-cn-uid-sn.html
+llms_txt: https://developer.pingidentity.com/pingdirectory/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-01-02
 section_ids:
   headers: Headers
   body: Body
@@ -1344,10 +1365,13 @@ task.resume()
 
 ---
 title: Change the Naming Attribute
-description: It is possible to change the attribute that is used as the naming attribute. In this case, both attribute options must be defined in the entry.
+description: Change the naming attribute used for a PingDirectory Server entry when multiple naming attribute options are defined in the entry
 component: pingdirectory
 page_id: pingdirectory:directory:directory-entry-apis/change-the-naming-attribute
 canonical_url: https://developer.pingidentity.com/pingdirectory/directory/directory-entry-apis/change-the-naming-attribute.html
+llms_txt: https://developer.pingidentity.com/pingdirectory/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-01-02
 section_ids:
   headers: Headers
   body: Body
@@ -1763,10 +1787,13 @@ task.resume()
 
 ---
 title: Change the Parent DN
-description: You can also change the parent DN, in addition to or independent of the RDN, in order to move the entry. The new parent DN must point to an existing entry and the naming attribute must still be provided, even if the RDN does not change.
+description: Move a PingDirectory Server entry to a new parent DN using the Directory REST API, with or without also changing the RDN
 component: pingdirectory
 page_id: pingdirectory:directory:directory-entry-apis/change-the-parent-dn
 canonical_url: https://developer.pingidentity.com/pingdirectory/directory/directory-entry-apis/change-the-parent-dn.html
+llms_txt: https://developer.pingidentity.com/pingdirectory/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-01-02
 section_ids:
   headers: Headers
   body: Body
@@ -2124,32 +2151,38 @@ task.resume()
 
 ---
 title: Changelog
-description: The following changes have been made to the PingDirectory REST API.
+description: Lists changes and new features added to the PingDirectory REST API over time, including authentication and extended operation support
 component: pingdirectory
 page_id: pingdirectory:directory:changelog
 canonical_url: https://developer.pingidentity.com/pingdirectory/directory/changelog.html
+llms_txt: https://developer.pingidentity.com/pingdirectory/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-11
 ---
 
 # Changelog
 
 The following changes have been made to the PingDirectory REST API.
 
-| Release Date | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| 12/13/2024   | The Directory REST API supports using OAuth scopes for ACI rules. Learn more in [Getting started](getting-started.html).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| 12/14/2023   | The Directory REST API supports [Authentication](authentication.html) in PingDirectory version 10 or higher. The following LDAP extended operations have been adopted to support the [Authenticate endpoint](authentication/authenticate.html): [Deliver one-time password](extended-operations/deliver-one-time-password/deliver-one-time-password.html), [Deregister YubiKey OTP device](extended-operations/deregister-yubikey-otp-device/deregister-yubikey-otp-device.html), [Generate TOTP shared secret](extended-operations/generate-totp-shared-secret/generate-totp-shared-secret.html), [Register YubiKey OTP device](extended-operations/register-yubikey-otp-device/register-yubikey-otp-device.html), [Revoke TOTP shared secret](extended-operations/revoke-totp-shared-secret/revoke-totp-shared-secret.html). |
-| 6/6/2023     | The Directory REST API now supports implementations of the LDAP [get password quality requirements](extended-operations/get-password-quality-requirements/get-password-quality-requirements.html) and [generate password](extended-operations/generate-password/generate-password.html) extended operations.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
-| 5/22/2023    | The LDAP [modify password](extended-operations/password-modify/password-modify.html) extended operation is now enabled through the Directory REST API.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| 6/1/2022     | All PingDirectory REST API documentation converted to Markdown and moved from Postman.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| Release Date | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| 12/13/2024   | The Directory REST API supports using OAuth scopes for ACI rules. Learn more in [Getting started](getting-started/index.html).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| 12/14/2023   | The Directory REST API supports [Authentication](authentication/index.html) in PingDirectory version 10 or higher. The following LDAP extended operations have been adopted to support the [Authenticate endpoint](authentication/authenticate.html): [Deliver one-time password](extended-operations/deliver-one-time-password/deliver-one-time-password.html), [Deregister YubiKey OTP device](extended-operations/deregister-yubikey-otp-device/deregister-yubikey-otp-device.html), [Generate TOTP shared secret](extended-operations/generate-totp-shared-secret/generate-totp-shared-secret.html), [Register YubiKey OTP device](extended-operations/register-yubikey-otp-device/register-yubikey-otp-device.html), [Revoke TOTP shared secret](extended-operations/revoke-totp-shared-secret/revoke-totp-shared-secret.html). |
+| 6/6/2023     | The Directory REST API now supports implementations of the LDAP [get password quality requirements](extended-operations/get-password-quality-requirements/get-password-quality-requirements.html) and [generate password](extended-operations/generate-password/generate-password.html) extended operations.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| 5/22/2023    | The LDAP [modify password](extended-operations/password-modify/password-modify.html) extended operation is now enabled through the Directory REST API.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| 6/1/2022     | All PingDirectory REST API documentation converted to Markdown and moved from Postman.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 
 ---
 
 ---
 title: Controls
-description: The requests for creating, updating, deleting, and searching entries support the _controls property, which is a JSON field added to the requests and responses. The property specifies an array of JSON formatted controls that provide additional content in LDAP requests and responses.
+description: Add LDAP controls to Directory REST API requests and responses using the _controls property, including OID, criticality, and value fields
 component: pingdirectory
-page_id: pingdirectory:directory:controls
-canonical_url: https://developer.pingidentity.com/pingdirectory/directory/controls.html
+page_id: pingdirectory:directory:controls/index
+canonical_url: https://developer.pingidentity.com/pingdirectory/directory/controls/index.html
+llms_txt: https://developer.pingidentity.com/pingdirectory/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-11
 ---
 
 # Controls
@@ -2168,7 +2201,7 @@ LDAP controls consist of these attributes:
 
 * `value-json`: An optional property that provides additional information for use with the control. The format for the value varies from one type of control to another. Some types of controls do not require a value because the mere presence of a control with a given OID is sufficient to achieve the desired purpose (for example, the manage DSA IT request control may be used to indicate that the server should treat smart referral entries as regular entries, and no additional information is needed by that control).
 
-For examples of the `_controls` property in requests, refer to [Create Entry with Controls](directory-entry-apis/create-entry-with-controls.html) and [Search Using POST with Controls](subtree-apis/search-using-post-with-controls.html).
+For examples of the `_controls` property in requests, refer to [Create Entry with Controls](../directory-entry-apis/create-entry-with-controls.html) and [Search Using POST with Controls](../subtree-apis/search-using-post-with-controls.html).
 
 |   |                                                                            |
 | - | -------------------------------------------------------------------------- |
@@ -2178,10 +2211,13 @@ For examples of the `_controls` property in requests, refer to [Create Entry wit
 
 ---
 title: Conventions
-description: To make a call to the Directory REST API, you can use basic authentication (username/password) or an OAuth 2.0 access token for API authentication. The access token, shown here as accessToken, is accepted per RFC 6750 through the Authorization HTTP request header. For more information about acquiring a bearer access token for your organization, refer to Getting started.
+description: Describes conventions for the PingDirectory REST API, including HTTP methods, link expansion, response structure, filtering, error formats, and attribute tagging rules
 component: pingdirectory
 page_id: pingdirectory:directory:conventions
 canonical_url: https://developer.pingidentity.com/pingdirectory/directory/conventions.html
+llms_txt: https://developer.pingidentity.com/pingdirectory/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-11
 section_ids:
   directory-rest-api-requests: Directory REST API requests
   authorization: Authorization
@@ -2214,7 +2250,7 @@ section_ids:
 
 ### Authorization
 
-To make a call to the Directory REST API, you can use basic authentication (username/password) or an OAuth 2.0 access token for API authentication. The access token, shown here as `accessToken`, is accepted per [RFC 6750](https://datatracker.ietf.org/doc/html/rfc6750) through the Authorization HTTP request header. For more information about acquiring a bearer access token for your organization, refer to [Getting started](getting-started.html).
+To make a call to the Directory REST API, you can use basic authentication (username/password) or an OAuth 2.0 access token for API authentication. The access token, shown here as `accessToken`, is accepted per [RFC 6750](https://datatracker.ietf.org/doc/html/rfc6750) through the Authorization HTTP request header. For more information about acquiring a bearer access token for your organization, refer to [Getting started](getting-started/index.html).
 
 ### HTTP methods
 
@@ -2460,8 +2496,8 @@ Requests that are known to return a large number of items can be filtered using 
 
 | Operator | Description              | Behavior                                                                                                                                                                                                                                                                                                                                    |
 | -------- | ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| eq       | equal                    | The attribute and operator values are not identical.                                                                                                                                                                                                                                                                                        |
-| ne       | not equal                | The attribute and operator values must be identical for a match.                                                                                                                                                                                                                                                                            |
+| eq       | equal                    | The attribute and operator values must be identical for a match.                                                                                                                                                                                                                                                                            |
+| ne       | not equal                | The attribute and operator values are not identical.                                                                                                                                                                                                                                                                                        |
 | co       | contains                 | The entire operator value must be a substring of the attribute value for a match.                                                                                                                                                                                                                                                           |
 | sw       | starts with              | The entire operator value must be a substring of the attribute value, starting at the beginning of the attribute value. This criterion is satisfied if the two strings are identical.                                                                                                                                                       |
 | ew       | ends with                | The entire operator value must be a substring of the attribute value, matching at the end of the attribute value. This criterion is satisfied if the two strings are identical.                                                                                                                                                             |
@@ -2589,10 +2625,13 @@ For `PATCH` "add" and "remove", only attributes with the exact name and tagging 
 
 ---
 title: Create Entry
-description: The POST /directory/v1 operation adds a new entry to the directory. The request body must contain all of the required attributes as defined in the schema. If there are no required attributes defined in the schema, you can submit a valid create request with only the _dn attribute in the request body.
+description: Add a new entry to PingDirectory Server using the Directory REST API POST /directory/v1 operation
 component: pingdirectory
 page_id: pingdirectory:directory:directory-entry-apis/create-entry
 canonical_url: https://developer.pingidentity.com/pingdirectory/directory/directory-entry-apis/create-entry.html
+llms_txt: https://developer.pingidentity.com/pingdirectory/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-01-02
 section_ids:
   headers: Headers
   body: Body
@@ -3026,10 +3065,13 @@ task.resume()
 
 ---
 title: Create Entry and entryUUID
-description: You can create a new entry using the parent DN. The response shows the entry data, including the generated entryUUID attribute value associated with the entry resource. The entryUUID can be used to reference the entry, keeping confidential information from appearing in the DN.
+description: Create a PingDirectory Server entry under a parent DN and retrieve its generated entryUUID attribute value in the response
 component: pingdirectory
 page_id: pingdirectory:directory:directory-entry-apis/create-entry-and-entryUUID
 canonical_url: https://developer.pingidentity.com/pingdirectory/directory/directory-entry-apis/create-entry-and-entryUUID.html
+llms_txt: https://developer.pingidentity.com/pingdirectory/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-01-02
 section_ids:
   headers: Headers
   body: Body
@@ -3488,10 +3530,13 @@ task.resume()
 
 ---
 title: Create Entry with Controls
-description: This POST /directory/v1 operation adds a _controls property to the requests and responses for these APIs. The property is an array of JSON formatted controls that are used to include additional content in LDAP requests and responses. For more information about supported controls, refer to Controls.
+description: Create a PingDirectory Server entry using the Directory REST API POST operation with LDAP controls included in the request and response
 component: pingdirectory
 page_id: pingdirectory:directory:directory-entry-apis/create-entry-with-controls
 canonical_url: https://developer.pingidentity.com/pingdirectory/directory/directory-entry-apis/create-entry-with-controls.html
+llms_txt: https://developer.pingidentity.com/pingdirectory/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-01-02
 section_ids:
   headers: Headers
   body: Body
@@ -3507,7 +3552,7 @@ section_ids:
 POST {{apiPath}}/directory/v1
 ```
 
-This `POST /directory/v1` operation adds a `_controls` property to the requests and responses for these APIs. The property is an array of JSON formatted controls that are used to include additional content in LDAP requests and responses. For more information about supported controls, refer to [Controls](#controls).
+This `POST /directory/v1` operation adds a `_controls` property to the requests and responses for these APIs. The property is an array of JSON formatted controls that are used to include additional content in LDAP requests and responses. For more information about supported controls, refer to [Controls](../controls/index.html).
 
 The sample shows a create request that includes two controls, a generate password request control and an intermediate client request control.
 
@@ -3965,10 +4010,13 @@ task.resume()
 
 ---
 title: Delete an Entry
-description: The following sample shows the DELETE /directory/v1/{{dn}} operation to delete the entry specified by its distinguished name from the directory.
+description: Delete a PingDirectory Server entry identified by its distinguished name using the Directory REST API DELETE operation
 component: pingdirectory
 page_id: pingdirectory:directory:directory-entry-apis/delete-an-entry
 canonical_url: https://developer.pingidentity.com/pingdirectory/directory/directory-entry-apis/delete-an-entry.html
+llms_txt: https://developer.pingidentity.com/pingdirectory/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-01-02
 section_ids:
   headers: Headers
   example-request: Example Request
@@ -4211,10 +4259,13 @@ task.resume()
 
 ---
 title: Delete an Entry with Controls
-description: This DELETE /directory/v1/{{dn}} operation adds a _controls property to the requests and responses for these APIs. The property is an array of JSON formatted controls that are used to include additional content in LDAP requests and responses. For more information about supported controls, refer to Controls.
+description: Delete a PingDirectory Server entry using the Directory REST API DELETE operation with LDAP controls included in the request and response
 component: pingdirectory
 page_id: pingdirectory:directory:directory-entry-apis/delete-an-entry-with-controls
 canonical_url: https://developer.pingidentity.com/pingdirectory/directory/directory-entry-apis/delete-an-entry-with-controls.html
+llms_txt: https://developer.pingidentity.com/pingdirectory/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-01-02
 section_ids:
   headers: Headers
   body: Body
@@ -4230,7 +4281,7 @@ section_ids:
 DELETE {{apiPath}}/directory/v1/{{dn}}
 ```
 
-This `DELETE /directory/v1/{{dn}}` operation adds a `_controls` property to the requests and responses for these APIs. The property is an array of JSON formatted controls that are used to include additional content in LDAP requests and responses. For more information about supported controls, refer to [Controls](#controls).
+This `DELETE /directory/v1/{{dn}}` operation adds a `_controls` property to the requests and responses for these APIs. The property is an array of JSON formatted controls that are used to include additional content in LDAP requests and responses. For more information about supported controls, refer to [Controls](../controls/index.html).
 
 When successful, the response for a DELETE with controls returns a `200` status message.
 
@@ -4666,10 +4717,13 @@ task.resume()
 
 ---
 title: Deliver one time password
-description: The deliver one-time password (OTP) extended operation uses the POST /directory/v1/deliverOneTimePassword endpoint to generate an OTP and deliver it to the user out of band.
+description: Generate a one-time password and deliver it to a user out of band using the PingDirectory Directory REST API
 component: pingdirectory
 page_id: pingdirectory:directory:extended-operations/deliver-one-time-password/deliver-one-time-password
 canonical_url: https://developer.pingidentity.com/pingdirectory/directory/extended-operations/deliver-one-time-password/deliver-one-time-password.html
+llms_txt: https://developer.pingidentity.com/pingdirectory/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-01-02
 section_ids:
   headers: Headers
   body: Body
@@ -5021,8 +5075,11 @@ task.resume()
 title: Deliver One Time Password
 description: The deliver one-time password extended operation is used to indicate that the server should generate a one-time password for a user, store it in the user's entry, and deliver it to the user through a method like email or SMS. This operation is heavily based on the DeliverOneTimePasswordExtendedRequest class in the LDAP SDK.
 component: pingdirectory
-page_id: pingdirectory:directory:extended-operations/deliver-one-time-password
-canonical_url: https://developer.pingidentity.com/pingdirectory/directory/extended-operations/deliver-one-time-password.html
+page_id: pingdirectory:directory:extended-operations/deliver-one-time-password/index
+canonical_url: https://developer.pingidentity.com/pingdirectory/directory/extended-operations/deliver-one-time-password/index.html
+llms_txt: https://developer.pingidentity.com/pingdirectory/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-01-02
 ---
 
 # Deliver One Time Password
@@ -5081,10 +5138,13 @@ The response body is created from the [deliver one-time password extended result
 
 ---
 title: Deregister YubiKey OTP device
-description: The deregister YubiKey OTP device extended operation uses the POST /directory/v1/{{dn}}/deregisterYubiKeyOTPDevice endpoint to revoke a YubiKey device for a particular user.
+description: Revoke a registered YubiKey OTP device for a user using the PingDirectory Directory REST API
 component: pingdirectory
 page_id: pingdirectory:directory:extended-operations/deregister-yubikey-otp-device/deregister-yubikey-otp-device
 canonical_url: https://developer.pingidentity.com/pingdirectory/directory/extended-operations/deregister-yubikey-otp-device/deregister-yubikey-otp-device.html
+llms_txt: https://developer.pingidentity.com/pingdirectory/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-01-02
 section_ids:
   headers: Headers
   example-request: Example Request

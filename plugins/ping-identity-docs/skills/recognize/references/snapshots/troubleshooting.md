@@ -1,11 +1,12 @@
 ---
 title: Troubleshooting guide
-description: This document contains a list of errors that can occur when running PingOne Recognize on-premises and approaches for resolving each one.
+description: Troubleshoot PingOne Recognize on-premise errors for backend services, mobile SDK error codes, alerts, and cluster scaling.
 component: recognize
 page_id: recognize:troubleshooting:troubleshooting
 canonical_url: https://docs.pingidentity.com/recognize/troubleshooting/troubleshooting.html
 llms_txt: https://docs.pingidentity.com/recognize/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: July 23, 2026
 section_ids:
   core-backend-services: Core (backend services)
   core-daemon: Core daemon
@@ -21,7 +22,7 @@ section_ids:
 
 # Troubleshooting guide
 
-This document contains a list of errors that can occur when running PingOne Recognize on-premises and approaches for resolving each one.
+This document contains a list of errors that can occur when running PingOne Recognize on-premise and approaches for resolving each one.
 
 It includes sections for backend services, mobile SDKs, alerts, and information on scaling the production cluster.
 
@@ -119,7 +120,7 @@ All SDK errors below should be handled within the application and never shown di
 
 ## Alerts
 
-PingOne Recognize recommends the following alerts to monitor an on-premises instance:
+PingOne Recognize recommends the following alerts to monitor an on-premise instance:
 
 * `{{service.name}} Production alert`: Trigger when the error log count over a specific period exceeds a configurable threshold. Example: more than 20 error logs over 5 minutes.
 

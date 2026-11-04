@@ -122,7 +122,7 @@ To allow PingFederate to act as an identity provider and manage users in Zendesk
 
       | Attribute Contract | Subject Name Format                                                      |
       | ------------------ | ------------------------------------------------------------------------ |
-      | **SAML\_SUBJECT**  | `[.codeph]`urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified\`\`\`\` |
+      | **SAML_SUBJECT**   | `[.codeph]`urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified\`\`\`\` |
 
    3. On the **Browser SSO > Protocol Settings > Signature Policy** tab, select the **Always Sign Assertion** check box.
 

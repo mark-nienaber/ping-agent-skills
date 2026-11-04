@@ -4,6 +4,8 @@ description: Advanced Identity Cloud provides REST APIs to help you manage ident
 component: pingoneaic-api
 page_id: pingoneaic-api::postman-collection
 canonical_url: https://developer.pingidentity.com/pingoneaic-api/postman-collection.html
+llms_txt: https://developer.pingidentity.com/pingoneaic-api/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 keywords: ["REST API", "Third-Party", "Integration"]
 section_ids:
   download-postman-and-import-the-advanced-identity-cloud-collection: Download Postman and import the Advanced Identity Cloud collection
@@ -384,7 +386,7 @@ Before using the Advanced Identity Cloud Postman collection, you should run the 
 
 When completed, Advanced Identity Cloud contains the following:
 
-* An alpha\_user identity, named `postmanDemoUser` by default, which demonstrates a number of user-related endpoints, such as identity profiles, and user self-service.
+* An alpha_user identity, named `postmanDemoUser` by default, which demonstrates a number of user-related endpoints, such as identity profiles, and user self-service.
 
 * Two OAuth 2.0 clients:
 

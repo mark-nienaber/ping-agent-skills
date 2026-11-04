@@ -1,9 +1,11 @@
 ---
 title: Authenticating with social media providers
-description: You can authenticate using social media providers as an external identity provider (IdP) using PingOne and PingFederate.
+description: Authenticate with social media providers as external IdPs using PingOne and PingFederate.
 component: solution-guides
 page_id: solution-guides:customer_use_cases:htg_authn_with_social_media
 canonical_url: https://docs.pingidentity.com/solution-guides/customer_use_cases/htg_authn_with_social_media.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 13, 2025
 page_aliases: ["customer_use_cases:htg_authn_with_social_media_p1.adoc", "customer_use_cases:htg_authn_with_social_media_pf.adoc"]
 section_ids:
@@ -65,11 +67,13 @@ Learn more in the following topics:
 
 ---
 title: Customer Use Cases
-description: Authenticating with social media providers
+description: Index of customer-facing use cases covering authentication, MFA, password management, SSO, and sign-on with Ping Identity products.
 component: solution-guides
 page_id: solution-guides:customer_use_cases:htg_customer
 canonical_url: https://docs.pingidentity.com/solution-guides/customer_use_cases/htg_customer.html
-revdate: January 19, 2024
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-31T00:00:00Z
 ---
 
 # Customer Use Cases
@@ -85,17 +89,17 @@ revdate: January 19, 2024
 | [Setting up and customizing sign-on windows in PingOne](htg_sign_on_window_setup_p1.html)              | Customize the sign-on window in PingOne to match your company's desired branding and themes.                                                                                                                                      |
 | [Setting up password recovery in PingOne](htg_password_recovery_setup_p1.html)                         | Learn how to set up password recovery for an application using PingOne.                                                                                                                                                           |
 | [Setting up password reset in PingOne](htg_password_reset_setup_p1.html)                               | Learn how to customize the user's sign-on experience by enabling self-service management, such as change password and password reset, in the PingFederate administrative console when using the company's HTML Form sign-on page. |
-| [Setting up PingDataSync between Active Directory and PingOne](htg_pds_setup_between_ad_and_p1.html)   | Learn how to configure PingDataSync for Microsoft Active Directory (AD) to PingOne in a Windows environment.                                                                                                                      |
-| [Setting up PingDataSync between PingDirectory and PingOne](htg_pds_setup_between_pd_and_p1.html)      | Learn how to set up PingDataSync between PingDirectory and PingOne using installation commands for Linux.                                                                                                                         |
 
 ---
 
 ---
 title: Customizing SSO user sign-on windows in PingFederate
-description: You can customize the default single sign-on (SSO) end user sign-on window for PingFederate. Learn more about customizable user-facing pages in IdP user-facing pages in the PingFederate documentation.
+description: Customize the SSO end-user sign-on window in PingFederate using default templates, custom CSS, and background images.
 component: solution-guides
 page_id: solution-guides:customer_use_cases:htg_customize_sso_user_sign_on_windows_pf
 canonical_url: https://docs.pingidentity.com/solution-guides/customer_use_cases/htg_customize_sso_user_sign_on_windows_pf.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 13, 2025
 page_aliases: ["customer_use_cases:htg_customize_sso_user_sign_on_windows_pf_default_template.adoc", "customer_use_cases:htg_customize_sso_user_sign_on_windows_pf_custom_css.adoc", "customer_use_cases:htg_customize_sso_user_sign_on_windows_pf_custom_background.adoc"]
 section_ids:
@@ -286,10 +290,12 @@ If you are running PingFederate in a cluster, you must make these changes on eac
 
 ---
 title: Enabling MFA for your application
-description: Enable an authentication policy that includes multi-factor authentication (MFA) for your applications in PingOne.
+description: Enable MFA for your application in PingOne by configuring an authentication policy that requires multi-factor authentication.
 component: solution-guides
 page_id: solution-guides:customer_use_cases:htg_enable_mfa_for_app
 canonical_url: https://docs.pingidentity.com/solution-guides/customer_use_cases/htg_enable_mfa_for_app.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 13, 2025
 section_ids:
   before-you-begin: Before you begin
@@ -350,10 +356,12 @@ Enable an authentication policy that includes multi-factor authentication (MFA) 
 
 ---
 title: Obtaining logging data from PingOne
-description: Sign on to PingOne and select your environment.
+description: Obtain audit logging data from PingOne by accessing activity reports and configuring audit parameters.
 component: solution-guides
 page_id: solution-guides:customer_use_cases:htg_obtain_logging_data_p1
 canonical_url: https://docs.pingidentity.com/solution-guides/customer_use_cases/htg_obtain_logging_data_p1.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 13, 2025
 page_aliases: ["customer_use_cases:htg_obtain_logging_data_p1_audit_params.adoc"]
 section_ids:
@@ -503,10 +511,12 @@ The following table describes the fields and options available in the **Audit Pa
 
 ---
 title: Resetting a password through a text or SMS message
-description: Configure an SMS provider in an HTML Form Adapter instance in PingFederate for users to receive a text message notification with a one-time passcode (OTP) to reset their password.
+description: Reset a password via SMS OTP using a PingFederate HTML Form Adapter instance with an SMS provider configured.
 component: solution-guides
 page_id: solution-guides:customer_use_cases:htg_password_reset_p1_method_message
 canonical_url: https://docs.pingidentity.com/solution-guides/customer_use_cases/htg_password_reset_p1_method_message.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 29, 2024
 section_ids:
   before-you-begin: Before you begin
@@ -564,10 +574,12 @@ Configure an SMS provider in an HTML Form Adapter instance in PingFederate for u
 
 ---
 title: Resetting a password through the HTML Form sign on page
-description: Change your password through the HTML Form sign-on page.
+description: Reset a password through the HTML Form sign-on page in PingFederate using the Trouble Signing On link.
 component: solution-guides
 page_id: solution-guides:customer_use_cases:htg_password_reset_p1_method_html_form
 canonical_url: https://docs.pingidentity.com/solution-guides/customer_use_cases/htg_password_reset_p1_method_html_form.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 29, 2024
 section_ids:
   steps: Steps
@@ -591,10 +603,12 @@ Change your password through the HTML Form sign-on page.
 
 ---
 title: Resetting a password using a link through email
-description: Reset a password using a one-time link sent to a user's email account.
+description: Reset a password using a one-time link sent by email, configured in a PingFederate HTML Form Adapter instance.
 component: solution-guides
 page_id: solution-guides:customer_use_cases:htg_password_reset_p1_method_email
 canonical_url: https://docs.pingidentity.com/solution-guides/customer_use_cases/htg_password_reset_p1_method_email.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 29, 2024
 section_ids:
   before-you-begin: Before you begin
@@ -704,10 +718,12 @@ For resetting a password using an email link, you must set up an SMTP mail serve
 
 ---
 title: Resetting a password using a one-time passcode through email
-description: Reset a password through a user's email account using a one-time passcode (OTP) .
+description: Reset a password using a one-time passcode (OTP) sent by email, configured in a PingFederate HTML Form Adapter instance.
 component: solution-guides
 page_id: solution-guides:customer_use_cases:htg_password_reset_p1_method_otp
 canonical_url: https://docs.pingidentity.com/solution-guides/customer_use_cases/htg_password_reset_p1_method_otp.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 29, 2024
 section_ids:
   before-you-begin: Before you begin
@@ -828,10 +844,12 @@ For resetting a password with a one-time passcode through email, you must setup 
 
 ---
 title: Setting up an agent in PingAccess
-description: Learn how to set up an agent integration for PingAccess applications.
+description: Set up an agent integration in PingAccess to enable application access control and policy enforcement.
 component: solution-guides
 page_id: solution-guides:customer_use_cases:htg_agent_setup_pa
 canonical_url: https://docs.pingidentity.com/solution-guides/customer_use_cases/htg_agent_setup_pa.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 14, 2025
 page_aliases: ["customer_use_cases:htg_agent_setup_pa_config_agent.adoc", "customer_use_cases:htg_agent_setup_pa_config_token_provider.adoc", "customer_use_cases:htg_agent_setup_pa_install_agent.adoc"]
 section_ids:
@@ -971,10 +989,12 @@ Learn how to set up an agent integration for PingAccess applications.
 
 ---
 title: Setting up an OIDC application in PingFederate
-description: Create a new OAuth or OpenID Connect (OIDC) application in PingFederate.
+description: Set up an OAuth or OIDC application in PingFederate including client configuration and token management.
 component: solution-guides
 page_id: solution-guides:customer_use_cases:htg_oidc_app_setup_pf
 canonical_url: https://docs.pingidentity.com/solution-guides/customer_use_cases/htg_oidc_app_setup_pf.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 13, 2025
 section_ids:
   before-you-begin: Before you begin
@@ -1104,7 +1124,7 @@ Do the following:
 
     1. In the list of available response types, select at least one option.
 
-       ![Screen capture the Restrict Response Types option with the checkbox for Restrict selected. After this checkbox is a list of options and checkboxes for response types to restrict. The options are code, code id\_token, code id\_token token, code token, id\_token, id\_token token, token.](_images/xtr1600204154232.png)
+       ![Screen capture the Restrict Response Types option with the checkbox for Restrict selected. After this checkbox is a list of options and checkboxes for response types to restrict. The options are code, code id_token, code id_token token, code token, id_token, id_token token, token.](_images/xtr1600204154232.png)
 
 15. In the **Default Access Token Manager** list, select the default access token manager (ATM) for this client.
 
@@ -1232,10 +1252,12 @@ Do the following:
 
 ---
 title: Setting up and customizing sign-on windows in PingOne
-description: Customize the sign-on window in PingOne to match your company's desired branding and themes.
+description: "Set up and customize the sign-on window in PingOne to match your company's branding, themes, and logo."
 component: solution-guides
 page_id: solution-guides:customer_use_cases:htg_sign_on_window_setup_p1
 canonical_url: https://docs.pingidentity.com/solution-guides/customer_use_cases/htg_sign_on_window_setup_p1.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 13, 2025
 section_ids:
   before-you-begin: Before you begin
@@ -1322,10 +1344,12 @@ The **Branding & Themes** window provides the ability to customize logos, colors
 
 ---
 title: Setting up password recovery in PingOne
-description: Learn how to set up password recovery for an application using PingOne.
+description: Set up password recovery in PingOne by configuring the Single_Factor policy in the administrative console.
 component: solution-guides
 page_id: solution-guides:customer_use_cases:htg_password_recovery_setup_p1
 canonical_url: https://docs.pingidentity.com/solution-guides/customer_use_cases/htg_password_recovery_setup_p1.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: February 16, 2022
 section_ids:
   about-this-task: About this task
@@ -1341,7 +1365,7 @@ Learn how to set up password recovery for an application using PingOne.
 
 ## About this task
 
-Set up account recovery by modifying an application's **Single\_Factor** policy in the PingOne administrative console or Unified Product Administrator.
+Set up account recovery by modifying an application's **Single_Factor** policy in the PingOne administrative console or Unified Product Administrator.
 
 ## Steps
 
@@ -1351,17 +1375,17 @@ Set up account recovery by modifying an application's **Single\_Factor** policy 
 
    ### Result:
 
-   The **Policies** page lists your default **Single\_Factor** and **Multi\_Factor** policies.
+   The **Policies** page lists your default **Single_Factor** and **Multi_Factor** policies.
 
    ![Screen capture of the Policies page with a list of all existing policies in your PingOne configuration.](_images/lta1626204946617.jpg)
 
-2. To modify the **Single\_Factor** policy, click the **Expand** icon and then click the **Pencil** ([icon: pencil, set=fa]) icon.
+2. To modify the **Single_Factor** policy, click the **Expand** icon and then click the **Pencil** ([icon: pencil, set=fa]) icon.
 
-   ![Screen capture of the expanded Single\_Factor authentication policy with a summary of its login, recovery and registration, required when, and presented identity providers configuration details.](_images/jmo1626205305899.jpg)
+   ![Screen capture of the expanded Single_Factor authentication policy with a summary of its login, recovery and registration, required when, and presented identity providers configuration details.](_images/jmo1626205305899.jpg)
 
 3. In the **Recovery & Registration** section, select the **Enable account recovery** checkbox. Click **Save**.
 
-   ![Screen capture of the edit page for the Single\_Factor policy. There are modifiable configurations for Login, Recovery & Registration, Requested When, and Presented Identity Providers. The Recovery & Registration section has checkboxes for Enable account recovery and Enable registration. The Enable account recovery checkbox is selected.](_images/xaq1626205429170.jpg)
+   ![Screen capture of the edit page for the Single_Factor policy. There are modifiable configurations for Login, Recovery & Registration, Requested When, and Presented Identity Providers. The Recovery & Registration section has checkboxes for Enable account recovery and Enable registration. The Enable account recovery checkbox is selected.](_images/xaq1626205429170.jpg)
 
 4. To view the connection policies of an application, go to **Connections > Applications**.
 
@@ -1377,28 +1401,30 @@ Set up account recovery by modifying an application's **Single\_Factor** policy 
 
    ![Screen capture of a expanded application. There are tabs for Profile, Configuration, Access, Policies, Attribute Mappings, and Roles. The Policies tab is selected.](_images/akb1626205809699.jpg)
 
-7. To add the **Single\_Factor** policy to **Applied Policies**, choose one of the following ways:
+7. To add the **Single_Factor** policy to **Applied Policies**, choose one of the following ways:
 
    ### Choose from:
 
-   * Drag the **Single\_Factor** policy from **All Policies** to **Applied Policies**.
+   * Drag the **Single_Factor** policy from **All Policies** to **Applied Policies**.
 
-   * Click the **[icon: plus, set=fa]**icon in the **Single\_Factor** policy.
+   * Click the **[icon: plus, set=fa]**icon in the **Single_Factor** policy.
 
-     ![Screen capture of the Policies tab with existing policies for All Policies and Applied Policies. The All Policies section has Multi\_Factor and Single\_Factor listed.](_images/xbb1626209941584.jpg)
+     ![Screen capture of the Policies tab with existing policies for All Policies and Applied Policies. The All Policies section has Multi_Factor and Single_Factor listed.](_images/xbb1626209941584.jpg)
 
 8. Click **Save**.
 
-   ![Screen capture of a dragged Single\_Factor policy from the All Policies section to the Applied Policies section. The Single\_Factor policy is highlighted waiting for the changes to be saved. There are buttons for Save and Discard Changes.](_images/zir1626209614329.jpg)
+   ![Screen capture of a dragged Single_Factor policy from the All Policies section to the Applied Policies section. The Single_Factor policy is highlighted waiting for the changes to be saved. There are buttons for Save and Discard Changes.](_images/zir1626209614329.jpg)
 
 ---
 
 ---
 title: Setting up password reset in PingOne
-description: Learn how to customize the user's sign-on experience by enabling self-service management, such as change password and password reset, in the PingFederate administrative console when using the company's HTML Form sign-on page.
+description: Set up self-service password reset in PingFederate and PingOne to enable users to change or reset passwords via the HTML Form sign-on page.
 component: solution-guides
 page_id: solution-guides:customer_use_cases:htg_password_reset_setup_p1
 canonical_url: https://docs.pingidentity.com/solution-guides/customer_use_cases/htg_password_reset_setup_p1.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 13, 2025
 page_aliases: ["customer_use_cases:htg_password_reset_p1_pf_ldaps.adoc", "customer_use_cases:htg_password_reset_p1_pf_html_form.adoc", "customer_use_cases:htg_password_reset_p1_methods.adoc"]
 section_ids:
@@ -1616,654 +1642,3 @@ You have successfully created an instance of the HTML Form Adapter with the self
 ## Resetting a password using various methods
 
 You can use several methods to configure password reset. Click the following tabs to see instructions for each method.
-
----
-
----
-title: Setting up PingDataSync between Active Directory and PingOne
-description: Learn how to configure PingDataSync for Microsoft Active Directory (AD) to PingOne in a Windows environment.
-component: solution-guides
-page_id: solution-guides:customer_use_cases:htg_pds_setup_between_ad_and_p1
-canonical_url: https://docs.pingidentity.com/solution-guides/customer_use_cases/htg_pds_setup_between_ad_and_p1.html
-revdate: July 25, 2025
-section_ids:
-  before-you-begin: Before you begin
-  about-this-task: About this task
-  steps: Steps
----
-
-# Setting up PingDataSync between Active Directory and PingOne
-
-Learn how to configure PingDataSync for Microsoft Active Directory (AD) to PingOne in a Windows environment.
-
-## Before you begin
-
-**Components**
-
-* PingOne
-
-* PingDataSync
-
-You must:
-
-* [Install PingDataSync](https://docs.pingidentity.com/pingdirectory/latest/installing_the_pingdirectory_suite_of_products/pd_sync_installing_pds.html).
-
-* Have the hostname for the AD instance.
-
-* Have the port for the AD instance.
-
-  With AD, this is 389 or 636. If you're not planning to work with passwords, you should keep everything on 389. Steps for working with SSL over port 636 are not a part of this guide.
-
-* Have the AD Admin ID (For example, cn=administrator, cn=users, dc=mydomain, dc=com).
-
-* Have your PingOne Environment ID, Client ID, and Client Secret from your designated PingOne Worker App.
-
-  |   |                                                                                                                                                                                                                                                                                                          |
-  | - | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-  |   | Use the Client ID and Client Secret from the PingOne Worker App that will manage the operation. Learn more about creating and maintaining Worker Apps in [Adding an application](https://docs.pingidentity.com/pingone/applications/p1_applications_add_applications.html) in the PingOne documentation. |
-
-## About this task
-
-Setting this configuration primarily uses the `dsconfig.bat` tool.
-
-|   |                                                                                                                                                                             |
-| - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | Although the steps for this configuration are shown in a Windows environment, you can configure this in Linux or Docker with the correct networking configuration in place. |
-
-This task uses the following naming conventions:
-
-* PingDataSync Server references: "server" + Application.
-
-  For example, `serverAD` or `` serverP1` ``.
-
-* PingDataSync objects: object name + source + "to" + destination.
-
-  For example, `mapADtoP1`, `pipeADtoP1`.
-
-## Steps
-
-1. To create an external server in PingDataSync, open a terminal window and run the following command.
-
-   |   |                                                                                        |
-   | - | -------------------------------------------------------------------------------------- |
-   |   | Make sure to replace the bracketed fields with the values for the administrative user. |
-
-   ```shell
-   C:\<Ping>\<PingDataSync>\bat\dsconfig.bat ^
-   create-external-server ^
-   --server-name serverAD ^
-   --type active-directory ^
-   --set server-host-name:<hostname or IP>  ^
-   --set server-port:389 ^
-   --set bind-dn:<your bind DN> ^
-   --set password:<password> ^
-   --set connection-security:none ^
-   --set key-manager-provider:null ^
-   --trustAll ^
-   --no-prompt
-   ```
-
-   This step defines the connection from PingDataSync to the AD server.
-
-   |   |                                                                                                                                                 |
-   | - | ----------------------------------------------------------------------------------------------------------------------------------------------- |
-   |   | The `--trustAll` and `--no-prompt` parameters bypass any potential certificate issues and suppress prompts or inputs from executing `dsconfig`. |
-
-2. To create the sync source, specify the starting point for the synchronization process with the following command.
-
-   ```shell
-   C:\<Ping>\<PingDataSync>\bat\dsconfig.bat ^
-   create-sync-source ^
-   --source-name sourceAD ^
-   --type active-directory ^
-   --set base-dn:<your base DN> ^
-   --set server:serverAD ^
-   --trustAll ^
-   --no-prompt
-   ```
-
-3. To create the sync destination, run the following command.
-
-   ```shell
-   C:\<Ping>\<PingDataSync>\bat\dsconfig.bat ^
-   create-sync-destination ^
-   --destination-name destinationP1 ^
-   --type ping-one-customer ^
-   --set api-url:https://api.pingone.com/v1 ^
-   --set auth-url:https://auth.pingone.com/<your environment ID>/as/token ^
-   --set environment-id:<your environment ID> ^
-   --set oauth-client-id:<your OAuth client ID> ^
-   --set oauth-client-secret:<your client secret> ^
-   --trustAll ^
-   --no-prompt
-   ```
-
-   |   |                                                                                                                                           |
-   | - | ----------------------------------------------------------------------------------------------------------------------------------------- |
-   |   | Because you're using PingOne as a destination, you don't need to create an external server reference. Everything is done through the API. |
-
-4. Create the attribute map:
-
-   1. Create the map object with the following command.
-
-      ```shell
-      C:\<Ping>\<PingDataSync>\bat\dsconfig.bat ^
-      create-attribute-map ^
-      --map-name mapADtoP1 ^
-      --trustAll ^
-      --no-prompt
-      ```
-
-      There are three types of mappings that you can make after you define a map:
-
-      * Direct
-
-        All the contents from the source attribute are mapped to the destination attribute with no changes, for example,`mail` to `email`.
-
-      * Constructed
-
-        The value of the destination attribute is constructed by various means with the simplest use case being a user defined string, for example, `resourceType` to `"user"`.
-
-      * JSON Attribute mapping
-
-        JSON mappings hold a JSON representation of a complex attribute. PingOne specifically uses JSON representation for concepts, such as addresses and name information. These attributes in PingOne are case-sensitive. For example, `Address.street` doesn't work, but `address.streetAddress` does.
-
-        |   |                                                                                                             |
-        | - | ----------------------------------------------------------------------------------------------------------- |
-        |   | The following mappings are suggestions for what works. Your installations might require different mappings. |
-
-   2. Create the direct attribute mappings.
-
-      | Mapping                             | Command                                                                                                                                                                                                                  |
-      | ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-      | `sAMAccountName` to `accountID`     | ```shell
-      C:\<Ping>\<PingDataSync>\bat\dsconfig.bat ^
-      create-attribute-mapping ^
-      --map-name mapADtoP1 ^
-      --mapping-name accountID ^
-      --type direct ^
-      --set from-attribute:samaccountname ^
-      --trustAll ^
-      --no-prompt
-      ```     |
-      | `mobile` to `mobilePhone`           | ```shell
-      C:\<Ping>\<PingDataSync>\bat\dsconfig.bat ^
-      create-attribute-mapping ^
-      --map-name mapADtoP1 ^
-      --mapping-name mobilePhone ^
-      --type direct ^
-      --set from-attribute:mobile ^
-      --trustAll ^
-      --no-prompt
-      ```           |
-      | `mail` to `email`                   | ```shell
-      C:\<Ping>\<PingDataSync>\bat\dsconfig.bat ^
-      create-attribute-mapping ^
-      --map-name mapADtoP1 ^
-      --mapping-name email ^
-      --type direct ^
-      --set from-attribute:mail ^
-      --trustAll ^
-      --no-prompt
-      ```                   |
-      | `telephoneNumber` to `primaryPhone` | ```shell
-      C:\<Ping>\<PingDataSync>\bat\dsconfig.bat ^
-      create-attribute-mapping ^
-      --map-name mapADtoP1 ^
-      --mapping-name primaryPhone ^
-      --type direct ^
-      --set from-attribute:telephoneNumber ^
-      --trustAll ^
-      --no-prompt
-      ``` |
-      | `title` to `title`                  | ```shell
-      C:\<Ping>\<PingDataSync>\bat\dsconfig.bat ^
-      create-attribute-mapping ^
-      --map-name mapADtoP1 ^
-      --mapping-name title ^
-      --type direct ^
-      --set from-attribute:title ^
-      --trustAll ^
-      --no-prompt
-      ```                  |
-      | `employeeNumber` to `externalID`    | ```shell
-      C:\<Ping>\<PingDataSync>\bat\dsconfig.bat ^
-      create-attribute-mapping ^
-      --map-name mapADtoP1 ^
-      --mapping-name externalID ^
-      --type direct ^
-      --set from-attribute:employeeNumber ^
-      --trustAll ^
-      --no-prompt
-      ```    |
-      | `sAMAccountName` to `username`      | ```shell
-      C:\<Ping>\<PingDataSync>\bat\dsconfig.bat ^
-      create-attribute-mapping ^
-      --map-name mapADtoP1 ^
-      --mapping-name username ^
-      --type direct ^
-      --set from-attribute:samaccountname ^
-      --trustAll ^
-      --no-prompt
-      ```      |
-
-   3. Create constructed attribute mappings.
-
-      | Mapping        | Command                                                                                                                                                                                                                          |
-      | -------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-      | `population`   | ```shell
-      C:\<Ping>\<PingDataSync>\bat\dsconfig.bat ^
-      create-attribute-mapping ^
-      --map-name mapADtoP1 ^
-      --mapping-name population ^
-      --type constructed ^
-      --set value-pattern:{{"P1People":"name"}} ^
-      --trustAll ^
-      --no-prompt
-      ``` |
-      | `resourceType` | ```shell
-      C:\<Ping>\<PingDataSync>\bat\dsconfig.bat ^
-      create-attribute-mapping ^
-      --map-name mapADtoP1 ^
-      --mapping-name resourceType ^
-      --type constructed ^
-      --set value-pattern:user ^
-      --trustAll ^
-      --no-prompt
-      ```                |
-
-   4. Create JSON attribute maps:
-
-      * To create the `name` attribute, run the following command.
-
-        ```shell
-        C:\<Ping>\<PingDataSync>\bat\dsconfig.bat ^
-        create-attribute-mapping ^
-        --map-namemapADtoP1 ^
-        --mapping-name name ^
-        --type json ^
-        --trustAll ^
-        --no-prompt
-        ```
-
-        |   |                                                                                                                               |
-        | - | ----------------------------------------------------------------------------------------------------------------------------- |
-        |   | The PingOne name attribute holds information about the identity's name — first name, last name, and formatted (display name). |
-
-      * To create the `address` attribute, run the following command.
-
-        ```shell
-        C:\<Ping>\<PingDataSync>\bat\dsconfig.bat ^
-        create-attribute-mapping ^
-        --map-name mapADtoP1 ^
-        --mapping-name address ^
-        --type json ^
-        --trustAll ^
-        --no-prompt
-        ```
-
-        |   |                                                                                                   |
-        | - | ------------------------------------------------------------------------------------------------- |
-        |   | The PingOne address attribute holds address information and maps to a number of different fields. |
-
-   5. Create JSON attribute mappings.
-
-      | Mapping                              | Command                                                                                                                                                                                                                                                      |
-      | ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-      | `sn` to `name.family`                | ```shell
-      C:\<Ping>\<PingDataSync>\bat\dsconfig.bat ^
-      create-json-attribute-mapping-field ^
-      --map-name mapADtoP1 ^
-      --mapping-name name ^
-      --field-name family ^
-      --set json-type:string ^
-      --set from-attribute:sn ^
-      --trustAll ^
-      --no-prompt
-      ```                |
-      | `givenName` to `name.given`          | ```shell
-      C:\<Ping>\<PingDataSync>\bat\dsconfig.bat ^
-      create-json-attribute-mapping-field ^
-      --map-name mapADtoP1 ^
-      --mapping-name name ^
-      --field-name given ^
-      --set json-type:string ^
-      --set from-attribute:givenName ^
-      --trustAll ^
-      --no-prompt
-      ```          |
-      | `cn` to `name.formatted`             | ```shell
-      C:\<Ping>\<PingDataSync>\bat\dsconfig.bat ^
-      create-json-attribute-mapping-field ^
-      --map-name mapADtoP1 ^
-      --mapping-name name ^
-      --field-name formatted ^
-      --set json-type:string ^
-      --set from-attribute:cn ^
-      --trustAll ^
-      --no-prompt
-      ```             |
-      | `l` to `address.locality`            | ```shell
-      C:\<Ping>\<PingDataSync>\bat\dsconfig.bat ^
-      create-json-attribute-mapping-field ^
-      --map-name mapADtoP1 ^
-      --mapping-name address ^
-      --field-name locality ^
-      --set json-type:string ^
-      --set from-attribute:l ^
-      --trustAll ^
-      --no-prompt
-      ```            |
-      | `postalCode` to `address.postalCode` | ```shell
-      C:\<Ping>\<PingDataSync>\bat\dsconfig.bat ^
-      create-json-attribute-mapping-field ^
-      --map-name mapADtoP1 ^
-      --mapping-name address ^
-      --field-name postalCode ^
-      --set json-type:string ^
-      --set from-attribute:postalCode ^
-      --trustAll ^
-      --no-prompt
-      ``` |
-      | `st` to `address.region`             | ```shell
-      C:\<Ping>\<PingDataSync>\bat\dsconfig.bat ^
-      create-json-attribute-mapping-field ^
-      --map-name mapADtoP1 ^
-      --mapping-name address ^
-      --field-name region ^
-      --set json-type:string ^
-      --set from-attribute:st ^
-      --trustAll ^
-      --no-prompt
-      ```             |
-      | `street` to `address.streetAddress`  | ```shell
-      C:\<Ping>\<PingDataSync>\bat\dsconfig.bat ^
-      create-json-attribute-mapping-field ^
-      --map-name mapADtoP1 ^
-      --mapping-name address ^
-      --field-name streetAddress ^
-      --set json-type:string ^
-      --set from-attribute:street ^
-      --trustAll ^
-      --no-prompt
-      ```  |
-      | `c` to `address.countryCode`         | ```shell
-      C:\<Ping>\<PingDataSync>\bat\dsconfig.bat ^
-      create-json-attribute-mapping-field ^
-      --map-name mapADtoP1 ^
-      --mapping-name address ^
-      --field-name countryCode ^
-      --set json-type:string ^
-      --set from-attribute:c ^
-      --trustAll ^
-      --no-prompt
-      ```         |
-
-5. Create the sync pipe with the following command.
-
-   ```shell
-   C:\<Ping>\<PingDataSync>\bat\dsconfig.bat ^
-   create-sync-pipe ^
-   --pipe-name pipeADtoP1 ^
-   --set started:true ^
-   --set sync-source:sourceAD ^
-   --set sync-destination:destinationP1 ^
-   --trustAll ^
-   --no-prompt
-   ```
-
-   Creating the sync pipe provides the object that is directly used by PingDataSync and continues to bring the PingDataSync objects together.
-
-6. Create the sync class with the following command.
-
-   ```shell
-   C:\<Ping>\<PingDataSync>\bat\dsconfig.bat ^
-   create-sync-class ^
-   --pipe-name pipeADtoP1 ^
-   --class-name classADtoP1 ^
-   --set attribute-map:mapADtoP1 ^
-   --set "include-filter:(objectClass=user)" ^
-   --set auto-mapped-source-attribute:-none- ^
-   --set destination-correlation-attributes:username ^
-   --set replace-all-attr-values:true ^
-   --set creates-as-modifies:true ^
-   --trustAll ^
-   --no-prompt
-   ```
-
-   The sync class brings the remaining objects together and is directly linked to the sync pipe.
-
-7. To test the PingDataSync connection between AD and PingOne, run the `resync -p pipeADtoP1` command.
-
-   |   |                                                                                                                   |
-   | - | ----------------------------------------------------------------------------------------------------------------- |
-   |   | If the sync encounters any errors, examine the `C:\<Ping>\<PingDataSync>\logs\tools\re-sync-failed-DNs.log` file. |
-
----
-
----
-title: Setting up PingDataSync between PingDirectory and PingOne
-description: Learn how to set up PingDataSync between PingDirectory and PingOne using installation commands for Linux.
-component: solution-guides
-page_id: solution-guides:customer_use_cases:htg_pds_setup_between_pd_and_p1
-canonical_url: https://docs.pingidentity.com/solution-guides/customer_use_cases/htg_pds_setup_between_pd_and_p1.html
-revdate: July 25, 2025
-section_ids:
-  before-you-begin: Before you begin
-  steps: Steps
----
-
-# Setting up PingDataSync between PingDirectory and PingOne
-
-Learn how to set up PingDataSync between PingDirectory and PingOne using installation commands for Linux.
-
-## Before you begin
-
-You must have:
-
-* PingDataSync
-
-* PingDirectory
-
-* PingOne
-
-You must:
-
-* [Install PingDataSync](https://docs.pingidentity.com/pingdirectory/latest/installing_the_pingdirectory_suite_of_products/pd_sync_installing_pds.html).
-
-* (Optional) Note the following values in a plain text file for easy copy and paste to the command line:
-
-  * Implementation suffix
-
-  * Host name for the PingDirectory instance
-
-  * PingDirectory port
-
-  * PingDirectory starting point
-
-  * PingDirectory filter
-
-  * PingDirectory Admin ID
-
-  * PingDirectory Admin password
-
-  * PingOne Population ID
-
-  * PingOne Environment ID
-
-  * WorkerApp Client ID
-
-  * WorkerApp Client Secret
-
-    |   |                                                                                                                                                                                                                                                                                                               |
-    | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-    |   | Use the Client ID and Client Secret from the PingOne Worker App that will be managing the operation. Learn more about creating and maintaining Worker Apps in [Adding an application](https://docs.pingidentity.com/pingone/applications/p1_applications_add_applications.html) in the PingOne documentation. |
-
-* (Optional) [Set up SSO access from the PingOne admin console](https://docs.pingidentity.com/pingone/getting_started_with_pingone/p1_set_up_sso_pd.html).
-
-  This allows administrative users to single sign-on (SSO) *(tooltip: \<div class="paragraph">
-  \<p>The process of authenticating an identity (signing on) at one website (usually with a user ID and password) and then accessing resources secured by other domains without reauthenticating.\</p>
-  \</div>)* to the PingData admin console from PingOne.
-
-## Steps
-
-1. To create an external server, run the following command:
-
-   ```
-   /opt/<PingDataSync>/bin/dsconfig create-external-server --server-name serverPD_PDtest --type ping-identity-ds --set server-host-name:localhost --set server-port:11389 --set bind-dn:<your bind DN>  --set password:<your password>  --set connection-security:none --set key-manager-provider:null --trustAll --no-prompt
-   ```
-
-   |   |                                                                                                        |
-   | - | ------------------------------------------------------------------------------------------------------ |
-   |   | The `--type` parameter is different if you're using Active Directory or another Directory Server type. |
-
-2. To create a sync source, run the following command:
-
-   ```
-   /opt/<PingDataSync>/bin/dsconfig create-sync-source --source-name sourcePD_PDtest --type ping-identity --set base-dn:ou=test,dc=p1,dc=lab --set server:serverPD_PDtest --trustAll --no-prompt
-   ```
-
-   |   |                                                                                        |
-   | - | -------------------------------------------------------------------------------------- |
-   |   | Make sure that your `base-dn` indicates where you want to start in the directory tree. |
-
-3. To create a sync destination, run the following command:
-
-   ```
-   /opt/<PingDataSync>/bin/dsconfig create-sync-destination --destination-name destinationPD-P1_PDtest --trustAll --no-prompt --type ping-one-customer --set api-url:https://api.pingone.com/v1 --set auth-url:https://auth.pingone.com/<your PingOne environment ID>/as/token --set environment-id:<your PingOne environment ID>  --set oauth-client-id:<your worker app client ID>  --set oauth-client-secret:<your worker app client secret>  --set default-population-id:<your PingOne population ID>
-   ```
-
-   |   |                                                                                                |
-   | - | ---------------------------------------------------------------------------------------------- |
-   |   | Setting the population ID here avoids having to configure it in the attribute mapping section. |
-
-4. To create an attribute map, run the following command:
-
-   ```
-   /opt/<PingDataSync>/bin/dsconfig create-attribute-map --map-name mapPDtoP1_PDtest --trustAll --no-prompt
-   ```
-
-   There are three types of mappings that you can make after you define a map:
-
-   * Direct
-
-     All the contents from the source attribute are mapped to the destination attribute with no changes, such as `mail` to `email`.
-
-   * Constructed
-
-     The value of the destination attribute is constructed by various means, with the simplest use case being a user defined string, such as `resourceType` to `"user"`.
-
-   * JSON Attribute mapping
-
-     JSON mappings hold a JSON representation of a complex attribute. PingOne specifically uses JSON representation for concepts, such as addresses and name information. These attributes in PingOne are case-sensitive. For example, `Address.street` doesn't work, but `address.streetAddress` does.
-
-     |   |                                                                                                                     |
-     | - | ------------------------------------------------------------------------------------------------------------------- |
-     |   | The following mappings are suggestions for what works. Your installations will possibly require different mappings. |
-
-     1. Create direct mappings.
-
-        |   |                                              |
-        | - | -------------------------------------------- |
-        |   | This is easier to run as a `dsconfig` batch. |
-
-        1. Create a `<PingDataSync>/directMapping.dsconfig` text file.
-
-        2. Place the following commands into your `directMapping` file:
-
-           ```
-           dsconfig create-attribute-mapping --map-name mapPDtoP1_PDtest --mapping-name accountID --type direct --set from-attribute:uid --trustAll --no-prompt
-           dsconfig create-attribute-mapping --map-name mapPDtoP1_PDtest --mapping-name mobilePhone --type direct --set from-attribute:mobile --trustAll --no-prompt
-           dsconfig create-attribute-mapping --map-name mapPDtoP1_PDtest --mapping-name email --type direct --set from-attribute:mail --trustAll --no-prompt
-           dsconfig create-attribute-mapping --map-name mapPDtoP1_PDtest --mapping-name primaryPhone --type direct --set from-attribute:telephoneNumber --trustAll --no-prompt
-           dsconfig create-attribute-mapping --map-name mapPDtoP1_PDtest --mapping-name title --type direct --set from-attribute:title --trustAll --no-prompt
-           dsconfig create-attribute-mapping --map-name mapPDtoP1_PDtest --mapping-name externalID --type direct --set from-attribute:employeeNumber --trustAll --no-prompt
-           dsconfig create-attribute-mapping --map-name mapPDtoP1_PDtest --mapping-name username --type direct --set from-attribute:uid --trustAll --no-prompt
-           ```
-
-        3. Run the batch with the following command:
-
-           ```
-           /opt/<PingDataSync>/bin/dsconfig --trustAll --no-prompt --batch-file /opt/<Your directMapping file name>.dsconfig
-           ```
-
-     2. Create constructed attribute mappings with the following command:
-
-        ```
-        /opt/<PingDataSync>/bin/dsconfig create-attribute-mapping --map-name mapPDtoP1_PDtest --mapping-name resourceType --trustAll --no-prompt --type constructed --set value-pattern:user
-        ```
-
-     3. Create JSON attribute maps.
-
-        |   |                                                                                                                                                                             |
-        | - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-        |   | This is easier to run as a `dsconfig` batch. The JSON maps are created as a subset of the attribute map that was just constructed and are populated in the following steps. |
-
-        1. Create a `<PingDataSync>/jsonMap.dsconfig` text file.
-
-        2. Place the following commands in your `jsonMap` file:
-
-           ```
-           dsconfig create-attribute-mapping --map-name mapPDtoP1_PDtest --mapping-name name --type json --trustAll --no-prompt
-           dsconfig create-attribute-mapping --map-name mapPDtoP1_PDtest --mapping-name address --type json --trustAll --no-prompt
-           ```
-
-        3. Run the batch with the following command:
-
-           ```
-           /opt/<PingDataSync>/bin/dsconfig --trustAll --no-prompt --batch-file /opt/jsonMap.dsconfig
-           ```
-
-     4. Create JSON attribute mappings.
-
-        |   |                                              |
-        | - | -------------------------------------------- |
-        |   | This is easier to run as a `dsconfig` batch. |
-
-        1. Create a `<PingDataSync>/jsonMapping.dsconfig` text file.
-
-        2. Place the following commands in your `jsonMapping` file:
-
-           ```
-           dsconfig create-json-attribute-mapping-field --map-name mapPDtoP1_PDtest --mapping-name name --field-name family --set json-type:string --set from-attribute:sn --trustAll --no-prompt
-           dsconfig create-json-attribute-mapping-field --map-name mapPDtoP1_PDtest --mapping-name name --field-name given --set json-type:string --set from-attribute:givenName --trustAll --no-prompt
-           dsconfig create-json-attribute-mapping-field --map-name mapPDtoP1_PDtest --mapping-name name --field-name formatted --set json-type:string --set from-attribute:cn --trustAll --no-prompt
-           dsconfig create-json-attribute-mapping-field --map-name mapPDtoP1_PDtest --mapping-name address --field-name locality --set json-type:string --set from-attribute:l --trustAll --no-prompt
-           dsconfig create-json-attribute-mapping-field --map-name mapPDtoP1_PDtest --mapping-name address --field-name postalCode --set json-type:string --set from-attribute:postalCode --trustAll --no-prompt
-           dsconfig create-json-attribute-mapping-field --map-name mapPDtoP1_PDtest --mapping-name address --field-name region --set json-type:string --set from-attribute:st --trustAll --no-prompt
-           dsconfig create-json-attribute-mapping-field --map-name mapPDtoP1_PDtest --mapping-name address --field-name streetAddress --set json-type:string --set from-attribute:street --trustAll --no-prompt
-           ```
-
-        3. Run the batch with the following command:
-
-           ```
-           /opt/<PingDataSync>/bin/dsconfig --trustAll --no-prompt --batch-file /opt/jsonMapping.dsconfig
-           ```
-
-5. To create a SyncPipe, run the following command:
-
-   ```
-   /opt/<PingDataSync>/bin/dsconfig create-sync-pipe --pipe-name  pipePDtoP1_PDtest --set started:true --set sync-source:sourcePD_PDtest --set sync-destination:destinationPD-P1_PDtest --trustAll --no-prompt
-   ```
-
-6. To create a sync class, run the following command:
-
-   ```
-   /opt/<PingDataSync>/bin/dsconfig  create-sync-class --pipe-name pipePDtoP1_PDtest --class-name classPDtoP1_PDtest --set attribute-map:mapPDtoP1_PDtest --set "include-filter:(objectClass=inetOrgPerson)" --set auto-mapped-source-attribute:-none- --set destination-correlation-attributes:username --set replace-all-attr-values:true --set creates-as-modifies:true --trustAll --no-prompt
-   ```
-
-7. Test the sync:
-
-   1. Run the sync with the following command:
-
-      ```
-      /opt/<PingDataSync>/bin/resync -p pipePDtoP1_PDtest
-      ```
-
-   2. (Optional) If the sync results in any errors, examine the `/Ping/<PingDataSync>/logs/tools/re-sync-failed-DNs.log`.
-
-   3. (Optional) If you receive an error that includes `Cannot connect because: The connection to server localhost:11389 was closed while waiting for a response to a bind request SimpleBindRequest(dn='cn=dmanager').`:
-
-      1. In the PingDataSync admin console, go to **Configuration > External Servers > ServerPD\_PDtest**.
-
-      2. Update your password.

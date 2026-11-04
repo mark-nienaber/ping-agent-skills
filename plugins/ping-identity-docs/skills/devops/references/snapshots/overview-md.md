@@ -1,6 +1,6 @@
 ---
 title: Overview
-description: The DevOps resources include Docker images of Ping Identity products, deployment examples, and configuration management tools.
+description: Provide an overview of Ping Identity DevOps resources, including Docker images, deployment examples, and configuration management tools
 component: devops
 page_id: devops::overview
 canonical_url: https://developer.pingidentity.com/devops/overview.html

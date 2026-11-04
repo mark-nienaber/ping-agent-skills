@@ -4,6 +4,8 @@ description: You can extend Advanced Identity Cloud features with JavaScript.
 component: pingoneaic-api
 page_id: pingoneaic-api::scripting
 canonical_url: https://developer.pingidentity.com/pingoneaic-api/scripting.html
+llms_txt: https://developer.pingidentity.com/pingoneaic-api/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 keywords: ["Extensibility", "Scripts"]
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: Access control
-description: The server's access control subsystem provides a way to examine each request that a client issues to determine whether it should be allowed.
+description: Understand PingDirectory access control and ACI evaluation.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:pingdirectory_security_guide:pd_sec_access_control
@@ -24,7 +24,7 @@ The server's access control policy denies all access by default. Unless there is
 
 ---
 title: Account security considerations
-description: There are several things to keep in mind when creating and managing user accounts.
+description: Understand considerations for creating and managing secure PingDirectory user accounts.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:pingdirectory_security_guide:pd_sec_consids_acct_security
@@ -42,7 +42,7 @@ There are several things to keep in mind when creating and managing user account
 
 ---
 title: Account status notifications
-description: Account status notifications are used to notify users (or administrators) about events that affect their accounts or potentially to invoke custom code if such events occur.
+description: Lists the events that trigger PingDirectory account status notifications and the handlers that process them.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:pingdirectory_security_guide:pd_sec_acct_status_notifications
@@ -108,7 +108,7 @@ The following password policy configuration property can be used to configure on
 
 ---
 title: Account status notifications
-description: PingDirectory server can generate account status notifications whenever certain events occur in the server regarding an account's state.
+description: "Understand how PingDirectory generates account status notifications when an account's state changes."
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:pingdirectory_security_guide:pd_sec_acct_status_notifs
@@ -128,14 +128,14 @@ These notifications are used to notify end users or administrators about that ev
 
 ---
 title: ACI bind rules
-description: Bind rules are used to identify the set of requesters to which an ACI applies.
+description: Understand PingDirectory ACI bind rules and requester matching syntax.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:pingdirectory_security_guide:pd_sec_aci_bind_rules
 canonical_url: https://docs.pingidentity.com/pingdirectory/11.1/pingdirectory_security_guide/pd_sec_aci_bind_rules.html
 llms_txt: https://docs.pingidentity.com/pingdirectory/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: September 13, 2023
+revdate: 2026-08-19T00:00:00Z
 section_ids:
   userdn: userdn
   groupdn: groupdn
@@ -186,7 +186,7 @@ The `userdn` bind rule is used to target a requester based on their authenticate
 
 * It can have an LDAP URL in which the DN is the string `parent`: `userdn="ldap:///parent`. This indicates that the ACI applies to any operation that targets an entry whose immediate parent is the requester's own entry. That is, it allows a requester to perform operations on entries immediately below their own.
 
-* It can be a full LDAP URL, including a base DN (without wildcards or parameterization), scope, and filter suh as `userdn="ldap:///dc=example,dc=com??sub?(objectClass=person)"`.
+* It can be a full LDAP URL, including a base DN (without wildcards or parameterization), scope, and filter such as `userdn="ldap:///dc=example,dc=com??sub?(objectClass=person)"`.
 
 The `userdn` bind rule can also contain multiple LDAP URLs. In that case, each URL should be separated by two consecutive vertical bar characters `||`: `("userdn="ldap:///uid=jdoe,ou=People,dc=example, dc=com || uid=jpublic,ou=People,dc=example,dc=com"")`.
 
@@ -374,7 +374,7 @@ The `!=` operator can be used as an alternative to the `=` operator: `oauthscope
 
 ---
 title: ACI rights
-description: The rights section of an ACI defines the permissions that are granted or denied to requesters identified by the bind rule for operations against the data specified by the target.
+description: Understand PingDirectory ACI rights and permissions.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:pingdirectory_security_guide:pd_sec_aci_rights
@@ -504,7 +504,7 @@ Enabling this property causes PingDirectory to require a bind user to have an `a
 
 ---
 title: ACI syntax
-description: The access control instruction (ACI) syntax that the PingDirectory server uses is similar to that used by other types of directory servers and is designed to make it easy to migrate data containing access control rules from other servers.
+description: Understand PingDirectory ACI syntax.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:pingdirectory_security_guide:pd_sec_aci_syntax
@@ -610,7 +610,7 @@ For example, the following ACI allows a user to update their own password.
 
 ---
 title: ACI targets
-description: ACI targets specify the set of data to which an ACI applies.
+description: Understand PingDirectory ACI targets and matching syntax.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:pingdirectory_security_guide:pd_sec_aci_targets
@@ -738,7 +738,7 @@ The `extop` ACI target is very similar to the `targetcontrol` target, except tha
 
 ---
 title: Additional mechanisms for securing communication
-description: TLS provides a strong way to ensure that unauthorized observers aren't able to interpret the network communication to and from the PingDirectory server.
+description: Harden PingDirectory network communication with secure DNS and host-network controls.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:pingdirectory_security_guide:pd_sec_addl_mech_secure_comm
@@ -808,14 +808,14 @@ This also applies to any communication that the underlying system needs to perfo
 
 ---
 title: Administrative alerts
-description: The PingDirectory server can generate administrative alerts to notify administrators of errors, warnings, and significant events that occur in the server. Each alert has a name, severity, and message.
+description: Understand PingDirectory administrative alerts, including alert types, severities, and configurable alert handlers.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:pingdirectory_security_guide:pd_sec_admin_alerts
 canonical_url: https://docs.pingidentity.com/pingdirectory/11.1/pingdirectory_security_guide/pd_sec_admin_alerts.html
 llms_txt: https://docs.pingidentity.com/pingdirectory/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: September 13, 2023
+revdate: 2026-08-19T00:00:00Z
 ---
 
 # Administrative alerts
@@ -874,7 +874,7 @@ The `docs/admin-alerts-list.csv` and `docs/admin-alerts-list.html` files provide
 
 Whenever an administrative alert is raised within the server, the server provides it to all alert handlers that are defined and enabled in the configuration. Alert handlers that are available in the PingDirectory server include:
 
-* Error Log — Write a message about the alert to server error log.
+* Error Log — Write a message about the alert to the server error log.
 
 * Exec — Execute a specified command on the underlying system.
 
@@ -896,47 +896,7 @@ Information about recent alerts generated by the server is also available in the
 
 ---
 title: Administrative password reset
-description: In most cases, if a user's account is in an unusable state, an administrative password reset can restore access.
-component: pingdirectory
-version: 11.1
-page_id: pingdirectory:pingdirectory_security_guide:pd_sec_admin_password_reset
-canonical_url: https://docs.pingidentity.com/pingdirectory/11.1/pingdirectory_security_guide/pd_sec_admin_password_reset.html
-llms_txt: https://docs.pingidentity.com/pingdirectory/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: September 13, 2023
----
-
-# Administrative password reset
-
-In most cases, if a user's account is in an unusable state, an administrative password reset can restore access.
-
-This includes:
-
-* If a user has forgotten their password
-
-* If the account has been locked after too many failed authentication attempts
-
-* If the account has been locked because it has been too long since the user last authenticated
-
-* If the account has been locked because the user failed to authenticate in a timely manner after an administrative reset
-
-* If the account has been locked because the user attempted to bind with a password that failed validation
-
-* If the user's password has expired
-
-An administrative password reset does not restore access to an account under the following circumstances:
-
-* If the account has been administratively disabled
-
-* If the account has an activation time that is in the future
-
-  If the account has an expiration time, not to be confused with the password expiration time, which is in the past
-
----
-
----
-title: Administrative password reset
-description: An administrative password reset occurs when one user changes the password for another user.
+description: Configure PingDirectory to require users to choose a new password after an administrative password reset.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:pingdirectory_security_guide:pd_sec_admin_pw_reset
@@ -975,8 +935,48 @@ See the `config/sample-dsconfig-batch-files/configure-password-reset-constraints
 ---
 
 ---
+title: Administrative password reset
+description: Understand when an administrative password reset can restore access to a locked or unusable PingDirectory account.
+component: pingdirectory
+version: 11.1
+page_id: pingdirectory:pingdirectory_security_guide:pd_sec_admin_password_reset
+canonical_url: https://docs.pingidentity.com/pingdirectory/11.1/pingdirectory_security_guide/pd_sec_admin_password_reset.html
+llms_txt: https://docs.pingidentity.com/pingdirectory/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: September 13, 2023
+---
+
+# Administrative password reset
+
+In most cases, if a user's account is in an unusable state, an administrative password reset can restore access.
+
+This includes:
+
+* If a user has forgotten their password
+
+* If the account has been locked after too many failed authentication attempts
+
+* If the account has been locked because it has been too long since the user last authenticated
+
+* If the account has been locked because the user failed to authenticate in a timely manner after an administrative reset
+
+* If the account has been locked because the user attempted to bind with a password that failed validation
+
+* If the user's password has expired
+
+An administrative password reset does not restore access to an account under the following circumstances:
+
+* If the account has been administratively disabled
+
+* If the account has an activation time that is in the future
+
+  If the account has an expiration time, not to be confused with the password expiration time, which is in the past
+
+---
+
+---
 title: Alarms and gauges
-description: Each PingDirectory server includes a set of gauges for tracking various metrics over time.
+description: Understand PingDirectory alarms and gauges used to track metrics and trigger threshold-based alarm conditions.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:pingdirectory_security_guide:pd_sec_alarms_gauges
@@ -1000,7 +1000,7 @@ Alarms are exposed in the `cn=alarms` backend. Their values can change over time
 
 ---
 title: Assigning password policies to users
-description: Each user is associated with a password policy that governs their activity in the server, and different users can have different password policies.
+description: Assign PingDirectory password policies to users, including defining policies in user data for multi-tenant deployments.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:pingdirectory_security_guide:pd_sec_assign_password_policy
@@ -1061,7 +1061,7 @@ For improved performance, the PingDirectory server maintains a cache of password
 
 ---
 title: Auditing
-description: It is important to regularly audit the PingDirectory server and its content to ensure that the data remains secure.
+description: Understand why regularly auditing the PingDirectory server and its content helps keep data secure.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:pingdirectory_security_guide:pd_sec_auditing
@@ -1079,7 +1079,7 @@ It is important to regularly audit the PingDirectory server and its content to e
 
 ---
 title: Auditing configuration changes
-description: Proper server configuration is critical to maintaining security. Be aware of all changes to the server configuration and understand whether the configuration in its current state matches what you intend and expect it to be.
+description: Audit PingDirectory configuration changes using administrative alerts, the configuration audit log, and config-diff.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:pingdirectory_security_guide:pd_sec_audit_config_changes
@@ -1148,7 +1148,7 @@ The PingDirectory server provides a `config-diff` tool to compare different vers
 
 ---
 title: Auditing data access
-description: It's also important to understand the kinds of requests that clients make. This can help you identify requests that are out of the ordinary, which might be evidence of a potential attack.
+description: Audit PingDirectory data access by analyzing logs and using account status notification handlers for unusual requests.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:pingdirectory_security_guide:pd_sec_audit_data_access
@@ -1201,7 +1201,7 @@ This can be accomplished with account status notification handlers, and the serv
 
 ---
 title: Auditing data content
-description: It's also a good idea to keep track of the data itself and identify any potential security-related issues that affect user entries or other data.
+description: Audit PingDirectory data content using data security auditors and soft deletes to detect security issues.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:pingdirectory_security_guide:pd_sec_audit_data_content
@@ -1334,7 +1334,7 @@ If necessary, `soft-deleted` entries can be resurrected with the [undelete reque
 
 ---
 title: Authentication
-description: Authentication is the process that a client uses to identify themselves to the server.
+description: Understand how clients authenticate to PingDirectory to identify themselves to the server.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:pingdirectory_security_guide:pd_sec_authentication
@@ -1364,14 +1364,14 @@ This section covers the set of authentication mechanisms that the PingDirectory 
 
 ---
 title: Authentication-related controls
-description: The PingDirectory server provides support for several additional controls that can be used when authenticating or interacting with password policy-related operations.
+description: Understand PingDirectory controls used for authentication and password policy operations.
 component: pingdirectory
 version: 11.1
 page_id: pingdirectory:pingdirectory_security_guide:pd_sec_authn_ctrls
 canonical_url: https://docs.pingidentity.com/pingdirectory/11.1/pingdirectory_security_guide/pd_sec_authn_ctrls.html
 llms_txt: https://docs.pingidentity.com/pingdirectory/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: September 13, 2023
+revdate: 2026-08-19T00:00:00Z
 page_aliases: ["pd_sec_authn_ctrls_ext_ops.adoc", "pd_sec_authr_id_request_ctrl.adoc", "pd_sec_get_authr_entry_ctrl.adoc", "pd_sec_acct_usable_control.adoc", "pd_sec_pw_policy_control.adoc", "pd_sec_pw_expire_controls.adoc", "pd_sec_get_pw_policy_state.adoc", "pd_sec_pw_validation_details_ctrl.adoc", "pd_sec_generate_pw_request_ctrl.adoc"]
 section_ids:
   the-authorization-identity-request-control: The authorization identity request control
@@ -1486,7 +1486,7 @@ The bind request must also include the [retain identity request control](pd_sec_
 
 PingDirectory server provides support for a [password validation details request control](https://docs.ldap.com/ldap-sdk/docs/javadoc/index.html?com/unboundid/ldap/sdk/unboundidds/controls/PasswordValidationDetailsRequestControl.html) that can be included in an add request, modify request, or password modify extended request.
 
-It indicates that the server should return a corresponding response control with a list of each of the requirements that the password must satisfy and an indication as to whether the proposed password satisfied.
+It indicates that the server should return a corresponding response control with a list of each of the requirements that the password must satisfy and an indication as to whether the proposed password satisfied those requirements.
 
 ## The generate password request control
 

@@ -1,12 +1,12 @@
 ---
 title: PingID Offline MFA
-description: PingID runs as a cloud service on the PingOne platform. To allow users to authenticate even if the PingID service is unreachable, PingID includes offline multi-factor authentication (MFA).
+description: Overview of PingID offline MFA setup for PingFederate SSO, RADIUS PCV, Windows login, Mac login, and SSH in the legacy PingID admin portal when the PingID service is unreachable.
 component: pingid
 page_id: pingid:pingid_offline_mfa:pid_offline_mfa
-canonical_url: http://docs.pingidentity.com/pingid/pingid_offline_mfa/pid_offline_mfa.html
-llms_txt: http://docs.pingidentity.com/pingid/llms.txt
+canonical_url: https://docs.pingidentity.com/pingid/pingid_offline_mfa/pid_offline_mfa.html
+llms_txt: https://docs.pingidentity.com/pingid/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: April 10, 2024
+revdate: July 29, 2026
 section_ids:
   pingid-offline-mfa-when-authenticating-through-pingfederate-single-sign-on-sso: PingID offline MFA when authenticating through PingFederate single sign-on (SSO)
   pingid-offline-mfa-when-accessing-through-radius-password-credential-validator-pcv: PingID offline MFA when accessing through RADIUS password credential validator (PCV)
@@ -20,7 +20,7 @@ section_ids:
 
 PingID runs as a cloud service on the PingOne platform. To allow users to authenticate even if the PingID service is unreachable, PingID includes offline multi-factor authentication (MFA).
 
-Offline MFA must be configured, so make sure to carry out the steps outlined here before you actually encounter such a situation.
+Offline MFA must be configured, so make sure to carry out the steps outlined here before you encounter such a situation.
 
 You can configure PingID offline MFA for the following use cases:
 
@@ -36,7 +36,7 @@ You can configure PingID offline MFA for the following use cases:
 
 * Access through the PingID integration with SSH
 
-Below is an outline of the steps required to configure offline MFA for each of these cases. Links are provided to the detailed information for each case.
+The following is an outline of the steps required to configure offline MFA for each of these cases. Links are provided to the detailed information for each case.
 
 |   |                                                                                                                                                                                                                                                                                                                                    |
 | - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -50,9 +50,9 @@ Below is an outline of the steps required to configure offline MFA for each of t
 
 Offline MFA requires the following:
 
-* A user directory to store user device information from PingID. For more information, see [User directory for PingID offline MFA](pid_user_directory_for_offline_mfa.html).
+* A user directory to store user device information from PingID. Learn more in [User directory for PingID offline MFA](pid_user_directory_for_offline_mfa.html).
 
-* Unlimited Strength Java Cryptography Extension (JCE), which is required for supporting the 256-bit key size for cryptographic algorithms. Without it, the feature will return an exception related to the missing library, and will not function.
+* Unlimited Strength Java Cryptography Extension (JCE), which is required for supporting the 256-bit key size for cryptographic algorithms. Without it, the feature will return an exception related to the missing library, and won't function.
 
 When the PingID service is unreachable, after first-factor authentication, the user receives a QR code on an offline authentication screen.
 
@@ -66,9 +66,9 @@ When configuring the PingID Adapter for offline MFA, the key option to configure
 
 * Passive Offline Authentication
 
-|   |                                                                                                                                                                                                                                                                                                                                                                                                                             |
-| - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | In addition to the standard options listed above, if you encounter a situation where PingID is down but the Passive Offline Authentication option is not prompting users to authenticate offline, you can select the **Enforce Offline Authentication** option for a limited time until the issue is resolved. This will force all your users to authenticate offline until you switch back to one of the standard options. |
+|   |                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| - | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | In addition to the standard options previously listed, if you encounter a situation where PingID is down but the Passive Offline Authentication option is not prompting users to authenticate offline, you can select the **Enforce Offline Authentication** option for a limited time until the issue is resolved. This will force all your users to authenticate offline until you switch back to one of the standard options. |
 
 ## PingID offline MFA when accessing through RADIUS password credential validator (PCV)
 
@@ -88,17 +88,17 @@ When configuring offline MFA for the PingID RADIUS PCV, the key option to config
 
 * Passive Offline Authentication
 
-|   |                                                                                                                                                                                                                                                                                                                                                                                                                             |
-| - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | In addition to the standard options listed above, if you encounter a situation where PingID is down but the Passive Offline Authentication option is not prompting users to authenticate offline, you can select the **Enforce Offline Authentication** option for a limited time until the issue is resolved. This will force all your users to authenticate offline until you switch back to one of the standard options. |
+|   |                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| - | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | In addition to the standard options previously listed, if you encounter a situation where PingID is down but the Passive Offline Authentication option is not prompting users to authenticate offline, you can select the **Enforce Offline Authentication** option for a limited time until the issue is resolved. This will force all your users to authenticate offline until you switch back to one of the standard options. |
 
 ## PingID offline MFA when accessing through Windows login
 
 When the PingID service is unreachable, after first-factor authentication, the user is prompted to authenticate using a security key or the PingID mobile app in offline MFA mode (manual authentication).
 
-For detailed information about configuring offline MFA for Windows login, see [Installing the PingID integration for Windows login](../pingid_integrations/pid_install_integration_windows_login.html).
+Find detailed information about configuring offline MFA for Windows login in [Installing the PingID integration for Windows login](../pingid_integrations/pid_install_integration_windows_login.html).
 
-The behavior for offline situations is determined by the value provided for the `offlineAuthType` parameter when carrying out command-line installation of the integration with Windows login. You can set `offlineAuthType` to:
+The behavior for offline situations is determined by the value provided for the `offlineAuthType` parameter when carrying out command-line installation of the integration with Windows login. Set `offlineAuthType` to:
 
 * 0 - do not allow MFA for offline authentication
 
@@ -112,15 +112,15 @@ The behavior for offline situations is determined by the value provided for the 
 
 When the PingID service is unreachable, after authentication is initiated, the user is prompted to authenticate using a security key or the PingID mobile app in offline MFA mode (manual authentication).
 
-For details, see the description of the **Offline Mode** option in [Creating an authentication policy (Windows passwordless)](../pingid_integrations/pid_creating_authentication_policy_windows_passwordless.html).
+Learn more about the **Offline Mode** option in [Creating an authentication policy (Windows passwordless)](../pingid_integrations/pid_creating_authentication_policy_windows_passwordless.html).
 
 ## PingID offline MFA when accessing through Mac login
 
 When the PingID service is unreachable, after first-factor authentication, the user is prompted to authenticate using a security key or the PingID mobile app in offline MFA mode (manual authentication).
 
-For detailed information about configuring offline MFA for Mac login, see [Installing the PingID integration for Mac login](../pingid_integrations/pid_installing_integration_for_mac_login.html).
+Find detailed information about configuring offline MFA for Mac login in [Installing the PingID integration for Mac login](../pingid_integrations/pid_installing_integration_for_mac_login.html).
 
-The behavior for offline situations is determined by the value provided for the `offlineAuthType` parameter when carrying out command-line installation of the integration with Mac login. You can set `offlineAuthType` to:
+The behavior for offline situations is determined by the value provided for the `offlineAuthType` parameter when carrying out command-line installation of the integration with Mac login. Set `offlineAuthType` to:
 
 * 0 - allow offline MFA with the PingID mobile app
 
@@ -132,7 +132,7 @@ The behavior for offline situations is determined by the value provided for the 
 
 When the PingID service is unreachable, after first-factor authentication, the user receives a 12-digit security key in the terminal window.
 
-For detailed information, see [Enabling offline MFA in SSH integration](../pingid_integrations/pid_enabling_offline_mfa_in_ssh_integration.html).
+Learn more in [Enabling offline MFA in SSH integration](../pingid_integrations/pid_enabling_offline_mfa_in_ssh_integration.html).
 
 The behavior for offline situations is determined by the value provided for the `fail_mode setting` in the configuration file, which can set to:
 
@@ -142,6 +142,84 @@ The behavior for offline situations is determined by the value provided for the 
 
 * `permissive`
 
-|   |                                                                                                                                                                                                                                                                                                                                                                                                                             |
-| - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | In addition to the standard options listed above, if you encounter a situation where PingID is down but the `passive_offline_authentication` option is not prompting users to authenticate offline, you can select the `enforce_offline_authentication` option for a limited time until the issue is resolved. This will force all your users to authenticate offline until you switch back to one of the standard options. |
+|   |                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | In addition to the standard options previously listed, if you encounter a situation where PingID is down but the `passive_offline_authentication` option isn't prompting users to authenticate offline, you can select the `enforce_offline_authentication` option for a limited time until the issue is resolved. This will force all your users to authenticate offline until you switch back to one of the standard options. |
+
+---
+
+---
+title: User directory for PingID offline MFA
+description: User directory configuration for PingID offline MFA in the legacy PingID admin portal, including required attributes, deployment options, and authentication flow priority settings.
+component: pingid
+page_id: pingid:pingid_offline_mfa:pid_user_directory_for_offline_mfa
+canonical_url: https://docs.pingidentity.com/pingid/pingid_offline_mfa/pid_user_directory_for_offline_mfa.html
+llms_txt: https://docs.pingidentity.com/pingid/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: July 28, 2026
+section_ids:
+  user-directory: User directory
+  priority-of-parameter-settings-during-the-flow-of-pingid-offline-mfa: Priority of parameter settings during the flow of PingID offline MFA
+---
+
+# User directory for PingID offline MFA
+
+PingID offline multi-factor authentication (MFA) *(tooltip: \<div class="paragraph">
+\<p>An electronic authentication method where a user is granted access only after presenting two or more verification factors for authentication.\</p>
+\</div>)* supports storage of user authentication device details according to different user directory deployments.
+
+## User directory
+
+PingID offline MFA can access device information stored in the directory's user object, or in a directory object separate from the user object, either in the same directory as the user object, or in a different directory.
+
+|   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | The PingID offline MFA feature is designed to work with directories from several vendors, including Active Directory, Oracle Directory, and Ping Directory.Directory setup scripts are provided for Active Directory as part of the PingID Integration Kit 2.0 and later. You must configure other directories manually.For more information on directory configuration, see [Installing the PingID Integration Kit for PingFederate](../pingid_integrations/installing_the_pid_i_for_pf.html). |
+
+Scripts provided in the PingID Integration Kit 2.0 or later add the following attributes to the directory:
+
+* `pf-pingid-state`
+
+  The `pf-pingid-state` attribute holds the authentication state of the user during offline MFA. Administrators can use this optional attribute to bypass or block individual users. When it's used, it must be coupled with the `user` object class on the main user directory. The optional values, `block` or `bypass`, stored in this attribute are managed by the administrator. Learn more in [Configuring offline MFA (PingID Adapter)](../pingid_integrations/pid_adapter_configuring_offline_mfa.html) or [Configuring offline MFA (RADIUS PCV)](../pingid_integrations/pid_configuring_offline_mfa_radius_pcv.html).
+
+PingFederate only requires read access to the `pf-pingid-state` attribute. The value of the `pf-pingid-state` attribute is always stored in the user's object. You can assign a different name to the attribute using the setup script, within the limits permitted by the user directory. When PingID is offline, the identity provider checks the configuration.
+
+* If the user's `pf-pingid-state` configuration is empty, the authentication flow continues.
+
+* If `pf-pingid-state` is set to `bypass`, the user bypasses MFA.
+
+* If `pf-pingid-state` is set to `block`, the user is blocked from logging in.
+
+  * `pf-pingid-local-fallback`
+
+    The `pf-pingid-local-fallback` attribute holds the user's authentication devices list information. It is a mandatory attribute. The administrator must decide between:
+
+* Adding the attribute to the `user` objectClass on the main user directory.
+
+* Adding the attribute to a separate custom `pf-pingid-device` objectClass.
+
+If you add `pf-pingid-local-fallback` to `pf-pingid-device`, you must decide which directory should hold the `pf-pingid-device` objects. These objects can be stored in the same directory as the users in a different location in the directory tree, or in an entirely separate directory. PingFederate configuration will vary according to the design you choose.
+
+Multiple Adapter/PCV Instances: When running a single PingFederate server with multiple PingID tenants, the `pf-pingid-local-fallback` attribute cannot be linked to the user objectClass. It is mandatory to set up a separate custom `pf-pingid-device` objectClass. The location of the `pf-pingid-device` objects must be different for each Adapter/PCV instance.
+
+If multiple Adapter/PCV instances use the same PingID tenant, there is no restriction on the `pf-pingid-local-fallback` attribute location.
+
+Learn more in [Installing the PingID Integration Kit for PingFederate](../pingid_integrations/installing_the_pid_i_for_pf.html).PingFederate will have read and write access to the `pf-pingid-local-fallback` attribute, because values stored in this attribute are managed by PingFederate.
+
+## Priority of parameter settings during the flow of PingID offline MFA
+
+1. If the `Authentication During Errors` parameter is set to `Bypass` or `Block`, the user's `state` attribute is ignored during offline authentication. All users will either bypass PingID offline MFA or be blocked from authenticating, according to the `Authentication During Errors` setting.
+
+2. If the `Authentication During Errors` parameter is set to `Passive` or `Enforce`, PingFederate checks the user's `state` attribute.
+
+   * The user's `state` attribute is empty
+
+     If the user has a paired mobile device, the flow proceeds to offline MFA.If the user doesn't have a paired mobile device, the flow proceeds according to the setting in the `Users Without a Paired Device` parameter.
+
+     * The user's `state` attribute is set to `Bypass`
+
+       The user will bypass PingID offline MFA.
+
+     * The user's `state` attribute is set to `Block`
+
+       The user is blocked from authenticating.

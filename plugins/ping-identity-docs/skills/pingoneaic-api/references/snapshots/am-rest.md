@@ -4,6 +4,8 @@ description: To maintain compatibility between releases, many REST APIs are vers
 component: pingoneaic-api
 page_id: pingoneaic-api:am-rest:rest-api-versioning
 canonical_url: https://developer.pingidentity.com/pingoneaic-api/am-rest/rest-api-versioning.html
+llms_txt: https://developer.pingidentity.com/pingoneaic-api/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 keywords: ["REST API", "JSON", "CSRF"]
 section_ids:
   rest-api-explicit-version: Specify versions
@@ -128,6 +130,8 @@ description: Specify the realm in the hostname or the path of the URL depending 
 component: pingoneaic-api
 page_id: pingoneaic-api:am-rest:rest-realms
 canonical_url: https://developer.pingidentity.com/pingoneaic-api/am-rest/rest-realms.html
+llms_txt: https://developer.pingidentity.com/pingoneaic-api/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 keywords: ["REST API", "Realms"]
 section_ids:
   in-the-hostname: In the hostname

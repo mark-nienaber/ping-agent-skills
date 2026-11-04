@@ -1,35 +1,37 @@
 ---
 title: Access services through scopes and roles
-description: User applications rely on self-management scopes to grant users access to a subset of PingOne resources. For more information about scopes, refer to Resource scopes. Conversely, administrator applications use role assignments to determine the actions a user or client can perform. For more information about roles, refer to Roles in the PingOne Platform APIs.
+description: Explains how PingOne self-management scopes and administrator role assignments determine access to platform resources
 component: pingone-api
-page_id: pingone-api:foundations:pingone-roles-scopes-and-permissions/access-services-through-scopes-and-roles
-canonical_url: https://developer.pingidentity.com/pingone-api/foundations/pingone-roles-scopes-and-permissions/access-services-through-scopes-and-roles.html
+page_id: pingone-api:foundations:pingone-roles-scopes-and-permissions/access-services-through-scopes-and-roles/index
+canonical_url: https://developer.pingidentity.com/pingone-api/foundations/pingone-roles-scopes-and-permissions/access-services-through-scopes-and-roles/index.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-11
 ---
 
 # Access services through scopes and roles
 
-User applications rely on self-management scopes to grant users access to a subset of PingOne resources. For more information about scopes, refer to [Resource scopes](../../platform/resources/resource-scopes.html). Conversely, administrator applications use role assignments to determine the actions a user or client can perform. For more information about roles, refer to [Roles](../../platform/roles.html) in the *PingOne Platform APIs*.
+User applications rely on self-management scopes to grant users access to a subset of PingOne resources. For more information about scopes, refer to [Resource scopes](../../../platform/resources/resource-scopes/index.html). Conversely, administrator applications use role assignments to determine the actions a user or client can perform. For more information about roles, refer to [Roles](../../../platform/roles/index.html) in the *PingOne Platform APIs*.
 
 For detailed information about scopes, refer to the following topics:
 
-* [PingOne self-management scopes](access-services-through-scopes-and-roles/pingone-self-management-scopes.html)
+* [PingOne self-management scopes](pingone-self-management-scopes.html)
 
-* [OpenID Connect (OIDC) scopes](access-services-through-scopes-and-roles/openid-connect-oidc-scopes.html)
+* [OpenID Connect (OIDC) scopes](openid-connect-oidc-scopes.html)
 
-* [Custom scopes](access-services-through-scopes-and-roles/custom-scopes.html)
+* [Custom scopes](custom-scopes.html)
 
 ---
 
 ---
 title: Access tokens and ID tokens
-description: All tokens in PingOne are JSON Web Tokens (JWTs) signed using the RS256 signing algorithm, except for refresh tokens which can be opaque. Access tokens are credential strings that represent authorization to access a protected resource. Client applications obtain access tokens by making OAuth 2 or OpenID Connect requests to an authorization server; resource servers require clients to authenticate using access tokens.
+description: "Explains PingOne access tokens and ID tokens, how they're obtained, their default lifetimes, and how to use them in API requests"
 component: pingone-api
-page_id: pingone-api:foundations:authentication-concepts/access-tokens-and-id-tokens
-canonical_url: https://developer.pingidentity.com/pingone-api/foundations/authentication-concepts/access-tokens-and-id-tokens.html
+page_id: pingone-api:foundations:authentication-concepts/access-tokens-and-id-tokens/index
+canonical_url: https://developer.pingidentity.com/pingone-api/foundations/authentication-concepts/access-tokens-and-id-tokens/index.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-25
 section_ids:
   token-lifetime: Token lifetime
 ---
@@ -45,18 +47,18 @@ Clients present access tokens when making requests to a resource server (for exa
 ```bash
 curl -X GET "https://api.pingone.com/v1/environments" \
 -H "Content-type: application/json" \
--H "Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6InRlc3QifQ.eyJzY29wZSI6IiIsImNsaWVudF9pZCI6ImlkZW50aXR5LWRpcmVjdG9yeS1zeW50aGV0aWMtdGVzdGluZyIsImlzcyI6ImF1dGgtc3RhZ2luZy5waW5nb25lLmNvbSIsImF1ZCI6ImFwaS1zdGFnaW5nLnBpbmdvbmUuY29tIiwiYWNjIjoiMDAwMDAwMDAtMDAwMC0wMDAwLTAwMDAtMDAwMDAwMDAwMDAwIiwiZW52aXJvbm1lbnRfaWQiOiIiLCJvcmciOiIwMDAwMDAwMC0wMDAwLTAwMDAtMDAwMC0wMDAwMDAwMDAwMDAiLCJvcmdhbml6YXRpb25faWQiOiIwMDAwMDAwMC0wMDAwLTAwMDAtMDAwMC0wMDAwMDAwMDAwMDAiLCJlbnYiOiIiLCJleHAiOjE1MzAxMTc1Nzl9.OTGQethw-flgnf0oslpQOmW9YdExf6ZpsqpmRtBTeD5gpKGFmaSeHguFMVpR94GSjb27OEPzCY8qpU_OkoaQGH9FiysdgvFFVNVzHOb80e0MgP47ean1Rtk3lHmIWHg1ihp3Kt7vq9fO0OwekmfshejyaLYLX2g4seWFZKbs7ICIaSufYuGTsLLQFixiK7b0tM-lcjZUmLglPlzdGEYQgg13ZWho02rFVjwRrfOVkQRCLuhkk2Pz2eeblQgWBlzMi_zbHnRhqRnrHyX2PwoPZ9qHh3aqz6yNgGinUwSrE3J1slnx8uPeP88obYcX4QXTXOCf7su2rinbexOsNu4Puw"
+-H "Authorization: Bearer {{accessToken}}"
 ```
 
-|   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | Calls to the PingOne Management APIs require an admin-level access token to authenticate the requests. An access token from a Worker app gives you admin-level access to the PingOne APIs. A Worker app's roles and permissions determine the authorized access to PingOne API resources. For more information about access tokens, roles, and scopes, refer to [Access services](../pingone-roles-scopes-and-permissions/access-services-through-scopes-and-roles.html). |
+|   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | Calls to the PingOne Management APIs require an admin-level access token to authenticate the requests. An access token from a Worker app gives you admin-level access to the PingOne APIs. A Worker app's roles and permissions determine the authorized access to PingOne API resources. For more information about access tokens, roles, and scopes, refer to [Access services](../../pingone-roles-scopes-and-permissions/access-services-through-scopes-and-roles/index.html). |
 
 ## Token lifetime
 
-By default, access tokens have a time to live (TTL) of 60 minutes. However, if you have a custom resource specified in your OIDC appliction's resource grant, you can set `accessTokenValiditySeconds` on that resource's token. For more information, refer to [POST Create Resource](../../platform/resources/resources-1/create-resource.html#post-create-resource).
+By default, access tokens have a time to live (TTL) of 60 minutes. However, if you have a custom resource specified in your OIDC appliction's resource grant, you can set `accessTokenValiditySeconds` on that resource's token. For more information, refer to [POST Create Resource](../../../platform/resources/resources-1/create-resource.html#post-create-resource).
 
-Refresh tokens have a default lifetime of 30 days. You can change this value by configuring the `refreshTokenDuration` property in your OIDC application. For more information, refer to the [Applications OIDC settings data model](../../platform/applications/application-management.html#applications-oidc-settings-data-model).
+Refresh tokens have a default lifetime of 30 days. You can change this value by configuring the `refreshTokenDuration` property in your OIDC application. For more information, refer to the [Applications OIDC settings data model](../../../platform/application-management.html#applications-oidc-settings-data-model).
 
 ID tokens have a lifetime of 60 minutes. This value is not configurable.
 
@@ -64,12 +66,13 @@ ID tokens have a lifetime of 60 minutes. This value is not configurable.
 
 ---
 title: Administrator permissions and role assignments
-description: Unlike user self-service applications, administrator applications use role assignments to determine the actions a user or client can perform. For external API client applications, the access tokens do not use scopes to control access to resources. Instead, the actor's role assignments determine resource access.
+description: Explains how PingOne Worker application role assignments determine administrator permissions and access to platform APIs
 component: pingone-api
 page_id: pingone-api:foundations:pingone-roles-scopes-and-permissions/administrator-permissions-and-role-assignments
 canonical_url: https://developer.pingidentity.com/pingone-api/foundations/pingone-roles-scopes-and-permissions/administrator-permissions-and-role-assignments.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-11
 section_ids:
   worker-application-permissions: Worker application permissions
   worker-applications-and-environments: Worker applications and environments
@@ -87,7 +90,7 @@ Administrator applications that interact with non-self Platform APIs are classif
 | - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 |   | Worker applications can use a user-based grant type (`implicit` or `authorization_code`). With this configuration, you can assign only OIDC scopes to the application. When getting a token using a user-based grant type, the user's role assignments are used. When getting a token using the `client_credentials` grant type, the application's role assignments are used. |
 
-Role assignments determine access to APIs (refer to [Application role assignments](../../platform/applications/application-role-assignments.html) and [User role assignments](../../platform/users/user-role-assignments.html) in the *PingOne Platform APIs*. Users and clients cannot create or use clients that have more privileges than the worker application itself. For example, an actor with only the Identity Data Admin role cannot create a worker application that has Environment Admin privileges. Likewise, access to an application's client secret is restricted based on the accessing user's or application's role assignments. If an actor has only the Identity Data Admin role, it is not able to see the client secret. Similar roles can have different privileges, or restrictions, based on the role's scope. For example, an actor with an Environment Admin role over a single environment cannot access the client secret of an application with Environment Admin privileges over the entire organization.
+Role assignments determine access to APIs (refer to [Application role assignments](../../platform/applications/application-role-assignments/index.html) and [User role assignments](../../platform/users/user-role-assignments/index.html) in the *PingOne Platform APIs*. Users and clients cannot create or use clients that have more privileges than the worker application itself. For example, an actor with only the Identity Data Admin role cannot create a worker application that has Environment Admin privileges. Likewise, access to an application's client secret is restricted based on the accessing user's or application's role assignments. If an actor has only the Identity Data Admin role, it is not able to see the client secret. Similar roles can have different privileges, or restrictions, based on the role's scope. For example, an actor with an Environment Admin role over a single environment cannot access the client secret of an application with Environment Admin privileges over the entire organization.
 
 PingOne roles include a set of permissions that allow access to PingOne resources. For example, the Identity Data Admin role grants access to PingOne resources for these user management actions:
 
@@ -127,12 +130,13 @@ When a worker application with Environment Admin privileges creates a new enviro
 
 ---
 title: API attacks
-description: API access is secured using OAuth 2.0, which provides token-based authentication. This ensures that APIs are only accessible by authorized users or systems. Using short-duration tokens, rather than static API keys, PingOne significantly reduces the risk of stolen credentials being misused. For more information refer to OpenID Connect/OAuth 2 APIs and OpenID Connect/OAuth 2.
+description: Describes measures PingOne takes and steps you can take to prevent API attacks, including OAuth 2.0, rate limiting, and TLS encryption
 component: pingone-api
 page_id: pingone-api:foundations:api-security/api-attack-prevention
 canonical_url: https://developer.pingidentity.com/pingone-api/foundations/api-security/api-attack-prevention.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-14
 section_ids:
   what-pingone-does-to-prevent-against-api-attacks: What PingOne does to prevent against API attacks
   what-you-can-do-to-prevent-api-attacks-for-your-pingone-deployment: What you can do to prevent API attacks for your PingOne deployment
@@ -142,25 +146,25 @@ section_ids:
 
 ## What PingOne does to prevent against API attacks
 
-* API access is secured using OAuth 2.0, which provides token-based authentication. This ensures that APIs are only accessible by authorized users or systems. Using short-duration tokens, rather than static API keys, PingOne significantly reduces the risk of stolen credentials being misused. For more information refer to [OpenID Connect/OAuth 2 APIs](../auth-apis-overview/openid-connect-oauth-2.html) and [OpenID Connect/OAuth 2](../../auth/openid-connect-oauth-2.html).
+* API access is secured using OAuth 2.0, which provides token-based authentication. This ensures that APIs are only accessible by authorized users or systems. Using short-duration tokens, rather than static API keys, PingOne significantly reduces the risk of stolen credentials being misused. For more information refer to [OpenID Connect/OAuth 2 APIs](../auth-apis-overview/openid-connect-oauth-2.html) and [OpenID Connect/OAuth 2](../../auth/openid-connect-oauth-2/index.html).
 
-* User authentication is secured using OpenID Connect (OIDC) on top of OAuth 2.0, reducing the risk of API abuse by verifying user identities before granting access. For more information refer to [Authentication flow states](../authentication-concepts/pingone-authentication-flow-states.html).
+* User authentication is secured using OpenID Connect (OIDC) on top of OAuth 2.0, reducing the risk of API abuse by verifying user identities before granting access. For more information refer to [Authentication flow states](../authentication-concepts/pingone-authentication-flow-states/index.html).
 
-* API authentication is secured using JSON Web Tokens (JWTs). JWTs are compact, encrypted tokens containing JSON content (claims) that are signed to ensure their integrity. PingOne verifies the signature of each JWT before granting access to APIs. For more information refer to [Introduction to JSON Web Tokens (JWT)](https://docs.pingidentity.com/developer-resources/dev_jwt_jose_overview.html), [Access tokens and ID tokens](../authentication-concepts/access-tokens-and-id-tokens.html), [Token](../../auth/openid-connect-oauth-2/token-intro.html), and [Configuration options](../../auth/openid-connect-oauth-2.html#configuration-options).
+* API authentication is secured using JSON Web Tokens (JWTs). JWTs are compact, encrypted tokens containing JSON content (claims) that are signed to ensure their integrity. PingOne verifies the signature of each JWT before granting access to APIs. For more information refer to [Access tokens and ID tokens](../authentication-concepts/access-tokens-and-id-tokens/index.html), [Token](../../auth/openid-connect-oauth-2/token/index.html), and [Configuration options](../../auth/auth-config-options/index.html).
 
 * An API gateway is used for centralized management of API requests, and adherence to PingOne security protocols. The API gateway acts as an intermediary between clients and backend services, managing API traffic going through endpoints that require API authentication. The API gateway applies security policies, enforces rate limits, and handles authentication for API requests.
 
-* Token expiration is enforced, ensuring that tokens expire after a predefined period. In case of suspicious activity or compromised tokens, tokens can be immediately revoked, rendering them useless to attackers. For more information refer to [Access tokens and ID tokens](../authentication-concepts/access-tokens-and-id-tokens.html).
+* Token expiration is enforced, ensuring that tokens expire after a predefined period. In case of suspicious activity or compromised tokens, tokens can be immediately revoked, rendering them useless to attackers. For more information refer to [Access tokens and ID tokens](../authentication-concepts/access-tokens-and-id-tokens/index.html).
 
 * Rate limiting is enforced to control the volume of API requests that a user or system can make within a certain time frame. This prevents API abuse, such as brute-force attacks, credential stuffing, or excessive traffic that could degrade performance or lead to service outages. For more information refer to [PingOne standard platform limits](https://docs.pingidentity.com/pingone/getting_started_with_pingone/p1_platform_limits.html).
 
-* Transport Layer Security (TLS) is used to encrypt all API communications between clients, services, and PingOne. This ensures that data transmitted via APIs is protected from interception and tampering during transit, preventing Man-in-the-Middle (MitM) attacks. For more information refer to [TLS and cipher suite requirements](../../before-you-begin/introduction.html#tls-and-cipher-suite-requirements).
+* Transport Layer Security (TLS) is used to encrypt all API communications between clients, services, and PingOne. This ensures that data transmitted via APIs is protected from interception and tampering during transit, preventing Man-in-the-Middle (MitM) attacks. For more information refer to [TLS and cipher suite requirements](../../before-you-begin/index.html#tls-and-cipher-suite-requirements).
 
 ## What you can do to prevent API attacks for your PingOne deployment
 
-* Ensure that PingOne API credentials are securely stored and managed. Avoid hardcoding client secrets in applications or exposing them in public repositories. For more information refer to [Configuration options](../../auth/openid-connect-oauth-2.html#configuration-options) and [PingOne Credentials](../../credentials/introduction.html).
+* Ensure that PingOne API credentials are securely stored and managed. Avoid hardcoding client secrets in applications or exposing them in public repositories. For more information refer to [Configuration options](../../auth/openid-connect-oauth-2/index.html#configuration-options) and [PingOne Credentials](../../credentials/index.html).
 
-* Implement Role-Based Access Control (RBAC) by defining OAuth scopes for your API users and applications, ensuring that they only have access to the resources they need. This limits the attack surface by preventing over-privileged access to sensitive data or services. For more information refer to [Roles, scopes, and permissions](../pingone-roles-scopes-and-permissions.html).
+* Implement Role-Based Access Control (RBAC) by defining OAuth scopes for your API users and applications, ensuring that they only have access to the resources they need. This limits the attack surface by preventing over-privileged access to sensitive data or services. For more information refer to [Roles, scopes, and permissions](../pingone-roles-scopes-and-permissions/index.html).
 
 * Use a Web Application Firewall (WAF) in front of your applications to protect against common API attacks like SQL injection, XSS, and DDoS attacks. A WAF inspects incoming API traffic and blocks malicious requests before they reach your application, ensuring that only legitimate traffic passes through.
 
@@ -168,12 +172,13 @@ section_ids:
 
 ---
 title: API requests
-description: This section discusses making requests to public endpoints using geographic domains in your PingOne environment. If you use the Postman environment template retrieved when you Download the PingOne Postman collections, set the value of {{tld}} to the top level domain (TLD) appropriate to your region. Refer to PingOne API domains in the PingOne Platform APIs for more information. When you set {{tld}}, the {{…​Path}} variables are also set to the appropriate region.
+description: Explains PingOne API request conventions, including regional endpoints, authorization, HTTP methods, UUIDs, and placeholder syntax
 component: pingone-api
 page_id: pingone-api:foundations:conventions/pingone-api-requests
 canonical_url: https://developer.pingidentity.com/pingone-api/foundations/conventions/pingone-api-requests.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-12
 section_ids:
   public-endpoints: Public endpoints
   authorization: Authorization
@@ -197,7 +202,7 @@ section_ids:
 
 ## Public endpoints
 
-This section discusses making requests to public endpoints using geographic domains in your PingOne environment. If you use the Postman environment template retrieved when you [Download the PingOne Postman collections](../../before-you-begin/introduction.html#the-pingone-postman-collections), set the value of `{{tld}}` to the top level domain (TLD) appropriate to your region. Refer to [PingOne API domains](../../before-you-begin/introduction.html#pingone-api-domains) in the *PingOne Platform APIs* for more information. When you set `{{tld}}`, the `{{…​Path}}` variables are also set to the appropriate region.
+This section discusses making requests to public endpoints using geographic domains in your PingOne environment. If you use the Postman environment template retrieved when you [Download the PingOne Postman collections](../../before-you-begin/index.html#the-pingone-postman-collections), set the value of `{{tld}}` to the top level domain (TLD) appropriate to your region. Refer to [PingOne API domains](../../before-you-begin/index.html#pingone-api-domains) in the *PingOne Platform APIs* for more information. When you set `{{tld}}`, the `{{…​Path}}` variables are also set to the appropriate region.
 
 PingOne offers separate services that each require all its API requests go to an exclusive domain. Use the tables below to determine the service endpoint and top level domain `{{tld}}` value of the geography appropriate for your environment:
 
@@ -214,16 +219,12 @@ PingOne offers separate services that each require all its API requests go to an
 | - | ---------------------------------------------------------------------------------------------- |
 |   | An organization can define and manage environments in only one geographic domain at this time. |
 
-| Service            | Postman variable      | Endpoint                                     | Description                                                       |
-| ------------------ | --------------------- | -------------------------------------------- | ----------------------------------------------------------------- |
-| **Environments**   | `{{apiPath}}`         | `https://api.pingone.{{tld}/v1`              | PingOne API services for environments.                            |
-| **Authentication** | `{{authPath}}`        | `https://auth.pingone.{{tld}}`               | PingOne API services for authentication.                          |
-| **DaVinci**        | `{{orchestratePath}}` | `https://orchestrate-api.pingone.{{tld}}/v1` | PingOne API services for DaVinci Management.                      |
-| **SCIM**           | `{{scimPath}}`        | `https://scim-api.pingone.{{tld}}`           | PingOne API services for Cross-domain Identity Management (SCIM). |
-
-|   |                                                                                                                                                      |
-| - | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | The trailing `/v1` is required in the `{{apiPath}}` and `{{orchestratePath}}` variables but must be excluded from `{{authPath}}` and `{{scimPath}}`. |
+| Service            | Postman variable      | Endpoint                                  | Description                                                       |
+| ------------------ | --------------------- | ----------------------------------------- | ----------------------------------------------------------------- |
+| **Environments**   | `{{apiPath}}`         | `https://api.pingone.{{tld}`              | PingOne API services for environments.                            |
+| **Authentication** | `{{authPath}}`        | `https://auth.pingone.{{tld}}`            | PingOne API services for authentication.                          |
+| **DaVinci**        | `{{orchestratePath}}` | `https://orchestrate-api.pingone.{{tld}}` | PingOne API services for DaVinci Management.                      |
+| **SCIM**           | `{{scimPath}}`        | `https://scim-api.pingone.{{tld}}`        | PingOne API services for Cross-domain Identity Management (SCIM). |
 
 ## Authorization
 
@@ -377,13 +378,13 @@ Placeholders are also used to specify external identity provider attributes. For
 
 The following table shows the PingOne resources that use Placeholder syntax in POST requests.
 
-| PingOn resource                                                                          | Placeholder example                                                                                                                                                      |
-| ---------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| [Sign-on policy actions](../../platform/sign-on-policies/sign-on-policy-actions.html)    | `${session.lastSignOn.at}` `${session.lastSignOn.withAuthenticator.pwd.at}` `${session.lastSignOn.withAuthenticator.mfa.at}` `${flow.request.http.remoteIp}` `${user.*}` |
-| [Identity providers](../../platform/identity-provider-management.html)                   | `${providerAttributes.<IdP attribute name>}`                                                                                                                             |
-| [Notifications templates](../../platform/notifications.html)                             | `${user.username}` `${OTP}`                                                                                                                                              |
-| [Resource attributes](../../platform/resources/resource-attributes.html)                 | `${user.email}`                                                                                                                                                          |
-| [SAML attribute mapping](../../platform/applications/application-attribute-mapping.html) | `${user.id}`                                                                                                                                                             |
+| PingOn resource                                                                                | Placeholder example                                                                                                                                                      |
+| ---------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| [Sign-on policy actions](../../platform/sign-on-policies/sign-on-policy-actions/index.html)    | `${session.lastSignOn.at}` `${session.lastSignOn.withAuthenticator.pwd.at}` `${session.lastSignOn.withAuthenticator.mfa.at}` `${flow.request.http.remoteIp}` `${user.*}` |
+| [Identity providers](../../platform/identity-provider-management/index.html)                   | `${providerAttributes.<IdP attribute name>}`                                                                                                                             |
+| [Notifications templates](../../platform/notifications/index.html)                             | `${user.username}` `${OTP}`                                                                                                                                              |
+| [Resource attributes](../../platform/resources/resource-attributes/index.html)                 | `${user.email}`                                                                                                                                                          |
+| [SAML attribute mapping](../../platform/applications/application-attribute-mapping/index.html) | `${user.id}`                                                                                                                                                             |
 
 ### Request model and query parameter expandable sections
 
@@ -710,12 +711,13 @@ The response error looks like this:
 
 ---
 title: API responses
-description: The PingOne API includes information about the result of the operation in the HTTP headers. This enables you to determine the appropriate action to take without having to parse the response body.
+description: Explains PingOne API response conventions, including HTTP headers, response codes, HAL data structure, relationships, and caching
 component: pingone-api
 page_id: pingone-api:foundations:conventions/pingone-api-responses
 canonical_url: https://developer.pingidentity.com/pingone-api/foundations/conventions/pingone-api-responses.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-11
 section_ids:
   http-response-headers: HTTP response headers
   http-response-codes: HTTP response codes
@@ -985,9 +987,9 @@ These relationships and references are represented as follows:
 
 * References as attributes have an `id` value and can also have additional attributes (such as `displayName`).
 
-|   |                                                                                                                                         |
-| - | --------------------------------------------------------------------------------------------------------------------------------------- |
-|   | For information about error messages, refer to [Error codes](../../platform/reference.html#error-codes) in the *PingOne Platform APIs*. |
+|   |                                                                                                                                               |
+| - | --------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | For information about error messages, refer to [Error codes](../../platform/reference/index.html#error-codes) in the *PingOne Platform APIs*. |
 
 ## Caching
 
@@ -1025,12 +1027,13 @@ The PingOne API generally implements HTTP caching of operation responses. When H
 
 ---
 title: Applications
-description: Application resources define the connection between PingOne and the actual application (also known as a client connection). PingOne supports several application types. When you make a request to define a new application, you must specify the type property that specifies one of the following application types:
+description: Describes PingOne application types and the endpoints to manage application connections, grants, role assignments, and attribute mapping
 component: pingone-api
 page_id: pingone-api:foundations:management-apis-overview/application-management-apis
 canonical_url: https://developer.pingidentity.com/pingone-api/foundations/management-apis-overview/application-management-apis.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-11
 section_ids:
   managing-applications: Managing applications
 ---
@@ -1069,46 +1072,47 @@ Application resources define the connection between PingOne and the actual appli
 
 ## Managing applications
 
-The base endpoint, `/v1/environments/{{envID}}/applications`, provides endpoint operations to create, read, update, and delete OIDC and SAML application connections. There are `POST` request examples to show the required properties to create each type of application connection. For more information, refer to [Application Operations](../../platform/applications/applications-1.html) in the *PingOne Platform APIs*.
+The base endpoint, `/v1/environments/{{envID}}/applications`, provides endpoint operations to create, read, update, and delete OIDC and SAML application connections. There are `POST` request examples to show the required properties to create each type of application connection. For more information, refer to [Application Operations](../../platform/applications/applications-1/index.html) in the *PingOne Platform APIs*.
 
-The secret endpoint, `/v1/environments/{{envID}}/applications/{{appID}}/secret`, provides endpoint operations to read and update the application's secret, if the requesting actor has a superset of the application's role assignments. For more information, refer to [Application Secret](../../platform/applications/application-secret.html) in the *PingOne Platform APIs*.
+The secret endpoint, `/v1/environments/{{envID}}/applications/{{appID}}/secret`, provides endpoint operations to read and update the application's secret, if the requesting actor has a superset of the application's role assignments. For more information, refer to [Application Secret](../../platform/applications/application-secret/index.html) in the *PingOne Platform APIs*.
 
 Applications support the following additional configuration properties:
 
 * **Application resource grants**
 
-  The application resource grants endpoint, `/v1/environments/{{envID}}/applications/{{appID}}/grants`, provides endpoint operations to create, read, update, and delete the resource grant associated with the application connection. For more information, refer to [Application Resource Grants](../../platform/applications/application-resource-grants.html) in the *PingOne Platform APIs*.
+  The application resource grants endpoint, `/v1/environments/{{envID}}/applications/{{appID}}/grants`, provides endpoint operations to create, read, update, and delete the resource grant associated with the application connection. For more information, refer to [Application Resource Grants](../../platform/applications/application-resource-grants/index.html) in the *PingOne Platform APIs*.
 
 * **Application sign-on policy assignments**
 
-  The application sign-on policy assignments endpoint, `/v1/environments/{{envID}}/applications/{{appID}}/signOnPolicyAssignments`, provides endpoint operations to create, read, update, and delete the sign-on policies associated with the application connection. For more information, refer to [Application Sign-On Policy Assignments](../../platform/applications/application-sign-on-policy-assignments.html) in the *PingOne Platform APIs*.
+  The application sign-on policy assignments endpoint, `/v1/environments/{{envID}}/applications/{{appID}}/signOnPolicyAssignments`, provides endpoint operations to create, read, update, and delete the sign-on policies associated with the application connection. For more information, refer to [Application Sign-On Policy Assignments](../../platform/applications/application-sign-on-policy-assignments/index.html) in the *PingOne Platform APIs*.
 
 * **Application role assignments**
 
-  The application role assignments endpoint, `/v1/environments/{{envID}}/applications/{{appID}}/roleAssignments`, provides endpoint operations to create, read, update, and delete the role assignments associated with the application connection. For more information, refer to [Application Role Assignments](../../platform/applications/application-role-assignments.html) in the *PingOne Platform APIs*.
+  The application role assignments endpoint, `/v1/environments/{{envID}}/applications/{{appID}}/roleAssignments`, provides endpoint operations to create, read, update, and delete the role assignments associated with the application connection. For more information, refer to [Application Role Assignments](../../platform/applications/application-role-assignments/index.html) in the *PingOne Platform APIs*.
 
 * **Application attribute mapping**
 
-  The application attribute mapping endpoint, `/v1/environments/{{envID}}/applications/{{appID}}/roleAssignments`, lets you customize the content of an ID token or a SAML assertion by adding custom attributes and their values. For more information, refer to [Application Attribute Mapping](../../platform/applications/application-attribute-mapping.html) in the *PingOne Platform APIs*.
+  The application attribute mapping endpoint, `/v1/environments/{{envID}}/applications/{{appID}}/roleAssignments`, lets you customize the content of an ID token or a SAML assertion by adding custom attributes and their values. For more information, refer to [Application Attribute Mapping](../../platform/applications/application-attribute-mapping/index.html) in the *PingOne Platform APIs*.
 
 * **Application MFA push credentials**
 
-  Push credentials are required for sending push notifications to a native application. The endpoint, `/v1/environments/{{envID}}/applications/{{appID}}/pushCredentials`, provides endpoint operations to create, read, update, and delete the push credentials associated with the application connection. This section provides examples for both `APNS` and `FCM` push credential types. For more information, refer to [Application MFA Push Credentials](../../platform/applications/application-mfa-push-credentials.html) in the *PingOne Platform APIs*.
+  Push credentials are required for sending push notifications to a native application. The endpoint, `/v1/environments/{{envID}}/applications/{{appID}}/pushCredentials`, provides endpoint operations to create, read, update, and delete the push credentials associated with the application connection. This section provides examples for both `APNS` and `FCM` push credential types. For more information, refer to [Application MFA Push Credentials](../../platform/applications/application-mfa-push-credentials/index.html) in the *PingOne Platform APIs*.
 
 > **Collapse: Related topics**
 >
-> * [Authorization and authentication by application type](../authentication-concepts/authorization-and-authentication-by-application-type.html)
+> * [Authorization and authentication by application type](../authentication-concepts/authorization-and-authentication-by-application-type/index.html)
 
 ---
 
 ---
 title: Authentication flow states
-description: An application's sign-on policy determines the flow states and the corresponding actions required to complete an authentication workflow. When the authentication workflow begins, the flow gets the list of sign-on policies assigned to the application and evaluates the policy conditions that must be met to complete sign on. The sign-on policy evaluation logic is shown in the diagram below:
+description: Explains PingOne authentication flow states and the sign-on actions, such as login, MFA, and progressive profiling, that complete a workflow
 component: pingone-api
-page_id: pingone-api:foundations:authentication-concepts/pingone-authentication-flow-states
-canonical_url: https://developer.pingidentity.com/pingone-api/foundations/authentication-concepts/pingone-authentication-flow-states.html
+page_id: pingone-api:foundations:authentication-concepts/pingone-authentication-flow-states/index
+canonical_url: https://developer.pingidentity.com/pingone-api/foundations/authentication-concepts/pingone-authentication-flow-states/index.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-11
 section_ids:
   common-authentication-actions: Common authentication actions
 ---
@@ -1117,9 +1121,9 @@ section_ids:
 
 An application's sign-on policy determines the flow states and the corresponding actions required to complete an authentication workflow. When the authentication workflow begins, the flow gets the list of sign-on policies assigned to the application and evaluates the policy conditions that must be met to complete sign on. The sign-on policy evaluation logic is shown in the diagram below:
 
-![Sign-on policy evaluation logic](../../_images/p1_PolicyLogic.svg)
+![Sign-on policy evaluation logic](../../../_images/p1_PolicyLogic.svg)
 
-For more information about sign-on policies, refer to [Sign-on policies](../../platform/sign-on-policies.html), [Sign-on policy actions](../../platform/sign-on-policies/sign-on-policy-actions.html), and [Application sign-on policy assignments](../../platform/applications/application-sign-on-policy-assignments.html) in the *PingOne Platform APIs*.
+For more information about sign-on policies, refer to [Sign-on policies](../../../platform/sign-on-policies/index.html), [Sign-on policy actions](../../../platform/sign-on-policies/sign-on-policy-actions/index.html), and [Application sign-on policy assignments](../../../platform/applications/application-sign-on-policy-assignments/index.html) in the *PingOne Platform APIs*.
 
 ## Common authentication actions
 
@@ -1127,7 +1131,7 @@ The PingOne flow API supports single-factor and multi-factor actions to complete
 
 PingOne supports a progressive profiling action that prompts users to provide additional data at sign on. This action type does not authenticate users. It is used only to obtain additional profile data.
 
-* [Login action](pingone-authentication-flow-states/login-action.html)
+* [Login action](login-action.html)
 
   * Sign on with username and password
 
@@ -1137,51 +1141,52 @@ PingOne supports a progressive profiling action that prompts users to provide ad
 
   * Sign on with identity provider
 
-* [Identifier first action](pingone-authentication-flow-states/identifier-first-action.html)
+* [Identifier first action](identifier-first-action.html)
 
-* [Multi-factor (MFA) action](pingone-authentication-flow-states/multi-factor-mfa-action.html)
+* [Multi-factor (MFA) action](multi-factor-mfa-action.html)
 
   * Push authentication
 
-* [Progressive profiling action](pingone-authentication-flow-states/progressive-profiling-action.html)
+* [Progressive profiling action](progressive-profiling-action.html)
 
-|   |                                                                                                                                               |
-| - | --------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | For more information about flow states and their associated sign-on actions, refer to [Flows](../../auth/flows.html) in *Platform Auth APIs*. |
+|   |                                                                                                                                                        |
+| - | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+|   | For more information about flow states and their associated sign-on actions, refer to [Flows](../../../auth/flows/index.html) in *Platform Auth APIs*. |
 
 ---
 
 ---
 title: Authorization and authentication
-description: The following section provides additional information about PingOne platform authorization and authentication workflows. It also includes detailed information about access tokens and ID tokens.
+description: Overviews PingOne authorization and authentication workflow concepts, including application types, grant types, flow states, and tokens
 component: pingone-api
-page_id: pingone-api:foundations:authentication-concepts
-canonical_url: https://developer.pingidentity.com/pingone-api/foundations/authentication-concepts.html
+page_id: pingone-api:foundations:authentication-concepts/index
+canonical_url: https://developer.pingidentity.com/pingone-api/foundations/authentication-concepts/index.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-11
 ---
 
 # Authorization and authentication
 
 The following section provides additional information about PingOne platform authorization and authentication workflows. It also includes detailed information about access tokens and ID tokens.
 
-* [Authorization and authentication by application type](authentication-concepts/authorization-and-authentication-by-application-type.html)
+* [Authorization and authentication by application type](authorization-and-authentication-by-application-type/index.html)
 
   PingOne supports several application types. When you define a new application, you must specify the `type` property value that best describes the application.
 
-* [Authorization flow by grant type](authentication-concepts/authorization-flow-by-grant-type.html)
+* [Authorization flow by grant type](authorization-flow-by-grant-type/index.html)
 
   Authorization and authentication sign-on flows depend on the application's grant type. When you define a new application, you must specify its grant type.
 
-* [PingOne authentication flow states](authentication-concepts/pingone-authentication-flow-states.html)
+* [PingOne authentication flow states](pingone-authentication-flow-states/index.html)
 
   An application's sign-on policy determines the flow states and the corresponding actions required to complete the workflow.
 
-* [Access tokens and ID tokens](authentication-concepts/access-tokens-and-id-tokens.html)
+* [Access tokens and ID tokens](access-tokens-and-id-tokens/index.html)
 
   Access tokens and ID tokens are credential strings that provide authorization to access a protected resource. All tokens in PingOne are signed JSON Web Tokens (JWTs).
 
-* [Postman collection-level authorization](authentication-concepts/postman-collection-level-authorization.html)
+* [Postman collection-level authorization](postman-collection-level-authorization/index.html)
 
   We use Postman to create our PingOne API docs, and have supplied our Postman collections for you to download. There's also an accompanying Postman Environment template already populated with the variables used in the collections. In PingOne collections, the authorization method is defined at the collection level, and this section describes how to use collection-level request authentication in Postman.
 
@@ -1189,31 +1194,32 @@ The following section provides additional information about PingOne platform aut
 
 ---
 title: Authorization and authentication APIs
-description: The PingOne Authorization and Authentication APIs provide services to query the authorization server, run authentication workflows, and receive access tokens from the authorization server. An authentication workflow can include local authentication actions (login), multi-factor authentication actions, and other external actions. The Authentication API includes the flow orchestration and action services needed to configure an authentication workflow.
+description: Overviews the PingOne Authorization and Authentication APIs, including OAuth 2, OpenID Connect, SAML 2.0, external authentication, and flow orchestration
 component: pingone-api
-page_id: pingone-api:foundations:auth-apis-overview
-canonical_url: https://developer.pingidentity.com/pingone-api/foundations/auth-apis-overview.html
+page_id: pingone-api:foundations:auth-apis-overview/index
+canonical_url: https://developer.pingidentity.com/pingone-api/foundations/auth-apis-overview/index.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-11
 ---
 
 # Authorization and authentication APIs
 
 The PingOne Authorization and Authentication APIs provide services to query the authorization server, run authentication workflows, and receive access tokens from the authorization server. An authentication workflow can include local authentication actions (login), multi-factor authentication actions, and other external actions. The Authentication API includes the flow orchestration and action services needed to configure an authentication workflow.
 
-* [OAuth 2 and OpenID Connect](auth-apis-overview/openid-connect-oauth-2.html)
+* [OAuth 2 and OpenID Connect](openid-connect-oauth-2.html)
 
   OpenID Connect is an authentication protocol that PingOne-connected applications can use to authenticate users and get user data through claims. The OAuth 2 framework defines several methods by which a client can obtain authorization to access protected resources using an access token.
 
-* [SAML 2.0](auth-apis-overview/saml-2.0.html)
+* [SAML 2.0](saml-2.0.html)
 
   The SAML service provides support for the SAML protocol to authorize clients and allow clients to obtain a requestor's authentication state. The SAML service implements functions to initiate SAML 2.0 single sign-on and single logout authentication flows.
 
-* [External authentication](auth-apis-overview/external-authentication.html)
+* [External authentication](external-authentication.html)
 
   The external authentication API provides endpoints for performing end user authentication with PingOne-supported external identity providers. End users are redirected immediately to the authentication initialization endpoint at the external authentication service. After sign-on, they are redirected back to Pingone, where the external authentication API validates the token or assertion returned from the external identity provider.
 
-* [Flows](auth-apis-overview/flows.html)
+* [Flows](flows.html)
 
   The PingOne flow orchestration service configures the steps required to authenticate the actor that initiates the authentication request. The service is responsible for the authentication session and making calls to specific actions required by the authentication workflow.
 
@@ -1221,12 +1227,13 @@ The PingOne Authorization and Authentication APIs provide services to query the 
 
 ---
 title: Authorization and authentication by application type
-description: PingOne supports several application types. When you make a POST {{apiPath}}/v1/environments/{{envID}}/applications request to define a new application, you must specify the type property that best describes the application. PingOne supports the following application types:
+description: Describes the PingOne application types (web, native, single-page, non-interactive, worker) and the authorization flow for each
 component: pingone-api
-page_id: pingone-api:foundations:authentication-concepts/authorization-and-authentication-by-application-type
-canonical_url: https://developer.pingidentity.com/pingone-api/foundations/authentication-concepts/authorization-and-authentication-by-application-type.html
+page_id: pingone-api:foundations:authentication-concepts/authorization-and-authentication-by-application-type/index
+canonical_url: https://developer.pingidentity.com/pingone-api/foundations/authentication-concepts/authorization-and-authentication-by-application-type/index.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-11
 section_ids:
   authorization-flow-steps: Authorization flow steps
 ---
@@ -1235,23 +1242,23 @@ section_ids:
 
 PingOne supports several application types. When you make a `POST {{apiPath}}/v1/environments/{{envID}}/applications` request to define a new application, you must specify the `type` property that best describes the application. PingOne supports the following application types:
 
-* [Web applications](authorization-and-authentication-by-application-type/web-applications.html)
+* [Web applications](web-applications.html)
 
   A browser-based application with a server-side component, such as ASP, CGI, JSP/Java, Node.js, or Ruby on Rails applications.
 
-* [Native applications](authorization-and-authentication-by-application-type/native-and-single-page-applications.html)
+* [Native applications](native-and-single-page-applications.html)
 
   An application that is installed and run directly on the local operating system, like Java, Objective-C, Swift, or React applications. Native applications are typically intended for native devices.
 
-* [Single-page applications](authorization-and-authentication-by-application-type/native-and-single-page-applications.html)
+* [Single-page applications](native-and-single-page-applications.html)
 
   A browser-based application that runs on the front-end with no server-side component, such as Sencha Touch, AngularJS, and React applications. A single-page application runs on the client side after it loads, so it cannot keep a client secret.
 
-* [Non-interactive applications](authorization-and-authentication-by-application-type/non-interactive-applications.html)
+* [Non-interactive applications](non-interactive-applications.html)
 
   A web application that does not require user interaction through the web browser, like a command line interface, a service, or a daemon.
 
-* [Worker applications](authorization-and-authentication-by-application-type/worker-applications.html)
+* [Worker applications](worker-applications.html)
 
   An administrator application that can interact with platform APIs. Access to platform APIs is determined by the user's or application's role assignments.
 
@@ -1265,18 +1272,19 @@ An authorization grant gives applications the capability to authenticate users a
 
 3. For `authorization_code` and `client_credentials` grants, the application calls the `/{{envID}}/as/token` endpoint to acquire the access token.
 
-For more information about authorization, refer to [OpenID Connect/OAuth 2](../auth-apis-overview/openid-connect-oauth-2.html).
+For more information about authorization, refer to [OpenID Connect/OAuth 2](../../auth-apis-overview/openid-connect-oauth-2.html).
 
 ---
 
 ---
 title: Authorization code grant type
-description: If the grant type is authorization_code, PingOne returns an authorization code in the response to the application's authorization request. The Location HTTP header returned by the /as/resume endpoint contains the authorization code. The authorization code returned in the resume endpoint response is used by the /as/token endpoint to get an ID token, an access token, or both.
+description: Walks through the PingOne authorization_code grant type flow using GET and POST authorize requests to obtain an access token
 component: pingone-api
 page_id: pingone-api:foundations:authentication-concepts/authorization-flow-by-grant-type/authorization-code-grant-type
 canonical_url: https://developer.pingidentity.com/pingone-api/foundations/authentication-concepts/authorization-flow-by-grant-type/authorization-code-grant-type.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-11
 section_ids:
   authorization-code-authorize-request-using-get: Authorization code authorize request using GET
   authorization-code-authorize-request-using-post: Authorization code authorize request using POST
@@ -1298,7 +1306,7 @@ curl --location --request GET '{{authPath}}/{{envID}}/as/authorize?response_type
 
 The request requires the following properties in the request URL:
 
-* `response_type`: For an authorization\_code grant the response type is `code`.
+* `response_type`: For an authorization_code grant the response type is `code`.
 
 * `client_id`: The application's ID.
 
@@ -1306,7 +1314,7 @@ The request requires the following properties in the request URL:
 
 * `scope`: The permissions that specify accessible resources.
 
-The response returns a `Location` HTTP header that specifies the URL for the sign-on screen and the flow ID for the sign-on workflow. For information about additional optional query parameters that can be set on the request, refer to [Authorize (authorization\_code)](../../../auth/openid-connect-oauth-2/authorize-authorization_code.html#get-authorize-authorization_code-get) in *Platform Auth APIs*.
+The response returns a `Location` HTTP header that specifies the URL for the sign-on screen and the flow ID for the sign-on workflow. For information about additional optional query parameters that can be set on the request, refer to [Authorize (authorization_code)](../../../auth/openid-connect-oauth-2/authorization/authorize-authorization_code.html#get-authorize-authorization_code-get) in *Platform Auth APIs*.
 
 **Step 2:** After the sign-on flow completes, call the resume endpoint.
 
@@ -1339,7 +1347,7 @@ The request requires the following properties in the request URL:
 
 * `redirect_uri`: The URL that specifies the return entry point of the application.
 
-The token endpoint response returns the access token, ID token, or both. For information about the authorization code token request based on the application's `tokenEndpointAuthMethod`, refer to [Token](../../../auth/openid-connect-oauth-2/token-intro.html) in *Platform Auth APIs*.
+The token endpoint response returns the access token, ID token, or both. For information about the authorization code token request based on the application's `tokenEndpointAuthMethod`, refer to [Token](../../../auth/openid-connect-oauth-2/token/index.html) in *Platform Auth APIs*.
 
 ## Authorization code authorize request using POST
 
@@ -1358,7 +1366,7 @@ curl --location --request POST '{{authPath}}/{{envID}}/as/authorize' \
 
 The request requires the following properties in the request URL:
 
-* `response_type`: For an authorization\_code grant the response type is `code`.
+* `response_type`: For an authorization_code grant the response type is `code`.
 
 * `client_id`: The application's ID.
 
@@ -1366,7 +1374,7 @@ The request requires the following properties in the request URL:
 
 * `scope`: The permissions that specify accessible resources.
 
-The response returns a `Location` HTTP header that specifies the URL for the sign-on screen and the flow ID for the sign-on workflow. For information about additional optional query parameters that can be set on the request, refer to [Authorize (authorization\_code)](../../../auth/openid-connect-oauth-2/authorize-authorization_code-1.html#post-authorize-authorization_code-post) in *Platform Auth APIs*.
+The response returns a `Location` HTTP header that specifies the URL for the sign-on screen and the flow ID for the sign-on workflow. For information about additional optional query parameters that can be set on the request, refer to [Authorize (authorization_code)](../../../auth/openid-connect-oauth-2/authorization/authorize-authorization_code-1.html#post-authorize-authorization_code-post) in *Platform Auth APIs*.
 
 **Step 2:** After the sign-on flow completes, call the resume endpoint.
 
@@ -1389,60 +1397,62 @@ curl --location --request POST '{{authPath}}/{{envID}}/as/token' \
 
 ---
 title: Authorization flow by grant type
-description: The authorization request flow depends on the grant type you have selected for the application.
+description: Describes the PingOne authorization request flow for each supported grant type, including authorization code, implicit, hybrid, and CIBA
 component: pingone-api
-page_id: pingone-api:foundations:authentication-concepts/authorization-flow-by-grant-type
-canonical_url: https://developer.pingidentity.com/pingone-api/foundations/authentication-concepts/authorization-flow-by-grant-type.html
+page_id: pingone-api:foundations:authentication-concepts/authorization-flow-by-grant-type/index
+canonical_url: https://developer.pingidentity.com/pingone-api/foundations/authentication-concepts/authorization-flow-by-grant-type/index.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-11
 ---
 
 # Authorization flow by grant type
 
 The authorization request flow depends on the grant type you have selected for the application.
 
-* [Authorization code grant type](authorization-flow-by-grant-type/authorization-code-grant-type.html)
+* [Authorization code grant type](authorization-code-grant-type.html)
 
   If the application's grant type is `authorization_code`, PingOne returns an authorization code in the response to the application's authorization request. The authorization code is used by the `/as/token` endpoint to get an ID token, an access token, or both.
 
-* [Implicit grant type](authorization-flow-by-grant-type/implicit-grant-type.html)
+* [Implicit grant type](implicit-grant-type.html)
 
   If the application's grant type is `implicit`, the response to the authorization request is an `id_token`, a `token` (access token), or both, depending on the value of the `response_type` parameter in the authorization request.
 
-* [Hybrid grant type](authorization-flow-by-grant-type/hybrid-grant-type.html)
+* [Hybrid grant type](hybrid-grant-type.html)
 
   In a hybrid authorize flow, an authorization code is returned from the authorization endpoint, some tokens are returned from the authorization endpoint, and others are returned from the token endpoint. The authorization endpoint's `response_type` property specifies the `code` type and it also specifies `id_token`, or `token`, or both.
 
-* [PKCE parameters](authorization-flow-by-grant-type/pkce-parameters.html)
+* [PKCE parameters](pkce-parameters.html)
 
   For added security, you can also include Proof Key for Code Exchange (PKCE) parameters in the authorization request for the code and hybrid grant types. PKCE for OAuth uses either plain text or a cryptographic hash of a random string that is included in the authorization request (`code_challenge`) along with the encoding method used (`code_challenge_method`). When the authorization code is issued in the response, the original plain text or random string (`code_verifier`) is included in the token request.
 
-* [Device code grant type](authorization-flow-by-grant-type/device-code-grant-type.html)
+* [Device code grant type](device-code-grant-type.html)
 
   If the grant type is `device_code`, PingOne returns an activation code in the response to the `POST /{{envID}}/as/device_authorization` request. It starts a flow that gives OAuth-enabled devices, such as smart TVs, the ability to complete user authorization and access protected resources.
 
-* [Token exchange grant type](authorization-flow-by-grant-type/token-exchange-grant-type.html)
+* [Token exchange grant type](token-exchange-grant-type.html)
 
   If an application's grant type is `token_exchange`, PingOne returns an access token in response to the `POST /{{envID}}/as/token` request. The application presents a `subject_token` and optionally, an `actor_token`. Currently, this grant type only issues custom resource access tokens, and not PingOne API access tokens (those with an audience of `https://api.pingone.<region>`).
 
-* [CIBA grant type](authorization-flow-by-grant-type/ciba-grant-type.html)
+* [CIBA grant type](ciba-grant-type.html)
 
   If the grant type is `ciba`, PingOne returns an `auth_req_id` value in the response to the `POST /{{envID}}/as/cibaAuthorization` request. The application then polls the `POST /{{envID}}/as/token` endpoint for tokens, including the `auth_req_id` value in the body of the request.
 
-|   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | The PingOne platform also supports the `client_credentials` grant type for admin applications, which is not covered in this topic. For information about admin applications that use the `client_credentials` grant type, refer to [Authorization and authentication by application type](authorization-and-authentication-by-application-type.html) and [Token Admin App (client\_credentials)](../../auth/openid-connect-oauth-2/token-admin-app-client_credentials.html#post-token-admin-app-client_credentials) in the *PingOne Platform APIs*. |
+|   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | The PingOne platform also supports the `client_credentials` grant type for admin applications, which is not covered in this topic. For information about admin applications that use the `client_credentials` grant type, refer to [Authorization and authentication by application type](../authorization-and-authentication-by-application-type/index.html) and [Token Admin App (client_credentials)](../../../auth/openid-connect-oauth-2/token/token-admin-app-client_credentials.html) in the *PingOne Platform APIs*. |
 
 ---
 
 ---
 title: Bearer Token
-description: Bearer tokens enable requests to authenticate using an access key, such as a JSON Web Token (JWT) used by PingOne. The token is three base64url strings separated by periods, and specified in the variable used by the Authorization header.
+description: Explains how to configure a PingOne Postman collection to use Bearer Token authorization and retrieve an access token
 component: pingone-api
 page_id: pingone-api:foundations:authentication-concepts/postman-collection-level-authorization/bearer-token
 canonical_url: https://developer.pingidentity.com/pingone-api/foundations/authentication-concepts/postman-collection-level-authorization/bearer-token.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-11
 ---
 
 # Bearer Token
@@ -1465,7 +1475,7 @@ Postman appends the **Token** value to the text `Bearer` in the required format 
 
 Before you can run Postman requests that use `Bearer Token`, you must retrieve an access token. To retrieve an access token manually in Postman:
 
-1. Run [Token Admin App (client\_credentials)](../../../auth/openid-connect-oauth-2/token-admin-app-client_credentials.html#post-token-admin-app-client_credentials).
+1. Run [Token Admin App (client_credentials)](../../../auth/openid-connect-oauth-2/token/token-admin-app-client_credentials.html).
 
    The script on the Tests tab sets the `{{accessToken}}` environment variable to `access_token` from the response.
 
@@ -1476,261 +1486,14 @@ Before you can run Postman requests that use `Bearer Token`, you must retrieve a
 ---
 
 ---
-title: Best practices
-description: Transient API errors occur because of temporary service interruptions such as network issues, rate limits, server congestion, and other similar occurrences. This topic outlines the recommended best practices for implementing retry-handling logic to maintain resiliency in the applications and integrations with PingOne.
-component: pingone-api
-page_id: pingone-api:foundations:best-practices
-canonical_url: https://developer.pingidentity.com/pingone-api/foundations/best-practices.html
-llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-section_ids:
-  transient-api-errors: Transient API errors
-  accounting-for-latency: Accounting for latency
-  eventual-consistency-and-retryable-404-errors: Eventual Consistency and retryable 404 errors
-  eventual-consistency-and-delete-operations: Eventual consistency and delete operations
-  retry-handling-logic-with-exponential-backoff-and-jitter: Retry-handling logic with exponential backoff and jitter
-  honor-the-retry-after-header: Honor the Retry-After header
-  dont-make-retry-handling-a-catchall: Don't make retry handling a catchall
-  fail-gracefully: Fail gracefully
-  security-considerations: Security considerations
-  sample-retry-handler: Sample retry handler
----
-
-# Best practices
-
-## Transient API errors
-
-Transient API errors occur because of temporary service interruptions such as network issues, rate limits, server congestion, and other similar occurrences. This topic outlines the recommended best practices for implementing retry-handling logic to maintain resiliency in the applications and integrations with PingOne.
-
-These HTTP status codes indicate temporary issues that can resolve over time, making them ideal candidates for automatic retries by a calling client.
-
-| HTTP status code              | Description                                                                                                                                                                                                                                                                                                                                           |
-| ----------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `408` (Request Timeout)       | The server took too long to respond to the client request, possibly caused by a weak or slow connection to the client application.                                                                                                                                                                                                                    |
-| `429` (Too Many Requests)     | Rate limiting controls denied the request, often because the user is over quota for the request. Retry after the delay specified in the `Retry-After` header. Refer to [PingOne Platform Limits](https://docs.pingidentity.com/pingone/getting_started_with_pingone/p1_platform_limits.html) in the PingOne admin documentation for more information. |
-| `500` (Internal Server Error) | There was an unexpected server-side error encountered while processing the request.                                                                                                                                                                                                                                                                   |
-| `502` (Bad Gateway)           | Suggests a temporary network issue or service stack disruption caused by a communication problem between servers.                                                                                                                                                                                                                                     |
-| `503` (Service Unavailable)   | The server cannot process the request, possibly resulting from a temporary service outage or in-progress deployment.                                                                                                                                                                                                                                  |
-| `504` (Gateway Timeout)       | A downstream server (for example, DNS) didn't respond in time to complete the request.                                                                                                                                                                                                                                                                |
-
-|   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | These HTTP status codes represent permanent errors or client-side issues that automatic retries cannot resolve. In such cases, automatically retrying the request leads to unnecessary resource consumption or further complications.- `400` (Bad Request): The client sent an invalid request. Fix the issue in the request before trying again.
-
-- `401` (Unauthorized): Authentication is required or failed. Fix the authentication issue before trying again (for example, get a fresh token).
-
-- `403` (Forbidden): The client lacks permission to access the resource. Fix the authorization issue such as getting a new token with additional scopes before trying again. If you receive an `ACCESS_FAILED` error when accessing PingOne endpoints in the period immediately following an environment creation, this may be a transient issue due to propagation latency and can be retried.
-
-- `405` (Method Not Allowed): The HTTP method used is not supported. Retrying with the same method will not resolve the issue.
-
-- `409` (Conflict): Indicates a conflict in the request such as unique constraints for referential integrity. Retrying without addressing the conflict will continue to fail.
-
-- `422` (Unprocessable Entity): The server understands the request but cannot process it due to semantic errors. Fix the issue in the request before trying again. |
-
-## Accounting for latency
-
-API clients can experience latency when creating resources across services in the PingOne platform multi-geography architecture, where the newly created resource has not propagated through the system to allow for the successful completion of a follow-up request. For example, if you create a resource with one internal service, it is possible that other internal services might not be aware of that new resource in time for your code's next step. An immediate call to the second resource can fail. Given this potential for latency, all applications should be written to retry the request.
-
-The primary areas that experience latency are:
-
-* **Applications and Secrets**
-
-  Latency occurs when you create an application and then try immediately to retrieve the system-generated secret.
-
-* **Applications and Scopes**
-
-  Latency occurs when you create an application and then try immediately to retrieve its resource access grants.
-
-* **SAML configuration and attributes**
-
-  Latency occurs when you create a SAML configuration and then try immediately to retrieve its attribute mappings.
-
-* **Environments, role assignments, and applications**
-
-  Latency occurs when you create an environment and then try immediately to retrieve its role assignments or add an application to the new environment.
-
-* **Populations and role assignments**
-
-  Latency occurs when you create a population and then try immediately to retrieve its role assignments.
-
-|   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
-| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-|   | If you use Terraform and you create a new environment, calls to create or read configuration resources in that new environment immediately after creation can generate `401` errors. This occurs because the environment is still propagating on the resource server. This scenario represents a specific case in which an application should be written to initiate a retry for a `401` error. For more information on best practices for implementing retries, refer to [Retries: Best practice for managing transient API errors](../before-you-begin/retry-best-practices.html). |
-
-### Eventual Consistency and retryable 404 errors
-
-Latency most often affects read operations immediately after a create request. For `404 Not Found` responses where eventual consistency can delay resource visibility across services, it is recommended that you retry only if:
-
-* You recently performed a successful create operation on a parent resource (such as Environment or Application), and
-
-* The `404` response is received during a `GET` request for a subordinate resource shortly afterward.
-
-For example, after creating an environment with `POST {{apiPath}}/v1/environments`, an immediate follow-up `GET {{apiPath}}/v1/environments/{{envID}}/signOnPolicies` might return a `404` briefly. Likewise, after creating an application with `POST {{apiPath}}/v1/environments/{{envID}}/applications`, an immediate `GET {{apiPath}}/v1/environments/{{envID}}/applications/{{appID}}/secret` might return a `404` briefly until the secret gets generated asynchronously.
-
-### Eventual consistency and delete operations
-
-Similar to create cases, eventual consistency can affect reading resources after a delete operation. In these cases, subordinate resources might still be readable for a period of time until the system propagates the delete across services.
-
-For example, after deleting an environment with `DELETE {{apiPath}}/v1/environments/{{envID}}`, an immediate read operation on applications with `GET {{apiPath}}/v1/environments/{{envID}}/applications` might return some results temporarily. In such cases, it is recommended that you do not retry the original delete and do not delete the currently readable resource. The system is eventually consistent and will catch up.
-
-For more information about these status codes, refer to [MDN Web Docs HTTP response status codes](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status).
-
-## Retry-handling logic with exponential backoff and jitter
-
-Do not simply create a loop that rapidly re-submits the same request over and over. You could unintentionally end up with a status `429`, trigger rate limiting, or worse have your IP address blocked. Instead, implement an *exponential backoff with jitter* that gradually increases the time between retry attempts. Start small and increase exponentially until reaching maximum delay. This allows the server or network time to recover, and your application will get the response it needs.
-
-For example, you can increase the number of seconds between retries in powers of two. If you add jitter, which involves adding randomness to those retry delays, this will randomize backoff retry delays to avoid "retry storms" when multiple clients are in use simultaneously.
-
-```java
-// Pseudo code
-// Example of an exponential backoff calculator
-function calculateExponentialBackoff(attempt, baseDelay) {
-    jitter = random(0, 100); // Add random jitter
-    return baseDelay * (2 ** attempt) + jitter;
-}
-```
-
-## Honor the Retry-After header
-
-Status codes `429` and `503` often include a `Retry-After` header that specifies one of two things, depending on the status code. For a `429`, it specifies how long the client should wait before retrying the request, designated in number of seconds. For these cases, your retry handler must wait for the amount of time provided by the service.
-
-For a 503 status code, the `Retry-After` header specifies when the service is expected to be available, designated in a date format. In both cases, the `Retry-After` header specifies when your app can reasonably make the request again. You need to do some math on the available date to figure out when you can try again. Or, if the retry delay is too long, then return a friendly error message to the client.
-
-```java
-//Pseudo code
-//Example of using the Retry-After header
-if response.status == 429 or response.status == 503:
-    retryAfter = response.getHeader("Retry-After");
-    if retryAfter exists:
-        wait(retryAfter);
-    else:
-        delay = calculateExponentialBackoff(attempt, baseDelay);
-        wait(delay);
-[source]
-```
-
-## Don't make retry handling a catchall
-
-It's good practice to avoid a catchall approach to errors, particularly if you are implementing retry logic in your API calls. The goal is to create resiliency in your application and provide the best user experience. Do not try to handle all status codes in the same way. The status codes outlined above that support retry logic mean different things with respect to how you should handle them.
-
-The following is an example of an anti-pattern that could result in unintended bad consequences.
-
-```java
-//Psuedo code
-// Example of bad practice
-switch(statusCode) {
-    case 408:
-    case 429:
-    case 500:
-    case 502:
-    case 504:
-    case 503:
-        //callout to service
-    default:
-        //catchall for other status codes
-}
-```
-
-|   |                                                                                               |
-| - | --------------------------------------------------------------------------------------------- |
-|   | Refer to the "Sample retry handler" section below for an example that follows best practices. |
-
-## Fail gracefully
-
-If you reach the maximum number of retries without a successful request, it's important to consider how you handle the error. You need to take into account the user experience as well as your business requirements.
-
-Don't return raw error responses to the user. Provide a useful, friendly error message with instructions on how to retry later or who to contact. If there are business implications to not making a successful request, first consider what operations might need to be rolled back, and any logging that should occur, before or simultaneously with your client error message (particularly in authentication and authorization transactions). You might need to revoke tokens or sessions, depending on your use case.
-
-## Security considerations
-
-To avoid exposing your applications to vulnerabilities or attacks, it is important to design your retry handler properly. The following factors should be considered.
-
-* **Maximum retry counts**
-
-  If your retry logic supports an unlimited number of retries, you could expose your application to resource exhaustion attacks. Attackers can use your application as a proxy for denial of service (DoS) attacks against PingOne APIs or as a conduit for brute force credential-stuffing attacks.
-
-  Consult with your app owners and security teams to determine a reasonable number of retries. Set that as the maximum number of retries in your retry handler in a way that cannot be overridden.
-
-* **Validate reasonable Retry-After limits**
-
-  Similar to the best practice of validating input data at the client and server, you should also validate the `Retry-After` header in API responses when the status code is `429` or `503`. Man-in-the-middle attacks could result in manipulation of the response headers, and an attacker could reset the value to 1, causing your application to retry too often and get rate limited, or worse, have your IP address blocked. Likewise, attackers can reset the value to an extremely long wait time, like 172800 (2 days), causing your customers to abandon your application before a transaction is completed.
-
-  If no `Retry-After` header is present, make sure you have reasonable values set in your exponential-backoff variable number of seconds to avoid rate-limiting, IP blocking, or retry storms.
-
-* **Check for token expiration**
-
-  If your application is retrying requests, keep checking the HTTP status code in case it changes to a `401` (unauthorized), or `403` (forbidden). During your retry attempts, your token could expire, and you should switch to re-authentication before trying again. If you're using OAuth/OIDC, and depending on your security requirements, you have options for silent authentication with the `prompt="none"` parameter, the `login_hint_token` request parameter, or using refresh tokens to get a new token before retrying. These options provide a better user experience rather than forcing users to login again.
-
-* **Alert excessive failures**
-
-  Monitor, log, and alert the number of attempts a user or customer submits while using your application to retry these API calls (if you have that capability from your client application). It could be a sign of a misuse or abuse case you need to handle.
-
-## Sample retry handler
-
-The following psuedo code sample shows these retry logic best practices.
-
-```java
-// Pseudo code
-//Example of retry logic
-function callApiWithRetry(apiEndpoint, maxRetries = 5, baseDelay = 1000) {
-    let attempt = 0;
-
-    while (attempt < maxRetries) {
-        response = makeApiCall(apiEndpoint);
-
-        // Success Case
-        if response.status == 200 || response.status == 202:
-            return response.data;
-
-        // Handle Transient Errors
-        if response.status in [408, 500, 502, 504]:
-            delay = calculateExponentialBackoff(attempt, baseDelay);
-            wait(delay);
-
-        // Handle Rate-Limiting
-        else if response.status == 429 or response.status == 503:
-            retryAfter = response.getHeader("Retry-After");
-            if retryAfter exists:
-                wait(retryAfter);
-            else:
-                delay = calculateExponentialBackoff(attempt, baseDelay);
-                wait(delay);
-
-        // Handle Authentication Failures
-        else if response.status == 401 or response.status == 403:
-            refreshToken(); // Secure token refresh or re-authentication
-            continue;
-
-        // Handle other errors (No retries)
-        else:
-            handleError(response); // Sanitize and log the error
-            throw Error("Request failed with status code: " + response.status);
-
-        // Increment Retry Counter and Monitor
-        attempt += 1;
-        monitorRetries(apiEndpoint, attempt); // Security monitoring for abnormal retry behavior
-    }
-
-    // Fail Gracefully After Max Retries
-    throw Error("Max retries reached. Request failed.");
-}
-
-function calculateExponentialBackoff(attempt, baseDelay) {
-    jitter = random(0, 100); // Add random jitter
-    return baseDelay * (2 ** attempt) + jitter;
-}
-```
-
----
-
----
 title: CIBA grant type
-description: The Client-Initiated Backchannel Authentication (CIBA) flow is an OpenID Connect specification. CIBA involves a consumption device, on which the user interacts with the relying party (RP), and an authentication device, on which the user authenticates with the OpenID Provider and grants consent.
+description: Explains the PingOne Client-Initiated Backchannel Authentication (CIBA) grant type flow, including the authorization and token endpoints
 component: pingone-api
 page_id: pingone-api:foundations:authentication-concepts/authorization-flow-by-grant-type/ciba-grant-type
 canonical_url: https://developer.pingidentity.com/pingone-api/foundations/authentication-concepts/authorization-flow-by-grant-type/ciba-grant-type.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-11
 section_ids:
   ciba-authorization-endpoint: CIBA authorization endpoint
   token-endpoint: Token endpoint
@@ -1771,7 +1534,7 @@ First, the application initiates the CIBA flow with the `POST /{{envID}}/as/ciba
 
 * `login_hint_token`
 
-  The application provides a JWT containing the user ID as a claim. This token is created and signed by the application. Learn more in [Create a login\_hint\_token JWT](../../../auth/auth-config-options/create-a-login_hint_token-jwt.html).
+  The application provides a JWT containing the user ID as a claim. This token is created and signed by the application. Learn more in [Create a login_hint_token JWT](../../../auth/auth-config-options/create-a-login_hint_token-jwt.html).
 
 |   |                                                                      |
 | - | -------------------------------------------------------------------- |
@@ -1829,12 +1592,13 @@ If the CIBA request has expired, PingOne returns the following token response:
 
 ---
 title: Code injection
-description: Strict input validation (such as for form inputs, query parameters, and API requests) is enforced to ensure user-provided data is checked against expected formats. By validating inputs against defined rules (such as, acceptable characters, data types, and length), PingOne prevents attackers from injecting malicious code into application fields.
+description: Describes measures PingOne takes and steps you can take to prevent code injection attacks such as SQL injection and cross-site scripting
 component: pingone-api
 page_id: pingone-api:foundations:api-security/code-injection-prevention
 canonical_url: https://developer.pingidentity.com/pingone-api/foundations/api-security/code-injection-prevention.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-11
 section_ids:
   what-pingone-does-to-prevent-against-code-injection: What PingOne does to prevent against code injection
   what-you-can-do-to-prevent-code-injection-for-your-pingone-deployment-and-applications: What you can do to prevent code injection for your PingOne deployment and applications
@@ -1862,18 +1626,19 @@ section_ids:
 
 * Use secure server configurations for your applications to reduce your attack surface and limit potential vulnerabilities. For instance, disable unnecessary ports and services, and keep software updated with the latest security patches.
 
-* Follow the least privilege principle, ensuring that both users and applications have only the minimum permissions necessary to perform their tasks. This limits the damage that can be done if an attacker successfully executes code. For more information refer to [Roles, scopes, and permissions](../pingone-roles-scopes-and-permissions.html).
+* Follow the least privilege principle, ensuring that both users and applications have only the minimum permissions necessary to perform their tasks. This limits the damage that can be done if an attacker successfully executes code. For more information refer to [Roles, scopes, and permissions](../pingone-roles-scopes-and-permissions/index.html).
 
 ---
 
 ---
 title: Control access to applications through roles and groups
-description: The applications data model includes optional accessControl properties that, when set, specify the conditions that must be met by an authenticating actor to access the application. The application properties that control application access are:
+description: Explains how to use PingOne application accessControl properties to restrict access to OIDC and SAML applications by role or group
 component: pingone-api
 page_id: pingone-api:foundations:pingone-roles-scopes-and-permissions/control-access-to-applications-through-roles-and-groups
 canonical_url: https://developer.pingidentity.com/pingone-api/foundations/pingone-roles-scopes-and-permissions/control-access-to-applications-through-roles-and-groups.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-11
 section_ids:
   application-access-control-for-openid-connect-applications: Application access control for OpenID Connect applications
   application-access-control-for-saml-applications: Application access control for SAML applications
@@ -1885,7 +1650,7 @@ The applications data model includes optional `accessControl` properties that, w
 
 * `accessControl.role.type`
 
-  This property specifies that an administrator role is required to access the application. When set, the only option for this property is `ADMIN_USERS_ONLY`, which means that the actor must be assigned at least one or more of the following administrator roles: Organization Admin, Environment Admin, Identity Data Admin, or Client Application Developer. For more information about roles, refer to [Roles](../../platform/roles.html) in the *PingOne Platform APIs*. If this property is not set, access to the application is not restricted by administrator roles.
+  This property specifies that an administrator role is required to access the application. When set, the only option for this property is `ADMIN_USERS_ONLY`, which means that the actor must be assigned at least one or more of the following administrator roles: Organization Admin, Environment Admin, Identity Data Admin, or Client Application Developer. For more information about roles, refer to [Roles](../../platform/roles/index.html) in the *PingOne Platform APIs*. If this property is not set, access to the application is not restricted by administrator roles.
 
 * `accessControl.group.type`
 
@@ -1913,7 +1678,7 @@ To implement group-based application access control:
 
 2. Set the property value for the `accessControl.group.type`. The options are `ANY_GROUP` and `ALL_GROUPS`.
 
-3. Set the `accessControl.group.groups` property value to list the group IDs to which an actor must belong. For information about obtaining group IDs, refer to [Groups](../../platform/groups.html) in the *PingOne Platform APIs*.
+3. Set the `accessControl.group.groups` property value to list the group IDs to which an actor must belong. For information about obtaining group IDs, refer to [Groups](../../platform/groups/index.html) in the *PingOne Platform APIs*.
 
 If the actor belongs to at least one group (for the `ANY_GROUP` type), or all groups (for the `ALL_GROUPS` type), a token is issued that allows access to the application.
 
@@ -1929,32 +1694,34 @@ When `accessControl` properties are set for a SAML application, the authenticati
 
 ---
 title: Conventions
-description: This topic describes how to call PingOne APIs, how responses are returned by the PingOne resource server, and how collections that support filtering can be fine-tuned using query parameters on the request. The following sections provide information about these conventions:
+description: Overviews the conventions used to call PingOne APIs, including request formatting, response handling, and query parameter filtering
 component: pingone-api
-page_id: pingone-api:foundations:conventions
-canonical_url: https://developer.pingidentity.com/pingone-api/foundations/conventions.html
+page_id: pingone-api:foundations:conventions/index
+canonical_url: https://developer.pingidentity.com/pingone-api/foundations/conventions/index.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-11
 ---
 
 # Conventions
 
 This topic describes how to call PingOne APIs, how responses are returned by the PingOne resource server, and how collections that support filtering can be fine-tuned using query parameters on the request. The following sections provide information about these conventions:
 
-* [PingOne API requests](conventions/pingone-api-requests.html)
+* [PingOne API requests](pingone-api-requests.html)
 
-* [PingOne API responses](conventions/pingone-api-responses.html)
+* [PingOne API responses](pingone-api-responses.html)
 
 ---
 
 ---
 title: Custom scopes
-description: Resources are the protected endpoints that applications request access to using OAuth 2 authorization services. The PingOne platform includes two predefined resources, PingOne API, which is a defined resource that represents the PingOne APIs, and openid, which represents OpenID Connect scopes. These resources have self scopes that grant an actor permission to perform CRUD operations on the actor's data (such as p1:create:device, p1:read:device, p1:update:device, and p1:delete:device).
+description: Explains custom resource scopes and custom PingOne API scopes, and how they control access to protected endpoints and user attributes
 component: pingone-api
 page_id: pingone-api:foundations:pingone-roles-scopes-and-permissions/access-services-through-scopes-and-roles/custom-scopes
 canonical_url: https://developer.pingidentity.com/pingone-api/foundations/pingone-roles-scopes-and-permissions/access-services-through-scopes-and-roles/custom-scopes.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-11
 section_ids:
   custom-resource-scopes: Custom resource scopes
   custom-pingone-api-scopes: Custom PingOne API scopes
@@ -1980,10 +1747,111 @@ The request could not be completed. One or more validation errors were in the re
 
 OIDC-based applications in PingOne can now request an access token that accesses scopes from multiple custom resources in a single request. This capability simplifies the application authentication and authorization process and reduces the number of requests an application must make. By default, if more than one resource is associated with the application, actors need to make separate authorization requests to get a token for the desired resource scopes. However, if the `requestScopesForMultipleResourcesEnabled` OIDC property on the application is set to `true`, then the application accepts scopes from multiple custom resources, eliminating the need to make multiple authorize requests.
 
-For more information, refer to [Applications OIDC settings data model](../../../platform/applications/application-management.html#applications-oidc-settings-data-model), [Resource Scopes](../../../platform/resources/resource-scopes.html), and [Create scope](../../../platform/resources/resource-scopes/create-custom-resource-scope.html#post-create-custom-resource-scope) in the *PingOne Platform APIs*.
+For more information, refer to [Applications OIDC settings data model](../../../platform/application-management.html#applications-oidc-settings-data-model), [Resource Scopes](../../../platform/resources/resource-scopes/index.html), and [Create scope](../../../platform/resources/resource-scopes/create-custom-resource-scope.html#post-create-custom-resource-scope) in the *PingOne Platform APIs*.
 
 ## Custom PingOne API scopes
 
 Custom PingOne API scopes control access to specific user schema attributes. As described above, a PingOne platform custom scope is based on an existing platform scope and uses the `schemaAttributes` property in the scope's definition to list the specific user attributes that the end user has permission to read or update. For example, a scope that grants permission to update only the user's email address would list only the `email` attribute in the `schemaAttributes` property. This PingOne custom scope is named by adding a descriptive suffix to the base PingOne scope name: `p1:update:user:email-only`.
 
 For more information about defining custom PingOne API scopes, refer to [Create PingOne access control scope](../../../platform/resources/resource-scopes/create-pingone-access-control-scope.html#post-create-pingone-access-control-scope) in the *PingOne Platform APIs*.
+
+---
+
+---
+title: Device code grant type
+description: Walks through the PingOne device_code grant type flow used by OAuth-enabled devices such as smart TVs to authorize access
+component: pingone-api
+page_id: pingone-api:foundations:authentication-concepts/authorization-flow-by-grant-type/device-code-grant-type
+canonical_url: https://developer.pingidentity.com/pingone-api/foundations/authentication-concepts/authorization-flow-by-grant-type/device-code-grant-type.html
+llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-11
+section_ids:
+  authorization-for-a-device-authorize-grant-request: Authorization for a device authorize grant request
+---
+
+# Device code grant type
+
+If the grant type is `device_code`, PingOne returns an activation code in the response to the `POST /{{envID}}/as/device_authorization` request. This authorize endpoint is used only with device authorization grant flows. It starts a flow that gives OAuth enabled devices such as smart TVs the ability to complete user authorization and access protected resources.
+
+Unlike the PingOne `as/authorize` request, which returns a `302 Location` header in the response, the `/as/device_authorization` endpoint returns a `200 OK` successful operation message. The response body returns the `user_code` property value (the activation code) as well as the verification URI (a short web address) that end users visit on another device to enter (or confirm) the activation code.
+
+The steps below outline the device authorization grant flow.
+
+## Authorization for a device authorize grant request
+
+The `POST /{{envID}}/as/device_authorization` request takes all configuration paramaters in the endpoint's request body. Parameters and their values are Form Serialized by adding the parameter names and values to the entity body of the HTTP request and specifying the `Content-Type: application/x-www-form-urlencoded` request header.
+
+**Step 1:** Send an authorize request to the PingOne authorization server using `POST`.
+
+```bash
+curl --location --request POST '{{authPath}}/{{envID}}/as/device_authorization' \
+--header 'Content-Type: application/x-www-form-urlencoded' \
+--data-urlencode 'client_id={{deviceAppID}}' \
+--data-urlencode 'scope=openid'
+```
+
+The request requires the following properties:
+
+* `client_id`: The application ID for an application that specifies the `device_code` grant type.
+
+* `scope`: The permissions that specify accessible resources.
+
+The response returns a `200 OK` message with the following properties:
+
+```json
+{
+    "device_code": "96624b82-1469-46a9-a4f8-544970b62c37",
+    "user_code": "GKHF-JQBC",
+    "verification_uri": "https://auth.pingone.com/abfba8f6-49eb-49f5-a5d9-80ad5c98f9f6/device",
+    "verification_uri_complete": "https://auth.pingone.com/abfba8f6-49eb-49f5-a5d9-80ad5c98f9f6/device?user_code=GKHF-JQBC",
+    "expires_in": 600,
+    "interval": 5
+}
+```
+
+**Step 2:** Start the flow using `GET {{authPath}}/{{envID}}/device/{{appIdentifier}}` or `GET {{authPath}}/{{envID}}/device`.
+
+|   |                                                                                                                                                                                                                                                                                                                                         |
+| - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | The endpoint's `{{appIdentifier}}` value is set on the application configuration. This ID can be the PingOne application ID or another unique secondary identifier. When using the `/device` endpoint for a device authorization grant flow without the application identifier, the flow uses the environment's default sign-on policy. |
+
+The response returns a `Location` HTTP header that specifies the URL for the sign-on screen and the flow ID.
+
+**Step 3:** The sign-on flow calls the `POST /{{envID}}/flows/{{flowID}}` flow orchestration endpoints to prompt the end user to complete the actions required by the sign-on policy, and perform the following two device code actions: (1) confirm the device activation code, and (2) accept device authorization grant consent.
+
+This flow action confirms the activation code:
+
+```bash
+curl --location --request POST '{{authPath}}/{{envID}}/flows/{{flowID}}' \
+--header 'Content-Type: application/vnd.pingidentity.deviceAuthGrant.userCode.verify+json' \
+--data-raw '{
+    "userCode": "{{userCode}}"
+}'
+```
+
+This flow action accepts consent:
+
+```bash
+curl --location --request POST '{{authPath}}/{{envID}}/flows/{{flowID}}' \
+--header 'Content-Type: application/vnd.pingidentity.deviceAuthGrant.consent+json' \
+--data-raw '{
+	"accept": true
+}'
+```
+
+**Step 4:** Call the token endpoint to exchange the device code for a token. Note that the `grant_type` parameter in the request body uses the IETF-specified syntax to identify the device code grant type (`urn:ietf:params:oauth:grant-type:device_code`).
+
+```bash
+curl --location --request POST '{{authPath}}/{{envID}}/as/token' \
+--header 'Content-Type: application/x-www-form-urlencoded' \
+--data-urlencode 'grant_type=urn:ietf:params:oauth:grant-type:device_code' \
+--data-urlencode 'device_code={{deviceCode}}' \
+--data-urlencode 'client_id={{deviceAppID}}'
+```
+
+|   |                                                                                                                                                                   |
+| - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | In the token request above, the application's configuration has the `tokenEndpointAuthMethod` set to `NONE`. In this case, no `Authorization` header is required. |
+
+For more information about the endpoints used in a device authorization grant flow, refer to [Device Authorization Grant](../../../auth/openid-connect-oauth-2/device-authorization-grant/index.html) and [Device Authorization Grant Flows](../../../auth/flows/index.html#device-authorization-grant-flows) in the *Platform Auth APIs*.

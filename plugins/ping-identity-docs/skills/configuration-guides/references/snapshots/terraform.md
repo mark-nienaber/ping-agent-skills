@@ -1,9 +1,11 @@
 ---
 title: Configuring SAML SSO with Terraform and PingOne
-description: Learn how to enable Terraform sign-on from the PingOne SSO console (IdP-initiated sign-on) and direct Terraform login using PingOne SSO (SP-initiated sign-on).
+description: Configure SAML SSO with Terraform and PingOne — IdP-initiated and SP-initiated sign-on
 component: configuration_guides
 page_id: configuration_guides:terraform:config_saml_terraform_p1
 canonical_url: https://docs.pingidentity.com/configuration_guides/terraform/config_saml_terraform_p1.html
+llms_txt: https://docs.pingidentity.com/configuration_guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: May 15, 2024
 section_ids:
   before-you-begin: Before you begin

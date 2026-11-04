@@ -4,6 +4,8 @@ description: The following tables list the tasks users can perform on their own 
 component: pgic
 page_id: pgic:pgic_task_summary_table:pgic_task_table
 canonical_url: http://docs.pingidentity.com/pgic/pgic_task_summary_table/pgic_task_table.html
+llms_txt: http://docs.pingidentity.com/pgic/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: May 6, 2024
 section_ids:
   self-service-tasks: Self-service tasks

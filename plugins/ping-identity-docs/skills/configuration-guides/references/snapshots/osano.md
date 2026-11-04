@@ -1,9 +1,11 @@
 ---
 title: Configuring SAML SSO with Osano and PingOne
-description: Learn how to enable Osano sign-on from the PingOne console (IdP-initiated sign-on) and direct Osano sign-on using PingOne (SP-initiated sign-on).
+description: Configure SAML SSO with Osano and PingOne — IdP-initiated and SP-initiated sign-on
 component: configuration_guides
 page_id: configuration_guides:osano:config_saml_osano_p1
 canonical_url: https://docs.pingidentity.com/configuration_guides/osano/config_saml_osano_p1.html
+llms_txt: https://docs.pingidentity.com/configuration_guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: May 15, 2024
 section_ids:
   before-you-begin: Before you begin

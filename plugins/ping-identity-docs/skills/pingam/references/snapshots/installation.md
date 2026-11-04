@@ -7,6 +7,7 @@ page_id: pingam:installation:prepare-apache-tomcat
 canonical_url: https://docs.pingidentity.com/pingam/8.1/installation/prepare-apache-tomcat.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 keywords: ["Install", "Web Container"]
 page_aliases: ["install-guide:prepare-apache-tomcat.adoc"]
 section_ids:
@@ -139,6 +140,7 @@ page_id: pingam:installation:configure-sites
 canonical_url: https://docs.pingidentity.com/pingam/8.1/installation/configure-sites.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 keywords: ["Install", "Deployment"]
 page_aliases: ["install-guide:configure-sites.adoc"]
 section_ids:
@@ -303,6 +305,7 @@ page_id: pingam:installation:customize-openam
 canonical_url: https://docs.pingidentity.com/pingam/8.1/installation/customize-openam.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 keywords: ["Customization", "Install", "Deployment"]
 page_aliases: ["install-guide:customize-openam.adoc"]
 ---
@@ -330,6 +333,7 @@ page_id: pingam:installation:start-over-install
 canonical_url: https://docs.pingidentity.com/pingam/8.1/installation/start-over-install.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 keywords: ["Install", "Backup &amp; Restore"]
 page_aliases: ["install-guide:start-over-install.adoc"]
 ---
@@ -399,6 +403,7 @@ page_id: pingam:installation:deploy-openam
 canonical_url: https://docs.pingidentity.com/pingam/8.1/installation/deploy-openam.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 keywords: ["Install", "Deployment", "Topology"]
 page_aliases: ["install-guide:deploy-openam.adoc"]
 ---
@@ -452,6 +457,7 @@ page_id: pingam:installation:download-openam-software
 canonical_url: https://docs.pingidentity.com/pingam/8.1/installation/download-openam-software.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 keywords: ["Install"]
 page_aliases: ["install-guide:download-openam-software.adoc"]
 ---
@@ -482,7 +488,7 @@ When you unzip the archive of the entire package, you get samples, snmp and lega
 | `Fedlet-8.1.1.zip`             | An AM Fedlet, a light-weight SAML 2.0 service provider.The Fedlet lets you set up a federated deployment without the need of a fully-featured service provider.                                                                                                                                                                                                                                                                                                                                                 |
 | `IDPDiscovery-8.1.1.war`       | An IdP Discovery Profile (SAMLv2 binding profile) for its IdP Discovery service. The profile keeps track of the identity providers for each user.                                                                                                                                                                                                                                                                                                                                                               |
 | `sample-trees-8.1.1.zip`       | Sample authentication trees for demonstration purposes. The trees are provided as JSON files and can be imported into an AM deployment using *Amster*. Find information on importing files using Amster in [Import configuration data](../amster/import-config.html).                                                                                                                                                                                                                                           |
-| `Truststore-Utility-8.1.1.zip` | A utility to help with creating a trust store for use with web authentication.Find more information in the `readme.md` in the `.zip` archive and [MFA: Web authentication (WebAuthn) and passkeys](../am-authentication/authn-mfa-webauthn.html).                                                                                                                                                                                                                                                               |
+| `Truststore-Utility-8.1.1.zip` | A utility to help with creating a trust store for use with web authentication.Find more information in the `readme.md` in the `.zip` archive and [Web authentication (WebAuthn) and passkeys](../am-authentication/authn-mfa-webauthn.html).                                                                                                                                                                                                                                                                    |
 
 ---
 
@@ -495,6 +501,7 @@ page_id: pingam:installation:prepare-ibm-websphere
 canonical_url: https://docs.pingidentity.com/pingam/8.1/installation/prepare-ibm-websphere.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 keywords: ["Install", "Web Container"]
 page_aliases: ["install-guide:prepare-ibm-websphere.adoc"]
 section_ids:
@@ -584,6 +591,7 @@ page_id: pingam:installation:installing-instances
 canonical_url: https://docs.pingidentity.com/pingam/8.1/installation/installing-instances.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 keywords: ["Install", "Availability"]
 page_aliases: ["install-guide:installing-instances.adoc"]
 section_ids:
@@ -633,6 +641,7 @@ page_id: pingam:installation:preface
 canonical_url: https://docs.pingidentity.com/pingam/8.1/installation/preface.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 keywords: ["Install"]
 page_aliases: ["index.adoc", "release-notes:preface.adoc", "install-guide:preface.adoc"]
 ---
@@ -696,6 +705,7 @@ page_id: pingam:installation:interactive-install
 canonical_url: https://docs.pingidentity.com/pingam/8.1/installation/interactive-install.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 keywords: ["Install"]
 page_aliases: ["install-custom.adoc", "install-guide:interactive-install.adoc"]
 ---
@@ -752,7 +762,7 @@ Follow these steps to install a single AM instance, or to install the first inst
 
    * Platform Locale
 
-     The platform locale of your server. Supported locales include en\_US (English), de (German), es (Spanish), fr (French), ja (Japanese), ko (Korean), zh\_CN (Simplified Chinese), and zh\_TW (Traditional Chinese).
+     The platform locale of your server. Supported locales include en_US (English), de (German), es (Spanish), fr (French), ja (Japanese), ko (Korean), zh_CN (Simplified Chinese), and zh_TW (Traditional Chinese).
 
    * Configuration Directory
 
@@ -921,6 +931,7 @@ page_id: pingam:installation:prepare-jboss
 canonical_url: https://docs.pingidentity.com/pingam/8.1/installation/prepare-jboss.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 keywords: ["Install", "Web Container"]
 page_aliases: ["install-guide:prepare-jboss.adoc"]
 section_ids:
@@ -1053,6 +1064,7 @@ page_id: pingam:installation:post-install
 canonical_url: https://docs.pingidentity.com/pingam/8.1/installation/post-install.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 keywords: ["Install"]
 page_aliases: ["install-guide:post-install.adoc"]
 ---
@@ -1136,6 +1148,7 @@ page_id: pingam:installation:passive-install
 canonical_url: https://docs.pingidentity.com/pingam/8.1/installation/passive-install.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 keywords: ["Install", "Silent install", "Non-interactive install"]
 page_aliases: ["install-guide:passive-install.adoc"]
 ---
@@ -1179,6 +1192,7 @@ page_id: pingam:installation:passive-install-rest
 canonical_url: https://docs.pingidentity.com/pingam/8.1/installation/passive-install-rest.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 page_aliases: ["silent-install.adoc", "install-guide:passive-install-configurator.adoc", "passive-install-configurator.adoc"]
 section_ids:
   examples: Examples
@@ -1318,27 +1332,27 @@ Configuration complete!
 
 The following table lists the configuration properties that you can set when installing AM over REST.
 
-| Property name          | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           | Example values                                         |
-| ---------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------ |
-| SERVER\_URL            | The protocol, fully qualified domain name, and port to use for the AM server instance.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | `https://am.example.com:8443`                          |
-| DEPLOYMENT\_URI        | The deployment URI to use for the AM server instance.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | `/am`                                                  |
-| BASE\_DIR              | The configuration directory where AM stores files.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    | `$HOME/am`                                             |
-| locale                 | The user locale.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | `en_GB`                                                |
-| PLATFORM\_LOCALE       | The locale of the AM server instance.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | `en_US`                                                |
-| AM\_ENC\_KEY           | The password encryption key, which must be the same on all servers in a site configuration.If this property is excluded, AM generates a random password encryption key on install that you can view in the AM admin UI, under Deployment > Servers > *server name* > Security.                                                                                                                                                                                                                                                                                                                                        | `O6QWwHPO4os+zEz3Nqn/2daAYWyiFE32`                     |
-| ADMIN\_PWD             | The password of the AM administrator user `amAdmin`, which must be at least 8 characters in length and must be the same on all servers in a site configuration.                                                                                                                                                                                                                                                                                                                                                                                                                                                       | `Ch4ng31t`                                             |
-| ADMIN\_CONFIRM\_PWD    | Confirmation of the `amAdmin` password.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               | `Ch4ng31t`                                             |
-| COOKIE\_DOMAIN         | The name of the trusted DNS domain AM returns to a browser when it grants a session ID to a user.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     | `am.example.com`                                       |
-| acceptLicense          | Set this to `true` to auto-accept the software license agreement, which suppresses the display of the license acceptance page during the install.                                                                                                                                                                                                                                                                                                                                                                                                                                                                     | `true`                                                 |
-| DATA\_STORE            | Set this to `dirServer` to indicate an external PingDS directory server for the configuration store.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  | `dirServer`                                            |
-| DIRECTORY\_SSL         | Set this to `SSL` to use LDAP with SSL. DS is configured for LDAPS by default. To use LDAP without SSL, set this to `SIMPLE`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | `SSL`                                                  |
-| DIRECTORY\_SERVER      | The fully qualified domain name of the configuration store directory server host.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     | `ds.example.com`                                       |
-| DIRECTORY\_PORT        | The LDAPS or LDAP port number for the configuration store directory server.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           | `1636`                                                 |
-| DIRECTORY\_ADMIN\_PORT | The administration port number for the configuration store directory server.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          | `4444`                                                 |
-| ROOT\_SUFFIX           | The root suffix distinguished name (DN) for the configuration store.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  | `ou=am-config`                                         |
-| DS\_DIRMGRDN           | The bind DN of the configuration store user account.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  | `uid=am-config,ou=admins,ou=am-config`                 |
-| DS\_DIRMGRPASSWD       | The password for the bind DN.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | `Ch4ng31t`                                             |
-| USERSTORE\_TYPE        | The type of directory server to use for the identity store.Possible values are:- `LDAPv3ForAD`: Active Directory with host and port settings
+| Property name        | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           | Example values                                         |
+| -------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------ |
+| SERVER_URL           | The protocol, fully qualified domain name, and port to use for the AM server instance.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | `https://am.example.com:8443`                          |
+| DEPLOYMENT_URI       | The deployment URI to use for the AM server instance.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | `/am`                                                  |
+| BASE_DIR             | The configuration directory where AM stores files.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    | `$HOME/am`                                             |
+| locale               | The user locale.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | `en_GB`                                                |
+| PLATFORM_LOCALE      | The locale of the AM server instance.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | `en_US`                                                |
+| AM_ENC_KEY           | The password encryption key, which must be the same on all servers in a site configuration.If this property is excluded, AM generates a random password encryption key on install that you can view in the AM admin UI, under Deployment > Servers > *server name* > Security.                                                                                                                                                                                                                                                                                                                                        | `O6QWwHPO4os+zEz3Nqn/2daAYWyiFE32`                     |
+| ADMIN_PWD            | The password of the AM administrator user `amAdmin`, which must be at least 8 characters in length and must be the same on all servers in a site configuration.                                                                                                                                                                                                                                                                                                                                                                                                                                                       | `Ch4ng31t`                                             |
+| ADMIN_CONFIRM_PWD    | Confirmation of the `amAdmin` password.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               | `Ch4ng31t`                                             |
+| COOKIE_DOMAIN        | The name of the trusted DNS domain AM returns to a browser when it grants a session ID to a user.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     | `am.example.com`                                       |
+| acceptLicense        | Set this to `true` to auto-accept the software license agreement, which suppresses the display of the license acceptance page during the install.                                                                                                                                                                                                                                                                                                                                                                                                                                                                     | `true`                                                 |
+| DATA_STORE           | Set this to `dirServer` to indicate an external PingDS directory server for the configuration store.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  | `dirServer`                                            |
+| DIRECTORY_SSL        | Set this to `SSL` to use LDAP with SSL. DS is configured for LDAPS by default. To use LDAP without SSL, set this to `SIMPLE`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | `SSL`                                                  |
+| DIRECTORY_SERVER     | The fully qualified domain name of the configuration store directory server host.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     | `ds.example.com`                                       |
+| DIRECTORY_PORT       | The LDAPS or LDAP port number for the configuration store directory server.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           | `1636`                                                 |
+| DIRECTORY_ADMIN_PORT | The administration port number for the configuration store directory server.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          | `4444`                                                 |
+| ROOT_SUFFIX          | The root suffix distinguished name (DN) for the configuration store.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  | `ou=am-config`                                         |
+| DS_DIRMGRDN          | The bind DN of the configuration store user account.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  | `uid=am-config,ou=admins,ou=am-config`                 |
+| DS_DIRMGRPASSWD      | The password for the bind DN.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | `Ch4ng31t`                                             |
+| USERSTORE_TYPE       | The type of directory server to use for the identity store.Possible values are:- `LDAPv3ForAD`: Active Directory with host and port settings
 
 - `LDAPv3ForADDC`: Active Directory with domain name setting
 
@@ -1353,15 +1367,15 @@ The following table lists the configuration properties that you can set when ins
 - `LDAPv3ForOpenDS`: PingDS
 
 - `LDAPv3ForPingDirectory`: PingDirectory | `LDAPv3ForOpenDS`                                      |
-| USERSTORE\_DOMAINNAME  | If `USERSTORE_TYPE` is `LDAPv3ForADDC`, set this to the Active Directory Domain Name. Then only set the `USERSTORE_SSL`, `USERSTORE_MGRDN`, and `USERSTORE_PASSWD` properties to let Active Directory use DNS to retrieve service locations. Otherwise, don't set this property.                                                                                                                                                                                                                                                                                                                                      | `ad.example.com`                                       |
-| USERSTORE\_SSL         | Set this to `SSL` to use LDAP with SSL. DS is configured for LDAPS by default. To use LDAP without SSL, set this to `SIMPLE`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | `SSL`                                                  |
-| USERSTORE\_HOST        | The fully qualified domain name of the identity store directory server.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               | `ds.example.com`                                       |
-| USERSTORE\_PORT        | The LDAPS or LDAP port number for the identity store directory server.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | `1636`                                                 |
-| USERSTORE\_SUFFIX      | The root suffix DN for the identity store.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            | `ou=identities`                                        |
-| USERSTORE\_MGRDN       | The bind DN of the identity store user account.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | `uid=am-identity-bind-account,ou=admins,ou=identities` |
-| USERSTORE\_PASSWD      | The password for the bind DN.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | `Ch4ng31t`                                             |
-| LB\_SITE\_NAME         | The name of the AM site. Required when installing a server as part of a site configuration.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           | `lb`                                                   |
-| LB\_PRIMARY\_URL       | The load balancer URL for the site. Required when installing a server as part of a site configuration.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | `https://lb.example.com:8443/am`                       |
+| USERSTORE_DOMAINNAME | If `USERSTORE_TYPE` is `LDAPv3ForADDC`, set this to the Active Directory Domain Name. Then only set the `USERSTORE_SSL`, `USERSTORE_MGRDN`, and `USERSTORE_PASSWD` properties to let Active Directory use DNS to retrieve service locations. Otherwise, don't set this property.                                                                                                                                                                                                                                                                                                                                      | `ad.example.com`                                       |
+| USERSTORE_SSL        | Set this to `SSL` to use LDAP with SSL. DS is configured for LDAPS by default. To use LDAP without SSL, set this to `SIMPLE`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | `SSL`                                                  |
+| USERSTORE_HOST       | The fully qualified domain name of the identity store directory server.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               | `ds.example.com`                                       |
+| USERSTORE_PORT       | The LDAPS or LDAP port number for the identity store directory server.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | `1636`                                                 |
+| USERSTORE_SUFFIX     | The root suffix DN for the identity store.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            | `ou=identities`                                        |
+| USERSTORE_MGRDN      | The bind DN of the identity store user account.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | `uid=am-identity-bind-account,ou=admins,ou=identities` |
+| USERSTORE_PASSWD     | The password for the bind DN.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | `Ch4ng31t`                                             |
+| LB_SITE_NAME         | The name of the AM site. Required when installing a server as part of a site configuration.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           | `lb`                                                   |
+| LB_PRIMARY_URL       | The load balancer URL for the site. Required when installing a server as part of a site configuration.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | `https://lb.example.com:8443/am`                       |
 
 ---
 
@@ -1374,6 +1388,7 @@ page_id: pingam:installation:passive-install-amster
 canonical_url: https://docs.pingidentity.com/pingam/8.1/installation/passive-install-amster.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 page_aliases: ["user-guide:amster-install-am.adoc", "amster:configure-am-with-amster.adoc"]
 section_ids:
   install-am-examples: Examples
@@ -1800,6 +1815,7 @@ page_id: pingam:installation:passive-install-fbc
 canonical_url: https://docs.pingidentity.com/pingam/8.1/installation/passive-install-fbc.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 page_aliases: ["install-guide:passive-install-fbc.adoc"]
 section_ids:
   fbc-startup: FBC initial startup
@@ -1947,7 +1963,7 @@ This command sets the following properties:
 
 * Identity and application stores to `ds.example.com:1636`
 
-* Identity and application store connection details to the values set if you install your <https://docs.pingidentity.com/pingds/8.1> servers with the corresponding [setup profiles](https://docs.pingidentity.com/pingds/8.1/install-guide/setup-profiles.html).
+* Identity and application store connection details to the values set if you install your DS servers with the corresponding [setup profiles](https://docs.pingidentity.com/pingds/8.1/install-guide/setup-profiles.html).
 
 * Location of truststore to `/path/to/truststore`. Learn more in [Prepare the truststore](prepare-trust-store.html).
 
@@ -2066,6 +2082,7 @@ page_id: pingam:installation:prepare-configuration-store
 canonical_url: https://docs.pingidentity.com/pingam/8.1/installation/prepare-configuration-store.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 keywords: ["Install", "Configuration Store"]
 page_aliases: ["install-guide:prepare-configuration-store.adoc"]
 ---
@@ -2135,6 +2152,7 @@ page_id: pingam:installation:prepare-containers
 canonical_url: https://docs.pingidentity.com/pingam/8.1/installation/prepare-containers.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 keywords: ["Install", "Web Container"]
 page_aliases: ["install-guide:prepare-containers.adoc"]
 ---
@@ -2155,3 +2173,146 @@ The following table summarizes the high-level tasks required to prepare your con
 | Secure the containerThere are many ways to deploy and configure your environment for AM. Enforce HTTPS connections to AM where possible.If a Java Security Manager is enabled for your web application container, add permissions before installing AM. | - [Secure connections to the AM container](configure-container-HTTPS.html)
 
 - [Use stronger encryption algorithms](prepare-aeswrap.html)        |
+
+---
+
+---
+title: Prepare an FQDN
+description: Configure PingAM with a fully qualified domain name and set cookie domain names to ensure proper browser cookie handling
+component: pingam
+version: 8.1
+page_id: pingam:installation:prepare-networking
+canonical_url: https://docs.pingidentity.com/pingam/8.1/installation/prepare-networking.html
+llms_txt: https://docs.pingidentity.com/pingam/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
+keywords: ["Install"]
+page_aliases: ["install-guide:prepare-networking.adoc"]
+---
+
+# Prepare an FQDN
+
+AM requires that you provide an FQDN when you configure it. Before you set up AM, be sure that your system has an FQDN, such as `am.example.com`. For evaluation purposes, you can give your system an alias using the `/etc/hosts` file on UNIX systems or `%SystemRoot%\system32\drivers\etc\hosts` on Windows. For production deployments, make sure the FQDN is properly assigned using DNS.
+
+Do not use the hostname `localhost` for AM, not even for testing purposes. AM relies on browser cookies, which are returned based on the domain name. You can set the cookie domain name value to an empty string for host-only cookies or to any non-top level domain. For example, if you install AM and use `am.example.com` as the host, you can set the cookie domain name as `example.com`.
+
+|   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+|   | Do not configure a top-level domain as your cookie domain as browsers will reject them.Top-level domains are browser-specific. Some browsers, like Firefox, also consider special domains like Amazon's web service (for example, ap-southeast-2.compute.amazonaws.com) to be a top-level domain.Check the effective top-level domain list at <https://publicsuffix.org/list/effective_tld_names.dat> to ensure that you do not set your cookie to a domain in the list. |
+
+---
+
+---
+title: Prepare datastores
+description: Configure datastores to separate different types of information in PingAM, including configuration, identity, policy, application, CTS token, and UMA data
+component: pingam
+version: 8.1
+page_id: pingam:installation:prepare-ext-stores
+canonical_url: https://docs.pingidentity.com/pingam/8.1/installation/prepare-ext-stores.html
+llms_txt: https://docs.pingidentity.com/pingam/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
+keywords: ["Install", "Configuration Store", "Policy Store", "Identity Store", "Application Store", "CTS Store (Sessions &amp; Tokens)", "User-Managed Access (UMA)"]
+page_aliases: ["install-guide:prepare-ext-stores.adoc"]
+section_ids:
+  ldap_datastores: LDAP datastores
+  file_based_configuration_store: File-based configuration store
+---
+
+# Prepare datastores
+
+AM stores different types of information. At a high-level, you can divide information into the following types:
+
+* Configuration
+
+  Relatively *static* information that doesn't change frequently after initial setup. Only administrative users can change it.
+
+* Runtime data
+
+  Dynamic information that changes at runtime, often due to end user action. Examples of runtime data are identities, CTS tokens, policies, sessions, and applications.
+
+Apart from identity data, AM stores all data after the installation process in its *configuration store*. This keeps basic deployments simple.
+
+For advanced and high-load deployments, you can configure different sets of replicated DS servers to keep distinct data types separate and to tune DS for different requirements.
+
+AM supports the following datastores:
+
+| Store name                          | Type of data                                                                                                                                                                                                   | Required during installation?                                  |
+| ----------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------- |
+| Configuration store (PingDS or FBC) | Static configuration (properties and settings used by the AM instance).                                                                                                                                        | Yes                                                            |
+| Identity or user store              | Stores identity profiles; that is, information about the users, devices, or things that authenticate to your systems. You can also configure AM to access existing directory servers to get identity profiles. | No, but you can configure one during the installation process. |
+| Policy store                        | Stores policy-related data, such as policies, policy sets, and resource types.                                                                                                                                 | No                                                             |
+| Application store                   | Stores application-related data, such as web and Java agent configurations, federation entities and configuration, and OAuth 2.0 client definitions.                                                           | No                                                             |
+| CTS token store                     | Stores information about sessions, SAML 2.0 assertions, OAuth 2.0 tokens, and session denylists and allowlists.                                                                                                | No                                                             |
+| UMA store                           | Stores information about UMA resources, labels, audit messages, and pending requests.                                                                                                                          | No                                                             |
+
+## LDAP datastores
+
+The following table lists the supported directory servers for storing different data types:
+
+**Supported data stores**
+
+| Directory server           | Versions         | Configuration | Apps / policies | CTS | Identities | UMA |
+| -------------------------- | ---------------- | ------------- | --------------- | --- | ---------- | --- |
+| PingDS                     | 7.3.1 and later  | ✔             | ✔               | ✔   | ✔          | ✔   |
+| PingDirectory              | 9.3 and later    |               |                 |     | ✔          |     |
+| Oracle Unified Directory   | 12c              |               |                 |     | ✔          |     |
+| Microsoft Active Directory | 2019, 2022, 2025 |               |                 |     | ✔          |     |
+
+The procedure for preparing directory servers for AM to use is similar for each data type and includes the following steps:
+
+1. If you don't have an existing directory server, install the directory server software; for example, PingDS.
+
+2. As the directory administrator, you may need to perform the following steps:
+
+   1. Apply the relevant schema to the directory.
+
+   2. Create indexes to optimize data retrieval from the directory server.
+
+   3. Create a user account with the minimum required privileges for AM to bind to the directory server and access necessary data.
+
+To prepare the datastores AM needs during installation, read the following pages:
+
+[icon: handshake, set=fad, size=3x]
+
+#### [Prepare a truststore](prepare-trust-store.html)
+
+Trust datastores' certificates for LDAPS.
+
+[icon: cogs, set=fad, size=3x]
+
+#### [Prepare configuration stores](prepare-configuration-store.html)
+
+Install DS as an AM configuration store.
+
+[icon: user-circle, set=fad, size=3x]
+
+#### [Prepare identity stores](prepare-identity-repository.html)
+
+Install DS as an AM identity store.
+
+> **Collapse: Where do I find more information about the other datastores?**
+>
+> You can configure all datastores except the configuration store after you install AM:
+>
+> * [Prepare policy and application stores](../setup/prepare-policy-and-application-store.html)
+>
+> * [Core Token Service (CTS)](../cts/preface.html)
+>
+> * [Prepare external UMA datastores](../uma/prepare-uma-store.html)
+
+## File-based configuration store
+
+File-based configuration (FBC) is best-suited to a DevOps-style deployment, with the associated tools and practices of that approach.
+
+Static FBC data is written to configuration files in the file system and checked into a source control system, such as Git.
+
+AM instances are created as Docker images, with the FBC incorporated into the image.
+
+![Kubernetes deployment using file-based configuration.](../_images/docker-deployment.png)
+
+You can insert variables into these configuration files before you check them into source control. The variables are substituted with the appropriate values at runtime when you start the Docker container. Using variables lets you reuse the same base configuration files for multiple instances, and different staging environments. For example, development, QA, or pre-production, which are then promoted to production.
+
+Learn more about FBC in [Store configuration data in JSON files](fbc.html).
+
+Learn more about installing AM instances with Kubernetes in the [ForgeOps](https://docs.pingidentity.com/forgeops/2025.1) documentation.

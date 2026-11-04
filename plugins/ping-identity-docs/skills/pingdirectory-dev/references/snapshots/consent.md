@@ -1,9 +1,12 @@
 ---
 title: Consent API Activity
-description: The Consent API may be used as the data backend for an Open Banking account requests API. For more information about Open Banking, refer to Open Banking.
+description: Walk through an open banking scenario that uses the PingDirectory Consent API to create, check, and update a consent record
 component: pingdirectory
 page_id: pingdirectory:consent:consent-api-activity
 canonical_url: https://developer.pingidentity.com/pingdirectory/consent/consent-api-activity.html
+llms_txt: https://developer.pingidentity.com/pingdirectory/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-11
 section_ids:
   introduction: Introduction
   workflow-order-of-operations: Workflow order of operations
@@ -175,7 +178,7 @@ If successful, the operation returns a `201: Success` message and shows the cons
 
 Company A checks the consent status of the Customer's account. It makes a `GET` request to the `/account-requests/{{accountrequestid}}` service on the data governance server at Company B using the `AccountRequestId` property value returned in [Create the account request](#consent-create-the-account-request). Company B checks the consent status by making a `GET` request to the `/consents/{{consentRecordId}}` service on its directory server.
 
-The `GET /consents/{{consentRecordId}}` operation finds the consent record data for the `consentRecordId` returned in [Create a consent record](#post-create-a-consent).
+The `GET /consents/{{consentRecordId}}` operation finds the consent record data for the `consentRecordId` returned in [Create a consent record](#create-a-consent-record).
 
 ```none
 curl -X GET "https://api.companyb.com/consent/v1/consents/5caa81af-ec05-41ff-a709-c7378007a99c" \
@@ -264,7 +267,7 @@ The response data shows the current consent definition localizations. For this c
 
 After the Customer responds to the consent prompt, the authorization or denial of consent is added to the consent record. The consent capture app makes a `PATCH` request to the `/consents/{{consentRecordId}}` service to update the Customer's consent record. The updated record stores the information collected by the consent capture app from the Customer's response to the consent prompt.
 
-The `PATCH /consents/{{consentRecordId}}` operation updates an existing consent record, modifying the record to reflect only the new property values specified in the request body. The `consentRecordId` value obtained in [Create a consent record](#post-create-a-consent) is added to the request URL to identify the Customer's consent record.
+The `PATCH /consents/{{consentRecordId}}` operation updates an existing consent record, modifying the record to reflect only the new property values specified in the request body. The `consentRecordId` value obtained in [Create a consent record](#create-a-consent-record) is added to the request URL to identify the Customer's consent record.
 
 ```none
 curl -X PATCH "https://api.companyb.com/consent/v1/consents/5caa81af-ec05-41ff-a709-c7378007a99c" \
@@ -325,10 +328,13 @@ curl -X PATCH "https://api.companyb.com/consent/v1/consents/5caa81af-ec05-41ff-a
 
 ---
 title: Consent API Getting started
-description: The following information illustrates how to construct a typical Consent API request.
+description: Learn how to construct a PingDirectory Consent API request, including the request header, request body, and response
 component: pingdirectory
 page_id: pingdirectory:consent:consent-api-getting-started
 canonical_url: https://developer.pingidentity.com/pingdirectory/consent/consent-api-getting-started.html
+llms_txt: https://developer.pingidentity.com/pingdirectory/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-11
 section_ids:
   create-the-api-request-header: Create the API request header
   create-the-api-request-body: Create the API request body
@@ -418,10 +424,13 @@ The response returns the list of consent definitions.
 
 ---
 title: Consent API Overview
-description: The Consent Service is an HTTP-based REST API hosted by the PingDirectory Server or PingDirectory Proxy Server. The service enables the collection of consents from application users, the enforcement of consents, the management of consents by users, and auditing of consent actions. This service helps companies to meet GDPR mandates and promotes transparency for users submitting data through applications.
+description: Learn how the PingDirectory Consent API collects, enforces, manages, and audits user consents using definitions, localizations, and consent records
 component: pingdirectory
 page_id: pingdirectory:consent:consent-api-overview
 canonical_url: https://developer.pingidentity.com/pingdirectory/consent/consent-api-overview.html
+llms_txt: https://developer.pingidentity.com/pingdirectory/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-11
 section_ids:
   what-is-the-consent-api: What is the Consent API?
   consent-api-model: Consent API model
@@ -501,10 +510,13 @@ Consent records capture an individual's consent decision. The consent records AP
 
 ---
 title: Consent API Requests
-description: ^== Authentication
+description: Learn how to authenticate to the PingDirectory Consent API and determine privileged versus unprivileged access to consent records
 component: pingdirectory
 page_id: pingdirectory:consent:consent-api-requests
 canonical_url: https://developer.pingidentity.com/pingdirectory/consent/consent-api-requests.html
+llms_txt: https://developer.pingidentity.com/pingdirectory/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-11
 section_ids:
   authorization: Authorization
   consent-body-attributes: Consent Body Attributes
@@ -1102,10 +1114,13 @@ The response data lists the consent records associated with John Doe (`subject`)
 
 ---
 title: Consent API Responses
-description: The Consent API includes information about the result of the operation in the HTTP headers. This enables you to determine the appropriate action to take without having to parse the response body.
+description: Learn about the HTTP response headers and status codes returned by PingDirectory Consent API operations
 component: pingdirectory
 page_id: pingdirectory:consent:consent-api-responses
 canonical_url: https://developer.pingidentity.com/pingdirectory/consent/consent-api-responses.html
+llms_txt: https://developer.pingidentity.com/pingdirectory/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-11
 section_ids:
   http-response-headers: HTTP response headers
   http-response-codes: HTTP response codes
@@ -1268,10 +1283,13 @@ Errors generated by the Consent API are intended to allow you to resolve specifi
 
 ---
 title: CREATE a consent
-description: The POST consent/v1/consents operation creates a new consent record.
+description: Create a new consent record with the PingDirectory Consent API
 component: pingdirectory
 page_id: pingdirectory:consent:consents-api/create-a-consent
 canonical_url: https://developer.pingidentity.com/pingdirectory/consent/consents-api/create-a-consent.html
+llms_txt: https://developer.pingidentity.com/pingdirectory/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-01-02
 section_ids:
   headers: Headers
   body: Body
@@ -1703,10 +1721,13 @@ task.resume()
 
 ---
 title: DELETE a consent
-description: The DELETE consent/v1/consents/{{consentRecordId}} opertion deletes the consent record with the provided unique ID. The response returns a 204 Consent record deleted message.
+description: Delete the consent record with the provided unique ID using the PingDirectory Consent API
 component: pingdirectory
 page_id: pingdirectory:consent:consents-api/delete-a-consent
 canonical_url: https://developer.pingidentity.com/pingdirectory/consent/consents-api/delete-a-consent.html
+llms_txt: https://developer.pingidentity.com/pingdirectory/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-01-02
 section_ids:
   headers: Headers
   example-request: Example Request
@@ -1943,10 +1964,14 @@ task.resume()
 
 ---
 title: PingDirectory Consent API Reference
-description: Before you read the Consent API topics or use the Consent API, review the following topics:
+description: Review prerequisite topics on the PingDirectory Consent Service and HTTP fundamentals before using the Consent API
 component: pingdirectory
-page_id: pingdirectory:consent:introduction
-canonical_url: https://developer.pingidentity.com/pingdirectory/consent/introduction.html
+page_id: pingdirectory:consent:index
+canonical_url: https://developer.pingidentity.com/pingdirectory/consent/index.html
+llms_txt: https://developer.pingidentity.com/pingdirectory/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-11
+page_aliases: ["introduction.adoc"]
 ---
 
 # PingDirectory Consent API Reference
@@ -1971,10 +1996,13 @@ In addition, ensure you are familiar with HTTP headers, methods, and response co
 
 ---
 title: READ a consent
-description: The GET consent/v1/consents/{{consentRecordId}} operation returns the indicated consent record.
+description: Retrieve the consent record with the provided unique ID using the PingDirectory Consent API
 component: pingdirectory
 page_id: pingdirectory:consent:consents-api/read-a-consent
 canonical_url: https://developer.pingidentity.com/pingdirectory/consent/consents-api/read-a-consent.html
+llms_txt: https://developer.pingidentity.com/pingdirectory/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-01-02
 section_ids:
   headers: Headers
   example-request: Example Request
@@ -2251,10 +2279,13 @@ task.resume()
 
 ---
 title: READ a definition
-description: The GET consent/v1/definitions/{{definitionid}} operation retrieves the consent definition with the provided definition ID.
+description: Retrieve the consent definition with the provided definition ID using the PingDirectory Consent API
 component: pingdirectory
 page_id: pingdirectory:consent:definitions-api/read-a-definition
 canonical_url: https://developer.pingidentity.com/pingdirectory/consent/definitions-api/read-a-definition.html
+llms_txt: https://developer.pingidentity.com/pingdirectory/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-01-02
 section_ids:
   headers: Headers
   example-request: Example Request
@@ -2511,10 +2542,13 @@ task.resume()
 
 ---
 title: READ a localization
-description: The GET consent/v1/definitions/{{definitionid}}/localizations/{{localizationid}} operation retrieves the localization with the specified localization ID for the consent definition with the specified definition ID.
+description: Retrieve a specific localization for a consent definition using the PingDirectory Consent API
 component: pingdirectory
 page_id: pingdirectory:consent:definitions-api/read-a-localization
 canonical_url: https://developer.pingidentity.com/pingdirectory/consent/definitions-api/read-a-localization.html
+llms_txt: https://developer.pingidentity.com/pingdirectory/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-01-02
 section_ids:
   headers: Headers
   example-request: Example Request
@@ -2766,10 +2800,13 @@ task.resume()
 
 ---
 title: READ consents
-description: The GET consent/v1/consents operation returns one or more consent records. If neither subject nor actor query parameter is used, the default subject value is the authenticated identity.
+description: Retrieve one or more consent records using the PingDirectory Consent API, optionally filtered by subject or actor
 component: pingdirectory
 page_id: pingdirectory:consent:consents-api/read-consents
 canonical_url: https://developer.pingidentity.com/pingdirectory/consent/consents-api/read-consents.html
+llms_txt: https://developer.pingidentity.com/pingdirectory/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-01-02
 section_ids:
   headers: Headers
   example-request: Example Request
@@ -3049,10 +3086,13 @@ task.resume()
 
 ---
 title: READ definitions
-description: The GET consent/v1/definitions operation lists all the consent definitions present on the server.
+description: List all consent definitions present on the server using the PingDirectory Consent API
 component: pingdirectory
 page_id: pingdirectory:consent:definitions-api/read-definitions
 canonical_url: https://developer.pingidentity.com/pingdirectory/consent/definitions-api/read-definitions.html
+llms_txt: https://developer.pingidentity.com/pingdirectory/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-01-02
 section_ids:
   headers: Headers
   example-request: Example Request
@@ -3311,10 +3351,13 @@ task.resume()
 
 ---
 title: READ localizations
-description: The GET consent/v1/definitions/{{definitionid}}/localizations+ operation lists all the localizations for a consent definition.
+description: List all localizations for a consent definition using the PingDirectory Consent API
 component: pingdirectory
 page_id: pingdirectory:consent:definitions-api/read-localizations
 canonical_url: https://developer.pingidentity.com/pingdirectory/consent/definitions-api/read-localizations.html
+llms_txt: https://developer.pingidentity.com/pingdirectory/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-01-02
 section_ids:
   headers: Headers
   example-request: Example Request
@@ -3566,10 +3609,13 @@ task.resume()
 
 ---
 title: REPLACE a consent
-description: The PUT consent/v1/consents/{{consentRecordId}} operation updates a consent record by replacing the entire resource. The reauest body is a complete representation of the consent record with changes.
+description: Update a consent record by replacing the entire resource using the PingDirectory Consent API
 component: pingdirectory
 page_id: pingdirectory:consent:consents-api/replace-a-consent
 canonical_url: https://developer.pingidentity.com/pingdirectory/consent/consents-api/replace-a-consent.html
+llms_txt: https://developer.pingidentity.com/pingdirectory/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-01-02
 section_ids:
   headers: Headers
   body: Body
@@ -4001,10 +4047,13 @@ task.resume()
 
 ---
 title: UPDATE a consent
-description: The PATCH consent/v1/consents/{{consentRecordId}} operation modifies a consent record by specifying only the changes to be made. The request body is a partial representation of the consent record with changes only.
+description: Modify a consent record by specifying only the changed attributes using the PingDirectory Consent API
 component: pingdirectory
 page_id: pingdirectory:consent:consents-api/update-a-consent
 canonical_url: https://developer.pingidentity.com/pingdirectory/consent/consents-api/update-a-consent.html
+llms_txt: https://developer.pingidentity.com/pingdirectory/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-01-02
 section_ids:
   headers: Headers
   body: Body

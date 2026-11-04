@@ -4,6 +4,8 @@ description: Ping Government Identity Cloud provides you with your own virtual p
 component: pgic
 page_id: pgic:network:pgic_network
 canonical_url: http://docs.pingidentity.com/pgic/network/pgic_network.html
+llms_txt: http://docs.pingidentity.com/pgic/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
   _transit_gateway: AWS Transit Gateway network
   initial-setup: Initial setup

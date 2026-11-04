@@ -384,7 +384,7 @@ The assertion grant profile process takes place between the user or requesting a
 
 In this scenario, a client obtains an assertion, either a SAML 2.0 bearer assertion or a JSON Web Token (JWT) bearer token, and makes an HTTP request to the PingFederate OAuth AS to exchange the assertion for an access token. The OAuth AS validates the assertion and returns an access token. The client uses the token in an API call to the RS to obtain data.
 
-Flowchart depicting the assertion grant profile process between the User or Requesting Application, Client application, IdP, AS, and RS.Assertion grant profile
+![Flowchart depicting the assertion grant profile process between the User or Requesting Application, Client application, IdP, AS, and RS.](_images/dim1564003111649.png)
 
 ## Processing steps
 
@@ -406,7 +406,7 @@ Flowchart depicting the assertion grant profile process between the User or Requ
 
 * [Security Assertion Markup Language (SAML) 2.0 Profile for OAuth 2.0 Client Authentication and Authorization Grants](https://datatracker.ietf.org/doc/html/rfc7522)
 
-* [Configuring an OAuth assertion grant IdP connection](../administrators_reference_guide/help_idpconnectionconfigtasklet_oauthsamlgrantattributemappingstate.html)
+* [Configuring an OAuth assertion grant IdP connection](../administrators_reference_guide/pf_configuring_oauth_assertion_grant_idp_connection.html)
 
 ---
 
@@ -959,7 +959,7 @@ The OAuth Client Initiated Backchannel Authentication (CIBA) grant by ping proce
 
 After receiving an authentication request acknowledgment, the client waits for a ping callback message from the OpenID Provider (OP). When the OP receives the authorization granted by the user through the authentication device, it sends a ping callback message to the client's notification endpoint. The client then sends a token request to retrieve an access token.
 
-Flowchart depicting the CIBA by poll process between the Client, User, Authentication Device, AS/OP and RS.OAuth CIBA grant by ping
+![Flowchart depicting the CIBA by poll process between the Client, User, Authentication Device, AS/OP and RS.](_images/oek1564003110537.png)
 
 ## Processing steps
 

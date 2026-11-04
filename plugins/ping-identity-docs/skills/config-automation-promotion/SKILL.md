@@ -6,7 +6,7 @@ license: MIT
 
 # Config Automation Promotion
 
-Config Automation Promotion documentation is indexed in the bundled llms.txt and live Ping Markdown pages.
+Review and audit configuration changes before deployment to validate compliance and catch unverified changes in Ping Identity solutions.
 
 ## Live source of truth
 
@@ -27,9 +27,9 @@ Config Automation Promotion documentation is indexed in the bundled llms.txt and
 
 | Task category | Guide slug | Live URL pattern | Snapshot |
 |---|---|---|---|
-| Concepts: configuration, automation, auditing | concepts | https://developer.pingidentity.com/config-automation-promotion/concepts/*.md | references/snapshots/concepts.md |
+| Concepts: configuration, identity, changes | concepts | https://developer.pingidentity.com/config-automation-promotion/concepts/*.md | references/snapshots/concepts.md |
 | Configuration Promotion Landing Page.Md: configuration, identity, promotion | configuration_promotion_landing_page.md | https://developer.pingidentity.com/config-automation-promotion/configuration_promotion_landing_page.md | references/snapshots/configuration-promotion-landing-page-md.md |
-| Configuration Promotion Pipeline Examples.Md: examples, gitops, pipeline | configuration_promotion_pipeline_examples.md | https://developer.pingidentity.com/config-automation-promotion/configuration_promotion_pipeline_examples.md | references/snapshots/configuration-promotion-pipeline-examples-md.md |
+| Configuration Promotion Pipeline Examples.Md: gitops, pipeline, application | configuration_promotion_pipeline_examples.md | https://developer.pingidentity.com/config-automation-promotion/configuration_promotion_pipeline_examples.md | references/snapshots/configuration-promotion-pipeline-examples-md.md |
 
 ## Composition
 

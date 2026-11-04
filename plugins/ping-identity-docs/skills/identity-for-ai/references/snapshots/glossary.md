@@ -1,10 +1,12 @@
 ---
-title: Key Identity for AI Terminology
-description: Learn about key terms related to AI concepts and Identity for AI, a solution for securing, managing, and governing AI systems and data.
+title: Key Identity for AI terminology
+description: Definitions for key Identity for AI terms, including agent types, AI and machine learning concepts, and IAM practices and protocols.
 component: identity-for-ai
 page_id: identity-for-ai:glossary:idai-glossary
 canonical_url: https://developer.pingidentity.com/identity-for-ai/glossary/idai-glossary.html
-revdate: October 9, 2025
+llms_txt: https://developer.pingidentity.com/identity-for-ai/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-09-16T00:06:46Z
 keywords: ["Identity for AI", "ai identity", "ai terms", "ai terminology", "ai glossary", "ai"]
 page_aliases: ["index.adoc"]
 section_ids:
@@ -44,16 +46,16 @@ section_ids:
   trust-boundary: Trust boundary
   protocols: Protocols
   model-context-protocol-mcp: Model Context Protocol (MCP)
-  agent2agent-protocol-a2a: Agent2Agent protocol (A2A)
+  agent2agent-a2a-protocol: Agent2Agent (A2A) protocol
 ---
 
-# Key Identity for AI Terminology
+# Key Identity for AI terminology
 
 Learn about key terms related to artificial intelligence (AI) concepts and Identity for AI, a solution for securing, managing, and governing AI systems and data.
 
 ## Agent types
 
-Learn more in [What Are AI Agents?](../agents/idai-what-are-agents.html) and [Agent Types](../identity/idai-agent-types.html).
+Learn more in [What are AI agents?](../agents/idai-what-are-agents.html) and [Agent types](../identity/idai-agent-types.html).
 
 ### Digital assistant
 
@@ -69,7 +71,7 @@ A managed agent that's more autonomous than a digital assistant and designed to 
 
 ### Personal agent
 
-A proactive and autonomous agent that acts on behalf of a user to achieve the user's goals. This type of agent is highly personalized and acts as a proxy for the user on the user's device. Personal agents aren't managed by your organization and lie outside of your organization's trust boundary. Examples of this type of *your agent works for you* personal agent include agents that book travel, help with investments or shopping, and large language models (LLMs) such as [ChatGPT](https://chatgpt.com), [Claude](https://www.anthropic.com/claude), and [Google Gemini](https://gemini.google).
+A proactive and autonomous agent that acts on behalf of a user to achieve the user's goals. This type of agent is highly personalized and acts as a proxy for the user on the user's device. Personal agents aren't managed by your organization and lie outside of your organization's trust boundary. Examples of this type of *your agent works for you* personal agent include agents that book travel, help with investments or shopping, and large language models (LLMs) such as [ChatGPT](https://chatgpt.com), [Claude](https://www.anthropic.com/claude), and [Google Gemini](https://gemini.google.com/app).
 
 ## AI and ML terms
 
@@ -83,7 +85,7 @@ The simulation or replication of human-like intelligence by machines, especially
 
 ### Computer-using agent (CUA)
 
-An agent that interacts directly with graphical user interfaces (GUIs) and command-line interfaces (CLIs), such as web browsers, buttons, menus, and text fields, by emulating human actions. Learn more in [Computer-Using Agents (CUAs)](../agents/idai-computer-using-agents.html).
+An agent that interacts directly with graphical user interfaces (GUIs) and command-line interfaces (CLIs), such as web browsers, buttons, menus, and text fields, by emulating human actions. Learn more in [Computer-using agents (CUAs)](../agents/idai-computer-using-agents.html).
 
 ### Context poisoning (prompt injection)
 
@@ -157,7 +159,7 @@ A security and governance approach that requires human intervention and approval
 
 ### Identity for AI
 
-A comprehensive solution for securely managing, governing, and auditing the identities and access of AI systems, including autonomous agents, within an organization's digital ecosystem. Learn more in [What Is Identity for AI?](../getting-started/idai-what-is-identity-for-ai.html).
+A comprehensive solution for securely managing, governing, and auditing the identities and access of AI systems, including autonomous agents, within an organization's digital ecosystem. Learn more in [What is Identity for AI?](../getting-started/idai-what-is-identity-for-ai.html).
 
 ### Identity lifecycle management (ILM) for AI
 
@@ -191,8 +193,8 @@ A conceptual line that separates an organization's digital assets into different
 
 ### Model Context Protocol (MCP)
 
-An open-source standard for how AI systems, particularly LLMs, securely and dynamically interact with external tools and data sources. MCP defines an MCP server as a standardized interface that exposes a specific tool, API, or data source to an AI agent. The MCP server acts as a *smart adapter* or *universal connector* for AI. Learn more in [What is Model Context Protocol (MCP)?](../agents/idai-what-is-mcp.html) and [MCP servers and OAuth 2.0](../agents/idai-securing-mcp-servers.html).
+An open-source standard for how AI systems, particularly LLMs, securely and dynamically interact with external tools and data sources. MCP defines an MCP server as a standardized interface that exposes a specific tool, API, or data source to an AI agent. The MCP server acts as a *smart adapter* or *universal connector* for AI. Learn more in [What is Model Context Protocol (MCP)?](../protocols/idai-what-is-mcp.html) and [Securing MCP servers with OAuth 2.0](../identity/idai-securing-mcp-servers-oauth.html).
 
-### Agent2Agent protocol (A2A)
+### Agent2Agent (A2A) protocol
 
-An open-source protocol that enables secure and standardized communication between AI agents. A2A facilitates interoperability, allowing agents to share information, authenticate each other, delegate tasks, and coordinate actions while maintaining security and trust. Learn more in [What is Agent2Agent Protocol (A2A)?](../agents/idai-what-is-a2a.html).
+An open-source protocol that enables secure and standardized communication between AI agents. A2A facilitates interoperability, allowing agents to share information, authenticate each other, delegate tasks, and coordinate actions while maintaining security and trust. Learn more in [What is Agent2Agent (A2A) protocol?](../protocols/idai-what-is-a2a.html).

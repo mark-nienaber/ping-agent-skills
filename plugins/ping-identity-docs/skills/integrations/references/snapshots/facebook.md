@@ -32,7 +32,7 @@ To enable single sign-on (SSO) to Workplace from Facebook, modify the provisioni
 
    1. Go to **Browser SSO > SAML Profiles** and select only **IdP-Initiated SSO** and **SP-Initiated SSO**.
 
-   2. Go to **Browser SSO > Assertion Creation > Attribute Contract**. For **SAML\_SUBJECT**, select **urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress**.
+   2. Go to **Browser SSO > Assertion Creation > Attribute Contract**. For **SAML_SUBJECT**, select **urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress**.
 
    3. On the **Authentication Policy Mapping** tab, select or create an authentication source that maps `SAML_SUBJECT` to an email attribute that matches the email addresses used in Workplace from Facebook.
 
@@ -445,8 +445,8 @@ To enable SSO to an application within the PingFederate domain, configure an ada
 
    |                |                                                         |
    | -------------- | ------------------------------------------------------- |
-   | *pf\_host*     | The host name or IP address of the PingFederate server. |
-   | *pf\_port*     | The port number of the PingFederate server.             |
+   | *pf_host*      | The host name or IP address of the PingFederate server. |
+   | *pf_port*      | The port number of the PingFederate server.             |
    | *IdpAdapterId* | The instance ID of the IdP adapter instance.            |
    | *SpAdapterId*  | The instance ID of the SP adapter instance.             |
 
@@ -483,8 +483,8 @@ To enable SSO to a service provider (SP) outside the PingFederate domain, config
 
    |                |                                                         |
    | -------------- | ------------------------------------------------------- |
-   | *pf\_host*     | The host name or IP address of the PingFederate server. |
-   | *pf\_port*     | The port number of the PingFederate server.             |
+   | *pf_host*      | The host name or IP address of the PingFederate server. |
+   | *pf_port*      | The port number of the PingFederate server.             |
    | *ConnectionId* | The ID of the SP connection.                            |
 
 ---
@@ -506,34 +506,34 @@ The Facebook IdP Adapter has a set of core contract attributes. The core contrac
 
 **Core contract attributes in the Facebook IdP Adapter**
 
-| Version 1.3                                       | Version 2.0    | Version 2.1    |
-| ------------------------------------------------- | -------------- | -------------- |
-| about                                             |                |                |
-| access\_token                                     | access\_token  | access\_token  |
-|                                                   | age\_range     |                |
-| bio\[[1](#_footnotedef_1 "View footnote.")]       |                |                |
-| birthday\[[1](#_footnotedef_1 "View footnote.")]  |                |                |
-|                                                   | cover          |                |
-| education\[[1](#_footnotedef_1 "View footnote.")] |                |                |
-| first\_name                                       | first\_name    | first\_name    |
-| gender                                            | gender         |                |
-| hometown\[[1](#_footnotedef_1 "View footnote.")]  |                |                |
-| id                                                | id             | id             |
-| last\_name                                        | last\_name     | last\_name     |
-| link                                              | link           |                |
-| locale                                            | locale         |                |
-| location\[[1](#_footnotedef_1 "View footnote.")]  |                |                |
-|                                                   |                | middle\_name   |
-| name                                              | name           | name           |
-|                                                   |                | name\_format   |
-|                                                   | picture        | picture        |
-| quotes\[[1](#_footnotedef_1 "View footnote.")]    |                |                |
-|                                                   |                | short\_name    |
-| timezone                                          | timezone       |                |
-| token\_expires                                    | token\_expires | token\_expires |
-| updated\_time                                     | updated\_time  |                |
-| verified                                          | verified       |                |
-| work\[[1](#_footnotedef_1 "View footnote.")]      |                |                |
+| Version 1.3                                       | Version 2.0   | Version 2.1   |
+| ------------------------------------------------- | ------------- | ------------- |
+| about                                             |               |               |
+| access_token                                      | access_token  | access_token  |
+|                                                   | age_range     |               |
+| bio\[[1](#_footnotedef_1 "View footnote.")]       |               |               |
+| birthday\[[1](#_footnotedef_1 "View footnote.")]  |               |               |
+|                                                   | cover         |               |
+| education\[[1](#_footnotedef_1 "View footnote.")] |               |               |
+| first_name                                        | first_name    | first_name    |
+| gender                                            | gender        |               |
+| hometown\[[1](#_footnotedef_1 "View footnote.")]  |               |               |
+| id                                                | id            | id            |
+| last_name                                         | last_name     | last_name     |
+| link                                              | link          |               |
+| locale                                            | locale        |               |
+| location\[[1](#_footnotedef_1 "View footnote.")]  |               |               |
+|                                                   |               | middle_name   |
+| name                                              | name          | name          |
+|                                                   |               | name_format   |
+|                                                   | picture       | picture       |
+| quotes\[[1](#_footnotedef_1 "View footnote.")]    |               |               |
+|                                                   |               | short_name    |
+| timezone                                          | timezone      |               |
+| token_expires                                     | token_expires | token_expires |
+| updated_time                                      | updated_time  |               |
+| verified                                          | verified      |               |
+| work\[[1](#_footnotedef_1 "View footnote.")]      |               |               |
 
 ***
 

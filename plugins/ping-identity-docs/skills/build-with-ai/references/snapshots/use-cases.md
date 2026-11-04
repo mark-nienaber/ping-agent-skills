@@ -1,13 +1,13 @@
 ---
 title: Build an iOS Sample App with AI
-description: PingOne Advanced Identity Cloud iOS
+description: Build an iOS authentication app with device binding using the AIC MCP Server and Ping agent skills in Claude Code through natural language prompts.
 component: build-with-ai
 page_id: build-with-ai:use-cases:build-ios-app
 canonical_url: https://developer.pingidentity.com/build-with-ai/use-cases/build-ios-app.html
 llms_txt: https://developer.pingidentity.com/build-with-ai/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: May 22, 2026
-keywords: ["Use Case", "iOS", "SwiftUI", "AIC MCP Server", "Agent Skills", "Claude Code", "Ping Orchestration SDK", "OIDC", "Device Binding"]
+revdate: 2026-09-21T00:00:00Z
+keywords: ["Use Case", "iOS", "SwiftUI", "AIC MCP Server", "agent skills", "Claude Code", "Ping Orchestration SDK", "OIDC", "Device Binding"]
 section_ids:
   build-ios-app-description: Description
   build-ios-app-goals: Goals
@@ -32,11 +32,11 @@ section_ids:
 
 Estimated time to complete: 15 minutes
 
-This use case shows AI-first headless identity in action. Using Claude Code connected to the [AIC MCP Server](../aic-mcp-server/overview.html) and the [Mobile and Web App Integration Agent Skills](../agent-skills/overview.html), you go from a blank slate to a running iOS authentication app, creating the PingOne Advanced Identity Cloud Journey, making server-side configuration changes, setting up the OIDC application, and scaffolding the SwiftUI client, entirely through natural language prompts, without leaving your IDE.
+This use case shows AI-first headless identity in action. Using Claude Code connected to the [AIC Remote MCP Server](../aic-remote-mcp-server/overview.html) and the [Mobile and Web App Integration Agent Skills](../agent-skills/overview.html), you go from a blank slate to a running iOS authentication app. You create the PingOne Advanced Identity Cloud journey, make server-side configuration changes, set up the OIDC application, and scaffold the SwiftUI client, all through natural language prompts without leaving your IDE.
 
-In this use case, you will build with AI and:
+In this use case, you build with AI and:
 
-* Create a device binding journey in PingOne Advanced Identity Cloud using the AIC MCP Server
+* Create a device binding journey in PingOne Advanced Identity Cloud using the AIC Remote MCP Server
 
 * Update the journey to support passwordless login using device binding and Face ID
 
@@ -48,9 +48,9 @@ In this use case, you will build with AI and:
 
 ### Goals
 
-After completing this use case, you will understand:
+After completing this use case, you understand:
 
-* How to use the AIC MCP Server to manage journeys and applications from your IDE
+* How to use the AIC Remote MCP Server to manage journeys and applications from your IDE
 
 * How the Mobile and Web App Integration Agent Skills rapidly generates an iOS sample app with authentication flows
 
@@ -62,7 +62,7 @@ Before you begin:
 
 * [Claude Code](https://claude.ai/code) is installed and running
 
-* The [AIC MCP Server](../aic-mcp-server/getting-started.html) is configured and authenticated against an PingOne Advanced Identity Cloud sandbox or development tenant
+* The [AIC Remote MCP Server](../aic-remote-mcp-server/getting-started.html) is configured and authenticated against an PingOne Advanced Identity Cloud sandbox or development tenant
 
 * The [Mobile and Web App Integration Agent Skills](../agent-skills/overview.html#mobile-web-app-integration) are installed in Claude Code
 
@@ -72,13 +72,13 @@ Before you begin:
 
 **Video (Brightcove)**
 
-\<https\://players.brightcove.net/771836189001/default\_default/index.html?videoId=6396329895112>
+\<https\://players.brightcove.net/771836189001/default_default/index.html?videoId=6396329895112>
 
 ## Tasks
 
 ### Task 1: Create a device binding journey
 
-Prompt Claude Code to create a new device binding journey in PingOne Advanced Identity Cloud. The AIC MCP Server translates your natural language prompt into the appropriate API calls, configuring nodes and transitions without you touching the Admin UI.
+Prompt Claude Code to create a new device binding journey in PingOne Advanced Identity Cloud. The AIC Remote MCP Server translates your natural language prompt into the appropriate API calls, configuring nodes and transitions without you touching the Admin UI.
 
 Example prompt:
 
@@ -120,9 +120,9 @@ Using the Ping Orchestration Agent Skills, scaffold an iOS SwiftUI sample app th
 
 Build and run the scaffolded app in Xcode against your live PingOne Advanced Identity Cloud sandbox to complete the end-to-end flow.
 
-|   |                                                                                                                                                                                        |
-| - | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | You don't have to issue these as separate prompts. Describe the entire goal at once and Claude Code will use the AIC MCP Server and the SDK skill in whatever order the task requires. |
+|   |                                                                                                                                                                                           |
+| - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | You don't have to issue these as separate prompts. Describe the entire goal at once and Claude Code uses the AIC Remote MCP Server and the SDK skill in whatever order the task requires. |
 
 ## Validation
 
@@ -132,11 +132,11 @@ To confirm everything is working:
 
 2. Enter credentials for a test user in your PingOne Advanced Identity Cloud sandbox to register a device on first login.
 
-3. Log out, then log in again and confirm the app skips the password step and prompts for Face ID.
+3. Sign off, then sign on again and confirm the app skips the password step and prompts for Face ID.
 
-4. After authenticating, confirm the home screen displays the user's profile and a logout button.
+4. After authenticating, confirm the home screen displays the user's profile and a sign-off button.
 
-5. Tap logout and confirm the session ends and the app returns to the login screen.
+5. Tap Sign off and confirm the session ends and the app returns to the sign-on screen.
 
 ## Explore further
 
@@ -147,5 +147,5 @@ To confirm everything is working:
 | [Mobile and Web App Integration Agent Skills on GitHub](https://github.com/pingidentity/ping-sdk-agent-skills) | The agent skills repository, including the iOS SDK skill used in this use case.                        |
 | [Ping iOS SDK](https://github.com/ForgeRock/ping-ios-sdk/)                                                     | The Ping Orchestration iOS SDK that the generated sample app is built on.                              |
 | [iOS SDK sample apps](https://github.com/ForgeRock/sdk-sample-apps/tree/main/iOS)                              | Sample iOS apps showing common authentication patterns with the Ping iOS SDK.                          |
-| [AIC MCP Server available tools](../aic-mcp-server/available-tools.html)                                       | Full reference for all MCP tools used to manage journeys, applications, and server-side configuration. |
+| [AIC Remote MCP Server available tools](../aic-remote-mcp-server/available-tools.html)                         | Full reference for all MCP tools used to manage journeys, applications, and server-side configuration. |
 | [Agent Skills overview](../agent-skills/overview.html)                                                         | All available agent skill collections, including Android and ReactJS in addition to iOS.               |

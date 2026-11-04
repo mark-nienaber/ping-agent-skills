@@ -6,7 +6,7 @@ license: MIT
 
 # PingOne API
 
-PingOne API documentation is indexed in the bundled llms.txt and live Ping Markdown pages.
+Accept an administrator invitation with an invite code and password to activate a PingOne admin user.
 
 ## Live source of truth
 
@@ -27,18 +27,18 @@ PingOne API documentation is indexed in the bundled llms.txt and live Ping Markd
 
 | Task category | Guide slug | Live URL pattern | Snapshot |
 |---|---|---|---|
-| Platform: application, resources, agreement | platform | https://developer.pingidentity.com/pingone-api/platform/*.md | references/snapshots/platform.md |
-| Workflow Library: client, flow, secret | workflow-library | https://developer.pingidentity.com/pingone-api/workflow-library/*.md | references/snapshots/workflow-library.md |
-| Auth: authorize, authorization, accept | auth | https://developer.pingidentity.com/pingone-api/auth/*.md | references/snapshots/auth.md |
-| Mfa: device, fido, mfa | mfa | https://developer.pingidentity.com/pingone-api/mfa/*.md | references/snapshots/mfa.md |
-| Credentials: credential, create, signing | credentials | https://developer.pingidentity.com/pingone-api/credentials/*.md | references/snapshots/credentials.md |
-| Authorize: application, create, permissions | authorize | https://developer.pingidentity.com/pingone-api/authorize/*.md | references/snapshots/authorize.md |
-| Verify: delete, verify, deprecated | verify | https://developer.pingidentity.com/pingone-api/verify/*.md | references/snapshots/verify.md |
-| Foundations: authorization, authentication, type | foundations | https://developer.pingidentity.com/pingone-api/foundations/*.md | references/snapshots/foundations.md |
-| Davinci: davinci, admin, flow | davinci | https://developer.pingidentity.com/pingone-api/davinci/*.md | references/snapshots/davinci.md |
-| Protect: risk, create, predictor | protect | https://developer.pingidentity.com/pingone-api/protect/*.md | references/snapshots/protect.md |
-| Getting Started: step, create, get | getting-started | https://developer.pingidentity.com/pingone-api/getting-started/*.md | references/snapshots/getting-started.md |
-| Native Sdks: pingone, sdk, native | native-sdks | https://developer.pingidentity.com/pingone-api/native-sdks/*.md | references/snapshots/native-sdks.md |
+| Platform: application, pingone, agreement | platform | https://developer.pingidentity.com/pingone-api/platform/*.md | references/snapshots/platform.md |
+| Workflow Library: client, pingone, secret | workflow-library | https://developer.pingidentity.com/pingone-api/workflow-library/*.md | references/snapshots/workflow-library.md |
+| Auth: authorize, pingone, request | auth | https://developer.pingidentity.com/pingone-api/auth/*.md | references/snapshots/auth.md |
+| Mfa: device, mfa, pingone | mfa | https://developer.pingidentity.com/pingone-api/mfa/*.md | references/snapshots/mfa.md |
+| Authorize: application, authorize, pingone | authorize | https://developer.pingidentity.com/pingone-api/authorize/*.md | references/snapshots/authorize.md |
+| Credentials: credential, create, pingone | credentials | https://developer.pingidentity.com/pingone-api/credentials/*.md | references/snapshots/credentials.md |
+| Davinci: davinci, pingone, admin | davinci | https://developer.pingidentity.com/pingone-api/davinci/*.md | references/snapshots/davinci.md |
+| Foundations: pingone, authorization, access | foundations | https://developer.pingidentity.com/pingone-api/foundations/*.md | references/snapshots/foundations.md |
+| Verify: verification, verify, pingone | verify | https://developer.pingidentity.com/pingone-api/verify/*.md | references/snapshots/verify.md |
+| Protect: risk, create, pingone | protect | https://developer.pingidentity.com/pingone-api/protect/*.md | references/snapshots/protect.md |
+| Getting Started: pingone, step, app | getting-started | https://developer.pingidentity.com/pingone-api/getting-started/*.md | references/snapshots/getting-started.md |
+| Native Sdks: pingone, native, sdk | native-sdks | https://developer.pingidentity.com/pingone-api/native-sdks/*.md | references/snapshots/native-sdks.md |
 
 ## Composition
 

@@ -1,58 +1,39 @@
 ---
-title: pingctl kubernetes
-description: The pingctl utility referenced here has been deprecated and is no longer being maintained. It is recommended to use the Ping CLI utility under active development and support.
+title: The <code>ldap-sdk-tools</code> utility
+description: Describe the ldap-sdk-tools Docker image that provides LDAP Client SDK tools for use with PingDirectory
 component: devops
-page_id: devops::tools/commands/kubernetes
-canonical_url: https://developer.pingidentity.com/devops/tools/commands/kubernetes.html
+page_id: devops::tools/ldapsdkUtil
+canonical_url: https://developer.pingidentity.com/devops/tools/ldapsdkUtil.html
 llms_txt: https://developer.pingidentity.com/devops/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
-  devops-pingctl-kubernetes: Generate kubernetes resources
-  devops-description: Description
-  devops-usage: Usage
-  devops-options: Options
+  devops-setting-up-the-utility: Setting up the utility
 ---
 
-# pingctl kubernetes
+# The `ldap-sdk-tools` utility
 
-|   |                                                                                                                                                                                                                                                                                                                                                                                                        |
-| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-|   | The `pingctl` utility referenced here has been deprecated and is no longer being maintained. It is recommended to use the [Ping CLI](https://developer.pingidentity.com/pingcli/pingcli_landing_page.html) utility under active development and support.With few exceptions, many `pingctl` commands can be replicated using the `pingcli` utility, with gaps being addressed based on prioritization. |
+The `ldap-sdk-tools` Docker image gives you easy access to our LDAP Client SDK tools for use with PingDirectory.
 
-## Generate kubernetes resources
+For complete documentation, see the [`pingidentity/ldapsdk` repository](https://github.com/pingidentity/ldapsdk).
 
-### Description
+## Setting up the utility
 
-Manage Ping related Kubernetes resources.
+1. From your local `pingidentity-devops-getting-started` directory, enter:
 
-* Generate `devops-secret` secret containing Ping DevOps variables `PING_IDENTITY_DEVOPS_KEY` and `PING_IDENTITY_DEVOPS_SECRET`
+   ```sh
+   ./ldapsdk
+   ```
 
-* Generate `tls-secret` secret containing a self-signed certificate and key for a specified domain.
+   When you run the `ldapsdk` script for the first time, you're prompted to configure your settings.
 
-* Generate `ssh-id-secret` secret containing a file with ssh id (i.e. \~/.ssh/id\_rsa)
+   To edit the settings in the future, enter:
 
-* Generate `license-secret` secret containing a Ping Identity product license file or generated eval license
+   `sh ldapsdk configure`
 
-* Provide details about a cached kubectl oidc token
+2. To start the `ldap-sdk-tools` Docker image, enter:
 
-  * Display the entire jwt token
+   ```sh
+   docker run  -it --rm  --network pingnet  pingidentity/ldap-sdk-tools:latest
+   ```
 
-  * Display a specific claim
-
-  * Clear the kubectl oidc cache
-
-### Usage
-
-```
-pingctl kubernetes generate devops-secret
-pingctl kubernetes generate tls-secret {domain}
-pingctl kubernetes generate ssh-id-secret {ssh id_rsa file}
-pingctl kubernetes generate license-secret {license file}
-pingctl kubernetes generate license-secret {product} {ver}
-
-pingctl kubernetes oidc clear
-pingctl kubernetes oidc {claim}
-pingctl kubernetes oidc info
-```
-
-### Options
+3. To list the available tools, enter `ls`.

@@ -6,7 +6,7 @@ license: MIT
 
 # Login Widget
 
-Login Widget documentation is indexed in the bundled llms.txt and live Ping Markdown pages.
+Complete prerequisites and configure PingOne Advanced Identity Cloud or PingAM before running the ReactJS Login Widget sample.
 
 ## Live source of truth
 
@@ -27,8 +27,8 @@ Login Widget documentation is indexed in the bundled llms.txt and live Ping Mark
 
 | Task category | Guide slug | Live URL pattern | Snapshot |
 |---|---|---|---|
-| Login Widget: widget, step, advanced | login-widget | https://developer.pingidentity.com/login-widget/login-widget/*.md | references/snapshots/login-widget.md |
-| Release Notes: changelog, compatibility, developer | release-notes | https://developer.pingidentity.com/login-widget/release-notes/*.md | references/snapshots/release-notes.md |
+| Login Widget: widget, advanced, cloud | login-widget | https://developer.pingidentity.com/login-widget/login-widget/*.md | references/snapshots/login-widget.md |
+| Release Notes: changelog, breaking, changes | release-notes | https://developer.pingidentity.com/login-widget/release-notes/*.md | references/snapshots/release-notes.md |
 | Index.Md: advanced, cloud, identity | index.md | https://developer.pingidentity.com/login-widget/index.md | references/snapshots/index-md.md |
 
 ## Composition

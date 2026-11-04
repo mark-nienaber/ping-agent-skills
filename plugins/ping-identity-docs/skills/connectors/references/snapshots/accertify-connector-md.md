@@ -1,12 +1,12 @@
 ---
 title: Accertify Connector
-description: The Accertify connector lets you send identity lifecycle events to the Accertify fraud detection platform from your PingOne DaVinci flow.
+description: Configure the Accertify connector in PingOne DaVinci to send identity events to the Accertify fraud detection platform and receive risk scores
 component: connectors
 page_id: connectors::accertify_connector
 canonical_url: https://docs.pingidentity.com/connectors/accertify_connector.html
 llms_txt: https://docs.pingidentity.com/connectors/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: April 15, 2026
+revdate: 2026-07-09T00:00:00Z
 section_ids:
   setup: Setup
   resources: Resources
@@ -37,13 +37,13 @@ The connector sends events to the Accertify API at key moments in the user journ
 
 You can find more information and setup help in the following:
 
-* DaVinci documentation:
+* PingOne DaVinci documentation:
 
   * [Adding a connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html)
 
   * [Using connectors securely](https://docs.pingidentity.com/davinci/connectors/davinci_using_connectors_securely.html)
 
-  * [Using DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html)
+  * [Using PingOne DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html)
 
 ### Requirements
 
@@ -63,7 +63,7 @@ To use the connector, you'll need:
 
 ### Configuring the Accertify connector
 
-[Add the connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html) in DaVinci, then configure it as follows.
+[Add the connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html) in PingOne DaVinci, then configure it as follows.
 
 #### Connector configuration
 
@@ -114,7 +114,6 @@ To configure the collector node:
                  <input type="hidden" id="ubaId" name="ubaId" value="" />
                  <input type="hidden" id="pageId" name="pageId" value="" />
                  <input type="hidden" id="ubaEvents" name="ubaEvents" value="" />
-                 <input type="hidden" id="devicePayload" name="devicePayload" value="" />
                  <button
                    data-id="button"
                    style="display:none"
@@ -155,67 +154,51 @@ To configure the collector node:
    }
    ```
 
-4. In the **Script** field, replace DATA\_COLLECTOR\_URL with the collector script URL for your Accertify environment, then add the following:
+4. In the **Script** field, replace DATA_COLLECTOR_URL with the collector script URL for your Accertify environment, then add the following:
 
    ```javascript
-   var DATA_COLLECTOR_URL = "YOUR_COLLECTOR_SCRIPT_URL";
+   // Configuration
+   const DATA_COLLECTOR_URL = "YOUR_COLLECTOR_SCRIPT_URL";
+   const MAX_UBA_EVENTS_SIZE = 10; // Maximum UBA payload size: 10 KB (10,000 characters)
 
-   var s = document.createElement('script');
-   s.setAttribute('type', 'text/javascript');
-   s.setAttribute('src', DATA_COLLECTOR_URL);
-   s.setAttribute('dvct', '500');
-   s.setAttribute('id', 'bcn');
-   s.setAttribute('dvc', 'a');
+   // Load Accertify collector script
+   const script = document.createElement("script");
+   script.type = "text/javascript";
+   script.src = DATA_COLLECTOR_URL;
+   script.id = "bcn";
+   script.async = true;
+   script.setAttribute("dvct", "500");
+   script.setAttribute("dvc", "a");
 
-   s.onload = function() {
-       if (window.hasOwnProperty('_bcn') && window._bcn.hasOwnProperty('dvc')) {
-           window._bcn.dvc.setSubmissionCallback(registeredCallBackMethod);
-       }
+   script.onload = () => {
+       window._bcn?.dvc?.setSubmissionCallback?.(populateDeviceData);
    };
 
-   document.head.appendChild(s);
+   document.head.appendChild(script);
 
-   function registeredCallBackMethod() {
-       if (window.hasOwnProperty('_bcn') && window._bcn.hasOwnProperty('dvc')) {
-           const tid = window._bcn.dvc.getTID();
-
-           const devTidEl = document.getElementById("devTID");
-           if (devTidEl) {
-               devTidEl.value = tid || '';
-           }
-
-           try {
-               const collector = (window._bcn && window._bcn.collector) || window.collector;
-               if (collector && typeof collector.getPayload === 'function' && tid) {
-                   const payloadObj = collector.getPayload(tid);
-                   const devicePayload = payloadObj && payloadObj.payload;
-
-                   if (devicePayload) {
-                       const payloadEl = document.getElementById("devicePayload");
-                       if (payloadEl) {
-                           payloadEl.value = devicePayload;
-                       }
-                   }
-               }
-           } catch (e) {
-               console.warn('Unable to retrieve device payload from Accertify collector', e);
-           }
-       }
+   // Populate device attributes
+   function populateDeviceData() {
+       setFieldValue("devTID", window._bcn?.dvc?.getTID?.());
    }
 
-   setTimeout(() => {
-       if (window.hasOwnProperty('_bcn')) {
-           window._bcn.flush();
-           document.getElementById("ubaId").value = window._bcn.getToken();
-           document.getElementById("ubaSessionId").value = window._bcn.getUbaSessionId();
-           document.getElementById("pageId").value = window._bcn.getPageId();
-           document.getElementById("ubaEvents").value = window._bcn.getEvents();
+   // Flush and populate UBA fields when the button is clicked
+   document.getElementById("btnSubmit")?.addEventListener("click", () => {
+       window._bcn?.flush?.();
+
+       setFieldValue("ubaId", window._bcn?.getToken?.());
+       setFieldValue("ubaSessionId", window._bcn?.getUbaSessionId?.());
+       setFieldValue("pageId", window._bcn?.getPageId?.());
+       setFieldValue("ubaEvents", window._bcn?.getEvents?.(MAX_UBA_EVENTS_SIZE));
+   });
+
+   // Helper function
+   function setFieldValue(fieldId, value) {
+       const field = document.getElementById(fieldId);
+
+       if (field) {
+           field.value = value || "";
        }
-       const button = document.getElementById("btnSubmit");
-       if (button) {
-           button.click();
-       }
-   }, 3000);
+   }
    ```
 
 5. In the **Output Fields List**, add each of the following hidden input field names into the **Property Name** field, then click **Apply**:
@@ -229,8 +212,6 @@ To configure the collector node:
    * pageId
 
    * ubaEvents
-
-   * devicePayload
 
 6. Map the output fields to the corresponding inputs on the Accertify capability node in your flow.
 
@@ -310,6 +291,10 @@ Sends a login event payload to Accertify to receive a fraud/risk recommendation 
 >
 >   UBA recent events payload.
 >
+> - Brand textField
+>
+>   The brand submitting the event. For clients with multiple brands under one corporate entity. Maximum field length = 50 characters.
+>
 > - Email Address textField
 >
 >   Email address associated with the account or event.
@@ -344,9 +329,17 @@ Sends a login event payload to Accertify to receive a fraud/risk recommendation 
 >
 >   Whether the account has the mobile application installed somewhere.
 >
-> - Failure Code textField
+> - Failure Code dropDown
 >
 >   Login Event failure code.
+>
+>   * Account Doesn't Exist
+>
+>   * Account Locked
+>
+>   * Other
+>
+>   * Password Incorrect
 >
 > * default object
 >
@@ -392,6 +385,10 @@ Sends a login event payload to Accertify to receive a fraud/risk recommendation 
 >
 >       UBA recent events payload.
 >
+>     * brand string
+>
+>       The brand submitting the event. For clients with multiple brands under one corporate entity.
+>
 >     * emailAddress string
 >
 >       Email address associated with the account or event.
@@ -414,7 +411,7 @@ Sends a login event payload to Accertify to receive a fraud/risk recommendation 
 >
 >     * loginEventFailureCode string
 >
->       Login Event failure code.
+>       Login Event failure code (accountDoesntExist / accountLocked / other / passwordIncorrect).
 >
 > - output object
 >
@@ -510,6 +507,10 @@ Sends a verification event payload to Accertify to record the outcome of a verif
 >
 >   UBA recent events payload.
 >
+> - Brand textField
+>
+>   The brand submitting the event. For clients with multiple brands under one corporate entity. Maximum field length = 50 characters.
+>
 > - Email Address textField
 >
 >   Email address associated with the account or event.
@@ -540,39 +541,39 @@ Sends a verification event payload to Accertify to record the outcome of a verif
 >
 >   Kind of verification the user attempted.
 >
->   * appAuthenticator
+>   * App Authenticator
 >
->   * appPush
+>   * App Push
 >
->   * captcha
+>   * Captcha
 >
->   * email
+>   * Email
 >
 >   * FIDO
 >
->   * kbAnswers
+>   * KB Answers
 >
->   * magicLink
+>   * Magic Link
 >
->   * other
+>   * Other
 >
->   * phoneCall
+>   * Phone Call
 >
->   * securityQuestions
+>   * Security Questions
 >
->   * sms
+>   * SMS
 >
 > - Verification Status dropDown
 >
->   Status of the verification (mapped to failureCode in the doc).
+>   Status of the verification (mapped to failureCode).
 >
->   * abandoned
+>   * Abandoned
 >
->   * expired
+>   * Expired
 >
->   * fail
+>   * Fail
 >
->   * success
+>   * Success
 >
 > - Verification Attempts textField
 >
@@ -586,41 +587,51 @@ Sends a verification event payload to Accertify to record the outcome of a verif
 >
 >   Event type that triggered the verification.
 >
->   * accountCreate
+>   * Account Create
 >
->   * accountUpdate
+>   * Account Update
 >
->   * giftCardBalance
+>   * Gift Card Balance
 >
->   * inventoryHold
+>   * Inventory Hold
 >
->   * listingCreate
+>   * Listing Create
 >
->   * listingUpdate
+>   * Listing Update
 >
->   * login
+>   * Login
 >
->   * logout
+>   * Logout
 >
->   * passwordForgot
+>   * Password Forgot
 >
->   * passwordUpdate
+>   * Password Update
 >
->   * payment
+>   * Payment
 >
->   * refund
+>   * Refund
 >
->   * transfer
+>   * Transfer
 >
->   * usernameForgot
+>   * Username Forgot
 >
 > - Update Event Recommendation Detail textField
 >
 >   The recommendationDetail returned by Accertify for the original event.
 >
-> - Failure Code textField
+> - Failure Code dropDown
 >
 >   Verification Event failure code.
+>
+>   * Abandoned
+>
+>   * Expired
+>
+>   * Fail
+>
+>   * New Code Within Expiry
+>
+>   * Other
 >
 > * default object
 >
@@ -669,6 +680,10 @@ Sends a verification event payload to Accertify to record the outcome of a verif
 >     * ubaEvents string
 >
 >       UBA recent events payload.
+>
+>     * brand string
+>
+>       The brand submitting the event. For clients with multiple brands under one corporate entity.
 >
 >     * emailAddress string
 >
@@ -804,6 +819,10 @@ Sends an account creation event payload to Accertify to receive a fraud/risk rec
 >
 >   UBA recent events payload.
 >
+> - Brand textField
+>
+>   The brand submitting the event. For clients with multiple brands under one corporate entity. Maximum field length = 50 characters.
+>
 > - Email Address textField
 >
 >   Email address associated with the account or event.
@@ -850,13 +869,13 @@ Sends an account creation event payload to Accertify to receive a fraud/risk rec
 >
 >   Failure code for account create attempts.
 >
->   * accountExists
+>   * Account Exists
 >
->   * exportCompliance
+>   * Export Compliance
 >
->   * unsupportedLocation
+>   * Unsupported Location
 >
->   * other
+>   * Other
 >
 > * default object
 >
@@ -901,6 +920,10 @@ Sends an account creation event payload to Accertify to receive a fraud/risk rec
 >     * ubaEvents string
 >
 >       UBA recent events payload.
+>
+>     * brand string
+>
+>       The brand submitting the event. For clients with multiple brands under one corporate entity.
 >
 >     * emailAddress string
 >
@@ -1023,6 +1046,10 @@ Sends an account update event payload to Accertify to receive a fraud/risk recom
 > - UBA Events textField
 >
 >   UBA recent events payload.
+>
+> - Brand textField
+>
+>   The brand submitting the event. For clients with multiple brands under one corporate entity. Maximum field length = 50 characters.
 >
 > - Email Address textField
 >
@@ -1161,6 +1188,10 @@ Sends an account update event payload to Accertify to receive a fraud/risk recom
 >     * pageID string
 >
 >     * ubaEvents string
+>
+>     * brand string
+>
+>       The brand submitting the event. For clients with multiple brands under one corporate entity.
 >
 >     * emailAddress string
 >
@@ -1302,6 +1333,10 @@ Sends a password forgot event payload to Accertify to receive a fraud/risk recom
 >
 >   UBA recent events payload.
 >
+> - Brand textField
+>
+>   The brand submitting the event. For clients with multiple brands under one corporate entity. Maximum field length = 50 characters.
+>
 > - Email Address textField
 >
 >   Email address associated with the account or event.
@@ -1327,6 +1362,14 @@ Sends a password forgot event payload to Accertify to receive a fraud/risk recom
 >   * magicLink
 >
 >   * SMS
+>
+> - Failure Code dropDown
+>
+>   Password Forgot Event failure code.
+>
+>   * Account Doesn't Exist
+>
+>   * Other
 >
 > * default object
 >
@@ -1372,6 +1415,10 @@ Sends a password forgot event payload to Accertify to receive a fraud/risk recom
 >
 >       UBA recent events payload.
 >
+>     * brand string
+>
+>       The brand submitting the event. For clients with multiple brands under one corporate entity.
+>
 >     * emailAddress string
 >
 >       Email address associated with the account/event.
@@ -1383,6 +1430,10 @@ Sends a password forgot event payload to Accertify to receive a fraud/risk recom
 >     * authenticationMethod string
 >
 >       How the user authenticated onto your site.
+>
+>     * passwordForgotFailureCode string
+>
+>       Password Forgot Event failure code (accountDoesntExist / other).
 >
 > - output object
 >
@@ -1488,6 +1539,10 @@ Sends a password update event payload to Accertify to receive a fraud/risk recom
 >
 >   UBA recent events payload.
 >
+> - Brand textField
+>
+>   The brand submitting the event. For clients with multiple brands under one corporate entity. Maximum field length = 50 characters.
+>
 > - Email Address textField
 >
 >   Email address associated with the account or event.
@@ -1561,6 +1616,10 @@ Sends a password update event payload to Accertify to receive a fraud/risk recom
 >     * ubaEvents string
 >
 >       Imperative. UBA recent events payload.
+>
+>     * brand string
+>
+>       Optional. The brand submitting the event. For clients with multiple brands under one corporate entity.
 >
 >     * emailAddress string
 >

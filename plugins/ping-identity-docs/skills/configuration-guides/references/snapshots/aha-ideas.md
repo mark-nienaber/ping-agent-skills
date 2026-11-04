@@ -1,9 +1,11 @@
 ---
 title: Configuring SAML SSO with Aha! Ideas and PingOne
-description: Learn how to configure SAML SSO using Aha! Ideas and PingOne.
+description: Configure SAML SSO with Aha! Ideas and PingOne — IdP-initiated and SP-initiated sign-on
 component: configuration_guides
 page_id: configuration_guides:aha!_ideas:config_saml_ahalabs_p1
 canonical_url: https://docs.pingidentity.com/configuration_guides/aha!_ideas/config_saml_ahalabs_p1.html
+llms_txt: https://docs.pingidentity.com/configuration_guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: May 15, 2024
 section_ids:
   about-this-task: About this task

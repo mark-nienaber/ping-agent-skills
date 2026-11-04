@@ -4,6 +4,8 @@ description: Event hooks let you trigger scripts during various stages of the li
 component: pingoneaic-api
 page_id: pingoneaic-api::scripting-event-hooks
 canonical_url: https://developer.pingidentity.com/pingoneaic-api/scripting-event-hooks.html
+llms_txt: https://developer.pingidentity.com/pingoneaic-api/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 keywords: ["Extensibility", "Scripts", "Identities"]
 section_ids:
   create-a-new-event-hook: Create a new event hook

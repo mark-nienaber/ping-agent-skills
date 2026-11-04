@@ -4,6 +4,8 @@ description: To create a script in a realm, perform an HTTP POST using the /json
 component: pingoneaic-api
 page_id: pingoneaic-api:am-scripting:rest-api-scripts-create
 canonical_url: https://developer.pingidentity.com/pingoneaic-api/am-scripting/rest-api-scripts-create.html
+llms_txt: https://developer.pingidentity.com/pingoneaic-api/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 keywords: ["Scripts", "REST"]
 ---
 
@@ -52,6 +54,8 @@ description: To delete a script, perform an HTTP DELETE using the /json{/realm}/
 component: pingoneaic-api
 page_id: pingoneaic-api:am-scripting:rest-api-scripts-delete
 canonical_url: https://developer.pingidentity.com/pingoneaic-api/am-scripting/rest-api-scripts-delete.html
+llms_txt: https://developer.pingidentity.com/pingoneaic-api/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 keywords: ["Scripts", "REST"]
 ---
 
@@ -80,6 +84,8 @@ description: Advanced Identity Cloud provides the /scripts endpoint to manage sc
 component: pingoneaic-api
 page_id: pingoneaic-api:am-scripting:manage-scripts-rest
 canonical_url: https://developer.pingidentity.com/pingoneaic-api/am-scripting/manage-scripts-rest.html
+llms_txt: https://developer.pingidentity.com/pingoneaic-api/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 keywords: ["Extensibility", "Scripts"]
 page_aliases: ["index.adoc"]
 ---
@@ -209,6 +215,8 @@ description: To list all the scripts in a realm, as well as any default scripts,
 component: pingoneaic-api
 page_id: pingoneaic-api:am-scripting:rest-api-scripts-query
 canonical_url: https://developer.pingidentity.com/pingoneaic-api/am-scripting/rest-api-scripts-query.html
+llms_txt: https://developer.pingidentity.com/pingoneaic-api/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 keywords: ["Scripts", "REST"]
 ---
 
@@ -283,6 +291,8 @@ description: To read an individual script in a realm, perform an HTTP GET using 
 component: pingoneaic-api
 page_id: pingoneaic-api:am-scripting:rest-api-scripts-read
 canonical_url: https://developer.pingidentity.com/pingoneaic-api/am-scripting/rest-api-scripts-read.html
+llms_txt: https://developer.pingidentity.com/pingoneaic-api/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 keywords: ["Scripts", "REST"]
 ---
 
@@ -323,6 +333,8 @@ description: To update a script, perform an HTTP PUT using the /json{/realm}/scr
 component: pingoneaic-api
 page_id: pingoneaic-api:am-scripting:rest-api-scripts-update
 canonical_url: https://developer.pingidentity.com/pingoneaic-api/am-scripting/rest-api-scripts-update.html
+llms_txt: https://developer.pingidentity.com/pingoneaic-api/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 keywords: ["Scripts", "REST"]
 ---
 
@@ -372,6 +384,8 @@ description: To validate a script, perform an HTTP POST using the /json{/realm}/
 component: pingoneaic-api
 page_id: pingoneaic-api:am-scripting:rest-api-scripts-validate
 canonical_url: https://developer.pingidentity.com/pingoneaic-api/am-scripting/rest-api-scripts-validate.html
+llms_txt: https://developer.pingidentity.com/pingoneaic-api/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 keywords: ["Scripts", "REST"]
 ---
 

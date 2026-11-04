@@ -31,14 +31,19 @@ page_id: pingone-credentials:release_notes:pf_p1_credentials_ik_changelog
 canonical_url: https://docs.pingidentity.com/integrations/pingone-credentials/release_notes/pf_p1_credentials_ik_changelog.html
 llms_txt: https://docs.pingidentity.com/integrations/pingone-credentials/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: August 27, 2024
+revdate: 2026-10-01T18:00:00Z
 section_ids:
+  pingone-credentials-integration-kit-1-1-october-2026: PingOne Credentials Integration Kit 1.1 - October 2026
   pingone-credentials-integration-kit-1-0-august-2024: PingOne Credentials Integration Kit 1.0 - August 2024
 ---
 
 # Changelog
 
 The following is the change history for the PingOne Credentials Integration Kit.
+
+## PingOne Credentials Integration Kit 1.1 - October 2026
+
+* Added the ability to disable the `applicationInstanceId` cookie using the **Enable Application Instance Cookie** setting. Learn more in [PingOne Credentials IdP Adapter settings reference](../setup/pf_p1_credentials_ik_p1_credentials_idp_adapter_settings_reference.html).
 
 ## PingOne Credentials Integration Kit 1.0 - August 2024
 
@@ -800,7 +805,7 @@ page_id: pingone-credentials:setup:pf_p1_credentials_ik_p1_credentials_idp_adapt
 canonical_url: https://docs.pingidentity.com/integrations/pingone-credentials/setup/pf_p1_credentials_ik_p1_credentials_idp_adapter_settings_reference.html
 llms_txt: https://docs.pingidentity.com/integrations/pingone-credentials/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: September 3, 2024
+revdate: 2026-10-01T18:00:00Z
 ---
 
 # PingOne Credentials IdP Adapter settings reference
@@ -832,6 +837,7 @@ Field descriptions for the PingOne Credentials IdP Adapter configuration screen.
 | **Messages Files**                        | Identifies the customizable language-pack file that the adapter uses to show messages on the templates.If you customize the `pingone-credentials-messages.properties` file name in the `/server/default/conf/language-packs` directory, enter the new name here.The default value is `pingone-credentials-messages`.                                       |
 | **Error Message Key Prefix**              | Identifies the error messages in the language-pack file that the adapter uses to show messages on the templates.If you customize the error message names in `/server/default/conf/language-packs/pingone-credentials-messages.properties`, enter the new prefix here.The default value is `pingone.credentials.error.`.                                    |
 | **Allow Credential Verification Retries** | When credential verification fails, this setting determines whether to start a new session.This check box is cleared by default.                                                                                                                                                                                                                           |
+| **Enable Application Instance Cookie**    | On credential verification success, this setting sets the application instance cookie so that future sessions in the same browser are prompted for sharing credentials automatically, without requiring QR scanning.Disabling this setting requires QR scanning for every session.This check box is selected by default.                                   |
 | **Service Unavailable Failure Mode**      | When the adapter is unable to access PingOne, this setting determines whether the adapter should block the user's sign-on attempt or bypass authentication.The default selection is `Bypass authentication`.                                                                                                                                               |
 | **Show Success Screens**                  | When the presentation session is successful, this setting determines whether the adapter shows a success page.This check box is selected by default.                                                                                                                                                                                                       |
 | **Show Failed Screens**                   | When the presentation session fails, this setting determines whether the adapter shows a failure page.This check box is selected by default.                                                                                                                                                                                                               |

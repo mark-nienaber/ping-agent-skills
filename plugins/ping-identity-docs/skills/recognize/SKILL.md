@@ -27,16 +27,16 @@ This page explains the options customers have when using PingOne Recognize to su
 
 | Task category | Guide slug | Live URL pattern | Snapshot |
 |---|---|---|---|
-| Mobile Sdk: pingone, recognize, sdk | mobile-sdk | https://docs.pingidentity.com/recognize/mobile-sdk/*.md | references/snapshots/mobile-sdk.md |
+| Mobile Sdk: pingone, recognize, mobile | mobile-sdk | https://docs.pingidentity.com/recognize/mobile-sdk/*.md | references/snapshots/mobile-sdk.md |
 | Web Sdk: pingone, recognize, web | web-sdk | https://docs.pingidentity.com/recognize/web-sdk/*.md | references/snapshots/web-sdk.md |
 | Idv Bridge: bridge, idv, pingone | idv-bridge | https://docs.pingidentity.com/recognize/idv-bridge/*.md | references/snapshots/idv-bridge.md |
 | On Premise: premise, pingone, recognize | on-premise | https://docs.pingidentity.com/recognize/on-premise/*.md | references/snapshots/on-premise.md |
+| Introduction: pingone, recognize, page | introduction | https://docs.pingidentity.com/recognize/introduction/*.md | references/snapshots/introduction.md |
 | User Guide: account, your, app | user-guide | https://docs.pingidentity.com/recognize/user-guide/*.md | references/snapshots/user-guide.md |
-| Introduction: page, pingone, recognize | introduction | https://docs.pingidentity.com/recognize/introduction/*.md | references/snapshots/introduction.md |
 | Folder Example: folder, page | folder-example | https://docs.pingidentity.com/recognize/folder-example/*.md | references/snapshots/folder-example.md |
-| Pingone Recognize.Md: pingone, recognize | pingone-recognize.md | https://docs.pingidentity.com/recognize/pingone-recognize.md | references/snapshots/pingone-recognize-md.md |
-| Release Notes: previous, releases | release-notes | https://docs.pingidentity.com/recognize/release-notes/*.md | references/snapshots/release-notes.md |
-| Troubleshooting: guide, troubleshooting | troubleshooting | https://docs.pingidentity.com/recognize/troubleshooting/*.md | references/snapshots/troubleshooting.md |
+| Pingone Recognize.Md: pingone, recognize, app | pingone-recognize.md | https://docs.pingidentity.com/recognize/pingone-recognize.md | references/snapshots/pingone-recognize-md.md |
+| Release Notes: notes, pingone, recognize | release-notes | https://docs.pingidentity.com/recognize/release-notes/*.md | references/snapshots/release-notes.md |
+| Troubleshooting: alerts, backend, cluster | troubleshooting | https://docs.pingidentity.com/recognize/troubleshooting/*.md | references/snapshots/troubleshooting.md |
 
 ## Composition
 

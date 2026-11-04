@@ -4,6 +4,8 @@ description: When transitioning to Ping Government Identity Cloud, you'll need t
 component: pgic
 page_id: pgic::pgic_data_loading
 canonical_url: http://docs.pingidentity.com/pgic/pgic_data_loading.html
+llms_txt: http://docs.pingidentity.com/pgic/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 ---
 
 # Data loading and access

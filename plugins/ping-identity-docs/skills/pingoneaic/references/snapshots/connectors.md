@@ -14,19 +14,23 @@ section_ids:
 
 # Connectors
 
-Connectors are a tool to connect PingOne Advanced Identity Cloud to external resources and services and are built using the PingOne Open Connector Framework (ICF). Some connectors are built into Advanced Identity Cloud to let you easily connect to datastores in other services and are configurable using the IDM native admin console. Additional connectors are available to set up and run remotely using a remote connector server (RCS).
+Connectors connect Advanced Identity Cloud to external resources and services. They are built using the PingOne Open Connector Framework (ICF) and are used to synchronize identity data between Advanced Identity Cloud and systems such as directories, HR systems, and software as a service (SaaS) applications.
 
-|   |                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-|   | If you configure a connector with a password, you must update the connector's Advanced Identity Cloud configuration to replace the password's encrypted object with an ESV placeholder. This makes the connector's configuration compatible with the promotion process. Learn more in [Insert an ESV placeholder into an LDAP connector](../tenants/configuration-placeholders-api.html#configure-ldap-connector). |
+Some connectors are built into Advanced Identity Cloud to let you easily connect to datastores in other services and are configurable using the Advanced Identity Cloud admin console. Additional connectors are available to set up and run remotely using a remote connector server (RCS).
+
+|   |                                                                                                                                                                                                                                                                                                 |
+| - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | If you configure a connector with a password, you must update the connector's Advanced Identity Cloud configuration to replace the password's encrypted object with an [ESV](../tenants/esvs.html) placeholder. This makes the connector's configuration compatible with the promotion process. |
 
 ## Built-in connectors
 
-Advanced Identity Cloud includes several built-in connectors to connect easily to data stores in other services. These built-in connectors are accessed through the IDM native admin console. For a complete list of connectors bundled with Advanced Identity Cloud, refer to your tenant.
+Advanced Identity Cloud includes several built-in connectors to connect easily to datastores in other services.
 
-|   |                                                                                                                                                                                                                                                 |
-| - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | Learn more about provisioning connectors using the application management section of Advanced Identity Cloud in [Provision settings for an application](../app-management/provision-an-application.html#provision_settings_for_an_application). |
+You typically work with these connectors in two places:
+
+* The [icon: apps, set=material, size=inline] Applications page, when you provision a catalog application and its connected system. Learn more in [Provision settings for an application](../app-management/provision-an-application.html#provision_settings_for_an_application).
+
+* The [icon: power, set=material, size=inline] Integrations > Provisioners page, when you create a standalone provisioner to connect to an external system without creating an application. Learn more in [Standalone provisioners](../app-management/standalone-provisioners.html).
 
 ## Remote connectors
 

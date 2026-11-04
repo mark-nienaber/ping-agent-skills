@@ -6,6 +6,7 @@ page_id: recognize::folder-example/page-in-folder
 canonical_url: https://docs.pingidentity.com/recognize/folder-example/page-in-folder.html
 llms_txt: https://docs.pingidentity.com/recognize/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: July 23, 2026
 ---
 
 # Page in a folder

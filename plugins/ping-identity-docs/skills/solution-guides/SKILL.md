@@ -6,7 +6,7 @@ license: MIT
 
 # Solution Guides
 
-Identity for AI secures AI agents with agent registration, authentication, authorization, risk detection, agent gateway, and integrations.
+Add MFA to web apps by synchronizing sessions between PingFederate and PingAccess through PingID.
 
 ## Live source of truth
 
@@ -27,18 +27,17 @@ Identity for AI secures AI agents with agent registration, authentication, autho
 
 | Task category | Guide slug | Live URL pattern | Snapshot |
 |---|---|---|---|
-| Single Sign On Use Cases: configuring, pingfederate, enterprise | single_sign-on_use_cases | https://docs.pingidentity.com/solution-guides/single_sign-on_use_cases/*.md | references/snapshots/single-sign-on-use-cases.md |
-| Data And Application Security Use Cases: pingaccess, pingfederate, application | data_and_application_security_use_cases | https://docs.pingidentity.com/solution-guides/data_and_application_security_use_cases/*.md | references/snapshots/data-and-application-security-use-cases.md |
-| Workforce Use Cases: pingfederate, setting, authentication | workforce_use_cases | https://docs.pingidentity.com/solution-guides/workforce_use_cases/*.md | references/snapshots/workforce-use-cases.md |
-| Customer Use Cases: setting, password, pingone | customer_use_cases | https://docs.pingidentity.com/solution-guides/customer_use_cases/*.md | references/snapshots/customer-use-cases.md |
-| Best Practice Guides: best, practices, passwordless | best_practice_guides | https://docs.pingidentity.com/solution-guides/best_practice_guides/*.md | references/snapshots/best-practice-guides.md |
-| Multi Factor Authentication Use Cases: mfa, pingid, authentication | multi-factor_authentication_use_cases | https://docs.pingidentity.com/solution-guides/multi-factor_authentication_use_cases/*.md | references/snapshots/multi-factor-authentication-use-cases.md |
-| Standards And Protocols Use Cases: client, commands, federation | standards_and_protocols_use_cases | https://docs.pingidentity.com/solution-guides/standards_and_protocols_use_cases/*.md | references/snapshots/standards-and-protocols-use-cases.md |
-| Developer Api Use Cases: pingid, administrative, cases | developer_api_use_cases | https://docs.pingidentity.com/solution-guides/developer_api_use_cases/*.md | live-only |
-| Verified Trust: trust, desk, help | verified-trust | https://docs.pingidentity.com/solution-guides/verified-trust/*.md | live-only |
-| Directory Use Cases: attributes, cases, configuring | directory_use_cases | https://docs.pingidentity.com/solution-guides/directory_use_cases/*.md | live-only |
-| Htg Overview.Md: cases, overview, use | htg_overview.md | https://docs.pingidentity.com/solution-guides/htg_overview.md | live-only |
-| Identity For Ai: agent, identity, agents | identity-for-ai | https://docs.pingidentity.com/solution-guides/identity-for-ai/*.md | live-only |
+| Single Sign On Use Cases: pingfederate, sso, enterprise | single_sign-on_use_cases | https://docs.pingidentity.com/solution-guides/single_sign-on_use_cases/*.md | references/snapshots/single-sign-on-use-cases.md |
+| Data And Application Security Use Cases: pingaccess, pingfederate, oidc | data_and_application_security_use_cases | https://docs.pingidentity.com/solution-guides/data_and_application_security_use_cases/*.md | references/snapshots/data-and-application-security-use-cases.md |
+| Workforce Use Cases: pingfederate, authentication, pingone | workforce_use_cases | https://docs.pingidentity.com/solution-guides/workforce_use_cases/*.md | references/snapshots/workforce-use-cases.md |
+| Customer Use Cases: password, pingfederate, pingone | customer_use_cases | https://docs.pingidentity.com/solution-guides/customer_use_cases/*.md | references/snapshots/customer-use-cases.md |
+| Best Practice Guides: passwordless, authentication, best | best_practice_guides | https://docs.pingidentity.com/solution-guides/best_practice_guides/*.md | references/snapshots/best-practice-guides.md |
+| Multi Factor Authentication Use Cases: mfa, pingid, pingfederate | multi-factor_authentication_use_cases | https://docs.pingidentity.com/solution-guides/multi-factor_authentication_use_cases/*.md | references/snapshots/multi-factor-authentication-use-cases.md |
+| Standards And Protocols Use Cases: federation, pingfederate, kerberos | standards_and_protocols_use_cases | https://docs.pingidentity.com/solution-guides/standards_and_protocols_use_cases/*.md | references/snapshots/standards-and-protocols-use-cases.md |
+| Developer Api Use Cases: pingid, pingfederate, powershell | developer_api_use_cases | https://docs.pingidentity.com/solution-guides/developer_api_use_cases/*.md | references/snapshots/developer-api-use-cases.md |
+| Verified Trust: verified, account, agent | verified-trust | https://docs.pingidentity.com/solution-guides/verified-trust/*.md | references/snapshots/verified-trust.md |
+| Htg Overview.Md: cases, identity, overview | htg_overview.md | https://docs.pingidentity.com/solution-guides/htg_overview.md | references/snapshots/htg-overview-md.md |
+| Identity For Ai: agent, identity, agents | identity-for-ai | https://docs.pingidentity.com/solution-guides/identity-for-ai/*.md | references/snapshots/identity-for-ai.md |
 
 ## Composition
 

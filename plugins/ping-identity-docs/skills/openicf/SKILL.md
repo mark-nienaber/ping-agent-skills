@@ -27,7 +27,7 @@ Overview of the Identity Connector Framework (ICF) for connecting external resou
 
 | Task category | Guide slug | Live URL pattern | Snapshot |
 |---|---|---|---|
-| Connector Reference: connector, pingidm, configure | connector-reference | https://docs.pingidentity.com/openicf/connector-reference/*.md | references/snapshots/connector-reference.md |
+| Connector Reference: connector, identity, cloud | connector-reference | https://docs.pingidentity.com/openicf/connector-reference/*.md | references/snapshots/connector-reference.md |
 | Connector Dev Guide: connector, icf, connectors | connector-dev-guide | https://docs.pingidentity.com/openicf/connector-dev-guide/*.md | references/snapshots/connector-dev-guide.md |
 | Connector Release Notes: release, notes, connector | connector-release-notes | https://docs.pingidentity.com/openicf/connector-release-notes/*.md | references/snapshots/connector-release-notes.md |
 | Index.Md: identity, available, connecting | index.md | https://docs.pingidentity.com/openicf/index.md | references/snapshots/index-md.md |

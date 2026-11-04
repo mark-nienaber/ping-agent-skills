@@ -1,12 +1,12 @@
 ---
 title: About groups and populations
-description: Groups and populations are both used to organize users in PingOne, but they differ in several ways.
+description: Compare PingOne groups and populations, and learn about static, dynamic, nested, internal, and external group types and group roles.
 component: pingone
 page_id: pingone:directory:p1_groups_vs_populations
 canonical_url: https://docs.pingidentity.com/pingone/directory/p1_groups_vs_populations.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: May 3, 2024
+revdate: 2026-07-17T00:00:00Z
 section_ids:
   related-links: Related links
   p1-internal-external-groups: Internal and external groups
@@ -214,13 +214,13 @@ Learn more in [Creating a group](p1_create_group.html) and [Managing group membe
 
 ---
 title: Access user information to send to application developers
-description: "You can use the API tab on the user details panel to access and copy PingOne user information in a format that's easy for application developers to use."
+description: Copy PingOne user API information from the user details panel to share with developers.
 component: pingone
 page_id: pingone:directory:p1_viewusersapi
 canonical_url: https://docs.pingidentity.com/pingone/directory/p1_viewusersapi.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: May 24, 2024
+revdate: 2026-07-17T00:00:00Z
 ---
 
 # Access user information to send to application developers
@@ -239,13 +239,13 @@ The **API** tab includes general information about the user, such as user ID, en
 
 ---
 title: Adding a custom administrator role
-description: Learn how to create a custom administrator role in PingOne.
+description: Create a custom administrator role in PingOne.
 component: pingone
 page_id: pingone:directory:p1_custom_role_add
 canonical_url: https://docs.pingidentity.com/pingone/directory/p1_custom_role_add.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: May 22, 2026
+revdate: 2026-07-17T00:00:00Z
 section_ids:
   before-you-begin: Before you begin
   steps: Steps
@@ -406,7 +406,7 @@ page_id: pingone:directory:p1_adduser
 canonical_url: https://docs.pingidentity.com/pingone/directory/p1_adduser.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: May 16, 2024
+revdate: 2026-07-17T00:00:00Z
 section_ids:
   steps: Steps
   result: Result
@@ -492,11 +492,11 @@ page_id: pingone:directory:p1_adduserattributes
 canonical_url: https://docs.pingidentity.com/pingone/directory/p1_adduserattributes.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: May 3, 2024
+revdate: 2026-08-13T00:00:00Z
 page_aliases: ["p1_enabling_user_attibutes.adoc"]
 section_ids:
   steps: Steps
-  related-links: Related links
+  next-steps: Next steps
 ---
 
 # Adding user attributes
@@ -507,9 +507,9 @@ Use the **Attributes** page to add a user attribute to your environment.
 
 1. In the PingOne admin console, go to **Directory > User Attributes**.
 
-2. Click the **[icon: plus, set=fa]**icon.
+2. Click the **Plus** icon ([icon: plus, set=fa]).
 
-3. Select the attribute that you want to add:
+3. Select the type of attribute that you want to add:
 
    * **Declared**: Declared attributes are string attributes that applications can access through the PingOne API or the PingOne admin console. Declared attributes can be:
 
@@ -527,6 +527,10 @@ Use the **Attributes** page to add a user attribute to your environment.
 
      * Validated (JSON Schema)
 
+       |   |                                                                                                                             |
+       | - | --------------------------------------------------------------------------------------------------------------------------- |
+       |   | The JSON is only checked to ensure that it's valid and well-formed. No validation is performed against a particular schema. |
+
 4. Click **Next**.
 
 5. Enter the following information:
@@ -539,33 +543,53 @@ Use the **Attributes** page to add a user attribute to your environment.
 
 6. Select the configuration options for the attribute:
 
-   * **Enforce unique values**: Require that attribute values be unique across the environment.
+   * **Enforce unique values** (declared attributes only): Require that attribute values be unique across the environment.
 
    * **Allow multiple values**: Allow the attribute to support multiple values:
 
-     * When a multi-valued attribute is mapped as part of an OpenID Connect (OIDC) *(tooltip: \<div class="paragraph">
+     * When a multivalued attribute is mapped as part of an OpenID Connect (OIDC) *(tooltip: \<div class="paragraph">
        \<p>An authentication protocol built on top of OAuth that authenticates users and enables clients (relying parties) of all types to request and receive information about authenticated sessions and users. OIDC is extensible, allowing clients to use optional features such as encryption of identity data, discovery of OpenID Providers (OAuth authorization servers), and session management.\</p>
        \</div>)* or OAuth flow, the claim will be an array of values.
 
-     * When a multi-valued attribute is mapped as part of a SAML flow, the multi-valued attribute will be a multi-valued SAML attribute in the SAML assertion. Learn more in [Mapping attributes](p1_editsamlattributemapping.html).
+     * When a multivalued attribute is mapped as part of a SAML flow, the attribute will be a multivalued SAML attribute in the SAML assertion. Learn more in [Mapping attributes](p1_editsamlattributemapping.html).
 
-   * **No Validation**: No validation is needed.
+     |   |                                                                                          |
+     | - | ---------------------------------------------------------------------------------------- |
+     |   | After you create an attribute that is multivalued, you can't change it to single-valued. |
 
-   * **Enumerated Values**: Allows the attribute to have enumerated values.
+   * **Validation options** (declared attributes only)
 
-   * **Regex Validation**: Requires that the attribute have a testable expression. Enter the following information to test an expression:
+     Select an option in the list:
 
-     * **Expression**: A unique identifier for the attribute.
+     * **No Validation**: No validation is needed.
 
-     * **Description**: A brief description of the attribute.
+     * **Enumerated Values**: Allows the attribute to have enumerated values.
 
-     * **Values**: Examples of values that match or do not match the expression.
+       After you select this option, enter a value in the next field.
 
-     |   |                                                                                           |
-     | - | ----------------------------------------------------------------------------------------- |
-     |   | After you create an attribute that is multi-valued, you can't change it to single-valued. |
+       |   |                                                                               |
+       | - | ----------------------------------------------------------------------------- |
+       |   | To add multiple values, click **+ Add Value**. Click **X** to remove a value. |
 
-7. Click **Save**.
+     * **Regex Validation**: Requires that the attribute have a testable expression.
+
+       1. After you select this option, enter the following information:
+
+          * **Expression**: A regex expression.
+
+          * **Description**: A brief description of the expression.
+
+       2. Click **Test Expression**.
+
+       3. In the **Test Expression** modal, enter values that match or don't match the expression.
+
+          |   |                                                                               |
+          | - | ----------------------------------------------------------------------------- |
+          |   | To add multiple values, click **+ Add Value**. Click **X** to remove a value. |
+
+       4. Click **Save** in the modal.
+
+7. Click **Save** in the details panel.
 
 8. To enable a user attribute, click the toggle to the right (blue).
 
@@ -573,21 +597,21 @@ Use the **Attributes** page to add a user attribute to your environment.
    | - | --------------------------------------------------------------------------------------------------------------------------------------- |
    |   | You can disable the user attribute by clicking the toggle to the left (gray) and clicking **Confirm** in the **Confirm Disable** modal. |
 
-## Related links
+## Next steps
 
-* [Mapping attributes](p1_editsamlattributemapping.html)
+Map PingOne user attributes in your application, resource, identity provider, or provisioning connection. Learn more in [Mapping attributes](p1_editsamlattributemapping.html).
 
 ---
 
 ---
 title: Administrator Roles
-description: Administrator roles give PingOne administrators access to resources in the admin console and determine the actions they can take in PingOne.
+description: Reference for PingOne built-in and custom administrator roles, including permissions, assignment levels, and integrated product roles.
 component: pingone
 page_id: pingone:directory:p1_roles
 canonical_url: https://docs.pingidentity.com/pingone/directory/p1_roles.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: August 11, 2025
+revdate: 2026-10-21T20:25:06Z
 section_ids:
   built-in-roles-tab: Built-In Roles tab
   built-in-pingone-administrator-roles: Built-in PingOne administrator roles
@@ -692,21 +716,23 @@ Click a role to open the details pane and view additional details about the role
 
 ### Built-in PingOne administrator roles
 
-| Role                               | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| ---------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Advanced Help Desk Admin           | A role for managing user accounts, group membership, and identity credentials beyond the standard capabilities included in the Help Desk Admin role. Permissions for this role enable the administrator to perform full user lifecycle operations, manage group membership, issue and revoke credentials, and administer identity verification and MFA pairing keys to support escalated identity management tasks.                                                                                                                                                                                                                 |
-| Application Owner                  | A role for managing specific applications to which they are assigned. Key permissions include assigning application access using groups, editing attributes, and configuring connection details for the application.This role has no other administrator permissions.                                                                                                                                                                                                                                                                                                                                                               |
-| Authorize Gateway Policy Evaluator | This role grants the minimum permissions required for Authorize gateways to interact with PingOne. Permissions include reading gateway configuration and deployment details, such as the authorization policy version and minimum supported gateway instance version.To grant an Authorize gateway additional policy evaluation permissions, such as reading user details, checking group membership, and evaluating risk scores, create a custom administrator role and assign it to the Authorize gateway.                                                                                                                        |
-| Client Application Developer       | A role for managing API client applications. The permissions for a client application developer are centered around managing applications and include functions such as creating and deleting client applications and resetting a client secret for an application.                                                                                                                                                                                                                                                                                                                                                                 |
-| Configuration Read Only            | A subset of the Environment Admin role with read-only permissions only. For example, the Environment Admin role can read, update, and delete environments, but the Configuration Read Only role can read environment data only.Administrators with the Environment Admin or Configuration Read Only role can assign the Configuration Read Only role to users.                                                                                                                                                                                                                                                                      |
-| DaVinci Admin                      | (Only applicable for PingOne environments that include the PingOne DaVinci service.) A role that gives PingOne administrators full read and write access to the DaVinci console. Create, edit, and delete DaVinci flows, deploy DaVinci flows, create, edit, and delete connections and variables.The user adding DaVinci to an environment is given the DaVinci Admin role.                                                                                                                                                                                                                                                        |
-| DaVinci Admin Read Only            | (Only applicable for PingOne environments that include the PingOne DaVinci service.) A role that gives PingOne administrators read-only access to the DaVinci console. Read flows, connections, and variables.                                                                                                                                                                                                                                                                                                                                                                                                                      |
-| Environment Admin                  | A role for managing environments. The permissions for an environment administrator are centered around managing environments and include functions such as editing environments, managing populations, viewing password policies, and assigning certain roles.                                                                                                                                                                                                                                                                                                                                                                      |
-| Help Desk Admin                    | A role for managing user multi-factor authentication (MFA) methods and devices and resolving account lockouts. The permissions for a Help Desk Admin are centered around enabling the administrator to help end users successfully authenticate with PingOne and include functions such as resetting passwords and adding or updating MFA methods and devices configured in the user record.                                                                                                                                                                                                                                        |
-| Identity Data Admin                | A role for managing identities and identity data. The permissions for an identity data administrator are centered around managing user identities, and include functions like creating users and resetting a user's password.                                                                                                                                                                                                                                                                                                                                                                                                       |
-| Identity Data Read Only            | A subset of the Identity Data Admin role, but with read-only permissions. For example, the Identity Data Admin role can read, update, and delete users, but the Identity Data Read Only role can read user data only. Administrators with the Identity Data Admin or Identity Data Read Only role can assign the Identity Data Read Only role to users.                                                                                                                                                                                                                                                                             |
-| Organization Admin                 | A role for managing the entire organization. The permissions for an organization administrator are centered around managing organizations and include functions like creating, editing, and deleting organizations and environments.                                                                                                                                                                                                                                                                                                                                                                                                |
-| Promotion Admin                    | A role for managing the promotion of environment configuration from one environment to another. The permissions for this role enable the administrator to create, update, and delete promotion variables and promotion snapshots, and create and execute promotions. To execute a promotion, the administrator must have this role in both the source environment from which the promotion is initiated and the target environment.&#xA;&#xA;This role currently functions only if you select the Configuration Management opt-in for early access. Learn more in Configuration management and promotion in PingOne (early access). |
+| Role                                      | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| ----------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Advanced Help Desk Admin                  | A role for managing user accounts, group membership, and identity credentials beyond the standard capabilities included in the Help Desk Admin role. Permissions for this role enable the administrator to perform full user lifecycle operations, manage group membership, issue and revoke credentials, and administer identity verification and MFA pairing keys to support escalated identity management tasks.                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| Application Owner                         | A role for managing specific applications to which they are assigned. Key permissions include assigning application access using groups, editing attributes, and configuring connection details for the application.This role has no other administrator permissions.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| Authorize Gateway Policy Evaluator        | This role grants the minimum permissions required for Authorize gateways to interact with PingOne. Permissions include reading gateway configuration and deployment details, such as the authorization policy version and minimum supported gateway instance version.To grant an Authorize gateway additional policy evaluation permissions, such as reading user details, checking group membership, and evaluating risk scores, create a custom administrator role and assign it to the Authorize gateway.                                                                                                                                                                                                                                                                                                                                                                       |
+| Client Application Developer              | A role for managing API client applications. The permissions for a client application developer are centered around managing applications and include functions such as creating and deleting client applications and resetting a client secret for an application.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| Configuration Read Only                   | A subset of the Environment Admin role with read-only permissions only. For example, the Environment Admin role can read, update, and delete environments, but the Configuration Read Only role can read environment data only.&#xA;&#xA;Administrators with the Configuration Read Only role can read client secrets for applications. An administrator with this role could use a worker application's client secret to obtain an access token with the roles assigned to the application. If the application has permissions beyond the administrator's assigned role, this could result in privilege escalation. Assign worker applications only the roles they need and grant the Configuration Read Only role only to trusted administrators.Administrators with the Environment Admin or Configuration Read Only role can assign the Configuration Read Only role to users. |
+| DaVinci Admin                             | (Only applicable for PingOne environments that include the PingOne DaVinci service.) A role that gives PingOne administrators full read and write access to the DaVinci console. Create, edit, and delete DaVinci flows, deploy DaVinci flows, create, edit, and delete connections and variables.The user adding DaVinci to an environment is given the DaVinci Admin role.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| DaVinci Admin Read Only                   | (Only applicable for PingOne environments that include the PingOne DaVinci service.) A role that gives PingOne administrators read-only access to the DaVinci console. Read flows, connections, and variables.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| Environment Admin                         | A role for managing environments. The permissions for an environment administrator are centered around managing environments and include functions such as editing environments, managing populations, viewing password policies, and assigning certain roles.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| Help Desk Admin                           | A role for managing user multi-factor authentication (MFA) methods and devices and resolving account lockouts. The permissions for a Help Desk Admin are centered around enabling the administrator to help end users successfully authenticate with PingOne and include functions such as resetting passwords and adding or updating MFA methods and devices configured in the user record.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| Identity Data Admin                       | A role for managing identities and identity data. The permissions for an identity data administrator are centered around managing user identities, and include functions like creating users and resetting a user's password.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| Identity Data Read Only                   | A subset of the Identity Data Admin role, but with read-only permissions. For example, the Identity Data Admin role can read, update, and delete users, but the Identity Data Read Only role can read user data only. Administrators with the Identity Data Admin or Identity Data Read Only role can assign the Identity Data Read Only role to users.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| Organization Admin                        | A role for managing the entire organization. The permissions for an organization administrator are centered around managing organizations and include functions like creating, editing, and deleting organizations and environments.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| PingOne Privilege Administrator           | (Only applicable for PingOne environments that include the PingOne Privilege service.) A delegated administrator that can manage cloud infrastructure resources in the PingOne Privilege application and approve access requests to cloud resources.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| PingOne Privilege Read-Only Administrator | (Only applicable for PingOne environments that include the PingOne Privilege service.) A role with read-only access to the PingOne Privilege platform, including cloud resources and integrations with third-party applications.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| Promotion Admin                           | A role for managing the promotion of environment configuration from one environment to another. The permissions for this role enable the administrator to create, update, and delete promotion variables and promotion snapshots, and create and execute promotions. To execute a promotion, the administrator must have this role in both the source environment from which the promotion is initiated and the target environment.&#xA;&#xA;This role currently functions only if you select the Configuration Management opt-in for early access. Learn more in Configuration management and promotion in PingOne (early access).                                                                                                                                                                                                                                                |
 
 ### Advanced Identity Cloud Access
 
@@ -714,10 +740,11 @@ For PingOne environments that include SSO to PingOne Advanced Identity Cloud, Pi
 
 > **Collapse: Details**
 >
-> | Role                                 | Description                                                                                                                 |
-> | ------------------------------------ | --------------------------------------------------------------------------------------------------------------------------- |
-> | Advanced Identity Cloud Super Admin  | A role for managing the Advanced Identity Cloud tenant with all administrator permissions, including adding administrators. |
-> | Advanced Identity Cloud Tenant Admin | A role for managing the Advanced Identity Cloud tenant with most administrator permissions, except adding administrators.   |
+> | Role                                   | Description                                                                                                                                           |
+> | -------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+> | Advanced Identity Cloud Super Admin    | A role for managing the Advanced Identity Cloud tenant with all administrator permissions, including adding administrators.                           |
+> | Advanced Identity Cloud Tenant Admin   | A role for managing the Advanced Identity Cloud tenant with most administrator permissions, except adding administrators.                             |
+> | Advanced Identity Cloud Tenant Auditor | A role with read-only access to the Advanced Identity Cloud tenant configuration and settings. Assignable by the Advanced Identity Cloud Super Admin. |
 
 ### PingFederate Access
 
@@ -769,13 +796,13 @@ If missing permissions are preventing the page from loading properly, a message 
 
 ---
 title: Attribute access control
-description: Some PingOne platform self-management scopes allow organizations to specify which user profile attributes are accessible to end users.
+description: Learn how PingOne self-management scopes control which user profile attributes end users can access.
 component: pingone
 page_id: pingone:directory:p1_attribute_access_control_user_atts
 canonical_url: https://docs.pingidentity.com/pingone/directory/p1_attribute_access_control_user_atts.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: May 23, 2024
+revdate: 2026-07-17T00:00:00Z
 section_ids:
   related-links: Related links
 ---
@@ -818,9 +845,13 @@ You can bypass multi-factor authentication (MFA) for a specific user for a speci
 
 3. Click the **Services > Authentication** tab.
 
-4. To bypass MFA for single sign-on (SSO), in the **Multi-Factor Authentication** section, click **Allow MFA bypass**, and then in the **Bypass** modal, select the bypass duration and click **Bypass**.
+4. To bypass MFA for browser single sign-on (SSO) flows using PingFederate, PingOne SSO, or PingOne for Enterprise, in the **Multi-Factor Authentication** section, click **Allow MFA bypass**, and then in the **Bypass** modal, select the bypass duration and click **Bypass**.
 
    The bypass time remaining and a **Resume** link are shown. Click **Resume** to resume MFA for the selected user.
+
+   |   |                                                                                                                                                                                                               |
+   | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+   |   | The **Allow MFA bypass** is only applied to the previously described browser SSO flows. To bypass MFA for another integration, use the bypass option in **Integrations**. Learn how in the following section. |
 
 5. (Workforce only) To bypass MFA for a specific service, in the **Integrations** section, next to the relevant service, click the **More Options (⋮)** icon and then select **Disable** or **Bypass**. Bypassing a service suspends the need for a user to authenticate using the secondary authentication method for a specified amount of time.
 
@@ -832,23 +863,23 @@ You can bypass multi-factor authentication (MFA) for a specific user for a speci
 
 ---
 title: Characters supported in PingOne user attributes
-description: The characters supported in user attributes in PingOne vary depending on the attribute. Learn more in the following table.
+description: Reference table of characters supported in PingOne user attributes, including email, username, name, address, phone, and custom attributes.
 component: pingone
 page_id: pingone:directory:p1_user_atts_supported_characters
 canonical_url: https://docs.pingidentity.com/pingone/directory/p1_user_atts_supported_characters.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: June 17, 2024
+revdate: 2026-09-29T08:25:01Z
 ---
 
 # Characters supported in PingOne user attributes
 
 The characters supported in user attributes in PingOne vary depending on the attribute. Learn more in the following table.
 
-| Attribute                                                                                                                                                                                                                                                                                        | Supported characters                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Email Address**                                                                                                                                                                                                                                                                                | Uppercase and lowercase English letters: A-Z; a-z                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
-|                                                                                                                                                                                                                                                                                                  | Arabic numerals: 0-9                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| Attribute                                                                                                                                                                                                                                                                                        | Supported characters                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Email Address**                                                                                                                                                                                                                                                                                | Uppercase and lowercase English letters: A-Z; a-z                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+|                                                                                                                                                                                                                                                                                                  | Arabic numerals: 0-9                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
 |                                                                                                                                                                                                                                                                                                  | The following symbols:- Exclamation mark (!)
 
 - Pound sign (#)
@@ -899,8 +930,8 @@ The characters supported in user attributes in PingOne vary depending on the att
 
 - Tilde (\~)
 
-- Dash (-)                                                                                                                                                                                                                                                                                                                                                                                                        |
-|                                                                                                                                                                                                                                                                                                  | Unicode characters between \u0080 and \uFFF                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+- Dash (-)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+|                                                                                                                                                                                                                                                                                                  | Unicode characters between \u0080 and \uFFF                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
 |                                                                                                                                                                                                                                                                                                  | Double quotes (") if they meet the following criteria:- Must be used before the At sign (@)
 
   * Valid: "helloworld"@example.com
@@ -919,7 +950,7 @@ The characters supported in user attributes in PingOne vary depending on the att
 
   * Invalid: helloworld"@example.com
 
-- Characters after @ must be a properly formatted domain name                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+- Characters after @ must be a properly formatted domain name                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
 | * **Username**
 
 * **Name**
@@ -1010,7 +1041,7 @@ The characters supported in user attributes in PingOne vary depending on the att
 
   * Zl
 
-  * Zp                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+  * Zp                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
 | - **Address**
 
   * **Street Address**                                                                                                                                                                                                                                                            | All characters in the following [Unicode general categories](https://en.wikipedia.org/wiki/Unicode_character_property#General_Category):- L - Letter
@@ -1063,10 +1094,10 @@ The characters supported in user attributes in PingOne vary depending on the att
 
 - Z - Separator
 
-  * Zs                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+  * Zs                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
 | * **Address**
 
-  * **Country Code**                                                                                                                                                                                                                                                              | Two-letter country codes as listed in [ISO 3166-2](https://en.wikipedia.org/wiki/ISO_3166-2). Three-letter country codes are not supported.&#xA;&#xA;Any string of two uppercase letters is allowed, which means it is possible to enter a value that does not correspond to a country. For example, ZQ is valid in this attribute, but is not a valid country code.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+  * **Country Code**                                                                                                                                                                                                                                                              | Two-letter country codes as listed in [ISO 3166-2](https://en.wikipedia.org/wiki/ISO_3166-2). Three-letter country codes aren't supported.&#xA;&#xA;Any string of two uppercase letters is allowed, which means it's possible to enter a value that doesn't correspond to a country. For example, ZQ is valid in this attribute, but isn't a valid country code.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
 | - **Primary Phone**
 
 - **Mobile Phone**                                                                                                                                                                                                                                                          | All characters in the following [Unicode general categories](https://en.wikipedia.org/wiki/Unicode_character_property#General_Category):- L - Letter
@@ -1125,8 +1156,8 @@ The characters supported in user attributes in PingOne vary depending on the att
 
 - Z - Separator
 
-  * Zs&#xA;&#xA;To allow for the many different ways phone numbers are written around the world, the selection of characters that are valid in this attribute is fairly broad. However, this also means that it is possible to enter a value that does not correspond to a valid phone number.&#xA;&#xA;The following list contains examples of different phone number formats:&#xA;&#xA;USA: +1 512 555 1212&#xA;&#xA;USA: +1-512-555-1212&#xA;&#xA;USA: (512) 555-1212&#xA;&#xA;Germany: (30) 1234 5678&#xA;&#xA;Australia: +61 3 1234 5678 |
-| **Custom Attributes**                                                                                                                                                                                                                                                                            | Because administrators can define custom attributes that are set to **No Validation** or to a custom **Regex Validation**, supported characters will vary.If the attribute is set to use **No Validation**, all Unicode characters are supported.If the custom attribute is set to use **Regex Validation**, the **Expression** field supports all Unicode characters. The characters allowed by the expression defined in this field are the supported characters for the custom attribute.                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+  * Zs&#xA;&#xA;To allow for the many different ways phone numbers are written around the world, the selection of characters that are valid in this attribute is fairly broad. However, this also means that it's possible to enter a value that doesn't correspond to a valid phone number.&#xA;&#xA;The following list contains examples of different phone number formats:&#xA;&#xA;USA: +1 512 555 1212&#xA;&#xA;USA: +1-512-555-1212&#xA;&#xA;USA: (512) 555-1212&#xA;&#xA;Germany: (30) 1234 5678&#xA;&#xA;Australia: +61 3 1234 5678&#xA;&#xA;For SMS and voice authentication, the phone number must be in international format, including a leading + and country code. Learn more about SMS and voice authentication conditions and limitations in Configuring SMS and voice authentication. |
+| **Custom Attributes**                                                                                                                                                                                                                                                                            | Because administrators can define custom attributes that are set to **No Validation** or to a custom **Regex Validation**, supported characters will vary.If the attribute is set to use **No Validation**, all Unicode characters are supported.If the custom attribute is set to use **Regex Validation**, the **Expression** field supports all Unicode characters. The characters allowed by the expression defined in this field are the supported characters for the custom attribute.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
 
 ---
 
@@ -1138,7 +1169,7 @@ page_id: pingone:directory:p1_create_group
 canonical_url: https://docs.pingidentity.com/pingone/directory/p1_create_group.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: January 31, 2025
+revdate: 2026-07-17T00:00:00Z
 section_ids:
   steps: Steps
   next-steps: Next steps
@@ -1200,13 +1231,13 @@ Use the **Groups** page to create groups. You can create static and dynamic grou
 
 ---
 title: Creating a nested group
-description: You must create the groups before you can nest them. Learn more in Nested groups and Creating a group.
+description: Nest a PingOne group inside a parent group using the Groups page in the admin console.
 component: pingone
 page_id: pingone:directory:p1_create_nested_group
 canonical_url: https://docs.pingidentity.com/pingone/directory/p1_create_nested_group.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: January 31, 2025
+revdate: 2026-07-17T00:00:00Z
 section_ids:
   before-you-begin: Before you begin
   steps: Steps
@@ -1243,13 +1274,13 @@ Use the **Groups** page to nest groups within other groups.
 
 ---
 title: Custom role scenarios
-description: The scenarios in this section detail several uses for PingOne custom administrator roles.
+description: Walk through scenarios for creating and assigning PingOne custom administrator roles, using specific examples.
 component: pingone
 page_id: pingone:directory:p1_custom_roles_scenarios_intro
 canonical_url: https://docs.pingidentity.com/pingone/directory/p1_custom_roles_scenarios_intro.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: May 12, 2025
+revdate: 2026-07-17T00:00:00Z
 section_ids:
   new-roles-created: New roles created
   custom-roles-scenario-1: "Scenario 1: Custom role assignment within a single environment"
@@ -1301,17 +1332,17 @@ If two users exist in the same environment, and you create a custom role in that
 
 In this scenario:
 
-* User A has the Support Level 2 role in the CompanyA\_Support environment.
+* User A has the Support Level 2 role in the CompanyA_Support environment.
 
-* User B is also in the CompanyA\_Support environment.
+* User B is also in the CompanyA_Support environment.
 
 * Administrators with the Support Level 2 role can assign the Support Level 1 role.
 
 * User A assigns the Support Level 1 role to User B.
 
-  |   |                                                                                                                                                                                             |
-  | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-  |   | Because this is not the **Administrators** environment, User A can't assign the role at the organization level or to any environment resource outside of the CompanyA\_Support environment. |
+  |   |                                                                                                                                                                                            |
+  | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+  |   | Because this is not the **Administrators** environment, User A can't assign the role at the organization level or to any environment resource outside of the CompanyA_Support environment. |
 
   ![A diagram showing User A assigning the custom Support Level 1 role to User B in the same environment.](_images/p1-custom-roles-scenario-1.png)
 
@@ -1335,7 +1366,7 @@ In this scenario:
 
 * User D and User E also exist in the **Administrators** environment.
 
-* User C assigns the Support Level 1 role to User D and the Support Level 2 role to User E. Both are scoped to the CompanyA\_Support environment.
+* User C assigns the Support Level 1 role to User D and the Support Level 2 role to User E. Both are scoped to the CompanyA_Support environment.
 
   ![A diagram outlining the scenario as documented.](_images/p1-custom-roles-scenario-2.png)
 
@@ -1347,13 +1378,13 @@ In this scenario:
 
 * User C exists in the **Administrators** environment. They are assigned the Identity Data Admin role for all environments in the organization.
 
-* User F and User G exist in the CompanyA\_Support environment.
+* User F and User G exist in the CompanyA_Support environment.
 
-* Both the Support Level 1 and Support Level 2 roles are created in the **CompanyA\_Support** environment. These roles are assignable by the Identity Data Administrator role.
+* Both the Support Level 1 and Support Level 2 roles are created in the **CompanyA_Support** environment. These roles are assignable by the Identity Data Administrator role.
 
-* Because User C has the Identity Data Admin role for all of the environments in the organization, they can assign the Support Level 2 role to User F in the CompanyA\_Support environment.
+* Because User C has the Identity Data Admin role for all of the environments in the organization, they can assign the Support Level 2 role to User F in the CompanyA_Support environment.
 
-* User F can then assign the Support Level 1 role to User G because Support Level 1 role is assignable by either the Identity Data Admin or the Support Level 2 role, and the users both exist in the CompanyA\_Support environment.
+* User F can then assign the Support Level 1 role to User G because Support Level 1 role is assignable by either the Identity Data Admin or the Support Level 2 role, and the users both exist in the CompanyA_Support environment.
 
   ![A diagram showing outlining the scenario as documented.](_images/p1-custom-roles-scenario-3.png)
 
@@ -1361,13 +1392,13 @@ In this scenario:
 
 ---
 title: Deleting a group
-description: Use the Groups page to remove a group you no longer need.
+description: "Permanently delete a PingOne group from the admin console when it's no longer needed."
 component: pingone
 page_id: pingone:directory:p1_delete_group
 canonical_url: https://docs.pingidentity.com/pingone/directory/p1_delete_group.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: January 31, 2025
+revdate: 2026-07-17T00:00:00Z
 section_ids:
   steps: Steps
 ---
@@ -1388,13 +1419,13 @@ Use the **Groups** page to remove a group you no longer need.
 
 ---
 title: Deleting a user
-description: Use the Users page to remove user accounts that you no longer need.
+description: Permanently delete a PingOne user account from the admin console, or disable it instead to preserve the account.
 component: pingone
 page_id: pingone:directory:p1_deleteuser
 canonical_url: https://docs.pingidentity.com/pingone/directory/p1_deleteuser.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: May 3, 2024
+revdate: 2026-07-17T00:00:00Z
 section_ids:
   steps: Steps
 ---
@@ -1415,13 +1446,13 @@ Use the **Users** page to remove user accounts that you no longer need. You can 
 
 ---
 title: Directory
-description: The Directory branch contains the Users, Groups, Populations, User Attributes, and Administrator Roles pages.
+description: Overview of the PingOne Directory functions, covering users, groups, populations, user attributes, and roles.
 component: pingone
 page_id: pingone:directory:p1_directories_menu
 canonical_url: https://docs.pingidentity.com/pingone/directory/p1_directories_menu.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: May 3, 2024
+revdate: 2026-07-17T00:00:00Z
 ---
 
 # Directory
@@ -1444,13 +1475,13 @@ See:
 
 ---
 title: Editing a group
-description: Use the Groups page to edit existing groups in the PingOne Directory.
+description: Edit PingOne group details, including name, description, membership, nesting, and role assignments from the admin console.
 component: pingone
 page_id: pingone:directory:p1_editing_a_group
 canonical_url: https://docs.pingidentity.com/pingone/directory/p1_editing_a_group.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: May 12, 2025
+revdate: 2026-07-17T00:00:00Z
 section_ids:
   steps: Steps
 ---
@@ -1477,7 +1508,9 @@ Use the **Groups** page to edit existing groups in the PingOne Directory.
 
 6. On the **Roles** tab, edit the group roles. Learn more in [Group roles](p1_groups_vs_populations.html#p1-group-roles).
 
-7. Click the **X** in the upper right to close the group details panel.
+7. On the **Provisioning** tab, click the **Pencil** icon ([icon: pencil, set=fa]) to edit the outbound group name.
+
+8. Click the **X** in the upper right to close the group details panel.
 
 ---
 
@@ -1489,7 +1522,7 @@ page_id: pingone:directory:p1_edituser
 canonical_url: https://docs.pingidentity.com/pingone/directory/p1_edituser.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: May 12, 2025
+revdate: 2026-07-17T00:00:00Z
 section_ids:
   steps: Steps
 ---
@@ -1624,13 +1657,13 @@ This topic describes only the fields you can edit. Learn more about all of the f
 
 ---
 title: Editing user attributes
-description: You can edit existing user attributes in your environment.
+description: Edit PingOne user attributes, including uniqueness, multi-value support, and validation options such as enumerated values or regex.
 component: pingone
 page_id: pingone:directory:p1_edituserattributes
 canonical_url: https://docs.pingidentity.com/pingone/directory/p1_edituserattributes.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: May 3, 2024
+revdate: 2026-07-17T00:00:00Z
 section_ids:
   about-this-task: About this task
   steps: Steps
@@ -1700,13 +1733,13 @@ Core and standard attributes are system-provided attributes. While core attribut
 
 ---
 title: Enabling consent updates
-description: Learn how to allow users to view and update their consents in PingOne.
+description: Enable the Manage OAuth Consents option in the PingOne self-service application so end users can view and revoke their consents.
 component: pingone
 page_id: pingone:directory:p1_enable_consent_updates
 canonical_url: https://docs.pingidentity.com/pingone/directory/p1_enable_consent_updates.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: May 3, 2024
+revdate: 2026-07-17T00:00:00Z
 section_ids:
   steps: Steps
 ---
@@ -1735,13 +1768,13 @@ To allow users to view and update their consents in PingOne, you must enable the
 
 ---
 title: Enabling end users to view consents
-description: You can allow end users to view their consents, but not revoke them, in PingOne.
+description: Add the p1:read:oauthConsents scope to the PingOne self-service application to give end users view only access to their consents.
 component: pingone
 page_id: pingone:directory:p1_enable_end_users_to_view_consents
 canonical_url: https://docs.pingidentity.com/pingone/directory/p1_enable_end_users_to_view_consents.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: May 3, 2024
+revdate: 2026-07-17T00:00:00Z
 section_ids:
   steps: Steps
 ---

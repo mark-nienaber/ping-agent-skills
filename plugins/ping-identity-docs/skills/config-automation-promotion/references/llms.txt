@@ -1,12 +1,15 @@
-# Documentation
+# Configuration Promotion Automation
+
+> AI agents should consult [Docs for Agents](https://developer.pingidentity.com/build-with-ai/docs-for-agents.md)
+> for guidance on navigating Ping Identity documentation.
 
 ## Config Automation Promotion
 
-- [Auditing and Reviewing Changes](https://developer.pingidentity.com/config-automation-promotion/concepts/auditing_and_reviewing_changes.md)
-- [Configuration as Code (CaC)](https://developer.pingidentity.com/config-automation-promotion/concepts/configuration_as_code.md)
-- [Configuration Automation Concepts](https://developer.pingidentity.com/config-automation-promotion/concepts/overview.md)
-- [Configuration Promotion at Ping Identity](https://developer.pingidentity.com/config-automation-promotion/configuration_promotion_landing_page.md)
-- [GitOps Pipeline Examples](https://developer.pingidentity.com/config-automation-promotion/configuration_promotion_pipeline_examples.md)
-- [Promoting and Deploying Configuration](https://developer.pingidentity.com/config-automation-promotion/concepts/promoting_and_deploying_configuration.md)
-- [Testing Automation](https://developer.pingidentity.com/config-automation-promotion/concepts/automated_testing.md)
-- [Verifying Deployed Configuration](https://developer.pingidentity.com/config-automation-promotion/concepts/verifying_deployed_configuration.md)
+- [Auditing and Reviewing Changes](https://developer.pingidentity.com/config-automation-promotion/concepts/auditing_and_reviewing_changes.md): Review and audit configuration changes before deployment to validate compliance and catch unverified changes in Ping Identity solutions
+- [Configuration as Code (CaC)](https://developer.pingidentity.com/config-automation-promotion/concepts/configuration_as_code.md): Manage Ping Identity solution configuration as code, covering export guardrails and validation practices such as syntax checking and linting
+- [Configuration Automation Concepts](https://developer.pingidentity.com/config-automation-promotion/concepts/overview.md): Learn foundational concepts for automating configuration promotion across Ping Identity solutions using CI/CD and GitOps practices
+- [Configuration Promotion at Ping Identity](https://developer.pingidentity.com/config-automation-promotion/configuration_promotion_landing_page.md): Learn how to automate configuration promotion for Ping Identity solutions using GitOps, Terraform, and the Ping CLI command-line tool
+- [GitOps Pipeline Examples](https://developer.pingidentity.com/config-automation-promotion/configuration_promotion_pipeline_examples.md): Find example GitOps CI/CD pipeline templates for promoting Ping Identity platform, application, and infrastructure configuration
+- [Promoting and Deploying Configuration](https://developer.pingidentity.com/config-automation-promotion/concepts/promoting_and_deploying_configuration.md): Automate deployment of approved configuration changes to pre-production and production environments for Ping Identity solutions
+- [Testing Automation](https://developer.pingidentity.com/config-automation-promotion/concepts/automated_testing.md): Apply unit and integration testing practices to validate configuration changes for Ping Identity solutions in CI pipelines
+- [Verifying Deployed Configuration](https://developer.pingidentity.com/config-automation-promotion/concepts/verifying_deployed_configuration.md): Detect configuration drift in deployed Ping Identity solutions using automated verification methods such as Terraform plan and API checks

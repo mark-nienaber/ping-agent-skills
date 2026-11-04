@@ -290,7 +290,7 @@ The following section describes the steps for configuring single sign-on (SSO) t
 
    * [Configuring credentials](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/help_spconnectionconfigtasklet_credentialsstate.html)
 
-6. On the authentication adapter's **Attribute Contract Fulfillment** screen, map SAML\_SUBJECT to email address.
+6. On the authentication adapter's **Attribute Contract Fulfillment** screen, map SAML_SUBJECT to email address.
 
 7. On the **Protocol Settings > Allowable SAML Bindings** screen, ensure that both **POST** and **SOAP** are selected.
 
@@ -876,40 +876,40 @@ revdate: June 27, 2024
 
 The following attributes can be mapped for user provisioning to Box.
 
-| Attribute                         | Description                                                                                                                                                                                                                                                                                                                                                                                                                            |
-| --------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Name                              | The name of the user. This attribute is required.                                                                                                                                                                                                                                                                                                                                                                                      |
-| Login                             | The email address the user uses to sign on. This attribute is required.&#xA;&#xA;This value must be in the format of an email. Box Connector version 2.2 and later enables updating a user's login. However, the user has to have signed on previously for the update to succeed.                                                                                                                                                      |
-| Language                          | The user's language. Learn more in [Language Codes](https://developer.box.com/guides/api-calls/language-codes/) in the Box documentation.                                                                                                                                                                                                                                                                                              |
-| Timezone                          | The user's timezone. Input format follows tz database timezones.                                                                                                                                                                                                                                                                                                                                                                       |
-| Space Amount                      | The user's total available space amount in bytes. A value of -1 grants unlimited storage.                                                                                                                                                                                                                                                                                                                                              |
+| Attribute                         | Description                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| --------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Name                              | The name of the user. This attribute is required.                                                                                                                                                                                                                                                                                                                                                                                 |
+| Login                             | The email address the user uses to sign on. This attribute is required.&#xA;&#xA;This value must be in the format of an email. Box Connector version 2.2 and later enables updating a user's login. However, the user has to have signed on previously for the update to succeed.                                                                                                                                                 |
+| Language                          | The user's language. Learn more in [Language Codes](https://developer.box.com/guides/api-calls/language-codes/) in the Box documentation.                                                                                                                                                                                                                                                                                         |
+| Timezone                          | The user's timezone. Input format follows tz database timezones.                                                                                                                                                                                                                                                                                                                                                                  |
+| Space Amount                      | The user's total available space amount in bytes. A value of -1 grants unlimited storage.                                                                                                                                                                                                                                                                                                                                         |
 | Inactive Status Default           | The user's default inactive status. The three inactive defaults include:- inactive
 
-- cannot\_delete\_edit
+- cannot_delete_edit
 
-- cannot\_delete\_edit\_upload&#xA;&#xA;When a user is disabled, the user status will be the value you have specified here. If no value, the default is inactive. Deleting the user in LDAP will always default to inactive regardless of the attribute's value or the Target screen configuration for Remove User Action. |
-| Job Title                         | The user's job title.                                                                                                                                                                                                                                                                                                                                                                                                                  |
-| Phone                             | The user's phone number.                                                                                                                                                                                                                                                                                                                                                                                                               |
-| Address                           | The user's address.                                                                                                                                                                                                                                                                                                                                                                                                                    |
+- cannot_delete_edit_upload&#xA;&#xA;When a user is disabled, the user status will be the value you have specified here. If no value, the default is inactive. Deleting the user in LDAP will always default to inactive regardless of the attribute's value or the Target screen configuration for Remove User Action. |
+| Job Title                         | The user's job title.                                                                                                                                                                                                                                                                                                                                                                                                             |
+| Phone                             | The user's phone number.                                                                                                                                                                                                                                                                                                                                                                                                          |
+| Address                           | The user's address.                                                                                                                                                                                                                                                                                                                                                                                                               |
 | Role                              | The user's enterprise role. Valid options include:- coadmin
 
-- user                                                                                                                                                                                                                                                                                                                                                                    |
+- user                                                                                                                                                                                                                                                                                                                                                               |
 | Can See Managed Users             | Whether the user can see other enterprise users in their contact list. Valid options include:- true
 
-- false                                                                                                                                                                                                                                                                                                                           |
+- false                                                                                                                                                                                                                                                                                                                      |
 | Is Sync Enabled                   | Whether or not the user can use Box Sync. Valid options include:- true
 
-- false                                                                                                                                                                                                                                                                                                                                                        |
+- false                                                                                                                                                                                                                                                                                                                                                   |
 | Is Exempt from Device Limits      | Whether to exempt the user from Enterprise device limits. Valid options include:- true
 
-- false                                                                                                                                                                                                                                                                                                                                        |
+- false                                                                                                                                                                                                                                                                                                                                   |
 | Is Exempt from Login Verification | Whether or not this user must use two-factor authentication. Valid options include:- true
 
-- false                                                                                                                                                                                                                                                                                                                                     |
+- false                                                                                                                                                                                                                                                                                                                                |
 | Is External Collab Restricted     | Whether this user is allowed to collaborate with users outside her enterprise. Valid options include:- true
 
-- false                                                                                                                                                                                                                                                                                                                   |
-| Personal Folder Name              | The name to be used for the personal folder which can optionally be created along with a new user. The personal folder name format can be configured using OGNL expressions. Learn more in [Sample OGNL expressions](pf_box_connector_sample_ognl_expressions.html).Learn more about personal folder fields in [Configure provisioning](pf_box_connector_configure_provisioning.html).                                                 |
+- false                                                                                                                                                                                                                                                                                                              |
+| Personal Folder Name              | The name to be used for the personal folder which can optionally be created along with a new user. The personal folder name format can be configured using OGNL expressions. Learn more in [Sample OGNL expressions](pf_box_connector_sample_ognl_expressions.html).Learn more about personal folder fields in [Configure provisioning](pf_box_connector_configure_provisioning.html).                                            |
 
 ---
 
@@ -928,12 +928,12 @@ revdate: June 27, 2024
 
 The following table lists potential problems administrators might encounter during the setup or deployment of the Box Connector, along with possible solutions. Learn more in [Common Errors](https://developer.box.com/guides/api-calls/permissions-and-errors/common-errors/) in the Box documentation.
 
-| Problem                                                                                                                                                                                                                                                    | Possible Solution                                                                                                                                                                                                                                                                                                                                         |
-| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| The exception {"error":"invalid\_grant", "error\_description":"Refresh token has expired"} appears in `server.log`.                                                                                                                                        | The error indicates that the refresh token has expired. A refresh token from Box has a lifespan of 60 days. Additionally, if a new refresh token has been requested, the old one will become expired. Learn more about configuring PingFederate with a new refresh token in [Updating Box OAuth tokens](pf_box_connector_updating_box_oauth_tokens.html). |
-| The exception {"type":"error","status":403, "code":"access\_denied\_insufficient\_permissions", "help\_url":"http:\\/\\/developers.box.com\\/docs\\/#errors", "message":"Access denied - insufficient permission"} appears in `server.log`.                | Revert the email to the original and have the user sign on and set their password, then update the user's email.                                                                                                                                                                                                                                          |
-| The exception {"errors":\[{"reason":"invalid\_parameter", "name":"email","message":"Invalid value '\<email value>. This email address already has a Box account. You can only add emails that do not have an account already."}]} appears in `server.log`. | Revert the email to the original and have the user log in and set their password, then update the user's email.                                                                                                                                                                                                                                           |
-| The exception {"type":"error","status":500,"code":"internal\_server\_error", "help\_url":"http:\\/\\/developers.box.com\\/docs\\/#errors","message":"Internal Server Error","request\_id":"xxxxxxxx"} appears in `provisioner.log`.                        | If there is a value in the **Target** field **Box Account Email for Transferring Deleted User's Content**, ensure that it is a valid email belonging to a Box user in your instance, and that the user is active.                                                                                                                                         |
+| Problem                                                                                                                                                                                                                                                   | Possible Solution                                                                                                                                                                                                                                                                                                                                         |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| The exception {"error":"invalid_grant", "error_description":"Refresh token has expired"} appears in `server.log`.                                                                                                                                         | The error indicates that the refresh token has expired. A refresh token from Box has a lifespan of 60 days. Additionally, if a new refresh token has been requested, the old one will become expired. Learn more about configuring PingFederate with a new refresh token in [Updating Box OAuth tokens](pf_box_connector_updating_box_oauth_tokens.html). |
+| The exception {"type":"error","status":403, "code":"access_denied_insufficient_permissions", "help_url":"http:\\/\\/developers.box.com\\/docs\\/#errors", "message":"Access denied - insufficient permission"} appears in `server.log`.                   | Revert the email to the original and have the user sign on and set their password, then update the user's email.                                                                                                                                                                                                                                          |
+| The exception {"errors":\[{"reason":"invalid_parameter", "name":"email","message":"Invalid value '\<email value>. This email address already has a Box account. You can only add emails that do not have an account already."}]} appears in `server.log`. | Revert the email to the original and have the user log in and set their password, then update the user's email.                                                                                                                                                                                                                                           |
+| The exception {"type":"error","status":500,"code":"internal_server_error", "help_url":"http:\\/\\/developers.box.com\\/docs\\/#errors","message":"Internal Server Error","request_id":"xxxxxxxx"} appears in `provisioner.log`.                           | If there is a value in the **Target** field **Box Account Email for Transferring Deleted User's Content**, ensure that it is a valid email belonging to a Box user in your instance, and that the user is active.                                                                                                                                         |
 
 ---
 
@@ -1021,3 +1021,116 @@ section_ids:
 13. When you have completed the attribute configuration, click **Done**, **Done**, and **Save**.
 
 14. Activate the SP connection to resume outbound provisioning.
+
+---
+
+---
+title: User and group management
+description: The Box Provisioner synchronizes users and groups from your datastore to Box. The following describes the behavior of each provisioning capability.
+component: box
+page_id: box::pf_box_connector_user_and_group_management
+canonical_url: https://docs.pingidentity.com/integrations/box/pf_box_connector_user_and_group_management.html
+llms_txt: https://docs.pingidentity.com/integrations/box/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: June 27, 2024
+section_ids:
+  synchronizing-existing-users: Synchronizing existing users
+  user-provisioning: User provisioning
+  user-updates: User updates
+  user-deprovisioning: User deprovisioning
+  synchronizing-existing-groups: Synchronizing existing groups
+  group-provisioning: Group provisioning
+  group-name-updates: Group name updates
+  group-membership-updates: Group membership updates
+  group-deletion: Group deletion
+---
+
+# User and group management
+
+The Box Provisioner synchronizes users and groups from your datastore to Box. The following describes the behavior of each provisioning capability.
+
+|   |                                                                                                                                                                                                               |
+| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | You can configure the following capabilities and specify which users to provision when you get to the [Configure provisioning](setup/pf_box_connector_configure_provisioning.html) part of the setup process. |
+
+## Synchronizing existing users
+
+PingFederate synchronizes users based on the `mail` attribute in Box. If a user already exists in your datastore and Box, mapping this attribute correctly links the two records together.
+
+For example:
+
+* In Box, Janet's `mail` is `jsmith@example.com`.
+
+* In your datastore, Janet's `mail` is `jsmith@example.com`.
+
+* On the **Attribute Mapping** tab of your provisioning connection configuration, map the `mail` attribute to `mail`.
+
+* When the provisioning connector runs, the datastore user is provisioned with a `mail` of `jsmith@example.com`. That matches Janet's existing `mail` in Box, so her information in the datastore is synchronized to her Box account.
+
+## User provisioning
+
+PingFederate provisions users when any of the following happens:
+
+* A user is added to the datastore group or filter that is targeted by the provisioning connector.
+
+* A user with `disabled` status is added to the datastore group or filter that is targeted by the provisioning connector, and the **Provision disabled users** provisioning option is enabled. This feature is not available in all provisioning connector versions.
+
+You can define which users PingFederate targets for provisioning on the **Source Location** tab of your provisioning connection configuration.
+
+## User updates
+
+PingFederate updates users when a user attribute changes in your datastore.
+
+You can define which attributes PingFederate monitors for changes on the **Attribute Mapping** tab of your provisioning connection configuration.
+
+## User deprovisioning
+
+PingFederate deprovisions users when any of the following happens:
+
+* A user is deleted from the user store.
+
+* A user is disabled in the user store.
+
+* A user is removed from the datastore group or filter that is targeted by the provisioning connector.
+
+The **Remove User Action** setting in the connection configuration determines whether the deprovisioning action disables or deletes the user.
+
+## Synchronizing existing groups
+
+PingFederate synchronizes groups from the datastore to the target service based on the group name.
+
+For example:
+
+* In Box, there is a group is named `Accounting`.
+
+* In your datastore, there is a group with a `CN` of `Accounting`.
+
+* When the provisioning connector runs, the two groups are synchronized.
+
+## Group provisioning
+
+PingFederate provisions groups when a group is added to the datastore filter that is targeted by the provisioning connector.
+
+You can define which groups PingFederate targets for provisioning and monitors for changes on the **Source Location** tab in your provisioning connection configuration.
+
+## Group name updates
+
+PingFederate renames groups when they are renamed in the datastore.
+
+## Group membership updates
+
+PingFederate updates group memberships when memberships change in the datastore, whether the change is in the group's properties or a user's properties.
+
+Group memberships in the datastore overwrite the group memberships in Box.
+
+## Group deletion
+
+PingFederate deletes groups when any of the following happens:
+
+* The group is deleted in the datastore.
+
+* The group is removed from the datastore group or filter that is targeted by the provisioning connector.
+
+|   |                                                     |
+| - | --------------------------------------------------- |
+|   | Group deletions are permanent and cannot be undone. |

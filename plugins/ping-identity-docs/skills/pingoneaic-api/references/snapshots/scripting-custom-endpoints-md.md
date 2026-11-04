@@ -4,6 +4,8 @@ description: You can use custom endpoints to run arbitrary JavaScript code throu
 component: pingoneaic-api
 page_id: pingoneaic-api::scripting-custom-endpoints
 canonical_url: https://developer.pingidentity.com/pingoneaic-api/scripting-custom-endpoints.html
+llms_txt: https://developer.pingidentity.com/pingoneaic-api/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 keywords: ["Extensibility", "Scripts", "REST API"]
 section_ids:
   custom-endpoints-scripting-introduction: Custom endpoints scripting introduction

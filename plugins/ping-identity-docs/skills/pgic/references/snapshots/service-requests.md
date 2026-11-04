@@ -4,6 +4,8 @@ description: To add, modify, or remove access control instructions (ACIs), submi
 component: pgic
 page_id: pgic:service_requests:p14g_acis
 canonical_url: http://docs.pingidentity.com/pgic/service_requests/p14g_acis.html
+llms_txt: http://docs.pingidentity.com/pgic/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: May 6, 2024
 section_ids:
   about-this-task: About this task
@@ -71,6 +73,8 @@ description: Submit your requests to manage customer IAM Administrator MFA throu
 component: pgic
 page_id: pgic:service_requests:p14g_admin_mfa
 canonical_url: http://docs.pingidentity.com/pgic/service_requests/p14g_admin_mfa.html
+llms_txt: http://docs.pingidentity.com/pgic/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: May 6, 2024
 section_ids:
   steps: Steps
@@ -122,6 +126,8 @@ description: PingFederate and PingDirectory support full and incremental backups
 component: pgic
 page_id: pgic:service_requests:p14g_backup_restore
 canonical_url: http://docs.pingidentity.com/pgic/service_requests/p14g_backup_restore.html
+llms_txt: http://docs.pingidentity.com/pgic/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: May 6, 2024
 section_ids:
   steps: Steps
@@ -167,6 +173,8 @@ description: The administrative console provides a suite of configuration wizard
 component: pgic
 page_id: pgic:service_requests:p14g_certificates
 canonical_url: http://docs.pingidentity.com/pgic/service_requests/p14g_certificates.html
+llms_txt: http://docs.pingidentity.com/pgic/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: May 6, 2024
 section_ids:
   steps: Steps
@@ -222,6 +230,8 @@ description: You can import certificates into PingAccess to establish anchors us
 component: pgic
 page_id: pgic:service_requests:p14g_pa_certificates
 canonical_url: http://docs.pingidentity.com/pgic/service_requests/p14g_pa_certificates.html
+llms_txt: http://docs.pingidentity.com/pgic/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: May 6, 2024
 section_ids:
   steps: Steps
@@ -273,6 +283,8 @@ description: To add or replace a server certificate (an LDAPS/HTTPS certificate)
 component: pgic
 page_id: pgic:service_requests:p14g_server_certificate
 canonical_url: http://docs.pingidentity.com/pgic/service_requests/p14g_server_certificate.html
+llms_txt: http://docs.pingidentity.com/pgic/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: May 6, 2024
 section_ids:
   about-this-task: About this task
@@ -325,6 +337,8 @@ description: To modify client connection policies, submit a request through the 
 component: pgic
 page_id: pgic:service_requests:p14g_client_connection_policies
 canonical_url: http://docs.pingidentity.com/pgic/service_requests/p14g_client_connection_policies.html
+llms_txt: http://docs.pingidentity.com/pgic/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: May 6, 2024
 section_ids:
   about-this-task: About this task
@@ -385,6 +399,8 @@ description: Submit requests to change your Conditional Forwarders through the s
 component: pgic
 page_id: pgic:service_requests:p14g_conditional_dns_forwarding
 canonical_url: http://docs.pingidentity.com/pgic/service_requests/p14g_conditional_dns_forwarding.html
+llms_txt: http://docs.pingidentity.com/pgic/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: May 6, 2024
 section_ids:
   about-this-task: About this task
@@ -437,6 +453,8 @@ description: To modify connectivity settings between the platform and your on-pr
 component: pgic
 page_id: pgic:service_requests:p14g_customer_network_connection
 canonical_url: http://docs.pingidentity.com/pgic/service_requests/p14g_customer_network_connection.html
+llms_txt: http://docs.pingidentity.com/pgic/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: May 6, 2024
 section_ids:
   steps: Steps
@@ -482,6 +500,8 @@ description: To scale deployments or down for testing purposes, or if you expect
 component: pgic
 page_id: pgic:service_requests:p14g_deployment_scaling
 canonical_url: http://docs.pingidentity.com/pgic/service_requests/p14g_deployment_scaling.html
+llms_txt: http://docs.pingidentity.com/pgic/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: May 6, 2024
 section_ids:
   steps: Steps
@@ -525,6 +545,8 @@ description: Submit your routing policy requests through the service request for
 component: pgic
 page_id: pgic:service_requests:p14g_dns_routing
 canonical_url: http://docs.pingidentity.com/pgic/service_requests/p14g_dns_routing.html
+llms_txt: http://docs.pingidentity.com/pgic/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: May 6, 2024
 section_ids:
   steps: Steps
@@ -570,6 +592,8 @@ description: To request additional permissions for your administrators, such as 
 component: pgic
 page_id: pgic:service_requests:p14g_elevate_admin
 canonical_url: http://docs.pingidentity.com/pgic/service_requests/p14g_elevate_admin.html
+llms_txt: http://docs.pingidentity.com/pgic/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: May 6, 2024
 section_ids:
   steps: Steps
@@ -619,6 +643,8 @@ description: To customize email notifications, perhaps for branding purposes, su
 component: pgic
 page_id: pgic:service_requests:p14g_email_notifications
 canonical_url: http://docs.pingidentity.com/pgic/service_requests/p14g_email_notifications.html
+llms_txt: http://docs.pingidentity.com/pgic/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: May 6, 2024
 section_ids:
   about-this-task: About this task
@@ -683,6 +709,8 @@ description: To modify email templates, submit a request through the service req
 component: pgic
 page_id: pgic:service_requests:p14g_email_templates
 canonical_url: http://docs.pingidentity.com/pgic/service_requests/p14g_email_templates.html
+llms_txt: http://docs.pingidentity.com/pgic/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: May 6, 2024
 section_ids:
   about-this-task: About this task
@@ -739,6 +767,8 @@ description: Submit your index change requests through the service request form,
 component: pgic
 page_id: pgic:service_requests:p14g_indexes
 canonical_url: http://docs.pingidentity.com/pgic/service_requests/p14g_indexes.html
+llms_txt: http://docs.pingidentity.com/pgic/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: May 6, 2024
 section_ids:
   about-this-task: About this task
@@ -807,6 +837,8 @@ description: Submit your requests to define JSON field constraints through the s
 component: pgic
 page_id: pgic:service_requests:p14g_json_field_constraint
 canonical_url: http://docs.pingidentity.com/pgic/service_requests/p14g_json_field_constraint.html
+llms_txt: http://docs.pingidentity.com/pgic/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: May 6, 2024
 section_ids:
   about-this-task: About this task
@@ -893,6 +925,8 @@ description: When the platform initially opens, you will see your environments a
 component: pgic
 page_id: pgic:service_requests:p14g_launch_term_environments
 canonical_url: http://docs.pingidentity.com/pgic/service_requests/p14g_launch_term_environments.html
+llms_txt: http://docs.pingidentity.com/pgic/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: May 6, 2024
 section_ids:
   about-this-task: About this task
@@ -941,6 +975,8 @@ description: Administrators can provide localized versions of user-facing status
 component: pgic
 page_id: pgic:service_requests:p14g_localization
 canonical_url: http://docs.pingidentity.com/pgic/service_requests/p14g_localization.html
+llms_txt: http://docs.pingidentity.com/pgic/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: May 6, 2024
 section_ids:
   steps: Steps
@@ -986,6 +1022,8 @@ description: "PingFederate supports localization for three types of end-user mes
 component: pgic
 page_id: pgic:service_requests:p14g_pf_localization
 canonical_url: http://docs.pingidentity.com/pgic/service_requests/p14g_pf_localization.html
+llms_txt: http://docs.pingidentity.com/pgic/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: May 6, 2024
 section_ids:
   steps: Steps
@@ -1039,6 +1077,8 @@ description: PingAccess generates logs that record server events. To change the 
 component: pgic
 page_id: pgic:service_requests:p14g_logging_settings
 canonical_url: http://docs.pingidentity.com/pgic/service_requests/p14g_logging_settings.html
+llms_txt: http://docs.pingidentity.com/pgic/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: May 6, 2024
 section_ids:
   steps: Steps

@@ -1,12 +1,12 @@
 ---
 title: Deleting a user
-description: Delete a user to remove all information about the user from DaVinci.
+description: Delete a user in PingOne DaVinci to remove all information about the user.
 component: davinci
 page_id: davinci:users:davinci_deleting_a_user
-canonical_url: http://docs.pingidentity.com/davinci/users/davinci_deleting_a_user.html
-llms_txt: http://docs.pingidentity.com/davinci/llms.txt
+canonical_url: https://docs.pingidentity.com/davinci/users/davinci_deleting_a_user.html
+llms_txt: https://docs.pingidentity.com/davinci/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: May 28, 2024
+revdate: 2026-03-24
 section_ids:
   steps: Steps
 ---
@@ -33,13 +33,13 @@ Delete a user to remove all information about the user from DaVinci.
 
 ---
 title: Users
-description: "Users are end users created during flows. You can view and edit users' properties and delete users."
+description: Reference for PingOne DaVinci user properties, including user ID, connection name, email address, and authentication methods.
 component: davinci
 page_id: davinci:users:davinci_users
-canonical_url: http://docs.pingidentity.com/davinci/users/davinci_users.html
-llms_txt: http://docs.pingidentity.com/davinci/llms.txt
+canonical_url: https://docs.pingidentity.com/davinci/users/davinci_users.html
+llms_txt: https://docs.pingidentity.com/davinci/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: May 28, 2024
+revdate: 2024-09-12
 ---
 
 # Users
@@ -76,13 +76,13 @@ You can view the following properties when editing a user.
 
 ---
 title: Viewing and editing a user
-description: View and edit a user's properties, including variables and user events.
+description: "View and edit a PingOne DaVinci user's properties, including variables, user alias, and logged events."
 component: davinci
 page_id: davinci:users:davinci_viewing_and_editing_a_user
-canonical_url: http://docs.pingidentity.com/davinci/users/davinci_viewing_and_editing_a_user.html
-llms_txt: http://docs.pingidentity.com/davinci/llms.txt
+canonical_url: https://docs.pingidentity.com/davinci/users/davinci_viewing_and_editing_a_user.html
+llms_txt: https://docs.pingidentity.com/davinci/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: February 2, 2023
+revdate: 2026-03-24
 section_ids:
   steps: Steps
 ---

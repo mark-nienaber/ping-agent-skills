@@ -1,9 +1,11 @@
 ---
 title: Configuring SAML SSO with Cloudflare and PingFederate
-description: Learn how to direct Cloudflare sign on using PingFederate (SP-initiated sign-on).
+description: Configure SAML SSO with Cloudflare and PingFederate — SP-initiated sign-on
 component: configuration_guides
 page_id: configuration_guides:cloudflare:config_saml_cloudflare_pf
 canonical_url: https://docs.pingidentity.com/configuration_guides/cloudflare/config_saml_cloudflare_pf.html
+llms_txt: https://docs.pingidentity.com/configuration_guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: May 16, 2024
 section_ids:
   before-you-begin: Before you begin

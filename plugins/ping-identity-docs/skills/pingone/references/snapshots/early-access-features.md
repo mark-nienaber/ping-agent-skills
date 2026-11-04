@@ -9,14 +9,114 @@ docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agent
 ---
 
 ---
+title: Agent Detection (CUA) Dashboard (early access)
+description: The Agent Detection (CUA) Dashboard shows a summary of computer-using agent (CUA) activity detected by PingOne Protect.
+component: pingone
+page_id: pingone:early-access-features:ea-p1_agent_detection_dashboard
+canonical_url: https://docs.pingidentity.com/pingone/early-access-features/ea-p1_agent_detection_dashboard.html
+llms_txt: https://docs.pingidentity.com/pingone/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-10-29T16:49:34Z
+section_ids:
+  accessing-the-dashboard: Accessing the dashboard
+  filters: Filters
+  charts: Charts
+  total-cua-detections: Total CUA Detections
+  agent-detections-cua-over-time: Agent Detections (CUA) Over Time
+  human-vs-cua-activity-over-time: Human vs. CUA Activity Over Time
+  human-vs-cua-activity: Human vs. CUA Activity
+  requests-by-agent: Requests by Agent
+---
+
+# Agent Detection (CUA) Dashboard (early access)
+
+The **Agent Detection (CUA) Dashboard** is now available for early access in PingOne.
+
+The **Agent Detection (CUA) Dashboard** shows a summary of computer-using agent (CUA) activity detected by PingOne Protect in the environment. Data in the dashboard is based on PingOne Protect risk evaluations using the Bot Detection predictor and its agent type detection capabilities. Learn more in [PingOne Protect Bot Detection predictor](../threat_protection_using_pingone_protect/p1_protect_risk_predictors.html#bot-detection).
+
+The **Agent Detection (CUA) Dashboard** tracks transactions evaluated by PingOne Protect that result in a high score for artificial intelligence (AI)-based browser automation. You can use it to measure how effectively your configured PingOne Protect risk policies identify CUA activity across the environment. Metrics reflect only transactions evaluated by PingOne Protect, not all PingOne traffic.
+
+|   |                                                                                                                                                                                                 |
+| - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | To populate the **Agent Detection (CUA) Dashboard**, you must:- Add PingOne Protect and PingOne DaVinci to your PingOne environment.
+
+- Configure a DaVinci flow that includes PingOne Protect. |
+
+## Accessing the dashboard
+
+To access the **Authentication Dashboard**, in the PingOne admin console, go to **Monitoring > Agent Detection (CUA)**.
+
+![A screenshot of the Agent Detection (CUA) Dashboard](_images/p1-agent-detection-dashboard.png)
+
+## Filters
+
+Use filters to refine the data displayed on the dashboard. You can limit data to a specific time range:
+
+* **Today**: Displays data for the current day only.
+
+* **From Yesterday**: Displays data for the previous day only.
+
+* **Last 7 Days** (default): Displays data for the previous 7 days only.
+
+* **Last 30 Days**: Displays data for the previous 30 days only.
+
+* **Last 90 Days**: Displays data for the previous 90 days only.
+
+* **This Month**: Displays data for the current calendar month only.
+
+* **Last Month**: Displays data for the previous calendar month only.
+
+* **Custom Range**: Enables you to define a date range within the last 6 months. Select a start date and an end date in the date picker, then click **Apply**.
+
+This filter applies to all charts on the dashboard.
+
+|   |                                                                                   |
+| - | --------------------------------------------------------------------------------- |
+|   | The **Agent Detection (CUA) Dashboard** displays data only for the past 6 months. |
+
+## Charts
+
+Use the following controls to adjust the charts:
+
+| Icon                                                                | Name         | Description                                                                                                                                                                                       |
+| ------------------------------------------------------------------- | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ![The Maximize icon.](../_images/p1-dashboard-maximize.png)         | Maximize     | Expands the chart to fill the dashboard.To minimize the chart, click the icon again.                                                                                                              |
+| ![The Menu options icon.](../_images/p1-dashboard-menu-options.png) | Menu options | Options can vary for different types of charts:- **View summary data**: Displays chart data as a table.
+
+- **Export**: Exports chart data to CSV or Excel format, depending on the type of chart. |
+| ![The Sort visual icon.](../_images/p1-dashboard-sort-visual.png)   | Sort visual  | Sorts the chart data in ascending or descending order.                                                                                                                                            |
+
+### Total CUA Detections
+
+Displays the total number of requests evaluated by PingOne Protect that scored high for AI-based browser automation during the selected time period.
+
+### Agent Detections (CUA) Over Time
+
+Displays a rolling average line of CUA detections over time for the selected time period.
+
+### Human vs. CUA Activity Over Time
+
+Displays the number of human versus CUA requests for the selected time period.
+
+### Human vs. CUA Activity
+
+Displays a circle chart with the percentage of human versus CUA requests for the selected time period.
+
+### Requests by Agent
+
+Displays the percentage of CUA requests by agent type, such as Microsoft Copilot and Claude Code, for the selected time period.
+
+---
+
+---
 title: Audit report (early access)
-description: Provides a detailed view of audit events in PingOne for the selected environment, including event details, timestamps,
+description: The refreshed PingOne audit report UI provides improved navigation and filtering for reviewing audit events in the admin console.
 component: pingone
 page_id: pingone:early-access-features:ea-p1_audit_report
 canonical_url: https://docs.pingidentity.com/pingone/early-access-features/ea-p1_audit_report.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: June 8, 2026
+revdate: 2026-08-13T00:00:00Z
 keywords: ["audit report;audit events;event details;timestamps;filtering;exporting"]
 section_ids:
   running-an-audit-report: Running an audit report
@@ -169,7 +269,7 @@ page_id: pingone:early-access-features:ea-p1_promotion_scenarios_intro
 canonical_url: https://docs.pingidentity.com/pingone/early-access-features/ea-p1_promotion_scenarios_intro.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: December 8, 2025
+revdate: 2025-12-08T00:00:00Z
 section_ids:
   assumptions: Assumptions
 ---
@@ -341,7 +441,7 @@ page_id: pingone:early-access-features:ea-p1_configure_custom_push_provider
 canonical_url: https://docs.pingidentity.com/pingone/early-access-features/ea-p1_configure_custom_push_provider.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: July 2, 2026
+revdate: 2026-07-02T00:00:00Z
 section_ids:
   steps: Steps
   provider_configuration: Provider configuration
@@ -355,9 +455,9 @@ section_ids:
 
 # Configuring a custom push notification provider (early access)
 
-|   |                                                                                                                                                                                                                                                                                                                                                                                            |
-| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-|   | This feature is now available for early access in PingOne. Early access features and APIs are provided for preview purposes only and might change in the final version. Learn more about early access in [PingOne Early Access Features](p1_early_access_features.html) and [Managing opt-ins for early access features in PingOne](../settings/p1_managing_opt_ins_for_ea_features.html). |
+|   |                                                                                                                                                                                                                                                                                                                                                                                               |
+| - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | This feature is now available for early access in PingOne. Early access features and APIs are provided for preview purposes only and might change in the final version. Learn more about early access in [Early Access Features in PingOne](p1_early_access_features.html) and [Managing opt-ins for early access features in PingOne](../settings/p1_managing_opt_ins_for_ea_features.html). |
 
 Use the **Senders** page to configure a custom push notification provider for PingOne MFA.
 
@@ -514,7 +614,7 @@ page_id: pingone:early-access-features:ea-p1_configure_promotion
 canonical_url: https://docs.pingidentity.com/pingone/early-access-features/ea-p1_configure_promotion.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: December 1, 2025
+revdate: 2025-12-01T00:00:00Z
 section_ids:
   before-you-begin: Before you begin
   steps: Steps
@@ -659,7 +759,7 @@ page_id: pingone:early-access-features:ea-p1_create_promotion_variable
 canonical_url: https://docs.pingidentity.com/pingone/early-access-features/ea-p1_create_promotion_variable.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: October 1, 2025
+revdate: 2025-10-01T00:00:00Z
 section_ids:
   before-you-begin: Before you begin
   steps: Steps
@@ -772,204 +872,47 @@ Configure and run a promotion.
 ---
 
 ---
-title: DaVinci administrative audit events in PingOne (early access)
-description: DaVinci administrative audit events are available in the PingOne audit report with unified filtering, retention, and webhook streaming.
+title: Early Access Features in PingOne
+description: PingOne early access features are opt-in, environment-level capabilities available for preview before general availability.
 component: pingone
-page_id: pingone:early-access-features:ea_p1_davinci_audit_events
-canonical_url: https://docs.pingidentity.com/pingone/early-access-features/ea_p1_davinci_audit_events.html
+page_id: pingone:early-access-features:p1_early_access_features
+canonical_url: https://docs.pingidentity.com/pingone/early-access-features/p1_early_access_features.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: June 26, 2026
-section_ids:
-  accessing-davinci-audit-events: Accessing DaVinci audit events
-  retention-and-retrieval: Retention and retrieval
-  filtering-davinci-events: Filtering DaVinci events
-  filter-by-resource-type: Filter by resource type
-  filter-by-event-type: Filter by event type
-  filter-by-resource-id: Filter by resource ID
-  davinci-audit-event-reference: DaVinci audit event reference
-  audit-event-structure: Audit event structure
-  standard-fields: Standard fields
-  davinci-specific-_embedded-fields: DaVinci-specific _embedded fields
-  api-access: API access
+revdate: 2026-09-21T17:11:06Z
 ---
 
-# DaVinci administrative audit events in PingOne (early access)
+# Early Access Features in PingOne
 
-PingOne DaVinci administrative audit events are integrated into the PingOne centralized audit schema. DaVinci events appear alongside standard PingOne events in **Monitoring > Audit** and are subject to the same retention, retrieval, filtering, and webhook streaming capabilities. Learn more in [Audit](../monitoring/p1_reporting.html).
+This section provides early access documentation for the PingOne features available to customers who opt in to preview new functionality.
 
-## Accessing DaVinci audit events
+Early access features can be enabled only at the environment level. You can't enable an early access feature for an entire organization.
 
-DaVinci audit events are visible in **Monitoring > Audit**. They appear alongside standard PingOne events and can be filtered to show only DaVinci-related activity.
+Not all features are enabled for early access. Additionally, early access features related to services that aren't in the environment or that aren't allowable by the license assigned to the environment aren't available for opt-in.
 
-Learn more about running audit reports in [Audit](../monitoring/p1_reporting.html).
+You can opt in to early access features through the PingOne admin console or the PingOne API. Learn more in the following topics:
 
-### Retention and retrieval
+* Admin console: [Managing opt-ins for early access features in PingOne](../settings/p1_managing_opt_ins_for_ea_features.html)
 
-Use the following retention windows to determine whether your audit data is available immediately or requires a retrieval request:
+* API: [Early Access Features](https://developer.pingidentity.com/pingone-api/platform/environments/early-access-features.html)
 
-| Data age           | Availability                                                                               |
-| ------------------ | ------------------------------------------------------------------------------------------ |
-| Up to 14 days      | Available immediately in the PingOne admin console and through the API                     |
-| Older than 14 days | Request retrieval from the **Audit** page. A prompt is displayed before results are shown. |
+|   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| - | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | Early access features are provided for preview purposes only and aren't covered under standard Support service level agreements (SLAs). You can open support cases for feedback, bug reports, configuration questions, or other inquiries related to early access features, but resolution times for these cases will vary. These cases often require collaboration with our Engineering and Product teams, so timelines might exceed the usual SLAs for your Support package.Topics for these features are draft documentation for early access purposes only and aren't complete or final. |
 
-## Filtering DaVinci events
+* [PingOne Remote MCP Server (early access)](ea-p1_mcp_server_settings_app.html)
 
-Use the available filters to narrow audit results by DaVinci resource type, event type, or a specific resource ID.
+* [Configuration management and promotion (early access)](ea-p1_promote.html)
 
-### Filter by resource type
+* [Agent Detection (CUA) Dashboard (early access)](ea-p1_agent_detection_dashboard.html)
 
-In the **Filter Type** panel, select **Resource Type**. A **DaVinci** subsection is available with the following filters:
+* [New email and banner alerts for approaching license entitlement limits (early access)](ea-p1_license_entitlement_limit_alerts.html)
 
-| Filter value              | Covers                              |
-| ------------------------- | ----------------------------------- |
-| **DaVinci Flows**         | Flow events and flow version events |
-| **DaVinci Connectors**    | Connector instance events           |
-| **DaVinci Variables**     | Variable events                     |
-| **DaVinci Applications**  | Application events                  |
-| **DaVinci Flow Policies** | Flow policy events                  |
-| **DaVinci UI Templates**  | UI template events                  |
+* [Configuring a custom push notification provider (early access)](ea-p1_configure_custom_push_provider.html)
 
-### Filter by event type
+* [PingOne Authorize admin APIs (early access)](ea-p1-az-policy-admin-apis.html)
 
-Select **Event Type** in the filter panel. All granular DaVinci event types are listed and multiple event types can be selected simultaneously.
-
-### Filter by resource ID
-
-Enter a flow ID, variable ID, connector instance ID, flow policy ID, application ID, or UI template ID in the **Resource ID** filter to scope results to a specific DaVinci resource.
-
-## DaVinci audit event reference
-
-The following 37 DaVinci administrative events are logged in PingOne.
-
-|   |                                                                                                                                                                                                                                                                                                                                                                                             |
-| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | Rows 12 – 17 share the `DAVINCI.FLOW.CUSTOM_JAVASCRIPT.ADDED` action type for both flow-level and connector-level events. Differentiate by the `resources[].type` field: `DAVINCI_FLOW` for flow events (rows 12 – 15) and `DAVINCI_CONNECTOR` for connector events (rows 16 – 17). The context (direct creation, clone, or import) is reflected in `_embedded.davinciFlow.creationSource`. |
-
-| #  | Action type (`action.type`)                      | Event type (`action.description`)              | Example description (`result.description`)                                                                |
-| -- | ------------------------------------------------ | ---------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
-| 1  | `DAVINCI.FLOW.CREATED`                           | DaVinci Flow Created                           | Created DaVinci Flow '{name}'                                                                             |
-| 2  | `DAVINCI.FLOW.UPDATED`                           | DaVinci Flow Updated                           | Updated DaVinci Flow '{name}'                                                                             |
-| 3  | `DAVINCI.FLOW.DELETED`                           | DaVinci Flow Deleted                           | Deleted DaVinci Flow '{name}'                                                                             |
-| 4  | `DAVINCI.FLOW.DEPLOYED`                          | DaVinci Flow Deployed                          | Deployed DaVinci Flow '{name}'                                                                            |
-| 5  | `DAVINCI.FLOW.CLONED`                            | DaVinci Flow Cloned                            | Cloned DaVinci Flow 'CLONE-{name}' from '\\{source name}'                                                 |
-| 6  | `DAVINCI.FLOW.IMPORTED`                          | DaVinci Flow Imported                          | Imported DaVinci Flow '{name}'                                                                            |
-| 7  | `DAVINCI.FLOW.ENABLED`                           | DaVinci Flow Enabled                           | Enabled DaVinci Flow '{name}'                                                                             |
-| 8  | `DAVINCI.FLOW.DISABLED`                          | DaVinci Flow Disabled                          | Disabled DaVinci Flow '{name}'                                                                            |
-| 9  | `DAVINCI.FLOW.DEBUG_LOGGING.ENABLED`             | DaVinci Flow Debug Logging Enabled             | Debug logging enabled for DaVinci Flow '{name}'                                                           |
-| 10 | `DAVINCI.FLOW.DEBUG_LOGGING.DISABLED`            | DaVinci Flow Debug Logging Disabled            | Debug logging disabled for DaVinci Flow '{name}'                                                          |
-| 11 | `DAVINCI.COMPANY.ENABLE_ANALYTICS_DEBUG_VIEW`    | DaVinci Company Debug Logging Enabled          | Debug logging for Analytics enabled from Company Settings                                                 |
-| 12 | `DAVINCI.FLOW.CUSTOM_JAVASCRIPT.ADDED`           | DaVinci Flow Custom JavaScript Added           | Custom JavaScript added during flow creation for DaVinci Flow '{name}'                                    |
-| 13 | `DAVINCI.FLOW.CUSTOM_JAVASCRIPT.ADDED`           | DaVinci Flow Custom JavaScript Added           | Custom JavaScript added during flow cloning for DaVinci Flow '{name}'                                     |
-| 14 | `DAVINCI.FLOW.CUSTOM_JAVASCRIPT.ADDED`           | DaVinci Flow Custom JavaScript Added           | Custom JavaScript added during flow import for DaVinci Flow '{name}'                                      |
-| 15 | `DAVINCI.FLOW.CUSTOM_JAVASCRIPT.UPDATED`         | DaVinci Flow Custom JavaScript Updated         | Custom JavaScript updated in DaVinci Flow '{name}'                                                        |
-| 16 | `DAVINCI.FLOW.CUSTOM_JAVASCRIPT.ADDED`           | DaVinci Connector Custom JavaScript Added      | Custom JavaScript added in '\\{connector name}' Connector Configurations                                  |
-| 17 | `DAVINCI.FLOW.CUSTOM_JAVASCRIPT.ADDED`           | DaVinci Connector Custom JavaScript Updated    | Custom JavaScript updated in '\\{connector name}' Connector Configurations                                |
-| 18 | `DAVINCI.FLOW.VERSION.REVERTED`                  | DaVinci Flow Version Reverted                  | Flow version reverted from version {n} to version {m}, new version created: {p} for DaVinci Flow '{name}' |
-| 19 | `DAVINCI.FLOW.VERSION.ALIAS.UPDATED`             | DaVinci Flow Version Alias Updated             | Flow version alias updated for \\{flow name} (version {n}: {alias})                                       |
-| 20 | `DAVINCI.FLOW.VERSION.DELETED`                   | DaVinci Flow Version Deleted                   | Flow version {n} deleted for DaVinci Flow '{name}'                                                        |
-| 21 | `DAVINCI.FLOW.SESSION.CONFIGURATIONS.ADDED`      | DaVinci Flow Session Configurations Added      | Session configurations added in DaVinci Flow '{name}'                                                     |
-| 22 | `DAVINCI.FLOW.SESSION.CONFIGURATIONS.OVERRIDDEN` | DaVinci Flow Session Configurations Overridden | Session configurations overridden in DaVinci Flow '{name}'                                                |
-| 23 | `DAVINCI.CONNECTOR.CREATED`                      | DaVinci Connector Created                      | Created DaVinci Connector '{name}'                                                                        |
-| 24 | `DAVINCI.CONNECTOR.UPDATED`                      | DaVinci Connector Updated                      | Updated DaVinci Connector '{name}'                                                                        |
-| 25 | `DAVINCI.CONNECTOR.DELETED`                      | DaVinci Connector Deleted                      | Deleted DaVinci Connector '{name}'                                                                        |
-| 26 | `DAVINCI.VARIABLE.CREATED`                       | DaVinci Variable Created                       | Created DaVinci Variable '{name}'                                                                         |
-| 27 | `DAVINCI.VARIABLE.UPDATED`                       | DaVinci Variable Updated                       | Updated DaVinci Variable '{name}'                                                                         |
-| 28 | `DAVINCI.VARIABLE.DELETED`                       | DaVinci Variable Deleted                       | Deleted DaVinci Variable '{name}'                                                                         |
-| 29 | `DAVINCI.FLOW_POLICY.CREATED`                    | DaVinci Flow Policy Created                    | Created DaVinci Flow Policy '{name}'                                                                      |
-| 30 | `DAVINCI.FLOW_POLICY.UPDATED`                    | DaVinci Flow Policy Updated                    | Updated DaVinci Flow Policy '{name}'                                                                      |
-| 31 | `DAVINCI.FLOW_POLICY.DELETED`                    | DaVinci Flow Policy Deleted                    | Deleted DaVinci Flow Policy '{name}'                                                                      |
-| 32 | `DAVINCI.APPLICATION.CREATED`                    | DaVinci Application Created                    | Created DaVinci Application '{name}'                                                                      |
-| 33 | `DAVINCI.APPLICATION.UPDATED`                    | DaVinci Application Updated                    | Updated DaVinci Application '{name}'                                                                      |
-| 34 | `DAVINCI.APPLICATION.DELETED`                    | DaVinci Application Deleted                    | Deleted DaVinci Application '{name}'                                                                      |
-| 35 | `DAVINCI.UI_TEMPLATE.CREATED`                    | DaVinci UI Template Created                    | Created DaVinci UI Template '{name}'                                                                      |
-| 36 | `DAVINCI.UI_TEMPLATE.UPDATED`                    | DaVinci UI Template Updated                    | Updated DaVinci UI Template '{name}'                                                                      |
-| 37 | `DAVINCI.UI_TEMPLATE.DELETED`                    | DaVinci UI Template Deleted                    | Deleted DaVinci UI Template '{name}'                                                                      |
-
-## Audit event structure
-
-DaVinci audit events follow the standard PingOne audit event structure with DaVinci-specific `_embedded` fields.
-
-### Standard fields
-
-| Field                               | Description                                                                                                                        |
-| ----------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
-| `id`                                | Unique audit event ID                                                                                                              |
-| `recordedAt`                        | ISO 8601 timestamp when the event was recorded                                                                                     |
-| `correlationId`                     | Request correlation ID                                                                                                             |
-| `internalCorrelation.transactionId` | Internal DaVinci transaction ID                                                                                                    |
-| `actors.client.name`                | Client application that performed the action (for example, `adminui`)                                                              |
-| `actors.user.name`                  | User who performed the action (PingOne user email)                                                                                 |
-| `actors.user.id`                    | PingOne user ID (UUID)                                                                                                             |
-| `source.ipAddress`                  | IP address of the request origin                                                                                                   |
-| `source.userAgent`                  | User-agent string                                                                                                                  |
-| `action.type`                       | Machine-readable event type (for example, `DAVINCI.FLOW.CREATED`)                                                                  |
-| `action.description`                | Human-readable event type label                                                                                                    |
-| `resources[].type`                  | Resource type (for example, `DAVINCI_FLOW`, `DAVINCI_CONNECTOR`, `DAVINCI_VARIABLE`, `DAVINCI_APPLICATION`, `DAVINCI_UI_TEMPLATE`) |
-| `resources[].id`                    | Resource ID                                                                                                                        |
-| `resources[].name`                  | Resource name                                                                                                                      |
-| `result.status`                     | `SUCCESS` or `FAILURE`                                                                                                             |
-| `result.description`                | Human-readable result description                                                                                                  |
-
-### DaVinci-specific `_embedded` fields
-
-* `_embedded.davinciFlow`
-
-  The following fields are present on flow events:
-
-  | Field                | Description                                                                                           |
-  | -------------------- | ----------------------------------------------------------------------------------------------------- |
-  | `flowId`             | DaVinci internal flow ID                                                                              |
-  | `flowName`           | Human-readable flow name                                                                              |
-  | `flowStatus`         | `ACTIVE`, `DISABLED`, or similar                                                                      |
-  | `logLevel`           | Current log level: `ERROR`, `DEBUG`, or `INFO`                                                        |
-  | `flowType`           | Trigger type: `DEFAULT`, `PINGONE`, `SCHEDULED`, or similar                                           |
-  | `flowVersion`        | Flow version number (present on update, enable, and disable events)                                   |
-  | `modifiedAttributes` | Array of attribute paths changed during an update (for example, `graphData`, `flowSettings.logLevel`) |
-  | `creationSource`     | On custom JavaScript add events: `DIRECT`, `CLONE`, or `IMPORT`                                       |
-  | `targetNodeId`       | Node IDs containing the custom JavaScript                                                             |
-
-* `_embedded.davinciFlowVersion`
-
-  The following fields are present on flow version events:
-
-  | Field                 | Description                                |
-  | --------------------- | ------------------------------------------ |
-  | `flowVersion`         | Version number affected                    |
-  | `revertSourceVersion` | Source version number (revert events only) |
-  | `flowVersionAlias`    | Version alias string                       |
-  | `previousAlias`       | Previous alias value before update         |
-
-* `_embedded.davinciConnector`
-
-  The following fields are present on connector custom JavaScript events:
-
-  | Field                  | Description                                 |
-  | ---------------------- | ------------------------------------------- |
-  | `connectorInstanceId`  | Connector instance ID                       |
-  | `connectorDisplayName` | Display name of the connector instance      |
-  | `connectorType`        | Connector type (for example, `PingOne MFA`) |
-  | `connectorCategory`    | Connector category                          |
-
-* `_embedded.companySettings`
-
-  The following fields are present on company-level debug logging events:
-
-  | Field                      | Description                                  |
-  | -------------------------- | -------------------------------------------- |
-  | `enableAnalyticsDebugView` | `true` when company debug logging is enabled |
-
-## API access
-
-DaVinci audit events are accessible through the standard PingOne Activities API:
-
-```
-GET /v1/environments/{environmentId}/activities
-```
-
-Filter by DaVinci event types using standard PingOne audit filter parameters. For example, `filter=action.type sw "DAVINCI"`.
-
-Learn more in [Audit Activities](https://developer.pingidentity.com/pingone-api/platform/audit-activities.html) in the PingOne API documentation.
+* [NFC verification from PingOne Verify (early access)](ea-p1_verify_nfc_verification.html)
 
 ---
 
@@ -1014,7 +957,7 @@ page_id: pingone:early-access-features:ea-p1_promotion_key_concepts
 canonical_url: https://docs.pingidentity.com/pingone/early-access-features/ea-p1_promotion_key_concepts.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: April 16, 2026
+revdate: 2026-04-16T00:00:00Z
 section_ids:
   source-and-target-environments: Source and target environments
   snapshots: Snapshots
@@ -1128,138 +1071,6 @@ The promotion interface displays warnings when you initiate a promotion that inc
 ---
 
 ---
-title: New Authentication Dashboard (early access)
-description: The Authentication Dashboard shows a summary of SSO and authentication activity through PingOne authentication.
-component: pingone
-page_id: pingone:early-access-features:ea-p1_auth_dashboard
-canonical_url: https://docs.pingidentity.com/pingone/early-access-features/ea-p1_auth_dashboard.html
-llms_txt: https://docs.pingidentity.com/pingone/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: April 7, 2025
-section_ids:
-  limitations: Limitations
-  accessing-the-dashboard: Accessing the dashboard
-  filters: Filters
-  charts: Charts
-  total-successful-authentications: Total Successful Authentications
-  successful-authentications: Successful Authentications
-  total-identities: Total Identities
-  total-unsuccessful-authentication-attempts: Total Unsuccessful Authentication Attempts
-  unsuccessful-authentication-attempts: Unsuccessful Authentication Attempts
-  total-password-resets: Total Password Resets
-  password-resets: Password Resets
-  successful-authentications-by-dayhour: Successful Authentications by Day/Hour
----
-
-# New Authentication Dashboard (early access)
-
-For the purposes of early access, this topic describes the new Authentication Dashboard.
-
-The **Authentication Dashboard** shows a summary of authentication activity through PingOne authentication for the selected environment, including:
-
-* Single sign-on (SSO) activity.
-
-* User self-registration events.
-
-* PingOne DaVinci success flows from successful authentication attempts.
-
-* DaVinci failed flows from unsuccessful authentication attempts.
-
-* Authentication through external identity providers (IdPs) configured in PingOne.
-
-## Limitations
-
-The Authentication Dashboard doesn't display the following activity:
-
-* DaVinci authentication attempts that result in a timeout or user abandonment
-
-* DaVinci authentications through social login connectors that bypass the DaVinci flow orchestration service, such as passwordless-only flows or sign-on with social accounts like Google
-
-* DaVinci authentications that succeed after the user falls back to a previous authentication method following an initial failure
-
-* Guest checkouts when a user is unable to sign on to their existing account and proceeds as a guest instead
-
-## Accessing the dashboard
-
-To access the **Authentication Dashboard**, in the PingOne admin console, go to **Monitoring > Authentication**.
-
-![A screenshot of the Authentication Dashboard](_images/p1-authentication-dashboard.png)
-
-## Filters
-
-Use filters to refine the data displayed on the dashboard. You can limit data to a specific time range:
-
-* **Today**: Displays data for the current day only.
-
-* **From Yesterday**: Displays data for the previous day only.
-
-* **Last 7 Days** (default): Displays data for the previous 7 days only.
-
-* **Last 30 Days**: Displays data for the previous 30 days only.
-
-* **Last 90 Days**: Displays data for the previous 90 days only.
-
-* **This Month**: Displays data for the current calendar month only.
-
-* **Last Month**: Displays data for the previous calendar month only.
-
-* **Custom Range**: Enables you to define a date range within the last 6 months. Select a start date and an end date in the date picker, then click **Apply**.
-
-This filter applies to all charts on the dashboard.
-
-|   |                                                                        |
-| - | ---------------------------------------------------------------------- |
-|   | The Authentication Dashboard displays data only for the past 6 months. |
-
-## Charts
-
-Use the following controls to adjust the charts:
-
-| Icon                                                                | Name         | Description                                                                                                                                                                                       |
-| ------------------------------------------------------------------- | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| ![The Maximize icon.](../_images/p1-dashboard-maximize.png)         | Maximize     | Expands the chart to fill the dashboard.To minimize the chart, click the icon again.                                                                                                              |
-| ![The Menu options icon.](../_images/p1-dashboard-menu-options.png) | Menu options | Options can vary for different types of charts:- **View summary data**: Displays chart data as a table.
-
-- **Export**: Exports chart data to CSV or Excel format, depending on the type of chart. |
-| ![The Sort visual icon.](../_images/p1-dashboard-sort-visual.png)   | Sort visual  | Sorts the chart data in ascending or descending order.                                                                                                                                            |
-
-### Total Successful Authentications
-
-Displays the total number of successful authentication attempts during the selected time period.
-
-### Successful Authentications
-
-Displays a bar chart showing the total number of successful authentication attempts by date and a rolling average line for the selected time period. Hover over a bar to view the number of authentications for that date.
-
-### Total Identities
-
-Displays the total number of users in the PingOne directory for the selected time period and a graph showing the total user count by date.
-
-### Total Unsuccessful Authentication Attempts
-
-Displays the total number of unsuccessful authentication attempts, including account lockouts and timeouts, during the specified time period.
-
-### Unsuccessful Authentication Attempts
-
-Displays a bar chart of unsuccessful authentication attempts, including account lockouts and timeouts, by date, and a rolling average line for the selected time period. Hover over a bar to view the number of unsuccessful attempts for that date.
-
-### Total Password Resets
-
-Displays the total number of times users successfully reset their password during the selected time period.
-
-### Password Resets
-
-Displays a bar chart of times users successfully reset their password by date and a rolling average line for the selected time period. Hover over a bar to view the number of successful password resets for that date.
-
-### Successful Authentications by Day/Hour
-
-Displays a heat map of average authentication activity by hour of the day and day of the week in the end user's local time zone. The color variations show usage trends throughout an average week.
-
-Hover over the map to see the actual average of successful authentications to more accurately quantify the variation between periods. You can use this information to better understand user habits and identify periods of interest, such as typical highs and lows for authentication attempts.
-
----
-
----
 title: New email and banner alerts for approaching license entitlement limits (early access)
 description: New alert types have been added to Monitoring > Alerts and as banner alerts in the PingOne admin console. The alerts are available for early access.
 component: pingone
@@ -1306,74 +1117,254 @@ These alerts trigger auditing events that you can view in the auditing report, a
 ---
 
 ---
-title: PingOne Early Access Features
-description: This section provides early access documentation for the PingOne features available to customers who opt in to preview new functionality.
+title: NFC verification from PingOne Verify (early access)
+description: NFC verification is now available for early access verify.
 component: pingone
-page_id: pingone:early-access-features:ea-p1_early_access_features
-canonical_url: https://docs.pingidentity.com/pingone/early-access-features/ea-p1_early_access_features.html
+page_id: pingone:early-access-features:ea-p1_verify_nfc_verification
+canonical_url: https://docs.pingidentity.com/pingone/early-access-features/ea-p1_verify_nfc_verification.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: September 17, 2026
+page_aliases: ["ea-p1verify_documentation_authentication.adoc"]
+section_ids:
+  creating-a-verify-policy: Creating a verify policy
+  steps: Steps
+  next-steps: Next steps
 ---
 
-# PingOne Early Access Features
+# NFC verification from PingOne Verify (early access)
 
-This section provides early access documentation for the PingOne features available to customers who opt in to preview new functionality.
+**NFC Verification** is now available for early access verify. This capability lets users use near-field communication (NFC) verification on their mobile device to read a secure, embedded NFC chip on their government-issued ID or passport. This verification method is only available through in-app experiences on mobile devices.
 
-Early access features can be enabled only at the environment level. You can't enable an early access feature for an entire organization.
+NFC verification is one of many types of verification that PingOne Verify offers, as shown in the following table:
 
-Not all features are enabled for early access. Additionally, early access features related to services that aren't in the environment or that aren't allowable by the license assigned to the environment aren't available for opt-in.
+| Verification                         | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| ------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Government ID**                    | Verification based on government-issued documents. For example, a driver license or a passport.By default, government ID verifications use an automated inspection system. If automated verification is unsupported or fails due to poor image quality, the process falls back to manual inspection or a step-up approach (automated followed by manual).Verification is performed on PingOne Verify transactions by default, unless a customized verify policy is assigned to the transaction when it's created. |
+| **Digital Identity**                 | For users in India, you can also perform Aadhaar eID verification using DigiLocker. This method lets users share official identity attributes from their Aadhaar card through their government-backed digital wallet. By using this electronic path instead of image-only checks, you can reduce document failures while maintaining compliance with Indian digital identity standards.                                                                                                                           |
+| **NFC Verification**                 | Verification based on an embedded chip in a government-issued document. Near-field communication (NFC) verification uses Signicat ReadID to read a secure NFC chip on a user's ID or passport. This verification method is available only on mobile devices.&#xA;&#xA;This feature is currently available for early access.                                                                                                                                                                                       |
+| **Facial Comparison**                | A live photo (selfie) compared with government ID documents for verification.Verification is performed on PingOne Verify transactions by default, unless a customized verify policy is assigned to the transaction when it's created.                                                                                                                                                                                                                                                                             |
+| **Liveness**                         | A liveness check on the live photo (selfie) for verification.Verification is performed on PingOne Verify transactions by default, unless a customized verify policy is added to the transaction when it's created.                                                                                                                                                                                                                                                                                                |
+| **Phone**                            | Phone verification using one-time passcode (OTP).                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| **Email**                            | Email verification using OTP.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| **Identity Data**                    | Data Matching compares the identity data extracted during verification with data from an identity record.                                                                                                                                                                                                                                                                                                                                                                                                         |
+| **Data-based Identity Verification** | Verify user identity attributes with trusted third-party data.                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| **Device Ownership and Risk**        | Verify the end user legally owns or is associated with the phone number or email being used to complete the verification transaction.                                                                                                                                                                                                                                                                                                                                                                             |
 
-Learn more in [Managing opt-ins for early access features in PingOne](../settings/p1_managing_opt_ins_for_ea_features.html).
+## Creating a verify policy
 
-|   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| - | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | Early access features are provided for preview purposes only and aren't covered under standard Support service level agreements (SLAs). You can open support cases for feedback, bug reports, configuration questions, or other inquiries related to early access features, but resolution times for these cases will vary. These cases often require collaboration with our Engineering and Product teams, so timelines might exceed the usual SLAs for your Support package.Topics for these features are draft documentation for early access purposes only and aren't complete or final. |
+A verify policy dictates what's required to verify a user, such as an ID verification, facial comparison, or liveness. Users can now choose **NFC Verification** when creating a verify policy. It's included in the list of policies in the following steps:
 
-* [Configuration management and promotion (early access)](ea-p1_promote.html)
+## Steps
 
-* [New Authentication Dashboard (early access)](ea-p1_auth_dashboard.html)
+1. In the PingOne admin console, go to **Identity Verification > Verify Policies**.
 
-* [New email and banner alerts for approaching license entitlement limits (early access)](ea-p1_license_entitlement_limit_alerts.html)
+   |   |                                                                           |
+   | - | ------------------------------------------------------------------------- |
+   |   | A default verify policy based on your environment capabilities is listed. |
+
+2. Click the **[icon: plus, set=fa]**icon.
+
+3. Enter or edit the following:
+
+   > **Collapse: Policy configuration**
+   >
+   > | Field                                | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+   > | ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+   > | **Name**                             | The policy's name.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+   > | **Description**                      | The policy's description.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+   > | **Store Verified Claims**            | Stores verified personally identifiable information (PII) in the Identity Assurance (IDA) object within the PingOne Directory. Learn more in [Viewing user details](../directory/p1_viewusers.html) and [Editing a user in PingOne](../directory/p1_edituser.html).Select the checkbox to enable storing verified claims.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+   > | **Configuration**                    | * **Transaction Timeout**: Time period (in minutes) in which data can be collected after a transaction is created. The maximum transaction timeout is 30 minutes.
+   >
+   > * **Data Collection Timeout**: Time period (in minutes) in which data can be collected after initiating verification from the UI. By default, the data collection timeout is set to 15 minutes. The maximum data collection timeout is 30 minutes.
+   >
+   > * **Data Collection Only**: Click the toggle to enable data collection from a user without verification.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+   > | **Government ID**                    | Verification based on government-issued documents. For example, a driver license or a passport.Configure the following policy settings:* **ID Verification**: Select **Required** or **Disabled** to determine whether the end user must provide a government ID for verification.
+   >
+   >   &#xA;&#xA;If Government ID is Required, a government ID must be collected to compare with a selfie.
+   >
+   > * **Document Authentication Provider**: The provider used to authenticate government documents. Select **Mitek** or **Veriff** (default).
+   >
+   > * **Inspection Type**: Select the type of inspection performed on government-issued documents:
+   >
+   >   * **Automatic**: Artificial intelligence (AI)-based analytics examine the ID document to determine if it's original and unaltered.
+   >
+   >   * **Manual**: A human agent trained in document authentication examines the photo of the ID to determine its authenticity.
+   >
+   >   * **Step-Up to Manual**: Automated inspection is tried first. If the document can't be verified, the service switches to manual inspection.
+   >
+   >     &#xA;&#xA;Manual and Step-Up to Manual inspection types require an additional license.
+   >
+   > * **Government ID Retry Attempts**: The number of times a user can retry scanning an ID if the first attempt fails. Possible values for government ID retry attempts are 0 - 3.
+   >
+   > * **Enable AAMVA**: Click the toggle to enable verification of ID information against the issuing agency database, the [AAMVA Driver's License Data Verification (DLDV)](https://www.aamva.org/technology/systems/verification-systems/dldv) service. Learn more in [PingOne Verify and the American Association of Motor Vehicle Administrator's system of record](../identity_verification_using_pingone_verify/p1_verify_aamva_dldv.html).
+   >
+   > * **Fail Expired IDs**: Click the toggle to fail verification for expired IDs. |
+   > | **Digital Identity**                 | **Enable Aadhaar Verification (India)**: Click the toggle to enable user verification of Aadhaar eIDs through the DigiLocker wallet.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+   > | **NFC Verification**                 | Near-field communication (NFC) verification based on an embedded chip in a government-issued document using Signicat ReadID.&#xA;&#xA;This feature is currently available for early access.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+   > | **Facial Comparison**                | A live photo (selfie) compared with government ID documents or reference selfie for verification.Configure the following policy settings:* **Facial Comparison**: Select **Required**, **Optional**, or **Disabled** to determine whether the end user must provide a selfie for verification.
+   >
+   >   &#xA;&#xA;If Facial Comparison is Required, a government ID and selfie must be collected.
+   >
+   > * **Threshold**: The probability that selfies are likely to match with document images (facial comparison) or pass liveness checks (liveness). Select **Low**, **Medium**, or **High** threshold.
+   >
+   >   &#xA;&#xA;Selfies are less likely to match or pass with a higher threshold.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+   > | **Liveness**                         | A liveness check on the live photo (selfie) for verification.Configure the following policy settings:* **Liveness**: Select **Required**, **Optional**, or **Disabled** to determine whether the end user must provide a selfie for verification.
+   >
+   >   &#xA;&#xA;If Liveness is Required, a selfie must be collected.&#xA;&#xA;Disabling Liveness automatically deactivates the backend injection attack detection (IAD) process. IAD detects and blocks attempts to bypass the device camera using synthetic or prerecorded media.
+   >
+   > * **Threshold**: The probability that selfies are likely to match with document images (facial comparison) or pass liveness checks (liveness). Select **Low**, **Medium**, or **High** threshold.
+   >
+   >   &#xA;&#xA;Selfies are less likely to match or pass with a higher threshold.
+   >
+   > * **Selfie Retry Attempts**: The number of times a user can retake a selfie if the first attempt fails. Possible values for selfie retry attempts are 0 - 3.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+   > | **Phone**                            | Configure the following policy settings:* **Phone Verification**: Select **Required** or **Disabled** to determine whether the end user must provide their phone number for verification.
+   >
+   > * **Create MFA Device**: Click the toggle to enable registration of a user's phone number as a trusted multi-factor authentication (MFA) device after successful OTP or web link verification.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+   > | **Email**                            | Configure the following policy settings:* **Email Verification**: Select **Required** or **Disabled** to determine whether the end user must provide their email address for verification.
+   >
+   > * **Create MFA Device**: Click the toggle to enable registration of a user's email address as a trusted MFA device after successful OTP or web link verification.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+   > | **Identity Data**                    | **Data Matching** compares the identity data extracted during verification with data from an identity record.Configure the following policy settings:* **Attribute**: Lists **Given Name**, **Family Name**, **Full Name**, **Date of Birth**, and **Address**.
+   >
+   > * **Confidence Threshold**: The probability that an attribute (the data extracted during verification) matches the data from an identity record. Select **None**, **Low**, **Medium**, or **High**.
+   >
+   >   &#xA;&#xA;Selecting None leaves an attribute unconfigured and no matching occurs.
+   >
+   > * **Required**: Select the checkbox to make the value of an attribute required.
+   >
+   >   &#xA;&#xA;The verification fails automatically if a required value can't be extracted during verification or isn't included in the transaction input.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+   > | **Data-Based Identity Verification** | Verify user identity attributes with trusted third-party data.Configure the following policy settings:* **US Data-Based Identity Verification**: Select **Enabled** or **Disabled**.
+   >
+   > * **Threshold**: Assesses whether there's fraud or risk associated with the user. Select **Low**, **Medium**, or **High**.
+   >
+   > * **Required Contractual Obligation**: Select the checkbox to acknowledge that by enabling this feature, you're contractually obligated to obtain user consent.
+   >
+   >   &#xA;&#xA;You must select the Required Contractual Obligation checkbox to enable the Data-Based Identity Verification policy.Learn more in [PingOne Verify and data-based verification](../identity_verification_using_pingone_verify/p1_verify_data_based_verification.html).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+   > | **Device Ownership and Risk**        | Verify the end user legally owns or is associated with the phone number or email being used to complete the verification transaction.Configure the following policy settings:* **Device Ownership Check**: Select **Enabled** or **Disabled**.
+   >
+   > * **Phone Number Risk Threshold**: Determines the acceptable risk level for phone behavioral data inferred from the carrier history and other data sources. This field is required if **Device Ownership Check** is set to **Enabled**. Select **Medium** (default) or **High**.
+   >
+   > * **Phone-to-Name Threshold**: Determines linkage between phone and name. Select **Medium** (default) or **High**.You can also configure the following thresholds:* (Optional) **Email-to-Phone Threshold**: Select **Medium** or **High**.
+   >
+   > * (Optional) **Email-to-Name Threshold**: Select **Medium** or **High**.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+
+4. Click **Save**.
+
+### Next steps
+
+Find your new policy on **Verify Policies** page, then trigger a verify transaction using the verify policy. Learn more in [Configuring and setting up PingOne Verify](../identity_verification_using_pingone_verify/p1_verify_configuration_setup.html).
 
 ---
 
 ---
-title: PingOne Early Access Features
-description: This section provides early access documentation for the PingOne features available to customers who opt in to preview new functionality.
+title: PingOne Authorize admin APIs (early access)
+description: The PingOne Authorize admin APIs, available in early access, provide programmatic access to authorization policies and Trust Framework definitions.
 component: pingone
-page_id: pingone:early-access-features:p1_early_access_features
-canonical_url: https://docs.pingidentity.com/pingone/early-access-features/p1_early_access_features.html
+page_id: pingone:early-access-features:ea-p1-az-policy-admin-apis
+canonical_url: https://docs.pingidentity.com/pingone/early-access-features/ea-p1-az-policy-admin-apis.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-09-08T17:59:20Z
+keywords: ["PingOne Authorize;admin APIs;authorization policies;Trust Framework;early access"]
 ---
 
-# PingOne Early Access Features
+# PingOne Authorize admin APIs (early access)
 
-This section provides early access documentation for the PingOne features available to customers who opt in to preview new functionality.
+The PingOne Authorize admin APIs are available in early access. You can use these APIs to manage the following PingOne Authorize resources programmatically:
 
-Early access features can be enabled only at the environment level. You can't enable an early access feature for an entire organization.
+* Authorization policies, rules, and statements
 
-Not all features are enabled for early access. Additionally, early access features related to services that aren't in the environment or that aren't allowable by the license assigned to the environment aren't available for opt-in.
+* Trust Framework elements, including attributes, conditions, processors, and services
 
-Learn more in [Managing opt-ins for early access features in PingOne](../settings/p1_managing_opt_ins_for_ea_features.html).
+Learn more in the [PingOne Authorize Admin APIs (early access)](https://developer.pingidentity.com/pingone-api-ea/authorize/early-access/pingone-authorize-admin-apis.html) section of the PingOne API reference.
 
-|   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| - | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | Early access features are provided for preview purposes only and aren't covered under standard Support service level agreements (SLAs). You can open support cases for feedback, bug reports, configuration questions, or other inquiries related to early access features, but resolution times for these cases will vary. These cases often require collaboration with our Engineering and Product teams, so timelines might exceed the usual SLAs for your Support package.Topics for these features are draft documentation for early access purposes only and aren't complete or final. |
+---
 
-* [Configuration management and promotion (early access)](ea-p1_promote.html)
+---
+title: PingOne Remote MCP Server (early access)
+description: Learn about the new PingOne Remote MCP Server and how to enable it in your environment.
+component: pingone
+page_id: pingone:early-access-features:ea-p1_mcp_server_settings_app
+canonical_url: https://docs.pingidentity.com/pingone/early-access-features/ea-p1_mcp_server_settings_app.html
+llms_txt: https://docs.pingidentity.com/pingone/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-10-14T14:42:09Z
+section_ids:
+  mcp-server-settings: MCP Server settings
+  new-system-application: New system application
+  configuring-custom-redirect-uris: Configuring custom redirect URIs
+  steps: Steps
+  result: Result
+  learn-more: Learn more
+---
 
-* [New Authentication Dashboard (early access)](ea-p1_auth_dashboard.html)
+# PingOne Remote MCP Server (early access)
 
-* [New email and banner alerts for approaching license entitlement limits (early access)](ea-p1_license_entitlement_limit_alerts.html)
+The PingOne Remote MCP Server is now available for early access (EA).
 
-* [Audit report (early access)](ea-p1_audit_report.html)
+The PingOne Remote MCP Server lets artificial intelligence (AI) clients connect to PingOne through a single remote Model Context Protocol (MCP) endpoint. Because the server is remote, you don't need to install, configure, or run a local MCP server.
 
-* [DaVinci administrative audit events in PingOne (early access)](ea_p1_davinci_audit_events.html)
+After configuring a supported client, administrators authenticate through PingOne with OAuth 2.0. They can then securely use MCP tools to administer the PingOne platform.
 
-* [Configuring a custom push notification provider (early access)](ea-p1_configure_custom_push_provider.html)
+All MCP tools adhere to the PingOne roles and permissions model. Administrators can only access and use tools supported by their existing roles.
 
-* [Provisioning the PingOne connection with PingOne environments (early access)](ea_p1_provisioning_connection_pingone.html)
+## MCP Server settings
+
+To support the release of the PingOne Remote MCP Server, we've added a new **MCP Server** page in the **Settings** section of the PingOne admin console. Enable or disable the PingOne Remote MCP Server for the environment on this page (MCP server access is disabled by default).
+
+To enable the PingOne Remote MCP Server, click **Enable MCP Access**.
+
+![A screenshot of the MCP Server settings page in the PingOne admin console.](_images/p1-mcp-server-settings.png)
+
+You must have the Environment Admin role or a custom role with equivalent permissions to enable or disable the PingOne Remote MCP Server.
+
+|   |                                                                                                                                                                                                                                                                         |
+| - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | For this EA release, enabling the PingOne Remote MCP Server provides access to all of the available PingOne MCP tools. During EA, you should enable the server in non-production environments only. More granular tool controls will be introduced in a future release. |
+
+## New system application
+
+We've also added a new **PingOne MCP Server** system application. This application allows administrators to access and use the PingOne Remote MCP server to manage the environment's configuration and data. It's enabled by default and can't be disabled.
+
+|   |                                                                                                                                                                                |
+| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+|   | The **PingOne MCP Server** application won't appear in the PingOne admin console unless an administrator has opted in to the remote MCP feature for that specific environment. |
+
+![A screenshot of the PingOne Applications page showing the new MCP Server system application.](_images/p1-mcp-server-system-app.png)
+
+### Configuring custom redirect URIs
+
+By default, the **PingOne MCP Server** application uses two system-provided redirect URIs. Instead of using the default URIs, you can optionally add custom redirect URIs to which PingOne forwards the OIDC response after authentication. Learn more in [Redirect URIs](../applications/p1_wildcard_redirect_uri.html).
+
+#### Steps
+
+1. In the PingOne admin console, go to **Applications > Applications** and click the **PingOne MCP Server** application to open the details panel.
+
+2. On the **Overview** tab, click the **Pencil** icon ([icon: pencil, set=fa]).
+
+3. Click **[icon: plus, set=fa]Add Custom Redirect URI**.
+
+4. Enter the redirect URI your MCP client uses to receive the OIDC response.
+
+   Learn more about using a wildcard or loopback IP address in [Redirect URIs](../applications/p1_wildcard_redirect_uri.html).
+
+5. To add additional URIs, click **[icon: plus, set=fa]Add Custom Redirect URI**.
+
+6. (Optional) Select the **Allow Redirect URI Patterns** checkbox to use a wildcard for flexibility in managing redirect URIs.
+
+7. Click **Save**.
+
+|   |                                                                           |
+| - | ------------------------------------------------------------------------- |
+|   | To revert to using the default redirect URIs, click **Restore Defaults**. |
+
+#### Result
+
+The new redirect URIs are displayed on the **Redirect URIs** tab of the **MCP Server** page.
+
+## Learn more
+
+Learn more about the [PingOne Remote MCP Server](https://developer.pingidentity.com/build-with-ai/pingone-mcp-server/p1-overview.html) in the Build with AI documentation.
 
 ---
 
@@ -1385,6 +1376,7 @@ page_id: pingone:early-access-features:ea-p1_promotion_variables
 canonical_url: https://docs.pingidentity.com/pingone/early-access-features/ea-p1_promotion_variables.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-04-27T12:51:39Z
 section_ids:
   sensitive-variables: Sensitive variables
   additional-considerations: Additional considerations
@@ -1430,7 +1422,7 @@ page_id: pingone:early-access-features:ea-p1_promotions
 canonical_url: https://docs.pingidentity.com/pingone/early-access-features/ea-p1_promotions.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: MMMM D, YYYY
+revdate: 2026-04-27T12:51:39Z
 ---
 
 # Promotions (early access)
@@ -1450,161 +1442,6 @@ A promotion or rollback includes, at a minimum:
 ---
 
 ---
-title: Provisioning the PingOne connection with PingOne environments (early access)
-description: The PingOne provisioning connection links two environments, either within the same organization or across different organizations.
-component: pingone
-page_id: pingone:early-access-features:ea_p1_provisioning_connection_pingone
-canonical_url: https://docs.pingidentity.com/pingone/early-access-features/ea_p1_provisioning_connection_pingone.html
-llms_txt: https://docs.pingidentity.com/pingone/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: April 10, 2026
-section_ids:
-  provisioning-capabilities: Provisioning capabilities
-  before-you-begin: Before you begin
-  steps: Steps
-  result: Result:
-  validation: Validation
-  pingone-directory-attributes: PingOne directory attributes
----
-
-# Provisioning the PingOne connection with PingOne environments (early access)
-
-The PingOne provisioning connection links two environments, either within the same organization or across different organizations. By integrating the PingOne connection with PingOne, you can automate the lifecycle of user identities and groups, ensuring that access between your source and target environments is synchronized.
-
-## Provisioning capabilities
-
-| Resource   | Capability     | Description                                                                                                                              | Inbound | Outbound |
-| ---------- | -------------- | ---------------------------------------------------------------------------------------------------------------------------------------- | ------- | -------- |
-| User       | Create         | Generates a new user record in the destination.                                                                                          | Yes     | Yes      |
-|            | Read           | Retrieves or polls user attributes for synchronization.                                                                                  | Yes     | Yes      |
-|            | Update         | Modifies existing attributes, such as `job title`.                                                                                       | Yes     | Yes      |
-|            | Delete         | Deletes a user or temporarily suspends an account.                                                                                       | Yes     | Yes      |
-| Group      | Create         | Provisions a new group in the target application.&#xA;&#xA;Only internal and native PingOne groups are supported for group provisioning. | No      | Yes      |
-|            | Rename         | Updates the display name or identifier of an existing group.                                                                             | No      | Yes      |
-|            | Delete         | Removes a group from the target application.                                                                                             | No      | Yes      |
-| Membership | Add and remove | Handles additions and removals of users within groups.                                                                                   | No      | Yes      |
-
-## Before you begin
-
-Make sure that you have:
-
-* Administrator access to both the source and target PingOne environments in the same or cross organization.
-
-* The necessary API access and administrator approvals to test and confirm the connection works.
-
-* Created a worker application for OAuth authentication in the target PingOne environment and assign the following roles:
-
-  * **Environment Admin**
-
-  * **Identity Data Admin**
-
-  * **Identity Data Read Only**
-
-  * **Organization Admin**
-
-* The following PingOne configuration values required for OAuth or Token authentication:
-
-  * **Service URI**
-
-  * **Environment ID**
-
-  * **Authentication Method**
-
-  * **Client ID**
-
-  * **Client Secret**
-
-  * **Token Endpoint**
-
-  * **Grant Type**
-
-  * **Authentication Token**
-
-* Users assigned to a specific population or group in PingOne designated for provisioning. Learn more in [Adding a user in PingOne](../directory/p1_adduser.html) and [Managing groups](../directory/p1_managing_groups.html).
-
-## Steps
-
-1. Create a PingOne connection:
-
-   1. In the PingOne admin console, go to **Integrations > Provisioning**.
-
-   2. Click the **Plus** icon (+) and then click **New Connection**.
-
-   3. Click **Select** for **Identity Store**.
-
-   4. Click **Select** for the **PingOne** connection, and click **Next**.
-
-   5. []()In the **Configure Authentication** section, enter the following configurations that apply to your PingOne account:
-
-      * **Authentication Method**: Select one of the following:
-
-        * **OAUTH**: Enter the following:
-
-          | Configuration      | Example                                             |
-          | ------------------ | --------------------------------------------------- |
-          | **Service URI**    | `https://api.test-one-pingone.com/v1`               |
-          | **Environment ID** | `11111111-2222-3333-4444-555555555555`              |
-          | **Client ID**      | `aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee`              |
-          | **Client Secret**  | `example-client-secret`                             |
-          | **Token Endpoint** | `https://auth.test-one-pingone.com/env_id/as/token` |
-          | **Grant Type**     | `client_credentials`                                |
-
-        * **Token**: Enter the **Authentication Token**, such as `example-authentication-token`.
-
-   6. Click **Test Connection** to verify that PingOne can establish a connection.
-
-      ### Result:
-
-      If there are any issues with the connection, a **Test Connection Failed** modal opens. Click **Next** to resume the setup with an invalid connection.
-
-      |   |                                                                                                                                                                                                                                                                                                               |
-      | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-      |   | You can't use the connection for provisioning until you've established a valid connection. If the connection fails, click **Cancel** in the **Test Connection Failed** modal, verify that you have entered the configuration details in [step e](#p1_configure_authentication_step) correctly, and try again. |
-
-   7. Click **Next**.
-
-   8. In the **User Actions** section, select the following as needed:
-
-      | Field                        | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-      | ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-      | **Enable users creation**    | Creates a user in the target identity store when the user is created in the source identity store.                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-      | **Enable users updation**    | Updates user attributes in the target identity store when the user is updated in the source identity store.If **Enable users updation** is selected, you can choose to select **Enable users disable**, which disables a user in the target identity store when the user is disabled in the source identity store.                                                                                                                                                                                                                                     |
-      | **Enable users deprovision** | Deprovisions a user in the target identity store when the user is deprovisioned in the source identity store. If **Enable users deprovision** is selected, the following options appear:- **Remove Action**: Removes or disables a user in the target identity store when the user is deleted in the source identity store. Select **Delete** or **Disable**.
-
-        &#xA;&#xA;Remove Action is only available if you select Enable users disable.
-
-      - **Deprovision on rule deletion**: Deprovisions users if the associated provisioning rule is deleted. |
-
-   9. Click **Save**.
-
-   10. To enable the connection, click the toggle at the top of the details panel to the right (blue).
-
-       |   |                                                                           |
-       | - | ------------------------------------------------------------------------- |
-       |   | You can disable the connection by clicking the toggle to the left (gray). |
-
-2. Create an [inbound](../integrations/p1_create_provisioning_rule_inbound.html) or [outbound](../integrations/p1_create_provisioning_rule_outbound.html) rule and select the existing PingOne connection as the target or source. You can optionally add [attribute mappings](#pingone-directory-attributes).
-
-## Validation
-
-Confirm users and groups are successfully provisioned to PingOne. View the [sync status](../integrations/p1_view_sync_status.html) to review synchronization results and any errors. You can find examples in [Outbound provisioning sync summary examples](../integrations/p1_outbound_group_provisioning_sync_summary_examples.html).
-
-## PingOne directory attributes
-
-The following table lists common PingOne attributes that can be mapped for user provisioning:
-
-| Attribute       | Description                                                                 |
-| --------------- | --------------------------------------------------------------------------- |
-| `Username`      | The username value used for the target account.                             |
-| `Email`         | The email address mapped from PingOne Directory.                            |
-| `Enabled`       | Indicates whether the target user account is enabled.                       |
-| `Given Name`    | The user's first name.                                                      |
-| `Family Name`   | The user's last name.                                                       |
-| `Population ID` | The unique identifier of the target population where users are provisioned. |
-
----
-
----
 title: Rolling back a promotion (early access)
 description: Roll back a promotion to reset the target environment back to the state it was in immediately prior to the promotion.
 component: pingone
@@ -1612,7 +1449,7 @@ page_id: pingone:early-access-features:ea-p1_promotion_rolling_back
 canonical_url: https://docs.pingidentity.com/pingone/early-access-features/ea-p1_promotion_rolling_back.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: February 23, 2026
+revdate: 2026-02-23T00:00:00Z
 section_ids:
   limitations-and-considerations: Limitations and considerations
   steps: Steps
@@ -1692,13 +1529,13 @@ You're taken to the PingOne admin console for the target environment so that you
 
 ---
 title: "Scenario 1: Simple promotion without dependencies (early access)"
-description: Learn how to promote a PingOne resource that has no dependencies and understand how to configure promotion variables for the promotion.
+description: Promote a PingOne resource with no dependencies from a source to a target environment, including setting up promotion variables.
 component: pingone
 page_id: pingone:early-access-features:ea-p1_config_promotion_scenario_1
 canonical_url: https://docs.pingidentity.com/pingone/early-access-features/ea-p1_config_promotion_scenario_1.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: December 8, 2025
+revdate: 2026-08-13T00:00:00Z
 section_ids:
   configure-promotion-variables-in-the-source-environment: Configure promotion variables in the source environment
   steps: Steps

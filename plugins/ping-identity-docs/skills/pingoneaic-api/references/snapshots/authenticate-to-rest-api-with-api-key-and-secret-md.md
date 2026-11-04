@@ -4,6 +4,8 @@ description: You will need an API key and secret to authenticate to the followin
 component: pingoneaic-api
 page_id: pingoneaic-api::authenticate-to-rest-api-with-api-key-and-secret
 canonical_url: https://developer.pingidentity.com/pingoneaic-api/authenticate-to-rest-api-with-api-key-and-secret.html
+llms_txt: https://developer.pingidentity.com/pingoneaic-api/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 keywords: ["Integration", "REST API", "Authentication"]
 section_ids:
   get-an-api-key-and-secret: Get an API key and secret

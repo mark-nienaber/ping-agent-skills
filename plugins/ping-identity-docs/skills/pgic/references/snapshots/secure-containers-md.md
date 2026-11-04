@@ -1,10 +1,12 @@
 ---
 title: Secure containers
-description: Ping Government Identity Cloud Secure Containers are self-contained software packages that encapsulate Ping Identity software and relevant dependencies.
+description: Describes Ping Identity secure container availability, compatibility, security, and distribution.
 component: pgic
 page_id: pgic::secure-containers
 canonical_url: http://docs.pingidentity.com/pgic/secure-containers.html
-revdate: August 15, 2025
+llms_txt: http://docs.pingidentity.com/pgic/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: August 14, 2026
 section_ids:
   whats-included: What's included
   add-on-compatibility: Add-on compatibility
@@ -88,8 +90,6 @@ Secure containers are distributed as Docker images.
 The following links provide background, context, and details:
 
 * [Container Docker images information](https://developer.pingidentity.com/devops/docker-images/dockerImagesRef.html)
-
-* [Accessing Ping Identity secure containers](https://backstage.pingidentity.com/knowledge/backstagehelp/article/a46417859) (sign-on required)
 
 * [Docker image hardening guide](https://support.pingidentity.com/s/article/Docker-Image-Hardening-Deployment-Guide) (sign-on required)
 

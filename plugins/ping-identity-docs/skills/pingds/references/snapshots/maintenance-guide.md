@@ -7,7 +7,7 @@ page_id: pingds:maintenance-guide:accounts
 canonical_url: https://docs.pingidentity.com/pingds/8.1/maintenance-guide/accounts.html
 llms_txt: https://docs.pingidentity.com/pingds/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: 2025-10-22T14:42:39Z
+revdate: 2026-06-01T09:22:01Z
 keywords: ["Authentication", "Features", "LDAP", "Setup &amp; Configuration"]
 section_ids:
   configure-account-lockout: Account lockout
@@ -409,7 +409,7 @@ page_id: pingds:maintenance-guide:backup-restore
 canonical_url: https://docs.pingidentity.com/pingds/8.1/maintenance-guide/backup-restore.html
 llms_txt: https://docs.pingidentity.com/pingds/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: 2026-01-12T12:15:36Z
+revdate: 2026-06-01T09:22:01Z
 keywords: ["Backup &amp; Restore", "Features", "LDAP", "Setup &amp; Configuration", "Storage"]
 section_ids:
   how-backup-works: How backup works
@@ -866,7 +866,7 @@ page_id: pingds:maintenance-guide:preface
 canonical_url: https://docs.pingidentity.com/pingds/8.1/maintenance-guide/preface.html
 llms_txt: https://docs.pingidentity.com/pingds/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: 2025-10-22T14:42:39Z
+revdate: 2026-06-01T09:22:01Z
 keywords: ["LDAP", "Setup &amp; Configuration"]
 page_aliases: ["index.adoc"]
 ---
@@ -922,7 +922,7 @@ page_id: pingds:maintenance-guide:admin-tools
 canonical_url: https://docs.pingidentity.com/pingds/8.1/maintenance-guide/admin-tools.html
 llms_txt: https://docs.pingidentity.com/pingds/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: 2025-10-22T14:42:39Z
+revdate: 2026-06-01T09:22:01Z
 keywords: ["Features", "LDAP", "Setup &amp; Configuration"]
 section_ids:
   cli-overview: Server commands
@@ -1073,7 +1073,7 @@ page_id: pingds:maintenance-guide:mv-servers
 canonical_url: https://docs.pingidentity.com/pingds/8.1/maintenance-guide/mv-servers.html
 llms_txt: https://docs.pingidentity.com/pingds/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: 2025-10-22T14:42:39Z
+revdate: 2026-06-01T09:22:01Z
 keywords: ["Install", "LDAP", "Setup &amp; Configuration"]
 ---
 
@@ -1142,7 +1142,7 @@ page_id: pingds:maintenance-guide:server-process
 canonical_url: https://docs.pingidentity.com/pingds/8.1/maintenance-guide/server-process.html
 llms_txt: https://docs.pingidentity.com/pingds/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: 2025-10-22T14:42:39Z
+revdate: 2026-06-01T09:22:01Z
 keywords: ["Features", "LDAP"]
 section_ids:
   start-server: Start a server
@@ -1374,7 +1374,7 @@ page_id: pingds:maintenance-guide:troubleshooting
 canonical_url: https://docs.pingidentity.com/pingds/8.1/maintenance-guide/troubleshooting.html
 llms_txt: https://docs.pingidentity.com/pingds/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: 2026-01-08T11:44:16Z
+revdate: 2026-06-01T09:22:01Z
 keywords: ["Install", "LDAP", "Replication", "Security", "Troubleshooting"]
 section_ids:
   troubleshoot-identify-problem: Define the problem
@@ -2301,7 +2301,7 @@ $ status --offline --version
 Output
 
 ```
-PingDS Server 8.1.1-20260626083155-d61d2a465330810b9f827a8e47416ad66365c629
+PingDS Server 8.1.2-20260910134425-5effa5f6672e336eb4abf29fe962d6a94a8b1dfb
 Build <datestamp>
 ```
 

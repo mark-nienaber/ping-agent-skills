@@ -543,7 +543,7 @@ Create an instance of the Reference ID SP Adapter.
 
 ## About this task
 
-For a complete guide, see [Configuring a Reference ID SP Adapter instance](../../agentless/custom_application_setup/pf_agentless_ik_configuring_a_reference_id_sp_adapter_instance.html) in the Agentless Integration Kit documentation.
+For a complete guide, refer to [Configuring a Reference ID SP Adapter instance](../../agentless/custom_application_setup/pf_agentless_ik_configuring_reference_id_sp_adapter_instance.html) in the Agentless Integration Kit documentation.
 
 ## Steps
 
@@ -612,7 +612,7 @@ section_ids:
 
 3. Create an instance of Reference ID SP Adapter.
 
-   For a complete guide, see [Configuring a Reference ID SP Adapter instance](../../agentless/custom_application_setup/pf_agentless_ik_configuring_a_reference_id_sp_adapter_instance.html) in the Agentless Integration Kit documentation.
+   For a complete guide, refer to [Configuring a Reference ID SP Adapter instance](../../agentless/custom_application_setup/pf_agentless_ik_configuring_reference_id_sp_adapter_instance.html) in the Agentless Integration Kit documentation.
 
    1. Clear the **User Name** and **Pass Phrase** fields.
 
@@ -896,7 +896,7 @@ If you only want to use the Atlassian Cloud Provisioner for provisioning, skip t
 
    2. On the **Browser SSO > Protocol Settings > Assertion Consumer Service** tab, in the **Binding** list, select **POST**. In the **Endpoint URL** field, enter the **SP Assertion Consumer Service URL** that you noted in [Enabling single sign-on in Atlassian](pf_atlassian_cloud_connector_enabling_single_sign_on_in_atlassian.html). Click **Add**.
 
-   3. On the **Browser SSO > Protocol Settings > Assertion Creation > Attribute Contract** tab, for **SAML\_SUBJECT**, in the **Subject Name Format** list, select **urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress**.
+   3. On the **Browser SSO > Protocol Settings > Assertion Creation > Attribute Contract** tab, for **SAML_SUBJECT**, in the **Subject Name Format** list, select **urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress**.
 
 6. On the **Credentials** tab, configure the connection credentials. Click **Next**.
 
@@ -1075,24 +1075,31 @@ section_ids:
 ---
 
 ---
-title: Download manifest
-description: The following files are included in the Atlassian Cloud Provisioner .zip archive:
+title: Deploying the Agentless Integration Kit
+description: The Atlassian Integration Kit relies on the Reference ID adapter included in the Agentless Integration Kit.
 component: atlassian
-page_id: atlassian:atlassian_cloud_provisioner:pf_atlassian_cloud_connector_download_manifest
-canonical_url: https://docs.pingidentity.com/integrations/atlassian/atlassian_cloud_provisioner/pf_atlassian_cloud_connector_download_manifest.html
+page_id: atlassian:atlassian_integration_kit:pf_atlassian_ik_deploying_the_agentless_i
+canonical_url: https://docs.pingidentity.com/integrations/atlassian/atlassian_integration_kit/pf_atlassian_ik_deploying_the_agentless_i.html
 llms_txt: https://docs.pingidentity.com/integrations/atlassian/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 3, 2024
+section_ids:
+  about-this-task: About this task
+  steps: Steps
 ---
 
-# Download manifest
+# Deploying the Agentless Integration Kit
 
-The following files are included in the Atlassian Cloud Provisioner `.zip` archive:
+## About this task
 
-* `legal/Legal.pdf`: Copyright and license information.
+The Atlassian Integration Kit relies on the Reference ID adapter included in the Agentless Integration Kit.
 
-* `dist`: Contains the integration files
+## Steps
 
-  * `pf-atlassian-quickconnection-<version>.jar`: The Atlassian Cloud Provisioner quick connection template.
+1. Download the Agentless Integration Kit `.zip` archive from the [**Add-ons** tab of the PingFederate downloads page](https://www.pingidentity.com/en/resources/downloads/pingfederate.html) or the [Ping Identity Marketplace](https://marketplace.pingone.com/item/agentless-integration-kit).
 
-* `atlassian-saml-metadata.xml`: A modifiable metadata file used to create the connection.
+2. On the sidebar, click **Download Integration**.
+
+3. On the sidebar, click **Get Documentation**.
+
+4. Follow the documentation to deploy the Agentless Integration Kit.

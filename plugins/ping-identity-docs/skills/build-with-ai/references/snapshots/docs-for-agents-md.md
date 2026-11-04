@@ -6,7 +6,7 @@ page_id: build-with-ai::docs-for-agents
 canonical_url: https://developer.pingidentity.com/build-with-ai/docs-for-agents.html
 llms_txt: https://developer.pingidentity.com/build-with-ai/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: June 5, 2026
+revdate: 2026-09-21T00:00:00Z
 keywords: ["AI", "agents", "LLM", "markdown", "llms.txt", "documentation", "RAG", "context"]
 section_ids:
   documentation-domains: Documentation domains

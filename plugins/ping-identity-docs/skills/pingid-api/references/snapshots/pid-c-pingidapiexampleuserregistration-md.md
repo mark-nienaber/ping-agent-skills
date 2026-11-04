@@ -1,9 +1,11 @@
 ---
 title: "Example: PingID User Registration"
-description: The following example will register a new user at the PingID service and pair their phone to their profile using the online pairing process. At the end of this example a new PingID user will be configured and ready to authenticate using the PingID mobile application.
+description: Example of registering a new PingID user and pairing first online device
 component: pingid-api
 page_id: pingid-api::pid_c_PingIDapiExampleUserRegistration
 canonical_url: https://developer.pingidentity.com/pingid-api/pid_c_PingIDapiExampleUserRegistration.html
+llms_txt: https://developer.pingidentity.com/pingid-api/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
   overview: Overview
   step-1-create-the-adduser-request: "Step 1 : Create the AddUser Request"
@@ -59,13 +61,13 @@ The API request consists of building the JWT header and payload, signing the val
 
 ### Create the API token header
 
-The token header consists of three parameters, the signature algorithm which is always "HS256" and the org\_alias and token values retrieved from the PingID properties file:
+The token header consists of three parameters, the signature algorithm which is always "HS256" and the org_alias and token values retrieved from the PingID properties file:
 
-| Parameter  | Value                                |
-| ---------- | ------------------------------------ |
-| alg        | HS256                                |
-| org\_alias | aaaaaaaa-a1b2-123a-b456-1234abcd5678 |
-| token      | 1a2b3c4d5e6f                         |
+| Parameter | Value                                |
+| --------- | ------------------------------------ |
+| alg       | HS256                                |
+| org_alias | aaaaaaaa-a1b2-123a-b456-1234abcd5678 |
+| token     | 1a2b3c4d5e6f                         |
 
 These values are formatted in a JSON object:
 
@@ -134,7 +136,7 @@ Putting both the reqHeader and reqBody objects into JSON and joining them togeth
 
 ### Build and sign the API request token
 
-To create the JWS signature, apply Base64URL encoding to the header and payload JSON. After encoding both JSON objects, join these with a period then create a signature of this string using the HMAC with SHA-256 hash algorithm. The key used for the HMAC process is the "use\_base64\_key" value found in your PingID properties file.
+To create the JWS signature, apply Base64URL encoding to the header and payload JSON. After encoding both JSON objects, join these with a period then create a signature of this string using the HMAC with SHA-256 hash algorithm. The key used for the HMAC process is the "use_base64_key" value found in your PingID properties file.
 
 The steps to create the API token are described below:
 
@@ -148,7 +150,7 @@ API request token = [Signed Data] + "." + [Signature]
 
 The following items are used to construct the API request token:
 
-* Signature key (use\_base64\_key from the PingID properties file):
+* Signature key (use_base64_key from the PingID properties file):
 
   ```
     JWC41crr322aUfdckVfJKHvGKNIPyAPGL7rMsTbzHlA=
@@ -254,7 +256,7 @@ We have successfully created Meredith's user in the PingID service and have rece
 
 Therefore in this stage, we need to perform two tasks:
 
-* Create a loop that polls the GetPairingStatus operation at regular intervals to evaluate the pairingStatus value (this value will be "NOT\_CLAIMED" until Meredith has successfully paired her device when it will return "SUCCESS")
+* Create a loop that polls the GetPairingStatus operation at regular intervals to evaluate the pairingStatus value (this value will be "NOT_CLAIMED" until Meredith has successfully paired her device when it will return "SUCCESS")
 
 * Provide the activationCode (292070522701) to Meredith so that she can enter it into her PingID mobile app
 
@@ -274,7 +276,7 @@ The simplest process is just to display the activationCode on screen and instruc
 
 The application can also render a QR code to the user to simplify this process for them. To create the QR code, do the following:
 
-1. Using the activationCode received from the AddUser operation, create a query parameter "act\_code" with the value being the activationCode (i.e. act\_code=292070522701)
+1. Using the activationCode received from the AddUser operation, create a query parameter "act_code" with the value being the activationCode (i.e. act_code=292070522701)
 
 2. Base64 encode this value and append to the QR redirection URL (see [Activation code redirect link for Online Pairing](pid_c_PingIDapiUserManagement.html#activation-code-redirect-link-for-online-pairing)).
 

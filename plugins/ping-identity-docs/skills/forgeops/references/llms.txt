@@ -3,6 +3,105 @@
 > AI agents should consult [Docs for Agents](https://developer.pingidentity.com/build-with-ai/docs-for-agents.md)
 > for guidance on navigating Ping Identity documentation.
 
+## Forgeops 2026.3
+
+- [<code>am</code> and <code>idm</code> images](https://docs.pingidentity.com/forgeops/2026.3/customize/fr-data.md): Manage PingAM and PingIDM static and dynamic configuration, exports, and configuration profiles in ForgeOps
+- [<code>am</code> image](https://docs.pingidentity.com/forgeops/2026.3/customize/am.md): Customize PingAM configuration profiles, build BusyBox images, and redeploy PingAM in ForgeOps
+- [<code>ds</code> image](https://docs.pingidentity.com/forgeops/2026.3/customize/ds.md): Customize PingDS LDAP configuration, schema, and setup scripts, then build and redeploy a custom Docker image in ForgeOps
+- [<code>forgeops</code> repository feature evolution](https://docs.pingidentity.com/forgeops/2026.3/rn/evolution.md): Track ForgeOps releases including new features, deprecation, and removals
+- [<code>idm</code> image](https://docs.pingidentity.com/forgeops/2026.3/customize/idm.md): Customize PingIDM configuration profiles, build BusyBox images, and redeploy PingIDM in ForgeOps
+- [<code>kubectl</code> shell autocompletion](https://docs.pingidentity.com/forgeops/2026.3/troubleshoot/tab-completion.md): Enable kubectl shell autocompletion in Bash or Zsh
+- [<span class="command">dsbackup</span> utility](https://docs.pingidentity.com/forgeops/2026.3/backup/dsbackup.md): Configure DS backups and restores in ForgeOps with the dsbackup utility, cloud storage, scheduled backups, and disaster recovery
+- [<span class="command">forgeops</span> command reference](https://docs.pingidentity.com/forgeops/2026.3/reference/forgeops-cmd-ref.md): Use the `forgeops` command-line tool reference for generating overlays, managing Helm values, deploying components, and building Docker images
+- [About custom images](https://docs.pingidentity.com/forgeops/2026.3/customize/custom-images.md): Build custom Docker images for Ping Advanced Identity Software products configuration in development and production
+- [About ForgeOps benchmarking](https://docs.pingidentity.com/forgeops/2026.3/reference/benchmark/intro.md): Understand sample ForgeOps benchmarking and performance measuring
+- [About ForgeOps deployment monitoring](https://docs.pingidentity.com/forgeops/2026.3/prepare/monitoring/monitoring-intro.md): Install and customize Prometheus, Grafana, and Alertmanager to monitor ForgeOps deployments
+- [About property value substitution](https://docs.pingidentity.com/forgeops/2026.3/customize/value-substitution.md): Configure AM and IDM property value substitution using configuration expressions for environment-specific deployment settings
+- [Access restriction by IP address](https://docs.pingidentity.com/forgeops/2026.3/prepare/security/restrict-access-ip-address.md): Restrict ForgeOps ingress access to worker nodes from specified IP addresses with a CIDR block
+- [Additional setup](https://docs.pingidentity.com/forgeops/2026.3/customize/setup.md): Set up ForgeOps for custom Docker images, including single-instance deployments, registries, repositories, and deployment environments
+- [Alerts](https://docs.pingidentity.com/forgeops/2026.3/prepare/monitoring/alerts.md): Configure Prometheus alerts for ForgeOps deployments with Alertmanager and initial rules
+- [Articles in the <code>forgeops</code> repository](https://docs.pingidentity.com/forgeops/2026.3/reference/how-tos.md): The how-to articles on the `forgeops` GitHub repository describe usage of ForgeOps artifacts in special cases not covered in the ForgeOps documentation
+- [Assess your skill level](https://docs.pingidentity.com/forgeops/2026.3/start/start-here-skills.md): Assess skills required for deploying ForgeOps on Kubernetes
+- [Authentication rate](https://docs.pingidentity.com/forgeops/2026.3/reference/benchmark/authrate.md): Run ForgeOps PingAM REST authentication-rate benchmarks to measure throughput and response times
+- [AWS](https://docs.pingidentity.com/forgeops/2026.3/setup/aws.md): Set up AWS and local tools to deploy ForgeOps on Amazon EKS
+- [Azure](https://docs.pingidentity.com/forgeops/2026.3/setup/azure.md): Set up Azure and local tools to deploy ForgeOps on Azure Kubernetes Service (AKS)
+- [Backup and restore overview](https://docs.pingidentity.com/forgeops/2026.3/backup/overview.md): Plan and set up PingDS directory services backups using volume snapshots, the dsbackup utility, or third-party backup tools
+- [Backup and restore using volume snapshots](https://docs.pingidentity.com/forgeops/2026.3/backup/snapshots.md): Configure Kubernetes volume snapshots to back up and restore PingDS data in ForgeOps, including schedules, full restores, and selective restores
+- [Base Docker images](https://docs.pingidentity.com/forgeops/2026.3/reference/base-docker-images.md): Build custom Docker images from PingAM, PingIDM, PingDS, and PingGateway base images for ForgeOps deployments in production environments
+- [Beyond the docs](https://docs.pingidentity.com/forgeops/2026.3/reference/beyond-the-docs.md): Find supplementary ForgeOps articles beyond the scope of this documentation
+- [Cluster access for multiple AWS users](https://docs.pingidentity.com/forgeops/2026.3/prepare/security/multi-user-access-aws.md): Grant multiple AWS users access to a ForgeOps cluster by editing the Amazon EKS aws-auth configuration map
+- [Consolidated ForgeOps documentation](https://docs.pingidentity.com/forgeops/2026.3/consolidated.md): Consolidated ForgeOps documentation for deploying and customizing the Ping Advanced Identity Software on Kubernetes
+- [Custom Grafana dashboards](https://docs.pingidentity.com/forgeops/2026.3/prepare/monitoring/dashboards.md): Customize, export, and import Grafana dashboards for ForgeOps deployment monitoring
+- [Custom PingGateway image](https://docs.pingidentity.com/forgeops/2026.3/prepare/ig/deploy-custom-ig.md): Build and deploy a custom PingGateway image with ForgeOps routes and customize its PingAM URL
+- [Custom release site](https://docs.pingidentity.com/forgeops/2026.3/reference/releases.md): Create your custom ForgeOps release site
+- [Customization overview](https://docs.pingidentity.com/forgeops/2026.3/customize/overview.md): Customize Ping Advanced Identity Software products Docker images and configuration profiles for development and production deployments
+- [Deploy PingGateway](https://docs.pingidentity.com/forgeops/2026.3/prepare/ig/deploy-default-ig.md): Deploy PingGateway in a ForgeOps environment and verify its proxy routes
+- [Deploy using Helm on GKE, EKS, or AKS](https://docs.pingidentity.com/forgeops/2026.3/deploy/deploy-scenario-helm-cloud.md): Deploy ForgeOps using Helm on GKE, EKS, or AKS, including prerequisites, images, secrets, monitoring, and TLS certificates
+- [Deploy using Helm on minikube](https://docs.pingidentity.com/forgeops/2026.3/deploy/deploy-scenario-helm-local.md): Deploy ForgeOps using Helm on minikube, including prerequisites, images, deployment status, and TLS certificates
+- [Deploy using Kustomize on GKE, EKS, or AKS (Deprecated) <span class="icon gray"><i class="fa fa-alarm-clock"></i></span>](https://docs.pingidentity.com/forgeops/2026.3/deploy/deploy-scenario-kustomize-cloud.md): Deploy ForgeOps using Kustomize on GKE, EKS, or AKS, including prerequisites, images, secrets, monitoring, TLS, and deployment strategies
+- [Deploy using Kustomize on minikube (Deprecated) <span class="icon gray"><i class="fa fa-alarm-clock"></i></span>](https://docs.pingidentity.com/forgeops/2026.3/deploy/deploy-scenario-kustomize-local.md): Deploy ForgeOps using Kustomize on minikube, including prerequisites, images, deployment status, TLS, and alternative strategies
+- [Deployment overview](https://docs.pingidentity.com/forgeops/2026.3/deploy/overview.md): Explore ForgeOps deployments on Kubernetes, understand the deployment workflow, and prepare to deploy the platform in production
+- [DS diagnostic tools](https://docs.pingidentity.com/forgeops/2026.3/troubleshoot/debug-tools.md): Understand PingDS diagnostic tools to inspect and recover PingDS pods
+- [Expanded Kustomize output](https://docs.pingidentity.com/forgeops/2026.3/troubleshoot/kustomize.md): View the expanded Kustomize bases and overlays
+- [ForgeOps architecture](https://docs.pingidentity.com/forgeops/2026.3/deploy/architecture.md): Understand ForgeOps architecture, Kubernetes topology, availability, security, monitoring, replication, and backup
+- [ForgeOps benchmarks](https://docs.pingidentity.com/forgeops/2026.3/reference/benchmark/overview.md): Run lightweight ForgeOps deployment benchmarks to validate performance and plan production load tests
+- [ForgeOps deployment](https://docs.pingidentity.com/forgeops/2026.3/deploy/deploy.md): Choose Helm or Kustomize and deploy ForgeOps on Kubernetes using the appropriate cloud or minikube scenario
+- [ForgeOps deployment monitoring](https://docs.pingidentity.com/forgeops/2026.3/prepare/monitoring/overview.md): Monitor ForgeOps deployments with Prometheus metrics, Alertmanager notifications, and Grafana dashboards
+- [ForgeOps release notes](https://docs.pingidentity.com/forgeops/2026.3/rn/rn.md): Review ForgeOps release notes for new features, bug fixes, documentation updates, limitations, and supported platform changes
+- [ForgeOps release process](https://docs.pingidentity.com/forgeops/2026.3/start/release-process.md): Understand ForgeOps release process
+- [Glossary](https://docs.pingidentity.com/forgeops/2026.3/reference/glossary.md): Define ForgeOps related terms used throughout ForgeOps deployment documentation
+- [Google Cloud](https://docs.pingidentity.com/forgeops/2026.3/setup/google-cloud.md): Set up Google Cloud and local tools to deploy ForgeOps on Google Kubernetes Engine (GKE)
+- [Helm generated secrets](https://docs.pingidentity.com/forgeops/2026.3/prepare/security/helm-gen-sec.md): Use Helm-generated secrets in ForgeOps deployments and preserve secret values across upgrades
+- [Identity Gateway](https://docs.pingidentity.com/forgeops/2026.3/prepare/ig/overview.md): Deploy PingGateway in ForgeOps and choose between default and custom PingGateway images
+- [Ingress](https://docs.pingidentity.com/forgeops/2026.3/reference/ingress.md): Configure an ingress controller, such as Traefik or HAProxy for ForgeOps deployments
+- [Ingress issues](https://docs.pingidentity.com/forgeops/2026.3/troubleshoot/ingress.md): Diagnose Kubernetes ingress issues
+- [Integrate ForgeOps with the PingOne Worker service](https://docs.pingidentity.com/forgeops/2026.3/integration/int-p1-worker.md): Integrate ForgeOps with the PingOne Worker service to use PingOne Protect in authentication journeys on a ForgeOps deployment
+- [Integration use cases](https://docs.pingidentity.com/forgeops/2026.3/integration/overview.md): Integrate ForgeOps with PingOne services such as PingOne Protect and evaluate sample deployment use cases
+- [Kubernetes logs and other diagnostics](https://docs.pingidentity.com/forgeops/2026.3/troubleshoot/pods.md): Use the debug-logs utility to collect ForgeOps logging and other diagnostic information
+- [Legal notices](https://docs.pingidentity.com/forgeops/2026.3/rn/legal.md): Review ForgeOps legal notices
+- [Limitations](https://docs.pingidentity.com/forgeops/2026.3/rn/limitations.md): Review ForgeOps limitations
+- [Migrate from a ForgeOps 7.4 or 7.5 release branch to the 2026.3 tag](https://docs.pingidentity.com/forgeops/2026.3/upgrade/mig-74-75.md): Migrate ForgeOps from a 7.4 or 7.5 release branch to a newer tag
+- [Migrate secrets from secret agent to Helm-generated secrets](https://docs.pingidentity.com/forgeops/2026.3/prepare/security/migrate-helmsec.md): Migrate ForgeOps Helm deployments from secret agent to Helm-generated secrets with the forgeops migrate sa2hs command
+- [Migrate your Kustomize configurations](https://docs.pingidentity.com/forgeops/2026.3/upgrade/migrate-forgeops.md): Migrate ForgeOps Kustomize overlays from legacy releases to the new release
+- [minikube](https://docs.pingidentity.com/forgeops/2026.3/setup/minikube.md): Set up minikube and local tools to deploy ForgeOps on a single-node minikube cluster
+- [minikube hardware resources](https://docs.pingidentity.com/forgeops/2026.3/troubleshoot/minikube.md): Troubleshoot ForgeOps minikube deployments
+- [Monitoring pods](https://docs.pingidentity.com/forgeops/2026.3/prepare/monitoring/pods.md): Monitor Kubernetes pods in a ForgeOps deployment using Prometheus, Grafana, and Alertmanager
+- [Network policies](https://docs.pingidentity.com/forgeops/2026.3/prepare/security/network-policies.md): Configure Kubernetes network policies to restrict ForgeOps pod communication by service, port, namespace, and tier
+- [New security features](https://docs.pingidentity.com/forgeops/2026.3/prepare/security/sec-features.md): Review new ForgeOps security features in the current release
+- [Next steps](https://docs.pingidentity.com/forgeops/2026.3/deploy/next-steps.md): Plan ForgeOps production deployment: validate Kubernetes, PingAM, PingIDM, and PingDS, then prepare customization, monitoring, backup, and security
+- [OAuth 2.0 authorization code flow](https://docs.pingidentity.com/forgeops/2026.3/reference/benchmark/oauth2.md): Run ForgeOps PingAM OAuth 2.0 authorization-code benchmarks to measure authentication, authorization, and token-management performance
+- [Ping RCS Connector](https://docs.pingidentity.com/forgeops/2026.3/integration/rcs-helm-chart.md): Deploy the Ping Remote Connector Server with ForgeOps
+- [Prepare to deploy in production](https://docs.pingidentity.com/forgeops/2026.3/prepare/overview.md): Prepare ForgeOps for production deployment by customizing PingGateway, monitoring, security, and backup features
+- [Quick deployment on minikube](https://docs.pingidentity.com/forgeops/2026.3/quick/quick-set-mini.md): Deploy ForgeOps on minikube for demo or development and access the Ping Advanced Identity Software admin UI
+- [References](https://docs.pingidentity.com/forgeops/2026.3/reference/overview.md): Find ForgeOps reference documentation for custom Docker images, the forgeops command, terminology, and related how-to articles
+- [Remove a ForgeOps deployment](https://docs.pingidentity.com/forgeops/2026.3/deploy/remove.md): Remove ForgeOps deployments from GKE, EKS, AKS, or minikube and delete their Kubernetes clusters
+- [Repositories ](https://docs.pingidentity.com/forgeops/2026.3/start/repositories.md): Understand the content of `forgeops` and `forgeops-extras` GitHub repositories
+- [Resolve prometheus error](https://docs.pingidentity.com/forgeops/2026.3/troubleshoot/monitor.md): Resolve Prometheus error when scraping ForgeOps deployment
+- [Secrets Reference](https://docs.pingidentity.com/forgeops/2026.3/reference/secrets-reference.md): Reference for ForgeOps passwords and Kubernetes secrets
+- [Secrets Rotation](https://docs.pingidentity.com/forgeops/2026.3/prepare/security/secrets-rotation.md): Rotate ForgeOps Kubernetes secrets and passwords with the forgeops rotate command while managing dependent services
+- [Secure HTTP](https://docs.pingidentity.com/forgeops/2026.3/prepare/security/https.md): Secure ForgeOps deployments with TLS ingress, certificate management, trusted certificates, and mkcert
+- [Security](https://docs.pingidentity.com/forgeops/2026.3/prepare/security/overview.md): Configure ForgeOps deployment security with TLS, IP restrictions, Kubernetes network policies, AWS access, and secret management
+- [Setup overview](https://docs.pingidentity.com/forgeops/2026.3/setup/overview.md): Prepare local tools and Kubernetes clusters on Google Cloud, AWS, Azure, or minikube for ForgeOps deployments
+- [Staged installation](https://docs.pingidentity.com/forgeops/2026.3/troubleshoot/staged-deployment.md): Install ForgeOps components in stages to isolate and troubleshoot Kubernetes deployment issues
+- [Start here](https://docs.pingidentity.com/forgeops/2026.3/start/start-here.md): Get started with deploying ForgeOps on Kubernetes
+- [Support for ForgeOps](https://docs.pingidentity.com/forgeops/2026.3/start/support.md): Understand the support coverage, limitations, and reporting procedures for ForgeOps deployments
+- [Test user generation](https://docs.pingidentity.com/forgeops/2026.3/reference/benchmark/testusers.md): Generate and provision test users in PingDS for PingAM authentication and OAuth 2.0 benchmarks on small, medium, or large clusters
+- [The <span class="command">forgeops</span> command](https://docs.pingidentity.com/forgeops/2026.3/reference/forgeops.md): Use the ForgeOps command-line tool to configure deployments, generate Kustomize overlays and Helm values, manage images, and apply changes
+- [The secret agent operator](https://docs.pingidentity.com/forgeops/2026.3/prepare/security/secret-agent.md): Configure the ForgeOps secret agent operator to generate and manage deployment secrets with cloud secret managers
+- [Third-party software](https://docs.pingidentity.com/forgeops/2026.3/start/3rd-party.md): Install third-party software required to deploy ForgeOps on Kubernetes
+- [Third-party software](https://docs.pingidentity.com/forgeops/2026.3/reference/benchmark/sw.md): Install third-party software required to run ForgeOps deployment benchmarks
+- [Third-party software versions](https://docs.pingidentity.com/forgeops/2026.3/troubleshoot/sw-versions.md): Note the tested third-party software versions for ForgeOps deployments
+- [Troubleshooting](https://docs.pingidentity.com/forgeops/2026.3/troubleshoot/overview.md): Understand how to troubleshoot ForgeOps deployments
+- [Troubleshooting the <code>amster</code> pod](https://docs.pingidentity.com/forgeops/2026.3/troubleshoot/amster.md): Troubleshoot the ForgeOps amster pod
+- [UI and API access](https://docs.pingidentity.com/forgeops/2026.3/deploy/access.md): Access ForgeOps deployment UIs and REST APIs, PingDS pods, Grafana dashboards, and Prometheus
+- [Update Helm Chart](https://docs.pingidentity.com/forgeops/2026.3/upgrade/update-helm.md): Update ForgeOps Helm chart versions while preserving customized values.yaml files
+- [Upgrade and Migration Overview](https://docs.pingidentity.com/forgeops/2026.3/upgrade/upgrade-overview.md): Understand upgrade and migration options for ForgeOps deployments
+- [Upgrade Ping Advanced Identity Software Docker image to new patch release](https://docs.pingidentity.com/forgeops/2026.3/upgrade/upgrade-patch.md): Upgrade PingAM, PingIDM, PingDS, and PingGateway images to newer ForgeOps patch releases
+- [Upgrade Ping Advanced Identity Software Docker images to new major or minor version](https://docs.pingidentity.com/forgeops/2026.3/upgrade/upgrade-product.md): Upgrade ForgeOps PingAM, PingIDM, and PingDS Docker images to a new major or minor Ping Advanced Identity Software version
+- [Validated software versions](https://docs.pingidentity.com/forgeops/2026.3/rn/versions.md): Check validated Kubernetes, ingress controller, cert-manager, and ForgeOps operator versions for ForgeOps deployments
+- [Welcome to ForgeOps](https://docs.pingidentity.com/forgeops/2026.3/index.md): ForgeOps hub for setting up, deploying, customizing, securing, backing up, upgrading, and troubleshooting the Ping Advanced Identity Software on Kubernetes
+- [What&#8217;s new in ForgeOps 2026.3](https://docs.pingidentity.com/forgeops/2026.3/start/whats-new.md): Review new ForgeOps features, release changes, supported Ping Advanced Identity Software versions, and deployment updates
+
 ## Forgeops 2026.2
 
 - [<code>am</code> and <code>idm</code> images](https://docs.pingidentity.com/forgeops/2026.2/customize/fr-data.md)

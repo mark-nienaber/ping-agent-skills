@@ -1,12 +1,12 @@
 ---
 title: Company Settings
-description: You can view and modify environment-wide settings in DaVinci.
+description: Configure PingOne DaVinci company settings, including environment name, custom domain, debug logging, and multiple flow execution behavior.
 component: davinci
 page_id: davinci:company_settings:davinci_company_settings
-canonical_url: http://docs.pingidentity.com/davinci/company_settings/davinci_company_settings.html
-llms_txt: http://docs.pingidentity.com/davinci/llms.txt
+canonical_url: https://docs.pingidentity.com/davinci/company_settings/davinci_company_settings.html
+llms_txt: https://docs.pingidentity.com/davinci/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: May 6, 2024
+revdate: 2026-03-26
 section_ids:
   viewing-company-information: Viewing company information
   changing-the-environment-name: Changing the environment name

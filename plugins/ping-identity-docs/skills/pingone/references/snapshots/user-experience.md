@@ -1,12 +1,12 @@
 ---
 title: Adding a custom key for DaVinci
-description: Create custom key-value pairs that provide translatable text for various user-facing pages in PingOne DaVinci.
+description: Create custom key-value pairs in PingOne to provide translatable text for DaVinci user-facing pages.
 component: pingone
 page_id: pingone:user_experience:p1_adding_custom_key_davinci
 canonical_url: https://docs.pingidentity.com/pingone/user_experience/p1_adding_custom_key_davinci.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: Ocobter 9, 2024
+revdate: July 18, 2026
 section_ids:
   steps: Steps
 ---
@@ -61,13 +61,13 @@ To add a custom key:
 
 ---
 title: Adding a language
-description: Use the Languages page to add a language to your PingOne environment.
+description: Add a language to a PingOne environment to support localized user-facing content in notifications, agreements, and forms.
 component: pingone
 page_id: pingone:user_experience:p1_add_a_language
 canonical_url: https://docs.pingidentity.com/pingone/user_experience/p1_add_a_language.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: November 8, 2023
+revdate: July 18, 2026
 page_aliases: ["p1_enable_a_language.adoc"]
 section_ids:
   steps: Steps
@@ -106,13 +106,13 @@ Use the **Languages** page to add a language to your PingOne environment.
 
 ---
 title: Adding a language to an agreement
-description: After you've created an agreement, add localized content to the agreement. If the content has already been added to the agreement, you can skip this step. One agreement can consist of multiple language versions of the agreement.
+description: Add a localized language version to an existing PingOne agreement to support multi-language consent flows.
 component: pingone
 page_id: pingone:user_experience:p1_add_language_to_an_agreement
 canonical_url: https://docs.pingidentity.com/pingone/user_experience/p1_add_language_to_an_agreement.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: November 8, 2023
+revdate: July 18, 2026
 section_ids:
   steps: Steps
   result: Result:
@@ -149,13 +149,13 @@ After you've created an agreement, add localized content to the agreement. If th
 
 ---
 title: Adding a notification template
-description: Add a notification template in PingOne.
+description: Add a notification template in PingOne by selecting a notification type and customizing it for your organization.
 component: pingone
 page_id: pingone:user_experience:p1_add_notification
 canonical_url: https://docs.pingidentity.com/pingone/user_experience/p1_add_notification.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: November 8, 2023
+revdate: July 18, 2026
 section_ids:
   steps: Steps
   result: Result
@@ -189,6 +189,12 @@ To add a notification template, you'll select a default notification template an
         |   |                                                                                                                        |
         | - | ---------------------------------------------------------------------------------------------------------------------- |
         |   | The **Account Created** notification template is used only for accounts created as a result of a PingOne DaVinci flow. |
+
+      * **Account Updated**
+
+        |   |                                                                                                                        |
+        | - | ---------------------------------------------------------------------------------------------------------------------- |
+        |   | The **Account Updated** notification template is used only for accounts updated as a result of a PingOne DaVinci flow. |
 
       * **Credential Issued**
 
@@ -240,13 +246,13 @@ Edit the notification template as needed. Learn more in [Editing a notification 
 
 ---
 title: Adding a theme
-description: Use the Branding and Themes page to add a theme to the current PingOne environment.
+description: Add a branding theme to a PingOne environment by selecting a base theme and customizing colors, images, and styles.
 component: pingone
 page_id: pingone:user_experience:p1_add_theme
 canonical_url: https://docs.pingidentity.com/pingone/user_experience/p1_add_theme.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: April 11, 2025
+revdate: July 18, 2026
 section_ids:
   steps: Steps
   next-steps: Next steps
@@ -617,13 +623,13 @@ PingOne delivers several built-in themes. Use the **Branding and Themes** page t
 
 ---
 title: Adding an agreement
-description: Use the Agreements page to create a new agreement. You can use agreements to prompt your users to consent to various policies. Learn more in Authentication policies.
+description: Create a new agreement in PingOne to prompt users to consent to policies, with options for reconsent frequency.
 component: pingone
 page_id: pingone:user_experience:p1_add_an_agreement
 canonical_url: https://docs.pingidentity.com/pingone/user_experience/p1_add_an_agreement.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: November 8, 2023
+revdate: July 18, 2026
 section_ids:
   steps: Steps
   result: Result
@@ -662,13 +668,13 @@ The agreement is created and added to the **Agreements** list.
 
 ---
 title: Adding the agreement to the authentication policy
-description: To start gathering consents from end users, add the agreement to the appropriate authentication policy.
+description: Add a terms of service agreement step to a PingOne authentication policy to prompt users to consent.
 component: pingone
 page_id: pingone:user_experience:p1_add_agreement_to_authentication_policy
 canonical_url: https://docs.pingidentity.com/pingone/user_experience/p1_add_agreement_to_authentication_policy.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: November 8, 2023
+revdate: July 18, 2026
 section_ids:
   steps: Steps
 ---
@@ -699,13 +705,13 @@ To start gathering consents from end users, add the agreement to the appropriate
 
 ---
 title: Agreements
-description: You can require end users to consent to an agreement that is part of a sign-on policy in PingOne.
+description: Introduction to agreements in PingOne, which are used to require users to consent to policies as part of a sign-on policy.
 component: pingone
 page_id: pingone:user_experience:p1_agreements
 canonical_url: https://docs.pingidentity.com/pingone/user_experience/p1_agreements.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: May 17, 2024
+revdate: July 18, 2026
 ---
 
 # Agreements
@@ -722,13 +728,13 @@ For the localized agreement text, you can use any UTF-8 characters up to a maxim
 
 ---
 title: Auditing for agreement consents
-description: You can run an audit report to see more information about agreements, such as when an agreement was accepted or revoked. You can also use the User details page to see a user's consent history. Learn more in Viewing the consent history for a specific user.
+description: Run a PingOne audit report to view agreement consent events, including when agreements were accepted or revoked by users.
 component: pingone
 page_id: pingone:user_experience:p1_audit_agreements
 canonical_url: https://docs.pingidentity.com/pingone/user_experience/p1_audit_agreements.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: November 8, 2023
+revdate: July 18, 2026
 section_ids:
   steps: Steps
 ---
@@ -759,20 +765,20 @@ You can run an audit report to see more information about agreements, such as wh
 
 ---
 title: Branding and Themes
-description: "Use the Branding and Themes page in PingOne to quickly define a set of colors and images to best match your company's branding."
+description: "An introduction to branding and themes in PingOne which are used to define colors, images, and styles to match your company's branding across end-user pages."
 component: pingone
 page_id: pingone:user_experience:p1_branding_themes
 canonical_url: https://docs.pingidentity.com/pingone/user_experience/p1_branding_themes.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: April 23, 2025
+revdate: July 18, 2026
 section_ids:
   learn-more: Learn more
 ---
 
 # Branding and Themes
 
-Use branding themes to quickly define a set of colors and images to best match your company's branding and easily change the look of standard authentication policy forms, the application portal, the self-service portal, PingOne forms, and identity verification pages for a particular environment.
+Use themes to quickly define a set of colors and images to best match your company's branding and easily change the look of standard authentication policy forms, the application portal, the self-service portal, PingOne forms, and identity verification pages for a particular environment.
 
 ## Learn more
 
@@ -798,13 +804,13 @@ Use branding themes to quickly define a set of colors and images to best match y
 
 ---
 title: Changing the default language
-description: Use the Languages page in PingOne to change the default language.
+description: Change the default language for a PingOne environment.
 component: pingone
 page_id: pingone:user_experience:p1_change_default_language
 canonical_url: https://docs.pingidentity.com/pingone/user_experience/p1_change_default_language.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: November 8, 2023
+revdate: July 18, 2026
 section_ids:
   steps: Steps
 ---
@@ -831,13 +837,13 @@ The default language is the language that most users of your applications will s
 
 ---
 title: Cloning a theme
-description: Clone a PingOne theme to test the effect of theme changes without immediately deploying the changes to end users.
+description: Clone a PingOne branding theme to test changes in isolation before deploying to end users, preserving the original theme ID.
 component: pingone
 page_id: pingone:user_experience:p1_themes_cloning
 canonical_url: https://docs.pingidentity.com/pingone/user_experience/p1_themes_cloning.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: November 21, 2025
+revdate: July 18, 2026
 section_ids:
   steps: Steps
   result: Result
@@ -867,13 +873,13 @@ The **Clone Theme** option is available for legacy and new themes.
 
 ---
 title: Configuring a registration form
-description: You can use forms created in User Experience > Forms to allow users to register and sign terms and conditions configured in User Experience > Agreements. You can find more information on configuring agreements for use in forms in Agreements.
+description: Create a PingOne registration form that includes agreements for users to sign terms and conditions.
 component: pingone
 page_id: pingone:user_experience:p1_configuring_registration_form
 canonical_url: https://docs.pingidentity.com/pingone/user_experience/p1_configuring_registration_form.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: April 3, 2025
+revdate: July 18, 2026
 section_ids:
   steps: Steps
   result: Result
@@ -903,13 +909,13 @@ You can now use the form in your DaVinci flow with the [Form connector](https://
 
 ---
 title: Configuring a sign-on form
-description: You can use forms created in User Experience > Forms to allow users to sign on with credentials, social login providers, or a magic link.
+description: Create PingOne sign-on forms for credential, social login, or magic link authentication in DaVinci flows.
 component: pingone
 page_id: pingone:user_experience:p1_configuring_sign_on_form
 canonical_url: https://docs.pingidentity.com/pingone/user_experience/p1_configuring_sign_on_form.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: April 3, 2025
+revdate: July 18, 2026
 section_ids:
   creating-a-sign-on-form-with-username-and-password: Creating a sign-on form with username and password
   steps: Steps
@@ -1016,13 +1022,128 @@ To configure a sign-on form with magic link:
 
 ---
 title: Configuring an MFA form
-description: You can use forms created in User Experience > Forms to allow users to register and authenticate with multi-factor authentication (MFA), by one-time passcode (OTP), FIDO2, or an authenticator app.
+description: Configure PingOne Forms components to show or hide based on Boolean values from a DaVinci flow for modular, conditional user experiences.
+component: pingone
+page_id: pingone:user_experience:p1_configuring_conditional_component_visibility
+canonical_url: https://docs.pingidentity.com/pingone/user_experience/p1_configuring_conditional_component_visibility.html
+llms_txt: https://docs.pingidentity.com/pingone/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: July 18, 2026
+section_ids:
+  steps: Steps
+  use-case-reusing-one-form-for-multiple-scenarios: "Use case: Reusing one form for multiple scenarios"
+  steps-2: Steps
+---
+
+# Configuring an MFA form
+
+You can configure components so that they're shown or hidden in a user-facing form based on one or more Boolean values pulled from your DaVinci flow.
+
+|   |                                                                                                                                                                                                       |
+| - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | The following components don't have visibility controls:- **Submit button**
+
+- **MFA Device Selection - Authentication**
+
+- **MFA Device Selection - Registration**
+
+- **FIDO2**
+
+- **Error Display** |
+
+## Steps
+
+To configure conditional component visibility:
+
+1. In the PingOne admin console, go to **User Experience > Forms**.
+
+2. Click the **Pencil** ([icon: pencil, set=fa]) icon next to the form to configure.
+
+3. Select a component in the form builder.
+
+4. In the **Visibility Type** list, select whether the component is always visible, shown by default, or hidden by default.
+
+5. (Optional) Change the default **Visibility Key**. You'll need this key for the PingOne Form connector's **Component Visibility** field.
+
+6. Click **Save**.
+
+7. Configure conditional component visibility in the [Form connector](https://docs.pingidentity.com/connectors/form_connector.html).
+
+   1. In your DaVinci flow, add the PingOne Form connector.
+
+   2. Select the **Show Form** capability.
+
+   3. In the **Form** list, select the form you configured with conditional component visibility in your PingOne admin console.
+
+   4. In the **Component Visibility** field, you can populate the **Value** for the key associated with each component that was either **Hidden by default** or **Shown by default** when you created the form.
+
+   5. For each **Key**, select a variable from your flow that will act as a Boolean to show or hide the components associated with the key.
+
+8. Click **Apply**.
+
+## Use case: Reusing one form for multiple scenarios
+
+In this example, we'll build an one-time passcode (OTP) *(tooltip: \<div class="paragraph">
+\<p>A passcode valid for only one sign-on or transaction on a computer system or other digital device. Also known as a one-time password, one-time PIN, or dynamic password.\</p>
+\</div>)* prompt form for registration that will allow a user to register with either an email or an SMS.
+
+## Steps
+
+1. In the PingOne admin console, go to **User Experience > Forms**.
+
+2. Click the **[icon: plus, set=fa]**icon.
+
+3. Enter a form name and optional description and click **Add Form**.
+
+4. Select **Email OTP Prompt - Registration**.
+
+5. On the **Fields** and **Toolbox** tabs, customize the form to include components for an SMS OTP prompt for registration:
+
+   ![Form configured in the form builder with components for both email and SMS OTP registration.](_images/p1-forms-conditional-components.png)
+
+6. To make the user-facing form a conditional form that shows an OTP form for email by default but can also be an SMS OTP form based on Boolean values in the DaVinci flow:
+
+   1. Click the **Rich Text** heading component for email in the form builder.
+
+   2. In the configuration panel, set the **Visibility Type** to **Show by default**.
+
+   3. (Optional) Change the **Visibility Key** to something meaningful, such as `otpEmail`.
+
+      |   |                                                                                                                                                           |
+      | - | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+      |   | This key doesn't need to be unique because multiple components can share the same **Visibility Key**, allowing you to show or hide a group of components. |
+
+   4. Repeat for the **Rich Text** description and **Email Address** components, ensuring the **Visibility Key** is `otpEmail` so the components are grouped for visibility.
+
+   5. Repeat these steps for the SMS OTP form components, but set the **Visibility** to **Hide by default** and create a shared **Visibility Key**, such as `otpText`.
+
+7. Click **Save**.
+
+8. Configure conditional component visibility in the Form connector.
+
+   1. In your DaVinci flow, add the PingOne Form connector.
+
+   2. Select the **Show Form** capability.
+
+   3. In the **Form** list, select the form you configured with conditional component visibility in your PingOne admin console.
+
+   4. In the **Component Visibility** field, you can populate the **Value** for the key associated with each component that was either **Hidden by default** or **Shown by default** when you created the form.
+
+   5. For each **Key**, select a variable from your flow that will act as a Boolean to show or hide the components associated with the key.
+
+9. Click **Apply**.
+
+---
+
+---
+title: Configuring an MFA form
+description: Create MFA forms in PingOne Forms for OTP, FIDO2, and authenticator app registration and authentication flows.
 component: pingone
 page_id: pingone:user_experience:p1_configuring_mfa_form
 canonical_url: https://docs.pingidentity.com/pingone/user_experience/p1_configuring_mfa_form.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: April 3, 2025
+revdate: July 18, 2026
 section_ids:
   creating-an-mfa-form-with-otp: Creating an MFA form with OTP
   steps: Steps
@@ -1155,129 +1276,14 @@ You can now use the form in your DaVinci flow with the [Form connector](https://
 ---
 
 ---
-title: Configuring conditional component visibility
-description: Configure PingOne forms to show or hide components so that a form can be more modular with conditional component visibility.
-component: pingone
-page_id: pingone:user_experience:p1_configuring_conditional_component_visibility
-canonical_url: https://docs.pingidentity.com/pingone/user_experience/p1_configuring_conditional_component_visibility.html
-llms_txt: https://docs.pingidentity.com/pingone/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: May 19, 2026
-section_ids:
-  steps: Steps
-  use-case-reusing-one-form-for-multiple-scenarios: "Use case: Reusing one form for multiple scenarios"
-  steps-2: Steps
----
-
-# Configuring conditional component visibility
-
-You can configure components so that they're shown or hidden in a user-facing form based on one or more Boolean values pulled from your DaVinci flow.
-
-|   |                                                                                                                                                                                                       |
-| - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | The following components don't have visibility controls:- **Submit button**
-
-- **MFA Device Selection - Authentication**
-
-- **MFA Device Selection - Registration**
-
-- **FIDO2**
-
-- **Error Display** |
-
-## Steps
-
-To configure conditional component visibility:
-
-1. In the PingOne admin console, go to **User Experience > Forms**.
-
-2. Click the **Pencil** ([icon: pencil, set=fa]) icon next to the form to configure.
-
-3. Select a component in the form builder.
-
-4. In the **Visibility Type** list, select whether the component is always visible, shown by default, or hidden by default.
-
-5. (Optional) Change the default **Visibility Key**. You'll need this key for the PingOne Form connector's **Component Visibility** field.
-
-6. Click **Save**.
-
-7. Configure conditional component visibility in the [Form connector](https://docs.pingidentity.com/connectors/form_connector.html).
-
-   1. In your DaVinci flow, add the PingOne Form connector.
-
-   2. Select the **Show Form** capability.
-
-   3. In the **Form** list, select the form you configured with conditional component visibility in your PingOne admin console.
-
-   4. In the **Component Visibility** field, you can populate the **Value** for the key associated with each component that was either **Hidden by default** or **Shown by default** when you created the form.
-
-   5. For each **Key**, select a variable from your flow that will act as a Boolean to show or hide the components associated with the key.
-
-8. Click **Apply**.
-
-## Use case: Reusing one form for multiple scenarios
-
-In this example, we'll build an one-time passcode (OTP) *(tooltip: \<div class="paragraph">
-\<p>A passcode valid for only one sign-on or transaction on a computer system or other digital device. Also known as a one-time password, one-time PIN, or dynamic password.\</p>
-\</div>)* prompt form for registration that will allow a user to register with either an email or an SMS.
-
-## Steps
-
-1. In the PingOne admin console, go to **User Experience > Forms**.
-
-2. Click the **[icon: plus, set=fa]**icon.
-
-3. Enter a form name and optional description and click **Add Form**.
-
-4. Select **Email OTP Prompt - Registration**.
-
-5. On the **Fields** and **Toolbox** tabs, customize the form to include components for an SMS OTP prompt for registration:
-
-   ![Form configured in the form builder with components for both email and SMS OTP registration.](_images/p1-forms-conditional-components.png)
-
-6. To make the user-facing form a conditional form that shows an OTP form for email by default but can also be an SMS OTP form based on Boolean values in the DaVinci flow:
-
-   1. Click the **Rich Text** heading component for email in the form builder.
-
-   2. In the configuration panel, set the **Visibility Type** to **Show by default**.
-
-   3. (Optional) Change the **Visibility Key** to something meaningful, such as `otpEmail`.
-
-      |   |                                                                                                                                                           |
-      | - | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
-      |   | This key doesn't need to be unique because multiple components can share the same **Visibility Key**, allowing you to show or hide a group of components. |
-
-   4. Repeat for the **Rich Text** description and **Email Address** components, ensuring the **Visibility Key** is `otpEmail` so the components are grouped for visibility.
-
-   5. Repeat these steps for the SMS OTP form components, but set the **Visibility** to **Hide by default** and create a shared **Visibility Key**, such as `otpText`.
-
-7. Click **Save**.
-
-8. Configure conditional component visibility in the Form connector.
-
-   1. In your DaVinci flow, add the PingOne Form connector.
-
-   2. Select the **Show Form** capability.
-
-   3. In the **Form** list, select the form you configured with conditional component visibility in your PingOne admin console.
-
-   4. In the **Component Visibility** field, you can populate the **Value** for the key associated with each component that was either **Hidden by default** or **Shown by default** when you created the form.
-
-   5. For each **Key**, select a variable from your flow that will act as a Boolean to show or hide the components associated with the key.
-
-9. Click **Apply**.
-
----
-
----
 title: Configuring localized content
-description: Use the Agreements, Notification Templates, and Forms pages to set up localized content for each language.
+description: Set up localized content in PingOne for agreements, notification templates, and forms for each supported language.
 component: pingone
 page_id: pingone:user_experience:p1_configure_localized_content
 canonical_url: https://docs.pingidentity.com/pingone/user_experience/p1_configure_localized_content.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: August 16, 2024
+revdate: July 18, 2026
 section_ids:
   steps: Steps
   next-steps: Next steps
@@ -1303,13 +1309,13 @@ Make sure that the appropriate language is enabled for that language to appear i
 
 ---
 title: Configuring the Self Service portal end-user experience
-description: Configure what information appears to the end user in PingOne Self Service.
+description: Configure what end users can view and manage in the PingOne Self-Service MyAccount portal, including profile, password, and session options.
 component: pingone
 page_id: pingone:user_experience:p1_configure_self_service
 canonical_url: https://docs.pingidentity.com/pingone/user_experience/p1_configure_self_service.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: May 22, 2025
+revdate: July 18, 2026
 section_ids:
   steps: Steps
 ---
@@ -1363,13 +1369,13 @@ You can configure what information appears to end users in **Self Service**, als
 
 ---
 title: Creating a form
-description: Creating a form in PingOne allows you to provide branded user experiences through custom forms without writing custom HTML. You can quickly implement these forms in DaVinci with the Form connector. After you create a form in User Experience > Forms, using either a blank form or a form template, you can customize your form. Learn more in Form configuration.
+description: Create a branded, localized form in PingOne Forms using a blank form or template, then add it to a DaVinci flow.
 component: pingone
 page_id: pingone:user_experience:p1_creating_form
 canonical_url: https://docs.pingidentity.com/pingone/user_experience/p1_creating_form.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: April 3, 2025
+revdate: July 18, 2026
 section_ids:
   steps: Steps
   result: Result:
@@ -1421,13 +1427,13 @@ In this example, you create a form using a template that's set up for your own b
 
 ---
 title: Creating localized content
-description: After you add a language version to an agreement, you can enter the localized text that makes up the agreement. Each time you modify the localized agreement content, the revision number is incremented. You configure each new revision to require re-consent, if needed.
+description: Enter localized agreement text in PingOne, including format, acceptance labels, effective date, and re-consent settings.
 component: pingone
 page_id: pingone:user_experience:p1_create_localized_content
 canonical_url: https://docs.pingidentity.com/pingone/user_experience/p1_create_localized_content.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: January 24, 2025
+revdate: July 18, 2026
 section_ids:
   steps: Steps
   next-steps: Next steps

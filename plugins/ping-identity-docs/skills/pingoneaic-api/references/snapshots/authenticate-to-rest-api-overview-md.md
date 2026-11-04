@@ -4,6 +4,8 @@ description: The Advanced Identity Cloud REST API has two different authenticati
 component: pingoneaic-api
 page_id: pingoneaic-api::authenticate-to-rest-api-overview
 canonical_url: https://developer.pingidentity.com/pingoneaic-api/authenticate-to-rest-api-overview.html
+llms_txt: https://developer.pingidentity.com/pingoneaic-api/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 keywords: ["Integration", "REST API", "Authentication"]
 section_ids:
   summary-of-authentication-methods: Summary of authentication methods

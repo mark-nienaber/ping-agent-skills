@@ -1,9 +1,11 @@
 ---
 title: "Example: PingID FIDO passwordless Authentication"
-description: "The examples on this page present the steps comprising passwordless authentication flows, with configurations where application policies are evaluated (when the admin has configured enforcePolicy = \"true\"), and without policy evaluation (when the admin has configured enforcePolicy = \"false\")."
+description: Example of PingID FIDO passwordless authentication
 component: pingid-api
 page_id: pingid-api::pid_c_PingIDapiExamplePasswordless
 canonical_url: https://developer.pingidentity.com/pingid-api/pid_c_PingIDapiExamplePasswordless.html
+llms_txt: https://developer.pingidentity.com/pingid-api/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
   overview: Overview
   fido-passwordless-authentication-flow: FIDO passwordless authentication flow

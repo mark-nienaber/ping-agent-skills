@@ -1,9 +1,11 @@
 ---
 title: "Example: PingID FIDO biometrics"
-description: The examples on this page present the steps comprising the following FIDO biometrics flows:
+description: Example of FIDO biometrics pairing and authentication
 component: pingid-api
 page_id: pingid-api::pid_c_PingIDapiExampleFIDObiometrics
 canonical_url: https://developer.pingidentity.com/pingid-api/pid_c_PingIDapiExampleFIDObiometrics.html
+llms_txt: https://developer.pingidentity.com/pingid-api/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
   overview: Overview
   fido-biometrics-pairing-flow: FIDO biometrics pairing flow

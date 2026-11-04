@@ -6,13 +6,13 @@ license: MIT
 
 # Ping Platform
 
-Ping Platform documentation is indexed in the bundled llms.txt and live Ping Markdown pages.
+Prompts users to accept the active terms and conditions during registration or sign-on journeys in PingAM.
 
 ## Live source of truth
 
 - Product docs: https://docs.pingidentity.com/platform/
 - llms.txt index: https://docs.pingidentity.com/platform/llms.txt
-- Snapshot version: 8
+- Snapshot version: 8.1
 - Snapshot manifest: references/MANIFEST.md
 
 ## Retrieval strategy
@@ -27,9 +27,9 @@ Ping Platform documentation is indexed in the bundled llms.txt and live Ping Mar
 
 | Task category | Guide slug | Live URL pattern | Snapshot |
 |---|---|---|---|
-| Sample Setup: set, customization, deployment | sample-setup | https://docs.pingidentity.com/platform/8/sample-setup/*.md | references/snapshots/sample-setup.md |
-| Platform Guide: edge, hsm, overview | platform-guide | https://docs.pingidentity.com/platform/8/platform-guide/*.md | references/snapshots/platform-guide.md |
-| Release Notes: notes, release | release-notes | https://docs.pingidentity.com/platform/8/release-notes/*.md | references/snapshots/release-notes.md |
+| Sample Setup: set, customization, deployment | sample-setup | https://docs.pingidentity.com/platform/8.1/sample-setup/*.md | references/snapshots/sample-setup.md |
+| Platform Guide: edge, hsm, overview | platform-guide | https://docs.pingidentity.com/platform/8.1/platform-guide/*.md | references/snapshots/platform-guide.md |
+| Release Notes: notes, release | release-notes | https://docs.pingidentity.com/platform/8.1/release-notes/*.md | references/snapshots/release-notes.md |
 
 ## Composition
 

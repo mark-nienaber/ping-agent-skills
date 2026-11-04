@@ -1,13 +1,13 @@
 ---
 title: Advanced HTTP event logging
-description: The PingAuthorize Server provides advanced HTTP event logging through the file-based trace logger to help diagnose slowdowns in HTTP request processing.
+description: Configure advanced HTTP event logging in the PingAuthorize Server to trace the full HTTP request lifecycle and diagnose performance slowdowns.
 component: pingauthorize
 version: 11.1
 page_id: pingauthorize:troubleshooting_pingauthorize_server:paz_advanced_http_logging_monitoring
 canonical_url: https://docs.pingidentity.com/pingauthorize/11.1/troubleshooting_pingauthorize_server/paz_advanced_http_logging_monitoring.html
 llms_txt: https://docs.pingidentity.com/pingauthorize/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: June 26, 2026
+revdate: 2026-08-06T00:00:00Z
 section_ids:
   http-request-lifecycle: HTTP request lifecycle
   enabling-http-event-logging: Enabling HTTP event logging
@@ -161,14 +161,14 @@ By default, the file-based trace logger writes messages to the `logs/trace.log` 
 
 ---
 title: Common problems and potential solutions
-description: This section describes a number of different types of problems that can occur and common potential causes for them.
+description: Review common PingAuthorize Server problems and their potential solutions.
 component: pingauthorize
 version: 11.1
 page_id: pingauthorize:troubleshooting_pingauthorize_server:paz_common_probs_potential_sols
 canonical_url: https://docs.pingidentity.com/pingauthorize/11.1/troubleshooting_pingauthorize_server/paz_common_probs_potential_sols.html
 llms_txt: https://docs.pingidentity.com/pingauthorize/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: August 22, 2023
+revdate: 2026-08-05T00:00:00Z
 ---
 
 # Common problems and potential solutions
@@ -179,14 +179,14 @@ This section describes a number of different types of problems that can occur an
 
 ---
 title: Conditions for automatic server shutdown
-description: All PingAuthorize Server instances will shut down in an out-of-memory condition, a low-disk-space error state, or if they run out of file descriptors.
+description: Review a list of conditions that trigger the PingAuthorize Server to shut down automatically.
 component: pingauthorize
 version: 11.1
 page_id: pingauthorize:troubleshooting_pingauthorize_server:paz_conditions_auto_server_shutdown
 canonical_url: https://docs.pingidentity.com/pingauthorize/11.1/troubleshooting_pingauthorize_server/paz_conditions_auto_server_shutdown.html
 llms_txt: https://docs.pingidentity.com/pingauthorize/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: August 24, 2023
+revdate: 2026-08-05T00:00:00Z
 ---
 
 # Conditions for automatic server shutdown
@@ -204,14 +204,14 @@ $ dsconfig set-global-configuration-prop \
 
 ---
 title: Detecting expensive HTTP threads
-description: The HTTP Connection Handler can detect expensive threads that spend an unusually long time processing HTTP requests.
+description: Configure the PingAuthorize Server to detect expensive HTTP threads and generate thread dumps to help diagnose performance bottlenecks.
 component: pingauthorize
 version: 11.1
 page_id: pingauthorize:troubleshooting_pingauthorize_server:paz_detecting_expensive_threads
 canonical_url: https://docs.pingidentity.com/pingauthorize/11.1/troubleshooting_pingauthorize_server/paz_detecting_expensive_threads.html
 llms_txt: https://docs.pingidentity.com/pingauthorize/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: June 25, 2025
+revdate: 2026-08-05T00:00:00Z
 section_ids:
   how-it-works: How it works
   configuring-expensive-thread-detection: Configuring expensive thread detection
@@ -355,14 +355,14 @@ In a containerized deployment, make sure a mechanism is in place, such as a volu
 
 ---
 title: General troubleshooting methodology
-description: When you detect a problem, use the following general methodology to isolate the problem.
+description: Troubleshoot the PingAuthorize Server using logs, system commands, the periodic stats logger, and the status and collect-support-data tools.
 component: pingauthorize
 version: 11.1
 page_id: pingauthorize:troubleshooting_pingauthorize_server:paz_general_troubleshoot_method
 canonical_url: https://docs.pingidentity.com/pingauthorize/11.1/troubleshooting_pingauthorize_server/paz_general_troubleshoot_method.html
 llms_txt: https://docs.pingidentity.com/pingauthorize/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: August 22, 2023
+revdate: 2026-08-05T00:00:00Z
 ---
 
 # General troubleshooting methodology
@@ -395,14 +395,14 @@ When you detect a problem, use the following general methodology to isolate the 
 
 ---
 title: Java diagnostic information
-description: In addition to the tools listed in the previous section, the JVM can provide additional diagnostic information in response to certain events.
+description: Access JVM diagnostic information from the PingAuthorize Server, including crash dump files.
 component: pingauthorize
 version: 11.1
 page_id: pingauthorize:troubleshooting_pingauthorize_server:paz_java_diagnostic_info
 canonical_url: https://docs.pingidentity.com/pingauthorize/11.1/troubleshooting_pingauthorize_server/paz_java_diagnostic_info.html
 llms_txt: https://docs.pingidentity.com/pingauthorize/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: April 28, 2025
+revdate: 2026-08-05T00:00:00Z
 section_ids:
   jvm-crash-diagnostic-information: JVM crash diagnostic information
 ---
@@ -419,14 +419,14 @@ If the JVM crashes, then it generates a fatal error log with information about t
 
 ---
 title: Java troubleshooting tools
-description: The Java Development Kit provides a number of tools for obtaining information about Java applications and diagnosing problems. These tools are not included with the Java Runtime Environment, so the full Java Development Environment should always be installed and used to run the server.
+description: Use Java Development Kit tools such as jps, jstack, jmap, jhat, and jstat to troubleshoot Java applications.
 component: pingauthorize
 version: 11.1
 page_id: pingauthorize:troubleshooting_pingauthorize_server:paz_java_troubleshoot_tools
 canonical_url: https://docs.pingidentity.com/pingauthorize/11.1/troubleshooting_pingauthorize_server/paz_java_troubleshoot_tools.html
 llms_txt: https://docs.pingidentity.com/pingauthorize/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: April 28, 2025
+revdate: 2026-08-05T00:00:00Z
 section_ids:
   jps: jps
   jstack: jstack
@@ -562,14 +562,14 @@ The *\<interval>* option specifies the length of time in milliseconds between li
 
 ---
 title: PingAuthorize Server logs for troubleshooting and monitoring
-description: PingAuthorize Server has a comprehensive default set of log files and monitor entries that are useful when troubleshooting a particular server problem.
+description: Use the PingAuthorize Server logs and monitor entries to troubleshoot problems.
 component: pingauthorize
 version: 11.1
 page_id: pingauthorize:troubleshooting_pingauthorize_server:paz_dir_server_troubleshoot_info
 canonical_url: https://docs.pingidentity.com/pingauthorize/11.1/troubleshooting_pingauthorize_server/paz_dir_server_troubleshoot_info.html
 llms_txt: https://docs.pingidentity.com/pingauthorize/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: April 28, 2025
+revdate: 2026-08-05T00:00:00Z
 section_ids:
   error-log: Error log
   server-out-log: server.out log
@@ -704,56 +704,37 @@ Many of the administrative tools provided with the server (for example, `import-
 ---
 
 ---
-title: Problems with the administrative console
-description: To troubleshoot problems with the administrative console, consider these potential causes:
+title: Problems with the admin console
+description: Troubleshoot problems with the PingAuthorize Server admin console, including startup failures and authentication errors.
 component: pingauthorize
 version: 11.1
 page_id: pingauthorize:troubleshooting_pingauthorize_server:paz_problems_admin_console
 canonical_url: https://docs.pingidentity.com/pingauthorize/11.1/troubleshooting_pingauthorize_server/paz_problems_admin_console.html
 llms_txt: https://docs.pingidentity.com/pingauthorize/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: April 28, 2025
-section_ids:
-  jvm-memory-issues: JVM memory issues
+revdate: 2026-08-05T00:00:00Z
 ---
 
-# Problems with the administrative console
+# Problems with the admin console
 
-To troubleshoot problems with the administrative console, consider these potential causes:
+To troubleshoot problems with the admin console, consider these potential causes:
 
-* The web application container used to host the console is not running. If an error occurs while trying to start it, then consult the logs for the web application container.
+* The web application container used to host the console isn't running. If an error occurs while trying to start it, consult the logs for the web application container.
 
-* If a problem occurs while trying to authenticate to the web application container, then make sure that the target PingAuthorize Server is online. If it is online, then the access log may provide information about the reasons for the authentication failure.
-
-## JVM memory issues
-
-For servers running Java 7 and hosting web applications like the administrative console, an inadequate **PermSize** setting might cause an `OutOfMemoryError` related to `PermGen space`, as shown in the following error log example:
-
-```
-[02/Mar/2016:07:50:27.017 -0600] threadID=2 category=UTIL
-    severity=SEVERE_ERROR msgID=-1 msg="The server experienced an unexpected
-    error. Please report this problem and include this log file.
-    OutOfMemoryError: PermGen space
-    ()\ncom.unboundid.directory.server.core.DirectoryServer.uncaughtException
-    (DirectoryServer.java:15783)\njava.lang.ThreadGroup.uncaughtException
-    (ThreadGroup.java:1057)\njava.lang.ThreadGroup.uncaughtException
-    (ThreadGroup.java:1052)\njava.lang.ThreadGroup.uncaughtException
-    (ThreadGroup.java:1052)\njava.lang.Thread.dispatchUncaughtException
-    (Thread.java:1986)\nBuild revision: 22496\n"
-```
+* If a problem occurs while trying to authenticate to the web application container, make sure the target PingAuthorize Server is online. If it is online, the access log might provide information about the reasons for the authentication failure.
 
 ---
 
 ---
 title: Problems with the HTTP Connection Handler
-description: When problems with the HTTP Connection Handler occur, first look at the HTTP connection handler log to diagnose the issue.
+description: Diagnose HTTP Connection Handler errors in the PingAuthorize Server using example log entries for 4xx status codes.
 component: pingauthorize
 version: 11.1
 page_id: pingauthorize:troubleshooting_pingauthorize_server:paz_probs_http_connection_handler
 canonical_url: https://docs.pingidentity.com/pingauthorize/11.1/troubleshooting_pingauthorize_server/paz_probs_http_connection_handler.html
 llms_txt: https://docs.pingidentity.com/pingauthorize/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: August 28, 2023
+revdate: 2026-08-05T00:00:00Z
 ---
 
 # Problems with the HTTP Connection Handler
@@ -841,14 +822,14 @@ The following HTTP log examples detail various errors that can occur related to 
 
 ---
 title: Providing information for support cases
-description: If you are unable to fully diagnose with the server, contact your authorized support provider for assistance.
+description: Provide diagnostic information for support cases by running the PingAuthorize Server collect-support-data tool and sharing the .zip output.
 component: pingauthorize
 version: 11.1
 page_id: pingauthorize:troubleshooting_pingauthorize_server:paz_provide_info_support_cases
 canonical_url: https://docs.pingidentity.com/pingauthorize/11.1/troubleshooting_pingauthorize_server/paz_provide_info_support_cases.html
 llms_txt: https://docs.pingidentity.com/pingauthorize/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: August 28, 2023
+revdate: 2026-08-05T00:00:00Z
 ---
 
 # Providing information for support cases
@@ -865,14 +846,14 @@ To ensure that a problem can be addressed as quickly as possible, provide all of
 
 ---
 title: The server has crashed or shut itself down
-description: If the server has crashed or shut itself down, first check the current server state by using the bin/server-state command.
+description: Diagnose why the PingAuthorize Server crashed or shut down unexpectedly.
 component: pingauthorize
 version: 11.1
 page_id: pingauthorize:troubleshooting_pingauthorize_server:paz_server_crash_shut_down
 canonical_url: https://docs.pingidentity.com/pingauthorize/11.1/troubleshooting_pingauthorize_server/paz_server_crash_shut_down.html
 llms_txt: https://docs.pingidentity.com/pingauthorize/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: August 29, 2023
+revdate: 2026-08-05T00:00:00Z
 ---
 
 # The server has crashed or shut itself down
@@ -897,14 +878,14 @@ In the event that the operating system itself crashed or terminated the process,
 
 ---
 title: The server is slow to respond to client requests
-description: If the server is running and does respond to clients, but clients take a long time to receive responses, then the problem can be attributable to a number of potential problems.
+description: Diagnose slow PingAuthorize Server response times by investigating work queue load, cache configuration, JVM tuning, and system resources.
 component: pingauthorize
 version: 11.1
 page_id: pingauthorize:troubleshooting_pingauthorize_server:paz_server_slow_respond_client_requests
 canonical_url: https://docs.pingidentity.com/pingauthorize/11.1/troubleshooting_pingauthorize_server/paz_server_slow_respond_client_requests.html
 llms_txt: https://docs.pingidentity.com/pingauthorize/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: July 18, 2025
+revdate: 2026-08-05T00:00:00Z
 ---
 
 # The server is slow to respond to client requests
@@ -959,56 +940,80 @@ The potential problems that cause slow responses to client requests are as follo
 
 ---
 title: The server is unresponsive
-description: If the server process is running and appears to be accepting connections, but doesn't respond to requests received on those connections, first check the current server state by using the bin/server-state command.
+description: Diagnose an unresponsive PingAuthorize Server by checking worker thread exhaustion, JVM garbage collection pauses, and network configuration.
 component: pingauthorize
 version: 11.1
 page_id: pingauthorize:troubleshooting_pingauthorize_server:paz_server_unresponsive
 canonical_url: https://docs.pingidentity.com/pingauthorize/11.1/troubleshooting_pingauthorize_server/paz_server_unresponsive.html
 llms_txt: https://docs.pingidentity.com/pingauthorize/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: August 24, 2023
+revdate: 2026-08-27T15:19:50Z
 ---
 
 # The server is unresponsive
 
-If the server process is running and appears to be accepting connections, but doesn't respond to requests received on those connections, first check the current server state by using the `bin/server-state` command.
+If the server process is running and appears to be accepting connections, but isn't responding to requests, first use the `bin/server-state` command to check the current server state.
 
-|   |                                                                                                                                                                                                                                                |
-| - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | If it appears that the problem is with the server software or the JVM in which it is running, then you need to work with your authorized support provider to fully diagnose the problem and determine the best course of action to correct it. |
+|   |                                                                                                                                                                                                   |
+| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | If the problem appears to be with the server software or the JVM in which it's running, work with your authorized support provider to diagnose the problem and decide the best way to correct it. |
 
-If the server is unresponsive, then potential reasons for this behavior include:
+Potential reasons for an unresponsive server include:
 
-* If all worker threads are busy processing other client requests, then new requests that arrive will be forced to wait in the work queue until a worker thread becomes available. If this is the case, then a stack trace obtained using the `jstack` command shows that all of the worker threads are busy and none of them are waiting for new requests to process.
+* Busy worker threads
 
-  A dedicated thread pool can be used for processing administrative operations. This thread pool enables diagnosis and corrective action if all other worker threads are processing operations. To request that operations use the administrative thread pool, using the `ldapsearch` command for example, include the `--useAdministrativeSession` option. The requester must have the `use-admin-session` privilege (included for root users). By default, eight threads are available for this purpose. This can be changed with the `num-administrative-session-worker-threads` property in the work queue configuration.
+  If all worker threads are busy processing other client requests, new requests must wait in the work queue until a thread becomes available.
 
-  |   |                                                                                                                                                                                                                                                            |
-  | - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-  |   | If all of the worker threads are tied up processing the same operation for a long time, the server will also issue an alert that it might be deadlocked, which might not actually be the case. All threads might be tied up processing unindexed searches. |
+  * **How to diagnose**: Stack traces obtained using the `jstack` command show that all worker threads are busy and none are waiting for new requests to process.
 
-* If a request handler is stuck performing some expensive processing for a client connection, then other requests sent to the server on connections associated with that request handler are forced to wait until the request handler is able to read data on those connections. If this is the case, then only some of the connections can experience this behavior (unless there is only a single request handler, in which it will impact all connections), and stack traces obtained using the `jstack` command show that a request handler thread is continuously blocked rather than waiting for new requests to arrive. Note that this scenario is a theoretical problem and one that has not appeared in production.
+    |   |                                                                                                                                                                                                                                                     |
+    | - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+    |   | If all worker threads are tied up processing the same operation for a long time, the server will also issue an alert that it might be deadlocked, which might not actually be the case. All threads might be tied up processing unindexed searches. |
 
-* If the JVM in which the server is running is not properly configured, then it can be forced to spend a significant length of time performing garbage collection, and in severe cases, could cause significant interruptions in the execution of Java code. In such cases, a stack trace obtained from a `pstack` of the native process should show that most threads are idle, but at least one thread performing garbage collection is active. It is also likely that one or a small number of CPUs are 100% busy while all other CPUs are mostly idle. The server will also issue an alert after detecting a long JVM pause (due to garbage collection). The alert will include details of the pause.
+  * **Recommendation**: Use a dedicated thread pool to process administrative operations. This allows for problem diagnosis and corrective action even if all other worker threads are busy processing operations. To request that operations use the administrative thread pool, using the `ldapsearch` command for example, include the `--useAdministrativeSession` option. The requester must have the `use-admin-session` privilege (included for root users). By default, eight threads are available for this purpose. You can change this value with the `num-administrative-session-worker-threads` property in the work queue configuration.
 
-* If the JVM in which the server is running has hung for some reason, then the `pstack` utility should show that one or more threads are blocked and unable to make progress. In such cases, the system CPUs should be mostly idle.
+* Busy request handler
 
-* If a network or firewall configuration problem arises, then attempts to communicate with the server cannot be received by the server. In that case, a network sniffer like `snoop` or `tcpdump` should show that packets sent to the system on which the server is running are not receiving TCP acknowledgement.
+  If a request handler is stuck performing expensive processing for a client connection, other requests sent to the server on connections associated with that handler must wait until the request handler is able to read data on those connections. Typically, only some client connections can experience this behavior. However, if there's only one request handler, the problem affects all connections.
 
-* If the system on which the server is running has become hung or lost power with a graceful shutdown, then the behavior is often similar to that of a network or firewall configuration problem.
+  * **How to diagnose**: Stack traces obtained using the `jstack` command show that a request handler thread is continuously blocked rather than waiting for new requests to arrive.
+
+* Improper JVM configuration
+
+  If the JVM in which the server is running isn't properly configured, it can be forced to spend a significant amount of time performing garbage collection. In severe cases, there might be significant interruptions to Java code execution.
+
+  * **How to diagnose**: Stack traces obtained from a `pstack` of the native process show that most threads are idle, but at least one thread performing garbage collection is active. It's also likely that one or a small number of CPUs are 100% busy while all other CPUs are mostly idle.
+
+    The server will issue an alert after detecting a long JVM pause because of garbage collection. This alert includes details about the pause.
+
+* Hung JVM
+
+  If the JVM in which the server is running becomes hung, the system CPUs should be mostly idle.
+
+  * **How to diagnose**: The `pstack` utility shows that one or more threads are blocked and unable to make progress.
+
+* Network or firewall issue
+
+  If a network or firewall configuration problem arises, the server can't receive attempts to communicate with it.
+
+  |   |                                                                                                                                                              |
+  | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+  |   | If the system becomes hung or loses power without a graceful shutdown, the behavior is often similar to that of a network or firewall configuration problem. |
+
+  * **How to diagnose**: A network sniffer like `snoop` or `tcpdump` shows that packets sent to the system on which the server is running aren't receiving TCP acknowledgement.
 
 ---
 
 ---
 title: The server returns error responses to client requests
-description: If a large number of client requests are receiving error responses, then review the logs/failed-ops log, which is an access log only for failed operations.
+description: Review the failed-ops log to troubleshoot why the PingAuthorize Server is returning error responses to client requests.
 component: pingauthorize
 version: 11.1
 page_id: pingauthorize:troubleshooting_pingauthorize_server:paz_server_returnes_error_responses_client_requests
 canonical_url: https://docs.pingidentity.com/pingauthorize/11.1/troubleshooting_pingauthorize_server/paz_server_returnes_error_responses_client_requests.html
 llms_txt: https://docs.pingidentity.com/pingauthorize/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: August 28, 2023
+revdate: 2026-08-05T00:00:00Z
 ---
 
 # The server returns error responses to client requests
@@ -1029,14 +1034,14 @@ The potential reasons for the error responses include the following:
 
 ---
 title: The server will not accept client connections
-description: If the server does not appear to be accepting connections from clients, you can first check the current server state by using the bin/server-state command.
+description: "Diagnose why the PingAuthorize Server won't accept client connections."
 component: pingauthorize
 version: 11.1
 page_id: pingauthorize:troubleshooting_pingauthorize_server:paz_server_will_not_accept_client_connections
 canonical_url: https://docs.pingidentity.com/pingauthorize/11.1/troubleshooting_pingauthorize_server/paz_server_will_not_accept_client_connections.html
 llms_txt: https://docs.pingidentity.com/pingauthorize/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: August 24, 2023
+revdate: 2026-08-05T00:00:00Z
 ---
 
 # The server will not accept client connections
@@ -1063,14 +1068,14 @@ Potential reasons the server won't accept client connections include the followi
 
 ---
 title: The server will not run setup
-description: If the setup tool does not run properly, some of the most common reasons include the following:
+description: Troubleshoot the PingAuthorize Server setup tool failing to run because of a missing Java environment, unexpected JVM arguments, or prior configuration.
 component: pingauthorize
 version: 11.1
 page_id: pingauthorize:troubleshooting_pingauthorize_server:paz_server_will_not_run_setup
 canonical_url: https://docs.pingidentity.com/pingauthorize/11.1/troubleshooting_pingauthorize_server/paz_server_will_not_run_setup.html
 llms_txt: https://docs.pingidentity.com/pingauthorize/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: April 28, 2025
+revdate: 2026-08-05T00:00:00Z
 section_ids:
   a-suitable-java-environment-is-not-available: A suitable Java environment is not available
   unexpected-arguments-provided-to-the-jvm: Unexpected arguments provided to the JVM
@@ -1079,19 +1084,19 @@ section_ids:
 
 # The server will not run setup
 
-If the `setup` tool does not run properly, some of the most common reasons include the following:
+If the `setup` tool does not run properly, some of the most common reasons include the following.
 
 ## A suitable Java environment is not available
 
 The server requires that Java be installed on the system and made available to the server, and it must be installed prior to running `setup`. If the `setup` tool does not detect that a suitable Java environment is available, it will refuse to run.
 
-To ensure that this does not happen, the `setup` tool should be invoked with an explicitly defined value for the *JAVA\_HOME* environment variable that specifies the path to the Java installation that should be used. For example:
+To ensure that this does not happen, the `setup` tool should be invoked with an explicitly defined value for the *JAVA_HOME* environment variable that specifies the path to the Java installation that should be used. For example:
 
 ```
 env JAVA_HOME=/ds/java ./setup
 ```
 
-If the previous command doesn't solve the issue, the value specified in the provided *JAVA\_HOME* environment variable might have been overridden by another environment variable. In that case, try the following command, which should override any other environment variables that can be set:
+If the previous command doesn't solve the issue, the value specified in the provided *JAVA_HOME* environment variable might have been overridden by another environment variable. In that case, try the following command, which should override any other environment variables that can be set:
 
 ```
 env UNBOUNDID_JAVA_HOME="/ds/java" UNBOUNDID_JAVA_BIN="" ./setup
@@ -1099,7 +1104,7 @@ env UNBOUNDID_JAVA_HOME="/ds/java" UNBOUNDID_JAVA_BIN="" ./setup
 
 ## Unexpected arguments provided to the JVM
 
-If the `setup` script attempts to launch the `java` command with an invalid set of Java arguments, it might prevent the JVM from starting. By default, no special options are provided to the JVM when running `setup`, but this might not be the case if either the *JAVA\_ARGS* or *UNBOUNDID\_JAVA\_ARGS* environment variable is set. If the `setup` tool displays an error message that indicates that the Java environment could not be started with the provided set of arguments, then invoke the following command before trying to re-run `setup`:
+If the `setup` script attempts to launch the `java` command with an invalid set of Java arguments, it might prevent the JVM from starting. By default, no special options are provided to the JVM when running `setup`, but this might not be the case if either the *JAVA_ARGS* or *UNBOUNDID_JAVA_ARGS* environment variable is set. If the `setup` tool displays an error message that indicates that the Java environment could not be started with the provided set of arguments, then invoke the following command before trying to re-run `setup`:
 
 ```
 unset JAVA_ARGS UNBOUNDID_JAVA_ARGS
@@ -1123,14 +1128,14 @@ If the server has been previously used, and if you want to perform a fresh insta
 
 ---
 title: The server will not start
-description: If the server does not start, then there are a number of potential causes.
+description: Troubleshoot common issues that can prevent the PingAuthorize Server from starting.
 component: pingauthorize
 version: 11.1
 page_id: pingauthorize:troubleshooting_pingauthorize_server:paz_server_will_not_start
 canonical_url: https://docs.pingidentity.com/pingauthorize/11.1/troubleshooting_pingauthorize_server/paz_server_will_not_start.html
 llms_txt: https://docs.pingidentity.com/pingauthorize/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: April 29, 2025
+revdate: 2026-08-05T00:00:00Z
 section_ids:
   the-server-or-other-administrative-tool-is-already-running: The server or other administrative tool is already running
   there-is-not-enough-memory-available: There is not enough memory available
@@ -1195,7 +1200,7 @@ If an attempt to start the server fails with an error message indicating that no
 
 * The Java installation used to run the server has been updated, and the server is trying to use the correct Java installation, but one or more of the options that had worked with the previous Java version no longer work with the new version. In that case, it is recommended that the server be re-configured to use the previous Java version, so that it can be run while investigating which options should be used with the new installation.
 
-* If an *UNBOUNDID\_JAVA\_HOME* or *UNBOUNDID\_JAVA\_BIN* environment variable is set, then its value might override the path to the Java installation used to run the server as defined in the `config/java.properties` file. Similarly, if an *UNBOUNDID\_JAVA\_ARGS* environment variable is set, then its value might override the arguments provided to the JVM. If this is the case, then explicitly unset the *UNBOUNDID\_JAVA\_HOME*, *UNBOUNDID\_JAVA\_BIN*, and *UNBOUNDID\_JAVA\_ARGS* environment variables before trying to start the server.
+* If an *UNBOUNDID_JAVA_HOME* or *UNBOUNDID_JAVA_BIN* environment variable is set, then its value might override the path to the Java installation used to run the server as defined in the `config/java.properties` file. Similarly, if an *UNBOUNDID_JAVA_ARGS* environment variable is set, then its value might override the arguments provided to the JVM. If this is the case, then explicitly unset the *UNBOUNDID_JAVA_HOME*, *UNBOUNDID_JAVA_BIN*, and *UNBOUNDID_JAVA_ARGS* environment variables before trying to start the server.
 
 |   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
 | - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -1243,14 +1248,14 @@ chown -R ds:other /ds/the
 
 ---
 title: Troubleshooting AWS IAM authentication issues
-description: Learn how to fix common errors when setting up AWS IAM authentication for ElastiCache attribute and service caches.
+description: Troubleshoot common errors when setting up AWS IAM authentication for ElastiCache attribute and service caches.
 component: pingauthorize
 version: 11.1
 page_id: pingauthorize:troubleshooting_pingauthorize_server:paz_troubleshoot_aws_iam_auth_issues
 canonical_url: https://docs.pingidentity.com/pingauthorize/11.1/troubleshooting_pingauthorize_server/paz_troubleshoot_aws_iam_auth_issues.html
 llms_txt: https://docs.pingidentity.com/pingauthorize/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: June 25, 2026
+revdate: 2026-08-05T00:00:00Z
 section_ids:
   failed-to-generate-iam-auth-token: Failed to generate IAM auth token
   iam-auth-is-incompatible-with-a-static-password: IAM auth is incompatible with a static password
@@ -1418,14 +1423,14 @@ The following sections are organized by error message. Each section contains inf
 
 ---
 title: Troubleshooting PingAuthorize Server
-description: You can capture diagnostic data to help troubleshoot issues with PingAuthorize Server or a supporting component, such as the Java Virtual Machine (JVM), the operating system, or the hardware.
+description: Capture diagnostic data to troubleshoot the PingAuthorize Server, including issues with the JVM, operating system, and hardware.
 component: pingauthorize
 version: 11.1
 page_id: pingauthorize:troubleshooting_pingauthorize_server:paz_troubleshoot_server
 canonical_url: https://docs.pingidentity.com/pingauthorize/11.1/troubleshooting_pingauthorize_server/paz_troubleshoot_server.html
 llms_txt: https://docs.pingidentity.com/pingauthorize/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: February 25, 2025
+revdate: 2026-08-05T00:00:00Z
 ---
 
 # Troubleshooting PingAuthorize Server

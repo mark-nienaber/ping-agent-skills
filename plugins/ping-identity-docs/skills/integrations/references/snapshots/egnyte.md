@@ -43,7 +43,7 @@ To proceed with configuring Egnyte for SSO, you will require the below details f
 
 * Identity provider login URL
 
-  * Example: https\://*\<pf\_hostname>*:*\<pf\_port>*/idp/SSO.saml2
+  * Example: https\://*\<pf_hostname>*:*\<pf_port>*/idp/SSO.saml2
 
 * Identity provider entity ID
 
@@ -77,7 +77,7 @@ The following section describes the steps to configure SSO in Egnyte. For more i
      | - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
      |   | The **Identity provider certificate** is the PEM-encoded X.509 certificate from PingFederate. Paste the entire certificate, but remove the BEGIN and END CERTIFICATE lines. |
 
-   * Set the **Default user mapping**. The value of the SAML\_SUBJECT sent in your SP connection's attribute contract must match this mapping.
+   * Set the **Default user mapping**. The value of the SAML_SUBJECT sent in your SP connection's attribute contract must match this mapping.
 
    * Optional: Set the **User domain-specific Issuer value** based on your business use.
 
@@ -133,9 +133,9 @@ The following section describes the steps for configuring single sign-on (SSO) t
 
    * [Configuring credentials](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/help_spconnectionconfigtasklet_credentialsstate.html)
 
-     |   |                                                                                                                                                                                                                                                                            |
-     | - | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-     |   | The SAML\_SUBJECT configured on the **IdP Adapter Mapping > Attribute Contract Fulfillment** screen must match the **Default user mapping** configured in Egnyte. For more information, see [Configure Egnyte for SSO](pf_egnyte_connector_configure_egnyte_for_sso.html). |
+     |   |                                                                                                                                                                                                                                                                           |
+     | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+     |   | The SAML_SUBJECT configured on the **IdP Adapter Mapping > Attribute Contract Fulfillment** screen must match the **Default user mapping** configured in Egnyte. For more information, see [Configure Egnyte for SSO](pf_egnyte_connector_configure_egnyte_for_sso.html). |
 
 6. On the **Protocol Settings > Allowable SAML Bindings** screen, ensure that both **POST** and **Redirect** are selected.
 
@@ -201,10 +201,10 @@ To configure a connection for outbound provisioning to Egnyte, follow the instru
 
    **Target screen options**
 
-   | Field Name               | Description                                                                                                                                                                                      |
-   | ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-   | **OAuth\_Access\_Token** | The OAuth access token for the Egnyte account. For more information, see [Obtain access token](pf_egnyte_connector_obtain_access_token.html).                                                    |
-   | **Subdomain**            | The subdomain portion of the URL used to access your organization's Egnyte. For example, if the URL used to access Egnyte is https\://*myCompany*.egnyte.com/ then the subdomain is *myCompany*. |
+   | Field Name             | Description                                                                                                                                                                                      |
+   | ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+   | **OAuth_Access_Token** | The OAuth access token for the Egnyte account. For more information, see [Obtain access token](pf_egnyte_connector_obtain_access_token.html).                                                    |
+   | **Subdomain**          | The subdomain portion of the URL used to access your organization's Egnyte. For example, if the URL used to access Egnyte is https\://*myCompany*.egnyte.com/ then the subdomain is *myCompany*. |
 
 9. Click **Next** to continue the provisioning configuration. For more information, see the following sections under [Outbound provisioning for IdPs](https://docs.pingidentity.com/pingfederate/latest/introduction_to_pingfederate/pf_outboun_provis_for_idp.html) in the PingFederate documentation:
 
@@ -486,17 +486,17 @@ Once you have obtained your API key, you are able to use it to generate an acces
 
    where:
 
-   * *YOUR\_USERNAME* is the username of an administrative user on the Egnyte subdomain you wish to provision users.
+   * *YOUR_USERNAME* is the username of an administrative user on the Egnyte subdomain you wish to provision users.
 
      |   |                                                                                                                                                |
      | - | ---------------------------------------------------------------------------------------------------------------------------------------------- |
      |   | The administrative user for you Egnyte subdomain is not the same account that you used to generate the application on Egnyte's developer site. |
 
-   * *YOUR\_PASSWORD* is the password for the administrative user of your Egnyte subdomain.
+   * *YOUR_PASSWORD* is the password for the administrative user of your Egnyte subdomain.
 
-   * *YOUR\_API\_KEY* is the API key identified in [Obtain API key](pf_egnyte_connector_obtain_api_key.html).
+   * *YOUR_API_KEY* is the API key identified in [Obtain API key](pf_egnyte_connector_obtain_api_key.html).
 
-   * *YOUR\_SUBDOMAIN* is the subdomain portion of the URL used to access your organization's Egnyte. For example, if the URL used to access Egnyte is https\://*myCompany*.egnyte.com/ then the subdomain is *myCompany*.
+   * *YOUR_SUBDOMAIN* is the subdomain portion of the URL used to access your organization's Egnyte. For example, if the URL used to access Egnyte is https\://*myCompany*.egnyte.com/ then the subdomain is *myCompany*.
 
 2. Note the presented access token for later use in [Configure provisioning](pf_egnyte_connector_configure_provisioning.html). ![An image of the cURL command and expected access token results.](_images/sri1563995295504.jpg)
 

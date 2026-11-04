@@ -1,55 +1,57 @@
 ---
 title: PingOne Privilege
-description: PingOne Privilege is a cloud-based Privileged Access Management (PAM) solution that delivers secure, passwordless, and just-in-time access to cloud resources.
+description: PingOne Privilege documentation home for Human Privilege and Agent Privilege
 component: privilege
 page_id: privilege::index
 canonical_url: https://docs.pingidentity.com/privilege/index.html
-revdate: February 16, 2026
+llms_txt: https://docs.pingidentity.com/privilege/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: September 10, 2026
 section_ids:
   release-notes: Release Notes
-  get-started-with-pingone-privilege: Get Started with PingOne Privilege
-  use-pingone-privilege: Use PingOne Privilege
-  troubleshoot-pingone-privilege: Troubleshoot PingOne Privilege
+  getting-started-with-pingone-privilege: Getting started with PingOne Privilege
+  agent-privilege: Agent Privilege
+  human-privilege: Human Privilege
 ---
 
 # PingOne Privilege
 
-PingOne Privilege is a cloud-based Privileged Access Management (PAM) solution that delivers secure, passwordless, and just-in-time access to cloud resources.
+PingOne Privilege provides secure, passwordless, just-in-time access to cloud infrastructure and resources for administrators and developers. PingOne Privilege includes two complementary products: Human Privilege secures human access to privileged resources, while Agent Privilege secures the AI agents acting on behalf of your users.
 
 ## Release Notes
 
 * [Release Notes](release-notes/index.html)
 
-## Get Started with PingOne Privilege
+## Getting started with PingOne Privilege
 
-* [Introduction to PingOne Privilege](getting-started/introduction.html)
+* [What is PingOne Privilege?](getting-started/introduction.html)
 
 * [Key concepts](getting-started/key-concepts.html)
 
-* [Getting started for admins](getting-started/getting-started-admins.html)
+* [Getting started guide](getting-started/start-here.html)
 
-* [Set up your environment](getting-started/setting-up-environment.html)
+* [Use PingOne Privilege](getting-started/use-privilege.html)
 
-* [Choose a deployment model](getting-started/choosing-deployment-model.html)
+* [Integrate with your organization's systems](integrations/index.html)
 
-* [Onboard users](getting-started/onboarding-users.html)
+## Agent Privilege
 
-## Use PingOne Privilege
+* [What is Agent Privilege?](agent-privilege/what-is-agent-privilege.html)
 
-* [Configure cloud accounts](configuration/cloud-accounts.html)
+* [Getting started with Agent Privilege](agent-privilege/getting-started/index.html)
 
-* [Configure Kubernetes access](configuration/configuring-kubernetes-access/index.html)
+* [Configuring Agent Privilege](agent-privilege/index.html)
 
-* [Configure network infrastructure](configuration/network-infrastructure.html)
+* [Use cases for Agent Privilege](agent-privilege/use-cases/index.html)
 
-* [Configure access protocols](configuration/access-protocols.html)
+## Human Privilege
 
-* [Privileged Access Management (PAM) overview](privileged-access-management/what-is-privileged-access-management.html)
+* [What is Human Privilege?](human-privilege/what-is-human-privilege.html)
 
-* [Getting started for administrators](privileged-access-management/admin-tasks/getting-started/accessing-admin-console.html)
+* [Getting started with Human Privilege](human-privilege/getting-started.html)
 
-* [Getting started for users](privileged-access-management/user-tasks/getting-started/accessing-user-console.html)
+* [Configuring Human Privilege](human-privilege/configuration/index.html)
 
-## Troubleshoot PingOne Privilege
+* [Administrator use cases](human-privilege/admin-use-cases/index.html)
 
-* [Troubleshooting PingOne Privilege](troubleshooting/index.html)
+* [User use cases](human-privilege/user-use-cases/index.html)

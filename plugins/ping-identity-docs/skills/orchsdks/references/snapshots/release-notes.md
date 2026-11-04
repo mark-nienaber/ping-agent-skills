@@ -39,11 +39,59 @@ llms_txt: https://developer.pingidentity.com/orchsdks/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
   latest_releases: Latest Releases
+  unified_ios_2_2_0: Orchestration SDK for iOS 2.2.0
+  key_features: Key features
+  added: Added
+  updated: Updated
+  breaking_changes: Breaking changes
+  changed: Changed
+  fixed: Fixed
+  unified_react_native_1_1_0: Orchestration SDK for React Native 1.1.0
+  key_features_2: Key features
+  unified_android_2_2_0: Orchestration SDK for Android 2.2.0
+  key_features_3: Key features
+  added_2: Added
+  changed_2: Changed
+  fixed_2: Fixed
+  unified_javascript_2_3_0: Orchestration SDK for JavaScript 2.3.0
+  key_features_4: Key features
+  enhancements: Enhancements
+  unified_javascript_2_2_0: Orchestration SDK for JavaScript 2.2.0
+  enhancements_2: Enhancements
+  breaking_changes_2: Breaking Changes
+  changes: Changes
+  unified_ios_2_1_1: Orchestration SDK for iOS 2.1.1
+  updated_2: Updated
+  unified_javascript_2_1_1: Orchestration SDK for JavaScript 2.1.1
+  fixes: Fixes
+  unified_ios_2_1_0: Orchestration SDK for iOS 2.1.0
+  key_features_5: Key features
+  enhancements_3: Enhancements
+  fixes_2: Fixes
+  unified_javascript_2_1_0: Orchestration SDK for JavaScript 2.1.0
+  key_features_6: Key features
+  added_3: Added
+  updated_3: Updated
+  fixed_3: Fixed
+  unified_android_2_1_0: Orchestration SDK for Android 2.1.0
+  key_features_7: Key features
+  enhancements_4: Enhancements
+  fixes_3: Fixes
   unified_react_native_1_0_0: Orchestration SDK for React Native 1.0.0
+  key_features_8: Key features
   unified_android_2_0_1: Orchestration SDK for Android 2.0.1
+  fixes_4: Fixes
   unified_android_2_0_0: Orchestration SDK for Android 2.0.0
+  key_features_9: Key features
+  enhancements_5: Enhancements
   unified_ios_2_0_0: Orchestration SDK for iOS 2.0.0
+  key_features_10: Key features
+  enhancements_6: Enhancements
+  fixes_5: Fixes
   unified_javascript_2_0_0: Orchestration SDK for JavaScript 2.0.0
+  key_features_11: Key features
+  enhancements_7: Enhancements
+  fixes_6: Fixes
 ---
 
 # Developer Experience changelog
@@ -56,13 +104,483 @@ Subscribe to get automatic updates:
 
 ## Latest Releases
 
+### Orchestration SDK for iOS 2.2.0
+
+**October 20, 2026**
+
+#### Key features
+
+* **PingOne Recognize**
+
+  A new `recognize` module provides privacy-preserving facial biometrics for enrollment and sign-in in authentication journeys.
+
+  Learn more in [Integrating PingOne Recognize](../../journey/use-cases/recognize/index.html).
+
+* Facebook Limited Login
+
+  Sign in to Facebook using the OIDC ID-token flow instead of the classic access-token login.
+
+  In PingOne Advanced Identity Cloud and PingAM journeys, configure an OIDC Social Identity Provider with a name containing `fb-limited` to opt in; existing provider names such as `facebook` continue to use classic access-token login.
+
+  In DaVinci Custom HTML and PingOne Forms, set the new `facebookLimitedLoginEnabled` property on the Facebook collector to choose between the classic `accessToken` and Limited Login `idToken` payloads.
+
+  Learn more in [Authenticating with external identity providers on iOS](../../journey/use-cases/external-idp/ios/index.html).
+
+#### Added
+
+* Added a new `pingonemfa` module for PingOne MFA integration, with DaVinci `MobilePairingCollector` support for pairing PingOne MFA accounts directly within a DaVinci flow.
+
+* Added `ImageCollector` to support image display in DaVinci forms. \[SDKS-5143]
+
+* Added `MetadataCollector` to support the DaVinci SDK Integrator connector's pause/resume model, so the app can invoke on-device SDKs and return a result or error before the flow continues. \[SDKS-5142]
+
+* Added `trigger` and `isAutomatic` properties to the DaVinci FIDO collectors. \[SDKS-4552]
+
+* Added a present-only launch mode to `BrowserLauncher` through `browserMode: .custom`.
+
+  `launch()` resolves as soon as the browser UI is presented, without waiting for a callback. Use this for use cases such as session handoff or in-app SSO, where no redirect back to the app is expected. \[SDKS-5357]
+
+* Added `OidcError.configurationError` to report a configuration that has neither a usable `discoveryEndpoint` nor a pre-supplied `openId` object. \[SDKS-5301]
+
+* Added opt-in commercial device-model-name resolution to `DeviceProfileCallback` through `PlatformCollector(includeModelName: true)`; the default `PlatformCollector()` payload is unchanged. \[SDKS-5275]
+
+#### Updated
+
+* Redesigned the PingExample sample app with a shared design system. \[SDKS-5054]
+
+* Updated the Facebook iOS SDK dependency to 18.1.0. \[SDKS-5160]
+
+* The `oidc.discoveryEndpoint` property in unified JSON configuration is now required only when no `oidc.openId` sub-object is supplied.
+
+  An `openId` block without `discoveryEndpoint` replaces the discovery document and requires `tokenEndpoint`. \[SDKS-5301]
+
+* Restored `OidcClientConfig.openId` as a publicly settable property, and `oidcInitialize()` now skips OpenID discovery when it is pre-supplied, restoring the 2.0.0 no-discovery configuration path. \[SDKS-5301]
+
+#### Breaking changes
+
+* `PingJourney` no longer has a hard dependency on `PingDeviceProfile`. \[SDKS-5443]
+
+  Previously, every `PingJourney` consumer's binary transitively linked `PingDeviceProfile`, whose `BluetoothCollector` instantiates `CBCentralManager`, causing App Store Connect to flag the app for a missing `NSBluetoothAlwaysUsageDescription` even when no `DeviceProfileCallback` node was used.
+
+  If your journeys use the Device Profile Collector node, add the `PingDeviceProfile` product or pod explicitly to your own `Package.swift` or `Podfile`.
+
+* `OidcError` has a new `configurationError` case, so exhaustive `switch` statements over `OidcError` need a new branch. \[SDKS-5301]
+
+#### Changed
+
+* A JSON configuration with a blank `oidc.discoveryEndpoint` and no `oidc.openId` sub-object now fails at parse time instead of at first use. \[SDKS-5301]
+
+* `OidcClientConfig.oidcInitialize()` cancellation is now isolated per caller: cancelling one caller's own task still returns promptly with `CancellationError`, but no longer cancels the shared discovery operation for any other caller currently sharing it. \[SDKS-5301]
+
+* `CallbackRegistry.callback(from:)` now logs a debug message when a journey response contains a callback type with no registered handler, such as a `DeviceProfileCallback` in an app that did not add the `PingDeviceProfile` module, making the missing-module misconfiguration diagnosable instead of silently dropping the callback. \[SDKS-5443]
+
+* `SubmitCollector`, `FlowCollector`, and `MetadataCollector` now expose `actionKey` through the new `ActionKeyProvider` protocol. \[SDKS-5290]
+
+#### Fixed
+
+* Fixed DaVinci FIDO registration and authentication not launching automatically when the form's `trigger` property is not `BUTTON`. \[SDKS-4552]
+
+* Fixed FIDO2 client-side WebAuthn errors (cancellation, timeout, and similar) not routing to the DaVinci error branch. \[SDKS-4478]
+
+* Fixed `QRCodeCollector` not preserving the complete QR code data URI in `content`. \[SDKS-5299]
+
+* Fixed `OidcWebClient` `.authSession` and `.ephemeralAuthSession` not completing for Universal Link (https) redirect URIs. \[SDKS-5239]
+
+* Fixed `OidcWebClient.authorize()` collapsing `FailureNode.cause` to `.unknown`, losing typed browser-cancellation and unsupported-OS error identity. \[SDKS-5295]
+
+* Fixed 5xx PingAM responses with a parseable error body being misclassified as `FailureNode` instead of `ErrorNode`, diverging from Android. \[SDKS-5358]
+
+* Fixed `Journey.start(backchannelUri:)` not rejecting whitespace-only `authIndexType` and `authIndexValue`, diverging from Android. \[SDKS-5359]
+
+* Fixed the asynchronous `OidcClient.generateAuthorizeUrl(customParams:)` silently falling back to the standard (non-PAR) flow when called before `OidcClientConfig.oidcInitialize()`, which could emit `additionalParameters` onto the returned URL instead of the PAR POST body. The synchronous overload never supported PAR and is unaffected. \[SDKS-5403]
+
+* Fixed `swift build` (macOS) failing in `PingOidc`: `OidcDeviceClient.authorize(verificationUriComplete:)` now throws `BrowserError.httpsCallbackUnsupportedOS` on non-iOS platforms instead of referencing the iOS-only `BrowserLauncher` type, and the `PingOneMFA` target's `PingOneSDK` dependency is iOS-conditioned. \[SDKS-5443]
+
+### Orchestration SDK for React Native 1.1.0
+
+**October 8, 2026**
+
+#### Key features
+
+* **DaVinci module for React Native.**
+
+  The first public release of the `@ping-identity/rn-davinci` module lets your React Native app run DaVinci flows end to end, with form rendering and submission.
+
+  Learn more in [Using the DaVinci module for React Native](../../davinci/usage/react-native/index.html).
+
+* **PingOne Protect fraud prevention in DaVinci flows.**
+
+  The new `@ping-identity/rn-protect` module collects behavioral data and sends Protect signals during DaVinci flows, so your React Native app can assess fraud risk.
+
+  Learn more in [Getting started with PingOne Protect on React Native](../../davinci/use-cases/protect/react-native/index.html).
+
+* **External IdP (social sign-on) collectors in DaVinci flows.**
+
+  Authenticate with external identity providers such as Apple, Google, and Facebook directly from DaVinci flows in your React Native app.
+
+  Learn more in [Configure a React Native app for social sign-on](../../davinci/use-cases/external-idp/react-native/index.html).
+
+* **FIDO and passkeys in DaVinci flows.**
+
+  Register and authenticate passkeys in DaVinci flows with the new `FidoRegistrationCollector` and `FidoAuthenticationCollector`.
+
+  Learn more in [Getting started with FIDO on React Native](../../davinci/use-cases/fido/react-native/index.html).
+
+* **Device Authorization Grant in OIDC sign-on.**
+
+  Sign in on devices with limited input, such as smart TVs or set-top boxes, using the new `createOidcDeviceClient` and `useDeviceAuthGrant` APIs.
+
+  Learn more in [Authenticating devices with the Device Authorization Grant](../../oidc/use-cases/device-authorization-grant/index.html).
+
+* **Pushed Authorization Request (PAR) in OIDC sign-on.**
+
+  Send OAuth 2.0 authorization parameters directly to the server before the redirect begins, keeping them out of the browser URL, through the new `par` client config option.
+
+  Learn more in [Securing OIDC sign-on with Pushed Authorization Requests](../../oidc/use-cases/par/index.html).
+
+**Added**
+
+* Added DaVinci `BooleanCollector` and `ReadOnlyTextCollector` support, plus auto-submit for collectors flagged auto-capable by the flow.
+
+* Added DaVinci polling and QRCode collectors so flows can wait on out-of-band status and display QR codes.
+
+* Added DaVinci phone number collector support for phone extension fields (`extension`, `showExtension`, `extensionLabel`).
+
+* Added DaVinci label collector support for `richContent`.
+
+* Added DaVinci password collector support for server-provided validation rules, structured password-policy validation errors (`INVALID_LENGTH`, `UNIQUE_CHARACTER`, `MAX_REPEAT`, `MIN_CHARACTERS`) with native constraint values, and a `validate` method for on-demand collector validation.
+
+**Updated**
+
+* Improved the `useJourneyForm` hook with typed, normalized form fields for simpler Journey callback handling in `@ping-identity/rn-journey`.
+
+* Updated Journey `ContinueNode` to expose UI metadata, such as page header, description, submit button text, and page footer details.
+
+* Improved Expo compatibility with config plugin ownership.
+
+* Updated OATH typed errors to carry violated policy details, so callers can react without parsing message strings.
+
+**Fixed**
+
+* `SOCIAL_LOGIN_BUTTON` no longer reported in unsupported fields when an IdP collector is present in `@ping-identity/rn-davinci`.
+
+### Orchestration SDK for Android 2.2.0
+
+**September 25, 2026**
+
+#### Key features
+
+* **PingOne Recognize**
+
+  A new `recognize` module provides privacy-preserving facial biometrics for enrollment and sign-in in authentication journeys.
+
+  Learn more in [Integrating PingOne Recognize](../../journey/use-cases/recognize/index.html).
+
+* **Backchannel authentication** \[SDKS-5157]
+
+  The Orchestration SDK now supports transactional backchannel authentication in authentication journeys, so a third party can initiate a sign-in or transaction on behalf of your user, and your app completes it after the user approves it on their device.
+
+  |   |                                                                                                                                                                                                                                                                       |
+  | - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+  |   | This is not OIDC Client-Initiated Backchannel Authentication (CIBA).This feature uses a proprietary backchannel authentication mechanism in Advanced Identity Cloud and PingAM; a transactional authentication pattern that is unrelated to the OIDC CIBA grant type. |
+
+  Learn more in [Backchannel authentication](../../journey/use-cases/backchannel-auth/index.html).
+
+#### Added
+
+* Added a new `pingonemfa` module for PingOne MFA integration, with DaVinci `MobilePairingCollector` support for pairing PingOne MFA accounts directly within a DaVinci flow.
+
+* Added `MetadataCollector` for DaVinci flows to support exchanging custom SDK metadata. \[SDKS-5168]
+
+* Added `ImageCollector` for DaVinci forms to display images. \[SDKS-5169]
+
+* Added an optional HTTP status code to `ErrorNode`. \[SDKS-5202]
+
+#### Changed
+
+* Changed FIDO2 authentication to support per-request API selection with `useFido2ApiClient`. \[SDKS-5411]
+
+#### Fixed
+
+* Fixed the browser redirect URI scheme manifest placeholder to apply only to debug builds, allowing release consumers to provide their own value. \[SDKS-5296]
+
+* Fixed Journey `submitButtonText`/`pageFooter` to resolve against the device's ordered preferred-locale list. \[SDKS-5310]
+
+* Fixed OIDC `refresh()` to no longer delete the cached token from storage or revoke a non-expired access token before refreshing. \[SDKS-5414]
+
+* Fixed OAuth 2.0 Device Authorization Grant polling to retry on transient network and transport failures instead of terminating the flow. \[SDKS-5124]
+
+* Fixed `AbstractValidatedCallback` throwing when PingAM returns an empty `policies` array instead of an object. \[SDKS-5260]
+
+* Fixed `QRCodeCollector.id()` to return a stable key from the collector configuration instead of a random value. \[SDKS-5293]
+
+* Fixed FIDO2 collectors to report WebAuthn and credential errors as actionable events instead of generic submit failures. \[SDKS-4477]
+
+* Fixed Journey FIDO2 passkey registration crashes on API 33. \[SDKS-5411]
+
+* Fixed Jackson dependency versions to address security vulnerabilities (CVE-2026-54512, CVE-2026-54513, CVE-2026-54514, CVE-2026-54515). \[SDKS-5199]
+
+* Fixed missing blank-secret validation on `OathCredential`, and `OathType` now serializes as lowercase.
+
+### Orchestration SDK for JavaScript 2.3.0
+
+**September 25, 2026**
+
+#### Key features
+
+* **PingOne Recognize**
+
+  The Journey client now supports PingOne Recognize enrollment and authentication callbacks, providing privacy-preserving facial biometrics for enrollment and sign-in in authentication journeys.
+
+  Learn more in [Integrating PingOne Recognize](../../journey/use-cases/recognize/javascript/index.html).
+
+#### Enhancements
+
+* Enhanced `WebAuthn.isConditionalMediationSupported` to now accept an optional journey step. In addition to checking browser support, the method now also reports whether the server requested conditional mediation for that step, so the result reflects the journey's configuration.
+
+* Custom storage configuration types are now exported from the OIDC client, so you can write strongly typed custom storage implementations in TypeScript.
+
+### Orchestration SDK for JavaScript 2.2.0
+
+**September 16, 2026**
+
+#### Enhancements
+
+* Added `MetadataCollector` support for DaVinci flows to support exchanging custom SDK metadata.
+
+* Added JSON client config helper re-exports from the respective client packages, so a single import can build a client configuration from the unified JSON config.
+
+* Added `create-journey-step` export so a Journey step is easy to deserialize after it has been serialized.
+
+#### Breaking Changes
+
+* Changed the device client `tokenStore` configuration to accept a `CustomStorageObject` instead of the legacy `TokenStoreObject`.
+
+  This is a breaking change for custom token-store implementations. Learn more in [Incompatible changes](../breaking/breaking-changes.html#JSUNIFIED220).
+
+#### Changes
+
+* Changed FIDO/WebAuthn `DOMException` handling in DaVinci flows to catch errors and send them to DaVinci instead of failing generically.
+
+* Removed the `@forgerock/javascript-sdk` dependency from `device-client`.
+
+* Fixed the HTTP header to send `ping-sdk` instead of `forgerock-sdk`.
+
+### Orchestration SDK for iOS 2.1.1
+
+**September 4, 2026**
+
+#### Updated
+
+* Updated RecaptchaEnterprise dependency to 18.9.1 for Xcode 27 and iOS 27 compatibility. \[SDKS-5306]
+
+### Orchestration SDK for JavaScript 2.1.1
+
+**August 10, 2026**
+
+#### Fixes
+
+* Fixed the OIDC client to always include `prompt=none` on background authorization calls, for both standard and PAR flows.
+
+### Orchestration SDK for iOS 2.1.0
+
+**July 22, 2026**
+
+#### Key features
+
+* **Pushed Authorization Requests (PAR)** \[SDKS-4235]
+
+  PAR sends OAuth 2.0 authorization parameters directly to the server before the redirect begins, keeping them out of the browser URL and reducing the chance of them being tampered with or exposed in logs or referrer headers.
+
+  Learn more in [Configuring iOS apps for Pushed Authorization Requests](../../oidc/use-cases/par/ios.html).
+
+* **OAuth 2.0 Device Authorization Grant** \[SDKS-4785]
+
+  The Device Authorization Grant is designed for devices with no browser or keyboard, such as smart TVs or set-top boxes. Users authenticate on a secondary device like a phone, and the primary device receives a token once sign-in completes.
+
+  Learn more in [Configuring iOS apps for the Device Authorization Grant](../../oidc/use-cases/device-authorization-grant/ios.html).
+
+* **Standardized JSON configuration** \[SDKS-5066]
+
+  All SDK modules now support a shared JSON object or file for configuration. This makes it straightforward to manage settings across environments and to share a single configuration file across Android, iOS, and JavaScript.
+
+  Learn more in:
+
+  * [Using common JSON configuration for the iOS DaVinci module](../../davinci/usage/ios/02-configuring-the-davinci-module.html#common-json-configuration)
+
+  * [Using common JSON configuration for the iOS Journey module](../../journey/usage/ios/03-configuring-the-journey-module.html#common-json-configuration)
+
+  * [Using common JSON configuration for the iOS OIDC module](../../oidc/usage/ios-centralized-login.html#ios_oidc_common_json_configuration)
+
+#### Enhancements
+
+* Added `PollingCollector` for DaVinci flows. \[SDKS-4682]
+
+* Added `QRCodeCollector` for DaVinci flows. \[SDKS-4680]
+
+* Added `BooleanCollector` to support Checkbox and Switch input types in DaVinci forms. \[SDKS-4920]
+
+* Added `ReadOnlyTextCollector` for DaVinci forms. \[SDKS-4928]
+
+* Added rich text and embedded link support to `LabelCollector` through new `RichContent` and `RichContentReplacement` types. \[SDKS-4245]
+
+* Added support for phone number extensions in `PhoneNumberCollector`. \[SDKS-4668]
+
+* Added `PushError.pushNumberChallengeError` to surface a distinct failure for Push Number Challenge responses. \[SDKS-5115]
+
+* Added `preferImmediatelyAvailableCredentials` option to FIDO authentication to restrict the ceremony to locally-available credentials only, if they exist. \[SDKS-5212]
+
+* Added `AuthMigration` module for migrating existing sessions from the legacy ForgeRock SDK. \[SDKS-4773]
+
+* Added Page Node description, header, and footer support. \[SDKS-4762]
+
+#### Fixes
+
+* Fixed permanent authentication failure after iCloud device migration caused by a Secure Enclave key mismatch. \[SDKS-5172]
+
+* Fixed `PingFido` WebAuthn registration ignoring the configured `displayName` during passkey creation. \[SDKS-5211]
+
+* Fixed `PasswordCollector` not handling nested password policies. \[SDKS-4695]
+
+* Fixed PIN verification during device binding registration. \[SDKS-5015]
+
+* Fixed `Protect` collector being triggered multiple times within a flow. \[SDKS-4769]
+
+* Fixed browser close and reset logic. \[SDKS-4717]
+
+* Fixed device binding authenticators incorrectly reporting as supported on the simulator. \[SDKS-4836]
+
+* Fixed `DeviceBindingConfig` device name defaulting to the user-assigned name instead of the device model. \[SDKS-4850]
+
+* Fixed `DefaultDeviceIdentifier` to reuse the legacy device identifier when available. \[SDKS-4630]
+
+* Fixed Swift build failures caused by a platform bump and missing `canImport` guards. \[SDKS-4916]
+
+* Fixed FIDO ceremony logs not routing through the workflow logger. \[SDKS-4924]
+
+### Orchestration SDK for JavaScript 2.1.0
+
+**July 8, 2026**
+
+#### Key features
+
+* **Pushed Authorization Requests (PAR)**
+
+  PAR sends OAuth 2.0 authorization parameters directly to the server before the redirect begins, keeping them out of the browser URL and reducing the chance of them being tampered with or exposed in logs or referrer headers.
+
+  Learn more in [Configuring JavaScript apps for Pushed Authorization Requests](../../oidc/use-cases/par/javascript.html).
+
+* **Standardized JSON configuration**
+
+  All SDK modules now support a shared JSON object or file for configuration. This makes it straightforward to manage settings across environments and to share a single configuration file across Android, iOS, and JavaScript.
+
+  Learn more in:
+
+  * [Using common JSON configuration for the JavaScript DaVinci module](../../davinci/usage/javascript/02-configuring-the-davinci-module.html#common-json-configuration)
+
+  * [Using common JSON configuration for the JavaScript Journey module](../../journey/usage/javascript/03-configuring-the-journey-module.html#common-json-configuration)
+
+  * [Using common JSON configuration for the JavaScript OIDC module](../../oidc/usage/javascript-centralized-login.html#javascript_oidc_common_json_configuration)
+
+#### Added
+
+* Added `PollingCollector` for DaVinci flows.
+
+* Added `QrCodeCollector` for DaVinci flows.
+
+* Added `BooleanCollector` and `ValidatedBooleanCollector` to support Checkbox input types in DaVinci forms.
+
+* Added `PhoneNumberExtensionCollector` for phone number fields that include an extension.
+
+* Added `ValidatedPasswordCollector` for password fields with embedded policy validation.
+
+* Added `ImageCollector` for `IMAGE` form fields in DaVinci forms.
+
+* Added `subscribe` method to journey and OIDC client instances.
+
+* Added WebAuthn conditional mediation (passkey autofill) support.
+
+* Added `user.session()` method for silent OIDC session verification (`prompt=none`).
+
+#### Updated
+
+* Updated rich-text support of the `ReadOnlyCollector` to handle links in Translatable Rich Text (Forms).
+
+#### Fixed
+
+* Fixed RTK Query cache lookups in `cache.getLatestResponse()` and `cache.getResponseWithId()`.
+
+* Fixed `resume()` to correctly forward redirect query parameters from the authorization response.
+
+* Fixed `JourneyLoginFailure` not being returned when the server sends a login failure response.
+
+### Orchestration SDK for Android 2.1.0
+
+**July 7, 2026**
+
+#### Key features
+
+* **Pushed Authorization Requests (PAR)** \[SDKS-4231]
+
+  PAR sends OAuth 2.0 authorization parameters directly to the server before the redirect begins, keeping them out of the browser URL and reducing the chance of them being tampered with or exposed in logs or referrer headers.
+
+  Learn more in [Configuring Android apps for Pushed Authorization Requests](../../oidc/use-cases/par/android.html).
+
+* **OAuth 2.0 Device Authorization Grant** \[SDKS-4784]
+
+  The Device Authorization Grant is designed for devices with no browser or keyboard, such as smart TVs or set-top boxes. Users authenticate on a secondary device like a phone, and the primary device receives a token once sign-in completes.
+
+  Learn more in [Configuring Android apps for the Device Authorization Grant](../../oidc/use-cases/device-authorization-grant/android.html).
+
+* **Standardized JSON configuration** \[SDKS-5065]
+
+  All SDK modules now support a shared JSON object or file for configuration. This makes it straightforward to manage settings across environments and to share a single configuration file across Android, iOS, and JavaScript.
+
+  Learn more in:
+
+  * [Using common JSON configuration for the Android DaVinci module](../../davinci/usage/android/02-configuring-the-davinci-module.html#common-json-configuration)
+
+  * [Using common JSON configuration for the Android Journey module](../../journey/usage/android/03-configuring-the-journey-module.html#common-json-configuration)
+
+  * [Using common JSON configuration for the Android OIDC module](../../oidc/usage/android-centralized-login.html#android_oidc_common_json_configuration)
+
+* **Android 17 support** \[SDKS-5191]
+
+  Verified the Orchestration SDK for Android works with Android 17.
+
+#### Enhancements
+
+* Added `PollingCollector` for DaVinci flows. \[SDKS-4681]
+
+* Added `QrCodeCollector` for DaVinci flows. \[SDKS-4679]
+
+* Added `BooleanCollector` to support Checkbox and Switch input types in DaVinci forms. \[SDKS-4919]
+
+* Added `ReadOnlyTextCollector` for DaVinci forms to support Terms of Service and agreement displays. \[SDKS-4927]
+
+* Added support for links in Translatable Rich Text (Forms). \[SDKS-4246]
+
+* Added support for phone number extensions in `PhoneNumberCollector`. \[SDKS-4669]
+
+#### Fixes
+
+* Fixed OATH and Push URI parsers to propagate typed `InvalidUriException` for structural URI parse errors. \[SDKS-5074]
+
+* Fixed Ktor CIO engine dropping repeated `Set-Cookie` headers with mixed casing (KTOR-8614 workaround). \[SDKS-4742]
+
+* Fixed Push Number Challenge not surfacing a distinct failure for wrong-number responses. \[SDKS-5116]
+
+* Fixed `PasswordCollector` not handling nested Password policies. \[SDKS-4694]
+
 ### Orchestration SDK for React Native 1.0.0
 
-June 29, 2026 `major`
+**June 29, 2026**
 
-**Key features**
+#### Key features
 
-* The initial release of the **Orchestration SDK for React Native** is now available.
+* **Initial release**
+
+  The initial release of the **Orchestration SDK for React Native** is now available.
 
   This release supports the following key features:
 
@@ -108,19 +626,21 @@ June 29, 2026 `major`
 
 ### Orchestration SDK for Android 2.0.1
 
-June 1, 2026 `patch`
+**June 1, 2026**
 
-**Fixed**
+#### Fixes
 
 * Upgraded `bcpkix-jdk18on` from `1.81` to `1.84` to address a security vulnerability (CVE-2026-5588).
 
 ### Orchestration SDK for Android 2.0.0
 
-April 15, 2026 `major`
+**April 15, 2026**
 
-**Key features**
+#### Key features
 
-* The initial release of the **Orchestration SDK for Android** is now available with new features and additional support.
+* **Initial release**
+
+  The initial release of the **Orchestration SDK for Android** is now available with new features and additional support.
 
   This release supports the following key features:
 
@@ -156,7 +676,7 @@ April 15, 2026 `major`
 
     Learn more in [Managing registered devices](../../journey/use-cases/device-self-service/index.html).
 
-**Added**
+#### Enhancements
 
 * Added new `network` module. \[SDKS-4505]
 
@@ -172,11 +692,13 @@ April 15, 2026 `major`
 
 ### Orchestration SDK for iOS 2.0.0
 
-April 15, 2026 `major`
+**April 15, 2026**
 
-**Key features**
+#### Key features
 
-* The initial release of the **Orchestration SDK for iOS** is now available with new features and additional support.
+* **Initial release**
+
+  The initial release of the **Orchestration SDK for iOS** is now available with new features and additional support.
 
   This release supports the following key features:
 
@@ -212,7 +734,7 @@ April 15, 2026 `major`
 
     Learn more in [Managing registered devices](../../journey/use-cases/device-self-service/index.html).
 
-**Added**
+#### Enhancements
 
 * Added new `PingNetwork` module. \[SDKS-4496]
 
@@ -230,17 +752,19 @@ April 15, 2026 `major`
 
 * Added migration mechanism for existing device binding data from the ForgeRock SDK to the Orchestration SDK for iOS. \[SDKS-4495]
 
-**Fixes**
+#### Fixes
 
 * Updated `PingStorage` module to allow multiple DaVinci/Journey instances to have separate cookies, sessions, and token storage. \[SDKS-4588]
 
 ### Orchestration SDK for JavaScript 2.0.0
 
-April 15, 2026 `major`
+**April 15, 2026**
 
-**Key features**
+#### Key features
 
-* The initial release of the **Orchestration SDK for JavaScript** is now available with new features and additional support.
+* **Initial release**
+
+  The initial release of the **Orchestration SDK for JavaScript** is now available with new features and additional support.
 
   This release supports the following key features:
 
@@ -260,7 +784,7 @@ April 15, 2026 `major`
 
     Learn more in [Managing registered devices](../../journey/use-cases/device-self-service/index.html).
 
-**Added**
+#### Enhancements
 
 * Added well-known OIDC endpoint discovery support.
 
@@ -268,7 +792,7 @@ April 15, 2026 `major`
 
   Learn more in [Configuring the Journey module in JavaScript](../../journey/usage/javascript/03-configuring-the-journey-module.html).
 
-**Fixed**
+#### Fixes
 
 * Fixed error handling in the `storage` client and `davinci-client`.
 
@@ -328,19 +852,32 @@ page_id: orchsdks:release-notes:breaking/breaking-changes
 canonical_url: https://developer.pingidentity.com/orchsdks/release-notes/breaking/breaking-changes.html
 llms_txt: https://developer.pingidentity.com/orchsdks/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: Tue, 13 Jun 2023 13:08:39 +0100
+revdate: Wed, 16 Sep 2026 12:00:00 +0000
 section_ids:
-  ANDROID482: Orchestration SDK for Android 4.8.2
-  IOS400: ForgeRock SDK for iOS 4.0.0
-  ANDROID400: ForgeRock SDK for Android 4.0.0
-  JS400: ForgeRock SDK for JavaScript 4.0.0
+  JSUNIFIED220: Orchestration SDK for JavaScript 2.2.0
+  ANDROID482: Ping (ForgeRock) SDK for Android 4.8.2
+  IOS400: Ping (ForgeRock) SDK for iOS 4.0.0
+  ANDROID400: Ping (ForgeRock) SDK for Android 4.0.0
+  JS400: Ping (ForgeRock) SDK for JavaScript 4.0.0
 ---
 
 # Incompatible changes
 
-*Incompatible changes* refer to changes that impact existing functionality and might have an effect on your deployment. Before you upgrade, review these lists and make the appropriate changes to your scripts and plugins.
+*Incompatible changes* refer to changes that impact existing functionality and might have an effect on your deployment.
 
-## Orchestration SDK for Android 4.8.2
+Before you upgrade the Orchestration SDK, review these items and make the appropriate changes to your scripts and plugins.
+
+## Orchestration SDK for JavaScript 2.2.0
+
+* Device client custom token store interface change
+
+  The `@forgerock/device-client` package no longer depends on the legacy `@forgerock/javascript-sdk` package.
+
+  The device client has an ignored `tokenStore` configuration property. If you are using TypeScript, and were passing in `TokenStoreObject` to this property, you should update it to use `CustomStorageObject` instead, from `@forgerock/sdk-types`, to prevent type errors.
+
+  The property still has no affect on the device client, so it is unlikely that you will be affected by this change.
+
+## Ping (ForgeRock) SDK for Android 4.8.2
 
 * Upgraded cryptographic libraries
 
@@ -374,7 +911,7 @@ section_ids:
      }
      ```
 
-## ForgeRock SDK for iOS 4.0.0
+## Ping (ForgeRock) SDK for iOS 4.0.0
 
 * Exception changes
 
@@ -461,7 +998,7 @@ section_ids:
       | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
       |   | In ForgeRock SDK for Android 4.0.0 and later, make calls to the method using:`application(_ application:, didFinishLaunchingWithOptions launchOptions: )`Not the previous call:`application(_ app:, open url:, options:)` |
 
-## ForgeRock SDK for Android 4.0.0
+## Ping (ForgeRock) SDK for Android 4.0.0
 
 * Removed support for native single sign-on (SSO)
 
@@ -599,7 +1136,7 @@ section_ids:
         throws OathMechanismException, AccountLockException
       ```
 
-## ForgeRock SDK for JavaScript 4.0.0
+## Ping (ForgeRock) SDK for JavaScript 4.0.0
 
 * No longer provides Universal Module Definition (UMD) support
 
@@ -873,15 +1410,33 @@ page_id: orchsdks:release-notes:changelogs/changelog_android
 canonical_url: https://developer.pingidentity.com/orchsdks/release-notes/changelogs/changelog_android.html
 llms_txt: https://developer.pingidentity.com/orchsdks/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: Sun, 01 Jun 2026 12:00:00 +0000
+revdate: Fri, 25 Sep 2026 12:00:00 +0000
 keywords: ["Features", "Source Code", "SDK", "DaVinci"]
 section_ids:
+  unified_android_2_2_0: Orchestration SDK for Android 2.2.0
+  key_features: Key features
+  added: Added
+  changed: Changed
+  fixed: Fixed
+  unified_android_2_1_0: Orchestration SDK for Android 2.1.0
+  key_features_2: Key features
+  enhancements: Enhancements
+  fixes: Fixes
   unified_android_2_0_1: Orchestration SDK for Android 2.0.1
+  fixes_2: Fixes
   unified_android_2_0_0: Orchestration SDK for Android 2.0.0
+  key_features_3: Key features
+  enhancements_2: Enhancements
   davinci_android_1_3_0: DaVinci client for Android 1.3.0
+  enhancements_3: Enhancements
+  fixes_3: Fixes
   davinci_android_1_2_0: DaVinci client for Android 1.2.0
+  enhancements_4: Enhancements
   davinci_android_1_1_0: DaVinci client for Android 1.1.0
+  enhancements_5: Enhancements
+  fixes_4: Fixes
   davinci_android_1_0_0: DaVinci client 1.0.0
+  enhancements_6: Enhancements
 ---
 
 # Orchestration SDK for Android changelog
@@ -892,21 +1447,139 @@ Subscribe to get automatic updates:
 
 * [icon: square-envelope, set=fa][Orchestration SDKs Changelog email notifications](https://backstage.forgerock.com/account/notifications/settings)
 
+## Orchestration SDK for Android 2.2.0
+
+**September 25, 2026**
+
+### Key features
+
+* **PingOne Recognize**
+
+  A new `recognize` module provides privacy-preserving facial biometrics for enrollment and sign-in in authentication journeys.
+
+  Learn more in [Integrating PingOne Recognize](../../journey/use-cases/recognize/index.html).
+
+* **Backchannel authentication** \[SDKS-5157]
+
+  The Orchestration SDK now supports transactional backchannel authentication in authentication journeys, so a third party can initiate a sign-in or transaction on behalf of your user, and your app completes it after the user approves it on their device.
+
+  |   |                                                                                                                                                                                                                                                                       |
+  | - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+  |   | This is not OIDC Client-Initiated Backchannel Authentication (CIBA).This feature uses a proprietary backchannel authentication mechanism in Advanced Identity Cloud and PingAM; a transactional authentication pattern that is unrelated to the OIDC CIBA grant type. |
+
+  Learn more in [Backchannel authentication](../../journey/use-cases/backchannel-auth/index.html).
+
+### Added
+
+* Added a new `pingonemfa` module for PingOne MFA integration, with DaVinci `MobilePairingCollector` support for pairing PingOne MFA accounts directly within a DaVinci flow.
+
+* Added `MetadataCollector` for DaVinci flows to support exchanging custom SDK metadata. \[SDKS-5168]
+
+* Added `ImageCollector` for DaVinci forms to display images. \[SDKS-5169]
+
+* Added an optional HTTP status code to `ErrorNode`. \[SDKS-5202]
+
+### Changed
+
+* Changed FIDO2 authentication to support per-request API selection with `useFido2ApiClient`. \[SDKS-5411]
+
+### Fixed
+
+* Fixed the browser redirect URI scheme manifest placeholder to apply only to debug builds, allowing release consumers to provide their own value. \[SDKS-5296]
+
+* Fixed Journey `submitButtonText`/`pageFooter` to resolve against the device's ordered preferred-locale list. \[SDKS-5310]
+
+* Fixed OIDC `refresh()` to no longer delete the cached token from storage or revoke a non-expired access token before refreshing. \[SDKS-5414]
+
+* Fixed OAuth 2.0 Device Authorization Grant polling to retry on transient network and transport failures instead of terminating the flow. \[SDKS-5124]
+
+* Fixed `AbstractValidatedCallback` throwing when PingAM returns an empty `policies` array instead of an object. \[SDKS-5260]
+
+* Fixed `QRCodeCollector.id()` to return a stable key from the collector configuration instead of a random value. \[SDKS-5293]
+
+* Fixed FIDO2 collectors to report WebAuthn and credential errors as actionable events instead of generic submit failures. \[SDKS-4477]
+
+* Fixed Journey FIDO2 passkey registration crashes on API 33. \[SDKS-5411]
+
+* Fixed Jackson dependency versions to address security vulnerabilities (CVE-2026-54512, CVE-2026-54513, CVE-2026-54514, CVE-2026-54515). \[SDKS-5199]
+
+* Fixed missing blank-secret validation on `OathCredential`, and `OathType` now serializes as lowercase.
+
+## Orchestration SDK for Android 2.1.0
+
+**July 7, 2026**
+
+### Key features
+
+* **Pushed Authorization Requests (PAR)** \[SDKS-4231]
+
+  PAR sends OAuth 2.0 authorization parameters directly to the server before the redirect begins, keeping them out of the browser URL and reducing the chance of them being tampered with or exposed in logs or referrer headers.
+
+  Learn more in [Configuring Android apps for Pushed Authorization Requests](../../oidc/use-cases/par/android.html).
+
+* **OAuth 2.0 Device Authorization Grant** \[SDKS-4784]
+
+  The Device Authorization Grant is designed for devices with no browser or keyboard, such as smart TVs or set-top boxes. Users authenticate on a secondary device like a phone, and the primary device receives a token once sign-in completes.
+
+  Learn more in [Configuring Android apps for the Device Authorization Grant](../../oidc/use-cases/device-authorization-grant/android.html).
+
+* **Standardized JSON configuration** \[SDKS-5065]
+
+  All SDK modules now support a shared JSON object or file for configuration. This makes it straightforward to manage settings across environments and to share a single configuration file across Android, iOS, and JavaScript.
+
+  Learn more in:
+
+  * [Using common JSON configuration for the Android DaVinci module](../../davinci/usage/android/02-configuring-the-davinci-module.html#common-json-configuration)
+
+  * [Using common JSON configuration for the Android Journey module](../../journey/usage/android/03-configuring-the-journey-module.html#common-json-configuration)
+
+  * [Using common JSON configuration for the Android OIDC module](../../oidc/usage/android-centralized-login.html#android_oidc_common_json_configuration)
+
+* **Android 17 support** \[SDKS-5191]
+
+  Verified the Orchestration SDK for Android works with Android 17.
+
+### Enhancements
+
+* Added `PollingCollector` for DaVinci flows. \[SDKS-4681]
+
+* Added `QrCodeCollector` for DaVinci flows. \[SDKS-4679]
+
+* Added `BooleanCollector` to support Checkbox and Switch input types in DaVinci forms. \[SDKS-4919]
+
+* Added `ReadOnlyTextCollector` for DaVinci forms to support Terms of Service and agreement displays. \[SDKS-4927]
+
+* Added support for links in Translatable Rich Text (Forms). \[SDKS-4246]
+
+* Added support for phone number extensions in `PhoneNumberCollector`. \[SDKS-4669]
+
+### Fixes
+
+* Fixed OATH and Push URI parsers to propagate typed `InvalidUriException` for structural URI parse errors. \[SDKS-5074]
+
+* Fixed Ktor CIO engine dropping repeated `Set-Cookie` headers with mixed casing (KTOR-8614 workaround). \[SDKS-4742]
+
+* Fixed Push Number Challenge not surfacing a distinct failure for wrong-number responses. \[SDKS-5116]
+
+* Fixed `PasswordCollector` not handling nested Password policies. \[SDKS-4694]
+
 ## Orchestration SDK for Android 2.0.1
 
-June 1, 2026 `patch`
+**June 1, 2026**
 
-**Fixed**
+### Fixes
 
 * Upgraded `bcpkix-jdk18on` from `1.81` to `1.84` to address a security vulnerability (CVE-2026-5588).
 
 ## Orchestration SDK for Android 2.0.0
 
-April 15, 2026 `major`
+**April 15, 2026**
 
-**Key features**
+### Key features
 
-* The initial release of the **Orchestration SDK for Android** is now available with new features and additional support.
+* **Initial release**
+
+  The initial release of the **Orchestration SDK for Android** is now available with new features and additional support.
 
   This release supports the following key features:
 
@@ -942,7 +1615,7 @@ April 15, 2026 `major`
 
     Learn more in [Managing registered devices](../../journey/use-cases/device-self-service/index.html).
 
-**Added**
+### Enhancements
 
 * Added new `network` module. \[SDKS-4505]
 
@@ -958,9 +1631,9 @@ April 15, 2026 `major`
 
 ## DaVinci client for Android 1.3.0
 
-November 28, 2025 `minor`
+**November 28, 2025**
 
-**Added**
+### Enhancements
 
 * Added support for PingOne Protect, by using the new `PingProtect` module. \[SDKS-4069]
 
@@ -968,7 +1641,7 @@ November 28, 2025 `minor`
 
 * Added support for Android 16 and updated `compileSdk` to version 36 and `minSdk` to 29. \[SDKS-4278]
 
-**Fixed**
+### Fixes
 
 * Enhanced form handling in the DaVinci SDK to automatically reset form values after submission. \[SDKS-4511]
 
@@ -984,9 +1657,9 @@ November 28, 2025 `minor`
 
 ## DaVinci client for Android 1.2.0
 
-July 8, 2025 `minor`
+**July 8, 2025**
 
-**Added**
+### Enhancements
 
 * Added support for native social login with Google and Facebook. \[SDKS-3449]
 
@@ -1000,9 +1673,9 @@ July 8, 2025 `minor`
 
 ## DaVinci client for Android 1.1.0
 
-April 17, 2025 `minor`
+**April 17, 2025**
 
-**Added**
+### Enhancements
 
 * Added support for additional [PingOne Form fields](../../davinci/compatibility.html#form-connector-fields-release-notes). \[SDKS-3649]
 
@@ -1040,15 +1713,15 @@ April 17, 2025 `minor`
 
 * Added dynamic environment switching in the test sample app. \[SDKS-3642]
 
-**Fixed**
+### Fixes
 
 * Fixed an issue affecting the global logger when configuring a logger in DaVinci client configuration. \[SDKS-3616]
 
 ## DaVinci client 1.0.0
 
-December 16, 2024 `major`
+**December 16, 2024**
 
-**Added**
+### Enhancements
 
 * Initial release of the DaVinci client for Android.
 
@@ -1062,15 +1735,40 @@ page_id: orchsdks:release-notes:changelogs/changelog_ios
 canonical_url: https://developer.pingidentity.com/orchsdks/release-notes/changelogs/changelog_ios.html
 llms_txt: https://developer.pingidentity.com/orchsdks/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: Thu, 19 Jun 2025 15:44:47 +0100
+revdate: Tue, 20 Oct 2026 12:00:00 +0000
 keywords: ["Features", "Source Code", "SDK", "DaVinci"]
 section_ids:
+  unified_ios_2_2_0: Orchestration SDK for iOS 2.2.0
+  key_features: Key features
+  added: Added
+  updated: Updated
+  breaking_changes: Breaking changes
+  changed: Changed
+  fixed: Fixed
+  unified_ios_2_1_1: Orchestration SDK for iOS 2.1.1
+  updated_2: Updated
+  unified_ios_2_1_0: Orchestration SDK for iOS 2.1.0
+  key_features_2: Key features
+  enhancements: Enhancements
+  fixes: Fixes
   unified_ios_2_0_0: Orchestration SDK for iOS 2.0.0
+  key_features_3: Key features
+  enhancements_2: Enhancements
+  fixes_2: Fixes
   davinci_ios_1_3_1: DaVinci client for iOS 1.3.1
+  updated_3: Updated
+  fixes_3: Fixes
   davinci_ios_1_3_0: DaVinci client for iOS 1.3.0
+  enhancements_3: Enhancements
+  updated_4: Updated
   davinci_ios_1_2_0: DaVinci client for iOS 1.2.0
+  enhancements_4: Enhancements
+  fixes_4: Fixes
+  changes: Changes
   davinci_ios_1_1_0: DaVinci client for iOS 1.1.0
+  enhancements_5: Enhancements
   davinci_ios_1_0_0: DaVinci client 1.0.0
+  enhancements_6: Enhancements
 ---
 
 # Orchestration SDK for iOS changelog
@@ -1081,13 +1779,191 @@ Subscribe to get automatic updates:
 
 * [icon: square-envelope, set=fa][Orchestration SDKs Changelog email notifications](https://backstage.forgerock.com/account/notifications/settings)
 
+## Orchestration SDK for iOS 2.2.0
+
+**October 20, 2026**
+
+### Key features
+
+* **PingOne Recognize**
+
+  A new `recognize` module provides privacy-preserving facial biometrics for enrollment and sign-in in authentication journeys.
+
+  Learn more in [Integrating PingOne Recognize](../../journey/use-cases/recognize/index.html).
+
+* Facebook Limited Login
+
+  Sign in to Facebook using the OIDC ID-token flow instead of the classic access-token login.
+
+  In PingOne Advanced Identity Cloud and PingAM journeys, configure an OIDC Social Identity Provider with a name containing `fb-limited` to opt in; existing provider names such as `facebook` continue to use classic access-token login.
+
+  In DaVinci Custom HTML and PingOne Forms, set the new `facebookLimitedLoginEnabled` property on the Facebook collector to choose between the classic `accessToken` and Limited Login `idToken` payloads.
+
+  Learn more in [Authenticating with external identity providers on iOS](../../journey/use-cases/external-idp/ios/index.html).
+
+### Added
+
+* Added a new `pingonemfa` module for PingOne MFA integration, with DaVinci `MobilePairingCollector` support for pairing PingOne MFA accounts directly within a DaVinci flow.
+
+* Added `ImageCollector` to support image display in DaVinci forms. \[SDKS-5143]
+
+* Added `MetadataCollector` to support the DaVinci SDK Integrator connector's pause/resume model, so the app can invoke on-device SDKs and return a result or error before the flow continues. \[SDKS-5142]
+
+* Added `trigger` and `isAutomatic` properties to the DaVinci FIDO collectors. \[SDKS-4552]
+
+* Added a present-only launch mode to `BrowserLauncher` through `browserMode: .custom`.
+
+  `launch()` resolves as soon as the browser UI is presented, without waiting for a callback. Use this for use cases such as session handoff or in-app SSO, where no redirect back to the app is expected. \[SDKS-5357]
+
+* Added `OidcError.configurationError` to report a configuration that has neither a usable `discoveryEndpoint` nor a pre-supplied `openId` object. \[SDKS-5301]
+
+* Added opt-in commercial device-model-name resolution to `DeviceProfileCallback` through `PlatformCollector(includeModelName: true)`; the default `PlatformCollector()` payload is unchanged. \[SDKS-5275]
+
+### Updated
+
+* Redesigned the PingExample sample app with a shared design system. \[SDKS-5054]
+
+* Updated the Facebook iOS SDK dependency to 18.1.0. \[SDKS-5160]
+
+* The `oidc.discoveryEndpoint` property in unified JSON configuration is now required only when no `oidc.openId` sub-object is supplied.
+
+  An `openId` block without `discoveryEndpoint` replaces the discovery document and requires `tokenEndpoint`. \[SDKS-5301]
+
+* Restored `OidcClientConfig.openId` as a publicly settable property, and `oidcInitialize()` now skips OpenID discovery when it is pre-supplied, restoring the 2.0.0 no-discovery configuration path. \[SDKS-5301]
+
+### Breaking changes
+
+* `PingJourney` no longer has a hard dependency on `PingDeviceProfile`. \[SDKS-5443]
+
+  Previously, every `PingJourney` consumer's binary transitively linked `PingDeviceProfile`, whose `BluetoothCollector` instantiates `CBCentralManager`, causing App Store Connect to flag the app for a missing `NSBluetoothAlwaysUsageDescription` even when no `DeviceProfileCallback` node was used.
+
+  If your journeys use the Device Profile Collector node, add the `PingDeviceProfile` product or pod explicitly to your own `Package.swift` or `Podfile`.
+
+* `OidcError` has a new `configurationError` case, so exhaustive `switch` statements over `OidcError` need a new branch. \[SDKS-5301]
+
+### Changed
+
+* A JSON configuration with a blank `oidc.discoveryEndpoint` and no `oidc.openId` sub-object now fails at parse time instead of at first use. \[SDKS-5301]
+
+* `OidcClientConfig.oidcInitialize()` cancellation is now isolated per caller: cancelling one caller's own task still returns promptly with `CancellationError`, but no longer cancels the shared discovery operation for any other caller currently sharing it. \[SDKS-5301]
+
+* `CallbackRegistry.callback(from:)` now logs a debug message when a journey response contains a callback type with no registered handler, such as a `DeviceProfileCallback` in an app that did not add the `PingDeviceProfile` module, making the missing-module misconfiguration diagnosable instead of silently dropping the callback. \[SDKS-5443]
+
+* `SubmitCollector`, `FlowCollector`, and `MetadataCollector` now expose `actionKey` through the new `ActionKeyProvider` protocol. \[SDKS-5290]
+
+### Fixed
+
+* Fixed DaVinci FIDO registration and authentication not launching automatically when the form's `trigger` property is not `BUTTON`. \[SDKS-4552]
+
+* Fixed FIDO2 client-side WebAuthn errors (cancellation, timeout, and similar) not routing to the DaVinci error branch. \[SDKS-4478]
+
+* Fixed `QRCodeCollector` not preserving the complete QR code data URI in `content`. \[SDKS-5299]
+
+* Fixed `OidcWebClient` `.authSession` and `.ephemeralAuthSession` not completing for Universal Link (https) redirect URIs. \[SDKS-5239]
+
+* Fixed `OidcWebClient.authorize()` collapsing `FailureNode.cause` to `.unknown`, losing typed browser-cancellation and unsupported-OS error identity. \[SDKS-5295]
+
+* Fixed 5xx PingAM responses with a parseable error body being misclassified as `FailureNode` instead of `ErrorNode`, diverging from Android. \[SDKS-5358]
+
+* Fixed `Journey.start(backchannelUri:)` not rejecting whitespace-only `authIndexType` and `authIndexValue`, diverging from Android. \[SDKS-5359]
+
+* Fixed the asynchronous `OidcClient.generateAuthorizeUrl(customParams:)` silently falling back to the standard (non-PAR) flow when called before `OidcClientConfig.oidcInitialize()`, which could emit `additionalParameters` onto the returned URL instead of the PAR POST body. The synchronous overload never supported PAR and is unaffected. \[SDKS-5403]
+
+* Fixed `swift build` (macOS) failing in `PingOidc`: `OidcDeviceClient.authorize(verificationUriComplete:)` now throws `BrowserError.httpsCallbackUnsupportedOS` on non-iOS platforms instead of referencing the iOS-only `BrowserLauncher` type, and the `PingOneMFA` target's `PingOneSDK` dependency is iOS-conditioned. \[SDKS-5443]
+
+## Orchestration SDK for iOS 2.1.1
+
+**September 4, 2026**
+
+### Updated
+
+* Updated RecaptchaEnterprise dependency to 18.9.1 for Xcode 27 and iOS 27 compatibility. \[SDKS-5306]
+
+## Orchestration SDK for iOS 2.1.0
+
+**July 22, 2026**
+
+### Key features
+
+* **Pushed Authorization Requests (PAR)** \[SDKS-4235]
+
+  PAR sends OAuth 2.0 authorization parameters directly to the server before the redirect begins, keeping them out of the browser URL and reducing the chance of them being tampered with or exposed in logs or referrer headers.
+
+  Learn more in [Configuring iOS apps for Pushed Authorization Requests](../../oidc/use-cases/par/ios.html).
+
+* **OAuth 2.0 Device Authorization Grant** \[SDKS-4785]
+
+  The Device Authorization Grant is designed for devices with no browser or keyboard, such as smart TVs or set-top boxes. Users authenticate on a secondary device like a phone, and the primary device receives a token once sign-in completes.
+
+  Learn more in [Configuring iOS apps for the Device Authorization Grant](../../oidc/use-cases/device-authorization-grant/ios.html).
+
+* **Standardized JSON configuration** \[SDKS-5066]
+
+  All SDK modules now support a shared JSON object or file for configuration. This makes it straightforward to manage settings across environments and to share a single configuration file across Android, iOS, and JavaScript.
+
+  Learn more in:
+
+  * [Using common JSON configuration for the iOS DaVinci module](../../davinci/usage/ios/02-configuring-the-davinci-module.html#common-json-configuration)
+
+  * [Using common JSON configuration for the iOS Journey module](../../journey/usage/ios/03-configuring-the-journey-module.html#common-json-configuration)
+
+  * [Using common JSON configuration for the iOS OIDC module](../../oidc/usage/ios-centralized-login.html#ios_oidc_common_json_configuration)
+
+### Enhancements
+
+* Added `PollingCollector` for DaVinci flows. \[SDKS-4682]
+
+* Added `QRCodeCollector` for DaVinci flows. \[SDKS-4680]
+
+* Added `BooleanCollector` to support Checkbox and Switch input types in DaVinci forms. \[SDKS-4920]
+
+* Added `ReadOnlyTextCollector` for DaVinci forms. \[SDKS-4928]
+
+* Added rich text and embedded link support to `LabelCollector` through new `RichContent` and `RichContentReplacement` types. \[SDKS-4245]
+
+* Added support for phone number extensions in `PhoneNumberCollector`. \[SDKS-4668]
+
+* Added `PushError.pushNumberChallengeError` to surface a distinct failure for Push Number Challenge responses. \[SDKS-5115]
+
+* Added `preferImmediatelyAvailableCredentials` option to FIDO authentication to restrict the ceremony to locally-available credentials only, if they exist. \[SDKS-5212]
+
+* Added `AuthMigration` module for migrating existing sessions from the legacy ForgeRock SDK. \[SDKS-4773]
+
+* Added Page Node description, header, and footer support. \[SDKS-4762]
+
+### Fixes
+
+* Fixed permanent authentication failure after iCloud device migration caused by a Secure Enclave key mismatch. \[SDKS-5172]
+
+* Fixed `PingFido` WebAuthn registration ignoring the configured `displayName` during passkey creation. \[SDKS-5211]
+
+* Fixed `PasswordCollector` not handling nested password policies. \[SDKS-4695]
+
+* Fixed PIN verification during device binding registration. \[SDKS-5015]
+
+* Fixed `Protect` collector being triggered multiple times within a flow. \[SDKS-4769]
+
+* Fixed browser close and reset logic. \[SDKS-4717]
+
+* Fixed device binding authenticators incorrectly reporting as supported on the simulator. \[SDKS-4836]
+
+* Fixed `DeviceBindingConfig` device name defaulting to the user-assigned name instead of the device model. \[SDKS-4850]
+
+* Fixed `DefaultDeviceIdentifier` to reuse the legacy device identifier when available. \[SDKS-4630]
+
+* Fixed Swift build failures caused by a platform bump and missing `canImport` guards. \[SDKS-4916]
+
+* Fixed FIDO ceremony logs not routing through the workflow logger. \[SDKS-4924]
+
 ## Orchestration SDK for iOS 2.0.0
 
-April 15, 2026 `major`
+**April 15, 2026**
 
-**Key features**
+### Key features
 
-* The initial release of the **Orchestration SDK for iOS** is now available with new features and additional support.
+* **Initial release**
+
+  The initial release of the **Orchestration SDK for iOS** is now available with new features and additional support.
 
   This release supports the following key features:
 
@@ -1123,7 +1999,7 @@ April 15, 2026 `major`
 
     Learn more in [Managing registered devices](../../journey/use-cases/device-self-service/index.html).
 
-**Added**
+### Enhancements
 
 * Added new `PingNetwork` module. \[SDKS-4496]
 
@@ -1141,33 +2017,33 @@ April 15, 2026 `major`
 
 * Added migration mechanism for existing device binding data from the ForgeRock SDK to the Orchestration SDK for iOS. \[SDKS-4495]
 
-**Fixes**
+### Fixes
 
 * Updated `PingStorage` module to allow multiple DaVinci/Journey instances to have separate cookies, sessions, and token storage. \[SDKS-4588]
 
 ## DaVinci client for iOS 1.3.1
 
-November 25, 2025 `patch`
+**November 25, 2025**
 
-**Updated**
+### Updated
 
 * Updated all targets to use the Swift 6 compiler. \[SDKS-4499]
 
-**Fixed**
+### Fixes
 
 * Fixed an issue in the `PingProtect` module causing a crash on iOS 17+ due to an incorrect actor executor assumption. \[SDKS-4494]
 
 ## DaVinci client for iOS 1.3.0
 
-October 23, 2025 `minor`
+**October 23, 2025**
 
-**Added**
+### Enhancements
 
 * Added support for PingOne Protect, by using the new `PingProtect` module. \[SDKS-4073]
 
   Learn more in [Evaluating risk with PingOne Protect](../../davinci/use-cases/protect/index.html).
 
-**Updated**
+### Updated
 
 * Updated to handle the country code format in the `PhoneNumber` collector. \[SDKS-4199]
 
@@ -1175,9 +2051,9 @@ October 23, 2025 `minor`
 
 ## DaVinci client for iOS 1.2.0
 
-July 8, 2025 `minor`
+**July 8, 2025**
 
-**Added**
+### Enhancements
 
 * Added support for native social login with Apple, Google, and Facebook. \[SDKS-3450]
 
@@ -1187,11 +2063,11 @@ July 8, 2025 `minor`
 
 * Added access to the `key` attribute of `LabelCollector`. \[SDKS-3956]
 
-**Fixed**
+### Fixes
 
 * Resolved an issue where cookies were incorrectly cleared from in-memory storage when requests contain a `Set-Cookie` header \[SDKS-4189]
 
-**Changed**
+### Changes
 
 * Renamed the `PingExternal-idp` module to `PingExternalIdP`. \[SDKS-3958]
 
@@ -1199,9 +2075,9 @@ July 8, 2025 `minor`
 
 ## DaVinci client for iOS 1.1.0
 
-April 17, 2025 `minor`
+**April 17, 2025**
 
-**Added**
+### Enhancements
 
 * Added support for additional [PingOne Form fields](../../davinci/compatibility.html#form-connector-fields-release-notes). \[SDKS-3671, SDKS-3672]
 
@@ -1239,9 +2115,9 @@ April 17, 2025 `minor`
 
 ## DaVinci client 1.0.0
 
-December 16, 2024 `major`
+**December 16, 2024**
 
-**Added**
+### Enhancements
 
 * Initial release of the DaVinci client for iOS.
 
@@ -1255,14 +2131,36 @@ page_id: orchsdks:release-notes:changelogs/changelog_javascript
 canonical_url: https://developer.pingidentity.com/orchsdks/release-notes/changelogs/changelog_javascript.html
 llms_txt: https://developer.pingidentity.com/orchsdks/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: Thu, 19 Jun 2025 15:44:47 +0100
+revdate: Fri, 25 Sep 2026 12:00:00 +0000
 keywords: ["Features", "Source Code", "SDK", "DaVinci"]
 section_ids:
+  unified_javascript_2_3_0: Orchestration SDK for JavaScript 2.3.0
+  key_features: Key features
+  enhancements: Enhancements
+  unified_javascript_2_2_0: Orchestration SDK for JavaScript 2.2.0
+  enhancements_2: Enhancements
+  breaking_changes: Breaking Changes
+  changes: Changes
+  unified_javascript_2_1_1: Orchestration SDK for JavaScript 2.1.1
+  fixes: Fixes
+  unified_javascript_2_1_0: Orchestration SDK for JavaScript 2.1.0
+  key_features_2: Key features
+  added: Added
+  updated: Updated
+  fixed: Fixed
   unified_javascript_2_0_0: Orchestration SDK for JavaScript 2.0.0
+  key_features_3: Key features
+  enhancements_3: Enhancements
+  fixes_2: Fixes
   davinci_js_1_3_0: DaVinci client for JavaScript 1.3.0
+  enhancements_4: Enhancements
   davinci_js_1_2_0: DaVinci client for JavaScript 1.2.0
+  enhancements_5: Enhancements
   davinci_js_1_1_0: DaVinci client for JavaScript 1.1.0
+  enhancements_6: Enhancements
+  updated_2: Updated
   davinci_javascript_1_0_0: DaVinci client 1.0.0
+  enhancements_7: Enhancements
 ---
 
 # Orchestration SDK for JavaScript changelog
@@ -1273,13 +2171,123 @@ Subscribe to get automatic updates:
 
 * [icon: square-envelope, set=fa][Orchestration SDKs Changelog email notifications](https://backstage.forgerock.com/account/notifications/settings)
 
+## Orchestration SDK for JavaScript 2.3.0
+
+**September 25, 2026**
+
+### Key features
+
+* **PingOne Recognize**
+
+  The Journey client now supports PingOne Recognize enrollment and authentication callbacks, providing privacy-preserving facial biometrics for enrollment and sign-in in authentication journeys.
+
+  Learn more in [Integrating PingOne Recognize](../../journey/use-cases/recognize/javascript/index.html).
+
+### Enhancements
+
+* Enhanced `WebAuthn.isConditionalMediationSupported` to now accept an optional journey step. In addition to checking browser support, the method now also reports whether the server requested conditional mediation for that step, so the result reflects the journey's configuration.
+
+* Custom storage configuration types are now exported from the OIDC client, so you can write strongly typed custom storage implementations in TypeScript.
+
+## Orchestration SDK for JavaScript 2.2.0
+
+**September 16, 2026**
+
+### Enhancements
+
+* Added `MetadataCollector` support for DaVinci flows to support exchanging custom SDK metadata.
+
+* Added JSON client config helper re-exports from the respective client packages, so a single import can build a client configuration from the unified JSON config.
+
+* Added `create-journey-step` export so a Journey step is easy to deserialize after it has been serialized.
+
+### Breaking Changes
+
+* Changed the device client `tokenStore` configuration to accept a `CustomStorageObject` instead of the legacy `TokenStoreObject`.
+
+  This is a breaking change for custom token-store implementations. Learn more in [Incompatible changes](../breaking/breaking-changes.html#JSUNIFIED220).
+
+### Changes
+
+* Changed FIDO/WebAuthn `DOMException` handling in DaVinci flows to catch errors and send them to DaVinci instead of failing generically.
+
+* Removed the `@forgerock/javascript-sdk` dependency from `device-client`.
+
+* Fixed the HTTP header to send `ping-sdk` instead of `forgerock-sdk`.
+
+## Orchestration SDK for JavaScript 2.1.1
+
+**August 10, 2026**
+
+### Fixes
+
+* Fixed the OIDC client to always include `prompt=none` on background authorization calls, for both standard and PAR flows.
+
+## Orchestration SDK for JavaScript 2.1.0
+
+**July 8, 2026**
+
+### Key features
+
+* **Pushed Authorization Requests (PAR)**
+
+  PAR sends OAuth 2.0 authorization parameters directly to the server before the redirect begins, keeping them out of the browser URL and reducing the chance of them being tampered with or exposed in logs or referrer headers.
+
+  Learn more in [Configuring JavaScript apps for Pushed Authorization Requests](../../oidc/use-cases/par/javascript.html).
+
+* **Standardized JSON configuration**
+
+  All SDK modules now support a shared JSON object or file for configuration. This makes it straightforward to manage settings across environments and to share a single configuration file across Android, iOS, and JavaScript.
+
+  Learn more in:
+
+  * [Using common JSON configuration for the JavaScript DaVinci module](../../davinci/usage/javascript/02-configuring-the-davinci-module.html#common-json-configuration)
+
+  * [Using common JSON configuration for the JavaScript Journey module](../../journey/usage/javascript/03-configuring-the-journey-module.html#common-json-configuration)
+
+  * [Using common JSON configuration for the JavaScript OIDC module](../../oidc/usage/javascript-centralized-login.html#javascript_oidc_common_json_configuration)
+
+### Added
+
+* Added `PollingCollector` for DaVinci flows.
+
+* Added `QrCodeCollector` for DaVinci flows.
+
+* Added `BooleanCollector` and `ValidatedBooleanCollector` to support Checkbox input types in DaVinci forms.
+
+* Added `PhoneNumberExtensionCollector` for phone number fields that include an extension.
+
+* Added `ValidatedPasswordCollector` for password fields with embedded policy validation.
+
+* Added `ImageCollector` for `IMAGE` form fields in DaVinci forms.
+
+* Added `subscribe` method to journey and OIDC client instances.
+
+* Added WebAuthn conditional mediation (passkey autofill) support.
+
+* Added `user.session()` method for silent OIDC session verification (`prompt=none`).
+
+### Updated
+
+* Updated rich-text support of the `ReadOnlyCollector` to handle links in Translatable Rich Text (Forms).
+
+### Fixed
+
+* Fixed RTK Query cache lookups in `cache.getLatestResponse()` and `cache.getResponseWithId()`.
+
+* Fixed `resume()` to correctly forward redirect query parameters from the authorization response.
+
+* Fixed `JourneyLoginFailure` not being returned when the server sends a login failure response.
+
 ## Orchestration SDK for JavaScript 2.0.0
 
-April 15, 2026 `major`
+**April 15, 2026**
 
-**Key features**
+### Key features
 
-* The initial release of the **Orchestration SDK for JavaScript** is now available with new features and additional support.
+* **Initial release**
+
+  The initial release of the **Orchestration SDK for JavaScript** is now available with new features and additional support.
 
   This release supports the following key features:
 
@@ -1299,7 +2307,7 @@ April 15, 2026 `major`
 
     Learn more in [Managing registered devices](../../journey/use-cases/device-self-service/index.html).
 
-**Added**
+### Enhancements
 
 * Added well-known OIDC endpoint discovery support.
 
@@ -1307,7 +2315,7 @@ April 15, 2026 `major`
 
   Learn more in [Configuring the Journey module in JavaScript](../../journey/usage/javascript/03-configuring-the-journey-module.html).
 
-**Fixed**
+### Fixes
 
 * Fixed error handling in the `storage` client and `davinci-client`.
 
@@ -1319,9 +2327,9 @@ April 15, 2026 `major`
 
 ## DaVinci client for JavaScript 1.3.0
 
-November 25, 2025 `minor`
+**November 25, 2025**
 
-**Added**
+### Enhancements
 
 * Added support for the Ping Protect collector
 
@@ -1331,17 +2339,17 @@ November 25, 2025 `minor`
 
 ## DaVinci client for JavaScript 1.2.0
 
-July 8, 2025 `minor`
+**July 8, 2025**
 
-**Added**
+### Enhancements
 
 * Added support for PingOne Forms one-time passcode (MFA) components `DEVICE_REGISTRATION`, `DEVICE_AUTHENTICATION`, and `PHONE_NUMBER`.
 
 ## DaVinci client for JavaScript 1.1.0
 
-April 17, 2025 `minor`
+**April 17, 2025**
 
-**Added**
+### Enhancements
 
 * Added support for additional [PingOne Form fields](../../davinci/compatibility.html#form-connector-fields-release-notes).
 
@@ -1375,7 +2383,7 @@ April 17, 2025 `minor`
 
 * Added support for default values in PingOne Form fields.
 
-**Updated**
+### Updated
 
 * Updated dependency on `@forgerock/javascript-sdk` to `4.7.0`.
 
@@ -1385,9 +2393,9 @@ April 17, 2025 `minor`
 
 ## DaVinci client 1.0.0
 
-December 16, 2024 `major`
+**December 16, 2024**
 
-**Added**
+### Enhancements
 
 * Initial release of the DaVinci client JavaScript.
 
@@ -1401,10 +2409,13 @@ page_id: orchsdks:release-notes:changelogs/changelog_react_native
 canonical_url: https://developer.pingidentity.com/orchsdks/release-notes/changelogs/changelog_react_native.html
 llms_txt: https://developer.pingidentity.com/orchsdks/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: Sun, 29 Jun 2026 12:00:00 +0000
+revdate: Thu, 08 Oct 2026 12:00:00 +0000
 keywords: ["Features", "Source Code", "SDK", "React Native"]
 section_ids:
+  unified_react_native_1_1_0: Orchestration SDK for React Native 1.1.0
+  key_features: Key features
   unified_react_native_1_0_0: Orchestration SDK for React Native 1.0.0
+  key_features_2: Key features
 ---
 
 # Orchestration SDK for React Native changelog
@@ -1415,13 +2426,83 @@ Subscribe to get automatic updates:
 
 * [icon: square-envelope, set=fa][Orchestration SDKs Changelog email notifications](https://backstage.forgerock.com/account/notifications/settings)
 
+## Orchestration SDK for React Native 1.1.0
+
+**October 8, 2026**
+
+### Key features
+
+* **DaVinci module for React Native.**
+
+  The first public release of the `@ping-identity/rn-davinci` module lets your React Native app run DaVinci flows end to end, with form rendering and submission.
+
+  Learn more in [Using the DaVinci module for React Native](../../davinci/usage/react-native/index.html).
+
+* **PingOne Protect fraud prevention in DaVinci flows.**
+
+  The new `@ping-identity/rn-protect` module collects behavioral data and sends Protect signals during DaVinci flows, so your React Native app can assess fraud risk.
+
+  Learn more in [Getting started with PingOne Protect on React Native](../../davinci/use-cases/protect/react-native/index.html).
+
+* **External IdP (social sign-on) collectors in DaVinci flows.**
+
+  Authenticate with external identity providers such as Apple, Google, and Facebook directly from DaVinci flows in your React Native app.
+
+  Learn more in [Configure a React Native app for social sign-on](../../davinci/use-cases/external-idp/react-native/index.html).
+
+* **FIDO and passkeys in DaVinci flows.**
+
+  Register and authenticate passkeys in DaVinci flows with the new `FidoRegistrationCollector` and `FidoAuthenticationCollector`.
+
+  Learn more in [Getting started with FIDO on React Native](../../davinci/use-cases/fido/react-native/index.html).
+
+* **Device Authorization Grant in OIDC sign-on.**
+
+  Sign in on devices with limited input, such as smart TVs or set-top boxes, using the new `createOidcDeviceClient` and `useDeviceAuthGrant` APIs.
+
+  Learn more in [Authenticating devices with the Device Authorization Grant](../../oidc/use-cases/device-authorization-grant/index.html).
+
+* **Pushed Authorization Request (PAR) in OIDC sign-on.**
+
+  Send OAuth 2.0 authorization parameters directly to the server before the redirect begins, keeping them out of the browser URL, through the new `par` client config option.
+
+  Learn more in [Securing OIDC sign-on with Pushed Authorization Requests](../../oidc/use-cases/par/index.html).
+
+**Added**
+
+* Added DaVinci `BooleanCollector` and `ReadOnlyTextCollector` support, plus auto-submit for collectors flagged auto-capable by the flow.
+
+* Added DaVinci polling and QRCode collectors so flows can wait on out-of-band status and display QR codes.
+
+* Added DaVinci phone number collector support for phone extension fields (`extension`, `showExtension`, `extensionLabel`).
+
+* Added DaVinci label collector support for `richContent`.
+
+* Added DaVinci password collector support for server-provided validation rules, structured password-policy validation errors (`INVALID_LENGTH`, `UNIQUE_CHARACTER`, `MAX_REPEAT`, `MIN_CHARACTERS`) with native constraint values, and a `validate` method for on-demand collector validation.
+
+**Updated**
+
+* Improved the `useJourneyForm` hook with typed, normalized form fields for simpler Journey callback handling in `@ping-identity/rn-journey`.
+
+* Updated Journey `ContinueNode` to expose UI metadata, such as page header, description, submit button text, and page footer details.
+
+* Improved Expo compatibility with config plugin ownership.
+
+* Updated OATH typed errors to carry violated policy details, so callers can react without parsing message strings.
+
+**Fixed**
+
+* `SOCIAL_LOGIN_BUTTON` no longer reported in unsupported fields when an IdP collector is present in `@ping-identity/rn-davinci`.
+
 ## Orchestration SDK for React Native 1.0.0
 
-June 29, 2026 `major`
+**June 29, 2026**
 
-**Key features**
+### Key features
 
-* The initial release of the **Orchestration SDK for React Native** is now available.
+* **Initial release**
+
+  The initial release of the **Orchestration SDK for React Native** is now available.
 
   This release supports the following key features:
 
@@ -1478,25 +2559,90 @@ docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agent
 revdate: Fri, 16 May 2025 12:17:11 +0100
 keywords: ["Compatibility", "Features", "Source Code", "SDK"]
 section_ids:
-  latest_updates: Latest updates
+  unified_ios_2_2_0: Orchestration SDK for iOS 2.2.0
+  key_features: Key features
+  added: Added
+  updated: Updated
+  breaking_changes: Breaking changes
+  changed: Changed
+  fixed: Fixed
+  unified_react_native_1_1_0: Orchestration SDK for React Native 1.1.0
+  key_features_2: Key features
+  unified_android_2_2_0: Orchestration SDK for Android 2.2.0
+  key_features_3: Key features
+  added_2: Added
+  changed_2: Changed
+  fixed_2: Fixed
+  unified_javascript_2_3_0: Orchestration SDK for JavaScript 2.3.0
+  key_features_4: Key features
+  enhancements: Enhancements
+  unified_javascript_2_2_0: Orchestration SDK for JavaScript 2.2.0
+  enhancements_2: Enhancements
+  breaking_changes_2: Breaking Changes
+  changes: Changes
+  unified_ios_2_1_1: Orchestration SDK for iOS 2.1.1
+  updated_2: Updated
+  unified_javascript_2_1_1: Orchestration SDK for JavaScript 2.1.1
+  fixes: Fixes
+  unified_ios_2_1_0: Orchestration SDK for iOS 2.1.0
+  key_features_5: Key features
+  enhancements_3: Enhancements
+  fixes_2: Fixes
+  unified_javascript_2_1_0: Orchestration SDK for JavaScript 2.1.0
+  key_features_6: Key features
+  added_3: Added
+  updated_3: Updated
+  fixed_3: Fixed
+  unified_android_2_1_0: Orchestration SDK for Android 2.1.0
+  key_features_7: Key features
+  enhancements_4: Enhancements
+  fixes_3: Fixes
   unified_react_native_1_0_0: Orchestration SDK for React Native 1.0.0
+  key_features_8: Key features
   unified_android_2_0_1: Orchestration SDK for Android 2.0.1
+  fixes_4: Fixes
   unified_android_2_0_0: Orchestration SDK for Android 2.0.0
+  key_features_9: Key features
+  enhancements_5: Enhancements
   unified_ios_2_0_0: Orchestration SDK for iOS 2.0.0
+  key_features_10: Key features
+  enhancements_6: Enhancements
+  fixes_5: Fixes
   unified_javascript_2_0_0: Orchestration SDK for JavaScript 2.0.0
+  key_features_11: Key features
+  enhancements_7: Enhancements
+  fixes_6: Fixes
   davinci_android_1_3_0: DaVinci client for Android 1.3.0
+  enhancements_8: Enhancements
+  fixes_7: Fixes
   davinci_js_1_3_0: DaVinci client for JavaScript 1.3.0
+  enhancements_9: Enhancements
   davinci_ios_1_3_1: DaVinci client for iOS 1.3.1
+  updated_4: Updated
+  fixes_8: Fixes
   davinci_ios_1_3_0: DaVinci client for iOS 1.3.0
+  enhancements_10: Enhancements
+  updated_5: Updated
   davinci_android_1_2_0: DaVinci client for Android 1.2.0
+  enhancements_11: Enhancements
   davinci_ios_1_2_0: DaVinci client for iOS 1.2.0
+  enhancements_12: Enhancements
+  fixes_9: Fixes
+  changes_2: Changes
   davinci_js_1_2_0: DaVinci client for JavaScript 1.2.0
+  enhancements_13: Enhancements
   davinci_android_1_1_0: DaVinci client for Android 1.1.0
+  enhancements_14: Enhancements
+  fixes_10: Fixes
   davinci_ios_1_1_0: DaVinci client for iOS 1.1.0
+  enhancements_15: Enhancements
   davinci_js_1_1_0: DaVinci client for JavaScript 1.1.0
+  enhancements_16: Enhancements
+  updated_6: Updated
   davinci_android_1_0_0: DaVinci client 1.0.0
-  davinci_ios_1_0_0: DaVinci client 1.0.0
-  davinci_javascript_1_0_0: DaVinci client 1.0.0
+  enhancements_17: Enhancements
+  enhancements_18: Enhancements
+  enhancements_19: Enhancements
 ---
 
 # Release Notes
@@ -1507,15 +2653,483 @@ Subscribe to get automatic updates:
 
 * [icon: square-envelope, set=fa][Orchestration SDKs Changelog email notifications](https://backstage.forgerock.com/account/notifications/settings)
 
-## Latest updates
+## Orchestration SDK for iOS 2.2.0
 
-### Orchestration SDK for React Native 1.0.0
+**October 20, 2026**
 
-June 29, 2026 `major`
+### Key features
 
-**Key features**
+* **PingOne Recognize**
 
-* The initial release of the **Orchestration SDK for React Native** is now available.
+  A new `recognize` module provides privacy-preserving facial biometrics for enrollment and sign-in in authentication journeys.
+
+  Learn more in [Integrating PingOne Recognize](../journey/use-cases/recognize/index.html).
+
+* Facebook Limited Login
+
+  Sign in to Facebook using the OIDC ID-token flow instead of the classic access-token login.
+
+  In PingOne Advanced Identity Cloud and PingAM journeys, configure an OIDC Social Identity Provider with a name containing `fb-limited` to opt in; existing provider names such as `facebook` continue to use classic access-token login.
+
+  In DaVinci Custom HTML and PingOne Forms, set the new `facebookLimitedLoginEnabled` property on the Facebook collector to choose between the classic `accessToken` and Limited Login `idToken` payloads.
+
+  Learn more in [Authenticating with external identity providers on iOS](../journey/use-cases/external-idp/ios/index.html).
+
+### Added
+
+* Added a new `pingonemfa` module for PingOne MFA integration, with DaVinci `MobilePairingCollector` support for pairing PingOne MFA accounts directly within a DaVinci flow.
+
+* Added `ImageCollector` to support image display in DaVinci forms. \[SDKS-5143]
+
+* Added `MetadataCollector` to support the DaVinci SDK Integrator connector's pause/resume model, so the app can invoke on-device SDKs and return a result or error before the flow continues. \[SDKS-5142]
+
+* Added `trigger` and `isAutomatic` properties to the DaVinci FIDO collectors. \[SDKS-4552]
+
+* Added a present-only launch mode to `BrowserLauncher` through `browserMode: .custom`.
+
+  `launch()` resolves as soon as the browser UI is presented, without waiting for a callback. Use this for use cases such as session handoff or in-app SSO, where no redirect back to the app is expected. \[SDKS-5357]
+
+* Added `OidcError.configurationError` to report a configuration that has neither a usable `discoveryEndpoint` nor a pre-supplied `openId` object. \[SDKS-5301]
+
+* Added opt-in commercial device-model-name resolution to `DeviceProfileCallback` through `PlatformCollector(includeModelName: true)`; the default `PlatformCollector()` payload is unchanged. \[SDKS-5275]
+
+### Updated
+
+* Redesigned the PingExample sample app with a shared design system. \[SDKS-5054]
+
+* Updated the Facebook iOS SDK dependency to 18.1.0. \[SDKS-5160]
+
+* The `oidc.discoveryEndpoint` property in unified JSON configuration is now required only when no `oidc.openId` sub-object is supplied.
+
+  An `openId` block without `discoveryEndpoint` replaces the discovery document and requires `tokenEndpoint`. \[SDKS-5301]
+
+* Restored `OidcClientConfig.openId` as a publicly settable property, and `oidcInitialize()` now skips OpenID discovery when it is pre-supplied, restoring the 2.0.0 no-discovery configuration path. \[SDKS-5301]
+
+### Breaking changes
+
+* `PingJourney` no longer has a hard dependency on `PingDeviceProfile`. \[SDKS-5443]
+
+  Previously, every `PingJourney` consumer's binary transitively linked `PingDeviceProfile`, whose `BluetoothCollector` instantiates `CBCentralManager`, causing App Store Connect to flag the app for a missing `NSBluetoothAlwaysUsageDescription` even when no `DeviceProfileCallback` node was used.
+
+  If your journeys use the Device Profile Collector node, add the `PingDeviceProfile` product or pod explicitly to your own `Package.swift` or `Podfile`.
+
+* `OidcError` has a new `configurationError` case, so exhaustive `switch` statements over `OidcError` need a new branch. \[SDKS-5301]
+
+### Changed
+
+* A JSON configuration with a blank `oidc.discoveryEndpoint` and no `oidc.openId` sub-object now fails at parse time instead of at first use. \[SDKS-5301]
+
+* `OidcClientConfig.oidcInitialize()` cancellation is now isolated per caller: cancelling one caller's own task still returns promptly with `CancellationError`, but no longer cancels the shared discovery operation for any other caller currently sharing it. \[SDKS-5301]
+
+* `CallbackRegistry.callback(from:)` now logs a debug message when a journey response contains a callback type with no registered handler, such as a `DeviceProfileCallback` in an app that did not add the `PingDeviceProfile` module, making the missing-module misconfiguration diagnosable instead of silently dropping the callback. \[SDKS-5443]
+
+* `SubmitCollector`, `FlowCollector`, and `MetadataCollector` now expose `actionKey` through the new `ActionKeyProvider` protocol. \[SDKS-5290]
+
+### Fixed
+
+* Fixed DaVinci FIDO registration and authentication not launching automatically when the form's `trigger` property is not `BUTTON`. \[SDKS-4552]
+
+* Fixed FIDO2 client-side WebAuthn errors (cancellation, timeout, and similar) not routing to the DaVinci error branch. \[SDKS-4478]
+
+* Fixed `QRCodeCollector` not preserving the complete QR code data URI in `content`. \[SDKS-5299]
+
+* Fixed `OidcWebClient` `.authSession` and `.ephemeralAuthSession` not completing for Universal Link (https) redirect URIs. \[SDKS-5239]
+
+* Fixed `OidcWebClient.authorize()` collapsing `FailureNode.cause` to `.unknown`, losing typed browser-cancellation and unsupported-OS error identity. \[SDKS-5295]
+
+* Fixed 5xx PingAM responses with a parseable error body being misclassified as `FailureNode` instead of `ErrorNode`, diverging from Android. \[SDKS-5358]
+
+* Fixed `Journey.start(backchannelUri:)` not rejecting whitespace-only `authIndexType` and `authIndexValue`, diverging from Android. \[SDKS-5359]
+
+* Fixed the asynchronous `OidcClient.generateAuthorizeUrl(customParams:)` silently falling back to the standard (non-PAR) flow when called before `OidcClientConfig.oidcInitialize()`, which could emit `additionalParameters` onto the returned URL instead of the PAR POST body. The synchronous overload never supported PAR and is unaffected. \[SDKS-5403]
+
+* Fixed `swift build` (macOS) failing in `PingOidc`: `OidcDeviceClient.authorize(verificationUriComplete:)` now throws `BrowserError.httpsCallbackUnsupportedOS` on non-iOS platforms instead of referencing the iOS-only `BrowserLauncher` type, and the `PingOneMFA` target's `PingOneSDK` dependency is iOS-conditioned. \[SDKS-5443]
+
+## Orchestration SDK for React Native 1.1.0
+
+**October 8, 2026**
+
+### Key features
+
+* **DaVinci module for React Native.**
+
+  The first public release of the `@ping-identity/rn-davinci` module lets your React Native app run DaVinci flows end to end, with form rendering and submission.
+
+  Learn more in [Using the DaVinci module for React Native](../davinci/usage/react-native/index.html).
+
+* **PingOne Protect fraud prevention in DaVinci flows.**
+
+  The new `@ping-identity/rn-protect` module collects behavioral data and sends Protect signals during DaVinci flows, so your React Native app can assess fraud risk.
+
+  Learn more in [Getting started with PingOne Protect on React Native](../davinci/use-cases/protect/react-native/index.html).
+
+* **External IdP (social sign-on) collectors in DaVinci flows.**
+
+  Authenticate with external identity providers such as Apple, Google, and Facebook directly from DaVinci flows in your React Native app.
+
+  Learn more in [Configure a React Native app for social sign-on](../davinci/use-cases/external-idp/react-native/index.html).
+
+* **FIDO and passkeys in DaVinci flows.**
+
+  Register and authenticate passkeys in DaVinci flows with the new `FidoRegistrationCollector` and `FidoAuthenticationCollector`.
+
+  Learn more in [Getting started with FIDO on React Native](../davinci/use-cases/fido/react-native/index.html).
+
+* **Device Authorization Grant in OIDC sign-on.**
+
+  Sign in on devices with limited input, such as smart TVs or set-top boxes, using the new `createOidcDeviceClient` and `useDeviceAuthGrant` APIs.
+
+  Learn more in [Authenticating devices with the Device Authorization Grant](../oidc/use-cases/device-authorization-grant/index.html).
+
+* **Pushed Authorization Request (PAR) in OIDC sign-on.**
+
+  Send OAuth 2.0 authorization parameters directly to the server before the redirect begins, keeping them out of the browser URL, through the new `par` client config option.
+
+  Learn more in [Securing OIDC sign-on with Pushed Authorization Requests](../oidc/use-cases/par/index.html).
+
+**Added**
+
+* Added DaVinci `BooleanCollector` and `ReadOnlyTextCollector` support, plus auto-submit for collectors flagged auto-capable by the flow.
+
+* Added DaVinci polling and QRCode collectors so flows can wait on out-of-band status and display QR codes.
+
+* Added DaVinci phone number collector support for phone extension fields (`extension`, `showExtension`, `extensionLabel`).
+
+* Added DaVinci label collector support for `richContent`.
+
+* Added DaVinci password collector support for server-provided validation rules, structured password-policy validation errors (`INVALID_LENGTH`, `UNIQUE_CHARACTER`, `MAX_REPEAT`, `MIN_CHARACTERS`) with native constraint values, and a `validate` method for on-demand collector validation.
+
+**Updated**
+
+* Improved the `useJourneyForm` hook with typed, normalized form fields for simpler Journey callback handling in `@ping-identity/rn-journey`.
+
+* Updated Journey `ContinueNode` to expose UI metadata, such as page header, description, submit button text, and page footer details.
+
+* Improved Expo compatibility with config plugin ownership.
+
+* Updated OATH typed errors to carry violated policy details, so callers can react without parsing message strings.
+
+**Fixed**
+
+* `SOCIAL_LOGIN_BUTTON` no longer reported in unsupported fields when an IdP collector is present in `@ping-identity/rn-davinci`.
+
+## Orchestration SDK for Android 2.2.0
+
+**September 25, 2026**
+
+### Key features
+
+* **PingOne Recognize**
+
+  A new `recognize` module provides privacy-preserving facial biometrics for enrollment and sign-in in authentication journeys.
+
+  Learn more in [Integrating PingOne Recognize](../journey/use-cases/recognize/index.html).
+
+* **Backchannel authentication** \[SDKS-5157]
+
+  The Orchestration SDK now supports transactional backchannel authentication in authentication journeys, so a third party can initiate a sign-in or transaction on behalf of your user, and your app completes it after the user approves it on their device.
+
+  |   |                                                                                                                                                                                                                                                                       |
+  | - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+  |   | This is not OIDC Client-Initiated Backchannel Authentication (CIBA).This feature uses a proprietary backchannel authentication mechanism in Advanced Identity Cloud and PingAM; a transactional authentication pattern that is unrelated to the OIDC CIBA grant type. |
+
+  Learn more in [Backchannel authentication](../journey/use-cases/backchannel-auth/index.html).
+
+### Added
+
+* Added a new `pingonemfa` module for PingOne MFA integration, with DaVinci `MobilePairingCollector` support for pairing PingOne MFA accounts directly within a DaVinci flow.
+
+* Added `MetadataCollector` for DaVinci flows to support exchanging custom SDK metadata. \[SDKS-5168]
+
+* Added `ImageCollector` for DaVinci forms to display images. \[SDKS-5169]
+
+* Added an optional HTTP status code to `ErrorNode`. \[SDKS-5202]
+
+### Changed
+
+* Changed FIDO2 authentication to support per-request API selection with `useFido2ApiClient`. \[SDKS-5411]
+
+### Fixed
+
+* Fixed the browser redirect URI scheme manifest placeholder to apply only to debug builds, allowing release consumers to provide their own value. \[SDKS-5296]
+
+* Fixed Journey `submitButtonText`/`pageFooter` to resolve against the device's ordered preferred-locale list. \[SDKS-5310]
+
+* Fixed OIDC `refresh()` to no longer delete the cached token from storage or revoke a non-expired access token before refreshing. \[SDKS-5414]
+
+* Fixed OAuth 2.0 Device Authorization Grant polling to retry on transient network and transport failures instead of terminating the flow. \[SDKS-5124]
+
+* Fixed `AbstractValidatedCallback` throwing when PingAM returns an empty `policies` array instead of an object. \[SDKS-5260]
+
+* Fixed `QRCodeCollector.id()` to return a stable key from the collector configuration instead of a random value. \[SDKS-5293]
+
+* Fixed FIDO2 collectors to report WebAuthn and credential errors as actionable events instead of generic submit failures. \[SDKS-4477]
+
+* Fixed Journey FIDO2 passkey registration crashes on API 33. \[SDKS-5411]
+
+* Fixed Jackson dependency versions to address security vulnerabilities (CVE-2026-54512, CVE-2026-54513, CVE-2026-54514, CVE-2026-54515). \[SDKS-5199]
+
+* Fixed missing blank-secret validation on `OathCredential`, and `OathType` now serializes as lowercase.
+
+## Orchestration SDK for JavaScript 2.3.0
+
+**September 25, 2026**
+
+### Key features
+
+* **PingOne Recognize**
+
+  The Journey client now supports PingOne Recognize enrollment and authentication callbacks, providing privacy-preserving facial biometrics for enrollment and sign-in in authentication journeys.
+
+  Learn more in [Integrating PingOne Recognize](../journey/use-cases/recognize/javascript/index.html).
+
+### Enhancements
+
+* Enhanced `WebAuthn.isConditionalMediationSupported` to now accept an optional journey step. In addition to checking browser support, the method now also reports whether the server requested conditional mediation for that step, so the result reflects the journey's configuration.
+
+* Custom storage configuration types are now exported from the OIDC client, so you can write strongly typed custom storage implementations in TypeScript.
+
+## Orchestration SDK for JavaScript 2.2.0
+
+**September 16, 2026**
+
+### Enhancements
+
+* Added `MetadataCollector` support for DaVinci flows to support exchanging custom SDK metadata.
+
+* Added JSON client config helper re-exports from the respective client packages, so a single import can build a client configuration from the unified JSON config.
+
+* Added `create-journey-step` export so a Journey step is easy to deserialize after it has been serialized.
+
+### Breaking Changes
+
+* Changed the device client `tokenStore` configuration to accept a `CustomStorageObject` instead of the legacy `TokenStoreObject`.
+
+  This is a breaking change for custom token-store implementations. Learn more in [Incompatible changes](breaking/breaking-changes.html#JSUNIFIED220).
+
+### Changes
+
+* Changed FIDO/WebAuthn `DOMException` handling in DaVinci flows to catch errors and send them to DaVinci instead of failing generically.
+
+* Removed the `@forgerock/javascript-sdk` dependency from `device-client`.
+
+* Fixed the HTTP header to send `ping-sdk` instead of `forgerock-sdk`.
+
+## Orchestration SDK for iOS 2.1.1
+
+**September 4, 2026**
+
+### Updated
+
+* Updated RecaptchaEnterprise dependency to 18.9.1 for Xcode 27 and iOS 27 compatibility. \[SDKS-5306]
+
+## Orchestration SDK for JavaScript 2.1.1
+
+**August 10, 2026**
+
+### Fixes
+
+* Fixed the OIDC client to always include `prompt=none` on background authorization calls, for both standard and PAR flows.
+
+## Orchestration SDK for iOS 2.1.0
+
+**July 22, 2026**
+
+### Key features
+
+* **Pushed Authorization Requests (PAR)** \[SDKS-4235]
+
+  PAR sends OAuth 2.0 authorization parameters directly to the server before the redirect begins, keeping them out of the browser URL and reducing the chance of them being tampered with or exposed in logs or referrer headers.
+
+  Learn more in [Configuring iOS apps for Pushed Authorization Requests](../oidc/use-cases/par/ios.html).
+
+* **OAuth 2.0 Device Authorization Grant** \[SDKS-4785]
+
+  The Device Authorization Grant is designed for devices with no browser or keyboard, such as smart TVs or set-top boxes. Users authenticate on a secondary device like a phone, and the primary device receives a token once sign-in completes.
+
+  Learn more in [Configuring iOS apps for the Device Authorization Grant](../oidc/use-cases/device-authorization-grant/ios.html).
+
+* **Standardized JSON configuration** \[SDKS-5066]
+
+  All SDK modules now support a shared JSON object or file for configuration. This makes it straightforward to manage settings across environments and to share a single configuration file across Android, iOS, and JavaScript.
+
+  Learn more in:
+
+  * [Using common JSON configuration for the iOS DaVinci module](../davinci/usage/ios/02-configuring-the-davinci-module.html#common-json-configuration)
+
+  * [Using common JSON configuration for the iOS Journey module](../journey/usage/ios/03-configuring-the-journey-module.html#common-json-configuration)
+
+  * [Using common JSON configuration for the iOS OIDC module](../oidc/usage/ios-centralized-login.html#ios_oidc_common_json_configuration)
+
+### Enhancements
+
+* Added `PollingCollector` for DaVinci flows. \[SDKS-4682]
+
+* Added `QRCodeCollector` for DaVinci flows. \[SDKS-4680]
+
+* Added `BooleanCollector` to support Checkbox and Switch input types in DaVinci forms. \[SDKS-4920]
+
+* Added `ReadOnlyTextCollector` for DaVinci forms. \[SDKS-4928]
+
+* Added rich text and embedded link support to `LabelCollector` through new `RichContent` and `RichContentReplacement` types. \[SDKS-4245]
+
+* Added support for phone number extensions in `PhoneNumberCollector`. \[SDKS-4668]
+
+* Added `PushError.pushNumberChallengeError` to surface a distinct failure for Push Number Challenge responses. \[SDKS-5115]
+
+* Added `preferImmediatelyAvailableCredentials` option to FIDO authentication to restrict the ceremony to locally-available credentials only, if they exist. \[SDKS-5212]
+
+* Added `AuthMigration` module for migrating existing sessions from the legacy ForgeRock SDK. \[SDKS-4773]
+
+* Added Page Node description, header, and footer support. \[SDKS-4762]
+
+### Fixes
+
+* Fixed permanent authentication failure after iCloud device migration caused by a Secure Enclave key mismatch. \[SDKS-5172]
+
+* Fixed `PingFido` WebAuthn registration ignoring the configured `displayName` during passkey creation. \[SDKS-5211]
+
+* Fixed `PasswordCollector` not handling nested password policies. \[SDKS-4695]
+
+* Fixed PIN verification during device binding registration. \[SDKS-5015]
+
+* Fixed `Protect` collector being triggered multiple times within a flow. \[SDKS-4769]
+
+* Fixed browser close and reset logic. \[SDKS-4717]
+
+* Fixed device binding authenticators incorrectly reporting as supported on the simulator. \[SDKS-4836]
+
+* Fixed `DeviceBindingConfig` device name defaulting to the user-assigned name instead of the device model. \[SDKS-4850]
+
+* Fixed `DefaultDeviceIdentifier` to reuse the legacy device identifier when available. \[SDKS-4630]
+
+* Fixed Swift build failures caused by a platform bump and missing `canImport` guards. \[SDKS-4916]
+
+* Fixed FIDO ceremony logs not routing through the workflow logger. \[SDKS-4924]
+
+## Orchestration SDK for JavaScript 2.1.0
+
+**July 8, 2026**
+
+### Key features
+
+* **Pushed Authorization Requests (PAR)**
+
+  PAR sends OAuth 2.0 authorization parameters directly to the server before the redirect begins, keeping them out of the browser URL and reducing the chance of them being tampered with or exposed in logs or referrer headers.
+
+  Learn more in [Configuring JavaScript apps for Pushed Authorization Requests](../oidc/use-cases/par/javascript.html).
+
+* **Standardized JSON configuration**
+
+  All SDK modules now support a shared JSON object or file for configuration. This makes it straightforward to manage settings across environments and to share a single configuration file across Android, iOS, and JavaScript.
+
+  Learn more in:
+
+  * [Using common JSON configuration for the JavaScript DaVinci module](../davinci/usage/javascript/02-configuring-the-davinci-module.html#common-json-configuration)
+
+  * [Using common JSON configuration for the JavaScript Journey module](../journey/usage/javascript/03-configuring-the-journey-module.html#common-json-configuration)
+
+  * [Using common JSON configuration for the JavaScript OIDC module](../oidc/usage/javascript-centralized-login.html#javascript_oidc_common_json_configuration)
+
+### Added
+
+* Added `PollingCollector` for DaVinci flows.
+
+* Added `QrCodeCollector` for DaVinci flows.
+
+* Added `BooleanCollector` and `ValidatedBooleanCollector` to support Checkbox input types in DaVinci forms.
+
+* Added `PhoneNumberExtensionCollector` for phone number fields that include an extension.
+
+* Added `ValidatedPasswordCollector` for password fields with embedded policy validation.
+
+* Added `ImageCollector` for `IMAGE` form fields in DaVinci forms.
+
+* Added `subscribe` method to journey and OIDC client instances.
+
+* Added WebAuthn conditional mediation (passkey autofill) support.
+
+* Added `user.session()` method for silent OIDC session verification (`prompt=none`).
+
+### Updated
+
+* Updated rich-text support of the `ReadOnlyCollector` to handle links in Translatable Rich Text (Forms).
+
+### Fixed
+
+* Fixed RTK Query cache lookups in `cache.getLatestResponse()` and `cache.getResponseWithId()`.
+
+* Fixed `resume()` to correctly forward redirect query parameters from the authorization response.
+
+* Fixed `JourneyLoginFailure` not being returned when the server sends a login failure response.
+
+## Orchestration SDK for Android 2.1.0
+
+**July 7, 2026**
+
+### Key features
+
+* **Pushed Authorization Requests (PAR)** \[SDKS-4231]
+
+  PAR sends OAuth 2.0 authorization parameters directly to the server before the redirect begins, keeping them out of the browser URL and reducing the chance of them being tampered with or exposed in logs or referrer headers.
+
+  Learn more in [Configuring Android apps for Pushed Authorization Requests](../oidc/use-cases/par/android.html).
+
+* **OAuth 2.0 Device Authorization Grant** \[SDKS-4784]
+
+  The Device Authorization Grant is designed for devices with no browser or keyboard, such as smart TVs or set-top boxes. Users authenticate on a secondary device like a phone, and the primary device receives a token once sign-in completes.
+
+  Learn more in [Configuring Android apps for the Device Authorization Grant](../oidc/use-cases/device-authorization-grant/android.html).
+
+* **Standardized JSON configuration** \[SDKS-5065]
+
+  All SDK modules now support a shared JSON object or file for configuration. This makes it straightforward to manage settings across environments and to share a single configuration file across Android, iOS, and JavaScript.
+
+  Learn more in:
+
+  * [Using common JSON configuration for the Android DaVinci module](../davinci/usage/android/02-configuring-the-davinci-module.html#common-json-configuration)
+
+  * [Using common JSON configuration for the Android Journey module](../journey/usage/android/03-configuring-the-journey-module.html#common-json-configuration)
+
+  * [Using common JSON configuration for the Android OIDC module](../oidc/usage/android-centralized-login.html#android_oidc_common_json_configuration)
+
+* **Android 17 support** \[SDKS-5191]
+
+  Verified the Orchestration SDK for Android works with Android 17.
+
+### Enhancements
+
+* Added `PollingCollector` for DaVinci flows. \[SDKS-4681]
+
+* Added `QrCodeCollector` for DaVinci flows. \[SDKS-4679]
+
+* Added `BooleanCollector` to support Checkbox and Switch input types in DaVinci forms. \[SDKS-4919]
+
+* Added `ReadOnlyTextCollector` for DaVinci forms to support Terms of Service and agreement displays. \[SDKS-4927]
+
+* Added support for links in Translatable Rich Text (Forms). \[SDKS-4246]
+
+* Added support for phone number extensions in `PhoneNumberCollector`. \[SDKS-4669]
+
+### Fixes
+
+* Fixed OATH and Push URI parsers to propagate typed `InvalidUriException` for structural URI parse errors. \[SDKS-5074]
+
+* Fixed Ktor CIO engine dropping repeated `Set-Cookie` headers with mixed casing (KTOR-8614 workaround). \[SDKS-4742]
+
+* Fixed Push Number Challenge not surfacing a distinct failure for wrong-number responses. \[SDKS-5116]
+
+* Fixed `PasswordCollector` not handling nested Password policies. \[SDKS-4694]
+
+## Orchestration SDK for React Native 1.0.0
+
+**June 29, 2026**
+
+### Key features
+
+* **Initial release**
+
+  The initial release of the **Orchestration SDK for React Native** is now available.
 
   This release supports the following key features:
 
@@ -1559,21 +3173,23 @@ June 29, 2026 `major`
 
     Learn more in [Introducing user profile self-service](../journey/use-cases/user-self-service/index.html).
 
-### Orchestration SDK for Android 2.0.1
+## Orchestration SDK for Android 2.0.1
 
-June 1, 2026 `patch`
+**June 1, 2026**
 
-**Fixed**
+### Fixes
 
 * Upgraded `bcpkix-jdk18on` from `1.81` to `1.84` to address a security vulnerability (CVE-2026-5588).
 
-### Orchestration SDK for Android 2.0.0
+## Orchestration SDK for Android 2.0.0
 
-April 15, 2026 `major`
+**April 15, 2026**
 
-**Key features**
+### Key features
 
-* The initial release of the **Orchestration SDK for Android** is now available with new features and additional support.
+* **Initial release**
+
+  The initial release of the **Orchestration SDK for Android** is now available with new features and additional support.
 
   This release supports the following key features:
 
@@ -1609,7 +3225,7 @@ April 15, 2026 `major`
 
     Learn more in [Managing registered devices](../journey/use-cases/device-self-service/index.html).
 
-**Added**
+### Enhancements
 
 * Added new `network` module. \[SDKS-4505]
 
@@ -1623,13 +3239,15 @@ April 15, 2026 `major`
 
 * Added new `device-root` module. \[SDKS-4365]
 
-### Orchestration SDK for iOS 2.0.0
+## Orchestration SDK for iOS 2.0.0
 
-April 15, 2026 `major`
+**April 15, 2026**
 
-**Key features**
+### Key features
 
-* The initial release of the **Orchestration SDK for iOS** is now available with new features and additional support.
+* **Initial release**
+
+  The initial release of the **Orchestration SDK for iOS** is now available with new features and additional support.
 
   This release supports the following key features:
 
@@ -1665,7 +3283,7 @@ April 15, 2026 `major`
 
     Learn more in [Managing registered devices](../journey/use-cases/device-self-service/index.html).
 
-**Added**
+### Enhancements
 
 * Added new `PingNetwork` module. \[SDKS-4496]
 
@@ -1683,17 +3301,19 @@ April 15, 2026 `major`
 
 * Added migration mechanism for existing device binding data from the ForgeRock SDK to the Orchestration SDK for iOS. \[SDKS-4495]
 
-**Fixes**
+### Fixes
 
 * Updated `PingStorage` module to allow multiple DaVinci/Journey instances to have separate cookies, sessions, and token storage. \[SDKS-4588]
 
-### Orchestration SDK for JavaScript 2.0.0
+## Orchestration SDK for JavaScript 2.0.0
 
-April 15, 2026 `major`
+**April 15, 2026**
 
-**Key features**
+### Key features
 
-* The initial release of the **Orchestration SDK for JavaScript** is now available with new features and additional support.
+* **Initial release**
+
+  The initial release of the **Orchestration SDK for JavaScript** is now available with new features and additional support.
 
   This release supports the following key features:
 
@@ -1713,7 +3333,7 @@ April 15, 2026 `major`
 
     Learn more in [Managing registered devices](../journey/use-cases/device-self-service/index.html).
 
-**Added**
+### Enhancements
 
 * Added well-known OIDC endpoint discovery support.
 
@@ -1721,7 +3341,7 @@ April 15, 2026 `major`
 
   Learn more in [Configuring the Journey module in JavaScript](../journey/usage/javascript/03-configuring-the-journey-module.html).
 
-**Fixed**
+### Fixes
 
 * Fixed error handling in the `storage` client and `davinci-client`.
 
@@ -1731,11 +3351,11 @@ April 15, 2026 `major`
 
   * Improved `davinci-client` error handling to use explicit error checks instead of try-catch.
 
-### DaVinci client for Android 1.3.0
+## DaVinci client for Android 1.3.0
 
-November 28, 2025 `minor`
+**November 28, 2025**
 
-**Added**
+### Enhancements
 
 * Added support for PingOne Protect, by using the new `PingProtect` module. \[SDKS-4069]
 
@@ -1743,7 +3363,7 @@ November 28, 2025 `minor`
 
 * Added support for Android 16 and updated `compileSdk` to version 36 and `minSdk` to 29. \[SDKS-4278]
 
-**Fixed**
+### Fixes
 
 * Enhanced form handling in the DaVinci SDK to automatically reset form values after submission. \[SDKS-4511]
 
@@ -1757,11 +3377,11 @@ November 28, 2025 `minor`
 
 * Upgraded datastore library to version 1.1.7. \[SDKS-4207]
 
-### DaVinci client for JavaScript 1.3.0
+## DaVinci client for JavaScript 1.3.0
 
-November 25, 2025 `minor`
+**November 25, 2025**
 
-**Added**
+### Enhancements
 
 * Added support for the Ping Protect collector
 
@@ -1769,39 +3389,39 @@ November 25, 2025 `minor`
 
 * Added support for pre-filled phone number and country code
 
-### DaVinci client for iOS 1.3.1
+## DaVinci client for iOS 1.3.1
 
-November 25, 2025 `patch`
+**November 25, 2025**
 
-**Updated**
+### Updated
 
 * Updated all targets to use the Swift 6 compiler. \[SDKS-4499]
 
-**Fixed**
+### Fixes
 
 * Fixed an issue in the `PingProtect` module causing a crash on iOS 17+ due to an incorrect actor executor assumption. \[SDKS-4494]
 
-### DaVinci client for iOS 1.3.0
+## DaVinci client for iOS 1.3.0
 
-October 23, 2025 `minor`
+**October 23, 2025**
 
-**Added**
+### Enhancements
 
 * Added support for PingOne Protect, by using the new `PingProtect` module. \[SDKS-4073]
 
   Learn more in [Evaluating risk with PingOne Protect](../davinci/use-cases/protect/index.html).
 
-**Updated**
+### Updated
 
 * Updated to handle the country code format in the `PhoneNumber` collector. \[SDKS-4199]
 
 * Redesigned and improved the PingExample app. \[SDKS-4104]
 
-### DaVinci client for Android 1.2.0
+## DaVinci client for Android 1.2.0
 
-July 8, 2025 `minor`
+**July 8, 2025**
 
-**Added**
+### Enhancements
 
 * Added support for native social login with Google and Facebook. \[SDKS-3449]
 
@@ -1813,11 +3433,11 @@ July 8, 2025 `minor`
 
 * Added support for StrongBox when generating keys. \[SDKS-4098]
 
-### DaVinci client for iOS 1.2.0
+## DaVinci client for iOS 1.2.0
 
-July 8, 2025 `minor`
+**July 8, 2025**
 
-**Added**
+### Enhancements
 
 * Added support for native social login with Apple, Google, and Facebook. \[SDKS-3450]
 
@@ -1827,29 +3447,29 @@ July 8, 2025 `minor`
 
 * Added access to the `key` attribute of `LabelCollector`. \[SDKS-3956]
 
-**Fixed**
+### Fixes
 
 * Resolved an issue where cookies were incorrectly cleared from in-memory storage when requests contain a `Set-Cookie` header \[SDKS-4189]
 
-**Changed**
+### Changes
 
 * Renamed the `PingExternal-idp` module to `PingExternalIdP`. \[SDKS-3958]
 
   You must update the module name in your code if you are using the previous module name and upgrade to DaVinci client for iOS 1.2.0.
 
-### DaVinci client for JavaScript 1.2.0
+## DaVinci client for JavaScript 1.2.0
 
-July 8, 2025 `minor`
+**July 8, 2025**
 
-**Added**
+### Enhancements
 
 * Added support for PingOne Forms one-time passcode (MFA) components `DEVICE_REGISTRATION`, `DEVICE_AUTHENTICATION`, and `PHONE_NUMBER`.
 
-### DaVinci client for Android 1.1.0
+## DaVinci client for Android 1.1.0
 
-April 17, 2025 `minor`
+**April 17, 2025**
 
-**Added**
+### Enhancements
 
 * Added support for additional [PingOne Form fields](../davinci/compatibility.html#form-connector-fields-release-notes). \[SDKS-3649]
 
@@ -1887,15 +3507,15 @@ April 17, 2025 `minor`
 
 * Added dynamic environment switching in the test sample app. \[SDKS-3642]
 
-**Fixed**
+### Fixes
 
 * Fixed an issue affecting the global logger when configuring a logger in DaVinci client configuration. \[SDKS-3616]
 
-### DaVinci client for iOS 1.1.0
+## DaVinci client for iOS 1.1.0
 
-April 17, 2025 `minor`
+**April 17, 2025**
 
-**Added**
+### Enhancements
 
 * Added support for additional [PingOne Form fields](../davinci/compatibility.html#form-connector-fields-release-notes). \[SDKS-3671, SDKS-3672]
 
@@ -1931,11 +3551,11 @@ April 17, 2025 `minor`
 
 * Added Swift 6 support. \[SDKS-3728]
 
-### DaVinci client for JavaScript 1.1.0
+## DaVinci client for JavaScript 1.1.0
 
-April 17, 2025 `minor`
+**April 17, 2025**
 
-**Added**
+### Enhancements
 
 * Added support for additional [PingOne Form fields](../davinci/compatibility.html#form-connector-fields-release-notes).
 
@@ -1969,7 +3589,7 @@ April 17, 2025 `minor`
 
 * Added support for default values in PingOne Form fields.
 
-**Updated**
+### Updated
 
 * Updated dependency on `@forgerock/javascript-sdk` to `4.7.0`.
 
@@ -1977,26 +3597,85 @@ April 17, 2025 `minor`
 
 * Updated the checks to determine what node state the DaVinci Client is in based on the response from PingOne.
 
-### DaVinci client 1.0.0
+## DaVinci client 1.0.0
 
-December 16, 2024 `major`
+**December 16, 2024**
 
-**Added**
+### Enhancements
 
-* Initial release of the DaVinci client for Android.
+* Initial release of the DaVinci client for Android. == DaVinci client 1.0.0
 
-### DaVinci client 1.0.0
+**December 16, 2024**
 
-December 16, 2024 `major`
+### Enhancements
 
-**Added**
+* Initial release of the DaVinci client for iOS. == DaVinci client 1.0.0
 
-* Initial release of the DaVinci client for iOS.
+**December 16, 2024**
 
-### DaVinci client 1.0.0
-
-December 16, 2024 `major`
-
-**Added**
+### Enhancements
 
 * Initial release of the DaVinci client JavaScript.
+
+---
+
+---
+title: Release timeline
+description: The release history of the Orchestration SDKs, showing when each version shipped and linking to the corresponding changelog entry
+component: orchsdks
+page_id: orchsdks:release-notes:timeline
+canonical_url: https://developer.pingidentity.com/orchsdks/release-notes/timeline.html
+llms_txt: https://developer.pingidentity.com/orchsdks/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: Mon, 10 Aug 2026 12:00:00 +0000
+keywords: ["Release history", "SDK versions"]
+---
+
+# Release timeline
+
+***Key***: *N.N.N* = Latest version
+
+Each row links to the changelog entry for that release.
+
+| Release date | Platform                                                                                                | SDK version | Release type(1) | Link                                                                                            |
+| ------------ | ------------------------------------------------------------------------------------------------------- | ----------- | --------------- | ----------------------------------------------------------------------------------------------- |
+| 2026-OCT-20  | [Orchestration SDK for iOS](changelogs/changelog_ios.html#unified_ios_2_2_0)                            | *2.2.0*     | Minor           | [[icon: file-lines, set=fa]](changelogs/changelog_ios.html#unified_ios_2_2_0)                   |
+| 2026-OCT-08  | [Orchestration SDK for React Native](changelogs/changelog_react_native.html#unified_react_native_1_1_0) | *1.1.0*     | Minor           | [[icon: file-lines, set=fa]](changelogs/changelog_react_native.html#unified_react_native_1_1_0) |
+| 2026-SEP-25  | [Orchestration SDK for Android](changelogs/changelog_android.html#unified_android_2_2_0)                | *2.2.0*     | Minor           | [[icon: file-lines, set=fa]](changelogs/changelog_android.html#unified_android_2_2_0)           |
+| 2026-SEP-25  | [Orchestration SDK for JavaScript](changelogs/changelog_javascript.html#unified_javascript_2_3_0)       | *2.3.0*     | Minor           | [[icon: file-lines, set=fa]](changelogs/changelog_javascript.html#unified_javascript_2_3_0)     |
+| 2026-SEP-16  | [Orchestration SDK for JavaScript](changelogs/changelog_javascript.html#unified_javascript_2_2_0)       | 2.2.0       | Minor           | [[icon: file-lines, set=fa]](changelogs/changelog_javascript.html#unified_javascript_2_2_0)     |
+| 2026-SEP-04  | [Orchestration SDK for iOS](changelogs/changelog_ios.html#unified_ios_2_1_1)                            | 2.1.1       | Patch           | [[icon: file-lines, set=fa]](changelogs/changelog_ios.html#unified_ios_2_1_1)                   |
+| 2026-AUG-10  | [Orchestration SDK for JavaScript](changelogs/changelog_javascript.html#unified_javascript_2_1_1)       | 2.1.1       | Patch           | [[icon: file-lines, set=fa]](changelogs/changelog_javascript.html#unified_javascript_2_1_1)     |
+| 2026-JUL-22  | [Orchestration SDK for iOS](changelogs/changelog_ios.html#unified_ios_2_1_0)                            | 2.1.0       | Minor           | [[icon: file-lines, set=fa]](changelogs/changelog_ios.html#unified_ios_2_1_0)                   |
+| 2026-JUL-08  | [Orchestration SDK for JavaScript](changelogs/changelog_javascript.html#unified_javascript_2_1_0)       | 2.1.0       | Minor           | [[icon: file-lines, set=fa]](changelogs/changelog_javascript.html#unified_javascript_2_1_0)     |
+| 2026-JUL-07  | [Orchestration SDK for Android](changelogs/changelog_android.html#unified_android_2_1_0)                | 2.1.0       | Minor           | [[icon: file-lines, set=fa]](changelogs/changelog_android.html#unified_android_2_1_0)           |
+| 2026-JUN-29  | [Orchestration SDK for React Native](changelogs/changelog_react_native.html#unified_react_native_1_0_0) | 1.0.0       | Major           | [[icon: file-lines, set=fa]](changelogs/changelog_react_native.html#unified_react_native_1_0_0) |
+| 2026-JUN-01  | [Orchestration SDK for Android](changelogs/changelog_android.html#unified_android_2_0_1)                | 2.0.1       | Patch           | [[icon: file-lines, set=fa]](changelogs/changelog_android.html#unified_android_2_0_1)           |
+| 2026-APR-15  | [Orchestration SDK for Android](changelogs/changelog_android.html#unified_android_2_0_0)                | 2.0.0       | Major           | [[icon: file-lines, set=fa]](changelogs/changelog_android.html#unified_android_2_0_0)           |
+| 2026-APR-15  | [Orchestration SDK for iOS](changelogs/changelog_ios.html#unified_ios_2_0_0)                            | 2.0.0       | Major           | [[icon: file-lines, set=fa]](changelogs/changelog_ios.html#unified_ios_2_0_0)                   |
+| 2026-APR-15  | [Orchestration SDK for JavaScript](changelogs/changelog_javascript.html#unified_javascript_2_0_0)       | 2.0.0       | Major           | [[icon: file-lines, set=fa]](changelogs/changelog_javascript.html#unified_javascript_2_0_0)     |
+
+> **Collapse: 2025**
+>
+> | Release date | Platform                                                                               | SDK version | Release type(1) | Link                                                                                  |
+> | ------------ | -------------------------------------------------------------------------------------- | ----------- | --------------- | ------------------------------------------------------------------------------------- |
+> | 2025-NOV-28  | [DaVinci client for Android](changelogs/changelog_android.html#davinci_android_1_3_0)  | 1.3.0       | Minor           | [[icon: file-lines, set=fa]](changelogs/changelog_android.html#davinci_android_1_3_0) |
+> | 2025-NOV-25  | [DaVinci client for JavaScript](changelogs/changelog_javascript.html#davinci_js_1_3_0) | 1.3.0       | Minor           | [[icon: file-lines, set=fa]](changelogs/changelog_javascript.html#davinci_js_1_3_0)   |
+> | 2025-NOV-25  | [DaVinci client for iOS](changelogs/changelog_ios.html#davinci_ios_1_3_1)              | 1.3.1       | Patch           | [[icon: file-lines, set=fa]](changelogs/changelog_ios.html#davinci_ios_1_3_1)         |
+> | 2025-OCT-23  | [DaVinci client for iOS](changelogs/changelog_ios.html#davinci_ios_1_3_0)              | 1.3.0       | Minor           | [[icon: file-lines, set=fa]](changelogs/changelog_ios.html#davinci_ios_1_3_0)         |
+> | 2025-JUL-08  | [DaVinci client for Android](changelogs/changelog_android.html#davinci_android_1_2_0)  | 1.2.0       | Minor           | [[icon: file-lines, set=fa]](changelogs/changelog_android.html#davinci_android_1_2_0) |
+> | 2025-JUL-08  | [DaVinci client for iOS](changelogs/changelog_ios.html#davinci_ios_1_2_0)              | 1.2.0       | Minor           | [[icon: file-lines, set=fa]](changelogs/changelog_ios.html#davinci_ios_1_2_0)         |
+> | 2025-JUL-08  | [DaVinci client for JavaScript](changelogs/changelog_javascript.html#davinci_js_1_2_0) | 1.2.0       | Minor           | [[icon: file-lines, set=fa]](changelogs/changelog_javascript.html#davinci_js_1_2_0)   |
+> | 2025-APR-17  | [DaVinci client for Android](changelogs/changelog_android.html#davinci_android_1_1_0)  | 1.1.0       | Minor           | [[icon: file-lines, set=fa]](changelogs/changelog_android.html#davinci_android_1_1_0) |
+> | 2025-APR-17  | [DaVinci client for iOS](changelogs/changelog_ios.html#davinci_ios_1_1_0)              | 1.1.0       | Minor           | [[icon: file-lines, set=fa]](changelogs/changelog_ios.html#davinci_ios_1_1_0)         |
+> | 2025-APR-17  | [DaVinci client for JavaScript](changelogs/changelog_javascript.html#davinci_js_1_1_0) | 1.1.0       | Minor           | [[icon: file-lines, set=fa]](changelogs/changelog_javascript.html#davinci_js_1_1_0)   |
+
+> **Collapse: 2024**
+>
+> | Release date | Platform                                                                                       | SDK version | Release type(1) | Link                                                                                        |
+> | ------------ | ---------------------------------------------------------------------------------------------- | ----------- | --------------- | ------------------------------------------------------------------------------------------- |
+> | 2024-DEC-16  | [DaVinci client for Android](changelogs/changelog_android.html#davinci_android_1_0_0)          | 1.0.0       | Major           | [[icon: file-lines, set=fa]](changelogs/changelog_android.html#davinci_android_1_0_0)       |
+> | 2024-DEC-16  | [DaVinci client for iOS](changelogs/changelog_ios.html#davinci_ios_1_0_0)                      | 1.0.0       | Major           | [[icon: file-lines, set=fa]](changelogs/changelog_ios.html#davinci_ios_1_0_0)               |
+> | 2024-DEC-16  | [DaVinci client for JavaScript](changelogs/changelog_javascript.html#davinci_javascript_1_0_0) | 1.0.0       | Major           | [[icon: file-lines, set=fa]](changelogs/changelog_javascript.html#davinci_javascript_1_0_0) |
+
+(1) For details about the scope of expected changes for different release types, see [Interface stability](stability.html).

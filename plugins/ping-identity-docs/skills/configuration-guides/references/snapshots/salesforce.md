@@ -1,9 +1,11 @@
 ---
 title: Configure direct Salesforce sign on using PingOne (SP-initiated login) plus SLO
-description: You must first enable identity provider (IdP)-initiated sign-on.
+description: Configure Salesforce SP-initiated sign-on and single logout (SLO) with PingOne — extends IdP-initiated setup
 component: configuration_guides
 page_id: configuration_guides:salesforce:config_signon_slo_salesforce_p1
 canonical_url: https://docs.pingidentity.com/configuration_guides/salesforce/config_signon_slo_salesforce_p1.html
+llms_txt: https://docs.pingidentity.com/configuration_guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: May 15, 2024
 section_ids:
   before-you-begin: Before you begin
@@ -63,10 +65,12 @@ section_ids:
 
 ---
 title: Configure direct Salesforce sign-on using PingFederate (SP-initiated sign-on) plus single logout (SLO)
-description: You must first enable IdP-initiated sign-on.
+description: Configure Salesforce SP-initiated sign-on and single logout (SLO) with PingFederate — extends IdP-initiated setup
 component: configuration_guides
 page_id: configuration_guides:salesforce:config_signon_slo_salesforce_pf
 canonical_url: https://docs.pingidentity.com/configuration_guides/salesforce/config_signon_slo_salesforce_pf.html
+llms_txt: https://docs.pingidentity.com/configuration_guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: May 15, 2024
 section_ids:
   before-you-begin: Before you begin
@@ -126,10 +130,12 @@ You should also select the **Login Form** check box during the testing phase in 
 
 ---
 title: Configuring SAML SSO with Salesforce and PingFederate
-description: Enable Salesforce sign-on from a PingFederate URL (IdP-initiated sign-on) plus single logout (SLO).
+description: Configure SAML SSO with Salesforce and PingFederate — IdP-initiated sign-on with single logout (SLO)
 component: configuration_guides
 page_id: configuration_guides:salesforce:config_saml_salesforce_pf
 canonical_url: https://docs.pingidentity.com/configuration_guides/salesforce/config_saml_salesforce_pf.html
+llms_txt: https://docs.pingidentity.com/configuration_guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: February 10, 2022
 section_ids:
   before-you-begin: Before you begin
@@ -317,10 +323,12 @@ You should also select the **Login Form** check box during the testing phase in 
 
 ---
 title: Configuring SAML SSO with Salesforce and PingOne for Enterprise
-description: Enable Salesforce sign-on from the PingOne for Enterprise console (IdP-initiated sign-on) plus single logout (SLO).
+description: Configure SAML SSO with Salesforce and PingOne for Enterprise — IdP-initiated sign-on with single logout (SLO)
 component: configuration_guides
 page_id: configuration_guides:salesforce:config_saml_salesforce_p1
 canonical_url: https://docs.pingidentity.com/configuration_guides/salesforce/config_saml_salesforce_p1.html
+llms_txt: https://docs.pingidentity.com/configuration_guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: May 15, 2024
 section_ids:
   before-you-begin: Before you begin

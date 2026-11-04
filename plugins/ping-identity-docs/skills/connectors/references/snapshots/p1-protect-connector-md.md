@@ -1,12 +1,12 @@
 ---
 title: PingOne Protect Connector
-description: This connector lets you use PingOne Protect in a PingOne DaVinci flow to improve the user experience, reduce multi-factor authentication (MFA) fatigue, lower the probability of unintentional push approvals, and issue challenges or deny access in high-risk situations.
+description: Configure the PingOne Protect connector in PingOne DaVinci to evaluate user risk, apply security policies, and route flows based on risk score or level
 component: connectors
 page_id: connectors::p1_protect_connector
 canonical_url: https://docs.pingidentity.com/connectors/p1_protect_connector.html
 llms_txt: https://docs.pingidentity.com/connectors/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: February 07, 2025
+revdate: 2026-07-09T00:00:00Z
 section_ids:
   setup: Setup
   resources: Resources
@@ -21,7 +21,7 @@ section_ids:
   create-risk-evaluation: Create Risk Evaluation
   steps: Steps
   update-risk-evaluation: Update Risk Evaluation
-  steps-2: Steps
+  updateSteps: Steps
   capabilities: Capabilities
   createRiskEvaluation: Create Risk Evaluation
   updateRiskEvaluation: Update Risk Evaluation
@@ -59,7 +59,7 @@ Learn more in the following documentation:
 
   * [Getting started with PingOne Protect](https://docs.pingidentity.com/pingone/threat_protection_using_pingone_protect/p1_protect_getting_started.html)
 
-* DaVinci documentation:
+* PingOne documentation:
 
   * [Introduction to PingOne](https://docs.pingidentity.com/pingone/introduction_to_pingone/p1_introduction.html)
 
@@ -125,7 +125,7 @@ To add a worker app:
 
 1. Follow the instructions in [Getting started with PingOne Protect](https://docs.pingidentity.com/pingone/threat_protection_using_pingone_protect/p1_protect_getting_started.html).
 
-2. In DaVinci, add a [PingOne Protect connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html).
+2. In PingOne DaVinci, add a [PingOne Protect connector](https://docs.pingidentity.com/davinci/connectors/davinci_adding_a_connector.html).
 
 #### Connector configuration
 
@@ -161,7 +161,45 @@ The PingOne Protect connector provides these capabilities:
 
 The following diagram shows an example user transaction flow with the two different PingOne Protect connector capabilities:
 
-![A diagram of an example DaVinci flow with the Create Risk Evaluation and Update Risk Evaluation connectors.](_images/connector-images/dvc-p1-protect-html-form.png)
+![A diagram of an example PingOne DaVinci flow with the Create Risk Evaluation and Update Risk Evaluation connectors.](_images/connector-images/dvc-p1-protect-html-form.png)
+
+|   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | The Risk Evaluation Update step is usually handled automatically for flows that contain a PingOne Protect connector. However, there are some cases where you might have to manually add an additional PingOne Protect connector to handle the update step. The update is handled automatically if your flow executes a step after the risk evaluation that reflects the success or failure of the action, specifically, any of the following connector-capability combinations:- HTTP Connector:
+
+  * Send Success JSON Response
+
+  * Send Custom JSON Response
+
+  * Send Error JSON Response
+
+- PingOne Authentication Connector
+
+  * Return Success Response (Redirect Flows)
+
+  * Return Error Response (Redirect Flows)
+
+  * Return Success Response (Widget Flows)
+
+  * Return CIBA Success
+
+  * Return CIBA Error
+
+  * Authorize User Code (Device Auth Flows)
+
+  * Decline User Code (Device Auth Flows)
+
+- Token Management Connector
+
+  * Create Tokens (with redirect)
+
+  * Create Tokens with Custom Claims (with redirect)
+
+  * Create Tokens (without redirect)
+
+  * Redirect User with ErrorBecause a risk evaluation is usually followed by multiple possible paths based on the risk level calculated, add one of the above capabilities to each of the possible paths to ensure that the Risk Evaluation Update step is handled automatically. |
+
+If your flow does not include one of the connector-capability combinations from this list after the risk evaluation, you must add an additional PingOne Protect connector after the evaluation to handle the evaluation update, as described in [Update Risk Evaluation Steps](#updateSteps).
 
 ### Create Risk Evaluation
 
@@ -209,11 +247,11 @@ Evaluate risk for a specific transaction based on predictors, such user location
 
    * PingOne Forms connector
 
-   You can manually deploy the Signals (Protect) SDK when integrating using the DaVinci APIs. For mobile applications or integrating your webpage with DaVinci using APIs instead of redirecting, you'll:
+   You can manually deploy the Signals (Protect) SDK when integrating using the PingOne DaVinci APIs. For mobile applications or integrating your webpage with PingOne DaVinci using APIs instead of redirecting, you'll:
 
    * Deploy the Signals (Protect) SDK.
 
-   * Send the SDK payload and the rest of the required data, such as username, user ID, IP address, and any custom attributes to DaVinci using the API.
+   * Send the SDK payload and the rest of the required data, such as username, user ID, IP address, and any custom attributes to PingOne DaVinci using the API.
 
    * Include a variable in your flow that represents the data obtained.
 
@@ -221,9 +259,9 @@ Evaluate risk for a specific transaction based on predictors, such user location
 
    1. Follow the [PingOne Protect Native SDKs](https://apidocs.pingidentity.com/pingone/native-sdks/v1/api/#pingone-protect-native-sdks) documentation to implement the SDK in your mobile app or webpage.
 
-   2. Set global variables using the SDK to pass risk-related information from the SDK and map the information into the risk evaluation in DaVinci.
+   2. Set global variables using the SDK to pass risk-related information from the SDK and map the information into the risk evaluation in PingOne DaVinci.
 
-   3. In DaVinci, click the applicable PingOne Protect connector with the **Create Risk Evaluation** capability in your flow to open its settings.
+   3. In PingOne DaVinci, click the applicable PingOne Protect connector with the **Create Risk Evaluation** capability in your flow to open its settings.
 
       1. On the **Device Configurations** tab, for **Risk input from device**, enter the name of the variable that represents the data obtained from the SDK in your manual implementation.
 
@@ -235,11 +273,11 @@ Evaluate risk for a specific transaction based on predictors, such user location
 
       3. To improve risk analysis, use the **Cookie** field to provide the value of a persistent cookie, if available.
 
-      4. If you want to maintain your own device IDs, you can assign external device IDs that are not managed by the SDK, such as device serial number or mobile application installation ID. External IDs can be sent to DaVinci using the API.
+      4. If you want to maintain your own device IDs, you can assign external device IDs that are not managed by the SDK, such as device serial number or mobile application installation ID. External IDs can be sent to PingOne DaVinci using the API.
 
          For example, in a workforce user flow, you can use the [Google Chrome Device Trust connector](https://marketplace.pingone.com/item/google-chrome-device-trust-connector) to map the user device serial number when using the Chrome browser.
 
-      5. To pass the risk information from the SDK to DaVinci, map the global variables that you set with the SDK into DaVinci:
+      5. To pass the risk information from the SDK to PingOne DaVinci, map the global variables that you set with the SDK into PingOne DaVinci:
 
          1. On the **Log Fields Mapping** tab, click **+ Field**.
 
@@ -257,7 +295,7 @@ Evaluate risk for a specific transaction based on predictors, such user location
 
      For example, you can create a subflow that performs the risk evaluation within a parent flow. In this case, add the `skrisk` component to relevant HTTP connectors in the parent flow that call this subflow.
 
-     You can find subflow templates in the [Integration Directory](https://support.pingidentity.com/s/marketplace-integration-home-page), such as [Login with Self-Service Journey](https://support.pingidentity.com/s/marketplace-integration/a7iUJ0000000vkfYAA/login-with-selfservice-journey), [PingOne Sign On and Password Reset](https://support.pingidentity.com/s/marketplace-integration/a7i8Z000000bsa3QAA/pingone-sign-on-and-password-reset), and [User Registration Journey](https://support.pingidentity.com/s/marketplace-integration/a7iUJ0000000gthYAA/user-registration-journey). Learn more in [Using DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html).
+     You can find subflow templates in the [Integration Directory](https://support.pingidentity.com/s/marketplace-integration-home-page), such as [Login with Self-Service Journey](https://support.pingidentity.com/s/marketplace-integration/a7iUJ0000000vkfYAA/login-with-selfservice-journey), [PingOne Sign On and Password Reset](https://support.pingidentity.com/s/marketplace-integration/a7i8Z000000bsa3QAA/pingone-sign-on-and-password-reset), and [User Registration Journey](https://support.pingidentity.com/s/marketplace-integration/a7iUJ0000000gthYAA/user-registration-journey). Learn more in [Using PingOne DaVinci flow templates](https://docs.pingidentity.com/davinci/flows/davinci_using_davinci_flow_templates.html).
 
    Adding the `skrisk` component to multiple connectors in a flow allows the SDK to collect additional data throughout the flow and improves bot detection.
 
@@ -335,7 +373,7 @@ Evaluate risk for a specific transaction based on predictors, such user location
 
 ### Update Risk Evaluation
 
-Update an existing risk evaluation to include the flow completion status for the risk evaluation. Updating the completion status allows PingOne Protect to refine and improve the accuracy of future risk evaluations. Always include a PingOne Protect connector with the Update Risk Evaluation capability in your flows to allow PingOne Protect to learn over time. The Update Risk Evaluation event includes one of the following flow completion statuses for the risk evaluation:
+Update an existing risk evaluation to include the flow completion status. Updating the completion status allows PingOne Protect to refine and improve the accuracy of future risk evaluations. The Update Risk Evaluation event includes one of the following flow completion statuses for the risk evaluation:
 
 * `SUCCESS` when the user was granted access or passed the MFA challenge
 
@@ -348,6 +386,44 @@ Update an existing risk evaluation to include the flow completion status for the
 |   |                                                                                                                                                                  |
 | - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 |   | If `completionStatus` isn't updated, the status remains `completionStatus=IN_PROGRESS`, and the predictor can't learn from the event and stays in training mode. |
+
+|   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | The Risk Evaluation Update step is usually handled automatically for flows that contain a PingOne Protect connector. However, there are some cases where you might have to manually add an additional PingOne Protect connector to handle the update step. The update is handled automatically if your flow executes a step after the risk evaluation that reflects the success or failure of the action, specifically, any of the following connector-capability combinations:- HTTP Connector:
+
+  * Send Success JSON Response
+
+  * Send Custom JSON Response
+
+  * Send Error JSON Response
+
+- PingOne Authentication Connector
+
+  * Return Success Response (Redirect Flows)
+
+  * Return Error Response (Redirect Flows)
+
+  * Return Success Response (Widget Flows)
+
+  * Return CIBA Success
+
+  * Return CIBA Error
+
+  * Authorize User Code (Device Auth Flows)
+
+  * Decline User Code (Device Auth Flows)
+
+- Token Management Connector
+
+  * Create Tokens (with redirect)
+
+  * Create Tokens with Custom Claims (with redirect)
+
+  * Create Tokens (without redirect)
+
+  * Redirect User with ErrorBecause a risk evaluation is usually followed by multiple possible paths based on the risk level calculated, add one of the above capabilities to each of the possible paths to ensure that the Risk Evaluation Update step is handled automatically. |
+
+If your flow does not include one of the connector-capability combinations from this list after the risk evaluation, follow these steps to include the risk evaluation update step.
 
 ## Steps
 
@@ -385,7 +461,7 @@ Evaluate risk for a specific transaction. Risk results are based on predictors l
 >
 >   * EXTERNAL (Default)
 >
->   * PING\_ONE
+>   * PING_ONE
 >
 > - User Groups textField
 >
@@ -399,9 +475,9 @@ Evaluate risk for a specific transaction. Risk results are based on predictors l
 >
 >   Password hashing method.
 >
->   * SHA\_256 (Default)
+>   * SHA_256 (Default)
 >
->   * SHA\_384
+>   * SHA_384
 >
 > - IP textField
 >
@@ -1273,71 +1349,71 @@ Submit feedback to help refine risk classification or clear a user's risk status
 >
 >   The type of feedback to submit for the risk evaluation.
 >
->   * FALSE\_HIGH\_RISK
+>   * FALSE_HIGH_RISK
 >
->   * FRIENDLY\_BOT
+>   * FRIENDLY_BOT
 >
->   * NEW\_ACCOUNT\_FRAUD
+>   * NEW_ACCOUNT_FRAUD
 >
->   * COMPROMISED\_ACCOUNT
+>   * COMPROMISED_ACCOUNT
 >
->   * AUTOMATED\_ATTACK
+>   * AUTOMATED_ATTACK
 >
 > - Reason dropDown
 >
->   Reason for FALSE\_HIGH\_RISK
+>   Reason for FALSE_HIGH_RISK
 >
->   * OFFICE\_NETWORK
+>   * OFFICE_NETWORK
 >
->   * COMPANY\_VPN
+>   * COMPANY_VPN
 >
->   * WRONG\_LOCATION
+>   * WRONG_LOCATION
 >
->   * ORG\_NETWORK
+>   * ORG_NETWORK
 >
->   * SUCCESSFUL\_MFA
+>   * SUCCESSFUL_MFA
 >
 >   * OTHER
 >
 > - Reason dropDown
 >
->   Reason for FRIENDLY\_BOT
+>   Reason for FRIENDLY_BOT
 >
->   * KNOWN\_CRAWLER
+>   * KNOWN_CRAWLER
 >
->   * KNOWN\_AGGREGATOR
+>   * KNOWN_AGGREGATOR
 >
->   * INTERNAL\_AUTOMATION
->
->   * OTHER
->
-> - Reason dropDown
->
->   Reason for NEW\_ACCOUNT\_FRAUD
->
->   * SUSPICIOUS\_EMAIL\_ADDRESS
->
->   * USERNAME\_GUESSING
+>   * INTERNAL_AUTOMATION
 >
 >   * OTHER
 >
 > - Reason dropDown
 >
->   Reason for COMPROMISED\_ACCOUNT
+>   Reason for NEW_ACCOUNT_FRAUD
 >
->   * USER\_CLAIMS\_IT\_IS\_NOT\_THEM
+>   * SUSPICIOUS_EMAIL_ADDRESS
 >
->   * UNSUCCESSFUL\_MFA
+>   * USERNAME_GUESSING
 >
 >   * OTHER
 >
 > - Reason dropDown
 >
->   Reason for AUTOMATED\_ATTACK
+>   Reason for COMPROMISED_ACCOUNT
 >
->   * CREDENTIAL\_STUFFING
+>   * USER_CLAIMS_IT_IS_NOT_THEM
 >
->   * PASSWORD\_SPRAY
+>   * UNSUCCESSFUL_MFA
+>
+>   * OTHER
+>
+> - Reason dropDown
+>
+>   Reason for AUTOMATED_ATTACK
+>
+>   * CREDENTIAL_STUFFING
+>
+>   * PASSWORD_SPRAY
 >
 >   * OTHER
 >
@@ -1390,6 +1466,6 @@ To start troubleshooting issues with the PingOne Protect connector, try the foll
 
 * For mobile applications, if you're using the `skrisk` component to include the data provided by the Signals (Protect) SDK, make sure that you followed the steps in the [PingOne Protect Native SDKs documentation](http://apidocs.pingidentity.com/pingone/native-sdks/v1/api/#pingone-risk-native-sdks).
 
-* To use the DaVinci Analytics feature to find where the flow stopped, open your flow and click **Analytics** in the lower-left corner of the flow editor. Learn more in [Debugging and analytics](https://docs.pingidentity.com/davinci/davinci_best_practices/davinci_best_practices_debugging_and_analytics.html).
+* To use the PingOne DaVinci Analytics feature to find where the flow stopped, open your flow and click **Analytics** in the lower-left corner of the flow editor. Learn more in [Debugging and analytics](https://docs.pingidentity.com/davinci/davinci_best_practices/davinci_best_practices_debugging_and_analytics.html).
 
 * Open your flow, click the **More Options** (⋮) icon, and click the **Show Node ID** toggle. This makes it easier to identify the source of inputs and outputs.

@@ -45,7 +45,7 @@ The following is the change history for the Microsoft Login Integration Kit.
 
 ## Microsoft Login Integration Kit 1.1 – July 2024
 
-* Added the ability to send a **login\_hint** parameter to pre-fill the **Username** field on the Microsoft user sign-on page. Learn more in the **Include Login Hint** field description in [Microsoft IdP Adapter settings reference](../setup/pf_microsoft_login_ik_idp_adapter_settings_reference.html).
+* Added the ability to send a **login_hint** parameter to pre-fill the **Username** field on the Microsoft user sign-on page. Learn more in the **Include Login Hint** field description in [Microsoft IdP Adapter settings reference](../setup/pf_microsoft_login_ik_idp_adapter_settings_reference.html).
 
 * Added the ability to send a prompt parameter to confirm user interaction during the authentication process. Learn more in the **Include Prompt** field description in [Microsoft IdP Adapter settings reference](../setup/pf_microsoft_login_ik_idp_adapter_settings_reference.html).
 
@@ -356,8 +356,8 @@ To complete your Microsoft sign-on integration, add a sign-on hyperlink to your 
 
       | Variable          | Description                                                                                          |
       | ----------------- | ---------------------------------------------------------------------------------------------------- |
-      | *\<pf\_host>*     | The host name or IP address of the PingFederate server.                                              |
-      | *\<pf\_port>*     | The port number for PingFederate.                                                                    |
+      | *\<pf_host>*      | The host name or IP address of the PingFederate server.                                              |
+      | *\<pf_port>*      | The port number for PingFederate.                                                                    |
       | *\<ConnectionId>* | The federation identifier of the SP for the connection that uses the Microsoft IdP Adapter instance. |
 
 2. If your application is inside the PingFederate domain, configure an adapter-to-adapter mapping:
@@ -386,8 +386,8 @@ To complete your Microsoft sign-on integration, add a sign-on hyperlink to your 
 
       | Variable          | Description                                                                               |
       | ----------------- | ----------------------------------------------------------------------------------------- |
-      | *\<pf\_host>*     | The host name or IP address of the PingFederate server.                                   |
-      | *\<pf\_port>*     | The port number for PingFederate.                                                         |
+      | *\<pf_host>*      | The host name or IP address of the PingFederate server.                                   |
+      | *\<pf_port>*      | The port number for PingFederate.                                                         |
       | *\<IdpAdapterId>* | The instance ID of the Microsoft IdP Adapter instance.                                    |
       | *\<SpAdapterId>*  | The instance ID of the SP adapter instance that has been integrated with the application. |
 
@@ -453,7 +453,7 @@ Field descriptions for the Microsoft IdP Adapter configuration screen.
 >
 > | Field Name                           | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
 > | ------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-> | **Include Login Hint**               | If selected, the incoming **User Id** value (if provided) is sent as a **login\_hint** query string parameter value to Microsoft.Microsoft uses this value to pre-fill the **Username** field on the Microsoft user sign-on page.                                                                                                                                                                                                                                                                                                                                                                                      |
+> | **Include Login Hint**               | If selected, the incoming **User Id** value (if provided) is sent as a **login_hint** query string parameter value to Microsoft.Microsoft uses this value to pre-fill the **Username** field on the Microsoft user sign-on page.                                                                                                                                                                                                                                                                                                                                                                                       |
 > | **Include Prompt**                   | If selected, PingFederate automatically maps and sends the standard PingFederate-supported OIDC prompt parameter as the **prompt** parameter value in the authorization request to Microsoft.&#xA;&#xA;This applies only if PingFederate receives the prompt parameter through an authentication policy that has a value of consent or login.To send other values in the authorization request, use the **Additional Parameters** table and provide the value in an incoming chained attribute. Learn more in step 3 of [Configuring an adapter instance](pf_microsoft_login_ik_configuring_an_adapter_instance.html). |
 > | **Microsoft Login Base URL**         | The base URL Microsoft uses for any authentication calls. The default value is:```none
 > https://login.microsoftonline.com/

@@ -1,11 +1,12 @@
 ---
 title: API Access Management
-description: The PingOne Authorize API access management service provides tools to externalize the management and evaluation of access control policies for HTTP-based APIs. The access control policies defined in the API Service configuration are enforced through an API gateway, which delegates policy evaluation using a Ping Identity-provided integration kit that connects with the PingOne API.
+description: Explains how the PingOne Authorize API access management service externalizes access control policy enforcement for HTTP-based APIs through a gateway integration kit
 component: pingone-api
-page_id: pingone-api:authorize:api-access-management
-canonical_url: https://developer.pingidentity.com/pingone-api/authorize/api-access-management.html
+page_id: pingone-api:authorize:api-access-management/index
+canonical_url: https://developer.pingidentity.com/pingone-api/authorize/api-access-management/index.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-07
 ---
 
 # API Access Management
@@ -14,23 +15,27 @@ The PingOne Authorize API access management service provides tools to externaliz
 
 The integration kit installed in your API gateway authenticates to PingOne. You configure a gateway and obtain a gateway credential. This credential is used to configure the API gateway integration kit. For more information, refer to [PingOne Authorize API Gateway Integration Kits](https://docs.pingidentity.com/pingone/authorization_using_pingone_authorize/p1az_api_gateway_is.html).
 
-To create a gateway resource, refer to [Create API Gateway Integration](../platform/gateway-management/gateways/create-api-gateway-integration.html). In addition, API access management also uses the gateways credentials service. For more information, refer to [Gateway Credentials](../platform/gateway-management/gateway-credentials.html).
+To create a gateway resource, refer to [Create API Gateway Integration](../../platform/gateway-management/gateways/create-api-gateway-integration.html). In addition, API access management also uses the gateways credentials service. For more information, refer to [Gateway Credentials](../../platform/gateway-management/gateway-credentials/index.html).
+
+When you create an API service, PingOne Authorize automatically creates an authorization module associated with that service. The module has its own policy space, which means policies you define within the API service's module are scoped to that service and evaluated independently. The new module shares the Trust Framework of the Default module, including attributes, services, processors, and conditions, but maintains a separate space for policies. For more information, refer to [Authorization Modules](../authorization-modules/modules/index.html).
 
 ---
 
 ---
 title: API Operations
-description: The PingOne /v1/environments/{{envID}}/apiServers/{{apiServerID}}/operations endpoint provides operations to create, read, update, and delete API service operations in PingOne. Each operation is defined by one or more paths, and each path must have a unique pattern.
+description: Explains the PingOne Authorize API service operations endpoint and path parameter pattern syntax for defining API server operations
 component: pingone-api
-page_id: pingone-api:authorize:api-access-management/api-operations
-canonical_url: https://developer.pingidentity.com/pingone-api/authorize/api-access-management/api-operations.html
+page_id: pingone-api:authorize:api-access-management/api-operations/index
+canonical_url: https://developer.pingidentity.com/pingone-api/authorize/api-access-management/api-operations/index.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-07
 section_ids:
   path-parameter-pattern-syntax: Path parameter pattern syntax
   assigning-admin-roles-and-permissions-to-this-service: Assigning admin roles and permissions to this service
   api-server-operations-data-model: API service operations data model
   response-codes: Response codes
+  api-service-operations-errors: API service operations errors
 ---
 
 # API Operations
@@ -63,19 +68,19 @@ If a path pattern has a type of `PARAMETER`, the following syntax rules apply to
 
 ## Assigning admin roles and permissions to this service
 
-Admin role assignments determine access to PingOne APIs. When assigning admin roles to this service, refer to [PingOne Permissions by Service](../../platform/reference/roles-and-permissions-in-pingone/permissions-by-service.html) for the service-specific permissions.
+Admin role assignments determine access to PingOne APIs. When assigning admin roles to this service, refer to [PingOne Permissions by Service](../../../platform/reference/roles-and-permissions-in-pingone/permissions-by-service.html) for the service-specific permissions.
 
-You can also choose to assign admin roles based on particular service resources. Refer to [PingOne Permissions by Resource](../../platform/reference/roles-and-permissions-in-pingone/permissions-by-resource.html) when assigning admin roles per service resources.
+You can also choose to assign admin roles based on particular service resources. Refer to [PingOne Permissions by Resource](../../../platform/reference/roles-and-permissions-in-pingone/permissions-by-resource.html) when assigning admin roles per service resources.
 
 Admin assignments to roles are set by:
 
-* [Automatic assignment for some roles](../../platform/roles/predefined-roles.html#automatic-role-assignment).
+* [Automatic assignment for some roles](../../../platform/roles/predefined-roles/index.html#automatic-role-assignment).
 
-* [Group Role Assignments](../../platform/group-role-assignments/group-role-assignments.html).
+* [Group Role Assignments](../../../platform/group-role-assignments/index.html).
 
-* [User Role Assignments](../../platform/users/user-role-assignments.html).
+* [User Role Assignments](../../../platform/users/user-role-assignments/index.html).
 
-Refer to [Roles Management](../../platform/roles.html) for more information.
+Refer to [Roles Management](../../../platform/roles/index.html) for more information.
 
 ## API service operations data model
 
@@ -121,27 +126,109 @@ Refer to [Roles Management](../../platform/roles.html) for more information.
 | 403  | You do not have permissions or are not licensed to make this request. |
 | 404  | The requested resource was not found.                                 |
 
+## API service operations errors
+
+In addition to the general [error codes](../../../platform/reference/error-codes.html), API service operation operations can return the following errors:
+
+| HTTP status | Top‑level code     | Detail code                       | When it happens and what the response contains                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| ----------- | ------------------ | --------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 400         | `INVALID_DATA`     | `EMPTY_VALUE` or `REQUIRED_VALUE` | **Message:** `Validation Error : [<property> <message>]` or `One or more issues were found in the request data.`> **Collapse: When and details**
+>
+> **When:** A `POST` or `PUT /apiServers/{apiServerID}/operations` request omits `name` or `paths`, provides an empty `paths` array, or omits an element ID required by a configured access control rule
+>
+> **Details:** `must not be null or empty` for an omitted or blank `name`, `must not be null or empty` for an omitted or empty `paths` array, `The scope ID value is required.` for a scope rule element without an `id`, `The authentication policy ID value is required.` and `The authentication policy type is required.` for an `accessControl.authentication.acrs` element missing those values, or `An application permission ID value is required.` for an `accessControl.permission.id` that is omitted, for example `Validation Error : [name must not be null or empty]`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| 400         | `INVALID_DATA`     | `INVALID_VALUE`                   | **Message:** `Validation Error : [<property> <message>]` or `One or more issues were found in the request data.`> **Collapse: When and details**
+>
+> **When:** A `POST` or `PUT /apiServers/{apiServerID}/operations` request provides a `name` that is blank or exceeds the maximum length, `methods` entries that are not valid unique HTTP methods or exceed 64 characters, a `paths` pattern that is invalid for its type (missing a leading slash, containing a query parameter, fragment, empty or dot path segment, or ASCII control characters, exceeding 2048 characters, or being a duplicate within the operation), an invalid `PARAMETER` pattern expression, a `paths` array longer than 10 entries, a `methods` array longer than 10 entries, or access control references that do not exist or are not related to the API service's resource
+>
+> **Details:** `Operation name must not be empty or blank.` for a blank `name`, `Operation name must be between 1 and 256 characters.` for an over-long `name`, `must include only unique HTTP methods` for duplicate `methods` entries, `must be 64 characters or fewer` for an over-long method, `must not include duplicate paths` for a duplicate pattern, `Pattern "<pattern>" must start with "/"` for a pattern without a leading slash, `The path pattern "<pattern>" must not contain query parameters` or `must not contain a fragment`, `The path pattern "<pattern>" must not be longer than 2048`, `The path pattern "<pattern>" must not contain an empty or dot path segment`, `Path expression must start with a '/'` and `Parameter with name '<name>' already exists` for invalid `PARAMETER` expressions, or `The group with ID '<groupID>' does not exist.` and `The authentication policy with ID '<policyID>' and type '<type>' does not exist.` for references that do not resolve |
+| 400         | `INVALID_DATA`     | `UNIQUENESS_VIOLATION`            | **Message:** `A resource with the specified name already exists.`> **Collapse: When and details**
+>
+> **When:** A `POST` or `PUT /apiServers/{apiServerID}/operations` request specifies a `name` that already exists within the same API service
+>
+> **Details:** The target is `name`; the message is `the Operation name "<operationName>" cannot be used twice within the API Service`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| 400         | `INVALID_DATA`     | `INVALID_VALUE`                   | **Message:** `Invalid value for attribute.`> **Collapse: When and details**
+>
+> **When:** A `POST` or `PUT /apiServers/{apiServerID}/operations` request configures a `scopes` or `permission` rule on an API service whose authorization server type is `EXTERNAL`, or a `groups` or `permission` rule on an API service whose directory type is `EXTERNAL`
+>
+> **Details:** `Cannot configure a scopes rule for an API Service with authorization server type EXTERNAL` with target `accessControl.scope`, `Cannot configure a permission rule for an API Service with authorization server type EXTERNAL` with target `accessControl.permission`, `Cannot configure a groups rule for an API Service with directory type EXTERNAL` with target `accessControl.group`, or `Cannot configure a permission rule for an API Service with directory type EXTERNAL` with target `accessControl.permission`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| 400         | `INVALID_DATA`     | None                              | **Message:** `Maximum number of operations have been created for this API service.`> **Collapse: When and details**
+>
+> **When:** A `POST /apiServers/{apiServerID}/operations` request would exceed the maximum number of operations for the API service (25, or 100 when the modules feature is enabled)
+>
+> **Details:** None                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| 400         | `REQUEST_FAILED`   | `CONSTRAINT_VIOLATION`            | **Message:** `The request violates a constraint imposed by the service.`> **Collapse: When and details**
+>
+> **When:** A `POST` or `PUT /apiServers/{apiServerID}/operations` request configures a `scopes` or application `permission` rule when the API service has no PingOne SSO resource, configures an authentication requirements rule when the API service's authorization server type is not `PINGONE_SSO`, or creates an operation on an MCP API service
+>
+> **Details:** `The scopes access control rule cannot be configured because the API service's PingOne SSO resource is undefined` with target `accessControl.scope`:
+>
+> ```
+> The application permission access control rule cannot be configured because the API service's PingOne SSO resource is undefined
+> ```
+>
+> with target `accessControl.permission`:
+>
+> ```
+> The authentication requirements rule cannot be configured because the API service does not use an authorizationServer type of PINGONE_SSO.
+> ```
+>
+> with target `accessControl.authentication`, or `An operation cannot be created when the API Service type is MCP.` with no target.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| 400         | `REQUEST_FAILED`   | `INVALID_PARAMETER`               | **Message:** `The request could not be completed. There was an issue processing the request.` for a negative `limit`, or `The request could not be completed. The request was malformed or invalid.` for an invalid `expand` value> **Collapse: When and details**
+>
+> **When:** A `GET /apiServers/{apiServerID}/operations` request provides a negative `limit` value, or a `GET /apiServers/{apiServerID}/operations/{apiServerOperationID}` request provides an `expand` value that is not a comma-separated list of `authenticationPolicies`, `groups`, and/or `scopes`
+>
+> **Details:** The target is `limit`; the message is `Limit parameter value must be a non-negative integer.` For an invalid `expand` value, the target is `expand` and the message is:
+>
+> ```
+> The 'expand' parameter value must be a comma-separated list consisting only of the values 'authenticationPolicies', 'groups', and/or 'scopes'
+> ```                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| 400         | `REQUEST_FAILED`   | None                              | **Message:** `API service and operations cannot be modified while a deployment is in progress.`> **Collapse: When and details**
+>
+> **When:** A `POST`, `PUT`, or `DELETE /apiServers/{apiServerID}/operations` request modifies an API service whose deployment is in progress
+>
+> **Details:** None                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| 403         | `ACCESS_FAILED`    | None                              | **Message:** `The actor attempting to perform the request is not authorized.`> **Collapse: When and details**
+>
+> **When:** The actor lacks the `authz:read:apiServer` permission (`GET` operations), the `authz:create:apiServer` permission (`POST`), the `authz:update:apiServer` permission (`PUT`), or the `authz:delete:apiServer` permission (`DELETE`)
+>
+> **Details:** None                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| 404         | `NOT_FOUND`        | None                              | **Message:** `The request could not be completed. The requested resource was not found.`> **Collapse: When and details**
+>
+> **When:** The `apiServerID` or `apiServerOperationID` does not identify a resource in the environment, or a `GET` operation targets an MCP API service, which does not support operations
+>
+> **Details:** None                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| 500         | `UNEXPECTED_ERROR` | None                              | **Message:** `Failed to build policy tree, try again later`> **Collapse: When and details**
+>
+> **When:** The operation fails unexpectedly while building the policy tree for a custom-policy API service
+>
+> **Details:** None                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+
 ---
 
 ---
 title: API Services
-description: The PingOne /v1/environments/{{envID}}/apiServers endpoint provides operations to create, read, update, and delete API services in PingOne. An API service models a customer's APIs, which are then protected by the PingOne API access management service.
+description: Explains the PingOne Authorize API services endpoint used to create, read, update, and delete API services that model customer APIs
 component: pingone-api
-page_id: pingone-api:authorize:api-access-management/api-services
-canonical_url: https://developer.pingidentity.com/pingone-api/authorize/api-access-management/api-services.html
+page_id: pingone-api:authorize:api-access-management/api-services/index
+canonical_url: https://developer.pingidentity.com/pingone-api/authorize/api-access-management/api-services/index.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-07
 section_ids:
   assigning-admin-roles-and-permissions-to-this-service: Assigning admin roles and permissions to this service
   api-server-data-model: API service data model
   path-parameter-pattern-syntax: Path parameter pattern syntax
   api-server-limit-filter-data: Limiting and filtering data
   response-codes: Response codes
+  api-services-errors: API services errors
 ---
 
 # API Services
 
 The PingOne `/v1/environments/{{envID}}/apiServers` endpoint provides operations to create, read, update, and delete API services in PingOne. An API service models a customer's APIs, which are then protected by the PingOne API access management service.
+
+When you create an API service, PingOne Authorize automatically creates an authorization module associated with that service. The module has its own policy space, which means policies you define within the API service's module are scoped to that service and evaluated independently. The new module shares the trust framework of the Default module, including attributes, services, processors, and conditions, but maintains a separate space for policies. For more information, refer to [Authorization Modules](../../authorization-modules/modules/index.html).
 
 |   |                                                              |
 | - | ------------------------------------------------------------ |
@@ -149,19 +236,19 @@ The PingOne `/v1/environments/{{envID}}/apiServers` endpoint provides operations
 
 ## Assigning admin roles and permissions to this service
 
-Admin role assignments determine access to PingOne APIs. When assigning admin roles to this service, refer to [PingOne Permissions by Service](../../platform/reference/roles-and-permissions-in-pingone/permissions-by-service.html) for the service-specific permissions.
+Admin role assignments determine access to PingOne APIs. When assigning admin roles to this service, refer to [PingOne Permissions by Service](../../../platform/reference/roles-and-permissions-in-pingone/permissions-by-service.html) for the service-specific permissions.
 
-You can also choose to assign admin roles based on particular service resources. Refer to [PingOne Permissions by Resource](../../platform/reference/roles-and-permissions-in-pingone/permissions-by-resource.html) when assigning admin roles per service resources.
+You can also choose to assign admin roles based on particular service resources. Refer to [PingOne Permissions by Resource](../../../platform/reference/roles-and-permissions-in-pingone/permissions-by-resource.html) when assigning admin roles per service resources.
 
 Admin assignments to roles are set by:
 
-* [Automatic assignment for some roles](../../platform/roles/predefined-roles.html#automatic-role-assignment).
+* [Automatic assignment for some roles](../../../platform/roles/predefined-roles/index.html#automatic-role-assignment).
 
-* [Group Role Assignments](../../platform/group-role-assignments/group-role-assignments.html).
+* [Group Role Assignments](../../../platform/group-role-assignments/index.html).
 
-* [User Role Assignments](../../platform/users/user-role-assignments.html).
+* [User Role Assignments](../../../platform/users/user-role-assignments/index.html).
 
-Refer to [Roles Management](../../platform/roles.html) for more information.
+Refer to [Roles Management](../../../platform/roles/index.html) for more information.
 
 ## API service data model
 
@@ -209,9 +296,9 @@ If a path pattern has a type of `PARAMETER`, the following syntax rules apply to
 
 ## Limiting and filtering data
 
-You can limit the number of results returned on the [Read API Services](api-services/read-api-servers.html) request with the `limit` parameter. Refer to [Paging and ordering collections](../../platform/reference/paging-ordering-collections.html) for more information about use of the `limit` parameter, as well as other methods of controlling pagination.
+You can limit the number of results returned on the [Read API Services](read-api-servers.html) request with the `limit` parameter. Refer to [Paging and ordering collections](../../../platform/reference/paging-ordering-collections.html) for more information about use of the `limit` parameter, as well as other methods of controlling pagination.
 
-You can filter response data by applying a SCIM filtering expression to the [Read API Services](api-services/read-api-servers.html) request. These SCIM operators can be applied to the following attributes:
+You can filter response data by applying a SCIM filtering expression to the [Read API Services](read-api-servers.html) request. These SCIM operators can be applied to the following attributes:
 
 * `eq` (equals)
 
@@ -229,16 +316,94 @@ You can filter response data by applying a SCIM filtering expression to the [Rea
 | 403  | You do not have permissions or are not licensed to make this request. |
 | 404  | The requested resource was not found.                                 |
 
+## API services errors
+
+In addition to the general [error codes](../../../platform/reference/error-codes.html), API service operations can return the following errors:
+
+| HTTP status | Top‑level code     | Detail code            | When it happens and what the response contains                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| ----------- | ------------------ | ---------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 400         | `INVALID_DATA`     | `EMPTY_VALUE`          | **Message:** `Validation Error : [<property> <message>]` or `The request is missing a required value.`> **Collapse: When and details**
+>
+> **When:** A `POST /apiServers` or `PUT /apiServers/{apiServerID}` request omits `baseUrls`, provides an empty array, or provides an array containing a null entry, or omits the `authorizationServer.resource.id` value required for a `PINGONE_SSO` authorization server type
+>
+> **Details:** `must not be null or empty` for an omitted or empty `baseUrls`, or `A resource ID must be provided.` for an omitted `authorizationServer.resource.id`, for example `Validation Error : [baseUrls must not be null or empty.]`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| 400         | `INVALID_DATA`     | `INVALID_VALUE`        | **Message:** `The request could not be completed. One or more validation errors were in the request.` or, for a single-field validator failure, the enumerated template beginning `A base URL must 1) be an absolute URL using the 'https' or 'http' scheme`> **Collapse: When and details**
+>
+> **When:** A `POST` or `PUT /apiServers` request provides a `name` that is blank or contains disallowed characters, a `baseUrls` entry that is not a valid absolute `http` or `https` URL with a path that does not end in a slash and has no query, fragment, or empty or dot path segments, an `authorizationServer.type` of `EXTERNAL` with a directory type of `PINGONE_SSO` (or the reverse), an `authorizationServer.type` of `PINGONE_SSO` together with `authorizationServer.externalOAuthServer`, or an `authorizationServer.resource.id` that does not identify a resource of type `CUSTOM`
+>
+> **Details:** Describes the failing property, such as `must not be empty or blank` for a blank `name`, `must contain only Unicode letters, marks, numbers, spaces, forward slashes, dots, apostrophes, underscores, or hyphens` for a `name` with invalid characters, `Authorization server type cannot be "PINGONE_SSO" with directory type "EXTERNAL".` for a conflicting `authorizationServer.type`, `Authorization server type must not be "PINGONE_SSO" when providing an external OAuth server.`, or `The resource with ID '<resourceId>' is not of type CUSTOM.`; for a single-field validator failure, the top-level message is the enumerated base URL template and the detail code is `INVALID_VALUE` (or `UNIQUENESS_VIOLATION` for an in-use URL) |
+| 400         | `INVALID_DATA`     | `SIZE_LIMIT_EXCEEDED`  | **Message:** `The request contains an attribute value that is too large.`> **Collapse: When and details**
+>
+> **When:** A `POST` or `PUT /apiServers` request provides more than 10 `baseUrls` entries or a `baseUrls` entry longer than 256 characters
+>
+> **Details:** `No more than 10 base URLs may be specified.` for more than 10 entries, or `URL length cannot exceed 256 characters.` for an over-long entry                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| 400         | `INVALID_DATA`     | `UNIQUENESS_VIOLATION` | **Message:** `A resource with the specified name already exists.` or, for an in-use `baseUrls` entry, the enumerated template beginning `A base URL must 1) be an absolute URL using the 'https' or 'http' scheme`> **Collapse: When and details**
+>
+> **When:** A `POST` or `PUT /apiServers` request specifies a `name` that already exists in the environment, or a `baseUrls` entry that is already in use by another API service
+>
+> **Details:** The target is `name`; the message is `The name '<apiServerName>' is already in use.` For an in-use `baseUrls` entry, the target is `baseUrls[<index>]` and the message is `The URL '<url>' is already in use by API service '<apiServerName>'.`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| 400         | `INVALID_DATA`     | `CONSTRAINT_VIOLATION` | **Message:** `The request violates a constraint imposed by the service.`> **Collapse: When and details**
+>
+> **When:** A `PUT /apiServers/{apiServerID}` request attempts to change the API service `deploymentType` or `type`
+>
+> **Details:** `Deployment type cannot be modified.` for a deployment type change attempt or `API service type cannot be modified.` for an API service type change attempt; the target is `deploymentType` or `type`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| 400         | `REQUEST_FAILED`   | `CONSTRAINT_VIOLATION` | **Message:** `The request violates a constraint imposed by the service.`> **Collapse: When and details**
+>
+> **When:** A `POST` or `PUT /apiServers` request sets `authorizationServer.resource.id` to a resource already linked to another API service
+>
+> **Details:** The target is `authorizationServer.resource.id`; the message is:
+>
+> ```
+> The specified resource is already linked to the API service '<apiServerName>'. A resource can only be linked to one API service.
+> ```
+>
+> (or, if more than one existing API service uses the resource, the message is:)
+>
+> ```
+> The specified resource is already linked to the following API services: <names>. A resource can only be linked to one API service.
+> ```                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| 400         | `REQUEST_FAILED`   | None                   | **Message:** `API service cannot be modified while a deployment is in progress.`> **Collapse: When and details**
+>
+> **When:** A `PUT /apiServers/{apiServerID}` request modifies an API service while a deployment is in progress
+>
+> **Details:** None                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| 400         | `REQUEST_FAILED`   | `INVALID_PARAMETER`    | **Message:** `The request could not be completed. There was an issue processing the request.`> **Collapse: When and details**
+>
+> **When:** A `GET /apiServers` request provides a negative `limit` value
+>
+> **Details:** The target is `limit`; the message is `Limit parameter value must be a non-negative integer.`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| 400         | `REQUEST_FAILED`   | None                   | **Message:** `Maximum number of API servers have been created in this environment.`> **Collapse: When and details**
+>
+> **When:** A `POST /apiServers` request would create the environment's 26th API service
+>
+> **Details:** None                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| 403         | `ACCESS_FAILED`    | None                   | **Message:** `The actor attempting to perform the request is not authorized.`> **Collapse: When and details**
+>
+> **When:** The actor lacks the `authz:read:apiServer` permission (`GET` operations), the `authz:create:apiServer` permission (`POST`), the `authz:update:apiServer` permission (`PUT`), or the `authz:delete:apiServer` permission (`DELETE`)
+>
+> **Details:** None                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| 404         | `NOT_FOUND`        | None                   | **Message:** `The request could not be completed. The requested resource was not found.`> **Collapse: When and details**
+>
+> **When:** The `apiServerID` does not identify an API service in the environment
+>
+> **Details:** None                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| 500         | `UNEXPECTED_ERROR` | None                   | **Message:** `There was an unexpected error with the service. Please try again later.` for a failed policy tree build on `POST`, or `Failed to build policy tree, try again later` on `PUT`, or `Failed to update policy tree, try again later` on `DELETE`.> **Collapse: When and details**
+>
+> **When:** A custom-policy API service request fails while building the policy tree
+>
+> **Details:** None                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+
 ---
 
 ---
 title: Application Permissions
-description: The PingOne Authorize application resources and roles service provides endpoints to define custom roles and permissions within PingOne to protect external application resources.
+description: Lists the endpoints for defining custom application roles and permissions in PingOne Authorize to protect external application resources
 component: pingone-api
-page_id: pingone-api:authorize:application-permissions
-canonical_url: https://developer.pingidentity.com/pingone-api/authorize/application-permissions.html
+page_id: pingone-api:authorize:application-permissions/index
+canonical_url: https://developer.pingidentity.com/pingone-api/authorize/application-permissions/index.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-07
 ---
 
 # Application Permissions
@@ -247,27 +412,27 @@ The PingOne Authorize application resources and roles service provides endpoints
 
 To create and manage application roles and permissions, see:
 
-* [View application resources](application-permissions/application-resources.html)
+* [View application resources](application-resources/index.html)
 
-  Provides endpoints to list the representations of external applications in PingOne. For create, update, and delete operations for application resources, refer to [Application resources](application-permissions/application-resources.html).
+  Provides endpoints to list the representations of external applications in PingOne. For create, update, and delete operations for application resources, refer to [Application resources](application-resources/index.html).
 
-* [Application resource permissions](application-permissions/application-resource-permissions.html)
+* [Application resource permissions](application-resource-permissions/index.html)
 
   Provides endpoints to define and manage permissions on the application resource.
 
-* [Application roles](application-permissions/application-roles.html)
+* [Application roles](application-roles/index.html)
 
   Provides endpoints to define and manage application roles in PingOne. Roles contain application permissions. Application roles can be assigned to PingOne users.
 
-* [Application role permissions](application-permissions/application-role-permissions.html)
+* [Application role permissions](application-role-permissions/index.html)
 
   Provides endpoints to define and manage access control permissions, expected to be defined by a customer application developer. An application permission is comprised of an action and a protected resource, such as `read:accounts`. When a permission is added to a role, it creates a role entry. A subject assigned to a role is authorized for the permissions represented by the role's entries.
 
-* [Application role assignments by role](application-permissions/application-role-assignments.html)
+* [Application role assignments by role](application-role-assignments/index.html)
 
   Provides an endpoint to read application role assignments by role. The endpoint specifies a role ID in the request URL and the operation returns the role assignments associated with the identified role.
 
-* [User application role assignments](../platform/users/user-application-role-assignments.html)
+* [User application role assignments](../../platform/users/user-application-role-assignments/index.html)
 
   Provides endpoints to define and manage application role assignments associated with user resources.
 
@@ -275,15 +440,17 @@ To create and manage application roles and permissions, see:
 
 ---
 title: Application Resource Permissions
-description: The PingOne Authorize {{apiPath}}/v1/environments/{{envID}}/applicationResources/{{appResourceID}}/permissions endpoint provides operations to create, read, update, and delete application resource permissions in PingOne.
+description: Explains the PingOne Authorize application resource permissions endpoint used to create, read, update, and delete permissions on an application resource
 component: pingone-api
-page_id: pingone-api:authorize:application-permissions/application-resource-permissions
-canonical_url: https://developer.pingidentity.com/pingone-api/authorize/application-permissions/application-resource-permissions.html
+page_id: pingone-api:authorize:application-permissions/application-resource-permissions/index
+canonical_url: https://developer.pingidentity.com/pingone-api/authorize/application-permissions/application-resource-permissions/index.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-07
 section_ids:
   authorize-application-resources-permissions-data-model: Application resources permissions data model
   response-codes: Response codes
+  application-resource-permission-errors: Application resource permission errors
 ---
 
 # Application Resource Permissions
@@ -315,24 +482,63 @@ The PingOne Authorize `{{apiPath}}/v1/environments/{{envID}}/applicationResource
 | 403  | You do not have permissions or are not licensed to make this request. |
 | 404  | The requested resource was not found.                                 |
 
+## Application resource permission errors
+
+In addition to the general [error codes](../../../platform/reference/error-codes.html), application resource permission operations can return the following errors:
+
+| HTTP status | Top‑level code     | Detail code                                       | When it happens and what the response contains                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| ----------- | ------------------ | ------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 400         | `INVALID_DATA`     | `EMPTY_VALUE`, `INVALID_VALUE`, or `OUT_OF_RANGE` | **Message:** `Validation Error : [<field> <message>]`> **Collapse: When and details**
+>
+> **When:** A `POST` or `PUT` request omits `action` or supplies a blank `action` value, or supplies an `action` value longer than 20 characters or containing characters other than Unicode letters, marks, numbers, spaces, forward slashes, dots, apostrophes, underscores, and hyphens, or supplies a `description` value that fails validation
+>
+> **Details:** Describes the failing property, such as `must not be blank` for an omitted or blank `action`, `must contain only Unicode letters, marks, numbers, spaces, forward slashes, dots, apostrophes, underscores, or hyphens` for an `action` with disallowed characters, or `size must be between 1 and 20` for an `action` longer than 20 characters, for example `Validation Error : [action must not be blank]` |
+| 400         | `INVALID_DATA`     | `UNIQUENESS_VIOLATION`                            | **Message:** `The request could not be completed. One or more validation errors were in the request.`> **Collapse: When and details**
+>
+> **When:** A `POST` request specifies an `action` already used by another application resource permission on the same application resource, or a `PUT` request changes the `action` to one that already exists on the same application resource
+>
+> **Details:** `A permission with this action already exists on the resource.` The target is `action`.                                                                                                                                                                                                                                                                                                                                                                         |
+| 400         | `REQUEST_FAILED`   | `CONSTRAINT_VIOLATION`                            | **Message:** `The request could not be completed. There was an issue processing the request.`> **Collapse: When and details**
+>
+> **When:** A `POST` request exceeds the environment's application permission limit
+>
+> **Details:** `Maximum limit of application permissions per environment reached`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| 403         | `ACCESS_FAILED`    | None                                              | **Message:** `The actor attempting to perform the request is not authorized.`> **Collapse: When and details**
+>
+> **When:** The actor lacks the `applicationRoles:create:applicationPermission` permission (`POST`), the `applicationRoles:read:applicationPermission` permission (`GET`), the `applicationRoles:update:applicationPermission` permission (`PUT`), or the `applicationRoles:delete:applicationPermission` permission (`DELETE`)
+>
+> **Details:** None                                                                                                                                                                                                                                                                                                                                                                                                     |
+| 404         | `NOT_FOUND`        | None                                              | **Message:** `The request could not be completed. The requested resource was not found.`> **Collapse: When and details**
+>
+> **When:** A `GET` (single permission), `PUT`, or `DELETE` request references an application resource ID or permission ID that does not exist, a `GET` (all permissions for a resource) request references an application resource ID that does not exist, or a `POST` request references an application resource ID that does not exist
+>
+> **Details:** None                                                                                                                                                                                                                                                                                                                                                                                |
+| 500         | `UNEXPECTED_ERROR` | None                                              | **Message:** `There was an unexpected error with the service. Please try again later.`> **Collapse: When and details**
+>
+> **When:** Application resource permission creation fails after repeated attempts to generate a unique identifier
+>
+> **Details:** None                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+
 ---
 
 ---
 title: Application Resources
-description: The PingOne Authorize {{apiPath}}/v1/environments/{{envID}}/applicationResources endpoint provides operations to read application resources in PingOne. For information about create, update, and delete operations for application resources, refer to Create Application Resource, Update Application Resource, and Delete Application Resource.
+description: Explains the PingOne Authorize application resources endpoint used to read representations of external applications in PingOne
 component: pingone-api
-page_id: pingone-api:authorize:application-permissions/application-resources
-canonical_url: https://developer.pingidentity.com/pingone-api/authorize/application-permissions/application-resources.html
+page_id: pingone-api:authorize:application-permissions/application-resources/index
+canonical_url: https://developer.pingidentity.com/pingone-api/authorize/application-permissions/application-resources/index.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-07
 section_ids:
   authorize-application-resources-data-model: API application resources data model
   response-codes: Response codes
+  application-resource-errors: Application resource errors
 ---
 
 # Application Resources
 
-The PingOne Authorize `{{apiPath}}/v1/environments/{{envID}}/applicationResources` endpoint provides operations to read application resources in PingOne. For information about create, update, and delete operations for application resources, refer to [Create Application Resource](../../platform/resources/application-resources/create-application-resource.html), [Update Application Resource](../../platform/resources/application-resources/update-application-resource.html), and [Delete Application Resource](../../platform/resources/application-resources/delete-application-resource.html).
+The PingOne Authorize `{{apiPath}}/v1/environments/{{envID}}/applicationResources` endpoint provides operations to read application resources in PingOne. For information about create, update, and delete operations for application resources, refer to [Create Application Resource](../../../platform/resources/application-resources/create-application-resource.html), [Update Application Resource](../../../platform/resources/application-resources/update-application-resource.html), and [Delete Application Resource](../../../platform/resources/application-resources/delete-application-resource.html).
 
 ## API application resources data model
 
@@ -357,19 +563,38 @@ The PingOne Authorize `{{apiPath}}/v1/environments/{{envID}}/applicationResource
 | 403  | You do not have permissions or are not licensed to make this request. |
 | 404  | The requested resource was not found.                                 |
 
+## Application resource errors
+
+In addition to the general [error codes](../../../platform/reference/error-codes.html), application resource operations can return the following errors:
+
+| HTTP status | Top‑level code  | Detail code | When it happens and what the response contains                                                                                                                                                                                                  |
+| ----------- | --------------- | ----------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 403         | `ACCESS_FAILED` | None        | **Message:** `The actor attempting to perform the request is not authorized.`> **Collapse: When and details**
+>
+> **When:** The actor lacks the `applicationRoles:read:applicationResource` permission (`GET` operations)
+>
+> **Details:** None |
+| 404         | `NOT_FOUND`     | None        | **Message:** `The request could not be completed. The requested resource was not found.`> **Collapse: When and details**
+>
+> **When:** A `GET` request references an application resource ID that does not exist
+>
+> **Details:** None          |
+
 ---
 
 ---
 title: Application Role Assignments
-description: The PingOne Authorize`{{apiPath}}/v1/environments/{{envID}}/applicationRoles/{{appRoleID}}/assignments` endpoint provides operations to read application role assignments in PingOne.
+description: Explains the PingOne Authorize application role assignments endpoint used to read the users assigned to an application role
 component: pingone-api
-page_id: pingone-api:authorize:application-permissions/application-role-assignments
-canonical_url: https://developer.pingidentity.com/pingone-api/authorize/application-permissions/application-role-assignments.html
+page_id: pingone-api:authorize:application-permissions/application-role-assignments/index
+canonical_url: https://developer.pingidentity.com/pingone-api/authorize/application-permissions/application-role-assignments/index.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-07
 section_ids:
   application-role-assignments-data-model: Appliction role assignments data model
   response-codes: Response codes
+  application-role-assignment-errors: Application role assignment errors
 ---
 
 # Application Role Assignments
@@ -394,19 +619,38 @@ The PingOne Authorize\`{{apiPath}}/v1/environments/{{envID}}/applicationRoles/{{
 | 403  | You do not have permissions or are not licensed to make this request. |
 | 404  | The requested resource was not found.                                 |
 
+## Application role assignment errors
+
+In addition to the general [error codes](../../../platform/reference/error-codes.html), application role assignment operations can return the following errors:
+
+| HTTP status | Top‑level code  | Detail code | When it happens and what the response contains                                                                                                                                                                                                        |
+| ----------- | --------------- | ----------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 403         | `ACCESS_FAILED` | None        | **Message:** `The actor attempting to perform the request is not authorized.`> **Collapse: When and details**
+>
+> **When:** The actor lacks the `applicationRoles:read:applicationRoleAssignment` permission (`GET` operations)
+>
+> **Details:** None |
+| 404         | `NOT_FOUND`     | None        | **Message:** `The request could not be completed. The requested resource was not found.`> **Collapse: When and details**
+>
+> **When:** A `GET` request references an application role ID that does not exist
+>
+> **Details:** None                    |
+
 ---
 
 ---
 title: Application Role Permissions
-description: The PingOne Authorize {{apiPath}}/v1/environments/{{envID}}/applicationRoles/{{appRoleID}}/permissions endpoint provides operations to add, read, and delete the permissions associated with application roles.
+description: Explains the PingOne Authorize application role permissions endpoint used to add, read, and delete permissions associated with application roles
 component: pingone-api
-page_id: pingone-api:authorize:application-permissions/application-role-permissions
-canonical_url: https://developer.pingidentity.com/pingone-api/authorize/application-permissions/application-role-permissions.html
+page_id: pingone-api:authorize:application-permissions/application-role-permissions/index
+canonical_url: https://developer.pingidentity.com/pingone-api/authorize/application-permissions/application-role-permissions/index.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-07
 section_ids:
   application-roles-permissions-data-model: Application roles permissions data model
   response-codes: Response codes
+  application-role-permission-errors: Application role permission errors
 ---
 
 # Application Role Permissions
@@ -437,19 +681,53 @@ The PingOne Authorize `{{apiPath}}/v1/environments/{{envID}}/applicationRoles/{{
 | 403  | You do not have permissions or are not licensed to make this request. |
 | 404  | The requested resource was not found.                                 |
 
+## Application role permission errors
+
+In addition to the general [error codes](../../../platform/reference/error-codes.html), application role permission operations can return the following errors:
+
+| HTTP status | Top‑level code   | Detail code            | When it happens and what the response contains                                                                                                                                                                                                                                                                                                                                                                                                          |
+| ----------- | ---------------- | ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 400         | `INVALID_DATA`   | `EMPTY_VALUE`          | **Message:** `Validation Error : [<field> <message>]`> **Collapse: When and details**
+>
+> **When:** A `POST` request omits the `id` property from the request body
+>
+> **Details:** `must not be null` for an omitted `id`, for example `Validation Error : [id must not be null]`                                                                                                                                                                      |
+| 400         | `INVALID_DATA`   | `UNIQUENESS_VIOLATION` | **Message:** `The request could not be completed. One or more validation errors were in the request.`> **Collapse: When and details**
+>
+> **When:** A `POST` request associates an application resource permission with the application role when the permission is already associated with the role
+>
+> **Details:** `This permission already exists on the role`                                                                                      |
+| 400         | `REQUEST_FAILED` | `CONSTRAINT_VIOLATION` | **Message:** `The request could not be completed. There was an issue processing the request.`> **Collapse: When and details**
+>
+> **When:** A `POST` request exceeds the maximum number of application permissions for the role
+>
+> **Details:** `Maximum limit of application permissions for role reached`                                                                                                                                            |
+| 403         | `ACCESS_FAILED`  | None                   | **Message:** `The actor attempting to perform the request is not authorized.`> **Collapse: When and details**
+>
+> **When:** The actor lacks the `applicationRoles:create:applicationRoleEntry` permission (`POST`), the `applicationRoles:read:applicationRoleEntry` permission (`GET`), or the `applicationRoles:delete:applicationRoleEntry` permission (`DELETE`)
+>
+> **Details:** None                                                              |
+| 404         | `NOT_FOUND`      | None                   | **Message:** `The request could not be completed. The requested resource was not found.`> **Collapse: When and details**
+>
+> **When:** A `POST` request references an application role ID or application resource permission ID that does not exist, a `GET` request references an application role ID that does not exist, or a `DELETE` request references an application role ID or permission association that does not exist
+>
+> **Details:** None |
+
 ---
 
 ---
 title: Application Roles
-description: The PingOne Authorize {{apiPath}}/v1/environments/{{envID}}/applicationRoles endpoint provides operations to create, read, update, and delete application roles in PingOne.
+description: Explains the PingOne Authorize application roles endpoint used to create, read, update, and delete application roles
 component: pingone-api
-page_id: pingone-api:authorize:application-permissions/application-roles
-canonical_url: https://developer.pingidentity.com/pingone-api/authorize/application-permissions/application-roles.html
+page_id: pingone-api:authorize:application-permissions/application-roles/index
+canonical_url: https://developer.pingidentity.com/pingone-api/authorize/application-permissions/application-roles/index.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-07
 section_ids:
   application-roles-data-model: Application roles data model
   response-codes: Response codes
+  application-role-errors: Application role errors
 ---
 
 # Application Roles
@@ -476,16 +754,69 @@ The PingOne Authorize `{{apiPath}}/v1/environments/{{envID}}/applicationRoles` e
 | 403  | You do not have permissions or are not licensed to make this request. |
 | 404  | The requested resource was not found.                                 |
 
+## Application role errors
+
+In addition to the general [error codes](../../../platform/reference/error-codes.html), application role operations can return the following errors:
+
+| HTTP status | Top‑level code     | Detail code                                       | When it happens and what the response contains                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| ----------- | ------------------ | ------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 400         | `INVALID_DATA`     | `EMPTY_VALUE`, `INVALID_VALUE`, or `OUT_OF_RANGE` | **Message:** `Validation Error : [<field> <message>]`> **Collapse: When and details**
+>
+> **When:** A `POST` or `PUT` request omits `name` or supplies a blank `name` value, or supplies a `name` value longer than 20 characters or containing characters other than Unicode letters, marks, numbers, spaces, forward slashes, dots, apostrophes, underscores, and hyphens, or supplies a `description` value that fails validation
+>
+> **Details:** Describes the failing property, such as `must not be blank` for an omitted or blank `name`, `must contain only Unicode letters, marks, numbers, spaces, forward slashes, dots, apostrophes, underscores, or hyphens` for a `name` with disallowed characters, or `size must be between 1 and 20` for a `name` longer than 20 characters, for example `Validation Error : [name must not be blank]` |
+| 400         | `INVALID_DATA`     | `UNIQUENESS_VIOLATION`                            | **Message:** `The request could not be completed. One or more validation errors were in the request.`> **Collapse: When and details**
+>
+> **When:** A `POST` request specifies an application role name already used by another application role in the environment, or a `PUT` request changes the `name` to one that already exists in the environment
+>
+> **Details:** `A role with this name already exists.` The target is `name`.                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| 400         | `REQUEST_FAILED`   | `CONSTRAINT_VIOLATION`                            | **Message:** `The request could not be completed. There was an issue processing the request.`> **Collapse: When and details**
+>
+> **When:** A `POST` request exceeds the environment's application role limit
+>
+> **Details:** `Maximum number of application roles per environment reached`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| 400         | `REQUEST_FAILED`   | `INVALID_PARAMETER`                               | **Message:** `The request could not be completed. There was an issue processing the request.`> **Collapse: When and details**
+>
+> **When:** A `GET /applicationRoles/{appRoleID}/users` request provides a `limit` value less than 1 or greater than 1024
+>
+> **Details:** `A query string parameter or value is not valid for this request.` The target is `limit`, with `rangeMinimumValue` 1 and `rangeMaximumValue` 1024 in `innerError`.                                                                                                                                                                                                                                                                                                                                                                                                            |
+| 400         | `REQUEST_FAILED`   | `INVALID_PARAMETER`                               | **Message:** `The request could not be completed. There was an issue processing the request.`> **Collapse: When and details**
+>
+> **When:** A `GET /applicationRoles/{appRoleID}/users` request provides a `cursor` value that is not a valid page cursor
+>
+> **Details:** `A query string parameter or value is not valid for this request.` The target is `cursor`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| 400         | `REQUEST_FAILED`   | `INVALID_PARAMETER`                               | **Message:** `The request could not be completed. There was an issue processing the request.`> **Collapse: When and details**
+>
+> **When:** A `GET /applicationRoles/{appRoleID}/users` request provides an `expand` value other than `user`
+>
+> **Details:** `The expand attribute was invalid`. The target is `expand`, with `allowedValues` listing the supported value `user` in `innerError`.                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| 403         | `ACCESS_FAILED`    | None                                              | **Message:** `The actor attempting to perform the request is not authorized.`> **Collapse: When and details**
+>
+> **When:** The actor lacks the `applicationRoles:create:applicationRole` permission (`POST`), the `applicationRoles:read:applicationRole` permission (`GET`), the `applicationRoles:update:applicationRole` permission (`PUT`), or the `applicationRoles:delete:applicationRole` permission (`DELETE`), or lacks the `applicationRoles:read:applicationRoleAssignment` permission on the `GET` operations that read role assignments (`/users` endpoints)
+>
+> **Details:** None                                                                                                                                                                                                                                                         |
+| 404         | `NOT_FOUND`        | None                                              | **Message:** `The request could not be completed. The requested resource was not found.`> **Collapse: When and details**
+>
+> **When:** A `GET` (single role), `PUT`, or `DELETE` request references an application role ID that does not exist, or the user ID referenced by a role-assignment `GET` request does not exist
+>
+> **Details:** None                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| 500         | `UNEXPECTED_ERROR` | None                                              | **Message:** `There was an unexpected error with the service. Please try again later.`> **Collapse: When and details**
+>
+> **When:** Application role creation fails after repeated attempts to generate a unique identifier
+>
+> **Details:** None                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+
 ---
 
 ---
 title: Authorization Decisions
-description: The PingOne Authorize decision service provides:
+description: Describes the PingOne Authorize decision service for runtime policy decision evaluation and decision endpoint management
 component: pingone-api
-page_id: pingone-api:authorize:authorization-decisions
-canonical_url: https://developer.pingidentity.com/pingone-api/authorize/authorization-decisions.html
+page_id: pingone-api:authorize:authorization-decisions/index
+canonical_url: https://developer.pingidentity.com/pingone-api/authorize/authorization-decisions/index.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-07
 ---
 
 # Authorization Decisions
@@ -494,7 +825,7 @@ The PingOne Authorize decision service provides:
 
 **Decision evaluation**
 
-* Runtime evaluation of decision requests against a given policy decision resource. For more information, refer to [Decision Evaluation](authorization-decisions/decision-evaluation.html)
+* Runtime evaluation of decision requests against a given policy decision resource. For more information, refer to [Decision Evaluation](decision-evaluation/index.html)
 
 **Decision endpoint management**
 
@@ -502,18 +833,39 @@ The PingOne Authorize decision service provides:
 
 * Control over which version of the policies are deployed to each decision endpoint, giving your organization control over how and when policies are rolled out.
 
-For more information, refer to [Decision Endpoints](authorization-decisions/decision-endpoints.html)
+For more information, refer to [Decision Endpoints](decision-endpoints/index.html)
+
+---
+
+---
+title: Authorization Modules
+description: Authorization modules are divisions of a PingOne Authorize environment with their own policy space. Use modules to organize authorization policies for separate teams without interference between them.
+component: pingone-api
+page_id: pingone-api:authorize:authorization-modules/index
+canonical_url: https://developer.pingidentity.com/pingone-api/authorize/authorization-modules/index.html
+llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+---
+
+# Authorization Modules
+
+Authorization modules are divisions of a PingOne Authorize environment with their own policy space. Use modules to organize authorization policies for separate teams without interference between them.
+
+The following section provides endpoints to create, read, update, and delete custom authorization modules:
+
+* [Modules](modules/index.html)
 
 ---
 
 ---
 title: Authorize Gateway Decision Evaluation
-description: Decision requests to an Authorize gateway instance are used to determine whether a user or system is permitted to perform a specific action.
+description: Explains the individual and bulk decision evaluation endpoints for PingOne Authorize gateway instances
 component: pingone-api
-page_id: pingone-api:authorize:authorize-gateways/authorize-gateway-decision-evaulation/authorize-gateway-decision-evaulation
-canonical_url: https://developer.pingidentity.com/pingone-api/authorize/authorize-gateways/authorize-gateway-decision-evaulation/authorize-gateway-decision-evaulation.html
+page_id: pingone-api:authorize:authorize-gateways/authorize-gateway-decision-evaluation/authorize-gateway-decision-evaluation
+canonical_url: https://developer.pingidentity.com/pingone-api/authorize/authorize-gateways/authorize-gateway-decision-evaluation/authorize-gateway-decision-evaluation.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-07
 ---
 
 # Authorize Gateway Decision Evaluation
@@ -532,12 +884,13 @@ See the following API examples:
 
 ---
 title: Authorize Gateways
-description: Authorize gateways combine the advantages of centralized policy administration with the benefits of on-premise decision evaluation and enforcement.
+description: Explains PingOne Authorize gateways, which combine centralized policy administration with on-premises decision evaluation and enforcement
 component: pingone-api
 page_id: pingone-api:authorize:authorize-gateways/authorize-gateways
 canonical_url: https://developer.pingidentity.com/pingone-api/authorize/authorize-gateways/authorize-gateways.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-07
 ---
 
 # Authorize Gateways
@@ -548,7 +901,7 @@ See the following topics for more information:
 
 * [Authorize gateways](https://docs.pingidentity.com/pingone/integrations/p1_authz_gateways.html) in the PingOne admin documentation.
 
-* [Authorize Gateway Decision Evaluation](authorize-gateway-decision-evaulation/authorize-gateway-decision-evaulation.html) provides the decision evaluation endpoints for Authorize gateway instances.
+* [Authorize Gateway Decision Evaluation](authorize-gateway-decision-evaluation/authorize-gateway-decision-evaluation.html) provides the decision evaluation endpoints for Authorize gateway instances.
 
 In addition, the PingOne gateway endpoints provide capabilities for Authorize gateway management.
 
@@ -568,12 +921,13 @@ See the following Authorize gateway examples:
 
 ---
 title: Create API Server Operation
-description: The POST {{apiPath}}/v1/environments/{{envID}}/apiServers/{{apiServerID}}/operations request creates a new API service operation associated with the environment and API service specified in the request URL.
+description: Create a PingOne Authorize API server operation defined by one or more path patterns
 component: pingone-api
 page_id: pingone-api:authorize:api-access-management/api-operations/create-api-server-operation
 canonical_url: https://developer.pingidentity.com/pingone-api/authorize/api-access-management/api-operations/create-api-server-operation.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-05-29
 section_ids:
   prerequisites: Prerequisites
   headers: Headers
@@ -594,11 +948,11 @@ The `POST {{apiPath}}/v1/environments/{{envID}}/apiServers/{{apiServerID}}/opera
 
 ### Prerequisites
 
-* Refer to [PingOne Authorize API Access Management](../../api-access-management.html) for important overview information.
+* Refer to [PingOne Authorize API Access Management](../index.html) for important overview information.
 
 > **Collapse: Request Model**
 >
-> For property descriptions, refer to [API service operations data model](../api-operations.html#api-server-operations-data-model).
+> For property descriptions, refer to [API service operations data model](index.html#api-server-operations-data-model).
 >
 > | Property                                | Type         | Required |
 > | --------------------------------------- | ------------ | -------- |
@@ -1015,12 +1369,13 @@ task.resume()
 
 ---
 title: Create API Service
-description: The following sample shows the POST {{apiPath}}/v1/environments/{{envID}}/apiServers operation to create a new API service endpoint resource associated with the environment specified in the request URL. The request body specifies the name, baseUrls, and authorizationServer.resource.id value that specifies the UUID for a custom resource defined in PingOne.
+description: "Create a PingOne Authorize API service that models and protects a customer's API"
 component: pingone-api
 page_id: pingone-api:authorize:api-access-management/api-services/create-api-server
 canonical_url: https://developer.pingidentity.com/pingone-api/authorize/api-access-management/api-services/create-api-server.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-05-29
 section_ids:
   prerequisites: Prerequisites
   headers: Headers
@@ -1033,6 +1388,10 @@ section_ids:
 
 ##
 
+Required permission:
+
+* [authz:create:apiServer](../../../platform/reference/roles-and-permissions-in-pingone/pingone-permissions-by-identifier.html#permission-authz-create-apiServer "Learn more about this permission")
+
 ```none
 POST {{apiPath}}/v1/environments/{{envID}}/apiServers
 ```
@@ -1041,7 +1400,7 @@ The following sample shows the `POST {{apiPath}}/v1/environments/{{envID}}/apiSe
 
 ### Prerequisites
 
-* Refer to [PingOne Authorize](../../../workflow-library/pingone-authorize.html) and [PingOne Authorize API Access Management](../../api-access-management.html) for important overview information.
+* Refer to [PingOne Authorize](../../../workflow-library/pingone-authorize/index.html) and [PingOne Authorize API Access Management](../index.html) for important overview information.
 
 * Use [Create Resource](../../../platform/resources/resources-1/create-resource.html) to create an authorization server resource entity for the `customP1ResourceID` variable. Use [Read All Resources](../../../platform/resources/resources-1/read-all-resources.html) to find an existing resource entity ID.
 
@@ -1049,7 +1408,7 @@ The following sample shows the `POST {{apiPath}}/v1/environments/{{envID}}/apiSe
 
 > **Collapse: Request Model**
 >
-> For property descriptions, refer to [API service data model](../api-services.html#api-server-data-model).
+> For property descriptions, refer to [API service data model](index.html#api-server-data-model).
 >
 > | Property                                           | Type         | Required |
 > | -------------------------------------------------- | ------------ | -------- |
@@ -1456,12 +1815,13 @@ task.resume()
 
 ---
 title: Create Application Permissions
-description: The following sample shows the POST {{apiPath}}/v1/environments/{{envID}}/applicationResources/{{appResourceID}}/permissions operation to create a new application resource permission. The request body specifies the action`and an optional `description.
+description: Create a new PingOne Authorize application resource permission
 component: pingone-api
 page_id: pingone-api:authorize:application-permissions/application-resource-permissions/create-application-permissions
 canonical_url: https://developer.pingidentity.com/pingone-api/authorize/application-permissions/application-resource-permissions/create-application-permissions.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-05-29
 section_ids:
   prerequisites: Prerequisites
   headers: Headers
@@ -1473,6 +1833,10 @@ section_ids:
 # Create Application Permissions
 
 ##
+
+Required permission:
+
+* [applicationRoles:create:applicationPermission](../../../platform/reference/roles-and-permissions-in-pingone/pingone-permissions-by-identifier.html#permission-applicationRoles-create-applicationPermission "Learn more about this permission")
 
 ```none
 POST {{apiPath}}/v1/environments/{{envID}}/applicationResources/{{appResourceID}}/permissions
@@ -1486,7 +1850,7 @@ The following sample shows the `POST {{apiPath}}/v1/environments/{{envID}}/appli
 
 > **Collapse: Request Model**
 >
-> For complete descriptions, refer to [Application resources permissions data model](../application-resource-permissions.html#authorize-application-resources-permissions-data-model).
+> For complete descriptions, refer to [Application resources permissions data model](index.html#authorize-application-resources-permissions-data-model).
 >
 > | Property      | Type   | Required |
 > | ------------- | ------ | -------- |
@@ -1804,12 +2168,13 @@ task.resume()
 
 ---
 title: Create Application Role
-description: The POST {{apiPath}}/v1/environments/{{envID}}/applicationRoles request creates a new application role.
+description: Create a new PingOne Authorize application role
 component: pingone-api
 page_id: pingone-api:authorize:application-permissions/application-roles/create-application-role
 canonical_url: https://developer.pingidentity.com/pingone-api/authorize/application-permissions/application-roles/create-application-role.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-05-29
 section_ids:
   headers: Headers
   body: Body
@@ -1821,6 +2186,10 @@ section_ids:
 
 ##
 
+Required permission:
+
+* [applicationRoles:create:applicationRole](../../../platform/reference/roles-and-permissions-in-pingone/pingone-permissions-by-identifier.html#permission-applicationRoles-create-applicationRole "Learn more about this permission")
+
 ```none
 POST {{apiPath}}/v1/environments/{{envID}}/applicationRoles
 ```
@@ -1829,7 +2198,7 @@ The `POST {{apiPath}}/v1/environments/{{envID}}/applicationRoles` request create
 
 > **Collapse: Request Model**
 >
-> For property descriptions, refer to [Application roles data model](../application-roles.html#application-roles-data-model).
+> For property descriptions, refer to [Application roles data model](index.html#application-roles-data-model).
 >
 > | Property      | Type   | Required |
 > | ------------- | ------ | -------- |
@@ -2142,12 +2511,13 @@ task.resume()
 
 ---
 title: Create Application Role Permission
-description: The POST {{apiPath}}/v1/environments/{{envID}}/applicationRoles/{{appRoleID}}/permissions request associates an application resource permission with the application role specified in the request URL. The request body takes an application resource permission ID as the value for the id property.
+description: Associate an application resource permission with a PingOne Authorize application role
 component: pingone-api
 page_id: pingone-api:authorize:application-permissions/application-role-permissions/create-application-role-permission
 canonical_url: https://developer.pingidentity.com/pingone-api/authorize/application-permissions/application-role-permissions/create-application-role-permission.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-05-29
 section_ids:
   headers: Headers
   body: Body
@@ -2159,6 +2529,10 @@ section_ids:
 
 ##
 
+Required permission:
+
+* [applicationRoles:create:applicationRoleEntry](../../../platform/reference/roles-and-permissions-in-pingone/pingone-permissions-by-identifier.html#permission-applicationRoles-create-applicationRoleEntry "Learn more about this permission")
+
 ```none
 POST {{apiPath}}/v1/environments/{{envID}}/applicationRoles/{{appRoleID}}/permissions
 ```
@@ -2169,7 +2543,7 @@ When creating a relationship between an application role and an application perm
 
 > **Collapse: Request Model**
 >
-> For complete descriptions, refer to [Application roles permissions data model](../application-role-permissions.html#application-roles-permissions-data-model).
+> For complete descriptions, refer to [Application roles permissions data model](index.html#application-roles-permissions-data-model).
 >
 > These properties are read-only:
 >
@@ -2481,12 +2855,13 @@ task.resume()
 
 ---
 title: Create Decision Endpoint
-description: There are two create options. You can configure a policy decision endpoint to reference a specific policy version. Or, you can configure a policy decision endpoint that is always up-to-date.
+description: Create a PingOne Authorize policy decision endpoint referencing a specific or always up-to-date policy version
 component: pingone-api
 page_id: pingone-api:authorize:authorization-decisions/decision-endpoints/create-decision-endpoint
 canonical_url: https://developer.pingidentity.com/pingone-api/authorize/authorization-decisions/decision-endpoints/create-decision-endpoint.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-05-29
 section_ids:
   prerequisites: Prerequisites
   headers: Headers
@@ -2498,6 +2873,10 @@ section_ids:
 # Create Decision Endpoint
 
 ##
+
+Required permission:
+
+* [authz:create:decisionendpoint](../../../platform/reference/roles-and-permissions-in-pingone/pingone-permissions-by-identifier.html#permission-authz-create-decisionendpoint "Learn more about this permission")
 
 ```none
 POST {{apiPath}}/v1/environments/{{envID}}/decisionEndpoints
@@ -2515,11 +2894,11 @@ The following sample shows the `POST {{apiPath}}/v1/environments/{{envID}}/decis
 
 ### Prerequisites
 
-* Refer to [Authorization Decisions](../decision-endpoints.html) for important overview information.
+* Refer to [Authorization Decisions](index.html) for important overview information.
 
 > **Collapse: Request Model**
 >
-> For property descriptions, refer to [Policy decision service data model](../decision-endpoints.html#policy-decision-service-data-model).
+> For property descriptions, refer to [Policy decision service data model](index.html#policy-decision-service-data-model).
 >
 > | Property                  | Type    | Required |
 > | ------------------------- | ------- | -------- |
@@ -2879,12 +3258,13 @@ task.resume()
 
 ---
 title: Create External OAuth Server
-description: The following sample shows the POST {{apiPath}}/v1/environments/{{envID}}/externalOAuthServers operation to create a new external OAuth server resource associated with the environment specified in the request URL.
+description: Create an external OAuth server resource for use with PingOne Authorize API access management
 component: pingone-api
 page_id: pingone-api:authorize:api-access-management/external-oauth-servers/create-external-oauth-server
 canonical_url: https://developer.pingidentity.com/pingone-api/authorize/api-access-management/external-oauth-servers/create-external-oauth-server.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-05-29
 section_ids:
   prerequisites: Prerequisites
   headers: Headers
@@ -2897,6 +3277,10 @@ section_ids:
 
 ##
 
+Required permission:
+
+* [authz:create:externalOAuthServer](../../../platform/reference/roles-and-permissions-in-pingone/pingone-permissions-by-identifier.html#permission-authz-create-externalOAuthServer "Learn more about this permission")
+
 ```none
 POST {{apiPath}}/v1/environments/{{envID}}/externalOAuthServers
 ```
@@ -2907,11 +3291,11 @@ When successful, a `201 CREATED` message and the new external OAuth server resou
 
 ### Prerequisites
 
-* Refer to [PingOne Authorize API Access Management](../../api-access-management.html) for important overview information.
+* Refer to [PingOne Authorize API Access Management](../index.html) for important overview information.
 
 > **Collapse: Request Model**
 >
-> For property descriptions, refer to [External OAuth server data model](../external-oauth-servers.html#external-oauth-server-data-model)
+> For property descriptions, refer to [External OAuth server data model](index.html#external-oauth-server-data-model)
 >
 > | Property                        | Type   | Required |
 > | ------------------------------- | ------ | -------- |
@@ -3316,75 +3700,3 @@ task.resume()
     }
 }
 ```
-
----
-
----
-title: Decision Endpoints
-description: The PingOne policy decision service provides operations to create, read, update and delete decision policy versions in PingOne.
-component: pingone-api
-page_id: pingone-api:authorize:authorization-decisions/decision-endpoints
-canonical_url: https://developer.pingidentity.com/pingone-api/authorize/authorization-decisions/decision-endpoints.html
-llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-section_ids:
-  assigning-admin-roles-and-permissions-to-this-service: Assigning admin roles and permissions to this service
-  policy-decision-service-data-model: Policy decision service data model
-  policy-decision-management-events-generated: Policy decision management events generated
-  response-codes: Response codes
----
-
-# Decision Endpoints
-
-The PingOne policy decision service provides operations to create, read, update and delete decision policy versions in PingOne.
-
-## Assigning admin roles and permissions to this service
-
-Admin role assignments determine access to PingOne APIs. When assigning admin roles to this service, refer to [PingOne Permissions by Service](../../platform/reference/roles-and-permissions-in-pingone/permissions-by-service.html) for the service-specific permissions.
-
-You can also choose to assign admin roles based on particular service resources. Refer to [PingOne Permissions by Resource](../../platform/reference/roles-and-permissions-in-pingone/permissions-by-resource.html) when assigning admin roles per service resources.
-
-Admin assignments to roles are set by:
-
-* [Automatic assignment for some roles](../../platform/roles/predefined-roles.html#automatic-role-assignment).
-
-* [Group Role Assignments](../../platform/group-role-assignments/group-role-assignments.html).
-
-* [User Role Assignments](../../platform/users/user-role-assignments.html).
-
-Refer to [Roles Management](../../platform/roles.html) for more information.
-
-## Policy decision service data model
-
-| Property                     | Type    | Required | Mutable | Description                                                                                                                                                                                                                                                           |
-| ---------------------------- | ------- | -------- | ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `alternateId`                | UUID    | Optional | Mutable | A string that specifies alternative unique identifier for the endpoint, which provides a method for locating the resource by a known, fixed identifier.                                                                                                               |
-| `authorizationVersion.id`    | UUID    | Optional | Mutable | A string that specifies the ID of the Authorization Version deployed to this endpoint. Versioning allows independent development and deployment of policies. If omitted, the endpoint always uses the latest policy version available from the policy editor service. |
-| `authorizationVersion.href`  | String  | Optional | Mutable | A string that specifies the request URL for the authorization version endpoint.                                                                                                                                                                                       |
-| `authorizationVersion.title` | String  | Optional | Mutable | A string that specifies the title for the authorization version response.                                                                                                                                                                                             |
-| `authorizationVersion.type`  | String  | Optional | Mutable | A string that specifies the content type for the authorization version response.                                                                                                                                                                                      |
-| `description`                | String  | Required | Mutable | A string that specifies the description of the policy decision resource.                                                                                                                                                                                              |
-| `id`                         | UUID    | Required | Mutable | A string that specifies the resource's unique identifier.                                                                                                                                                                                                             |
-| `name`                       | String  | Required | Mutable | A string that specifies the policy decision resource name.                                                                                                                                                                                                            |
-| `owned`                      | Boolean | Optional | Mutable | A boolean that when true restricts modifications of the endpoint to PingOne-owned clients.                                                                                                                                                                            |
-| `policyId`                   | UUID    | Optional | Mutable | A string that specifies the ID of the root policy configured for this endpoint. If omitted, the policy editor service decides on a suitable default.                                                                                                                  |
-| `recentDecisions.href`       | String  | Optional | Mutable | A string that specifies the request URL for the recent decisions endpoint.                                                                                                                                                                                            |
-| `recentDecisions.title`      | String  | Optional | Mutable | A string that specifies the title for the recent decisions response.                                                                                                                                                                                                  |
-| `recentDecisions.type`       | String  | Optional | Mutable | A string that specifies the content type for the recent decisions response.                                                                                                                                                                                           |
-| `recordRecentRequests`       | Boolean | Required | Mutable | A boolean that specifies whether to record a limited history of recent decision requests and responses, which can be queried through a separate API.                                                                                                                  |
-
-## Policy decision management events generated
-
-Refer to [Audit Reporting Events](../../platform/audit-activities.html) for the events generated.
-
-### Response codes
-
-| Code | Message                                                               |
-| ---- | --------------------------------------------------------------------- |
-| 200  | Successful operation.                                                 |
-| 201  | Successfully created.                                                 |
-| 204  | Successfully removed. No content.                                     |
-| 400  | The request could not be completed.                                   |
-| 401  | You do not have access to this resource.                              |
-| 403  | You do not have permissions or are not licensed to make this request. |
-| 404  | The requested resource was not found.                                 |

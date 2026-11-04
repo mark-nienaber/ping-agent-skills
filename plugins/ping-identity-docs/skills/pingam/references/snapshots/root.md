@@ -7,6 +7,7 @@ page_id: pingam::index
 canonical_url: https://docs.pingidentity.com/pingam/release-notes/preface.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 section_ids:
   release_notes: Release notes
   get_started_with_pingam: Get started with PingAM

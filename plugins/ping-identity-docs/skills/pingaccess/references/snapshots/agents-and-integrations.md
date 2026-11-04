@@ -408,7 +408,7 @@ Alternatively, update the dependency in your `pom.xml` to point to the local ins
 </dependency>
 ```
 
-With either of these options, replace *\<AGENT\_SDK\_JAVA\_HOME>* with the absolute path to the extracted `pingaccess-agent-java-sdk-<version_number>` directory.
+With either of these options, replace *\<AGENT_SDK_JAVA_HOME>* with the absolute path to the extracted `pingaccess-agent-java-sdk-<version_number>` directory.
 
 To download the SDK, go to the [PingAccess downloads site](https://www.pingidentity.com/en/resources/downloads/pingaccess.html) and click the **Add-ons** tab.
 
@@ -489,7 +489,7 @@ revdate: April 18, 2025
 
 The PingAccess agent for Apache (SLES) is supported on the following platforms:
 
-* Apache HTTP Server 2.4 running on SUSE Linux Enterprise Server 15 (x86\_64). Use the latest supported SP from SUSE.
+* Apache HTTP Server 2.4 running on SUSE Linux Enterprise Server 15 (x86_64). Use the latest supported SP from SUSE.
 
 |   |                                                                                                                                                                                                           |
 | - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

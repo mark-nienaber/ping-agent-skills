@@ -280,33 +280,41 @@ After you've created a PingAccess risk policy, you can assign it to a specific a
 ---
 
 ---
-title: Adding a Safenet Luna provider
-description: Add a Safenet Luna provider to begin using hardware security module (HSM)-stored key pairs in PingAccess.
+title: Adding a Thales Luna provider
+description: Add a Thales Luna (formerly Safenet Luna) provider to begin using HSM-stored key pairs in PingAccess.
 component: pingaccess
 version: 9.1
-page_id: pingaccess:pingaccess_user_interface_reference_guide:pa_adding_a_safenet_luna_provider
-canonical_url: https://docs.pingidentity.com/pingaccess/9.1/pingaccess_user_interface_reference_guide/pa_adding_a_safenet_luna_provider.html
+page_id: pingaccess:pingaccess_user_interface_reference_guide:pa_adding_a_thales_luna_provider
+canonical_url: https://docs.pingidentity.com/pingaccess/9.1/pingaccess_user_interface_reference_guide/pa_adding_a_thales_luna_provider.html
 llms_txt: https://docs.pingidentity.com/pingaccess/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: February 6, 2023
+revdate: July 16, 2026
+page_aliases: ["pa_adding_a_safenet_luna_provider.adoc"]
 section_ids:
   before-you-begin: Before you begin
+  choose-from: Choose from:
   steps: Steps
 ---
 
-# Adding a Safenet Luna provider
+# Adding a Thales Luna provider
 
-Add a Safenet Luna provider to begin using hardware security module (HSM) *(tooltip: \<div class="paragraph">
+Add a Thales Luna (formerly Safenet Luna) provider to begin using hardware security module (HSM) *(tooltip: \<div class="paragraph">
 \<p>A dedicated cryptographic processor designed to manage and protect digital keys. HSMs act as trust anchors that protect the cryptographic key lifecycle by securely managing, processing, and storing cryptographic keys inside a hardened, tamper-resistant device.\</p>
 \</div>)*-stored key pairs in PingAccess.
 
 ## Before you begin
 
-* Configure your hardware security module.
+* Configure your HSM.
 
 * Configure a Luna client on the PingAccess system. The PingAccess service must have full permissions over the client.
 
-* Move the `/usr/safenet/lunaclient/lib/libCryptoki2_64.so` library on Linux systems, or the `\Program Files\SafeNet\LunaClient\win32\cryptoki.dll` library on Windows systems, to the `deploy` directory on the PingAccess system.
+* Move the appropriate Luna Client library to the `deploy` directory on the PingAccess system.
+
+  ### Choose from:
+
+  * Windows: Move the `C:\Program Files\SafeNet\LunaClient\cryptoki.dll` library.
+
+  * Linux: Move the `/usr/safenet/lunaclient/lib/libCryptoki2_64.so` library.
 
 ## Steps
 
@@ -316,7 +324,7 @@ Add a Safenet Luna provider to begin using hardware security module (HSM) *(tool
 
 3. In the **Name** field, enter a name for the HSM provider.
 
-4. From the **Type** list, select **Safenet Luna Provider**.
+4. In the **Type** list, select **Thales Luna Provider**.
 
 5. In the **Slot ID** field, enter the slot ID of the HSM slot to use.
 

@@ -6,7 +6,7 @@ page_id: pingone:digital_credentials_using_pingone_credentials:p1_credentials_cr
 canonical_url: https://docs.pingidentity.com/pingone/digital_credentials_using_pingone_credentials/p1_credentials_creating_a_credential.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: June 2, 2025
+revdate: 2025-06-02T00:00:00Z
 section_ids:
   about-this-task: About this task
   before-you-begin: Before you begin
@@ -31,7 +31,7 @@ Define the information that you want to collect from your customer and customize
 
 * (Optional) Add PingID to your environment to add PingID as a digital wallet.
 
-  You can add PingOne Credentials or PingID with a [Workforce solution](../getting_started_with_pingone/p1_trial_workforce_solution.html) or [build your own solution](../getting_started_with_pingone/p1_building_solutions.html). Learn more in [Adding a new environment](../pingone_tutorials/p1_tutorial_config_mfa_experience_add_environment.html) and [Building solutions](../getting_started_with_pingone/p1_building_solutions.html).
+  You can add PingOne Credentials or PingID with a [Workforce solution](../getting_started_with_pingone/p1_trial_workforce_solution.html) or [build your own solution](../getting_started_with_pingone/p1_building_solutions.html). Learn more in [Adding a new environment that includes PingID](../pingone_tutorials/p1_tutorial_config_mfa_experience_add_environment.html) and [Building solutions](../getting_started_with_pingone/p1_building_solutions.html).
 
 * (Optional) Create a native [application](../applications/p1_application_types.html) to have an existing digital wallet to add to the credential. You can also wait to add a digital wallet during configuration.
 
@@ -184,13 +184,13 @@ Define the information that you want to collect from your customer and customize
 
 ---
 title: Credential management method comparison
-description: The PingOne Credentials service offers Automated and API credential management options.
+description: Compare automated and API credential management options in PingOne Credentials.
 component: pingone
 page_id: pingone:digital_credentials_using_pingone_credentials:p1_credentials_management_method_comparison
 canonical_url: https://docs.pingidentity.com/pingone/digital_credentials_using_pingone_credentials/p1_credentials_management_method_comparison.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: June 29, 2024
+revdate: 2024-06-29T00:00:00Z
 ---
 
 # Credential management method comparison
@@ -214,13 +214,13 @@ API credential management uses the Credential APIs to issue, edit, and revoke cr
 
 ---
 title: Customizing PingOne Credentials notification templates
-description: Customize notification templates for PingOne Credentials notifications that end users receive.
+description: Customize the PingOne Credentials notification templates that end users receive for credential issuance, revocation, updates, and digital wallet pairing.
 component: pingone
 page_id: pingone:digital_credentials_using_pingone_credentials:p1_credentials_customizing_notification_templates
 canonical_url: https://docs.pingidentity.com/pingone/digital_credentials_using_pingone_credentials/p1_credentials_customizing_notification_templates.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: June 29, 2024
+revdate: 2024-06-29T00:00:00Z
 section_ids:
   before-you-begin: Before you begin
   about-this-task: About this task
@@ -288,13 +288,13 @@ To customize notification templates for the notifications that groups or populat
 
 ---
 title: Digital Credentials using PingOne Credentials
-description: The PingOne Credentials service allows an issuer to create verifiable credentials that they can send to a compatible wallet app.
+description: Find getting started guides, scenarios, integrations, and developer resources for PingOne Credentials.
 component: pingone
 page_id: pingone:digital_credentials_using_pingone_credentials:p1_credentials_start
 canonical_url: https://docs.pingidentity.com/pingone/digital_credentials_using_pingone_credentials/p1_credentials_start.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: April 30, 2025
+revdate: 2025-04-30T00:00:00Z
 section_ids:
   getting-started: Getting started
   integrations-and-connectors: Integrations and connectors
@@ -321,7 +321,7 @@ The PingOne Credentials service allows an issuer to create verifiable credential
 
 * [Editing a credential](p1_credentials_editing_a_credential.html)
 
-* [Revoking credentials](p1_credentials_revoking_a_credential.html)
+* [Managing a credential](p1_credentials_managing_a_credential.html)
 
 ## Integrations and connectors
 
@@ -349,7 +349,7 @@ page_id: pingone:digital_credentials_using_pingone_credentials:p1_credentials_ed
 canonical_url: https://docs.pingidentity.com/pingone/digital_credentials_using_pingone_credentials/p1_credentials_editing_a_credential.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: June 2, 2025
+revdate: 2025-06-02T00:00:00Z
 section_ids:
   steps: Steps
   result: Result:
@@ -484,7 +484,7 @@ page_id: pingone:digital_credentials_using_pingone_credentials:p1_credentials_ge
 canonical_url: https://docs.pingidentity.com/pingone/digital_credentials_using_pingone_credentials/p1_credentials_getting_started.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: January 23, 2025
+revdate: 2025-01-23T00:00:00Z
 page_aliases: ["p1_credentials_creating_registering_neo_sdk.adoc"]
 section_ids:
   before-you-begin: Before you begin
@@ -637,13 +637,13 @@ The mobile app guides the user through the process of accepting and sharing cred
 
 ---
 title: Introduction to PingOne Credentials
-description: PingOne Credentials is a service that allows issuers to customize and issue verifiable digital credentials that users can store in their wallet, eliminating cost and management of issuing physical credentials.
+description: PingOne Credentials is a service that lets issuers create and issue verifiable digital credentials that users store in a wallet app.
 component: pingone
 page_id: pingone:digital_credentials_using_pingone_credentials:p1_credentials_introduction
 canonical_url: https://docs.pingidentity.com/pingone/digital_credentials_using_pingone_credentials/p1_credentials_introduction.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: November 25, 2024
+revdate: 2024-11-25T00:00:00Z
 section_ids:
   how-pingone-credentials-works: How PingOne Credentials works
   users-download-a-compatible-wallet-app-and-create-a-digital-identity-profile: "Users: Download a compatible wallet app and create a digital identity profile"
@@ -785,6 +785,79 @@ After they create these credentials, they can issue them to their users.
 ---
 
 ---
+title: Managing a credential
+description: "You can revoke, delete, or reset a credential in PingOne if it's no longer valid."
+component: pingone
+page_id: pingone:digital_credentials_using_pingone_credentials:p1_credentials_managing_a_credential
+canonical_url: https://docs.pingidentity.com/pingone/digital_credentials_using_pingone_credentials/p1_credentials_managing_a_credential.html
+llms_txt: https://docs.pingidentity.com/pingone/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2025-06-02T00:00:00Z
+page_aliases: ["p1_credentials_revoking_a_credential.adoc"]
+section_ids:
+  revoking-a-credential: Revoking a credential
+  steps: Steps
+  choose-from: Choose from:
+  result: Result
+  deleting-and-resetting-a-credential: Deleting and resetting a credential
+---
+
+# Managing a credential
+
+You can revoke, delete, or reset a credential in PingOne if it's no longer valid.
+
+## Revoking a credential
+
+You can revoke a credential if it's no longer valid and should be removed.
+
+To revoke a credential, you change the issuance rule or SCIM filter. You can remove or change the group, population, or custom filter so that the user no longer matches the rule or filter. You can also revoke a credential from a user on the **Users** page. Learn more in [Managing a user's credentials](../directory/p1_manage_user_credentials.html).
+
+|   |                                                   |
+| - | ------------------------------------------------- |
+|   | You can only delete a credential through the API. |
+
+To revoke credentials in PingOne Credentials:
+
+## Steps
+
+1. In the PingOne admin console, go to **Digital Credentials > Schemas**. Click the relevant credential to open the details panel.
+
+2. On the **Population**, **Group**, or **Custom** tab, click the **Pencil** icon ([icon: pencil, set=fa]).
+
+   ### Choose from:
+
+   * Select **Populations** and on the **Selected Populations** tab, click the population to revoke credentials.
+
+   * Select **Groups** and on the **Selected Groups** tab, click the group to revoke credentials.
+
+   * Select **Custom** and delete or edit conditions to revoke permissions based on different criteria.
+
+3. Click **Update**.
+
+## Result
+
+Credentials for users no longer meeting the criteria are revoked.
+
+## Deleting and resetting a credential
+
+You can remove a credential record from a user's profile in the PingOne admin console. Depending on how the credential was issued and its current status, either a **Delete** or **Reset** action displays. These actions allow a user to receive a new credential after a previous one has been revoked.
+
+| Action     | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Reset**  | Appears only when the following conditions are met:- Credential status is **Revoked**.
+
+- Issuance source indicates it was issued by an issuance rule.When you select **Reset**, the credential record is deleted, and PingOne evaluates whether the user still matches the criteria for the issuance rule:- If the user still matches the issuance rule criteria, PingOne allows the credential to be reissued automatically according to the rule configuration.
+
+- If the user no longer matches the issuance rule criteria, no further action occurs after the record is deleted. |
+| **Delete** | Appears when either of the following conditions is met:- Credential status isn't **Revoked**.
+
+- Credential was manually issued (without an issuance rule).When you select **Delete**, the credential record is permanently removed from the user profile.                                                                                                                                                                                                                                                                                                                            |
+
+Learn more in [Managing a user's credentials](../directory/p1_manage_user_credentials.html).
+
+---
+
+---
 title: Managing an issuer profile
 description: Manage details about your organization and issuer profile in PingOne.
 component: pingone
@@ -792,7 +865,7 @@ page_id: pingone:digital_credentials_using_pingone_credentials:p1_credentials_is
 canonical_url: https://docs.pingidentity.com/pingone/digital_credentials_using_pingone_credentials/p1_credentials_issuer_profile.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: Dec 3, 2025
+revdate: 2025-12-03T00:00:00Z
 section_ids:
   steps: Steps
 ---
@@ -849,13 +922,13 @@ Manage details about your organization and issuer profile of verifiable credenti
 
 ---
 title: PingOne Credentials scenarios
-description: These scenarios provide high-level examples of how you can use PingOne Credentials.
+description: Explore scenarios for issuing, presenting, verifying, and revoking credentials with PingOne Credentials.
 component: pingone
 page_id: pingone:digital_credentials_using_pingone_credentials:p1_credentials_scenario_intro
 canonical_url: https://docs.pingidentity.com/pingone/digital_credentials_using_pingone_credentials/p1_credentials_scenario_intro.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: June 29, 2024
+revdate: 2024-06-29T00:00:00Z
 ---
 
 # PingOne Credentials scenarios
@@ -879,65 +952,14 @@ The three scenarios that are covered are:
 ---
 
 ---
-title: Revoking a credential
-description: "You can revoke a credential in PingOne if it's no longer valid."
-component: pingone
-page_id: pingone:digital_credentials_using_pingone_credentials:p1_credentials_revoking_a_credential
-canonical_url: https://docs.pingidentity.com/pingone/digital_credentials_using_pingone_credentials/p1_credentials_revoking_a_credential.html
-llms_txt: https://docs.pingidentity.com/pingone/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: June 2, 2025
-section_ids:
-  steps: Steps
-  choose-from: Choose from:
-  result: Result
----
-
-# Revoking a credential
-
-You can revoke a credential if it's no longer valid and should be removed.
-
-To revoke a credential, you change the issuance rule or SCIM filter. You can either remove or change the group, population, or custom filter so that the user doesn't match anymore. You can also revoke a credential from a user in the **Users** page. Learn more in [Managing a user's credentials](../directory/p1_manage_user_credentials.html).
-
-|   |                                                   |
-| - | ------------------------------------------------- |
-|   | You can only delete a credential through the API. |
-
-To revoke credentials in PingOne Credentials:
-
-## Steps
-
-1. In the PingOne admin console, go to **Digital Credentials > Schemas**.
-
-2. Click the relevant credential to open the details panel.
-
-3. In the **Population**, **Group**, or **Custom** tab, click the **Pencil** icon ([icon: pencil, set=fa])
-
-   ### Choose from:
-
-   * Select **Populations** and in the **Selected Populations** tab, click the population to revoke credentials.
-
-   * Select **Groups** and in the **Selected Groups** tab, click the group to revoke credentials.
-
-   * Select **Custom** and delete or edit conditions as needed to revoke permissions based on different criteria.
-
-4. Click **Update**.
-
-## Result
-
-Credentials for users no longer meeting the criteria are revoked.
-
----
-
----
 title: "Scenario: Creating and receiving a credential"
-description: In this scenario, a car insurance company, BX Insurance (the issuer) wants to customize an email invitation for digital wallet pairing and create a digital credential they can issue to their customer, John Smith (a user). Afterward, (in a second scenario) John is notified, downloads the digital wallet app, and receives the credential.
+description: Walk through a scenario where an issuer customizes an invitation, creates a credential, and auto-issues it to a user in PingOne Credentials.
 component: pingone
 page_id: pingone:digital_credentials_using_pingone_credentials:p1_credentials_creating_credential_for_auto_issuance
 canonical_url: https://docs.pingidentity.com/pingone/digital_credentials_using_pingone_credentials/p1_credentials_creating_credential_for_auto_issuance.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: June 29, 2024
+revdate: 2024-06-29T00:00:00Z
 section_ids:
   scenario-participants: Scenario participants
   assumptions: Assumptions
@@ -1010,13 +1032,13 @@ BX Insurance (the credential issuer) meets the following requirements:
 
 ---
 title: "Scenario: Presenting and verifying a user credential"
-description: In this scenario, John Smith (the user) wants to reserve a car from BX Rental Cars (the credential verification service) for his vacation next month. Before he can complete the reservation, BX Rental Cars requires that John provide proof that he has a car insurance policy that will be valid throughout the rental period.
+description: Walk through a scenario where a user presents a digital credential to a service provider for verification in PingOne Credentials.
 component: pingone
 page_id: pingone:digital_credentials_using_pingone_credentials:p1_credentials_scenario_present_verify_cred
 canonical_url: https://docs.pingidentity.com/pingone/digital_credentials_using_pingone_credentials/p1_credentials_scenario_present_verify_cred.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: June 29, 2024
+revdate: 2024-06-29T00:00:00Z
 section_ids:
   scenario-participants: Scenario participants
   assumptions: Assumptions
@@ -1103,13 +1125,13 @@ Additionally, John Smith has previously received his credential from BX Insuranc
 
 ---
 title: "Scenario: Revoking a credential and notifying the user"
-description: In this scenario, John Smith (the user) decided he had a good experience with BX Rental Cars (the credential verification service) on his previous trip over the summer, and decides to rent with them again when he visits his family over the holidays. However, he missed both a notice from BX Insurance (the credential issuer) prompting him to renew his auto insurance and a later notification in his wallet app that his credential was revoked. He no longer has an active auto policy.
+description: Walk through a scenario where a credential is revoked, the user is notified, and the credential is later reissued in PingOne Credentials.
 component: pingone
 page_id: pingone:digital_credentials_using_pingone_credentials:p1_credentials_scenario_revoke_cred_notify_user
 canonical_url: https://docs.pingidentity.com/pingone/digital_credentials_using_pingone_credentials/p1_credentials_scenario_revoke_cred_notify_user.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: June 29, 2024
+revdate: 2024-06-29T00:00:00Z
 section_ids:
   scenario-participants: Scenario participants
   assumptions: Assumptions
@@ -1178,4 +1200,4 @@ BX Insurance meets the following requirements:
 
 8. After receiving the updated credential and saving it to his wallet app, John returns to BX Rental Cars reservation site and is able to complete the reservation process.
 
-For more information about revoking credentials, see [Revoking a credential](p1_credentials_revoking_a_credential.html).
+Learn more in [Managing a credential](p1_credentials_managing_a_credential.html).

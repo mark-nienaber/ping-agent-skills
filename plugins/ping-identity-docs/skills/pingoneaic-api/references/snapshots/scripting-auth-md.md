@@ -4,6 +4,8 @@ description: "You can use authentication and authorization (auth) scripting to m
 component: pingoneaic-api
 page_id: pingoneaic-api::scripting-auth
 canonical_url: https://developer.pingidentity.com/pingoneaic-api/scripting-auth.html
+llms_txt: https://developer.pingidentity.com/pingoneaic-api/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 keywords: ["Extensibility", "Scripts", "Authentication", "OAuth 2.0", "OpenID Connect (OIDC)", "Policies &amp; Entitlements", "Journeys"]
 section_ids:
   auth_script_types: Auth script types

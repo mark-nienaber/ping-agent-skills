@@ -273,7 +273,7 @@ For more information, see [Managing access token mappings](https://docs.pingiden
 
 5. On the **Contract Fulfillment** tab, from the **Source** list, select **Persistent Grant**.
 
-6. From the **Value** list, select **USER\_KEY**.
+6. From the **Value** list, select **USER_KEY**.
 
 7. Click **Next** until the **Summary** tab is displayed. Click **Save**.
 
@@ -327,7 +327,7 @@ For more information, see [Configuring an IdP adapter instance](https://docs.pin
 
 6. On the **IdP Adapter** tab, under **Password Credential Validator Instance**, click **Add a new row to 'Credential Validators'.**
 
-7. From the **Password Credential Validator Instance** list, select the password credential validator you created previously, for example, **My\_PCV**, and then click **Update**.
+7. From the **Password Credential Validator Instance** list, select the password credential validator you created previously, for example, **My_PCV**, and then click **Update**.
 
 8. Click **Next** until the **Adapter Attributes** tab is displayed.
 
@@ -375,13 +375,13 @@ For more information, see [Managing IdP adapter grant mapping](https://docs.ping
 
 3. Click **Add Mapping**, then click **Next** until the **Contract Fulfillment** tab is displayed.
 
-4. In the **USER\_KEY** row:
+4. In the **USER_KEY** row:
 
    1. In the **Source** column, select **Adapter**.
 
    2. In the **Value** column, select **username**.
 
-5. In the **USER\_NAME** row:
+5. In the **USER_NAME** row:
 
    1. In the **Source** column, select **Adapter**.
 

@@ -1,9 +1,11 @@
 ---
 title: Configuring SAML SSO with Jamf Pro and PingFederate
-description: Enable Jamf Pro sign-on from the PingFederate console (IdP-initiated sign-on) and direct Jamf Pro sign-on using PingFederate (SP-initiated sign-on).
+description: Configure SAML SSO with Jamf Pro and PingFederate — IdP-initiated and SP-initiated sign-on
 component: configuration_guides
 page_id: configuration_guides:jamf:config_saml_jamfpro_pf
 canonical_url: https://docs.pingidentity.com/configuration_guides/jamf/config_saml_jamfpro_pf.html
+llms_txt: https://docs.pingidentity.com/configuration_guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: May 15, 2024
 section_ids:
   before-you-begin: Before you begin
@@ -103,10 +105,12 @@ Enable Jamf Pro sign-on from the PingFederate console (IdP-initiated sign-on) an
 
 ---
 title: Configuring SAML SSO with Jamf Pro and PingOne for Enterprise
-description: Enable Jamf Pro sign-on from the PingOne for Enterprise console (IdP-initiated sign-on) and direct JAMF Pro sign-on using PingOne for Enterprise (SP-initiated sign-on) with single logout (SLO).
+description: Configure SAML SSO with Jamf Pro and PingOne for Enterprise — IdP-initiated and SP-initiated sign-on with SLO
 component: configuration_guides
 page_id: configuration_guides:jamf:config_saml_jamfpro_p1
 canonical_url: https://docs.pingidentity.com/configuration_guides/jamf/config_saml_jamfpro_p1.html
+llms_txt: https://docs.pingidentity.com/configuration_guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: May 20, 2024
 section_ids:
   before-you-begin: Before you begin

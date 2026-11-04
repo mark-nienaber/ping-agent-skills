@@ -1,9 +1,11 @@
 ---
 title: Configuring SAML SSO with Wrike and PingOne
-description: Learn how to configure SAML SSO with Wrike and PingOne.
+description: Configure SAML SSO with Wrike and PingOne — requires Business Level Wrike permissions
 component: configuration_guides
 page_id: configuration_guides:wrike:config_saml_wrike_p1
 canonical_url: https://docs.pingidentity.com/configuration_guides/wrike/config_saml_wrike_p1.html
+llms_txt: https://docs.pingidentity.com/configuration_guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: May 15, 2024
 section_ids:
   before-you-begin: Before you begin

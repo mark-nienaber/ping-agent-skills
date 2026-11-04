@@ -1,12 +1,12 @@
 ---
 title: Introduction to PingOne
-description: PingOne is a multi-tenant cloud-based identity as a service (IDaaS) platform for secure identity access management.
+description: Learn key PingOne concepts, including organizations, environments, administrator roles, and the application portal.
 component: pingone
 page_id: pingone:introduction_to_pingone:p1_introduction
 canonical_url: https://docs.pingidentity.com/pingone/introduction_to_pingone/p1_introduction.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: November 18, 2024
+revdate: 2026-09-22T15:17:11Z
 section_ids:
   p1-organizations: Organizations
   p1-environments-intro: Environments
@@ -183,17 +183,17 @@ Your environments can also be used to configure SSO to other Ping Identity produ
 
 Application grants describe which scopes the application can request. Scopes define the permissions for the application. Learn more in [Applications](../applications/p1_application_types.html) and [Editing an application](../applications/p1_editing_applications.html).
 
-* Environment dashboard
+* Environment Overview
 
-  The environment dashboard is accessed by clicking **Overview** in the sidebar. This dashboard provides:
+  Access information about your environment in the **Overview** page. This page provides:
 
-  * A list of the products and services included in the environment
+  * The environment name, ID, and a quick link to open the details panel for the environment.
 
-  * A graph showing the activity that has occurred within the environment (if the environment contains PingOne services)
+  * A list of the capabilities and optional connections included in the environment.
 
-  * Links to documentation, APIs, and code examples for each product and service in the environment
+  * Links to documentation, APIs, and code examples for each product and service in the environment.
 
-![A screenshot of the environment dashboard showing sign-on activity and included services.](../_images/zla1676309052731.png)
+  ![A screenshot of the Overview page for an environment showing included services and products.](../_images/p1-admin-overview-pg.png)
 
 * Activities
 
@@ -391,7 +391,7 @@ Learn more about the information each dashboard provides in the following sectio
 
 * [Overview page](../p1_overview_p1.html)
 
-* [Authentication dashboard](../monitoring/p1_auth_dashboard.html)
+* [Authentication Dashboard](../monitoring/p1_authentication_dashboard.html)
 
 * [Authorization Dashboard](../authorization_using_pingone_authorize/p1_az_dashboard.html)
 
@@ -424,8 +424,6 @@ Learn about PingOne Solutions packages and their included capabilities:
 * [PingOne for Workforce](#p1-workforce-solution) is a cloud-based solution that helps you orchestrate the experiences your work-anywhere employees need.
 
 * [Agent IAM Core](#agent_iam_core) is a cloud solution combining artificial intelligence (AI) agent management with authentication, user management, and MFA services in a single package.
-
-* PingOne Neo is a decentralized identity solution that gives control of identity data back to users. PingOne Neo empowers businesses to give their users full control over how they securely store and share verified credentials without unnecessary friction.
 
 * [PingOne for Customers Passwordless](https://docs.pingidentity.com/pingone-solutions/pingone-customers-passwordless/index.html) lets you offer your end users a variety of flexible passwordless options for account creation, sign-on, profile management, and account recovery using a simple Getting Started experience and pre-built DaVinci flows.
 

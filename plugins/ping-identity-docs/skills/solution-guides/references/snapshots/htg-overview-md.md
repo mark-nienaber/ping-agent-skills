@@ -1,11 +1,13 @@
 ---
 title: Use Cases Overview
-description: Learn how to configure Ping products with each other and with selected third-party products to enable you to run your security business better. If you need additional, detailed information for a Ping product, follow the links in the guides or go to the Ping Documentation.
+description: Overview of Ping Identity use cases covering SSO, MFA, passwordless, directory, data security, and identity for AI solutions.
 component: solution-guides
 page_id: solution-guides::htg_overview
 canonical_url: https://docs.pingidentity.com/solution-guides/htg_overview.html
-revdate: April 10, 2026
-page_aliases: ["getting_started_guides:how_to_guides_near_zero_downtime.adoc", "getting_started_guides:htg_get_started_with_pa.adoc", "getting_started_guides:htg_get_started_with_pf.adoc", "getting_started_guides:htg_get_started_with_pf_install_pf.adoc", "getting_started_guides:htg_get_started_with_pf_mpre_info.adoc", "getting_started_guides:htg_get_started_with_pid.adoc", "getting_started_guides:htg_get_started_with_pid_adv_setup.adoc", "getting_started_guides:htg_get_started_with_pid_quick_setup.adoc", "getting_started_guides:htg_getting_started_guides.adoc"]
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-31T00:00:00Z
+page_aliases: ["getting_started_guides:how_to_guides_near_zero_downtime.adoc", "getting_started_guides:htg_get_started_with_pa.adoc", "getting_started_guides:htg_get_started_with_pf.adoc", "getting_started_guides:htg_get_started_with_pf_install_pf.adoc", "getting_started_guides:htg_get_started_with_pf_mpre_info.adoc", "getting_started_guides:htg_get_started_with_pid.adoc", "getting_started_guides:htg_get_started_with_pid_adv_setup.adoc", "getting_started_guides:htg_get_started_with_pid_quick_setup.adoc", "getting_started_guides:htg_getting_started_guides.adoc", "single_sign-on_use_cases:htg_config_sailpoint_identityiq_pd_pf.adoc", "single_sign-on_use_cases:htg_config_sailpoint_identityiq_pd_pf_ldaps_cert.adoc", "single_sign-on_use_cases:htg_config_sailpoint_identityiq_pd_pf_ldaps_identityiq.adoc", "single_sign-on_use_cases:htg_config_sailpoint_identityiq_pd_pf_ldaps_identitynow.adoc", "single_sign-on_use_cases:htg_config_sailpoint_identityiq_pd_pf_saml_identityiq.adoc", "single_sign-on_use_cases:htg_config_sailpoint_identityiq_pd_pf_saml_sp_connection.adoc", "single_sign-on_use_cases:htg_config_sailpoint_identityiq_pd_pf_ldaps.adoc", "single_sign-on_use_cases:htg_config_sailpoint_identityiq_pd_pf_saml.adoc"]
 section_ids:
   ping-identity-use-cases: Ping Identity Use Cases
   pingone-advanced-identity-cloud-use-cases: PingOne Advanced Identity Cloud Use Cases
@@ -29,8 +31,6 @@ Learn how to configure Ping products with each other and with selected third-par
 * [Data and Application Security Use Cases](data_and_application_security_use_cases/htg_data_and_app_security_use_cases.html)
 
 * [Developer API Use Cases](developer_api_use_cases/htg_developer_api_user_cases.html)
-
-* [Directory Use Cases](directory_use_cases/htg_directory_use_cases.html)
 
 * [Multi-factor Authentication Use Cases](multi-factor_authentication_use_cases/htg_mfa_user_cases.html)
 

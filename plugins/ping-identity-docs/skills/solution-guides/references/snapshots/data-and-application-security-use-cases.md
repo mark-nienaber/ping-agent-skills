@@ -1,9 +1,11 @@
 ---
 title: Authenticating to EKS
-description: After you have configured OIDC for EKS, PingOne users can execute the kubectl command to authenticate to EKS.
+description: Authenticate to AWS EKS using kubectl after configuring OIDC with PingOne as the identity provider.
 component: solution-guides
 page_id: solution-guides:data_and_application_security_use_cases:htg_config_oidc_authn_aws_eks_custers_authn_eks
 canonical_url: https://docs.pingidentity.com/solution-guides/data_and_application_security_use_cases/htg_config_oidc_authn_aws_eks_custers_authn_eks.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 29, 2024
 ---
 
@@ -47,10 +49,12 @@ kubernetes   ClusterIP   10.100.0.1   <none>        443/TCP   8d
 
 ---
 title: Configuring kubectl for OIDC
-description: Configure the kubectl command line tool to work with OIDC.
+description: Configure kubectl for OIDC authentication to an AWS EKS cluster using kubeconfig context settings.
 component: solution-guides
 page_id: solution-guides:data_and_application_security_use_cases:htg_config_oidc_authn_aws_eks_custers_kubectl
 canonical_url: https://docs.pingidentity.com/solution-guides/data_and_application_security_use_cases/htg_config_oidc_authn_aws_eks_custers_kubectl.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 29, 2024
 section_ids:
   about-this-task: About this task
@@ -114,10 +118,12 @@ OIDC for EKS is configured, and PingOne users can authenticate to EKS by executi
 
 ---
 title: Configuring medium-grained application access control through Azure AD, PingFederate, and PingAccess
-description: PingAccess can interact directly with an OIDC IdP provider, so you don't need to use PingFederate to authenticate against Azure AD.
+description: Configure medium-grained application access control using Azure AD, PingFederate, and PingAccess with OIDC and session management.
 component: solution-guides
 page_id: solution-guides:data_and_application_security_use_cases:htg_config_med_grained_app
 canonical_url: https://docs.pingidentity.com/solution-guides/data_and_application_security_use_cases/htg_config_med_grained_app.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 18, 2022
 section_ids:
   components: Components
@@ -231,10 +237,12 @@ For general instructions, see [Create an OpenID Connect IdP connection](https://
 
 ---
 title: Configuring OIDC authentication for AWS EKS clusters
-description: Open ID Connect (OIDC) supports authentication for Amazon Web Services (AWS) Elastic Kubernetes Service (EKS) clusters. You can configure PingOne as an identity provider (IdP) to provide strong user authentication to your EKS clusters.
+description: Configure OIDC authentication for AWS EKS clusters using PingOne as an identity provider for centralized user access control.
 component: solution-guides
 page_id: solution-guides:data_and_application_security_use_cases:htg_config_oidc_authn_aws_eks_custers
 canonical_url: https://docs.pingidentity.com/solution-guides/data_and_application_security_use_cases/htg_config_oidc_authn_aws_eks_custers.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: December 29, 2022
 section_ids:
   components: Components
@@ -431,10 +439,12 @@ kubernetes   ClusterIP   10.100.0.1   <none>        443/TCP   8d
 
 ---
 title: Configuring PingAccess to protect a web application
-description: Add your PingFederate server certificate under Trusted Certificate Groups as described in Importing certificates and create a trusted certificate group.
+description: Configure PingAccess to protect a web application using PingFederate runtime settings and trusted certificate groups.
 component: solution-guides
 page_id: solution-guides:data_and_application_security_use_cases:htg_connect_pf_pa_oidc_web_app
 canonical_url: https://docs.pingidentity.com/solution-guides/data_and_application_security_use_cases/htg_connect_pf_pa_oidc_web_app.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 29, 2024
 section_ids:
   steps: Steps
@@ -472,7 +482,7 @@ section_ids:
 
    | Parameter                  | Value                     |
    | -------------------------- | ------------------------- |
-   | **Client ID**              | **pa\_rs**                |
+   | **Client ID**              | **pa_rs**                 |
    | **Client Secret**          | Enter your client secret. |
    | **Subject Attribute Name** | **UserName**              |
    | All other parameters       | Accept the defaults.      |
@@ -497,7 +507,7 @@ section_ids:
    | **Cookie Type**               | **Encrypted JWT**                        |
    | **Audience**                  | **global**                               |
    | **OpenID Connect Login Type** | **Code**                                 |
-   | **Client ID**                 | **pa\_wam**                              |
+   | **Client ID**                 | **pa_wam**                               |
    | **Client Secret**             | Enter your organization's client secret. |
    | All other parameters          | Accept the defaults.                     |
 
@@ -509,10 +519,12 @@ section_ids:
 
 ---
 title: Connecting OAuth 2.0 and OpenID Connect with PingAccess
-description: Sign on to your PingFederate administrative console.
+description: Enable OAuth 2.0 and OIDC in PingFederate and configure IdP adapters and token settings for PingAccess integration.
 component: solution-guides
 page_id: solution-guides:data_and_application_security_use_cases:htg_connect_pf_pa_oidc_oauth2
 canonical_url: https://docs.pingidentity.com/solution-guides/data_and_application_security_use_cases/htg_connect_pf_pa_oidc_oauth2.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 29, 2024
 section_ids:
   steps: Steps
@@ -578,7 +590,7 @@ section_ids:
 
    | Parameter               | Value                                                                                                                                                             |
    | ----------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-   | **Client ID**           | **pa\_rs**                                                                                                                                                        |
+   | **Client ID**           | **pa_rs**                                                                                                                                                         |
    | **Name**                | **PingAccess Resource Server**                                                                                                                                    |
    | **Client Secret**       | Generate a unique client secret.&#xA;&#xA;Although you can manually enter a client secret, allowing PingFederate to generate the secret provides better security. |
    | **Allowed Grant Types** | **Access Token Validation (Client is a Resource Server)**                                                                                                         |
@@ -588,10 +600,10 @@ section_ids:
 
    | Parameter                         | Value                                                                                                 |
    | --------------------------------- | ----------------------------------------------------------------------------------------------------- |
-   | **Client ID**                     | **pa\_wam**                                                                                           |
+   | **Client ID**                     | **pa_wam**                                                                                            |
    | **Name**                          | **PingAccess Web Management**                                                                         |
    | **Client Authentication**         | The client secret that you generated for the PingAccess Resource Server should fill in automatically. |
-   | **Redirection URI**               | https\://*\<PA\_HOST>*:*\<PA\_USER\_PORT>*/pa/oidc/cb                                                 |
+   | **Redirection URI**               | https\://*\<PA_HOST>*:*\<PA_USER_PORT>*/pa/oidc/cb                                                    |
    | **Bypass Authorization Approval** | **Bypass**                                                                                            |
    | **Allowed Grant Types**           | **Authorization Code**                                                                                |
    | All other parameters              | Accept the defaults.                                                                                  |
@@ -600,20 +612,20 @@ section_ids:
 
 10. Configure your IdP adapters to work with OAuth as described in [Managing IdP adapter grant mapping](https://cdn-docs.pingidentity.com/archive/pdf/pingfederate/pingfederate-103.pdf#page=543) using the following values
 
-    | Parameter                           | Value                                                                                                                     |
-    | ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
-    | **Source Adapter Instance**         | Select the HTML Form adapter or adapters that you want to use for PingAccess.                                             |
-    | **Attribute Sources & User Lookup** | For each adapter, accept the defaults.                                                                                    |
-    | **Contract Fulfillment**            | For each adapter, select the adapter as your source and set your unique identifiers for **USER\_KEY** and **USER\_NAME**. |
-    | **Issuance Criteria**               | Accept the defaults.                                                                                                      |
+    | Parameter                           | Value                                                                                                                   |
+    | ----------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
+    | **Source Adapter Instance**         | Select the HTML Form adapter or adapters that you want to use for PingAccess.                                           |
+    | **Attribute Sources & User Lookup** | For each adapter, accept the defaults.                                                                                  |
+    | **Contract Fulfillment**            | For each adapter, select the adapter as your source and set your unique identifiers for **USER_KEY** and **USER_NAME**. |
+    | **Issuance Criteria**               | Accept the defaults.                                                                                                    |
 
 11. Map your address tokens for OAuth as described in [Managing access token mappings](https://cdn-docs.pingidentity.com/archive/pdf/pingfederate/pingfederate-103.pdf#page=564) using the following values.
 
-    | Parameter                           | Value                                                                                            |
-    | ----------------------------------- | ------------------------------------------------------------------------------------------------ |
-    | **Attribute Sources & User Lookup** | Accept the defaults.                                                                             |
-    | **Contract Fulfillment**            | For the username, select **Persistent Grant** as your source and set the value as **USER\_KEY**. |
-    | **Issuance Criteria**               | Accept the defaults.                                                                             |
+    | Parameter                           | Value                                                                                           |
+    | ----------------------------------- | ----------------------------------------------------------------------------------------------- |
+    | **Attribute Sources & User Lookup** | Accept the defaults.                                                                            |
+    | **Contract Fulfillment**            | For the username, select **Persistent Grant** as your source and set the value as **USER_KEY**. |
+    | **Issuance Criteria**               | Accept the defaults.                                                                            |
 
 12. Verify your settings on the **Summary** tab, then click **Save**.
 
@@ -623,10 +635,12 @@ section_ids:
 
 ---
 title: Connecting PingFederate to PingAccess using the OIDC protocol
-description: Configure authentication between PingFederate and PingAccess using the OpenID Connect (OIDC) protocol.
+description: Connect PingFederate to PingAccess using OIDC to configure authentication between the two products.
 component: solution-guides
 page_id: solution-guides:data_and_application_security_use_cases:htg_connect_pf_pa_oidc
 canonical_url: https://docs.pingidentity.com/solution-guides/data_and_application_security_use_cases/htg_connect_pf_pa_oidc.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 18, 2022
 section_ids:
   components: Components
@@ -716,7 +730,7 @@ Configure authentication between PingFederate and PingAccess using the OpenID Co
 
    | Parameter               | Value                                                                                                                                                             |
    | ----------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-   | **Client ID**           | **pa\_rs**                                                                                                                                                        |
+   | **Client ID**           | **pa_rs**                                                                                                                                                         |
    | **Name**                | **PingAccess Resource Server**                                                                                                                                    |
    | **Client Secret**       | Generate a unique client secret.&#xA;&#xA;Although you can manually enter a client secret, allowing PingFederate to generate the secret provides better security. |
    | **Allowed Grant Types** | **Access Token Validation (Client is a Resource Server)**                                                                                                         |
@@ -726,10 +740,10 @@ Configure authentication between PingFederate and PingAccess using the OpenID Co
 
    | Parameter                         | Value                                                                                                 |
    | --------------------------------- | ----------------------------------------------------------------------------------------------------- |
-   | **Client ID**                     | **pa\_wam**                                                                                           |
+   | **Client ID**                     | **pa_wam**                                                                                            |
    | **Name**                          | **PingAccess Web Management**                                                                         |
    | **Client Authentication**         | The client secret that you generated for the PingAccess Resource Server should fill in automatically. |
-   | **Redirection URI**               | https\://*\<PA\_HOST>*:*\<PA\_USER\_PORT>*/pa/oidc/cb                                                 |
+   | **Redirection URI**               | https\://*\<PA_HOST>*:*\<PA_USER_PORT>*/pa/oidc/cb                                                    |
    | **Bypass Authorization Approval** | **Bypass**                                                                                            |
    | **Allowed Grant Types**           | **Authorization Code**                                                                                |
    | All other parameters              | Accept the defaults.                                                                                  |
@@ -738,20 +752,20 @@ Configure authentication between PingFederate and PingAccess using the OpenID Co
 
 10. Configure your IdP adapters to work with OAuth as described in [Managing IdP adapter grant mapping](https://cdn-docs.pingidentity.com/archive/pdf/pingfederate/pingfederate-103.pdf#page=543) using the following values
 
-    | Parameter                           | Value                                                                                                                     |
-    | ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
-    | **Source Adapter Instance**         | Select the HTML Form adapter or adapters that you want to use for PingAccess.                                             |
-    | **Attribute Sources & User Lookup** | For each adapter, accept the defaults.                                                                                    |
-    | **Contract Fulfillment**            | For each adapter, select the adapter as your source and set your unique identifiers for **USER\_KEY** and **USER\_NAME**. |
-    | **Issuance Criteria**               | Accept the defaults.                                                                                                      |
+    | Parameter                           | Value                                                                                                                   |
+    | ----------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
+    | **Source Adapter Instance**         | Select the HTML Form adapter or adapters that you want to use for PingAccess.                                           |
+    | **Attribute Sources & User Lookup** | For each adapter, accept the defaults.                                                                                  |
+    | **Contract Fulfillment**            | For each adapter, select the adapter as your source and set your unique identifiers for **USER_KEY** and **USER_NAME**. |
+    | **Issuance Criteria**               | Accept the defaults.                                                                                                    |
 
 11. Map your address tokens for OAuth as described in [Managing access token mappings](https://cdn-docs.pingidentity.com/archive/pdf/pingfederate/pingfederate-103.pdf#page=564) using the following values.
 
-    | Parameter                           | Value                                                                                            |
-    | ----------------------------------- | ------------------------------------------------------------------------------------------------ |
-    | **Attribute Sources & User Lookup** | Accept the defaults.                                                                             |
-    | **Contract Fulfillment**            | For the username, select **Persistent Grant** as your source and set the value as **USER\_KEY**. |
-    | **Issuance Criteria**               | Accept the defaults.                                                                             |
+    | Parameter                           | Value                                                                                           |
+    | ----------------------------------- | ----------------------------------------------------------------------------------------------- |
+    | **Attribute Sources & User Lookup** | Accept the defaults.                                                                            |
+    | **Contract Fulfillment**            | For the username, select **Persistent Grant** as your source and set the value as **USER_KEY**. |
+    | **Issuance Criteria**               | Accept the defaults.                                                                            |
 
 12. Verify your settings on the **Summary** tab, then click **Save**.
 
@@ -789,7 +803,7 @@ Configure authentication between PingFederate and PingAccess using the OpenID Co
 
    | Parameter                  | Value                     |
    | -------------------------- | ------------------------- |
-   | **Client ID**              | **pa\_rs**                |
+   | **Client ID**              | **pa_rs**                 |
    | **Client Secret**          | Enter your client secret. |
    | **Subject Attribute Name** | **UserName**              |
    | All other parameters       | Accept the defaults.      |
@@ -814,7 +828,7 @@ Configure authentication between PingFederate and PingAccess using the OpenID Co
    | **Cookie Type**               | **Encrypted JWT**                        |
    | **Audience**                  | **global**                               |
    | **OpenID Connect Login Type** | **Code**                                 |
-   | **Client ID**                 | **pa\_wam**                              |
+   | **Client ID**                 | **pa_wam**                               |
    | **Client Secret**             | Enter your organization's client secret. |
    | All other parameters          | Accept the defaults.                     |
 
@@ -828,7 +842,7 @@ Configure authentication between PingFederate and PingAccess using the OpenID Co
 
 1. Test your application in a web browser.
 
-   Access your application behind PingAccess (for example, https\://localhost:3000/*\<APP\_NAME>*).
+   Access your application behind PingAccess (for example, https\://localhost:3000/*\<APP_NAME>*).
 
    #### Result:
 
@@ -857,10 +871,12 @@ Configure authentication between PingFederate and PingAccess using the OpenID Co
 
 ---
 title: Creating a key pair associated with the new PingFederate host name
-description: Go to Security → Key Pairs.
+description: Create a key pair in PingAccess associated with a new PingFederate host name for secure communication.
 component: solution-guides
 page_id: solution-guides:data_and_application_security_use_cases:htg_protect_pf_gateway_deploy_pa_create_key_pair
 canonical_url: https://docs.pingidentity.com/solution-guides/data_and_application_security_use_cases/htg_protect_pf_gateway_deploy_pa_create_key_pair.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: May 1, 2024
 section_ids:
   steps: Steps
@@ -891,10 +907,12 @@ section_ids:
 
 ---
 title: Creating a PingAccess application leveraging the site and the virtual host
-description: Go to Applications → Add Application.
+description: Create a PingAccess application using a site and virtual host to proxy and protect a target resource.
 component: solution-guides
 page_id: solution-guides:data_and_application_security_use_cases:htg_protect_pf_gateway_deploy_pa_create_app_host
 canonical_url: https://docs.pingidentity.com/solution-guides/data_and_application_security_use_cases/htg_protect_pf_gateway_deploy_pa_create_app_host.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: May 1, 2024
 section_ids:
   steps: Steps
@@ -928,10 +946,12 @@ section_ids:
 
 ---
 title: Creating a PingAccess site to protect PingFederate
-description: Go to Sites → Add Site.
+description: Create a PingAccess site to proxy and protect PingFederate in a gateway deployment.
 component: solution-guides
 page_id: solution-guides:data_and_application_security_use_cases:htg_protect_pf_gateway_deploy_pa_create_pa_site
 canonical_url: https://docs.pingidentity.com/solution-guides/data_and_application_security_use_cases/htg_protect_pf_gateway_deploy_pa_create_pa_site.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: May 1, 2024
 section_ids:
   steps: Steps
@@ -959,10 +979,12 @@ section_ids:
 
 ---
 title: Creating a PingAccess virtual host
-description: Go to Access → Virtual Hosts.
+description: Create a PingAccess virtual host to route traffic to PingFederate runtime engine listeners.
 component: solution-guides
 page_id: solution-guides:data_and_application_security_use_cases:htg_protect_pf_gateway_deploy_pa_create_pa_host
 canonical_url: https://docs.pingidentity.com/solution-guides/data_and_application_security_use_cases/htg_protect_pf_gateway_deploy_pa_create_pa_host.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: May 1, 2024
 section_ids:
   steps: Steps
@@ -991,10 +1013,12 @@ section_ids:
 
 ---
 title: Creating a PingOne OIDC application
-description: To configure your AWS EKS cluster for OIDC authentication, you must first create a PingOne OIDC application to acquire the required OIDC Issuer URL and OIDC Client ID.
+description: Create a PingOne OIDC application to obtain the issuer URL and client ID for AWS EKS cluster OIDC authentication.
 component: solution-guides
 page_id: solution-guides:data_and_application_security_use_cases:htg_config_oidc_authn_aws_eks_custers_p1_oidc
 canonical_url: https://docs.pingidentity.com/solution-guides/data_and_application_security_use_cases/htg_config_oidc_authn_aws_eks_custers_p1_oidc.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 29, 2024
 section_ids:
   about-this-task: About this task
@@ -1049,10 +1073,12 @@ To create a PingOne OIDC application:
 
 ---
 title: Data and Application Security Use Cases
-description: Configuring OIDC authentication for AWS EKS clusters
+description: Index of data and application security use cases covering OIDC, access control, and gateway deployments with Ping Identity products.
 component: solution-guides
 page_id: solution-guides:data_and_application_security_use_cases:htg_data_and_app_security_use_cases
 canonical_url: https://docs.pingidentity.com/solution-guides/data_and_application_security_use_cases/htg_data_and_app_security_use_cases.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: January 19, 2024
 ---
 
@@ -1070,10 +1096,12 @@ revdate: January 19, 2024
 
 ---
 title: Exporting the PingFederate certificate that protects the runtime listener
-description: Log in to your PingFederate administration console.
+description: Export the PingFederate SSL server certificate protecting the runtime listener for import into PingAccess.
 component: solution-guides
 page_id: solution-guides:data_and_application_security_use_cases:htg_protect_pf_gateway_deploy_pa_export_pf_cert
 canonical_url: https://docs.pingidentity.com/solution-guides/data_and_application_security_use_cases/htg_protect_pf_gateway_deploy_pa_export_pf_cert.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: May 1, 2024
 section_ids:
   steps: Steps
@@ -1099,10 +1127,12 @@ section_ids:
 
 ---
 title: Importing the certificate in PingAccess
-description: Log in to your PingAccess administration console.
+description: Import the PingFederate SSL certificate into PingAccess trusted certificates to enable secure communication.
 component: solution-guides
 page_id: solution-guides:data_and_application_security_use_cases:htg_protect_pf_gateway_deploy_pa_import_cert
 canonical_url: https://docs.pingidentity.com/solution-guides/data_and_application_security_use_cases/htg_protect_pf_gateway_deploy_pa_import_cert.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: May 1, 2024
 section_ids:
   steps: Steps
@@ -1128,10 +1158,12 @@ section_ids:
 
 ---
 title: Performing final steps
-description: Test your application in a web browser.
+description: Verify the PingFederate and PingAccess OIDC connection by testing application access in a browser.
 component: solution-guides
 page_id: solution-guides:data_and_application_security_use_cases:htg_connect_pf_pa_oidc_final_steps
 canonical_url: https://docs.pingidentity.com/solution-guides/data_and_application_security_use_cases/htg_connect_pf_pa_oidc_final_steps.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 29, 2024
 section_ids:
   steps: Steps
@@ -1144,7 +1176,7 @@ section_ids:
 
 1. Test your application in a web browser.
 
-   Access your application behind PingAccess (for example, https\://localhost:3000/*\<APP\_NAME>*).
+   Access your application behind PingAccess (for example, https\://localhost:3000/*\<APP_NAME>*).
 
    ### Result:
 
@@ -1173,10 +1205,12 @@ section_ids:
 
 ---
 title: Protecting PingAccess resources through external IdPs with PingFederate acting as an SP (leveraging FedHub)
-description: Components
+description: Protect PingAccess resources through external IdPs with PingFederate acting as a federation hub SP.
 component: solution-guides
 page_id: solution-guides:data_and_application_security_use_cases:htg_protect_pa_resources_pf
 canonical_url: https://docs.pingidentity.com/solution-guides/data_and_application_security_use_cases/htg_protect_pa_resources_pf.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: February 16, 2022
 section_ids:
   before-you-begin: Before you begin
@@ -1325,10 +1359,12 @@ Follow these steps to connect PingFederate as an SP to external IdP and configur
 
 ---
 title: Protecting PingFederate behind a gateway deployment of PingAccess
-description: Learn how to proxy PingAccess to protect PingFederate in a gateway deployment.
+description: Protect PingFederate behind a gateway deployment of PingAccess by proxying traffic through PingAccess.
 component: solution-guides
 page_id: solution-guides:data_and_application_security_use_cases:htg_protect_pf_gateway_deployment_pa
 canonical_url: https://docs.pingidentity.com/solution-guides/data_and_application_security_use_cases/htg_protect_pf_gateway_deployment_pa.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: January 19, 2023
 section_ids:
   components: Components
@@ -1540,10 +1576,12 @@ Make sure the components are installed and running.
 
 ---
 title: Setting PingAccess&#8217;s token provider to match the PingAccess application
-description: Go to System → Token Provider.
+description: Configure the PingAccess token provider host and port to match the virtual host settings for application access.
 component: solution-guides
 page_id: solution-guides:data_and_application_security_use_cases:htg_protect_pf_gateway_deploy_pa_match_token_app
 canonical_url: https://docs.pingidentity.com/solution-guides/data_and_application_security_use_cases/htg_protect_pf_gateway_deploy_pa_match_token_app.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: May 1, 2024
 section_ids:
   steps: Steps
@@ -1574,10 +1612,12 @@ section_ids:
 
 ---
 title: Setting up Azure AD as an OIDC provider for PingAccess in PingFederate
-description: This procedure assumes that you have configured PingFederate and PingAccess to talk to each other through OIDC. You need to add Azure AD as an authentication source for PingAccess in PingFederate.
+description: Set up Azure AD as an OIDC provider for PingAccess in PingFederate to support medium-grained access control.
 component: solution-guides
 page_id: solution-guides:data_and_application_security_use_cases:htg_config_med_grained_app_ad_oidc_pa
 canonical_url: https://docs.pingidentity.com/solution-guides/data_and_application_security_use_cases/htg_config_med_grained_app_ad_oidc_pa.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 29, 2024
 section_ids:
   about-this-task: About this task

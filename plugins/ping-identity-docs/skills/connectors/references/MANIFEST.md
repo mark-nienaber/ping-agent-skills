@@ -2,165 +2,217 @@
 
 - Product: Connectors
 - Version: current
-- Sync date: 2026-07-10
+- Sync date: 2026-11-03
 - Source: https://docs.pingidentity.com/connectors/llms.txt
-- Guides discovered: 82
-- Guides captured: 71
-- Guides fully captured: 70
+- Guides discovered: 97
+- Guides captured: 97
+- Guides fully captured: 96
 - Guides partially captured: 1
-- Guides without snapshots: 11
-- Total pages indexed: 121
-- Total snapshot pages captured: 93
+- Guides without snapshots: 0
+- Total pages indexed: 139
+- Total snapshot pages captured: 119
 
 ## Source URLs
 
 | Snapshot | Source type | Source URL | Pages indexed | Pages captured | Coverage |
 |---|---|---|---|---|---|
-| relnotes.md | assembled | <37 pages from relnotes> | 37 | 20 | partial |
-| type.md | assembled | <4 pages from type> | 4 | 4 | full |
-| accertify-connector-md.md | assembled | <1 pages from accertify_connector.md> | 1 | 1 | full |
-| adobe-experience-manager-connector-md.md | assembled | <1 pages from adobe_experience_manager_connector.md> | 1 | 1 | full |
-| apple-login-connector-md.md | assembled | <1 pages from apple_login_connector.md> | 1 | 1 | full |
-| authentication-connector-md.md | assembled | <1 pages from authentication_connector.md> | 1 | 1 | full |
-| authenticid-connector-md.md | assembled | <1 pages from authenticid_connector.md> | 1 | 1 | full |
-| azure-ad-user-management-connector-md.md | assembled | <1 pages from azure_ad_user_management_connector.md> | 1 | 1 | full |
-| babelstreet-connector-md.md | assembled | <1 pages from babelstreet_connector.md> | 1 | 1 | full |
-| castle-connector-md.md | assembled | <1 pages from castle_connector.md> | 1 | 1 | full |
-| challenge-connector-md.md | assembled | <1 pages from challenge_connector.md> | 1 | 1 | full |
-| clear-connector-md.md | assembled | <1 pages from clear_connector.md> | 1 | 1 | full |
-| cloudflare-connector-md.md | assembled | <1 pages from cloudflare_connector.md> | 1 | 1 | full |
-| code-snippet-connector-md.md | assembled | <1 pages from code_snippet_connector.md> | 1 | 1 | full |
-| constella-connector-md.md | assembled | <1 pages from constella_connector.md> | 1 | 1 | full |
-| cookie-connector-md.md | assembled | <1 pages from cookie_connector.md> | 1 | 1 | full |
-| crowdstrike-connector-md.md | assembled | <1 pages from crowdstrike_connector.md> | 1 | 1 | full |
-| daon-connector-md.md | assembled | <1 pages from daon_connector.md> | 1 | 1 | full |
-| device-policy-connector-md.md | assembled | <1 pages from device_policy_connector.md> | 1 | 1 | full |
-| duo-connector-md.md | assembled | <1 pages from duo_connector.md> | 1 | 1 | full |
-| entrust-connector-md.md | assembled | <1 pages from entrust_connector.md> | 1 | 1 | full |
-| error-message-connector-md.md | assembled | <1 pages from error_message_connector.md> | 1 | 1 | full |
-| facebook-login-connector-md.md | assembled | <1 pages from facebook_login_connector.md> | 1 | 1 | full |
-| fingerprintjs-connector-md.md | assembled | <1 pages from fingerprintjs_connector.md> | 1 | 1 | full |
-| flow-analytics-connector-md.md | assembled | <1 pages from flow_analytics_connector.md> | 1 | 1 | full |
-| flow-conductor-connector-md.md | assembled | <1 pages from flow_conductor_connector.md> | 1 | 1 | full |
-| form-connector-md.md | assembled | <1 pages from form_connector.md> | 1 | 1 | full |
-| functions-connector-md.md | assembled | <1 pages from functions_connector.md> | 1 | 1 | full |
-| google-login-connector-md.md | assembled | <1 pages from google_login_connector.md> | 1 | 1 | full |
-| google-workspace-admin-connector-md.md | assembled | <1 pages from google_workspace_admin_connector.md> | 1 | 1 | full |
-| hello-connector-md.md | assembled | <1 pages from hello_connector.md> | 1 | 1 | full |
-| http-connector-md.md | assembled | <1 pages from http_connector.md> | 1 | 1 | full |
-| hypr-connector-md.md | assembled | <1 pages from hypr_connector.md> | 1 | 1 | full |
-| id-dataweb-connector-md.md | assembled | <1 pages from id_dataweb_connector.md> | 1 | 1 | full |
-| index-md.md | assembled | <1 pages from index.md> | 1 | 1 | full |
-| island-connector-md.md | assembled | <1 pages from island_connector.md> | 1 | 1 | full |
-| jira-connector-md.md | assembled | <1 pages from jira_connector.md> | 1 | 1 | full |
-| ldap-connector-md.md | assembled | <1 pages from ldap_connector.md> | 1 | 1 | full |
-| lexisnexis-connector-md.md | assembled | <1 pages from lexisnexis_connector.md> | 1 | 1 | full |
-| location-policy-connector-md.md | assembled | <1 pages from location_policy_connector.md> | 1 | 1 | full |
-| marketo-connector-md.md | assembled | <1 pages from marketo_connector.md> | 1 | 1 | full |
-| mfa-connector-md.md | assembled | <1 pages from mfa_connector.md> | 1 | 1 | full |
-| microsoft-defender-connector-md.md | assembled | <1 pages from microsoft_defender_connector.md> | 1 | 1 | full |
-| microsoft-edge-connector-md.md | assembled | <1 pages from microsoft_edge_connector.md> | 1 | 1 | full |
-| microsoft-teams-connector-md.md | assembled | <1 pages from microsoft_teams_connector.md> | 1 | 1 | full |
-| mitek-connector-md.md | assembled | <1 pages from mitek_connector.md> | 1 | 1 | full |
-| oidc-oauth-idp-connector-md.md | assembled | <1 pages from oidc_oauth_idp_connector.md> | 1 | 1 | full |
-| onetrust-connector-md.md | assembled | <1 pages from onetrust_connector.md> | 1 | 1 | full |
-| p1-advanced-identity-cloud-access-request-connector-md.md | assembled | <1 pages from p1_advanced_identity_cloud_access_request_connector.md> | 1 | 1 | full |
-| p1-advanced-identity-cloud-login-connector-md.md | assembled | <1 pages from p1_advanced_identity_cloud_login_connector.md> | 1 | 1 | full |
-| p1-authentication-connector-md.md | assembled | <1 pages from p1_authentication_connector.md> | 1 | 1 | full |
-| p1-connector-md.md | assembled | <1 pages from p1_connector.md> | 1 | 1 | full |
-| p1-credentials-connector-md.md | assembled | <1 pages from p1_credentials_connector.md> | 1 | 1 | full |
-| p1-mfa-connector-md.md | assembled | <1 pages from p1_mfa_connector.md> | 1 | 1 | full |
-| p1-notifications-connector-md.md | assembled | <1 pages from p1_notifications_connector.md> | 1 | 1 | full |
-| p1-protect-connector-md.md | assembled | <1 pages from p1_protect_connector.md> | 1 | 1 | full |
-| p1-radius-gateway-connector-md.md | assembled | <1 pages from p1_radius_gateway_connector.md> | 1 | 1 | full |
-| p1-scope-consent-connector-md.md | assembled | <1 pages from p1_scope_consent_connector.md> | 1 | 1 | full |
-| p1-verify-connector-md.md | assembled | <1 pages from p1_verify_connector.md> | 1 | 1 | full |
-| p1az-connector-md.md | assembled | <1 pages from p1az_connector.md> | 1 | 1 | full |
-| pf-connector-md.md | assembled | <1 pages from pf_connector.md> | 1 | 1 | full |
-| servicenow-connector-md.md | assembled | <1 pages from servicenow_connector.md> | 1 | 1 | full |
-| socure-connector-md.md | assembled | <1 pages from socure_connector.md> | 1 | 1 | full |
-| splunk-connector-md.md | assembled | <1 pages from splunk_connector.md> | 1 | 1 | full |
-| string-connector-md.md | assembled | <1 pages from string_connector.md> | 1 | 1 | full |
-| teleport-connector-md.md | assembled | <1 pages from teleport_connector.md> | 1 | 1 | full |
-| token-management-connector-md.md | assembled | <1 pages from token_management_connector.md> | 1 | 1 | full |
-| transunion-tloxp-connector-md.md | assembled | <1 pages from transunion_tloxp_connector.md> | 1 | 1 | full |
-| variable-connector-md.md | assembled | <1 pages from variable_connector.md> | 1 | 1 | full |
-| veriff-connector-md.md | assembled | <1 pages from veriff_connector.md> | 1 | 1 | full |
-| yoti-connector-md.md | assembled | <1 pages from yoti_connector.md> | 1 | 1 | full |
+| relnotes.md | assembled | https://docs.pingidentity.com/connectors/llms.txt | 40 | 20 | partial |
+| type.md | assembled | https://docs.pingidentity.com/connectors/llms.txt | 4 | 4 | full |
+| abuseipdb-connector-md.md | assembled | https://docs.pingidentity.com/connectors/llms.txt | 1 | 1 | full |
+| accertify-connector-md.md | assembled | https://docs.pingidentity.com/connectors/llms.txt | 1 | 1 | full |
+| adobe-experience-manager-connector-md.md | assembled | https://docs.pingidentity.com/connectors/llms.txt | 1 | 1 | full |
+| akamai-account-protector-connector-md.md | assembled | https://docs.pingidentity.com/connectors/llms.txt | 1 | 1 | full |
+| apple-login-connector-md.md | assembled | https://docs.pingidentity.com/connectors/llms.txt | 1 | 1 | full |
+| authentication-connector-md.md | assembled | https://docs.pingidentity.com/connectors/llms.txt | 1 | 1 | full |
+| authenticid-connector-md.md | assembled | https://docs.pingidentity.com/connectors/llms.txt | 1 | 1 | full |
+| aws-s3-connector-md.md | assembled | https://docs.pingidentity.com/connectors/llms.txt | 1 | 1 | full |
+| aws-secrets-manager-connector-md.md | assembled | https://docs.pingidentity.com/connectors/llms.txt | 1 | 1 | full |
+| azure-ad-user-management-connector-md.md | assembled | https://docs.pingidentity.com/connectors/llms.txt | 1 | 1 | full |
+| babelstreet-connector-md.md | assembled | https://docs.pingidentity.com/connectors/llms.txt | 1 | 1 | full |
+| beyondtrust-pra-connector-md.md | assembled | https://docs.pingidentity.com/connectors/llms.txt | 1 | 1 | full |
+| castle-connector-md.md | assembled | https://docs.pingidentity.com/connectors/llms.txt | 1 | 1 | full |
+| challenge-connector-md.md | assembled | https://docs.pingidentity.com/connectors/llms.txt | 1 | 1 | full |
+| clear-connector-md.md | assembled | https://docs.pingidentity.com/connectors/llms.txt | 1 | 1 | full |
+| cloudflare-connector-md.md | assembled | https://docs.pingidentity.com/connectors/llms.txt | 1 | 1 | full |
+| code-snippet-connector-md.md | assembled | https://docs.pingidentity.com/connectors/llms.txt | 1 | 1 | full |
+| connectid-connector-md.md | assembled | https://docs.pingidentity.com/connectors/llms.txt | 1 | 1 | full |
+| constella-connector-md.md | assembled | https://docs.pingidentity.com/connectors/llms.txt | 1 | 1 | full |
+| cookie-connector-md.md | assembled | https://docs.pingidentity.com/connectors/llms.txt | 1 | 1 | full |
+| crowdstrike-connector-md.md | assembled | https://docs.pingidentity.com/connectors/llms.txt | 1 | 1 | full |
+| daon-connector-md.md | assembled | https://docs.pingidentity.com/connectors/llms.txt | 1 | 1 | full |
+| device-policy-connector-md.md | assembled | https://docs.pingidentity.com/connectors/llms.txt | 1 | 1 | full |
+| duo-connector-md.md | assembled | https://docs.pingidentity.com/connectors/llms.txt | 1 | 1 | full |
+| entrust-connector-md.md | assembled | https://docs.pingidentity.com/connectors/llms.txt | 1 | 1 | full |
+| error-message-connector-md.md | assembled | https://docs.pingidentity.com/connectors/llms.txt | 1 | 1 | full |
+| facebook-login-connector-md.md | assembled | https://docs.pingidentity.com/connectors/llms.txt | 1 | 1 | full |
+| fingerprintjs-connector-md.md | assembled | https://docs.pingidentity.com/connectors/llms.txt | 1 | 1 | full |
+| flow-analytics-connector-md.md | assembled | https://docs.pingidentity.com/connectors/llms.txt | 1 | 1 | full |
+| flow-conductor-connector-md.md | assembled | https://docs.pingidentity.com/connectors/llms.txt | 1 | 1 | full |
+| form-connector-md.md | assembled | https://docs.pingidentity.com/connectors/llms.txt | 1 | 1 | full |
+| functions-connector-md.md | assembled | https://docs.pingidentity.com/connectors/llms.txt | 1 | 1 | full |
+| google-login-connector-md.md | assembled | https://docs.pingidentity.com/connectors/llms.txt | 1 | 1 | full |
+| google-workspace-admin-connector-md.md | assembled | https://docs.pingidentity.com/connectors/llms.txt | 1 | 1 | full |
+| hello-connector-md.md | assembled | https://docs.pingidentity.com/connectors/llms.txt | 1 | 1 | full |
+| http-connector-md.md | assembled | https://docs.pingidentity.com/connectors/llms.txt | 1 | 1 | full |
+| hypr-connector-md.md | assembled | https://docs.pingidentity.com/connectors/llms.txt | 1 | 1 | full |
+| id-dataweb-connector-md.md | assembled | https://docs.pingidentity.com/connectors/llms.txt | 1 | 1 | full |
+| identity-verification-connector-md.md | assembled | https://docs.pingidentity.com/connectors/llms.txt | 1 | 1 | full |
+| idme-community-verification-connector-md.md | assembled | https://docs.pingidentity.com/connectors/llms.txt | 1 | 1 | full |
+| index-md.md | assembled | https://docs.pingidentity.com/connectors/llms.txt | 1 | 1 | full |
+| infinipoint-connector-md.md | assembled | https://docs.pingidentity.com/connectors/llms.txt | 1 | 1 | full |
+| ipstack-connector-md.md | assembled | https://docs.pingidentity.com/connectors/llms.txt | 1 | 1 | full |
+| island-connector-md.md | assembled | https://docs.pingidentity.com/connectors/llms.txt | 1 | 1 | full |
+| jira-connector-md.md | assembled | https://docs.pingidentity.com/connectors/llms.txt | 1 | 1 | full |
+| ldap-connector-md.md | assembled | https://docs.pingidentity.com/connectors/llms.txt | 1 | 1 | full |
+| lexisnexis-connector-md.md | assembled | https://docs.pingidentity.com/connectors/llms.txt | 1 | 1 | full |
+| location-policy-connector-md.md | assembled | https://docs.pingidentity.com/connectors/llms.txt | 1 | 1 | full |
+| marketo-connector-md.md | assembled | https://docs.pingidentity.com/connectors/llms.txt | 1 | 1 | full |
+| mfa-connector-md.md | assembled | https://docs.pingidentity.com/connectors/llms.txt | 1 | 1 | full |
+| microsoft-defender-connector-md.md | assembled | https://docs.pingidentity.com/connectors/llms.txt | 1 | 1 | full |
+| microsoft-edge-connector-md.md | assembled | https://docs.pingidentity.com/connectors/llms.txt | 1 | 1 | full |
+| microsoft-intune-connector-md.md | assembled | https://docs.pingidentity.com/connectors/llms.txt | 1 | 1 | full |
+| microsoft-teams-connector-md.md | assembled | https://docs.pingidentity.com/connectors/llms.txt | 1 | 1 | full |
+| mitek-connector-md.md | assembled | https://docs.pingidentity.com/connectors/llms.txt | 1 | 1 | full |
+| oidc-oauth-idp-connector-md.md | assembled | https://docs.pingidentity.com/connectors/llms.txt | 1 | 1 | full |
+| onetrust-connector-md.md | assembled | https://docs.pingidentity.com/connectors/llms.txt | 1 | 1 | full |
+| p1-advanced-identity-cloud-access-request-connector-md.md | assembled | https://docs.pingidentity.com/connectors/llms.txt | 1 | 1 | full |
+| p1-advanced-identity-cloud-login-connector-md.md | assembled | https://docs.pingidentity.com/connectors/llms.txt | 1 | 1 | full |
+| p1-authentication-connector-md.md | assembled | https://docs.pingidentity.com/connectors/llms.txt | 1 | 1 | full |
+| p1-connector-md.md | assembled | https://docs.pingidentity.com/connectors/llms.txt | 1 | 1 | full |
+| p1-credentials-connector-md.md | assembled | https://docs.pingidentity.com/connectors/llms.txt | 1 | 1 | full |
+| p1-mfa-connector-md.md | assembled | https://docs.pingidentity.com/connectors/llms.txt | 1 | 1 | full |
+| p1-notifications-connector-md.md | assembled | https://docs.pingidentity.com/connectors/llms.txt | 1 | 1 | full |
+| p1-protect-connector-md.md | assembled | https://docs.pingidentity.com/connectors/llms.txt | 1 | 1 | full |
+| p1-radius-gateway-connector-md.md | assembled | https://docs.pingidentity.com/connectors/llms.txt | 1 | 1 | full |
+| p1-recognize-connector-md.md | assembled | https://docs.pingidentity.com/connectors/llms.txt | 1 | 1 | full |
+| p1-scope-consent-connector-md.md | assembled | https://docs.pingidentity.com/connectors/llms.txt | 1 | 1 | full |
+| p1-verify-connector-md.md | assembled | https://docs.pingidentity.com/connectors/llms.txt | 1 | 1 | full |
+| p1az-connector-md.md | assembled | https://docs.pingidentity.com/connectors/llms.txt | 1 | 1 | full |
+| pf-connector-md.md | assembled | https://docs.pingidentity.com/connectors/llms.txt | 1 | 1 | full |
+| pid-connector-md.md | assembled | https://docs.pingidentity.com/connectors/llms.txt | 1 | 1 | full |
+| pid-legacy-connector-md.md | assembled | https://docs.pingidentity.com/connectors/llms.txt | 1 | 1 | full |
+| protect-use-case-connector-md.md | assembled | https://docs.pingidentity.com/connectors/llms.txt | 1 | 1 | full |
+| salesforce-connector-md.md | assembled | https://docs.pingidentity.com/connectors/llms.txt | 1 | 1 | full |
+| saml-connector-md.md | assembled | https://docs.pingidentity.com/connectors/llms.txt | 1 | 1 | full |
+| scrambleid-connector-md.md | assembled | https://docs.pingidentity.com/connectors/llms.txt | 1 | 1 | full |
+| screen-connector-md.md | assembled | https://docs.pingidentity.com/connectors/llms.txt | 1 | 1 | full |
+| secret-double-octopus-connector-md.md | assembled | https://docs.pingidentity.com/connectors/llms.txt | 1 | 1 | full |
+| securid-connector-md.md | assembled | https://docs.pingidentity.com/connectors/llms.txt | 1 | 1 | full |
+| segment-connector-md.md | assembled | https://docs.pingidentity.com/connectors/llms.txt | 1 | 1 | full |
+| sentinelone-connector-md.md | assembled | https://docs.pingidentity.com/connectors/llms.txt | 1 | 1 | full |
+| seon-connector-md.md | assembled | https://docs.pingidentity.com/connectors/llms.txt | 1 | 1 | full |
+| servicenow-connector-md.md | assembled | https://docs.pingidentity.com/connectors/llms.txt | 1 | 1 | full |
+| socure-connector-md.md | assembled | https://docs.pingidentity.com/connectors/llms.txt | 1 | 1 | full |
+| socure-riskos-connector-md.md | assembled | https://docs.pingidentity.com/connectors/llms.txt | 1 | 1 | full |
+| splunk-connector-md.md | assembled | https://docs.pingidentity.com/connectors/llms.txt | 1 | 1 | full |
+| string-connector-md.md | assembled | https://docs.pingidentity.com/connectors/llms.txt | 1 | 1 | full |
+| teleport-connector-md.md | assembled | https://docs.pingidentity.com/connectors/llms.txt | 1 | 1 | full |
+| token-management-connector-md.md | assembled | https://docs.pingidentity.com/connectors/llms.txt | 1 | 1 | full |
+| transunion-tloxp-connector-md.md | assembled | https://docs.pingidentity.com/connectors/llms.txt | 1 | 1 | full |
+| variable-connector-md.md | assembled | https://docs.pingidentity.com/connectors/llms.txt | 1 | 1 | full |
+| veriff-connector-md.md | assembled | https://docs.pingidentity.com/connectors/llms.txt | 1 | 1 | full |
+| wirewheel-connector-md.md | assembled | https://docs.pingidentity.com/connectors/llms.txt | 1 | 1 | full |
+| yoti-connector-md.md | assembled | https://docs.pingidentity.com/connectors/llms.txt | 1 | 1 | full |
 
 ## Checksums
 
 | File | SHA-256 |
 |---|---|
-| llms.txt | 405e4fde4bb679867d2ebb4ed064c24247d847f15176adbfc274a5704dffc6f6 |
-| snapshots/relnotes.md | 58d42043beb6b0be59f0a793013e91914bb47d312e2d1d491dbace331b4df878 |
-| snapshots/type.md | 84632f8ab054df196ca50a575ca481983572e8a34e5ddd3a551146d7fbda81cb |
-| snapshots/accertify-connector-md.md | de229b187f4f4bec02f7b98ec264154d6cdf200eb523252f0c7e7017114a6458 |
-| snapshots/adobe-experience-manager-connector-md.md | 02a134dc61bd29d53a3a2e1df9f72684b289eafb015b3cbff6cebfffda03f87d |
-| snapshots/apple-login-connector-md.md | a550cd82e00da34d9ab1db3ce34fa75b7ffd81421f3eec65ac4b6eaa2b5ad273 |
-| snapshots/authentication-connector-md.md | 6c13f63f0e3507976dc59ea518703df9f46d3fbdadd24c03f8c04cc0c36136fc |
-| snapshots/authenticid-connector-md.md | fb1d3fb2ea0ae50296b2944360f30121f9f50c42bf36ea72a4e5092d33755138 |
-| snapshots/azure-ad-user-management-connector-md.md | b4324f7e1447bc29422027ba5b1cb4b6c25c5917622b5ab3ab6a4e89708d7ddb |
-| snapshots/babelstreet-connector-md.md | 3263b3f5ac643039df3bc7c9dd01d1d699ea881343952794873df2de6e9ed919 |
-| snapshots/castle-connector-md.md | 50ec267389b96e07afd09872e2dd79c588b2ded09e69d3f066ecc7800f23235a |
-| snapshots/challenge-connector-md.md | fcc477bfd7093459e00458eada95943f939ae2d0e047edefdc8083c2b287728c |
-| snapshots/clear-connector-md.md | cae469e02f3ee3f60658af9b45416dbf860253f331e0e8ab8f4a7f5716f24451 |
-| snapshots/cloudflare-connector-md.md | 452ee9d759cbf3feee81b6dfc3f90e9c1ef91704815424b7d8df9b162e5093d4 |
-| snapshots/code-snippet-connector-md.md | d91e01249a3c74ce6e90c69c01d3ccf35ab608699477a9ca097f783194a3db6f |
-| snapshots/constella-connector-md.md | 8bd774510318a35121c14dee7ee986755ef71663ef8b0052426b16f6004226ab |
-| snapshots/cookie-connector-md.md | ad6627efdd2accf25106820a5202b806c5a1deb636a4f559704d9c84477688f5 |
-| snapshots/crowdstrike-connector-md.md | fa6441bab80774448989b364ac81bc7927e50219f80e35571b5d37171f0cf33e |
-| snapshots/daon-connector-md.md | 9617342efdf8c537c53cb0b50dfd62b45e1261cbe4e3411c546383a3b296c78f |
-| snapshots/device-policy-connector-md.md | 9b32c6e84ff485621dfe94d876fda8355084feb7546436d7c80678843ab4ff7b |
-| snapshots/duo-connector-md.md | 1aff4aa99bb0ca25126b8025cae37eead35d0d1d67b044d170e900748855b67e |
-| snapshots/entrust-connector-md.md | 01a149d7e888d6f8ab90311fd69737b609940fdd0d0b939a3b3658b960d00867 |
-| snapshots/error-message-connector-md.md | b9fa73719d49e35ce20bd68b325e3a463613987ddd7291d8acd1876d3049368a |
-| snapshots/facebook-login-connector-md.md | f548b9110b82a5c5981d70c569a7ed7f8926fc50c54b27c844cb4382fd3bf921 |
-| snapshots/fingerprintjs-connector-md.md | 1653cdc87c256c9a0cd0f4f394bce798bdc00c2bf68b05a54b0ed9cc39bae734 |
-| snapshots/flow-analytics-connector-md.md | 97b2e6a44d30b2a4d257cdcab422a10648185196fef7a15f2660340b219591f0 |
-| snapshots/flow-conductor-connector-md.md | 7bb84b4c2b58d8525386103d90b8261c4e352f7c9a92541d016201219894d87b |
-| snapshots/form-connector-md.md | 0126ca6233b3397271764575138b45bb65280483558e429f031b4940c0119d1a |
-| snapshots/functions-connector-md.md | a8c976e9c5ee387d946ca180bd41c460fad53baf4bad81f23ca2849455370278 |
-| snapshots/google-login-connector-md.md | 9f4db23a6b11dab16f0a9c6331dfa7a59f1d55687c731887a507ff7a01ea7423 |
-| snapshots/google-workspace-admin-connector-md.md | 7f5a83110d987443ab8455d6d1295cb0e83d890d351502605e8bad12703f547d |
-| snapshots/hello-connector-md.md | 2d24a8e4b933d7a89527c33bcf1de6488c13708f2c5deaa7594e6a2702925330 |
-| snapshots/http-connector-md.md | 8e112f9b0feb9c5afe3388ee31ad9c71f2493198102bfa3fab7476e1555c8648 |
-| snapshots/hypr-connector-md.md | dbd3940dcf7f8b4c5764604d796fe5542bcf71e3464b8eb46cf0fcaa7d30f3cb |
-| snapshots/id-dataweb-connector-md.md | 86ef687b6bd047d1465e0556c0c675838729addfcd1c2273ac1a315e4b098864 |
-| snapshots/index-md.md | 73beab013dd9639b9fa9cb79b4449a8450ab2674c28b1c5d1be1b6452913df15 |
-| snapshots/island-connector-md.md | ee886f54f52d8802f9b1b53fd48643544a425aa4062f74b44f658797706de7f1 |
-| snapshots/jira-connector-md.md | 4b661a7c08e6537db407ec3dc743d51906e6102295f149c278973a5213617ece |
-| snapshots/ldap-connector-md.md | bfcef500176563010f1a707f26ddc5f5a607014012237dd825772f52ec35003c |
-| snapshots/lexisnexis-connector-md.md | 7a03ed5883923bf8bd0137726fa8a3b360192894713fbde970582e2f8b4ce8d7 |
-| snapshots/location-policy-connector-md.md | f65290640d4d3647e100a885d83f09c9f0b62fe967243c0d8a15b23dd345ff6e |
-| snapshots/marketo-connector-md.md | d5c7367a1f6067365a22210e28b5df20fe6b160e4df0307c5419b75dccc691b4 |
-| snapshots/mfa-connector-md.md | 0bb82a606ce7b5d37785aabe9af0a9db30b003a783a0de232ed769592872a2e0 |
-| snapshots/microsoft-defender-connector-md.md | a5c9345884024ea3afd84e94b730a9bbe03344b9265972784d3bb36569985416 |
-| snapshots/microsoft-edge-connector-md.md | 0e6f1f4b6c92f5703e0bc5b09167b2d676b0436f72031df9ec8285ed7f3e6ee3 |
-| snapshots/microsoft-teams-connector-md.md | 5eb352d53bbafe9d0021dcbdffe5c3698cf2b96dc5db4fa9453333aa8561a23c |
-| snapshots/mitek-connector-md.md | f029d28b7e939d6a728a818bf4d841e062224240d213b0c30562d370ef618533 |
-| snapshots/oidc-oauth-idp-connector-md.md | d477d62f0e0784b4471f66950b6da002370087b8a830806af73e35f4cdf93f09 |
-| snapshots/onetrust-connector-md.md | 378eef287ec0eb2294c7e139fa43d7ffbb0eac98b724ebc2e14c17dc5502983d |
-| snapshots/p1-advanced-identity-cloud-access-request-connector-md.md | ab7ee742d6346e0b0b7daa331b180920b7f816d5893227040567e5a448b9fadc |
-| snapshots/p1-advanced-identity-cloud-login-connector-md.md | 3643b180d7e290091296d1599d2cc07a66a6e799b2fb24f03a6c9174f87f794b |
-| snapshots/p1-authentication-connector-md.md | c946d1f506dde0c8052bc02e26c1dfb780cd7357c64e5dd1d985e2a1e5c1668a |
-| snapshots/p1-connector-md.md | d19154ae045321787f38dcd84502c92487a46ba8de5e3f447b57c93c95024582 |
-| snapshots/p1-credentials-connector-md.md | 2e3e27198cf097c51ae2eb59044aceb0535bc770297c3bf4ea643d4c7804f5ce |
-| snapshots/p1-mfa-connector-md.md | 6bb854011f39abac6d4feb5fed0c26ecada15cc1aac6d7d7135ef2c73f1af2b2 |
-| snapshots/p1-notifications-connector-md.md | 5fa0e266c816bb725f8678fc877da3c7ba362f3229a95b0a1a4aca795ff39506 |
-| snapshots/p1-protect-connector-md.md | 86ee6c3f2213af64237239e3ba1ceabb4f893c7f133a8882bfd98049a17253f7 |
-| snapshots/p1-radius-gateway-connector-md.md | ab93702d5c1902c4a4b4c00a9aa43796b32da0ca6124e51280d834f9a581dd6b |
-| snapshots/p1-scope-consent-connector-md.md | 4e730f177e9ee256b93f93cf79c2bd2ccc5bd2910e2baf76f72e11c683f5f017 |
-| snapshots/p1-verify-connector-md.md | ebaf4612b2a99369650a89435f20f399a16d2e85124e89a3c14b17a28a9f4867 |
-| snapshots/p1az-connector-md.md | 6666a902bf37e1cc39b57f0bbcd6edcc405dfa95b0348a1c0c67e53a80946e84 |
-| snapshots/pf-connector-md.md | 15fd03b5b50544b9b40c7684f771ac47afa981f741cedefd3fc0a87f3e15af8c |
-| snapshots/servicenow-connector-md.md | f184519edeac06be27553fce7cb4092780477b557d7a67c1fa1a4d8964a9114f |
-| snapshots/socure-connector-md.md | aeaab8fa2bf2d548757d02597ca85b69b0666fcd381973b1d8a8bc989ed84a15 |
-| snapshots/splunk-connector-md.md | 67acb4ef1c2e08ff09e1c485fb01ba7a86b949d19a98823ec3104e3a35876709 |
-| snapshots/string-connector-md.md | 1d41233cba724f78857fe1c372e7c84c33959ba85c1b1ee1e5f37e09b3c6148d |
-| snapshots/teleport-connector-md.md | b83675b5b5869ef01622f815a923f521420a0f5555e59ee1bfd85c907024662f |
-| snapshots/token-management-connector-md.md | b803961d55ff6f3b333e3e9f04d7b3b3108dc76c4d5b5130a62ea6ea416c37a4 |
-| snapshots/transunion-tloxp-connector-md.md | 509977b07eb91b13ab3f32c58a9c7987cb237ad307cbbba386b053e47c72eb84 |
-| snapshots/variable-connector-md.md | d0ad28192a3f8b556dc2f7de288577b425a16d6e068fa10333064445c9129e6a |
-| snapshots/veriff-connector-md.md | ddd6730e3bee133ca754d7b5b2b279224d676af68a98238d1417346b6d7f6078 |
-| snapshots/yoti-connector-md.md | d59ebc98aaf82b149d6fcc797d651e3cd25616f84c6d2c860ffad7001c3e2ffd |
+| llms.txt | df4666279946d94d859d5289416ddf38a4943fe437806775bbfdcc388989fa42 |
+| snapshots/relnotes.md | 9bf91b99e1699d28e9b5bf3a8386dc0d84766a3a1f12c2c56685b6b33e226c69 |
+| snapshots/type.md | 16a0757ec3be5acd09ba3ddcfabdf904df03a7a562eb646849ef893f0cfb3d2d |
+| snapshots/abuseipdb-connector-md.md | 3bf11c36bbeb31d437fbf9f6cf0d88cea8bebd26c5e650ec557b3c5a528557fe |
+| snapshots/accertify-connector-md.md | 1d1f645b5c602579f186c3079fa47732bbdf35445086ea277162aa80e30a3388 |
+| snapshots/adobe-experience-manager-connector-md.md | ff5a59534beaf7a58282af31fd04c97e4c1bacc360ea76157c64e3c6cac83f96 |
+| snapshots/akamai-account-protector-connector-md.md | 6bd5219b1f6fa943c73591d91425eede7eee98be29463300e46e00ef78da6f5c |
+| snapshots/apple-login-connector-md.md | e3ea76867f918e104ce49da6629f518a8e639a4b0a847547fd50f7f31f2b6465 |
+| snapshots/authentication-connector-md.md | 28b9225862f1dd18b369d9c5e12b26c02438da19c27bf57291286b295b3830b6 |
+| snapshots/authenticid-connector-md.md | 7129f4ab29cc99063e72c526521f64b26f163d9be97b293bc42d00f819f56e3f |
+| snapshots/aws-s3-connector-md.md | 6513a86c0dfe435ec38010f62c6ddd15921c0f87f240cf0e44be215730ce5018 |
+| snapshots/aws-secrets-manager-connector-md.md | 76ae0180c2756710ad9f009e3c6dad20dcc729234aaabacad45a9892a36d627c |
+| snapshots/azure-ad-user-management-connector-md.md | 0908cf6e0366eeed636817c2ac44c10ecaa819eb5b911a733f50446cc4995ee3 |
+| snapshots/babelstreet-connector-md.md | c5f7fe8ab481310b5054cebc9c25646184ed0c808bcf0b17b819131739191b63 |
+| snapshots/beyondtrust-pra-connector-md.md | 5bbc722c5ddbd76df2c5dcaeb3e4ea8ee37291dd8d01e2587fefdc2e9c34fc22 |
+| snapshots/castle-connector-md.md | 08575a554b871d9b36a2c83f8b247a174e1e3158ca12a73b0abb1d1a6881b2a4 |
+| snapshots/challenge-connector-md.md | 3f070da3a6a8b0621aa506699c6fec4c2707b1ae5c6629d8f27de03f7c107063 |
+| snapshots/clear-connector-md.md | 7ee8e25d6b5454251ad6a6f775b8011e47a32ab6f1a70cc0564c5f77e8840116 |
+| snapshots/cloudflare-connector-md.md | 57c09e8e77cc2060e585e5cb6187556fa95ed7c6dd8552bb0bc1ff14e9ff9054 |
+| snapshots/code-snippet-connector-md.md | f34aa30e6c9c57ad1ca48c2f40bb7248e727359f12c50a666134517fcfbd6f0f |
+| snapshots/connectid-connector-md.md | 5b9a72dacc9298f812b1b541e4668293d6b1f198db8c01f127304f1b58bcb0a6 |
+| snapshots/constella-connector-md.md | faca5ad6f336aa474882b71ff3d68a392d30c45ee157f63dc3ca7ff8b71c1faa |
+| snapshots/cookie-connector-md.md | c8f14f499c98afd9916294240aafc343d6ff622c03e4474a2220291e04aed9c9 |
+| snapshots/crowdstrike-connector-md.md | 9ce592b08a75772967fb3df94a755d0f661a26f635a4133275776d91579e570a |
+| snapshots/daon-connector-md.md | d4bd9a474d0b89b3413f7bd501698711b198ac37506cdd9926a8a81400d7713a |
+| snapshots/device-policy-connector-md.md | 3ae3e6219586569fd081f37429816d6da2c46aae740e299c53070444bd396777 |
+| snapshots/duo-connector-md.md | c217b1d795548a456aeca7a4f3f87184f403ff78d93c3e52aa634c7ad2973fdb |
+| snapshots/entrust-connector-md.md | 11ae5b7e38c3ae8e3ced3e0aa655ba8c31e74e646e7528858bd4fce0b3f82060 |
+| snapshots/error-message-connector-md.md | 72db8ad053488fdcc475dc09d2614d263cfcab176cbefdb91db35ba3b6257322 |
+| snapshots/facebook-login-connector-md.md | bc1bf7a0feefb07d72e13f3d649cd6f2d4e9d8c2807dc31358c195303b77fb0a |
+| snapshots/fingerprintjs-connector-md.md | 18d88ef0e700cc5f505bf10cab2739639c9ac30b2f2e75ef6c84685abd6bf9ec |
+| snapshots/flow-analytics-connector-md.md | ae1c85bda9f46ff2a74804024ee8c00112a9c205f725ebbdc3a011e3b5b89d80 |
+| snapshots/flow-conductor-connector-md.md | 1a6ec28a8e61605528ef20868249c2800da2f20c55797c45c47c4edc0fbc8c98 |
+| snapshots/form-connector-md.md | 242b0cfc54cad4175fb0cfb943e7ae0fe61dda1b6b9a9a2ae7e291f57a616481 |
+| snapshots/functions-connector-md.md | 6d963ff7dc87427724d647fef420e860a59deb1c2205da65922956ee82c7a1bd |
+| snapshots/google-login-connector-md.md | 6a0b680c943ac98f513b0a5ee0f3898ec9de6d6188dd281f069072e162bab11a |
+| snapshots/google-workspace-admin-connector-md.md | 80024c47741039e90f191c776775c79325c7d074f1a8656350acacc2fccda96c |
+| snapshots/hello-connector-md.md | fb9655df62a21d1de2744ed54d46c344798d47eb7ab22596bf365a4dbfac6f4c |
+| snapshots/http-connector-md.md | c4bff4a041263f1b2e0550bf46e29986fcc1878156566734791d3273342db0ac |
+| snapshots/hypr-connector-md.md | bcfcf549bc15cc8f5685ae40600631275753736c0b7788efb4b9c2773dd780ac |
+| snapshots/id-dataweb-connector-md.md | dad50995b350d83dfcf39377942fbb883b2c3b50a21361a5e56b75708a77fc85 |
+| snapshots/identity-verification-connector-md.md | fe74868b32c56c3c18dab30aa82b004a77550ac5440c9f65c678c1ca07461eb3 |
+| snapshots/idme-community-verification-connector-md.md | 1f8af6c99c10f1bc17a337d43ddc5ef52adcbe889b55cddb3ac2b1820ed8418b |
+| snapshots/index-md.md | e15a9920a44f83ee92a675b2015d5b71c4c83eea11a3c000c26a0b785e2a7581 |
+| snapshots/infinipoint-connector-md.md | f71b7acda212f3d59129c223bf0f16da6b77694628822d579b98af3f9ed3ee7a |
+| snapshots/ipstack-connector-md.md | 4c52fce50856e0409911ef53327ccf5bfd98e4be9da35d237b9dec3db4427e38 |
+| snapshots/island-connector-md.md | a3f808ebd290f259c4e9e10dd689afdfe85705e689853f96640eed439a83e47c |
+| snapshots/jira-connector-md.md | 0174a110283e73c4322797dfe41a63ebc3227c217ccc62996d6f5ccdcbe355c3 |
+| snapshots/ldap-connector-md.md | 1acde0a88a2531509564e4d1523e9d7e43ee0015c7446fcc7cc00e91ffed6018 |
+| snapshots/lexisnexis-connector-md.md | 04ba63cd3dd5993b1897883f3acd31381839f6d0cc77000e809f1922e151cfa0 |
+| snapshots/location-policy-connector-md.md | dfd4e49b591a802e4069562fa398bd9fa0149ef3110ecd1341db0518232ce9ba |
+| snapshots/marketo-connector-md.md | 63a49568d8daef471498541e0bc69b3f4bf086648931071b238612fc6d78ebfd |
+| snapshots/mfa-connector-md.md | fbd320f1e535f69d8007873cf971d26462f245bf1d9a5984e99d26e52732b267 |
+| snapshots/microsoft-defender-connector-md.md | dda4925f75f19c8627b27f629db530e7a54b4fd9726af86e5671899390a73a97 |
+| snapshots/microsoft-edge-connector-md.md | da0f5cf958145b1306cd9260c0e574283ad146e1863ad4d364056ebc8251188b |
+| snapshots/microsoft-intune-connector-md.md | 919cca65efbdf6d9a162eb7a20fe96bff632d3cf0aec0d993cb797d246c11342 |
+| snapshots/microsoft-teams-connector-md.md | f61359d1446226f4bd7410172aa79ebc3faaf6095d80e66748d2d1861050ddf9 |
+| snapshots/mitek-connector-md.md | fd21fe7ea0c2450cca138a75985fdd48aaa51aa91a619749961424be52ed6aae |
+| snapshots/oidc-oauth-idp-connector-md.md | 5cff992959ce46ab90c2f5e4ec96b0e2c460289dc48c4187b83f843245bef103 |
+| snapshots/onetrust-connector-md.md | 91c7c3620539e83d296aaee521d60b512d99fcadbd046c5f886505ffd054f6b9 |
+| snapshots/p1-advanced-identity-cloud-access-request-connector-md.md | 0ef15c7a644742ec2a819bd66542e93fe14ce1ebe7d000fd892319825875b432 |
+| snapshots/p1-advanced-identity-cloud-login-connector-md.md | d8876d22789ed49914ae96ecb8d3a1fcc093aa9a3d2e429cc3bc3dbd9bbfb9d0 |
+| snapshots/p1-authentication-connector-md.md | b9b8166367bb7daeb76a9d9570306cc3b2045fdf09dad70ffa0e0dfa3ad1d786 |
+| snapshots/p1-connector-md.md | 88564bf63c4daad981e9afeac597207a797888ca23dbd96a56e2b207c0639eca |
+| snapshots/p1-credentials-connector-md.md | 60bd4493d982903d291ad38bd2cc2d318e5e5c20b989eb72868d9e9641d73795 |
+| snapshots/p1-mfa-connector-md.md | cab467d36dbddacb86edf83264eca156453d812cb9e2be88c9bf3e7224879397 |
+| snapshots/p1-notifications-connector-md.md | c4a15615e0d868021cc22ffb707cea57bcbb17a58d36432c6be66a2d48e4c847 |
+| snapshots/p1-protect-connector-md.md | 0c91557be3870ecba081cb7e4cd873f7cd65621295c01ca5549a7ca7ab3ca7ec |
+| snapshots/p1-radius-gateway-connector-md.md | 3d2480696cda7e44089f141938b069761809cb7a325cd291c6730b3970d2baf0 |
+| snapshots/p1-recognize-connector-md.md | cafca3bc01d2a5cd9ec9329644f60ffff6b0c03453a583443a492a95f6117f91 |
+| snapshots/p1-scope-consent-connector-md.md | 4c7f8b2d2b30e6cc369e10c6764aabaab028ba491b1e2cac4114aa2604feeaee |
+| snapshots/p1-verify-connector-md.md | 34942f59cd6c8218c226bd2f021d88060bfbf7f9c0e99e061b45aaf49c5e7f28 |
+| snapshots/p1az-connector-md.md | c8bf6e11f8269c9105186ac323fb8df979cd4c91200c633d02ede22a6f5c46ed |
+| snapshots/pf-connector-md.md | e3ba26ca1a8b393fe209dedee3804cd61ba3f8ffb9919badd26a6540b004996f |
+| snapshots/pid-connector-md.md | ff2212c0ac6045ad74cd3d9337c715904f28941a422fd296f4f4b6ef9197ab68 |
+| snapshots/pid-legacy-connector-md.md | b1f6ae1074c3db1b3d57a6f05c58854d9569f7f8add3cbb7b8468dec3ff4dd13 |
+| snapshots/protect-use-case-connector-md.md | ca7776603f4d92512d56fd36ebe6aedb0d71f811b112cf80ee8fff92be8137e6 |
+| snapshots/salesforce-connector-md.md | 29c48eafb978161597c14100991bdfde9c3a0a0dcbd42dc9ffff1ae175d92695 |
+| snapshots/saml-connector-md.md | 88dede407a2fd20840e190032e35683cde6538d085cce05c10278c20f7130e7f |
+| snapshots/scrambleid-connector-md.md | 8f4f17fbcac749f6c8031a902516e9ab467d3b0871fee90e4b6ce4c69a24c807 |
+| snapshots/screen-connector-md.md | 566ddd708d66052d7ab8fa8e6ed24b087110b902e1982b001c99fe6b750a7533 |
+| snapshots/secret-double-octopus-connector-md.md | 210ca39e33ecdedc43f3aa6d0c41c94b4eaa865014759e81633301f591134a73 |
+| snapshots/securid-connector-md.md | 85df0dda775642a3cdc304e41732a2fcc419e530e679db51c1c59e4aa924b285 |
+| snapshots/segment-connector-md.md | e2e53bf1c2a228063948cd38bba263186b4a42f1c86f27431fd7c28f48c8f4e6 |
+| snapshots/sentinelone-connector-md.md | 6acee17cc64deff17f5e55f266b097dd627681aa7cf5209c3493f8def7593a7c |
+| snapshots/seon-connector-md.md | 3f5375d922ba13d2dcbe9dbeda50fb8af243b8144215a8d6fbf41fa0c1fd6d94 |
+| snapshots/servicenow-connector-md.md | 1560f2a4f304e82e535bae8725642bb45f27daa0fb7110e7852d3086838d897a |
+| snapshots/socure-connector-md.md | 727bc32a3da3ca3583a5a1547cc589d572d1df207b9de36f17794fa9a29d75c7 |
+| snapshots/socure-riskos-connector-md.md | aa744806d378ffb8e4513dff50d2ebe933fe8b812445817c6c166c7f0775e4eb |
+| snapshots/splunk-connector-md.md | 66d17e8ac4449bd09a1c02346cd2d726e035737e20c3036d9e23a6f83d70244c |
+| snapshots/string-connector-md.md | 847f04e8d88e5d36a2e7af88e3fdc65dbc457bdcc376083d16370d3439121b6e |
+| snapshots/teleport-connector-md.md | 0b18a41be6bd56b9d4c43c22c4e67a27c3fbeaf51be7976180b6ee5e8c10e1fa |
+| snapshots/token-management-connector-md.md | 1b660717fc51c9124c1ec496f9244376eb85951d0bc9434e5432e77ad50a9b5c |
+| snapshots/transunion-tloxp-connector-md.md | 97cea1429de2354939dc6851f4fab0a5debe542eb14ea272b28c3557bb277347 |
+| snapshots/variable-connector-md.md | b468de5a5c1bae9309f6244c78bf4d139a1db9097e1ba3836346f950cf9eadc5 |
+| snapshots/veriff-connector-md.md | 9400fe485085afea1f4d753f419756ad63f8ee8511da4294953c96c9c18e6a94 |
+| snapshots/wirewheel-connector-md.md | d95f8231794d11fe3e03e4ab5d94c7190370095f22cbcef5a8aa3491c3f5c2bb |
+| snapshots/yoti-connector-md.md | 922c5b2796583aecc437a193711a77cfb259d70144233b298aecdbf0fc7778fc |

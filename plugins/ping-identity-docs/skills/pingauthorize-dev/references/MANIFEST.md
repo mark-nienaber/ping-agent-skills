@@ -2,7 +2,7 @@
 
 - Product: PingAuthorize (Developer)
 - Version: current
-- Sync date: 2026-07-03
+- Sync date: 2026-11-03
 - Source: https://developer.pingidentity.com/pingauthorize/llms.txt
 - Guides discovered: 1
 - Guides captured: 1
@@ -16,11 +16,11 @@
 
 | Snapshot | Source type | Source URL | Pages indexed | Pages captured | Coverage |
 |---|---|---|---|---|---|
-| pingauthorize.md | assembled | <206 pages from pingauthorize> | 206 | 20 | partial |
+| pingauthorize.md | assembled | https://developer.pingidentity.com/pingauthorize/llms.txt | 206 | 20 | partial |
 
 ## Checksums
 
 | File | SHA-256 |
 |---|---|
-| llms.txt | 74af56fc12a0b07d91dd0df9589dcab79a836484d1a9943a6d821e9e229354ba |
-| snapshots/pingauthorize.md | c335fde2bec1c6fb913fdc7a3b3743cb85dd75d8d2d69409b0d839dea28b385e |
+| llms.txt | ea044393885b42cfd620ba3334a8df7c05c15c6517c3754b5b27ebfb757e4428 |
+| snapshots/pingauthorize.md | 708dd147bea2a130332a38432a3aec75bd1000336c886da4434d399b3f353020 |

@@ -1,6 +1,6 @@
 ---
 title: Videos
-description: You can also find all of these DevOps videos on the Ping Identity website.
+description: Browse Ping Identity DevOps videos covering Kubernetes setup, CICD pipelines, Docker image internals, and platform deployments
 component: devops
 page_id: devops::videos/videos
 canonical_url: https://developer.pingidentity.com/devops/videos/videos.html

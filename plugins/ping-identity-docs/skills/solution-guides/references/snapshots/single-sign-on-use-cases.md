@@ -1,9 +1,11 @@
 ---
 title: Changing certificates from SHA-1 to SHA-2 in PingFederate
-description: Use your Java Virtual Machine (JVM) to generate SHA-2 certificates and import them into PingFederate to replace default SHA-1 certificates for better security.
+description: Change certificates from SHA-1 to SHA-2 in PingFederate by generating SHA-2 certs with JVM and importing them to replace defaults.
 component: solution-guides
 page_id: solution-guides:single_sign-on_use_cases:htg_change_certs_from_sha_1_to_sha_2_pf
 canonical_url: https://docs.pingidentity.com/solution-guides/single_sign-on_use_cases/htg_change_certs_from_sha_1_to_sha_2_pf.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: February 16, 2022
 section_ids:
   before-you-begin: Before you begin
@@ -63,10 +65,12 @@ PingFederate generates SHA-1 certificates by default prior to version 8. Use the
 
 ---
 title: Configuring a PingFederate authentication policy using PingID MFA authentication for CyberArk PVWA
-description: For CyberArk and Ping Identity best practices, deploy MFA for all single sign-on (SSO) requests to the CyberArk Password Vault Web Access (PVWA).
+description: Configure a PingFederate authentication policy with PingID MFA for SSO access to the CyberArk PVWA.
 component: solution-guides
 page_id: solution-guides:single_sign-on_use_cases:htg_integrate_cyberark_sso_authn_pf_pid
 canonical_url: https://docs.pingidentity.com/solution-guides/single_sign-on_use_cases/htg_integrate_cyberark_sso_authn_pf_pid.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 29, 2024
 section_ids:
   about-this-task: About this task
@@ -175,10 +179,12 @@ Integrate a PingFederate authentication policy with PingID multi-factor authenti
 
 ---
 title: Configuring a PingFederate SAML connection for CyberArk PVWA
-description: Set up a SAML connection using PingFederate for CyberArk Password Vault Web Access (PVWA).
+description: Configure a PingFederate SAML SP connection for CyberArk Password Vault Web Access (PVWA) SSO.
 component: solution-guides
 page_id: solution-guides:single_sign-on_use_cases:htg_integrate_cyberark_sso_authn_pf_saml
 canonical_url: https://docs.pingidentity.com/solution-guides/single_sign-on_use_cases/htg_integrate_cyberark_sso_authn_pf_saml.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 29, 2024
 section_ids:
   steps: Steps
@@ -242,7 +248,7 @@ Set up a SAML connection using PingFederate for CyberArk Password Vault Web Acce
 
 11. On the **Identity Mapping** tab, select **Standard** as the type of name identifier to send to the service provider. Click **Next**.
 
-12. On the **Attribute Contract** tab, in the **SAML\_SUBJECT** row, in the **Subject Name Format** list, select an option. Click **Next**.
+12. On the **Attribute Contract** tab, in the **SAML_SUBJECT** row, in the **Subject Name Format** list, select an option. Click **Next**.
 
     |   |                                                   |
     | - | ------------------------------------------------- |
@@ -374,10 +380,12 @@ Set up a SAML connection using PingFederate for CyberArk Password Vault Web Acce
 
 ---
 title: Configuring a PingOne for Enterprise authentication policy for PingID MFA using CyberArk PVWA
-description: For CyberArk and Ping Identity best practices, deploy multi-factor authentication (MFA) for all single sign-on (SSO) requests to the CyberArk Password Vault Web Access (PVWA).
+description: Configure a PingOne for Enterprise authentication policy to invoke PingID MFA for SSO access to the CyberArk PVWA.
 component: solution-guides
 page_id: solution-guides:single_sign-on_use_cases:htg_integrate_cyberark_sso_authn_p14e_pid
 canonical_url: https://docs.pingidentity.com/solution-guides/single_sign-on_use_cases/htg_integrate_cyberark_sso_authn_p14e_pid.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 29, 2024
 section_ids:
   about-this-task: About this task
@@ -407,10 +415,12 @@ Configure the PingOne for Enterprise authentication policy to invoke PingID MFA.
 
 ---
 title: Configuring a PingOne for Enterprise SAML Connection for CyberArk PVWA
-description: Set up SAML using PingOne for Enterprise for CyberArk Password Vault Web Access (PVWA).
+description: Configure a PingOne for Enterprise SAML connection for CyberArk Password Vault Web Access (PVWA) SSO.
 component: solution-guides
 page_id: solution-guides:single_sign-on_use_cases:htg_integrate_cyberark_sso_authn_p14e_saml
 canonical_url: https://docs.pingidentity.com/solution-guides/single_sign-on_use_cases/htg_integrate_cyberark_sso_authn_p14e_saml.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: April 29, 2024
 section_ids:
   before-you-begin: Before you begin
@@ -477,10 +487,12 @@ You must have the following information from your CyberArk and PingID environmen
 
 ---
 title: Configuring a SAML Integration with PingFederate in NGFW
-description: Configure the SAML IdP server profile in NGFW.
+description: Configure the SAML IdP server profile and GlobalProtect gateway in Palo Alto Networks NGFW using PingFederate metadata.
 component: solution-guides
 page_id: solution-guides:single_sign-on_use_cases:htg_config_sso_globalprotect_vpn_pf_saml_ngfw
 canonical_url: https://docs.pingidentity.com/solution-guides/single_sign-on_use_cases/htg_config_sso_globalprotect_vpn_pf_saml_ngfw.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: May 1, 2024
 section_ids:
   steps: Steps
@@ -603,73 +615,13 @@ section_ids:
 ---
 
 ---
-title: Configuring a trusted certificate in PingDirectory
-description: Configure a trusted certificate using components of PingDirectory such as the config directory and the dsconfig utility.
-component: solution-guides
-page_id: solution-guides:single_sign-on_use_cases:htg_config_sailpoint_identityiq_pd_pf_ldaps_cert
-canonical_url: https://docs.pingidentity.com/solution-guides/single_sign-on_use_cases/htg_config_sailpoint_identityiq_pd_pf_ldaps_cert.html
-revdate: May 1, 2024
-section_ids:
-  about-this-task: About this task
-  steps: Steps
-  result: Result
----
-
-# Configuring a trusted certificate in PingDirectory
-
-Configure a trusted certificate using components of PingDirectory such as the `config` directory and the `dsconfig` utility.
-
-## About this task
-
-To configure a trusted certificate in PingDirectory, you must replace the default self-signed certificate in the keystore with the trusted certificate. You must ensure that the referenced certificate files are in PEM certificate format.
-
-## Steps
-
-1. On the PingDirectory server in the installed directory, execute the following command.
-
-   ```
-   bin/manage-certificates change-certificate-alias \
-   > --keystore config/keystore \
-   > --keystore-password-file config/keystore.pin \
-   > --current-alias server-cert \
-   > --new-alias server-cert-prev
-   # Initializing the server's encryption framework...
-   Successfully changed the alias from 'server-cert' to 'server-cert-prev'.
-   ```
-
-2. Import the new trusted certificate to the keystore with the server-cert alias.
-
-   ```
-   bin/manage-certificates import-certificate \
-   > --keystore config/keystore \
-   > --keystore-password-file config/keystore.pin \
-   > --alias server-cert \
-   > --private-key-file demo.ping-eng.key \
-   > --certificate-file demo.ping-eng.pem \
-   > --certificate-file intermediate.crt
-   # Initializing the server's encryption framework...
-
-   The following certificate chain will be imported into the keystore, along with
-   a private key, into alias 'server-cert':
-
-   < Certificate Displayed Here >
-
-   Do you want to import this certificate chain into the keystore? yes
-   Successfully imported the certificate chain and its associated private key.
-   ```
-
-## Result
-
-The trusted certificate is installed for use by the PingDirectory LDAPS Listener. IdentityIQ can now connect to PingDirectory over LDAPS.
-
----
-
----
 title: Configuring authentication request signing in PingOne for Enterprise
-description: For service provider (SP)-initiated single sign-on (SSO), your identity provider (IdP) or company policy might require signing the SAML authentication request.
+description: Configure SAML authentication request signing in PingOne for Enterprise for SP-initiated SSO to meet IdP or policy requirements.
 component: solution-guides
 page_id: solution-guides:single_sign-on_use_cases:htg_config_authn_req_sign_p14e
 canonical_url: https://docs.pingidentity.com/solution-guides/single_sign-on_use_cases/htg_config_authn_req_sign_p14e.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: February 16, 2022
 section_ids:
   before-you-begin: Before you begin
@@ -733,10 +685,12 @@ PingOne for Enterprise will sign authentication requests during the SP-initiated
 
 ---
 title: Configuring federation with SharePoint server
-description: Create a WS-Federation connection, export the signing certificate, add a trusted identity provider to the SharePoint server, and assign the identity provider to the web application.
+description: Configure a WS-Federation connection in PingFederate to integrate with SharePoint Server 2013 or 2016 for SSO.
 component: solution-guides
 page_id: solution-guides:single_sign-on_use_cases:htg_config_fed_sharepoint
 canonical_url: https://docs.pingidentity.com/solution-guides/single_sign-on_use_cases/htg_config_fed_sharepoint.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 18, 2022
 page_aliases: ["single_sign-on_use_cases:htg_config_fed_sharepoint_wsfed_pf.adoc", "single_sign-on_use_cases:htg_config_fed_sharepoint_signing_cert.adoc", "single_sign-on_use_cases:htg_config_fed_sharepoint_trusted_ip.adoc", "single_sign-on_use_cases:htg_config_fed_sharepoint_trusted_ip_assign_web_app.adoc", "single_sign-on_use_cases:htg_config_fed_sharepoint_more_config.adoc"]
 section_ids:
@@ -1056,64 +1010,13 @@ Use the same service endpoint connection to service all of the web applications 
 ---
 
 ---
-title: Configuring IdentityIQ for SAML-based SSO
-description: Use IdentityIQ's settings to configure SAML-based single sign-on (SSO).
-component: solution-guides
-page_id: solution-guides:single_sign-on_use_cases:htg_config_sailpoint_identityiq_pd_pf_saml_identityiq
-canonical_url: https://docs.pingidentity.com/solution-guides/single_sign-on_use_cases/htg_config_sailpoint_identityiq_pd_pf_saml_identityiq.html
-revdate: May 1, 2024
-section_ids:
-  steps: Steps
----
-
-# Configuring IdentityIQ for SAML-based SSO
-
-Use IdentityIQ's settings to configure SAML-based single sign-on (SSO).
-
-## Steps
-
-1. From the IdentityIQ Administration console settings menu, select **Global Settings**.
-
-![Screenshot of IdentityIQ window showing the location of Global Settings in the menu beneath the wrench icon.](_images/lus1584135700663.png)
-
-1. From the **Global Settings** menu, select **Login Configuration**.
-
-2. Click the **SSO Configuration** tab and select the **Enable SAML-based single sign-on (SSO)** checkbox.
-
-3. Enter the SAML-based SSO settings.
-
-+\[caption=] .Identity Provider Settings
-
-| Field                    | Description                                                                                      |
-| ------------------------ | ------------------------------------------------------------------------------------------------ |
-| EntityID / Issuer        | The PingFederate SAML 2.0 Entity ID or Virtual Server ID.                                        |
-| SSO Login URL            | The PingFederate IdP SSO endpoint. The default value is https\://*\<domain>*:9031/idp/SSO.saml2. |
-| Public X.509 Certificate | The public certificate used in the PingFederate IdentityIQ SP connection                         |
-
-+\[caption=] .SP Provider (IdentityIQ) Settings
-
-| Field                 | Description                                                               |
-| --------------------- | ------------------------------------------------------------------------- |
-| EntityID / Issuer     | The Partner's IdentityIQ/Connection ID setup in the PingFederate SP.      |
-| SAML URL (ACS)        | The IdentityIQ application URL, /identityiq/home.jsf.                     |
-| SAML Binding          | The HTTP method configured in the PingFederate SP connection.             |
-| SAML Name ID Format   | The SAML Name ID Format configured in the PingFederate SP connection.     |
-| SAML Correlation Rule | The correlation rule in IdentityIQ. The default value is IdentityNowSAML. |
-
-1. Click **Save**.
-
-   |   |                                                                                                                                                                                                                                                |
-   | - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-   |   | After configuration, the default IdentityIQ login page redirects to the PingFederate identity provider (IdP). If you are required to authenticate to IdentityIQ, use the following URL: https\://*\<domain>*/identityiq/login.jsf?prompt=true. |
-
----
-
----
 title: Configuring PingOne for Enterprise SSO with PingFederate Bridge as the identity repository
-description: To enable PingOne for Enterprise single sign-on (SSO) using PingFederate Bridge as a new identity repository, use the PingFederate administrative console and the PingOne for Enterprise admin portal. To integrate PingOne for Enterprise SSO with an existing PingFederate configuration, see Connecting to PingOne for Enterprise after initial setup.
+description: Configure PingOne for Enterprise SSO using PingFederate Bridge as a new identity repository via the PingFederate console and PingOne for Enterprise admin portal.
 component: solution-guides
 page_id: solution-guides:single_sign-on_use_cases:htg_config_p14e_pfb_identity_repository
 canonical_url: https://docs.pingidentity.com/solution-guides/single_sign-on_use_cases/htg_config_p14e_pfb_identity_repository.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: May 1, 2024
 page_aliases: ["single_sign-on_use_cases:htg_config_p14e_pfb_identity_repository_p14e_portal.adoc", "single_sign-on_use_cases:htg_config_p14e_pfb_identity_repository_p14e_bridge.adoc", "single_sign-on_use_cases:htg_config_p14e_pfb_identity_repository_sso_bridge.adoc"]
 section_ids:
@@ -1311,57 +1214,13 @@ PingOne for Enterprise SSO, using PingFederate Bridge as the identity repository
 ---
 
 ---
-title: Configuring SailPoint IdentityIQ with PingDirectory and PingFederate
-description: This document describes how to integrate PingDirectory and PingFederate with SailPoint IdentityIQ.
-component: solution-guides
-page_id: solution-guides:single_sign-on_use_cases:htg_config_sailpoint_identityiq_pd_pf
-canonical_url: https://docs.pingidentity.com/solution-guides/single_sign-on_use_cases/htg_config_sailpoint_identityiq_pd_pf.html
-revdate: July 18, 2022
-page_aliases: ["single_sign-on_use_cases:htg_config_sailpoint_identityiq_pd_pf_ldaps.adoc", "single_sign-on_use_cases:htg_config_sailpoint_identityiq_pd_pf_saml.adoc"]
-section_ids:
-  components: Components
-  implementing-saml-based-sso-with-pingfederate-and-identityiq: Implementing SAML-based SSO with PingFederate and IdentityIQ
-  implementing-an-ldaps-connection-with-pingdirectory-and-identityiq: Implementing an LDAPS connection with PingDirectory and IdentityIQ
----
-
-# Configuring SailPoint IdentityIQ with PingDirectory and PingFederate
-
-This document describes how to integrate PingDirectory and PingFederate with SailPoint IdentityIQ.
-
-## Components
-
-* PingDirectory 7.3
-
-* PingFederate 9.2
-
-## Implementing SAML-based SSO with PingFederate and IdentityIQ
-
-Configure PingFederate and IdentityIQ to implement SAML-based single sign-on (SSO).
-
-The IdentityIQ integration to PingFederate acting as the identity provider (IdP) for SSO authentication is a straightforward standards integration with the following caveats:
-
-* The IdentityIQ application requires that the assertion portion inside the SAML response message is always signed.
-
-* This system is tested with PingFederate 9.2 and higher and with IdentityIQ 7.3.
-
-## Implementing an LDAPS connection with PingDirectory and IdentityIQ
-
-Configure PingDirectory and IdentityIQ to implement an LDAP over SSL (LDAPS) connection from IdentityIQ to PingDirectory.
-
-The IdentityIQ LDAPS integration to PingDirectory is a straightforward integration with the following caveats:
-
-* PingDirectory must use a trusted certificate.
-
-* IdentityIQ only supports the simple authentication bind mechanism.
-
----
-
----
 title: Configuring SP-initiated SSO in PingOne for Enterprise
-description: Configure the URL assigned to your application in PingOne for Enterprise to enable service provider (SP)-initiated SSO.
+description: Configure the SP-initiated SSO URL in PingOne for Enterprise for applications that only support SP-initiated single sign-on.
 component: solution-guides
 page_id: solution-guides:single_sign-on_use_cases:htg_config_sp_init_sso_p14e
 canonical_url: https://docs.pingidentity.com/solution-guides/single_sign-on_use_cases/htg_config_sp_init_sso_p14e.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: February 16, 2022
 section_ids:
   before-you-begin: Before you begin
@@ -1397,10 +1256,12 @@ When you enable connection to an SP in PingOne for Enterprise, an initial SSO UR
 
 ---
 title: Configuring SSO and SCIM for Uber for Business
-description: To set up single sign-on (SSO) for administrators and coordinators in your organization, create an SP connection in PingFederate and then work with your sales manager or business API support agent to enable SSO.
+description: Configure SSO and SCIM for Uber for Business by creating an SP connection and enabling SCIM provisioning in PingFederate.
 component: solution-guides
 page_id: solution-guides:single_sign-on_use_cases:htg_uber_sso_scim_overview
 canonical_url: https://docs.pingidentity.com/solution-guides/single_sign-on_use_cases/htg_uber_sso_scim_overview.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: December 14, 2023
 page_aliases: ["single_sign-on_use_cases:htg_uber_config_sso.adoc", "single_sign-on_use_cases:htg_uber_config_scim.adoc"]
 section_ids:
@@ -1472,7 +1333,7 @@ Start by creating an SP connection in PingFederate.
 
       1. On the **Identity Mapping** tab, ensure that **Standard** is selected. Click **Next**.
 
-      2. On the **Attribute Contract** tab, set **SAML\_SUBJECT** to `urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress`. Click **Next**.
+      2. On the **Attribute Contract** tab, set **SAML_SUBJECT** to `urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress`. Click **Next**.
 
    4. On the **Authentication Source Mapping** tab, select **Map New Adapter Instance**.
 
@@ -1588,10 +1449,12 @@ Next, configure PingFederate for SCIM using the SP connection that you created:
 
 ---
 title: Configuring SSO for GlobalProtect VPN with PingFederate
-description: Next-Generation Firewall (NGFW) supports the ability to enable single sign-on (SSO) through the admin UI.
+description: Configure SSO for Palo Alto Networks GlobalProtect VPN using SAML and PingFederate as the identity provider.
 component: solution-guides
 page_id: solution-guides:single_sign-on_use_cases:htg_config_sso_globalprotect_vpn_pf
 canonical_url: https://docs.pingidentity.com/solution-guides/single_sign-on_use_cases/htg_config_sso_globalprotect_vpn_pf.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: November 10, 2022
 section_ids:
   before-you-begin: Before you begin
@@ -1883,10 +1746,12 @@ To complete the integration, import the metadata file from NGFW and finish the s
 
 ---
 title: Configuring SSO for GlobalProtect VPN with PingOne for Enterprise
-description: Next-Generation Firewall (NGFW) supports the ability to enable Single Sign-On (SSO) through the PingOne for Enterprise admin UI.
+description: Configure SSO for Palo Alto Networks GlobalProtect VPN using SAML and PingOne for Enterprise as the identity provider.
 component: solution-guides
 page_id: solution-guides:single_sign-on_use_cases:htg_config_sso_globalprotect_vpn_p14e
 canonical_url: https://docs.pingidentity.com/solution-guides/single_sign-on_use_cases/htg_config_sso_globalprotect_vpn_p14e.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: February 16, 2022
 section_ids:
   before-you-begin: Before you begin
@@ -2076,141 +1941,13 @@ You can combine GlobalProtect VPN with PingOne for Enterprise for SSO as shown i
 ---
 
 ---
-title: Configuring the IdentityNow application for PingDirectory
-description: Use the IdentityNow configuration functionality to establish a successful connection to PingDirectory.
-component: solution-guides
-page_id: solution-guides:single_sign-on_use_cases:htg_config_sailpoint_identityiq_pd_pf_ldaps_identitynow
-canonical_url: https://docs.pingidentity.com/solution-guides/single_sign-on_use_cases/htg_config_sailpoint_identityiq_pd_pf_ldaps_identitynow.html
-revdate: July 10, 2025
-section_ids:
-  steps: Steps
-  example: Example:
----
-
-# Configuring the IdentityNow application for PingDirectory
-
-Use the IdentityNow configuration functionality to establish a successful connection to PingDirectory.
-
-## Steps
-
-1. Sign in to the IdentityNow Administrator interface.
-
-2. Under the **Admin** tab, go to **Connections → Sources**.
-
-3. Click the **+New** button.
-
-4. In the window that appears, choose **SunOne** from the **Source Type** dropdown list, fill in the remaining fields with your information, and select **Direct Connection** for **Connection Type**. Click **Continue**. ![The Create New Source pop-up window with example values in its fields](_images/eej1590164597957.png)
-
-5. Select a Virtual Appliance Cluster from those already configured for your organization. See the [SailPoint Virtual Appliance Reference Guide](https://community.sailpoint.com/t5/Connectors/Virtual-Appliance-Reference-Guide/ta-p/74641) for more details.
-
-6. Enter the following connection details.
-
-   1. In the **Connection Credentials** section, enter the PingDirectory administrator account information into the **Service Account** and **Password** fields.
-
-   2. In the **Server Host** section, enter the hostname of the PingDirectory server in the **Hostname or IP Address** field.
-
-   3. In the **Server Host** section, enter the PingDirectory configured LDAPS port 636 or 1636 in the **Port** field.
-
-![The Config tab with sections and fields mentioned in step 6](_images/krh1590171864118.png)
-
-1. Ensure the Account, Group and Group Member Search DNs are valid for the configured PingDirectory topology.
-
-   ### Example:
-
-   In the demo environment the following values were used.
-
-   * Account Search DN: `ou=people,dc=example,dc=com`
-
-   * Group Search DN: `ou=Groups,dc=example,dc=com`
-
-   * Group Membership DN: `ou=Groups,dc=example,dc=com`
-
-2. Under the **Connections** tab, enable the **Advanced Options** and select **Enable** in the **Use TLS** section and **Simple** in the **Authorization Type** section. ![The Connections tab with fields marked in accordance with step 8](_images/bnk1590174208878.png)
-
-3. Before making changes to the source configurations via RESTful requests, you must generate an access token. See [IdentityNow REST APIs](https://community.sailpoint.com/t5/IdentityNow-Wiki/IdentityNow-REST-APIs/ta-p/80132) for details on this process.
-
-4. Retrieve the internal **Source ID** of the PingDirectory source defined previously.
-
-   Do this by retrieving the full list of defined sources in IdentityNow, and then searching for the correct one. The first API call is
-
-   ```
-   GET https://<api-url>/cc/api/source/list
-   ```
-
-   where `<api-url>` is `https://<org_name>.api.identitynow.com`.
-
-   This returns a JSON array, each element of which is a source from IdentityNow. Search this array for the **Source Name** that you chose. It should look similar to the following example.
-
-   ```json
-   {
-           "id": "50959",
-           "version": 5,
-           "name": "PingDirectory",
-           "description": "PingDirectory source",
-           "owner": {
-               "id": "1037426",
-               "name": "Adam Creaney"
-           },
-           "lastUpdated": "2020-04-21T20:45:58Z",
-   ….
-   Rest of response deleted
-   ….
-   ```
-
-   |   |                                                                                                   |
-   | - | ------------------------------------------------------------------------------------------------- |
-   |   | The "id" entry is the value to save from this call. In the above example the "id" value is 50959. |
-
-5. Make the following API call (using a RESTful client application is recommended to accomplish this) to retrieve an `.xml` output of the configuration for the newly created source.
-
-   ```
-   GET https://<api-url>/cc/api/source/export/<sourceID>
-   ```
-
-   where `<sourceID>` is the "id" value from step 10.
-
-   1. Copy this output and paste into a text editor.
-
-   2. Find the section below for the Group schema as shown in the following screenshot. ![Screenshot of the Group schema with relevant changes highlighted](_images/anx1590177904376.png)
-
-   3. Modify the `nativeObjectType` to `"groupOfNames"`, as shown in the above image.
-
-   4. Find the attribute definition for the "member" attribute and add `multi="true"` to this section, as shown in the above image.
-
-   5. Change the 'groupMemberAttribute' entry by adding `value="member"`, as shown in the above image.
-
-   6. Save the file as `ping_directory.xml` (the name doesn't matter). Do not modify any other elements of the `.xml`.
-
-6. Import the changes back into IdentityNow using a tool such as Postman.
-
-   Use the following Postman command to import the changes.
-
-   ```
-   POST https://<api-url>/cc/api/source/import/<sourceID>
-   ```
-
-   where `<sourceID>` is the "id" value from step 10.
-
-   * The content-type of this request is multipart/form-data. boundary=\<calculated when request is sent>
-
-   * The body of this request should be of type form-data.
-
-   * The only entry key should be "file". For value, select the `.xml` file from earlier.
-
-![POST window showing the .xml file from earlier](_images/ovc1590182441281.png)
-
-1. Send the request. IdentityNow should return a success message.
-
-2. Click the **Test Connection** button to ensure the connection is successful.
-
----
-
----
 title: Configuring time synchronization between PingFederate and other servers
-description: Some operations require time synchronization between guest servers and PingFederate. This task describes how to resolve time synchronization errors for various server platforms.
+description: Configure time synchronization between PingFederate and VMware, Windows, or Unix servers to resolve token errors.
 component: solution-guides
 page_id: solution-guides:single_sign-on_use_cases:htg_config_time_sync_pf_others
 canonical_url: https://docs.pingidentity.com/solution-guides/single_sign-on_use_cases/htg_config_time_sync_pf_others.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: February 16, 2022
 page_aliases: ["single_sign-on_use_cases:htg_config_time_sync_pf_vmware.adoc", "single_sign-on_use_cases:htg_config_time_sync_pf_windows.adoc", "single_sign-on_use_cases:htg_config_time_sync_pf_unix.adoc"]
 section_ids:
@@ -2334,10 +2071,12 @@ Synchronize the time on most Linux/Unix servers using a simple `ntpdate` or `rda
 
 ---
 title: Configuring Workday SSO with PingOne for Enterprise or PingFederate
-description: You must have:
+description: Configure Workday SSO using PingOne for Enterprise for cloud integration or PingFederate for on-premise deployment.
 component: solution-guides
 page_id: solution-guides:single_sign-on_use_cases:htg_config_workday_sso_p14e_pf
 canonical_url: https://docs.pingidentity.com/solution-guides/single_sign-on_use_cases/htg_config_workday_sso_p14e_pf.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: December 4, 2023
 section_ids:
   before-you-begin: Before you begin
@@ -2481,7 +2220,7 @@ Follow these steps to configure Workday as a service provider (SP) through PingO
 
    6. Map attributes as needed:
 
-      * If the subject will contain the username that corresponds to the account within Workday, select **SAML\_SUBJECT**.
+      * If the subject will contain the username that corresponds to the account within Workday, select **SAML_SUBJECT**.
 
       * If the subject is the email address, click **Advanced** and select the function **GetLocalPartFromEmail**.
 
@@ -2604,10 +2343,12 @@ Follow these steps to configure Workday as a service provider (SP) through PingO
 
 ---
 title: Connecting Okta as an IdP through SAML to PingFederate as an SP
-description: This solution provides the steps to configure Okta as an identity provider (IdP) and PingFederate as a service provider (SP) using a SAML 2.0 connection for communications. This process doesn't address single logout (SLO) or provisioning for either side of the single sign-on (SSO) transaction.
+description: Connect Okta as a SAML 2.0 IdP to PingFederate as an SP for SSO, without single logout or provisioning.
 component: solution-guides
 page_id: solution-guides:single_sign-on_use_cases:htg_connect_okta_idp_saml_pf_sp
 canonical_url: https://docs.pingidentity.com/solution-guides/single_sign-on_use_cases/htg_connect_okta_idp_saml_pf_sp.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 18, 2022
 page_aliases: ["single_sign-on_use_cases:htg_connect_okta_idp_saml_pf_sp_okta_idp.adoc", "single_sign-on_use_cases:htg_connect_okta_idp_saml_pf_sp_config_pf.adoc", "single_sign-on_use_cases:htg_connect_okta_idp_saml_pf_sp_troubleshooting.adoc"]
 section_ids:
@@ -2860,3 +2601,477 @@ entityid='http://www.okta.com/<string>
 ```
 
 Check your metadata or check with the Okta account owner to verify the entityID.
+
+---
+
+---
+title: Enabling SCIM provisioning with AWS IAM Identity Center and PingFederate
+description: Enable SCIM automatic provisioning with AWS IAM Identity Center and PingFederate using Active Directory as the datastore.
+component: solution-guides
+page_id: solution-guides:single_sign-on_use_cases:scim_provisioning_aws_sso_pf
+canonical_url: https://docs.pingidentity.com/solution-guides/single_sign-on_use_cases/scim_provisioning_aws_sso_pf.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: March 15, 2023
+section_ids:
+  before-you-begin: Before you begin
+  steps: Steps
+  result: Result:
+  result-2: Result:
+  troubleshooting: Troubleshooting
+  next-steps: Next steps
+---
+
+# Enabling SCIM provisioning with AWS IAM Identity Center and PingFederate
+
+Learn how to enable automatic provisioning in Amazon Web Services (AWS) IAM Identity Center while integrating with PingFederate using Active Directory (AD) as an external datastore.
+
+## Before you begin
+
+Make sure you have:
+
+* Administrative access to PingFederate
+
+* PingFederate 10.3 or later installed.
+
+## Steps
+
+1. Connect to your AD in PingFederate:
+
+   1. In PingFederate, go to **System → Data Stores**.
+
+   2. Click **Add New Data Store**.
+
+   3. Name your connection and in the **Type** list, select **Directory (LDAP)**. Click **Next**.
+
+   4. On the **LDAP Configuration** tab, for **Hostname(s)**, enter the IP address or hostname of the AD hosting server.
+
+   5. For the **User DN** and **Password** fields, enter the admin credentials for who can access the AD.
+
+      After you complete the required fields, the **Test Connection** button becomes available.
+
+   6. Click **Test Connection**. Click **Save**.
+
+2. Create a password credential validator (PCV):
+
+   1. In PingFederate, go to **System → Password Credential Validators**.
+
+   2. Click **Create New Instance**.
+
+   3. Enter an **Instance Name** and **Instance ID**.
+
+   4. In the **Type** list, select **LDAP Username Password Credential Validator**. Click **Next**.
+
+   5. On the **Instance Configuration** tab, in the **Field Value** list for **LDAP Datastore**, select the datastore you created in step 1.
+
+   6. Enter a **Search Base**, such as `dc=mylab,dc=local`.
+
+   7. For **Search Filter**, enter `mail=${username}`.
+
+      |   |                                                                                                                                                                                                                                                                  |
+      | - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+      |   | * In AWS, the **userName** field must be mapped to an **Attribute** that is formatted as an email.
+
+      * The **userName** must match the value that the user uses to sign onto PingFederate.
+
+      * When using AD, specify the `UserPrincipalName` as the **userName**. |
+
+   8. Click **Next** twice. On the **Summary** tab, click **Save**.
+
+3. Create an HTML Form IdP adapter with AD PCV:
+
+   1. In PingFederate, go to **Authentication → IdP Adapters**.
+
+   2. Click **Create New Instance**.
+
+   3. Enter an **Instance Name** and an **Instance ID**.
+
+   4. In the **Type** list, select **HTML Form IdP Adapter**. Click **Next**.
+
+   5. On the **IdP Adapter** tab, in the **Password Credential Validator Instance** section, click **Add a new row to 'Credential Validators'**.
+
+   6. In the list that becomes available, select the PCV you created in step 2.
+
+   7. In the **Action** column, click **Update**. Click **Next**.
+
+   8. On the **Extended Contract** tab, click **Next**.
+
+   9. On the **Adapter Attributes** tab, in the **username** row, select **Pseudonym**.
+
+   10. On the **Adapter Contract Mapping** tab, click **Next**.
+
+   11. On the **Summary** tab, click **Save**.
+
+4. Set up the AWS IAM Identity Center Provisioner:
+
+   1. In PingFederate, in the **Helpful Links** section, click **Resource Downloads**.
+
+      ### Result:
+
+      You're redirected to the **PingFederate Downloads and Add-ons** page.
+
+   2. Click **Add-ons** and in the **SaaS Connectors** section, download the **AWS IAM Identity Center Provisioner 1.0**.
+
+   3. Stop PingFederate.
+
+   4. Extract the AWS IAM Identity Center Provisioner `.zip` archive and copy the contents of the `dist` file to `<pf_install>/pingfederate/server/default/deploy`.
+
+   5. Enable **STANDALONE** for `pf.provisioner.mode` in `run.properties`.
+
+   6. Start PingFederate again.
+
+5. [Export SAML metadata from PingFederate](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/pf_exporting_selected_saml_metadata.html).
+
+   |   |                                                                                                                |
+   | - | -------------------------------------------------------------------------------------------------------------- |
+   |   | You'll import this metadata during the AWS IAM Identity Center external identity provider (IdP) configuration. |
+
+6. Enable provisioning in AWS:
+
+   1. In the AWS IAM Identity Center console, in the **Identity Source** section, select **External Identity Provider**.
+
+   2. Import the PingFederate metadata you downloaded in step 5.
+
+   3. Enter your **IdP URL**, **Entity ID**, and the certificate you downloaded from PingFederate.
+
+      |   |                                                                |
+      | - | -------------------------------------------------------------- |
+      |   | The **Entity ID** is the **SAML Entity ID** from PingFederate. |
+
+   4. Download the AWS SAML metadata. Click **Save**.
+
+   5. From the left navigation pane, go to **Settings**.
+
+   6. In the **Identity source** section, next to **Provisioning**, select **Enable automatic provisioning**.
+
+      This immediately enables automatic provisioning in AWS IAM Identity Center and displays the necessary endpoint and access token information.
+
+   7. In the **Inbound automatic provisioning** dialog box, copy each of the values for **SCIM endpoint** and **Access token**.
+
+      |   |                                                                                |
+      | - | ------------------------------------------------------------------------------ |
+      |   | You'll paste these values later when configuring provisioning in PingFederate. |
+
+7. Create a service provider (SP) connection in PingFederate:
+
+   1. In PingFederate, go to **SP Connections**.
+
+   2. Click **Create Connection**.
+
+   3. On the **Connection Template** tab, select **Use a Template for this Connection**.
+
+   4. In the **Connection Template** list, select the **AWS SSO Cloud Connector**.
+
+   5. Import the metadata file you downloaded from AWS IAM Identity Center in step 6. Click **Next**.
+
+   6. On the **Connection Type** tab, select **Outbound Provisioning**. Click **Next**.
+
+   7. On the **General Info** tab, make sure the autopopulated information is correct. Click **Next**.
+
+   8. On the **Outbound Provisioning** tab, click **Configure Provisioning**.
+
+   9. Enter the System for Cross-domain Identity Management (SCIM) endpoint and access token values you copied from AWS IAM Identity Center. Click **Next**.
+
+   10. On the **Manage Channels** tab, click **Create**.
+
+   11. On the **Channel Info** tab, enter a name for your channel. Click **Next**.
+
+   12. On the **Source** tab, in the **Active Data Store** list, select your AD. Click **Next**.
+
+   13. On the **Source Settings** tab, leave the default settings. Click **Next**.
+
+   14. On the **Source Location** tab, enter your **Base DN**.
+
+   15. Enter your **Group DN** for **Users** and **Groups** based on the location in your AD. Click **Next**.
+
+   16. On the **Attribute Mapping** tab, for **userName**, select **mail**. Click **Next** and **Save**.
+
+       ### Result:
+
+       Users and groups are populated in AWS IAM Identity Center.
+
+## Troubleshooting
+
+If your sync isn't working, enable the **DEBUG** mode in log4j and open the `Provisioner.log`.
+
+## Next steps
+
+1. In the AWS IAM Identity Center user portal, open **Settings**.
+
+2. Sign on with your username and password, using your email in the username field.
+
+---
+
+---
+title: Enabling SSO
+description: Enable SSO for Uber for Business by providing PingFederate IdP sign-on URL and public key to your Uber sales manager.
+component: solution-guides
+page_id: solution-guides:single_sign-on_use_cases:htg_uber_enable_sso
+canonical_url: https://docs.pingidentity.com/solution-guides/single_sign-on_use_cases/htg_uber_enable_sso.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: December 14, 2023
+---
+
+# Enabling SSO
+
+Next, work with your sales manager or business API support agent to enable SSO. See .uber.com/docs/sso/introduction//coordinator-sso\[Steps to enable Admin/Coordinator SSO] in the Uber Developers Guide for details.
+
+You must provide them with the following information, which you can obtain from your IT administrator:
+
+* The organization's name or UUID.
+
+* The email domain (`@mycompany.com`)
+
+* PingFederate's IdP sign-on URL (https\://*\<public-ping-federate-server>*:9031/idp/SSO.saml2)
+
+* The IdP public key. To obtain it, in PingFederate, go to **Applications → SP Connections → Your Uber connection → Credentials → Certificate Management → Select Action → Export**.
+
+---
+
+---
+title: Exporting the SAML Metadata from PingFederate
+description: Export SAML metadata from PingFederate as an IdP for use in Palo Alto Networks GlobalProtect VPN integration.
+component: solution-guides
+page_id: solution-guides:single_sign-on_use_cases:htg_config_sso_globalprotect_vpn_pf_export_saml_metadata
+canonical_url: https://docs.pingidentity.com/solution-guides/single_sign-on_use_cases/htg_config_sso_globalprotect_vpn_pf_export_saml_metadata.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: May 1, 2024
+section_ids:
+  steps: Steps
+---
+
+# Exporting the SAML Metadata from PingFederate
+
+## Steps
+
+1. Sign on to the PingFederate administrative console and go to **System → Protocol Metadata → Metadata Export**.
+
+2. On the **Metadata Role** tab, select **I am the Identity Provider (IdP)**, and then click **Next**.
+
+   ![A screen capture of the Metadata Role tab in the administrative console.](../_images/zbi1593474042547.png)
+
+3. On the **Metadata Mode** tab, select **Select Information to Include in Metadata Manually**, and then click **Next**.
+
+   ![A screen capture of the Metadata Mode tab in the administrative console.](../_images/pvo1593474233350.png)
+
+4. On the **Protocol** tab, click **Next** until you reach the **Signing Key** tab, accepting the default values.
+
+5. On the **Signing Key** tab, select an available signing key from the **Digital Signature Keys/Certs** list, and then click **Next**. If none are available, click **Manage Certificates** to create a signing key, and then follow the on-screen instructions.
+
+   |   |                                                                                         |
+   | - | --------------------------------------------------------------------------------------- |
+   |   | Although you can use a self-signed certificate, a CA-signed certificate is recommended. |
+
+   ![A screen capture of Signing Key tab in the administrative console.](../_images/sga1593474593063.png)
+
+6. Click **Next** until you reach the **Export & Summary** tab, accepting the default values on the **Metadata Signing** and **XML Encryption Certificate** tabs.
+
+7. On the **Export & Summary** tab, click **Export** and save the `metadata.xml` file. You will upload this file to Palo Alto Networks NGFW in the next step.
+
+   ![A screen capture of the Export & Summary tab in the administrative console.](../_images/lfe1593474764679.png)
+
+---
+
+---
+title: Extending a PingFederate authentication session for corporate identifiers
+description: Extend PingFederate authentication session lifetime for corporate users using identifier-first adapter and OGNL expression issuance criteria.
+component: solution-guides
+page_id: solution-guides:single_sign-on_use_cases:pf_extend_corp_session
+canonical_url: https://docs.pingidentity.com/solution-guides/single_sign-on_use_cases/pf_extend_corp_session.html
+llms_txt: https://docs.pingidentity.com/solution-guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: July 25, 2025
+page_aliases: ["single_sign-on_use_cases:pf_id_first_config.adoc", "single_sign-on_use_cases:pf_session_selector_config.adoc", "single_sign-on_use_cases:pf_add_auth_policy.adoc", "single_sign-on_use_cases:pf_set_corp_ognl_expression.adoc"]
+section_ids:
+  component: Component
+  configuring-the-identifier-first-adapter: Configuring the Identifier First Adapter
+  about-this-task: About this task
+  steps: Steps
+  configuring-the-session-authentication-selector: Configuring the Session Authentication Selector
+  about-this-task-2: About this task
+  steps-2: Steps
+  adding-an-authentication-policy: Adding an authentication policy
+  about-this-task-3: About this task
+  steps-3: Steps
+  setting-an-ognl-expression: Setting an OGNL expression
+  about-this-task-4: About this task
+  steps-4: Steps
+---
+
+# Extending a PingFederate authentication session for corporate identifiers
+
+Starting with PingFederate 9.3, you can enable longer validity periods for employee authentication sessions than those for non-corporate users.
+
+The solution works by having a dedicated login adapter, such as the [HTML Form Adapter](https://cdn-docs.pingidentity.com/archive/pdf/pingfederate/pingfederate-93.pdf#page=717), for each user population with their own session timeouts and configuring an [Identifier First Adapter](https://cdn-docs.pingidentity.com/archive/pdf/pingfederate/pingfederate-93.pdf#page=710) to determine which adapter each user group should be routed to. Setting an OGNL expression in the issuance criteria of the corporate adapter ensures that a non-corporate user cannot authenticate with the corporate adapter.
+
+|   |                                                                                                                                                                                                                                                                                                                                                           |
+| - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | For this task, you must have created the login adapters for each user population and customized their session timeouts. To unify the user experience, you can create the non-corporate adapter as a child of the corporate parent adapter. The child adapter will inherit all of the parent's settings, including any custom templates used for branding. |
+
+## Component
+
+PingFederate 9.3 and later.
+
+## Configuring the Identifier First Adapter
+
+### About this task
+
+The Identifier First Adapter prompts the user to identify themselves with their email address. Upon submission of the address, the adapter parses out the email domain and subject. You can use the domain information retrieved by the adapter to create policy rule branches. For more information, see [Configuring an Identifier First Adapter instance](https://cdn-docs.pingidentity.com/archive/pdf/pingfederate/pingfederate-93.pdf#page=710).
+
+### Steps
+
+1. In the PingFederate administrative console, go to **Authentication → Integration → IdP Adapters**.
+
+2. Click **Create New Instance**.
+
+3. On the **Type** tab, configure the basics of the adapter instance:
+
+   1. Enter the **Instance Name** and **ID**.
+
+   2. In the **Type** list, select **Identifier First Adapter**.
+
+   3. Click **Next**.
+
+4. On the **IdP Adapter** tab, accept the default configuration and click **Next**.
+
+5. On the **Extended Contract** tab, accept the default configuration and click **Next**.
+
+6. On the **Adapter Attributes** tab, select the **Pseudonym** checkbox for the domain attribute. Click **Next**.
+
+   ![Screen capture of the Create adapter instance page with the pseudonym checkbox selected for the domain attribute on the Adapter attributes tab](_images/hsm1669843011564.png)
+
+7. On the **Adapter Contract Mapping** tab, click **Next**.
+
+   The adapter will fulfill the adapter contract by default.
+
+8. On the **Summary** tab, verify your adapter's configuration.
+
+   ![Screen capture of an example summary of a newly created Identifier First Adapter instance](_images/rmt1669060828765.png)
+
+9. Click **Done**.
+
+10. On the **Manage IdP Adapter Instances** page, click **Save**.
+
+## Configuring the Session Authentication Selector
+
+### About this task
+
+In this example, you are configuring a Session Authentication Selector with the corporate and non-corporate adapters added as authentication sources. The selector will check for an existing authentication session with either adapter. If a session exists, the user bypasses the Identifier First Adapter and is not asked to submit their email address. For more information, see [Configuring the Session Authentication Selector](https://cdn-docs.pingidentity.com/archive/pdf/pingfederate/pingfederate-93.pdf#page=336).
+
+### Steps
+
+1. In the PingFederate administrative console, go to **Authentication → Policies → Selectors**.
+
+2. Click **Create New Instance**.
+
+3. On the **Type** tab, configure the basics of the selector instance:
+
+   1. Enter the **Instance Name** and **ID**.
+
+   2. In the **Type** list, select **Session Authentication Selector**.
+
+4. On the **Authentication Selector** tab, add the corporate and non-corporate adapters as authentication sources, and then select the **Enable 'No Session' Result Value** checkbox.
+
+   ![Screen capture of the Create authentication selector instance page with the corporate and non-corporate adapters added as authentication sources and the Enable 'no session' result value selected on the Authentication selector tab](_images/tzb1669842144305.png)
+
+5. Click **Next** and verify your configuration on the **Summary** tab.
+
+   ![Screen capture of an example summary of a Session authentication selector instance](_images/oqj1669060951831.png)
+
+6. Click **Done**.
+
+7. On the **Manage Authentication Selector Instances** page, click **Save**.
+
+## Adding an authentication policy
+
+### About this task
+
+The authentication policy checks if the user has an existing authentication session. If they do, the user is sent to the corresponding adapter, allowing them to bypass the Identifier First Adapter. If they do not, they are prompted by the Identifier First Adapter to submit their email address to determine if they should be routed to the corporate or non-corporate adapter. For more information, see [Authentication Policies](https://cdn-docs.pingidentity.com/archive/pdf/pingfederate/pingfederate-93.pdf#page=324).
+
+### Steps
+
+1. In the PingFederate administrative console, go to **Policies → Policies** and click **Add Policy**.
+
+2. Enter a name for your policy, and in the **Policy** list, select your newly created Session Authentication Selector.
+
+   The policy branches are created based on the result values set for each authentication source in the selector.
+
+3. Select the appropriate adapter in the list of each branch:
+
+   1. Under the **Fail** list, click **Done**.
+
+   2. In the **Success** list, select your policy contract mapping setting.
+
+      ![Screen capture of the policy creation page with the Session Authentication Selector selected in the Policy list, the corporate session adapter selected in the corporate policy branch, the Done button under the Fail list highlighted, and the policy contract selected in the Success list](_images/eux1669916146439.png)
+
+4. In the **No Session** list, select your newly created Identifier First adapter.
+
+5. Under the **No Session** list, click **Rules**.
+
+   ![Screen capture of the policy creation page with the Identifier First Adapter selected in the No Session list, and the Rules button highlighted](_images/tqw1669915879511.png)
+
+   1. In the **Attribute Name** list, select **domain**.
+
+   2. In the **Condition** list, select **equal to**.
+
+   3. In the **Value** field, enter the corporate identifier.
+
+   4. In the **Result** field, enter a policy branch name for corporate users.
+
+   5. Click **Add**.
+
+   6. Repeat steps 5b-f, replacing the condition with **not equal to**, and replacing the result with the policy branch name for non-corporate users.
+
+   7. Clear the **Default to success** checkbox.
+
+   8. Click **Done**.
+
+      ![Screen capture of the No Session branch "Rules" menu with the relevant values set for attribute name, condition, value, and result for both corporate and non-corporate authentication attempts. The Default to success checkbox is cleared.](_images/xxr1669836566913.png)
+
+      |   |                                                                                                             |
+      | - | ----------------------------------------------------------------------------------------------------------- |
+      |   | The rules dictate which policy branch the user is routed to if they have no current authentication session. |
+
+6. Within the **No Session** branch, under the **Fail** list, click **Done**.
+
+   1. In each policy branch list, select the appropriate adapter.
+
+   2. Under each **Fail** list, click **Done**, and in each **Success** list, select your policy contract mapping setting.
+
+      ![Screen capture of the No Session policy branch on the policy creation page with the corporate and non-corporate user paths configured as outlined above](_images/qwb1669916360640.png)
+
+## Setting an OGNL expression
+
+### About this task
+
+In this task, you are adding an OGNL expression to the issuance criteria of the corporate adapter. This expression prevents a non-corporate user from being authenticated with a corporate identifier. For more information, see [Construct OGNL Expressions](https://cdn-docs.pingidentity.com/archive/pdf/pingfederate/pingfederate-93.pdf#page=860).
+
+### Steps
+
+1. In the PingFederate administrative console, go to **Authentication → Integration → IdP Adapters**.
+
+2. Select your corporate adapter instance.
+
+3. On the **Adapter Contract Mapping** tab, click **Configure Adapter Contract**.
+
+4. On the **Issuance Criteria** tab, click **Show Advanced Criteria**.
+
+   ![Screen capture of the Adapter contract mapping page with the Show advanced criteria button highlighted on the Issuance criteria tab](_images/xpt1669849978487.png)
+
+5. In the **Expression** field, enter the following:
+
+   ```
+   #allowed=#this.get("mapped.mail"), #allowed==null?"false":#this.get("mapped.mail").toString().contains("<corporate email domain>")
+   ```
+
+6. In the **Error Result** field, enter your desired error message.
+
+   |   |                                                                                                                                                                                                                   |
+   | - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+   |   | The error message displays if the user's mapped attribute from the adapter is not consistent with the string contained in your OGNL expression. This indicates a failure to authenticate the user as an employee. |
+
+   ![Screen capture of the Adapter contract mapping page with the constructed OGNL expression and desired error result displayed on the Issuance criteria tab](_images/mgd1669061143242.png)
+
+7. Click **Add**, and then click **Done**.

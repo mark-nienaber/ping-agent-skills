@@ -7,6 +7,7 @@ page_id: auth-node-ref:pingone:pingone-authorize
 canonical_url: https://docs.pingidentity.com/auth-node-ref/latest/pingone/pingone-authorize.html
 llms_txt: https://docs.pingidentity.com/auth-node-ref/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-09-01T13:00:59Z
 section_ids:
   example: Example
   availability: Availability
@@ -14,7 +15,9 @@ section_ids:
   dependencies: Dependencies
   configuration: Configuration
   outputs: Outputs
+  callbacks: Callbacks
   outcomes: Outcomes
+  errors: Errors
 ---
 
 # PingOne Authorize node
@@ -33,7 +36,7 @@ The following example journey illustrates how to use the PingOne Authorize node:
 
 ![PingOne Authorize node example](_images/p1-authorize-journey.png)
 
-The PingOne Authorize node gets the username from Username Collector node and evaluates the level authorization for the user. Based on the authorization level, further action is taken.
+The PingOne Authorize node gets the username from the Username Collector node and evaluates the authorization level for the user. Based on the authorization level, further action is taken.
 
 ## Availability
 
@@ -77,6 +80,10 @@ You must set up the following before using the PingOne Authorize node:
 
 This node doesn't change the shared state.
 
+## Callbacks
+
+This node doesn't send any callbacks.
+
 ## Outcomes
 
 * `Permit`
@@ -97,6 +104,10 @@ This node doesn't change the shared state.
 
   If this node logs an error, review the log messages to find the reason for the error and address the issue appropriately.
 
+## Errors
+
+The node logs an error when an authorization request fails. Review the log message and the PingOne Authorize response to determine the cause.
+
 ---
 
 ---
@@ -108,6 +119,7 @@ page_id: auth-node-ref:pingone:pingone-create-user
 canonical_url: https://docs.pingidentity.com/auth-node-ref/latest/pingone/pingone-create-user.html
 llms_txt: https://docs.pingidentity.com/auth-node-ref/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-09-01T13:00:59Z
 section_ids:
   example: Example
   availability: Availability
@@ -117,11 +129,12 @@ section_ids:
   outputs: Outputs
   callbacks: Callbacks
   outcomes: Outcomes
+  errors: Errors
 ---
 
 # PingOne Create User node
 
-The PingOne Create User node can create new users in the PingOne platform.
+The PingOne Create User node creates new users in the PingOne platform.
 
 You can configure the node to create a user including their profile data or to create an anonymized user.
 
@@ -215,9 +228,37 @@ The node created an account in PingOne.
 
 `False`
 
-The node did not create an account in PingOne.
+The node didn't create an account in PingOne.
 
 The journey also uses this outcome if any error occurs. Enable Capture Failure to store the details in node state.
+
+## Errors
+
+The node can log the following errors when it can't create a user in PingOne:
+
+* `Could not get the username from the context.`
+
+  The `username` property isn't available in the shared node state. Use a preceding node to collect or set the username.
+
+* `Unable to get access token for PingOne Worker.`
+
+  The node couldn't obtain an access token for the configured PingOne Worker Service. Check the worker service configuration and permissions.
+
+* `Could not get attribute from user profile.`
+
+  The configured AM Identity Attribute isn't available in the user's profile. Check the attribute name and ensure the profile contains a value.
+
+* `Could not find the identity with username in the realm.`
+
+  The node couldn't find the identity associated with the username in the realm. Check that the identity exists and that the username is correct.
+
+* `Error communicating with PingOne.`
+
+  The node couldn't communicate with PingOne. Check the network connection, worker service configuration, and PingOne availability.
+
+* `An unexpected error occurred.`
+
+  An unexpected error prevented the node from creating the user. Check the exception details stored in `pingOneCreateUserFailureReason` when Capture failure is enabled.
 
 ---
 
@@ -230,12 +271,14 @@ page_id: auth-node-ref:pingone:pingone-cred-delete-wallet
 canonical_url: https://docs.pingidentity.com/auth-node-ref/latest/pingone/pingone-cred-delete-wallet.html
 llms_txt: https://docs.pingidentity.com/auth-node-ref/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-18T00:00:00Z
 section_ids:
   example: Example
   inputs: Inputs
   dependencies: Dependencies
   configuration: Configuration
   outputs: Outputs
+  callbacks: Callbacks
   outcomes: Outcomes
   errors: Errors
 ---
@@ -268,6 +311,10 @@ This node requires that the PingOne Worker Service is configured so that it can 
 
 This node doesn't change the shared state.
 
+## Callbacks
+
+This node doesn't send any callbacks.
+
 ## Outcomes
 
 * `Success`
@@ -299,6 +346,7 @@ page_id: auth-node-ref:pingone:pingone-cred-find-wallet
 canonical_url: https://docs.pingidentity.com/auth-node-ref/latest/pingone/pingone-cred-find-wallet.html
 llms_txt: https://docs.pingidentity.com/auth-node-ref/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-18T00:00:00Z
 section_ids:
   example: Example
   availability: Availability
@@ -306,6 +354,7 @@ section_ids:
   dependencies: Dependencies
   configuration: Configuration
   outputs: Outputs
+  callbacks: Callbacks
   outcomes: Outcomes
   errors: Errors
 ---
@@ -349,6 +398,10 @@ This node requires that the PingOne Worker Service is configured so that it can 
 
 * `pingOneActiveWallets`: The PingOne User's active digital wallets.
 
+## Callbacks
+
+This node doesn't send any callbacks.
+
 ## Outcomes
 
 * `Success`
@@ -384,6 +437,7 @@ page_id: auth-node-ref:pingone:pingone-cred-issue
 canonical_url: https://docs.pingidentity.com/auth-node-ref/latest/pingone/pingone-cred-issue.html
 llms_txt: https://docs.pingidentity.com/auth-node-ref/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-18T00:00:00Z
 section_ids:
   example: Example
   availability: Availability
@@ -391,6 +445,7 @@ section_ids:
   dependencies: Dependencies
   configuration: Configuration
   outputs: Outputs
+  callbacks: Callbacks
   outcomes: Outcomes
   errors: Errors
 ---
@@ -432,6 +487,10 @@ This node requires that the PingOne Worker Service is configured so that it can 
 
 `pingOneCredentialId` - The ID of the created credential.
 
+## Callbacks
+
+This node doesn't send any callbacks.
+
 ## Outcomes
 
 * `Success`
@@ -459,6 +518,7 @@ page_id: auth-node-ref:pingone:pingone-cred-overview
 canonical_url: https://docs.pingidentity.com/auth-node-ref/latest/pingone/pingone-cred-overview.html
 llms_txt: https://docs.pingidentity.com/auth-node-ref/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-04T15:27:48Z
 section_ids:
   dependencies: Dependencies
   p1-cred-example-journey: Example
@@ -525,6 +585,7 @@ page_id: auth-node-ref:pingone:pingone-cred-pair-wallet
 canonical_url: https://docs.pingidentity.com/auth-node-ref/latest/pingone/pingone-cred-pair-wallet.html
 llms_txt: https://docs.pingidentity.com/auth-node-ref/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-18T00:00:00Z
 section_ids:
   example: Example
   availability: Availability
@@ -532,6 +593,7 @@ section_ids:
   dependencies: Dependencies
   configuration: Configuration
   outputs: Outputs
+  callbacks: Callbacks
   outcomes: Outcomes
   errors: Errors
 ---
@@ -579,6 +641,10 @@ This node requires that the PingOne Worker Service is configured so that it can 
 
 pingOneWallet - The new PingOne User's digital wallet.
 
+## Callbacks
+
+This node doesn't send any callbacks.
+
 ## Outcomes
 
 * `Success`
@@ -610,12 +676,14 @@ page_id: auth-node-ref:pingone:pingone-cred-revoke
 canonical_url: https://docs.pingidentity.com/auth-node-ref/latest/pingone/pingone-cred-revoke.html
 llms_txt: https://docs.pingidentity.com/auth-node-ref/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-18T00:00:00Z
 section_ids:
   availability: Availability
   inputs: Inputs
   dependencies: Dependencies
   configuration: Configuration
   outputs: Outputs
+  callbacks: Callbacks
   outcomes: Outcomes
   errors: Errors
 ---
@@ -652,6 +720,10 @@ This node requires that the PingOne Worker Service is configured so that it can 
 
 This node doesn't change the shared state.
 
+## Callbacks
+
+This node doesn't send any callbacks.
+
 ## Outcomes
 
 * `Success`
@@ -683,12 +755,14 @@ page_id: auth-node-ref:pingone:pingone-cred-update
 canonical_url: https://docs.pingidentity.com/auth-node-ref/latest/pingone/pingone-cred-update.html
 llms_txt: https://docs.pingidentity.com/auth-node-ref/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-18T00:00:00Z
 section_ids:
   availability: Availability
   inputs: Inputs
   dependencies: Dependencies
   configuration: Configuration
   outputs: Outputs
+  callbacks: Callbacks
   outcomes: Outcomes
   errors: Errors
 ---
@@ -727,6 +801,10 @@ This node requires that the PingOne Worker Service is configured so that it can 
 
 * `pingOneCredentialUpdate` — The response from the PingOne Credentials Update operation.
 
+## Callbacks
+
+This node doesn't send any callbacks.
+
 ## Outcomes
 
 * `Success`
@@ -754,6 +832,7 @@ page_id: auth-node-ref:pingone:pingone-cred-verify
 canonical_url: https://docs.pingidentity.com/auth-node-ref/latest/pingone/pingone-cred-verify.html
 llms_txt: https://docs.pingidentity.com/auth-node-ref/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-18T00:00:00Z
 section_ids:
   example: Example
   availability: Availability
@@ -761,6 +840,7 @@ section_ids:
   dependencies: Dependencies
   configuration: Configuration
   outputs: Outputs
+  callbacks: Callbacks
   outcomes: Outcomes
   errors: Errors
 ---
@@ -813,6 +893,10 @@ This node requires that the PingOne Worker Service is configured so that it can 
 
 * `pingOneApplicationInstanceId`: The identifier of the application running the Wallet SDK on the user's device and registered with the service.
 
+## Callbacks
+
+This node doesn't send any callbacks.
+
 ## Outcomes
 
 * `Success`
@@ -848,6 +932,7 @@ page_id: auth-node-ref:pingone:pingone-davinci
 canonical_url: https://docs.pingidentity.com/auth-node-ref/latest/pingone/pingone-davinci.html
 llms_txt: https://docs.pingidentity.com/auth-node-ref/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-09-01T13:00:59Z
 keywords: ["Authentication", "PingOne", "DaVinci"]
 section_ids:
   davinci-example: Example
@@ -859,7 +944,9 @@ section_ids:
   create-davinci-app: Create a PingOne DaVinci application
   configuration: Configuration
   outputs: Outputs
+  callbacks: Callbacks
   outcomes: Outcomes
+  errors: Errors
 ---
 
 # PingOne DaVinci API node
@@ -982,6 +1069,10 @@ The configurable properties for this node are:
 
 Any data configured to be returned to the PingOne DaVinci flow is put into the node state.
 
+## Callbacks
+
+This node doesn't send any callbacks.
+
 ## Outcomes
 
 * `True`
@@ -996,6 +1087,10 @@ Any data configured to be returned to the PingOne DaVinci flow is put into the n
 
   An error occurred causing the request to fail. Check the response code, response body, or logs to see more details of the error.
 
+## Errors
+
+The node logs an error when the PingOne DaVinci API request fails. Check the response code and response body to determine the cause.
+
 ---
 
 ---
@@ -1007,6 +1102,7 @@ page_id: auth-node-ref:pingone:pingone-delete-user
 canonical_url: https://docs.pingidentity.com/auth-node-ref/latest/pingone/pingone-delete-user.html
 llms_txt: https://docs.pingidentity.com/auth-node-ref/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-18T00:00:00Z
 section_ids:
   availability: Availability
   inputs: Inputs
@@ -1089,6 +1185,7 @@ page_id: auth-node-ref:pingone:pingone-identity-match
 canonical_url: https://docs.pingidentity.com/auth-node-ref/latest/pingone/pingone-identity-match.html
 llms_txt: https://docs.pingidentity.com/auth-node-ref/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-09-01T13:00:59Z
 section_ids:
   example: Example
   availability: Availability
@@ -1098,11 +1195,12 @@ section_ids:
   outputs: Outputs
   callbacks: Callbacks
   outcomes: Outcomes
+  errors: Errors
 ---
 
 # PingOne Identity Match node
 
-The PingOne Identity Match node checks that users that exist in the ForgeRock platform also exist in the PingOne platform.
+The PingOne Identity Match node checks that users that exist in AM also exist in the PingOne platform.
 
 ## Example
 
@@ -1162,13 +1260,12 @@ Find more information in [Connect AM to PingOne](https://docs.pingidentity.com/p
 
 ## Configuration
 
-| Property                  | Usage                                                                                                                                                                                                                                                                                           |
-| ------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| PingOne Worker Service ID | The ID of the PingOne worker service for connecting to PingOne.                                                                                                                                                                                                                                 |
-| Population ID             | The ID of the population in PingOne to check for users or provision new ones.If not specified, the node uses the environment's default population ID.                                                                                                                                           |
-| AM Identity Attribute     | The attribute from the user's ForgeRock profile that the node uses to match their account in PingOne.Default: `uid`                                                                                                                                                                             |
-| Ping Identity Attribute   | The attribute from the user's PingOne profile that the node uses to search for a matching account.If there are multiple entries with the same attribute value in the PingOne directory server, ensure that this property is specific enough to retrieve only one entry.Default: `username`      |
-| Capture failure           | Capture the details in shared state if a failure occurs.The node stores the details in a variable named `pingOneIdentityMatchFailureReason`.Default: `False`Example:```json
+| Property                   | Usage                                                                                                                                                                                                                                                                                           |
+| -------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| PingOne Worker service ID  | The ID of the PingOne worker service for connecting to PingOne.                                                                                                                                                                                                                                 |
+| AM identity attribute      | The attribute from the user's AM profile that the node uses to match their account in PingOne.Default: `uid`                                                                                                                                                                                    |
+| PingOne identity attribute | The attribute from the user's PingOne profile that the node uses to search for a matching account.If there are multiple entries with the same attribute value in the PingOne directory server, ensure that this property is specific enough to retrieve only one entry.Default: `username`      |
+| Capture failure            | Capture the details in shared state if a failure occurs.The node stores the details in a variable named `pingOneIdentityMatchFailureReason`.Default: `False`Example:```json
 {
   "code": "ACCESS_TOKEN",
   "message": "Unable to get access token for PingOne Worker.",
@@ -1194,7 +1291,39 @@ The node found a unique matching account in PingOne.
 
 `False`
 
-The node did not find a unique match in PingOne.
+The node didn't find a unique match in PingOne.
+
+## Errors
+
+The node can log the following errors when it can't find a unique matching user in PingOne:
+
+* `Could not get the username from the context.`
+
+  The `username` property isn't available in the shared node state. Use a preceding node to collect or set the username.
+
+* `Unable to get access token for PingOne Worker.`
+
+  The node couldn't obtain an access token for the configured PingOne Worker Service. Check the worker service configuration and permissions.
+
+* `Could not get the value for the configured user attribute.`
+
+  The configured AM Identity Attribute isn't available in the user's profile. Check the attribute name and ensure the profile contains a value.
+
+* `Found multiple entries with the same key attribute value in PingOne.`
+
+  The configured Ping Identity Attribute isn't unique in PingOne. Choose a more specific attribute or remove duplicate values.
+
+* `Could not find the identity with username in the realm.`
+
+  The node couldn't find the identity associated with the username in the realm. Check that the identity exists and that the username is correct.
+
+* `Error communicating with PingOne.`
+
+  The node couldn't communicate with PingOne. Check the network connection, worker service configuration, and PingOne availability.
+
+* `An unexpected error occurred.`
+
+  An unexpected error prevented the node from matching the user. Check the exception details stored in `pingOneIdentityMatchFailureReason` when Capture failure is enabled.
 
 ---
 
@@ -1207,6 +1336,7 @@ page_id: auth-node-ref:pingone:pingone
 canonical_url: https://docs.pingidentity.com/auth-node-ref/latest/pingone/pingone.html
 llms_txt: https://docs.pingidentity.com/auth-node-ref/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-18T00:00:00Z
 keywords: ["Authentication", "PingOne", "DaVinci"]
 section_ids:
   example: Example
@@ -1343,6 +1473,7 @@ page_id: auth-node-ref:pingone:pingone-protect-evaluation
 canonical_url: https://docs.pingidentity.com/auth-node-ref/latest/pingone/pingone-protect-evaluation.html
 llms_txt: https://docs.pingidentity.com/auth-node-ref/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-10-29T11:27:40Z
 page_aliases: ["auth-node-pingone-protect-evaluation.adoc"]
 section_ids:
   example: Example
@@ -1351,6 +1482,7 @@ section_ids:
   dependencies: Dependencies
   configuration: Configuration
   outputs: Outputs
+  callbacks: Callbacks
   outcomes: Outcomes
   outcome_precedence: Outcome precedence
   errors: Errors
@@ -1366,11 +1498,11 @@ Learn more in [PingOne Protect > How it Works](https://docs.pingidentity.com/pin
 
 ## Example
 
-The following example journey leverages PingOne Protect functionality to perform a risk evaluation.
+The following example journey uses PingOne Protect functionality to perform a risk evaluation.
 
 ![Example PingOne Protect journey](_images/pingone-protect-example-journey.png)Figure 1. Example PingOne Protect journey
 
-* a The [PingOne Protect Initialize node](pingone-protect-initialize.html) instructs the Ping SDK to initialize a PingOne Signals (Protect) SDK with the configured properties.
+* a The [PingOne Protect Initialize node](pingone-protect-initialize.html) instructs the Ping Orchestration SDKs to initialize a PingOne Signals (Protect) SDK with the configured properties.
 
   |   |                                                                                                                                                                                                       |
   | - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -1438,15 +1570,13 @@ The following example journey leverages PingOne Protect functionality to perform
 
 This node can use shared state variables that contain the PingOne `user.id` and `user.name` as input. If these aren't available, the node uses the `UserId` and `Username` variables.
 
-This node requires that you've initialized PingOne Protect in your client application. For example, by using a [PingOne Protect Initialize node](pingone-protect-initialize.html) node previously in the journey or by initializing the SDK within the app itself.
+This node requires that you've initialized PingOne Protect in your client application. For example, by using a [PingOne Protect Initialize node](pingone-protect-initialize.html) previously in the journey or by using the Ping Orchestration SDKs to initialize PingOne Protect within the app itself. Learn more in [Evaluating risk with PingOne Protect](https://developer.pingidentity.com/orchsdks/journey/use-cases/protect/index.html).
 
 ## Dependencies
 
 This node requires a PingOne Worker Service configuration to connect to your PingOne instance and send it the necessary data to make risk evaluations.
 
 Find more information in [Connect AM to PingOne](https://docs.pingidentity.com/pingam/8.1/integrations/connect-am-to-pingone.html).
-
-The client application must be using Ping SDK 4.4.0 or later.
 
 ## Configuration
 
@@ -1643,6 +1773,10 @@ The node outputs the following data to shared state:
 
 * `PINGONE_VERIFY_EVALUATION_FAILURE_REASON_KEY` If the node couldn't obtain the risk evaluation from PingOne, the failure reason.
 
+## Callbacks
+
+The node sends a `PingOneProtectEvaluationCallback`, which instructs the client-side Ping Orchestration SDKs to collect device signals for risk evaluation and return them to the server.
+
 ## Outcomes
 
 * `High`
@@ -1685,7 +1819,7 @@ The node outputs the following data to shared state:
 
 Evaluation of the journey continues along an outcome based on the response received and the fields present in the response:
 
-![Risk evaluation outcome path precedence](https://kroki.io/plantuml/svg/eNqVlOFO2zAQx7_7KU7eB7aItWvHgAFiKlCgEi2IlqFJSMhNLo1V165sp6VDPNBeY0-2cwJrhwJo_eCkvv_9_D_7nPoaA_odmunCylHm4fcvaH5qbsDH8NiEC6lH0ElQe-kXJLNTY4WXRrMib5BJB7FJEOjpDQwRcocJ4F2scidnqBYgNSm0xjikwVz67BVqgDqT-rmwCMaCQzuTMbpaEXkxD4ymlUyaonXg8jirhASHCkdCQUGQ6ArqPDOQiRmGWbTkXmoSChhKnYQFFeVqhyBGFnFCoreKWKuzPecXCveZoKpnFD-SlC0mcE8rXoik4DbZA0tMnBfIEID62oGIxyNrcp0cGkXWvRXaTakO7Yn6wPbqj2DmxlJTgJhPvO3VyVdAq7IjTEWu_LHRvicmCPwU1Qy9jAWvVvXlT4TGxiqjZzweGJugLZcaxridNp4LnvlJvmKSbq1i-plIzDwU4m2OjLGdS-nGgDOh8vKQLbqpoZPYZZqIUDQs45zTPLnjO3DPOf0H4Aqp9WiCd9tHnasuX38KuNhYpECjttHc_rLV-DtuLiUmt3HQ8NbJyWX7pDVoH91etzsnp4P-EmQxNhM6uQSTVtHZLmQcnA9uu51Bh5I6572l2i-mBfF76-yqzYvZBxopHUIpTKbwPooaNegHf3StqKTMqCSKbjRdnlSO8tCYQhdXC5FW_fYBfIY65P1AF0UfqIHeYRObaWMnitqFylXxTO7JOsJU-GyXksZSKYaKGpxQe3E4nR1abL9nSmjprVmDy2XJ8Fhzhb-J8HGGrsre0mA3iOiob3QUvYBdtXmjj6ll8E5MpgrXgT_fZ75b0ItKAF6phT4udHfp80DhzzUClY3CowhCm-GNFg5SodSQ2rVMiEWgQRRxfnZ-HaTl_Opun5l51c6uePqH89iUlaguJjKf_A_tlDqzmnVKF-RNEm18uSeseJcpK8c_kgbpsQ==)Figure 2. Risk evaluation outcome path precedence
+![Risk evaluation outcome path precedence](_images/figure-pingone-protect-evaluation-precedence.svg)Figure 2. Risk evaluation outcome path precedence
 
 1. If you've configured the Score Threshold property and the result contains a score that exceeds it, evaluation continues along the `Exceeds Score Threshold` outcome path.
 
@@ -1695,17 +1829,19 @@ Evaluation of the journey continues along an outcome based on the response recei
 
 ## Errors
 
-* If a recommended action outcome isn't defined, the node logs the following warning:
+The node can log the following warnings:
 
-  `Outcome not found for recommended action action`
+* `Outcome not found for recommended action action`
 
-* If PingOne Protect couldn't perform the risk assessment, for whatever reason, the node logs the following warning:
+  A recommended action outcome isn't defined.
 
-  `PingOne Protect risk evaluation failed`
+* `PingOne Protect risk evaluation failed`
 
-* If you've configured the node to read the Target App ID, Risk Policy Set ID, or any custom attributes from a shared state attribute, and it's unable to read these values from the shared state, it logs the following warning:
+  PingOne Protect couldn't perform the risk assessment.
 
-  `Expected attribute to be defined in node state`
+* `Expected attribute to be defined in node state`
+
+  The node is configured to read the Target App ID, Risk Policy Set ID, or any custom attributes from a shared state attribute, but is unable to read these values from the shared state.
 
 ---
 
@@ -1718,6 +1854,7 @@ page_id: auth-node-ref:pingone:pingone-protect-initialize
 canonical_url: https://docs.pingidentity.com/auth-node-ref/latest/pingone/pingone-protect-initialize.html
 llms_txt: https://docs.pingidentity.com/auth-node-ref/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-10-29T11:27:40Z
 page_aliases: ["auth-node-pingone-protect-initialize.adoc"]
 section_ids:
   example: Example
@@ -1728,13 +1865,14 @@ section_ids:
   outputs: Outputs
   callbacks: Callbacks
   outcomes: Outcomes
+  errors: Errors
 ---
 
 # PingOne Protect Initialize node
 
 The PingOne Protect Initialize node instructs the client to initialize a PingOne Signals (Protect) SDK so that it can start gathering device signals and contextual information:
 
-* If the client is a device or browser running a Ping SDK, this node initializes a PingOne Signals (Protect) SDK in the device or browser. This requires a Ping SDK v4.4.0 or later. Learn more in [Integrate with PingOne Protect for risk evaluations](https://docs.pingidentity.com/sdks/latest/sdks/integrations/integrate-with-pingone-protect.html).
+* If the client is a device or browser running the Ping Orchestration SDKs, this node initializes a PingOne Signals (Protect) SDK in the device or browser. Learn more in [Evaluating risk with PingOne Protect](https://developer.pingidentity.com/orchsdks/journey/use-cases/protect/index.html).
 
 You should place this node as early as possible in your journey so that it can gather sufficient contextual information to make risk evaluations.
 
@@ -1744,11 +1882,11 @@ Learn more in [Getting started with PingOne Protect](https://docs.pingidentity.c
 
 ## Example
 
-The following example journey leverages PingOne Protect functionality to perform a risk evaluation.
+The following example journey uses PingOne Protect functionality to perform a risk evaluation.
 
 ![Example PingOne Protect journey](_images/pingone-protect-example-journey.png)Figure 1. Example PingOne Protect journey
 
-* a The [PingOne Protect Initialize node](pingone-protect-initialize.html) instructs the Ping SDK to initialize a PingOne Signals (Protect) SDK with the configured properties.
+* a The [PingOne Protect Initialize node](pingone-protect-initialize.html) instructs the Ping Orchestration SDKs to initialize a PingOne Signals (Protect) SDK with the configured properties.
 
   |   |                                                                                                                                                                                                       |
   | - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -1822,8 +1960,6 @@ This node requires a PingOne Worker Service configuration so that it can connect
 
 Find more information in [Connect AM to PingOne](https://docs.pingidentity.com/pingam/8.1/integrations/connect-am-to-pingone.html).
 
-Only Ping SDKs v4.4.0 and later support this node.
-
 ## Configuration
 
 | Property                                      | Usage                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
@@ -1869,7 +2005,7 @@ Only Ping SDKs v4.4.0 and later support this node.
 | Port Number for Agent                         | The port number to use when connecting to the PingID Device Trust Agent.If you don't set a value, the connection goes through the default port: `9400`.	This field requires the PingID Device Trust agent to be installed on the end user's device.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
 | Additional Signals SDK Initialization Options | Lets you pass additional signals options (not included in the existing node configuration properties) when you initialize the [PingOne Signals (Protect) SDK](https://docs.pingidentity.com/pingone/threat_protection_using_pingone_protect/p1_protect_signals_sdk.html).Provide a map of keys and values where Key is the PingOne Protect signals parameter and Value is the parameter value. For example:- Key: `waitForWindowLoad`
 
-- Value: `true`Read the [SDKs documentation](https://docs.pingidentity.com/sdks/latest/sdks/integrations/pingone-protect/03-app.html#start) for the list of valid signals.	Don't include signals that are included in the existing node configuration properties. For example, don't add agentTimeout to this map.                                                                                                                                                                                                                                                                                                                                                                                                             |
+- Value: `true`Find a list of valid signals in [Ping Orchestration SDKs for JavaScript](https://developer.pingidentity.com/orchsdks/journey/use-cases/protect/javascript/02-protect-javascript-app-journeys.html#start), [Ping Orchestration SDKs for iOS](https://developer.pingidentity.com/orchsdks/journey/use-cases/protect/ios/02-protect-ios-app-journeys.html#start), and [Ping Orchestration SDKs for Android](https://developer.pingidentity.com/orchsdks/journey/use-cases/protect/android/02-protect-android-app-journeys.html#start).	Don't include signals that are included in the existing node configuration properties. For example, don't add agentTimeout to this map.                                     |
 
 ## Outputs
 
@@ -1906,6 +2042,18 @@ The client consumes this callback and initializes the PingOne Protect functional
 
   The client application didn't confirm successful receipt of the configuration or returned a client error.
 
+## Errors
+
+The node can log the following warnings:
+
+* `Cannot find PingOne Worker`
+
+  The configured PingOne Worker Service couldn't be found. Check the worker service ID and configuration.
+
+* `PingOne Worker is missing Environment ID`
+
+  The configured PingOne Worker Service doesn't have an environment ID. Add an environment ID to the worker service configuration.
+
 ---
 
 ---
@@ -1917,6 +2065,7 @@ page_id: auth-node-ref:pingone:pingone-protect-result
 canonical_url: https://docs.pingidentity.com/auth-node-ref/latest/pingone/pingone-protect-result.html
 llms_txt: https://docs.pingidentity.com/auth-node-ref/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-10-29T11:27:40Z
 page_aliases: ["auth-node-pingone-protect-result.adoc"]
 section_ids:
   example: Example
@@ -1925,7 +2074,9 @@ section_ids:
   dependencies: Dependencies
   configuration: Configuration
   outputs: Outputs
+  callbacks: Callbacks
   outcomes: Outcomes
+  errors: Errors
 ---
 
 # PingOne Protect Result node
@@ -1936,11 +2087,11 @@ You can check the results of the evaluation in the PingOne admin console by filt
 
 ## Example
 
-The following example journey leverages PingOne Protect functionality to perform a risk evaluation.
+The following example journey uses PingOne Protect functionality to perform a risk evaluation.
 
 ![Example PingOne Protect journey](_images/pingone-protect-example-journey.png)Figure 1. Example PingOne Protect journey
 
-* a The [PingOne Protect Initialize node](pingone-protect-initialize.html) instructs the Ping SDK to initialize a PingOne Signals (Protect) SDK with the configured properties.
+* a The [PingOne Protect Initialize node](pingone-protect-initialize.html) instructs the Ping Orchestration SDKs to initialize a PingOne Signals (Protect) SDK with the configured properties.
 
   |   |                                                                                                                                                                                                       |
   | - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -2006,7 +2157,7 @@ The following example journey leverages PingOne Protect functionality to perform
 
 ## Inputs
 
-This node requires that you've initialized PingOne Protect. For example, by using a [PingOne Protect Evaluation node](pingone-protect-evaluation.html) previously in the journey or by initializing it via the Ping SDK within the app itself.
+This node requires that you've initialized PingOne Protect in your client application. For example, by using a [PingOne Protect Initialize node](pingone-protect-initialize.html) previously in the journey or by using the Ping Orchestration SDKs to initialize PingOne Protect within the app itself. Learn more in [Evaluating risk with PingOne Protect](https://developer.pingidentity.com/orchsdks/journey/use-cases/protect/index.html).
 
 ## Dependencies
 
@@ -2026,11 +2177,35 @@ Find more information in [Connect AM to PingOne](https://docs.pingidentity.com/p
 
 This node doesn't change the shared state.
 
+## Callbacks
+
+This node doesn't send any callbacks.
+
 ## Outcomes
 
 Single outcome path.
 
 The node attempts to update the PingOne server but continues along the single outcome without confirming the server received the update.
+
+## Errors
+
+The node can log the following:
+
+* Warnings
+
+  * `Failed to update Risk Evaluation result.`
+
+    The node couldn't update the risk evaluation. Check the journey state, worker service configuration, and PingOne availability.
+
+  * `Failed to update Risk Evaluation result, riskId or workerId not found`
+
+    The risk ID or worker ID is missing. Check that the PingOne Protect evaluation was initialized and that the required worker service is configured.
+
+* Errors
+
+  * `PingOne Worker not found: worker ID`
+
+    The configured PingOne Worker Service couldn't be found. Check the worker service ID.
 
 ---
 
@@ -2043,6 +2218,7 @@ page_id: auth-node-ref:pingone:pingone-service
 canonical_url: https://docs.pingidentity.com/auth-node-ref/latest/pingone/pingone-service.html
 llms_txt: https://docs.pingidentity.com/auth-node-ref/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-04T15:27:48Z
 keywords: ["Authentication", "PingOne", "DaVinci"]
 section_ids:
   configure-p1-service: Configure the PingOne service
@@ -2127,6 +2303,7 @@ page_id: auth-node-ref:pingone:pingone-verify-authn
 canonical_url: https://docs.pingidentity.com/auth-node-ref/latest/pingone/pingone-verify-authn.html
 llms_txt: https://docs.pingidentity.com/auth-node-ref/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-18T00:00:00Z
 keywords: ["PingOne", "Verify", "Authentication"]
 section_ids:
   availability: Availability
@@ -2235,6 +2412,7 @@ page_id: auth-node-ref:pingone:pingone-verify-completion-decision
 canonical_url: https://docs.pingidentity.com/auth-node-ref/latest/pingone/pingone-verify-completion-decision.html
 llms_txt: https://docs.pingidentity.com/auth-node-ref/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-09-01T13:00:59Z
 section_ids:
   example: Example
   example_journey: Example journey
@@ -2246,6 +2424,7 @@ section_ids:
   outputs: Outputs
   callbacks: Callbacks
   outcomes: Outcomes
+  errors: Errors
 ---
 
 # PingOne Verify Completion Decision node
@@ -2861,3 +3040,31 @@ This node doesn't send any callbacks.
 * `Not Completed`
 
   The user's most recent PingOne Verify evaluation has started, but not yet completed.
+
+## Errors
+
+The node logs the following errors when it can't determine the completion status of the user's most recent verification transaction:
+
+* `Expected PingOne User ID to be set in sharedState.`
+
+  The `pingOneUserId` shared state property isn't available. Use the [PingOne Identity Match node](pingone-identity-match.html) earlier in the journey.
+
+* `Unable to get access token for PingOne Worker.`
+
+  The node couldn't obtain an access token for the configured PingOne Worker Service. Check the worker service configuration and permissions.
+
+* `Identity verification failed.`
+
+  The most recent identity verification transaction wasn't successful.
+
+* `Unexpected status returned from PingOne Verify Transaction.`
+
+  The transaction returned a status that the node doesn't recognize.
+
+* `Error evaluating the verify completion decision script.`
+
+  The configured script couldn't be evaluated. Check the script and its inputs.
+
+* `Script must set 'outcome' to a string.`
+
+  The configured script didn't set the `outcome` variable to a string before returning.

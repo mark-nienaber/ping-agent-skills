@@ -6,7 +6,7 @@ license: MIT
 
 # PingOne API (Early Access)
 
-PingOne API (Early Access) documentation is indexed in the bundled llms.txt and live Ping Markdown pages.
+Early access endpoints to create, read, update, test, and delete PingOne Authorize trust framework attributes, plus their data model and event types.
 
 ## Live source of truth
 
@@ -27,10 +27,11 @@ PingOne API (Early Access) documentation is indexed in the bundled llms.txt and 
 
 | Task category | Guide slug | Live URL pattern | Snapshot |
 |---|---|---|---|
-| Authorize: authorization, create, delete | authorize | https://developer.pingidentity.com/pingone-api-ea/authorize/*.md | references/snapshots/authorize.md |
-| Platform: create, promotion, variable | platform | https://developer.pingidentity.com/pingone-api-ea/platform/*.md | references/snapshots/platform.md |
+| Authorize: authorization, create, access | authorize | https://developer.pingidentity.com/pingone-api-ea/authorize/*.md | references/snapshots/authorize.md |
+| Platform: pingone, promotion, environment | platform | https://developer.pingidentity.com/pingone-api-ea/platform/*.md | references/snapshots/platform.md |
+| Verify: verification, pingone, verify | verify | https://developer.pingidentity.com/pingone-api-ea/verify/*.md | references/snapshots/verify.md |
 | Auth: access, early, auth | auth | https://developer.pingidentity.com/pingone-api-ea/auth/*.md | references/snapshots/auth.md |
-| Introduction.Md: untitled | introduction.md | https://developer.pingidentity.com/pingone-api-ea/introduction.md | references/snapshots/introduction-md.md |
+| Index.Md: access, early, pingone | index.md | https://developer.pingidentity.com/pingone-api-ea/index.md | references/snapshots/index-md.md |
 
 ## Composition
 

@@ -7,6 +7,7 @@ page_id: pingam:deployment-planning:deploy-configuration-types
 canonical_url: https://docs.pingidentity.com/pingam/8.1/deployment-planning/deploy-configuration-types.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 keywords: ["deployment", "planning", "configuration store"]
 page_aliases: ["deployment-planning-guide:deploy-configuration-types.adoc"]
 section_ids:
@@ -90,6 +91,7 @@ page_id: pingam:deployment-planning:preface
 canonical_url: https://docs.pingidentity.com/pingam/8.1/deployment-planning/preface.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 keywords: ["deployment", "planning"]
 page_aliases: ["index.adoc", "deployment-planning-guide:preface.adoc"]
 ---
@@ -147,6 +149,7 @@ page_id: pingam:deployment-planning:deploy-hardware-requirements
 canonical_url: https://docs.pingidentity.com/pingam/8.1/deployment-planning/deploy-hardware-requirements.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 keywords: ["deployment", "storage"]
 page_aliases: ["deployment-planning-guide:deploy-hardware-requirements.adoc"]
 section_ids:
@@ -255,6 +258,7 @@ page_id: pingam:deployment-planning:deploy-topologies-onprem
 canonical_url: https://docs.pingidentity.com/pingam/8.1/deployment-planning/deploy-topologies-onprem.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 keywords: ["deployment", "planning", "architecture", "availability", "failover", "agent"]
 page_aliases: ["deployment-planning-guide:deploy-topologies-onprem.adoc"]
 section_ids:
@@ -547,6 +551,7 @@ page_id: pingam:deployment-planning:deploy-highlevel-start
 canonical_url: https://docs.pingidentity.com/pingam/8.1/deployment-planning/deploy-highlevel-start.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 keywords: ["deployment", "planning", "sla", "training", "security"]
 page_aliases: ["deployment-planning-guide:deploy-highlevel-start.adoc"]
 ---
@@ -672,6 +677,7 @@ page_id: pingam:deployment-planning:openam-history
 canonical_url: https://docs.pingidentity.com/pingam/8.1/deployment-planning/openam-history.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 keywords: ["ciam"]
 page_aliases: ["deployment-planning-guide:openam-history.adoc"]
 ---
@@ -743,6 +749,7 @@ page_id: pingam:deployment-planning:understanding-iam
 canonical_url: https://docs.pingidentity.com/pingam/8.1/deployment-planning/understanding-iam.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 keywords: ["ciam"]
 page_aliases: ["deployment-planning-guide:understanding-iam.adoc"]
 ---
@@ -772,6 +779,7 @@ page_id: pingam:deployment-planning:key-benefits
 canonical_url: https://docs.pingidentity.com/pingam/8.1/deployment-planning/key-benefits.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 keywords: ["deployment", "planning", "security"]
 page_aliases: ["deployment-planning-guide:key-benefits.adoc"]
 ---
@@ -803,6 +811,7 @@ page_id: pingam:deployment-planning:not-just-sso
 canonical_url: https://docs.pingidentity.com/pingam/8.1/deployment-planning/not-just-sso.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 keywords: ["deployment", "planning"]
 page_aliases: ["deployment-planning-guide:not-just-sso.adoc"]
 ---
@@ -842,6 +851,7 @@ page_id: pingam:deployment-planning:planning-architecture-onprem
 canonical_url: https://docs.pingidentity.com/pingam/8.1/deployment-planning/planning-architecture-onprem.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 keywords: ["deployment", "planning", "architecture", "availability", "performance", "security", "training", "upgrade"]
 page_aliases: ["deployment-planning-guide:planning-architecture-onprem.adoc"]
 section_ids:
@@ -1295,6 +1305,7 @@ page_id: pingam:deployment-planning:am-server-overview
 canonical_url: https://docs.pingidentity.com/pingam/8.1/deployment-planning/am-server-overview.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 keywords: ["deployment", "planning", "architecture"]
 page_aliases: ["deployment-planning-guide:am-server-overview.adoc"]
 section_ids:
@@ -1343,7 +1354,7 @@ The distribution provides the following files:
 | `Fedlet-8.1.1.zip`             | An AM Fedlet, a light-weight SAML 2.0 service provider.The Fedlet lets you set up a federated deployment without the need of a fully-featured service provider.                                                                                                                                                                                                                                                                                                                                                 |
 | `IDPDiscovery-8.1.1.war`       | An IdP Discovery Profile (SAMLv2 binding profile) for its IdP Discovery service. The profile keeps track of the identity providers for each user.                                                                                                                                                                                                                                                                                                                                                               |
 | `sample-trees-8.1.1.zip`       | Sample authentication trees for demonstration purposes. The trees are provided as JSON files and can be imported into an AM deployment using *Amster*. Find information on importing files using Amster in [Import configuration data](../amster/import-config.html).                                                                                                                                                                                                                                           |
-| `Truststore-Utility-8.1.1.zip` | A utility to help with creating a trust store for use with web authentication.Find more information in the `readme.md` in the `.zip` archive and [MFA: Web authentication (WebAuthn) and passkeys](../am-authentication/authn-mfa-webauthn.html).                                                                                                                                                                                                                                                               |
+| `Truststore-Utility-8.1.1.zip` | A utility to help with creating a trust store for use with web authentication.Find more information in the `readme.md` in the `.zip` archive and [Web authentication (WebAuthn) and passkeys](../am-authentication/authn-mfa-webauthn.html).                                                                                                                                                                                                                                                                    |
 
 The [Ping Identity Download Center](https://backstage.pingidentity.com/downloads) hosts downloadable versions of AM, including a `.zip` file with all of the AM components, the `.war` file, AM tools, the configurator, web and Java agents, and documentation. Verify that you review the Software License and Subscription Agreement presented before you download AM files.
 
@@ -1362,6 +1373,7 @@ page_id: pingam:deployment-planning:deploy-sizing
 canonical_url: https://docs.pingidentity.com/pingam/8.1/deployment-planning/deploy-sizing.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 keywords: ["deployment", "planning", "availability", "storage"]
 page_aliases: ["deployment-planning-guide:deploy-sizing.adoc"]
 ---
@@ -1455,6 +1467,7 @@ page_id: pingam:deployment-planning:size-systems
 canonical_url: https://docs.pingidentity.com/pingam/8.1/deployment-planning/size-systems.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 keywords: ["deployment", "planning", "architecture", "availability", "storage"]
 page_aliases: ["deployment-planning-guide:size-systems.adoc"]
 section_ids:

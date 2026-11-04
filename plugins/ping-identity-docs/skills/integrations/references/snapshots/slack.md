@@ -109,7 +109,7 @@ For more context on subject format requirements, see [SAML NameID Format urn:oas
 
       | Attribute Contract | Subject Name Format                                     |
       | ------------------ | ------------------------------------------------------- |
-      | SAML\_SUBJECT      | `urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified` |
+      | SAML_SUBJECT       | `urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified` |
 
    3. In the **Extended the Contract** section, add the following attributes, and then click **Next**.
 
@@ -117,7 +117,7 @@ For more context on subject format requirements, see [SAML NameID Format urn:oas
 
       | Extend the Contract | Attribute name Format                                     |
       | ------------------- | --------------------------------------------------------- |
-      | SAML\_NAME\_FORMAT  | `urn:oasis:names:tc:SAML:2.0:attrname-format:unspecified` |
+      | SAML_NAME_FORMAT    | `urn:oasis:names:tc:SAML:2.0:attrname-format:unspecified` |
       | User.Email          | `urn:oasis:names:tc:SAML:2.0:attrname-format:unspecified` |
 
    4. On the **Authentication Source Mapping** tab, select or create your authentication source.
@@ -142,8 +142,8 @@ For more context on subject format requirements, see [SAML NameID Format urn:oas
 
       | Attribute Contract | Source      | Value                                                  |
       | ------------------ | ----------- | ------------------------------------------------------ |
-      | SAML\_NAME\_FORMAT | **text**    | `urn:oasis:names:tc:SAML:2.0:nameid-format:persistent` |
-      | SAML\_SUBJECT      | **Adapter** | `username`                                             |
+      | SAML_NAME_FORMAT   | **text**    | `urn:oasis:names:tc:SAML:2.0:nameid-format:persistent` |
+      | SAML_SUBJECT       | **Adapter** | `username`                                             |
       | User.Email         | **LDAP**    | `mail`                                                 |
 
       ![A screenshot that shows the Attribute Contract Fulfillment tab with the attributes mapped.](_images/vku1563995733409.png)

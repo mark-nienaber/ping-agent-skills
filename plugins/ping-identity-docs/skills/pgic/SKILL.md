@@ -6,7 +6,7 @@ license: MIT
 
 # PGIC
 
-PGIC documentation is indexed in the bundled llms.txt and live Ping Markdown pages.
+Describes Ping Identity secure container availability, compatibility, security, and distribution.
 
 ## Live source of truth
 

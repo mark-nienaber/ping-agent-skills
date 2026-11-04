@@ -1,6 +1,6 @@
 ---
 title: PingOne Advanced Services
-description: Licensing for PingOne Advanced Services, a dedicated SaaS platform, covering supported products, identity-based usage measures, and infrastructure add-ons.
+description: Licensing for PingOne Advanced Services, a dedicated SaaS platform, covering supported products, identity-based usage measures, infrastructure add-ons, and PingFederate Agent IAM Core.
 component: licensing-guide
 page_id: licensing-guide::pingone-advanced-services
 canonical_url: https://docs.pingidentity.com/licensing-guide/pingone-advanced-services.html
@@ -8,6 +8,7 @@ llms_txt: https://docs.pingidentity.com/licensing-guide/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
   infrastructure-add-ons: Infrastructure add-ons
+  pingfed-agent-iam-core: PingFederate Agent IAM Core
 ---
 
 # PingOne Advanced Services
@@ -54,6 +55,18 @@ A **Monthly Active User (MAU)** is a unique identity that is **active at least o
 | [Weekend Upgrade SKU](https://docs.pingidentity.com/pingoneadvancedservices/task_summary_table/p1as_platform_upgrades.html)                                                  | Allows requested platform upgrades to a production tenant over a weekend instead of during the normal window.                                                                                      |
 | [Disaster Recovery Testing in Staging Environment](https://docs.pingidentity.com/pingoneadvancedservices/introduction_to_pingone_advanced_services/p1as_regulations.html)    | Disaster recovery test add-on for a staging environment. Includes one inter-regional disaster recovery test per year using automatic failover between regions.                                     |
 | [Disaster Recovery Testing in Production Environment](https://docs.pingidentity.com/pingoneadvancedservices/introduction_to_pingone_advanced_services/p1as_regulations.html) | Disaster recovery test add-on for a production environment. Includes one inter-regional disaster recovery test per year using automatic failover between regions.                                  |
+
+## PingFederate Agent IAM Core
+
+Treats autonomous artificial intelligence (AI) agents as first-class, governed identities in PingOne, so they authenticate, get scoped tokens, and access APIs, data, and tools under the same least-privilege policies and audit controls as human users and applications.
+
+| Feature                                                                                                                               | Description                                                                                                                 |
+| ------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| [Identity for AI foundation](https://developer.pingidentity.com/identity-for-ai/getting-started/idai-what-is-identity-for-ai.html)    | Integrates AI agents into your IAM so they authenticate, authorize, and audit like users and apps.                          |
+| [AI agent architecture](https://developer.pingidentity.com/identity-for-ai/agents/idai-what-are-agents.html)                          | Defines agents as autonomous systems that use large language models (LLMs), tools, memory, and workflows to complete tasks. |
+| [Agent types and trust model](https://developer.pingidentity.com/identity-for-ai/identity/idai-agent-types.html)                      | Classifies agents (personal, assistants, digital workers) and distinguishes managed vs unmanaged based on control.          |
+| [Tools and external actions](https://developer.pingidentity.com/identity-for-ai/agents/idai-tools-intro.html)                         | Treats tools as external APIs and functions that agents call to access data or perform actions under IAM control.           |
+| [IAM best practices for agents](https://developer.pingidentity.com/identity-for-ai/getting-started/idai-what-is-identity-for-ai.html) | Applies IAM principles like delegation (not impersonation), least privilege, and monitoring to agents.                      |
 
 |   |                                                                                                                                                                                                                                                                                                                                                                                                                                |
 | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |

@@ -7,6 +7,7 @@ page_id: pingam:am-scripting:access-token-modification-api
 canonical_url: https://docs.pingidentity.com/pingam/8.1/am-scripting/access-token-modification-api.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-07-23T08:39:53Z
 page_aliases: ["scripting-guide:access-token-modification-api.adoc"]
 section_ids:
   atmapi-modify-access-token: Modify the access token
@@ -25,14 +26,14 @@ The following bindings are available to [access token modification](../am-oauth2
 | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 |   | This script can be either a legacy or a next-generation script. It has access to all the [common bindings](script-bindings.html) for its scripting context.Learn about converting existing scripts in [Migrate OAuth scripts to next-generation scripts](access-token-modification-migrate.html). |
 
-| Binding                                           | Description                                                                                                                                                | Legacy type                                                                                  | Next-generation type                                                                                                                                               |
-| ------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| [`accessToken`](#atmapi-modify-access-token)      | The OAuth 2.0 access token.                                                                                                                                | An [AccessToken](../_attachments/apidocs/org/forgerock/oauth2/core/AccessToken.html) object. | A wrapper object that lets you access [AccessToken](../_attachments/apidocs/org/forgerock/oauth2/core/AccessToken.html) methods.                                   |
-| [`clientProperties`](#atmapi-client-properties)   | A map of properties configured in the client profile. Only present if the client was correctly identified.                                                 | Map                                                                                          | Map                                                                                                                                                                |
-| [`identity`](#atmapi-profile)                     | Represents an identity that AM can access.                                                                                                                 | An [AMIdentity](../_attachments/apidocs/com/sun/identity/idm/AMIdentity.html) object.        | A wrapper object for a scripted identity.                                                                                                                          |
-| [`requestProperties`](#atmapi-request-properties) | A map of the properties present in the request.                                                                                                            | Map                                                                                          | Map                                                                                                                                                                |
-| `scopes`                                          | An array of the requested scopes. For example:`["read", "transfer", "download"]`.                                                                          | Set                                                                                          | List                                                                                                                                                               |
-| `session`                                         | Access the user's SSO session object if the request contains a session cookie.	The session isn't available for resource owner password credentials grants. | An [SSOToken](../_attachments/apidocs/com/iplanet/sso/SSOToken.html) object.                 | A `ScriptedSession` object.> **Collapse: Methods**
+| Binding                                           | Description                                                                                                                                                                                                                      | Legacy type                                                                                      | Next-generation type                                                                                                                                               |
+| ------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| [`accessToken`](#atmapi-modify-access-token)      | The OAuth 2.0 access token.                                                                                                                                                                                                      | An [AccessToken](../_attachments/apidocs/org/forgerock/oauth2/core/AccessToken.html) object.     | A wrapper object that lets you access [AccessToken](../_attachments/apidocs/org/forgerock/oauth2/core/AccessToken.html) methods.                                   |
+| [`clientProperties`](#atmapi-client-properties)   | A map of properties configured in the client profile. Only present if the client was correctly identified.                                                                                                                       | Map                                                                                              | Map                                                                                                                                                                |
+| [`identity`](#atmapi-profile)                     | Represents the resource owner.For next-generation scripts, this binding is always present; call `identity.exists()` before accessing profile data.For legacy scripts, the binding is `null` if the resource owner doesn't exist. | An [AMIdentity](../_attachments/apidocs/com/sun/identity/idm/AMIdentity.html) object, or `null`. | A wrapper object for a scripted identity. Use `identity.exists()` to check whether the resource owner exists.                                                      |
+| [`requestProperties`](#atmapi-request-properties) | A map of the properties present in the request.                                                                                                                                                                                  | Map                                                                                              | Map                                                                                                                                                                |
+| `scopes`                                          | An array of the requested scopes. For example:`["read", "transfer", "download"]`.                                                                                                                                                | Set                                                                                              | List                                                                                                                                                               |
+| `session`                                         | Access the user's SSO session object if the request contains a session cookie.	The session isn't available for resource owner password credentials grants.                                                                       | An [SSOToken](../_attachments/apidocs/com/iplanet/sso/SSOToken.html) object.                     | A `ScriptedSession` object.> **Collapse: Methods**
 >
 > ```java
 > public String getProperty(String name)
@@ -156,7 +157,7 @@ The client properties map has the following keys:
   var property = customProperties.get("myProperty");
   ```
 
-  The map is `null` if AM} didn't successfully identify the client.
+  The map is `null` if AM didn't successfully identify the client.
 
 * `redirectUris`
 
@@ -198,6 +199,12 @@ The request properties map has the following keys:
 
 Use the `identity` binding to get data about the subject of the authorization request.
 
+|   |                                                                                                                                                                                                                                                                                                                                                                                         |
+| - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | The resource owner might not exist as an identity in AM. For example, the [JWT bearer grant](../am-oauth2/oauth2-jwt-bearer-grant.html) doesn't require the JWT's subject to match a known identity.In this case, check whether the identity exists before accessing profile data:- For legacy scripts, `identity` is `null`.
+
+- For next-generation scripts, call `identity.exists()`. |
+
 * Methods
 
   The following actions are available to the `identity` binding:
@@ -235,27 +242,33 @@ Use the `identity` binding to get data about the subject of the authorization re
   * Legacy
 
   ```javascript
-  // Returns all values as an array, for example: ["test@example.com", "user@example.com"]
-  identity.getAttributeValues("mail");
-  // Returns the first value, for example:  test@example.com
-  identity.getAttributeValues("mail")[0];
-  // Create / replace attribute with the specified value
-  identity.setAttribute("attrName", ["newValue"]);
-  // Add attribute to the list
-  identity.addAttribute("attrName", ["newValue"]);
-  // Explicitly persist data when setting attributes
-  identity.store();
+  // Check the resource owner exists before accessing profile data
+  if (identity.exists()) {
+      // Returns all values as an array, for example: ["test@example.com", "user@example.com"]
+      identity.getAttributeValues("mail");
+      // Returns the first value, for example:  test@example.com
+      identity.getAttributeValues("mail")[0];
+      // Create / replace attribute with the specified value
+      identity.setAttribute("attrName", ["newValue"]);
+      // Add attribute to the list
+      identity.addAttribute("attrName", ["newValue"]);
+      // Explicitly persist data when setting attributes
+      identity.store();
+  }
   ```
 
   ```javascript
-  // Returns all values as a set, for example: [test@example.com, user@example.com]
-  identity.getAttribute("mail").toString();
-  // Returns the first value, for example:  test@example.com
-  identity.getAttribute("mail").iterator().next();
-  // Create / replace attribute with the specified value
-  identity.setAttribute("attrName", ["newValue"]);
-  // Add attribute to the list
-  identity.addAttribute("attrName", ["newValue"]);
+  // Check the resource owner exists before accessing profile data
+  if (identity != null) {
+      // Returns all values as a set, for example: [test@example.com, user@example.com]
+      identity.getAttribute("mail").toString();
+      // Returns the first value, for example:  test@example.com
+      identity.getAttribute("mail").iterator().next();
+      // Create / replace attribute with the specified value
+      identity.setAttribute("attrName", ["newValue"]);
+      // Add attribute to the list
+      identity.addAttribute("attrName", ["newValue"]);
+  }
   ```
 
 ---
@@ -269,6 +282,7 @@ page_id: pingam:am-scripting:authorize-endpoint-data-provider-api
 canonical_url: https://docs.pingidentity.com/pingam/8.1/am-scripting/authorize-endpoint-data-provider-api.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 ---
 
 # Authorization endpoint data provider scripting API
@@ -299,6 +313,7 @@ page_id: pingam:am-scripting:cache-manager
 canonical_url: https://docs.pingidentity.com/pingam/8.1/am-scripting/cache-manager.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-10-22T08:58:28Z
 section_ids:
   how_the_script_cache_works: How the script cache works
   example_script_cache_implementation: Example script cache implementation
@@ -321,6 +336,8 @@ For example, cache an access token at the start of one journey and retrieve it i
 The scripting cache is set to evict entries automatically, but you can also invalidate values manually or configure your own eviction policy.
 
 ## How the script cache works
+
+Each AM server instance holds its own local script cache, and caches aren't shared between instances. A value cached by one instance isn't available to the others, and each instance runs the cache loading script independently. Don't use the script cache to share values between journeys running on different instances.
 
 ![How the script cache works](_images/cache-manager-service.png)
 
@@ -550,6 +567,8 @@ Use the `cacheManager` binding to access a cache and get the values that you've 
 
 This section covers how to refresh or remove entries, monitor cache performance, and clear caches using the REST API.
 
+Because each underlying AM server instance has its own cache, the cache methods and the REST endpoints in this section affect only the cache on the instance that runs them.
+
 ### Refresh the cache
 
 You can refresh an entry in the cache in the following way:
@@ -573,6 +592,8 @@ You can refresh an entry in the cache in the following way:
 ### Remove cached values
 
 To evict entries from the cache immediately before the expiry period is reached, use the cache methods, `invalidate` or `invalidateAll`, through the [`cacheManager`](scripting-api-node.html#scripting-api-node-cachemanager) binding.
+
+An eviction REST request is processed by the AM server instance that receives it. The request doesn't automatically invalidate the corresponding cache on other instances. In a clustered deployment, send the request to each instance, for example, using instance-specific URLs, to clear all caches. Otherwise, entries on other instances remain until they expire or are invalidated locally.
 
 For example:
 
@@ -652,6 +673,7 @@ page_id: pingam:am-scripting:script-bindings
 canonical_url: https://docs.pingidentity.com/pingam/8.1/am-scripting/script-bindings.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-10-19T15:00:46Z
 keywords: ["Scripts"]
 page_aliases: ["scripting-guide:script-bindings.adoc"]
 section_ids:
@@ -1045,11 +1067,11 @@ You can find information about these settings in the [Http Client service config
 
 7. On the TLS Configuration tab, enter an identifier to be used in your secret label in the Client Certificate Secret Label Identifier field.
 
-   For example, `testCrt` creates the [dynamic secret label](../security/secret-mapping.html#httpclient-secret-labels), `am.services.httpclient.mtls.clientcert.testCrt.secret`.
+   For example, `testCrt` creates the [dynamic secret label](../security/secret-label-mappings.html#httpclient-secret-labels), `am.services.httpclient.mtls.clientcert.testCrt.secret`.
 
-   |   |                                                                                                                                                                                                                                                                                                               |
-   | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-   |   | To specify a truststore to verify the target server's certificate, provide a value for Server Trust Certificates Secret Label Identifier.This creates the [dynamic secret label](../security/secret-mapping.html#httpclient-secret-labels), `am.services.httpclient.mtls.servertrustcerts.identifier.secret`. |
+   |   |                                                                                                                                                                                                                                                                                                                      |
+   | - | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+   |   | To specify a truststore to verify the target server's certificate, provide a value for Server Trust Certificates Secret Label Identifier.This creates the [dynamic secret label](../security/secret-label-mappings.html#httpclient-secret-labels), `am.services.httpclient.mtls.servertrustcerts.identifier.secret`. |
 
 8. Optionally, configure connection and response timeout values on the Timeouts tab. Enable Use Instance Timeouts to override the default settings in advanced properties.
 
@@ -2231,6 +2253,7 @@ page_id: pingam:am-scripting:rest-api-scripts-create
 canonical_url: https://docs.pingidentity.com/pingam/8.1/am-scripting/rest-api-scripts-create.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 keywords: ["Scripts", "JSON"]
 page_aliases: ["scripting-guide:rest-api-scripts-create.adoc"]
 section_ids:
@@ -2329,6 +2352,7 @@ page_id: pingam:am-scripting:rest-api-scripts-delete
 canonical_url: https://docs.pingidentity.com/pingam/8.1/am-scripting/rest-api-scripts-delete.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 keywords: ["Scripts", "JSON"]
 page_aliases: ["scripting-guide:rest-api-scripts-delete.adoc"]
 ---
@@ -2363,6 +2387,7 @@ page_id: pingam:am-scripting:dcr-api
 canonical_url: https://docs.pingidentity.com/pingam/8.1/am-scripting/dcr-api.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-11T16:05:52Z
 page_aliases: ["scripting-guide:dcr-api.adoc"]
 ---
 
@@ -2451,6 +2476,7 @@ page_id: pingam:am-scripting:saml2-idp-adapter-api
 canonical_url: https://docs.pingidentity.com/pingam/8.1/am-scripting/saml2-idp-adapter-api.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 page_aliases: ["scripting-guide:saml2-idp-adapter-api.adoc"]
 ---
 
@@ -2833,6 +2859,7 @@ page_id: pingam:am-scripting:saml2-idp-attribute-mapper-api
 canonical_url: https://docs.pingidentity.com/pingam/8.1/am-scripting/saml2-idp-attribute-mapper-api.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 page_aliases: ["scripting-guide:saml2-idp-attribute-mapper-api.adoc"]
 ---
 
@@ -2871,6 +2898,7 @@ page_id: pingam:am-scripting:library-scripts
 canonical_url: https://docs.pingidentity.com/pingam/8.1/am-scripting/library-scripts.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 keywords: ["Scripts"]
 page_aliases: ["scripting-guide:library-scripts.adoc"]
 section_ids:
@@ -2980,6 +3008,7 @@ page_id: pingam:am-scripting:manage-scripts-rest
 canonical_url: https://docs.pingidentity.com/pingam/8.1/am-scripting/manage-scripts-rest.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 keywords: ["Scripts", "Rest", "JSON"]
 page_aliases: ["scripting-guide:manage-scripts-rest.adoc"]
 ---
@@ -3064,34 +3093,34 @@ The values for the fields shown in the example are explained below:
 
   **Supported context values**
 
-  | Legacy                                      | Next-generation                                        | Used by                                                                                                                             |
-  | ------------------------------------------- | ------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------- |
-  | AUTHENTICATION\_CLIENT\_SIDE                | *Not available*                                        | Client-side authentication                                                                                                          |
-  | AUTHENTICATION\_SERVER\_SIDE                | *Not available*                                        | Server-side authentication                                                                                                          |
-  | AUTHENTICATION\_TREE\_DECISION\_NODE        | SCRIPTED\_DECISION\_NODE                               | [Scripted Decision node](https://docs.pingidentity.com/auth-node-ref/8.1/scripted-decision.html)                                    |
-  |                                             | DEVICE\_MATCH\_NODE                                    | [Device Match node](https://docs.pingidentity.com/auth-node-ref/8.1/device-match.html)                                              |
-  | *Not available*                             | CACHE\_LOADER                                          | [Cache manager](cache-manager.html)                                                                                                 |
-  | CONFIG\_PROVIDER\_NODE                      | CONFIG\_PROVIDER\_NODE\_NEXT\_GEN                      | [Configuration Provider node](https://docs.pingidentity.com/auth-node-ref/8.1/config-provider.html)                                 |
-  | *Not available*                             | LIBRARY                                                | [Library scripts](library-scripts.html)                                                                                             |
-  | *Not available*                             | NODE\_DESIGNER                                         | [Custom scripted nodes](../am-authentication/node-designer.html)                                                                    |
-  | OAUTH2\_ACCESS\_TOKEN\_MODIFICATION         | OAUTH2\_ACCESS\_TOKEN\_MODIFICATION\_NEXT\_GEN         | [Access token modification](../am-oauth2/modifying-access-tokens-scripts.html)                                                      |
-  | OAUTH2\_AUTHORIZE\_ENDPOINT\_DATA\_PROVIDER | OAUTH2\_AUTHORIZE\_ENDPOINT\_DATA\_PROVIDER\_NEXT\_GEN | [Authorize endpoint data provider](../am-oauth2/plugins-auth-endpoint-data-provider.html)                                           |
-  | *Not available*                             | OAUTH2\_DYNAMIC\_CLIENT\_REGISTRATION                  | [Customize dynamic client registration](../am-oidc1/dynamic-client-registration-script.html)                                        |
-  | OAUTH2\_EVALUATE\_SCOPE                     | OAUTH2\_EVALUATE\_SCOPE\_NEXT\_GEN                     | [Scope evaluation](../am-oauth2/plugins-scope-evaluation.html)                                                                      |
-  | OAUTH2\_MAY\_ACT                            | OAUTH2\_MAY\_ACT\_NEXT\_GEN                            | [Token exchange](../am-oauth2/token-exchange.html)                                                                                  |
-  | OAUTH2\_SCRIPTED\_JWT\_ISSUER               | OAUTH2\_SCRIPTED\_JWT\_ISSUER\_NEXT\_GEN               | [Scripted trusted JWT issuer](../am-oauth2/oauth2-jwt-bearer-grant.html#configure-scripted-jwt-issuer)                              |
-  | OAUTH2\_VALIDATE\_SCOPE                     | OAUTH2\_VALIDATE\_SCOPE\_NEXT\_GEN                     | [Scope validation](../am-oauth2/plugins-scope-validation.html)                                                                      |
-  | OIDC\_CLAIMS                                | OIDC\_CLAIMS\_NEXT\_GEN                                | [OIDC claims](../am-oauth2/plugins-user-info-claims.html)                                                                           |
-  | *Not available*                             | PINGONE\_VERIFY\_COMPLETION\_DECISION\_NODE            | [PingOne Completion Decision node](https://docs.pingidentity.com/auth-node-ref/8.1/pingone/pingone-verify-completion-decision.html) |
-  | POLICY\_CONDITION                           | POLICY\_CONDITION\_NEXT\_GEN                           | [Scripted policy conditions](../am-authorization/scripted-policy-condition.html)                                                    |
-  | SAML2\_IDP\_ADAPTER                         | SAML2\_IDP\_ADAPTER\_NEXTGEN                           | [IdP adapter](../am-saml2/custom-idp-adapter.html)                                                                                  |
-  | SAML2\_IDP\_ATTRIBUTE\_MAPPER               | SAML2\_IDP\_ATTRIBUTE\_MAPPER\_NEXT\_GEN               | [IdP attribute mapper](../am-saml2/custom-idp-attribute-mapper.html)                                                                |
-  | *Not available*                             | SAML2\_NAMEID\_MAPPER                                  | [NameID mapper](../am-saml2/custom-nameid-mapper.html)                                                                              |
-  | *Not available*                             | SAML2\_SP\_ACCOUNT\_MAPPER                             | [SP account mapper](../am-saml2/custom-sp-account-mapper.html)                                                                      |
-  | SAML2\_SP\_ADAPTER                          | SAML2\_SP\_ADAPTER\_NEXTGEN                            | [SP adapter](../am-saml2/custom-sp-adapter.html)                                                                                    |
-  | SOCIAL\_IDP\_PROFILE\_TRANSFORMATION        | SOCIAL\_IDP\_PROFILE\_TRANSFORMATION\_NEXT\_GEN        | [Social authentication](../am-authentication/social-registration.html)                                                              |
-  |                                             | SOCIAL\_PROVIDER\_HANDLER\_NODE                        | [Social Provider Handler node](https://docs.pingidentity.com/auth-node-ref/8.1/social-provider-handler.html)                        |
-  |                                             | OIDC\_NODE                                             | [OIDC ID Token Validator node](https://docs.pingidentity.com/auth-node-ref/8.1/oidc-idtoken-validator.html)                         |
+  | Legacy                                  | Next-generation                                  | Used by                                                                                                                             |
+  | --------------------------------------- | ------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------- |
+  | AUTHENTICATION_CLIENT_SIDE              | *Not available*                                  | Client-side authentication                                                                                                          |
+  | AUTHENTICATION_SERVER_SIDE              | *Not available*                                  | Server-side authentication                                                                                                          |
+  | AUTHENTICATION_TREE_DECISION_NODE       | SCRIPTED_DECISION_NODE                           | [Scripted Decision node](https://docs.pingidentity.com/auth-node-ref/8.1/scripted-decision.html)                                    |
+  |                                         | DEVICE_MATCH_NODE                                | [Device Match node](https://docs.pingidentity.com/auth-node-ref/8.1/device-match.html)                                              |
+  | *Not available*                         | CACHE_LOADER                                     | [Cache manager](cache-manager.html)                                                                                                 |
+  | CONFIG_PROVIDER_NODE                    | CONFIG_PROVIDER_NODE_NEXT_GEN                    | [Configuration Provider node](https://docs.pingidentity.com/auth-node-ref/8.1/config-provider.html)                                 |
+  | *Not available*                         | LIBRARY                                          | [Library scripts](library-scripts.html)                                                                                             |
+  | *Not available*                         | NODE_DESIGNER                                    | [Custom scripted nodes](../am-authentication/node-designer.html)                                                                    |
+  | OAUTH2_ACCESS_TOKEN_MODIFICATION        | OAUTH2_ACCESS_TOKEN_MODIFICATION_NEXT_GEN        | [Access token modification](../am-oauth2/modifying-access-tokens-scripts.html)                                                      |
+  | OAUTH2_AUTHORIZE_ENDPOINT_DATA_PROVIDER | OAUTH2_AUTHORIZE_ENDPOINT_DATA_PROVIDER_NEXT_GEN | [Authorize endpoint data provider](../am-oauth2/plugins-auth-endpoint-data-provider.html)                                           |
+  | *Not available*                         | OAUTH2_DYNAMIC_CLIENT_REGISTRATION               | [Customize dynamic client registration](../am-oidc1/dynamic-client-registration-script.html)                                        |
+  | OAUTH2_EVALUATE_SCOPE                   | OAUTH2_EVALUATE_SCOPE_NEXT_GEN                   | [Scope evaluation](../am-oauth2/plugins-scope-evaluation.html)                                                                      |
+  | OAUTH2_MAY_ACT                          | OAUTH2_MAY_ACT_NEXT_GEN                          | [Token exchange](../am-oauth2/token-exchange.html)                                                                                  |
+  | OAUTH2_SCRIPTED_JWT_ISSUER              | OAUTH2_SCRIPTED_JWT_ISSUER_NEXT_GEN              | [Scripted trusted JWT issuer](../am-oauth2/oauth2-jwt-bearer-grant.html#configure-scripted-jwt-issuer)                              |
+  | OAUTH2_VALIDATE_SCOPE                   | OAUTH2_VALIDATE_SCOPE_NEXT_GEN                   | [Scope validation](../am-oauth2/plugins-scope-validation.html)                                                                      |
+  | OIDC_CLAIMS                             | OIDC_CLAIMS_NEXT_GEN                             | [OIDC claims](../am-oauth2/plugins-user-info-claims.html)                                                                           |
+  | *Not available*                         | PINGONE_VERIFY_COMPLETION_DECISION_NODE          | [PingOne Completion Decision node](https://docs.pingidentity.com/auth-node-ref/8.1/pingone/pingone-verify-completion-decision.html) |
+  | POLICY_CONDITION                        | POLICY_CONDITION_NEXT_GEN                        | [Scripted policy conditions](../am-authorization/scripted-policy-condition.html)                                                    |
+  | SAML2_IDP_ADAPTER                       | SAML2_IDP_ADAPTER_NEXTGEN                        | [IdP adapter](../am-saml2/custom-idp-adapter.html)                                                                                  |
+  | SAML2_IDP_ATTRIBUTE_MAPPER              | SAML2_IDP_ATTRIBUTE_MAPPER_NEXT_GEN              | [IdP attribute mapper](../am-saml2/custom-idp-attribute-mapper.html)                                                                |
+  | *Not available*                         | SAML2_NAMEID_MAPPER                              | [NameID mapper](../am-saml2/custom-nameid-mapper.html)                                                                              |
+  | *Not available*                         | SAML2_SP_ACCOUNT_MAPPER                          | [SP account mapper](../am-saml2/custom-sp-account-mapper.html)                                                                      |
+  | SAML2_SP_ADAPTER                        | SAML2_SP_ADAPTER_NEXTGEN                         | [SP adapter](../am-saml2/custom-sp-adapter.html)                                                                                    |
+  | SOCIAL_IDP_PROFILE_TRANSFORMATION       | SOCIAL_IDP_PROFILE_TRANSFORMATION_NEXT_GEN       | [Social authentication](../am-authentication/social-registration.html)                                                              |
+  |                                         | SOCIAL_PROVIDER_HANDLER_NODE                     | [Social Provider Handler node](https://docs.pingidentity.com/auth-node-ref/8.1/social-provider-handler.html)                        |
+  |                                         | OIDC_NODE                                        | [OIDC ID Token Validator node](https://docs.pingidentity.com/auth-node-ref/8.1/oidc-idtoken-validator.html)                         |
 
 * `createdBy`
 
@@ -3130,6 +3159,7 @@ page_id: pingam:am-scripting:manage-scripts-console
 canonical_url: https://docs.pingidentity.com/pingam/8.1/am-scripting/manage-scripts-console.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 keywords: ["Scripts", "User Interface"]
 page_aliases: ["scripting-guide:manage-scripts-console.adoc"]
 section_ids:
@@ -3215,6 +3245,7 @@ page_id: pingam:am-scripting:may-act-api
 canonical_url: https://docs.pingidentity.com/pingam/8.1/am-scripting/may-act-api.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 ---
 
 # May act scripting API
@@ -3280,6 +3311,7 @@ page_id: pingam:am-scripting:scripting-api-node-migrate
 canonical_url: https://docs.pingidentity.com/pingam/8.1/am-scripting/scripting-api-node-migrate.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 page_aliases: ["scripting-guide:scripting-api-node-migrate.adoc"]
 section_ids:
   v2-action: action
@@ -3465,6 +3497,7 @@ page_id: pingam:am-scripting:access-token-modification-migrate
 canonical_url: https://docs.pingidentity.com/pingam/8.1/am-scripting/access-token-modification-migrate.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 section_ids:
   v2-accesstoken: accessToken
   v2-identity: identity
@@ -3601,6 +3634,7 @@ page_id: pingam:am-scripting:policy-condition-migrate
 canonical_url: https://docs.pingidentity.com/pingam/8.1/am-scripting/policy-condition-migrate.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 page_aliases: ["scripting-guide:policy-condition-migrate.adoc"]
 section_ids:
   v2-environment: environment
@@ -3713,6 +3747,7 @@ page_id: pingam:am-scripting:saml2-nameid-mapper-api
 canonical_url: https://docs.pingidentity.com/pingam/8.1/am-scripting/saml2-nameid-mapper-api.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 page_aliases: ["scripting-guide:saml2-nameid-mapper-api.adoc"]
 ---
 
@@ -3762,6 +3797,7 @@ page_id: pingam:am-scripting:next-generation-scripts
 canonical_url: https://docs.pingidentity.com/pingam/8.1/am-scripting/next-generation-scripts.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 page_aliases: ["scripting-guide:next-generation-scripts.adoc"]
 section_ids:
   next-gen-availability: Availability
@@ -4162,6 +4198,7 @@ page_id: pingam:am-scripting:oauth2-scripting-api
 canonical_url: https://docs.pingidentity.com/pingam/8.1/am-scripting/oauth2-scripting-api.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 page_aliases: ["scripting-guide:oauth2-scripting-api.adoc"]
 ---
 
@@ -4184,6 +4221,7 @@ page_id: pingam:am-scripting:user-info-claims-api
 canonical_url: https://docs.pingidentity.com/pingam/8.1/am-scripting/user-info-claims-api.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 ---
 
 # OIDC claims scripting API
@@ -4194,18 +4232,18 @@ The following bindings are available to [OIDC claims](../am-oauth2/plugins-user-
 | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 |   | This script can be either a legacy or a next-generation script. It has access to all the [common bindings](script-bindings.html) for its scripting context.Learn about converting existing scripts in [Migrate OAuth scripts to next-generation scripts](access-token-modification-migrate.html). |
 
-| Binding                | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    | Legacy                                                                                | Next-generation                                                                                                                                                    |
-| ---------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `claims`               | An object (map) of the default OIDC claims AM provides.The keys are the claim strings. The values are the claim value objects.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | Map                                                                                   | Map                                                                                                                                                                |
-| `claimLocales`         | An array of string values from the `claims_locales` parameter.Learn more in [Claims Languages and Scripts](https://openid.net/specs/openid-connect-core-1_0.html#ClaimsLanguagesAndScripts) in the *OpenID Connect Core 1.0* specification.                                                                                                                                                                                                                                                                                                                                                                    | Array of Strings                                                                      | Array of Strings                                                                                                                                                   |
-| `claimObjects`         | The default OIDC claims AM provides.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           | An array of claim objects.                                                            | *Not available*                                                                                                                                                    |
-| `clientProperties`     | A map of properties configured in the client profile. Only present if the client was correctly identified.Find information about the keys in [Access client properties](access-token-modification-api.html#atmapi-client-properties).                                                                                                                                                                                                                                                                                                                                                                          | Map                                                                                   | Map                                                                                                                                                                |
-| `identity`             | Represents an identity that AM can access.Find information about how to use the binding in [Access profile data](access-token-modification-api.html#atmapi-profile).                                                                                                                                                                                                                                                                                                                                                                                                                                           | An [AMIdentity](../_attachments/apidocs/com/sun/identity/idm/AMIdentity.html) object. | A wrapper object for a scripted identity.                                                                                                                          |
-| `requestedClaims`      | An object (map) of requested claims. This is empty unless the request includes the `claims` query string parameter and AM is configured to support its use.Under Native Consoles > Access Management, go to Realms > *Realm Name* > Services > OAuth2 Provider > Advanced OpenID Connect. Enable Enable "claims\_parameter\_supported" and save your change.Find more information about the `claims` query string parameter in [Requesting Claims using the "claims" Request Parameter](https://openid.net/specs/openid-connect-core-1_0.html#ClaimsParameter) in the *OpenID Connect Core 1.0* specification. | Map of Set objects                                                                    | Map of List objects                                                                                                                                                |
-| `requestedTypedClaims` | This is empty unless the request includes claims.A claim with a single value means the script should return only that value.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   | An array of the requested claims objects.                                             | *Not available*. Use `requestedClaims` instead.                                                                                                                    |
-| `requestProperties`    | A read-only object (map) of the request properties.Learn more in [Access request properties](access-token-modification-api.html#atmapi-request-properties).                                                                                                                                                                                                                                                                                                                                                                                                                                                    | Map                                                                                   | Map                                                                                                                                                                |
-| `scopes`               | The set of scopes in the client request.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | Set of Strings                                                                        | List of Strings                                                                                                                                                    |
-| `session`              | A representation of the user's SSO session object.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             | An [SSOToken](../_attachments/apidocs/com/iplanet/sso/SSOToken.html) object.          | A `ScriptedSession` object.> **Collapse: Methods**
+| Binding                | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  | Legacy                                                                                | Next-generation                                                                                                                                                    |
+| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `claims`               | An object (map) of the default OIDC claims AM provides.The keys are the claim strings. The values are the claim value objects.                                                                                                                                                                                                                                                                                                                                                                                                                                                                               | Map                                                                                   | Map                                                                                                                                                                |
+| `claimLocales`         | An array of string values from the `claims_locales` parameter.Learn more in [Claims Languages and Scripts](https://openid.net/specs/openid-connect-core-1_0.html#ClaimsLanguagesAndScripts) in the *OpenID Connect Core 1.0* specification.                                                                                                                                                                                                                                                                                                                                                                  | Array of Strings                                                                      | Array of Strings                                                                                                                                                   |
+| `claimObjects`         | The default OIDC claims AM provides.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | An array of claim objects.                                                            | *Not available*                                                                                                                                                    |
+| `clientProperties`     | A map of properties configured in the client profile. Only present if the client was correctly identified.Find information about the keys in [Access client properties](access-token-modification-api.html#atmapi-client-properties).                                                                                                                                                                                                                                                                                                                                                                        | Map                                                                                   | Map                                                                                                                                                                |
+| `identity`             | Represents an identity that AM can access.Find information about how to use the binding in [Access profile data](access-token-modification-api.html#atmapi-profile).                                                                                                                                                                                                                                                                                                                                                                                                                                         | An [AMIdentity](../_attachments/apidocs/com/sun/identity/idm/AMIdentity.html) object. | A wrapper object for a scripted identity.                                                                                                                          |
+| `requestedClaims`      | An object (map) of requested claims. This is empty unless the request includes the `claims` query string parameter and AM is configured to support its use.Under Native Consoles > Access Management, go to Realms > *Realm Name* > Services > OAuth2 Provider > Advanced OpenID Connect. Enable Enable "claims_parameter_supported" and save your change.Find more information about the `claims` query string parameter in [Requesting Claims using the "claims" Request Parameter](https://openid.net/specs/openid-connect-core-1_0.html#ClaimsParameter) in the *OpenID Connect Core 1.0* specification. | Map of Set objects                                                                    | Map of List objects                                                                                                                                                |
+| `requestedTypedClaims` | This is empty unless the request includes claims.A claim with a single value means the script should return only that value.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | An array of the requested claims objects.                                             | *Not available*. Use `requestedClaims` instead.                                                                                                                    |
+| `requestProperties`    | A read-only object (map) of the request properties.Learn more in [Access request properties](access-token-modification-api.html#atmapi-request-properties).                                                                                                                                                                                                                                                                                                                                                                                                                                                  | Map                                                                                   | Map                                                                                                                                                                |
+| `scopes`               | The set of scopes in the client request.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     | Set of Strings                                                                        | List of Strings                                                                                                                                                    |
+| `session`              | A representation of the user's SSO session object.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           | An [SSOToken](../_attachments/apidocs/com/iplanet/sso/SSOToken.html) object.          | A `ScriptedSession` object.> **Collapse: Methods**
 >
 > ```java
 > public String getProperty(String name)

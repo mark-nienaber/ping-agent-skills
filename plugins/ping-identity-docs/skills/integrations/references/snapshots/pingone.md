@@ -1,1405 +1,1500 @@
 ---
-title: Authorization flow
-description: When using the PingOne MFA IdP Adapter through the PingFederate authentication application programming interface (API), the following flow is used for requesting authorization using a push notification to the user's paired mobile app.
+title: (Workforce only) Configuring offline MFA
+description: Offline multi-factor authentication (MFA) allows users to authenticate when the PingOne server is unreachable. If your organization is using MFA as a primary or secondary mode of authentication for federated single sign-on (SSO), you can implement the offline MFA feature of the PingOne MFA IdP Adapter adapter, so you can circumvent unforeseen outages or network issues preventing users from signing on to access their applications.
 component: pingone
-page_id: pingone:pingone_mfa_integration_kit_3.2:pf_p1_mfa_ik_authorization_flow
-canonical_url: https://docs.pingidentity.com/integrations/pingone/pingone_mfa_integration_kit_3.2/pf_p1_mfa_ik_authorization_flow.html
+page_id: pingone:pingone_mfa_integration_kit:pf_p1_mfa_ik_configuring_offline_mfa
+canonical_url: https://docs.pingidentity.com/integrations/pingone/pingone_mfa_integration_kit/pf_p1_mfa_ik_configuring_offline_mfa.html
 llms_txt: https://docs.pingidentity.com/integrations/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: June 15, 2024
+revdate: June 28, 2026
 section_ids:
-  authorization-via-the-mobile-app: Authorization via the mobile app
+  before-you-begin: Before you begin
+  steps: Steps
 ---
 
-# Authorization flow
+# (Workforce only) Configuring offline MFA
 
-When using the PingOne MFA IdP Adapter through the PingFederate authentication application programming interface (API) *(tooltip: \<div class="paragraph">
-\<p>A specification of interactions available for building software to access an application or service.\</p>
-\</div>)*, the following flow is used for requesting authorization using a push notification to the user's paired mobile app.
+Offline multi-factor authentication (MFA) allows users to authenticate when the PingOne server is unreachable. If your organization is using MFA as a primary or secondary mode of authentication for federated single sign-on (SSO), you can implement the offline MFA feature of the PingOne MFA IdP Adapter adapter, so you can circumvent unforeseen outages or network issues preventing users from signing on to access their applications.
 
-## Authorization via the mobile app
+When the PingOne server is available, the adapter caches each user's device credentials in an LDAP data source. If the PingOne server can't be reached, the adapter uses those cached credentials to authenticate the user locally.
 
-![A flow diagram showing the authorization process](_images/qjy1611964552690.png)
+|   |                                                                      |
+| - | -------------------------------------------------------------------- |
+|   | PingOne MFA policies are not enforced during offline authentication. |
 
-1. The user completes first-factor authentication. Completion of first-factor authentication is a prerequisite before progressing to multi-factor authentication (MFA) *(tooltip: \<div class="paragraph">
-   \<p>An electronic authentication method where a user is granted access only after presenting two or more verification factors for authentication.\</p>
-   \</div>)*, when using the PingOne MFA IdP Adapter with the PingFederate Authentication API flow.
+## Before you begin
 
-2. The status of `AUTHENTICATION_REQUIRED` is returned in the response to the Mobile app (API client).
+Before configuring offline MFA, make sure that you have the following:
 
-3. The Mobile app (API client) gets a mobile payload from the mobile SDK.
+* **PingOne Workforce environment with the **PingFederate Administrator** role**: The **PingFederate Administrator** role is required to use offline MFA.
 
-4. The Mobile app (API client) invokes the `authenticate` action, using the mobile payload.
+* **PingOne MFA IdP Adapter 4.1** or later.
 
-5. The status of `PUSH_CONFIRMATION_WAITING` together with the `selectedDeviceRef` object are returned in the response to the Mobile app (API client).
+* **LDAP data source**: An LDAP data source must be configured in PingFederate to store offline device credentials as an attribute on the user object.
 
-6. The Mobile app (API client) invokes the `poll` action, so that PingFederate gets the status of the mobile push. This is repeated until either a successful status is received or a timeout is reached.
+* **Encryption key** (recommended): An encryption key is strongly recommended to protect device data at rest. Without an encryption key, device credentials are stored as plain text in LDAP, and the **Allow Offline Devices Without Encryption** checkbox must be selected before you can save the configuration.
 
-7. The status of `MFA_COMPLETED` together with the `device_authorized` code are returned in the response to the Mobile app (API client).
+* **Unlimited Strength Java Cryptography Extension (JCE)**: Required for supporting the 256-byte key size for cryptographic algorithms. Without it, the feature will return an exception related to the missing library and will not function.
 
-8. The Mobile app (API client) invokes the `continueAuthentication` action. The Mobile app (API client) must call `continueAuthentication` in order to progress in the OIDC flow, and to complete it.
+## Steps
 
-9. PingFederate returns an access token to the Mobile app (API client).
+1. In the PingFederate administrative console, go to **Authentication > Integration > IdP Adapters** and select the PingOne MFA IdP Adapter adapter, or create a new one.
+
+2. On the **IdP Adapter** tab, click **Show Advanced Fields**.
+
+3. Configure the offline MFA fields:
+
+   * **LDAP Data Source**: Select the LDAP data source where your user objects are stored. Offline device data is currently configured to reside directly on the user object.
+
+   * **Encryption Key For Devices**: A base64url-encoded 256-bit key used to encrypt device credentials before saving them to LDAP.
+
+     |   |                                                                                                                                                                                                                                             |
+     | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+     |   | If the encryption key is changed, users must authenticate online at least once for their cached device credentials to be re-encrypted with the new key. Until then, offline authentication follows the **No Devices Failure Mode** setting. |
+
+   * **Allow Offline Devices Without Encryption**: Select the checkbox to confirm that device credentials will be stored as plain text. Required if the **Encryption Key** field is empty.
+
+   * **LDAP Search Scope**: Select the scope used when searching the directory for the user's device data. Only applies when device data is stored on the user object.
+
+   * **LDAP Data Source Filter**: An LDAP search filter used to locate the user entry. Use `${username}` as a placeholder for the authenticating user's username. For example, for Active Directory: `sAMAccountName=${username}`.
+
+   * **State Attribute**: The name of an LDAP attribute on the user object that overrides how that user is authenticated during offline authentication. When set, the adapter reads this attribute to determine whether to bypass or block the individual user. If left empty, no per-user override is applied.
+
+4. In the **Service Unavailable Failure Mode** field, configure how the adapter behaves when it's unable to access PingOne. Options include:
+
+   * **Block user**: Block the user's sign-on attempt.
+
+   * **Bypass authentication**: Authenticate the user without requiring MFA.
+
+   * **Enforce offline authentication**: The adapter requires offline MFA authentication regardless of PingOne availability. Use this option temporarily if PingOne is down and passive offline authentication isn't prompting users to authenticate offline.
+
+   * **Passive offline authentication**: The adapter attempts offline MFA when PingOne is unreachable, then falls back to the **No Devices Failure Mode** setting if the user has no cached offline credentials.
+
+5. Click **Done**, then click **Save**.
 
 ---
 
 ---
-title: Building a flow in DaVinci
-description: To integrate with PingFederate, configure your DaVinci flow to expect the parameters that you defined in the PingOne DaVinci IdP Adapter and end the flow with a JavaScript Object Notation (JSON) response.
+title: (Workforce only) Transitioning from the PingID Adapter to the PingOne MFA IdP Adapter
+description: Learn how to transition your PingFederate deployment from the PingID Adapter to the PingOne MFA IdP Adapter.
 component: pingone
-page_id: pingone:pingone_davinci_integration_kit:pf_p1_davinci_ik_building_a_flow_in_davinci
-canonical_url: https://docs.pingidentity.com/integrations/pingone/pingone_davinci_integration_kit/pf_p1_davinci_ik_building_a_flow_in_davinci.html
+page_id: pingone:pingone_mfa_integration_kit:pf_p1_mfa_ik_transitioning_from_pingid_adapter
+canonical_url: https://docs.pingidentity.com/integrations/pingone/pingone_mfa_integration_kit/pf_p1_mfa_ik_transitioning_from_pingid_adapter.html
+llms_txt: https://docs.pingidentity.com/integrations/pingone/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: September 7, 2026
+section_ids:
+  requirements: Requirements
+  migrating-your-configuration: Migrating your configuration
+  _changed_fields: Changed fields
+  changed-behavior: Changed behavior
+  _changed_attributes: Changed attributes
+  authentication-domain-changes: Authentication domain changes
+  unsupported-features: Unsupported Features
+---
+
+# (Workforce only) Transitioning from the PingID Adapter to the PingOne MFA IdP Adapter
+
+If you currently use the PingID Adapter for PingFederate integration, you can now use the PingOne MFA Integration Kit to integrate directly from PingOne without requiring the legacy PingID admin portal. This topic covers requirements, differences in field names and attributes, and features not yet available in the PingOne MFA Integration Kit.
+
+|   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| - | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | The PingOne MFA Integration Kit and the PingID Adapter are not interchangeable versions of the same product.- The PingID Adapter integrates directly with the PingID service.
+
+- The PingOne MFA Integration Kit integrates with PingOne and requires either:
+
+  * Singapore and Canada geographies: a PingOne for Workforce environment.
+
+  * All other geographies: a PingOne environment with the PingID service.
+
+    You must create a new adapter instance and reconfigure your PingFederate authentication policies to use the PingOne MFA IdP Adapter. |
+
+There are a few key differences to be aware of before you start:
+
+* Configuration
+
+  * **PingOne MFA IdP Adapter**: Configuration is split between PingOne admin portal and the adapter.
+
+  * **PingID Adapter**: Configuration is split between the PingID admin portal and the adapter itself.
+
+* Authenticator flow UI
+
+  * **PingOne MFA IdP Adapter**: Includes Native UI HTML files, which are bundled with the adapter.
+
+  * **PingID Adapter**: No native UI
+
+* Device Management
+
+  * **PingOne MFA IdP Adapter**: Device management can be handled natively in the adapter, without requiring device management through an external application.
+
+  * **PingID Adapter**: Device management requires an external application (such as the PingID admin portal **Devices page**, or the PingOne **MyAccounts** page).
+
+* Download manifest
+
+  The PingOne MFA Integration Kit has a different download manifest from the PingID Adapter. Before deploying, review the [PingOne MFA Integration Kit download manifest](pf_p1_mfa_ik_download_manifest_4.0.html) to make sure you have the correct files.
+
+## Requirements
+
+| Requirement                 | Details                                                                                                                                                       |
+| --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| PingFederate                | 11.3 or later                                                                                                                                                 |
+| PingOne MFA Integration Kit | 4.1 or later                                                                                                                                                  |
+| Java                        | 17 or later                                                                                                                                                   |
+| PingOne environment         | Singapore and Canada geographies: requires a PingOne for Workforce environment.All other geographies: requires a PingOne environment with the PingID service. |
+
+|   |                                                                                                                          |
+| - | ------------------------------------------------------------------------------------------------------------------------ |
+|   | Passwordless authentication using the PingID Desktop App (including Conditional UI) requires PingFederate 13.x or later. |
+
+## Migrating your configuration
+
+Create a new PingOne MFA IdP Adapter instance and use it to recreate your configuration manually. Test the configuration and when you are done, transition your users to use the new PingOne MFA IdP Adapter instance.
+
+1. [Update the PingOne MFA Integration Kit and deploy it](pf_p1_mfa_ik_deploying_the_integration_files_4.0.html) to your PingFederate instance.
+
+2. [Connect PingFederate to PingOne](pf_p1_mfa_ik_connecting_pf_to_p1_4.0.html).
+
+3. [Configure a new PingOne MFA IdP Adapter instance](pf_p1_mfa_ik_configuring_an_adapter_instance_4.0.html), referring to [Changed fields](#_changed_fields) for field names that changed.
+
+4. Update your PingFederate authentication policies to use the new adapter instance.
+
+5. If your authentication policies use PingID Adapter output attributes in downstream policy steps, update them to use the equivalent PingOne MFA Integration Kit attributes. See [Changed attributes](#_changed_attributes).
+
+|   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | * If your users authenticate with passkeys devices, you must:
+
+  1. Update the relevant FIDO policy to use a compatible domain (preferably the PingFederate root domain) as the `rpid`.
+
+  2. Make sure users with Passkey devices registered with the PingOne domain re-register their Passkeys.
+
+  Learn more in [Authentication domain changes](#authentication-domain-changes) and [Unsupported Features](#unsupported-features).
+
+* If your PingOne MFA policy still includes the legacy FIDO implementation (listing FIDO biometrics and Security Key as authentication methods), you must update it to FIDO2. Learn more in [Updating an existing MFA policy to use FIDO2](https://docs.pingidentity.com/strong_authentication_mfa/p1_updating_an_mfa_policy_to_fido2.html) in the PingOne documentation. |
+
+## Changed fields
+
+The following PingID Adapter fields have new names or different behavior in the PingOne MFA IdP Adapter.
+
+**Field name changes from the PingID Adapter to the PingOne MFA IdP Adapter**
+
+| PingID Adapter field                                    | PingOne MFA IdP Adapter field                                                                           | Notes                                                                                                                                                                                                                                                                                                            |
+| ------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Authentication During Errors                            | **Service Unavailable Failure Mode**                                                                    | Expanded to include offline MFA options: **Passive offline authentication** and **Enforce offline authentication**. Learn more in [(Workforce only) Configuring offline MFA](pf_p1_mfa_ik_configuring_offline_mfa.html).                                                                                         |
+| Users Without a Paired Device                           | **No Devices Failure Mode**                                                                             | Updated to account for offline MFA scenarios.                                                                                                                                                                                                                                                                    |
+| Allow only predefined values for phone or email devices | **Email Field Behavior**, **SMS Field Behavior**, **Voice Field Behavior**, **WhatsApp Field Behavior** | Replaced by per-method field behavior settings. Each field accepts **None** (blank), **Pre-populate** (editable), or **Pre-populate and Restrict** (read-only from the user directory). Learn more in [PingOne MFA IdP Adapter settings reference](pf-p1-mfa-ik-p1-mfa-idp-adapter-settings-reference_4.0.html). |
+| Require PingID Registration                             | **Prompt Users to Set Up MFA**                                                                          | Controls whether users without a paired device are prompted to register an authentication method during sign-on.                                                                                                                                                                                                 |
+| LDAP Username Mapping                                   | **Use Username Attribute During Authentication**                                                        | Renamed in the PingOne MFA IdP Adapter. Controls whether the value from **Username Attribute** is used during authentication as well as provisioning. Learn more in [PingOne MFA IdP Adapter settings reference](pf-p1-mfa-ik-p1-mfa-idp-adapter-settings-reference_4.0.html).                                   |
+| Enforce authentication after device registration        | **Enforce authentication after device registration**                                                    | The field name is unchanged. In the PingOne MFA IdP Adapter, configure this setting in the adapter's Advanced fields instead of in the PingID admin portal. Learn more in [PingOne MFA IdP Adapter settings reference](pf-p1-mfa-ik-p1-mfa-idp-adapter-settings-reference_4.0.html).                             |
+| HTML Template                                           | **HTML Template Prefix**                                                                                | The PingOne MFA IdP Adapter uses a prefix to resolve HTML template files. Specify the prefix that matches your custom templates, or leave blank to use the bundled default templates.                                                                                                                            |
+| PingID Heartbeat Timeout                                | **API Request Timeout**                                                                                 | Controls the timeout for requests to the PingOne MFA API.                                                                                                                                                                                                                                                        |
+| PingID Properties File Name                             | N/A                                                                                                     | The PingID Adapter required a PingID-specific properties file. The PingOne MFA IdP Adapter does not use a separate properties file; all configuration is in the adapter itself.                                                                                                                                  |
+| Keep cookies at sign-off                                | Requires the Remember Me adapter                                                                        | SLO is supported when the Remember Me adapter is configured in your PingFederate authentication policy. Learn more in [Remembered devices setup](pf-p1-mfa-ik-remembered-device-setup_4.0.html).                                                                                                                 |
+| Refresh UserId Cookie, Cookie Duration                  | N/A                                                                                                     | The PingID Adapter managed its own cookie lifecycle. Cookie sign-off and refresh behavior is handled by PingFederate session management, not the PingOne MFA IdP Adapter.                                                                                                                                        |
+
+## Changed behavior
+
+The following PingID Adapter behaviors work differently in the PingOne MFA IdP Adapter.
+
+* Just-in-time (JIT) registration
+
+  * **PingOne MFA IdP Adapter**: The PingOne MFA IdP Adapter also provisions missing authentication methods for existing PingOne users, as well as new users with no devices. If a user exists in PingOne but is missing one or more authentication methods, the adapter provisions a device on initial sign-on. Learn more in [Enabling user and authentication method provisioning](pf_p1_mfa_ik_enabling_user_and_authentication_method_provisioning_4.0.html).
+
+  * **PingID Adapter**: JIT only runs if the user has no devices.
+
+* Protect risk evaluation
+
+  * **PingOne MFA IdP Adapter**: Protect risk evaluation is handled by the [PingOne Protect Integration Kit](../pingone_protect_integration_kit/pf_p1_protect_ik_overview_sso_flow.html) that's chained before the MFA adapter in the PingFederate authentication policy. The MFA adapter receives and acts on the Protect results.
+
+  * **PingID Adapter**: Risk evaluation was configured directly in the adapter through the Risk Level and PingOne Protect API Response Mapping fields.
+
+## Changed attributes
+
+The PingID Adapter wrote authentication results to the `pingid.authentication.type` output attribute. The PingOne MFA Integration Kit uses `pingone.mfa.status`, which has a different set of values.
+
+If your authentication policies use `pingid.authentication.type` for branching decisions, update them to reference `pingone.mfa.status` instead. The `pingone.mfa.status` values distinguish between web and mobile sign-on contexts. Learn more in [PingOne MFA attributes reference](pf_p1_mfa_ik_p1_mfa_status_attributes_reference_4.0.html).
+
+**Attribute changes from the PingID Adapter to the PingOne MFA IdP Adapter**
+
+| PingID Adapter attribute     | PingOne MFA IdP Adapter attribute | Notes                                                                                                                                                             |
+| ---------------------------- | --------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `pingid.authentication.type` | `pingone.mfa.status`              | Values differ. See [PingOne MFA attributes reference](pf_p1_mfa_ik_p1_mfa_status_attributes_reference_4.0.html) for the full list of `pingone.mfa.status` values. |
+
+## Authentication domain changes
+
+The following differences exist between the PingOne MFA Integration Kit and the PingID Adapter:
+
+* **PingID Adapter**: Redirected users to the PingOne regional domain (pingone.\<geography_name>) to complete authentication.
+
+* **PingOne MFA IdP Adapter**: Users sign on entirely on your custom domain. The adapter does not redirect users to a PingOne domain during authentication.
+
+  If your users authenticate with passkeys or FIDO devices, when transitioning to the PingOne MFA Integration Kit, you'll need to update the relevant FIDO policy to use a compatible domain (preferably the PingFederate root domain) as the `rpid`.
+
+  Learn more in [Using FIDO device with PingOne custom domain configuration](pf_p1_mfa_ik_configuring_domains_for_fido_device_support_4.0.html) and [Configuring a PingFederate policy for a consistent passwordless authentication experience](pid_configuring_pf_policy_for_passwordless_authentication.html).
+
+## Unsupported Features
+
+The following features are not currently supported in the PingOne MFA Integration Kit:
+
+* PingID-compatible post-authentication attributes
+
+* Mandatory enrollment date
+
+* Passkeys registered with the PingOne domain can't be used for authentication. The users should use the PingOne MFA Integration Kit device management to re-register their Passkey device. In a future release, the option to re-register a Passkey to a compatible domain will be included as part of the authentication flow.
+
+---
+
+---
+title: Adding a language pack
+description: The PingOne MFA Integration Kit supports localized user-facing messages through PingFederate's language pack mechanism. You can add a language pack to display adapter messages in a language other than English.
+component: pingone
+page_id: pingone:pingone_mfa_integration_kit:pf_p1_mfa_ik_adding_a_language_pack_4.0
+canonical_url: https://docs.pingidentity.com/integrations/pingone/pingone_mfa_integration_kit/pf_p1_mfa_ik_adding_a_language_pack_4.0.html
+llms_txt: https://docs.pingidentity.com/integrations/pingone/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: August 31, 2026
+section_ids:
+  about-this-task: About this task
+  steps: Steps
+  result: Result
+---
+
+# Adding a language pack
+
+The PingOne MFA Integration Kit supports localized user-facing messages through PingFederate's language pack mechanism. You can add a language pack to display adapter messages in a language other than English.
+
+## About this task
+
+The adapter uses PingFederate's `LanguagePackMessages` class and standard Java `ResourceBundle` locale fallback. When a user authenticates, PingFederate selects the properties file that best matches the user's locale. If no matching locale file exists, PingFederate falls back to English.
+
+The PingOne MFA Integration Kit 4.1 download includes adapter message files for the following languages:
+
+* Canadian French
+
+* Czech
+
+* Dutch
+
+* English
+
+* French
+
+* German
+
+* Hungarian
+
+* Italian
+
+* Japanese
+
+* Korean
+
+* Polish
+
+* Portuguese
+
+* Russian
+
+* Simplified Chinese
+
+* Thai
+
+* Turkish
+
+The PingOne MFA Integration Kit download includes one adapter-specific message file for each supported language. To enable a locale in PingFederate, two files are required in the PingFederate language-packs folder:
+
+* `pingone-mfa-messages_<locale>.properties` — the adapter-specific messages file included in the PingOne MFA Integration Kit download
+
+* `pingfederate-messages_<locale>.properties` — the core PingFederate messages file copied from the PingFederate installation
+
+|   |                                                                                                                                                                                                                  |
+| - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | Both files must be present in the `language-packs` folder. If `pingfederate-messages_<locale>.properties` is absent, PingFederate silently falls back to English even when the adapter-specific file is present. |
+
+## Steps
+
+1. In the PingOne MFA Integration Kit download, locate the `language-packs` folder. For more information about the download contents, refer to [Download manifest](pf_p1_mfa_ik_download_manifest_4.0.html).
+
+2. Select the pretranslated adapter message file for the language you want to use.
+
+   The file uses the following naming pattern:
+
+   ```
+   {file-prefix}-messages_<locale>.properties
+   ```
+
+3. Copy the selected adapter message file to `<pf_install>/server/default/conf/language-packs`. To customize the messages, edit only the values on the right side of each `=` sign. Do not change the message keys.
+
+   The download includes adapter message files for Czech, German, English, Canadian French, French, Hungarian, Italian, Japanese, Korean, Dutch, Polish, Portuguese, Russian, Thai, Turkish, and Simplified Chinese.
+
+4. In your PingFederate installation, locate `<pf_install>/server/default/conf/language-packs`. Copy `pingfederate-messages.properties` and rename the copy to use the same locale tag:
+
+   ```
+   pingfederate-messages_<locale>.properties
+   ```
+
+   For example: `pingfederate-messages_fr.properties`
+
+5. Place both locale files in `<pf_install>/server/default/conf/language-packs`:
+
+   * `pingone-mfa-messages_<locale>.properties`
+
+   * `pingfederate-messages_<locale>.properties`
+
+6. Restart the PingFederate server.
+
+## Result
+
+When a user authenticates and their browser locale matches the locale tag you configured, the adapter displays messages in that language.
+
+---
+
+---
+title: Adding an application in DaVinci
+description: Create an application to associate your PingFederate integration with your flow.
+component: pingone
+page_id: pingone:pingone_davinci_integration_kit:pf_p1_davinci_ik_adding_an_application_in_davinci
+canonical_url: https://docs.pingidentity.com/integrations/pingone/pingone_davinci_integration_kit/pf_p1_davinci_ik_adding_an_application_in_davinci.html
 llms_txt: https://docs.pingidentity.com/integrations/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 19, 2024
 section_ids:
+  steps: Steps
+---
+
+# Adding an application in DaVinci
+
+Create an application to associate your PingFederate integration with your flow.
+
+## Steps
+
+1. Sign on to the DaVinci admin portal.
+
+2. Create a blank flow:
+
+   1. Go to **Flows** and click **[icon: plus, set=fa]Add Flow**.
+
+   2. Select **Blank Flow**.
+
+   3. On the **Add Flow** dialog, enter a name for your flow. Click **Create**.
+
+   4. Complete the flow as described in [Building a flow in DaVinci](pf_p1_davinci_ik_building_a_flow_in_davinci.html).
+
+3. Add an application:
+
+   1. Go to **Applications**.
+
+   2. Click **[icon: plus, set=fa]Add Application**
+
+   3. On the **Add Application** dialog, enter a name for your application. Click **Create**.
+
+   4. Click your application.
+
+4. Add a flow policy to your application:
+
+   1. On the **Flow Policy** tab, click **[icon: plus, set=fa]Add Flow Policy**.
+
+   2. Select the flow that you made in step 2. Select **Latest Version** or another version. Click **Create My Flow Policy**.
+
+   3. On the **Edit Your Weight Distribution** dialog, in the **Analytics - Select Success Nodes** list, select your **Send success JSON response** node. Click **Save My Flow Policy**.
+
+   4. On the **Flow Policy** tab, note your **Policy ID**. You'll use this to configure the DaVinciadapter.
+
+5. On the **General** tab, note your **Company ID** and **API Key**. You'll use these to configure the DaVinci adapter.
+
+---
+
+---
+title: Adding device profiling to a browser-based authentication page
+description: You can adapt these instructions to add device profiling to any web page included in an adapter, such as the Identifier First Adapter or a custom adapter. The page must meet the criteria listed in Device profiling methods.
+component: pingone
+page_id: pingone:pingone_protect_integration_kit:pf_p1_protect_ik_adding_device_profiling_browser
+canonical_url: https://docs.pingidentity.com/integrations/pingone/pingone_protect_integration_kit/pf_p1_protect_ik_adding_device_profiling_browser.html
+llms_txt: https://docs.pingidentity.com/integrations/pingone/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: August 12, 2026
+section_ids:
   about-this-task: About this task
   steps: Steps
 ---
 
-# Building a flow in DaVinci
-
-To integrate with PingFederate, configure your DaVinci flow to expect the parameters that you defined in the PingOne DaVinci IdP Adapter and end the flow with a JavaScript Object Notation (JSON) *(tooltip: \<div class="paragraph">
-\<p>An open, lightweight data-interchange format that uses human-readable text to store and transmit data.\</p>
-\</div>)* response.
+# Adding device profiling to a browser-based authentication page
 
 ## About this task
 
-|   |                                                                                                                                                                                                                                                                                                                                                        |
-| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-|   | The following example builds and configures a widget-based DaVinci flow for integration with PingFederate. To show that the integration works, it displays the passed PingFederate values in a user-facing page.Flows can have different user-facing elements or none at all, depending on whether you build a widget-based flow or an API-based flow. |
+You can adapt these instructions to add device profiling to any web page included in an adapter, such as the Identifier First Adapter or a custom adapter. The page must meet the criteria listed in [Device profiling methods](pf_p1_protect_ik_device_profiling_methods.html).
 
-![A screen capture of the example flow.](_images/ltt1649454442858.jpg)
+To use the HTML Form Adapter:
+
+* [Configure a risk provider instance](pf_p1_protect_ik_configuring_provider_instance.html)
+
+* [Configure an HTML Form Adapter instance](http://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/pf_html_form_adapter_advanced_fields.html) to use the risk provider
 
 ## Steps
 
-1. In the DaVinci admin portal, go to **Flows**, and open the blank flow that you created in [Adding an application in DaVinci](pf_p1_davinci_ik_adding_an_application_in_davinci.html).
+1. If you're modifying an external web application, copy the following files from the integration `.zip` archive to a location that your page can access.
 
-2. Add PingFederate to your flow's input schema.
+   * `signals-sdk-<version>.js`
 
-   1. Go to **Flow Options ( [icon: ellipsis-v, set=fa]) > Input Schema**.
+   * `pingone-protect-device-profile-implementation.js`. (If you are using version 1.0.1 or earlier of the integration kit, the file is called `pingone-protect-device-profiling.js`)
 
-   2. Click **Add**.
+2. Add the following external script references to the sign-on page:
 
-   3. In the **Parameter Name** field, enter the exact name that you defined in the **DaVinci Parameter Name** column in your DaVinci adapter configuration.
+   |   |                                                   |
+   | - | ------------------------------------------------- |
+   |   | The scripts must be added in the following order. |
 
-      |   |                                                                                                                                                                                                                        |
-      | - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-      |   | You must add `nonce` as a parameter with the **Data Type** set to **String**.![Screen capture of the nonce parameter with the Data Type set to String and the Required setting enabled.](_images/wgd1678213439935.png) |
+   ```
+   <script type="text/javascript" src="signals-sdk-<version>.js"></script>
+   <script type="text/javascript" src="pingone-protect-device-profile-implementation.js"></script>
+   ```
 
-   4. Repeat steps b-c for each parameter that you defined in the **Simple Parameter Mappings** and **Advanced Parameter Mappings** tables.
+   |   |                                                                                                                                                                                                         |
+   | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+   |   | If you are using version 1.0.1 or earlier of the integration kit, replace the reference to `pingone-protect-device-profile-implementation.js` with a reference to `pingone-protect-device-profiling.js` |
 
-   5. Click **Save**.
+3. When you complete the steps in [Configuring an adapter instance](pf_p1_protect_ik_configuring_an_adapter_instance.html), you can enable risk evaluation for active sessions.
 
-3. **Optional:** If you're building a widget-based flow, create a registration form.
+   Follow the steps in [Configuring authentication sessions](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/pf_config_auth_sessions.html) to set up sessions for the PingOne Protect Adapter, and complete steps 2a, 2b, and 3.
 
-   |   |                                                                                                                                        |
-   | - | -------------------------------------------------------------------------------------------------------------------------------------- |
-   |   | This example node represents the functional part of the flow. When you build your own flow, this step is where you customize the flow. |
+---
 
-   1. On the flow canvas, add the **HTTP** connector and select the **HTML Form** capability. Select the node that appears in your flow.
+---
+title: Adding device profiling to a browser-based authentication page
+description: "There are two ways for device profiling data to be collected: by the PingOne Risk IdP Adapter, or by a previous adapter such as the HTML Form Adapter."
+component: pingone
+page_id: pingone:pingone_risk_integration_kit:pf_p1_risk_ik_adding_device_profiling_to_an_authentication_page
+canonical_url: https://docs.pingidentity.com/integrations/pingone/pingone_risk_integration_kit/pf_p1_risk_ik_adding_device_profiling_to_an_authentication_page.html
+llms_txt: https://docs.pingidentity.com/integrations/pingone/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: July 12, 2024
+section_ids:
+  about-this-task: About this task
+  adding-device-profiling-to-a-browser-based-authentication-page-using-the-pingone-risk-signals-sdk-with-integration-kit-1-3-1: Adding device profiling to a browser-based authentication page using the PingOne Risk (Signals) SDK with integration kit 1.3.1
+  about-this-task-2: About this task
+  steps: Steps
+  adding-device-profiling-to-a-browser-based-authentication-page-using-the-pingone-risk-signals-sdk-and-integration-kit-1-3-or-earlier: Adding device profiling to a browser-based authentication page using the PingOne Risk (Signals) SDK and integration kit 1.3 or earlier
+  about-this-task-3: About this task
+  steps-2: Steps
+  adding-device-profiling-to-a-browser-based-authentication-page-using-fingerprint-js: Adding device profiling to a browser-based authentication page using Fingerprint JS
+  about-this-task-4: About this task
+  steps-3: Steps
+---
 
-   2. In the **Title** field, enter a title, such as `Registration`.
+# Adding device profiling to a browser-based authentication page
 
-   3. In the **Fields List** section, add fields for the following:
+There are two ways for device profiling data to be collected: by the PingOne Risk IdP Adapter, or by a previous adapter such as the HTML Form Adapter.
 
-      * Username
+## About this task
 
-      * Password
+Getting the device profile on the HTML Form Adapter page reduces the perceived wait times for the user. Learn more in [Device profiling methods](pf_p1_risk_ik_device_profiling_methods.html).
 
-      |   |                                                                                                   |
-      | - | ------------------------------------------------------------------------------------------------- |
-      |   | For help, see the [HTTP connector](https://docs.pingidentity.com/connectors/http_connector.html). |
+## Adding device profiling to a browser-based authentication page using the PingOne Risk (Signals) SDK with integration kit 1.3.1
 
-   4. In the **Next Button Text** field, enter `Sign Up`.
+### About this task
 
-   5. Click **Apply**.
+You can adapt these instructions to add device profiling to any page, such as the HTML Form Adapter or your web application. The page must meet the criteria listed in [Device profiling methods](pf_p1_risk_ik_device_profiling_methods.html).
 
-4. **Optional:** For widget-based flows, show the parameters DaVinci received from PingFederate.
+|   |                                                                                                                                                                                 |
+| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | PingOne Risk Integration Kit version 1.3.1 must be deployed before any changes can be made on the HTML side. SDK version 5.2 and later requires adapter version 1.3.1 or later. |
 
-   |   |                                                                                               |
-   | - | --------------------------------------------------------------------------------------------- |
-   |   | This node is for demonstration purposes only. You don't need it when you build your own flow. |
+### Steps
 
-   1. Following your **HTML Form** node in your flow, add the **HTTP** connector and select the **Custom HTML Message** capability. Select the node that appears in your flow.
+1. If you are modifying an external web application, copy the following files from the integration `.zip` archive to a location that your page can access.
 
-   2. In the **Title** field, enter a title, such as `Welcome`.
+   * `pingone-risk-profiling-signals-sdk.js`
 
-   3. In the **Message** field, enter the following:
+   * `pingone-risk-management-embedded.js`
 
-      ```none
-      Confirm your information:
+   * `signals-sdk-<version>.js`
 
-      Chained Attributes
+2. **Optional:** Edit the `pingone-risk-profiling-signals-sdk.js` file and add your PingOne environment ID.
 
-      Specified chained val:
+   ```
+   function profileDevice(callback) {
+       // Initialize the SDK
+       // replace <envid> with the PingOne console > Environment > Environment ID value
+       onPingOneSignalsReady(function () {
+           _pingOneSignals.initSilent({
+                envId: "<envid>",
+               behavioralDataCollection: false,
+               deviceAttributesBlackList: []
+           }).then(function ()
+   ```
 
-      Extended Properties
+3. Add the following external script references to the sign-on page:
 
-      Specified extended array:
+   |   |                                                   |
+   | - | ------------------------------------------------- |
+   |   | The scripts must be added in the following order. |
 
-      PAR Object
+   ```
+   <script type="text/javascript" src="signals-sdk-<version>.js"></script>
+   <script type="text/javascript" src="pingone-risk-profiling-signals-sdk.js"></script>
+   <script type="text/javascript" src="pingone-risk-management-embedded.js"></script>
+   ```
 
-      Specified PAR:
+4. **Optional:** Customize the device profile cookie name prefix to suit your environment.
 
-      Server Base URL:
+   1. Open `pingone-risk-management-embedded.js` for editing.
+
+   2. On the following line, change the value to a name of your choosing:
+
+      ```
+      var cookieNamePrefix = "pingone.risk.device.profile";
       ```
 
-   4. Populate the message by clicking **{}** and inserting variables from your flow's input schema.
+   3. Save the file.
 
-      ![A screen recording of a user inserting the chainedAttributes variable into the Message field.](_images/ugc1649886713104.gif)
+5. When you complete the steps in [Configuring an adapter instance](pf_p1_risk_ik_configuring_an_adapter_instance.html), follow the instructions to set the **Device profiling method** to **Captured by a previous adapter**. Update the **Cookie Name Prefix** field if you customized it above.
 
-   5. In the **Next Button Text** field, enter `Sign Up`.
+## Adding device profiling to a browser-based authentication page using the PingOne Risk (Signals) SDK and integration kit 1.3 or earlier
 
-   6. Click **Apply**.
+### About this task
 
-5. Send a JSON response back to PingFederate.
+You can adapt these instructions to add device profiling to any page, such as the HTML Form Adapter or your web application. The page must meet the criteria listed in [Device profiling methods](pf_p1_risk_ik_device_profiling_methods.html).
 
-   |   |                                                                               |
-   | - | ----------------------------------------------------------------------------- |
-   |   | When you build your own flow, make sure that you end the flow with this node. |
+### Steps
 
-   1. Following the **Custom HTML Message** node in your flow, add the **HTTP** connector and select the **Send Success JSON Response** capability. Select the node that appears in your flow.
+1. If you are modifying an external web application, copy the following files from the integration `.zip` archive to a location that your page can access.
 
-   2. Make sure that **Return Request Parameters** is enabled.
+   * `pingone-risk-profiling-signals-sdk.js`
 
-   3. In the **Additional Fields in the Response** section, click **[icon: plus, set=fa]Field**.
+   * `pingone-risk-management-embedded.js`
 
-   4. In the **Value** field, click **\\{}** and select the **username** variable from your **HTML Form** node.
+   * `signals-sdk.js`
 
-      ![A screen recording that shows the user inserting the username variable in the value field.](_images/ged1650915377831.gif)
+2. Edit the `pingone-risk-profiling-signals-sdk.js` file and add your PingOne environment ID.
 
-   5. In the **Name of the field containing the additional properties** field, enter `additionalProperties`.
+   |   |                                                                           |
+   | - | ------------------------------------------------------------------------- |
+   |   | The PingOne Risk SDK won't work if the PingOne environment ID is missing. |
 
-      If you customized the **Additional Properties Attribute** field in your PingOne DaVinci IdP Adapter configuration, enter the same value here.
+   ```
+   function profileDevice(callback) {
+       // Initialize the SDK
+       // replace <envid> with the PingOne console > Environment > Environment ID value
+       onPingOneSignalsReady(function () {
+           _pingOneSignals.initSilent({
+                envId: "<envid>",
+               deviceAttributesBlackList: []
+           }).then(function ()
+   ```
 
-   6. Make sure **Signed Response** is enabled.
+3. Add the following external script references to the sign-on page:
 
-   7. Click **Apply**.
+   |   |                                                   |
+   | - | ------------------------------------------------- |
+   |   | The scripts must be added in the following order. |
 
-6. If you're building a widget-based flow, on the **HTTP** node, click the **Gear** icon to open the connector configuration. In the **Select an OpenID token management connection for signed HTTP responses** list, select **Token Management**.
+   ```
+   <script type="text/javascript" src="signals-sdk.js"></script>
+   <script type="text/javascript" src="pingone-risk-profiling-signals-sdk.js"></script>
+   <script type="text/javascript" src="pingone-risk-management-embedded.js"></script>
+   ```
 
-   ![A pair of screen captures that show the user selecting token management for OpenID in the connector configuration.](_images/mhl1650918712933.jpg)
+4. **Optional:** Customize the device profile cookie name prefix to suit your environment.
 
-   |   |                                                                                                                                                                           |
-   | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-   |   | If your list doesn't have a token management connector to select, save your flow, go to **Connections > New Connection**, and then add a **Token Management** connection. |
+   1. Open `pingone-risk-management-embedded.js` for editing.
 
-7. Save and deploy your flow.
+   2. On the following line, change the value to a name of your choosing:
+
+      ```
+      var cookieNamePrefix = "pingone.risk.device.profile";
+      ```
+
+   3. Save the file.
+
+5. When you complete the steps in [Configuring an adapter instance](pf_p1_risk_ik_configuring_an_adapter_instance.html), follow the instructions to set the **Device profiling method** to **Captured by a previous adapter**. Update the **Cookie Name Prefix** field if you customized it above.
+
+## Adding device profiling to a browser-based authentication page using Fingerprint JS
+
+### About this task
+
+You can adapt these instructions to add device profiling to any page, such as the HTML Form Adapter or your web application. The page must meet the criteria listed in [Device profiling methods](pf_p1_risk_ik_device_profiling_methods.html).
+
+|   |                                                                                                                                                           |
+| - | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | The PingOne Risk (Signals) SDK is the preferred way to get device profiling and is recommended for use in the PingOne Risk Integration Kit 1.3 and later. |
+
+### Steps
+
+1. If you are modifying an external web application, copy the following files from the integration `.zip` archive to a location that your page can access.
+
+   * `fingerprint2-<version>.min.js`
+
+   * `pingone-risk-management-profiling.js`
+
+   * `pingone-risk-management-embedded.js`
+
+2. Add the following external script references to the sign-on page.
+
+   |   |                                                   |
+   | - | ------------------------------------------------- |
+   |   | The scripts must be added in the following order: |
+
+   ```
+   <script type="text/javascript" src="fingerprint2-<version>.min.js"></script>
+   <script type="text/javascript" src="{file-prefix}-profiling.js"></script>
+   <script type="text/javascript" src="{file-prefix}-embedded.js"></script>
+   ```
+
+3. Edit the `pingone-risk-management-embedded.js` file to use Fingerprint JS according to the comments in the file.
+
+4. **Optional:** Customize the device profile cookie name prefix to suit your environment.
+
+   1. Open `pingone-risk-management-embedded.js` for editing.
+
+   2. On the following line, change the value to a name of your choosing:
+
+      ```
+      var cookieNamePrefix = "pingone.risk.device.profile";
+      ```
+
+   3. Save the file.
+
+5. When you complete the steps in [Configuring an adapter instance](pf_p1_risk_ik_configuring_an_adapter_instance.html), follow the instructions to set the **Device profiling method** to **Captured by a previous adapter**. Update the **Cookie Name Prefix** field if you customized it above.
 
 ---
 
 ---
-title: Changelog
-description: The following is the change history for the Magic Link Integration Kit. Updated April 26, 2024.
+title: Adding device profiling to a browser-based authentication page using Fingerprint JS
+description: You can adapt these instructions to add device profiling to any page, such as the HTML Form Adapter or your web application. The page must meet the criteria listed in Device profiling methods.
 component: pingone
-page_id: pingone:magic_link_integration_kit:pf_magic_link_ik_changelog
-canonical_url: https://docs.pingidentity.com/integrations/pingone/magic_link_integration_kit/pf_magic_link_ik_changelog.html
+page_id: pingone:pingone_risk_integration_kit:pf_p1_risk_ik_adding_device_profiling_to_a_browser_based_authn_page_using_fingerprint_js
+canonical_url: https://docs.pingidentity.com/integrations/pingone/pingone_risk_integration_kit/pf_p1_risk_ik_adding_device_profiling_to_a_browser_based_authn_page_using_fingerprint_js.html
 llms_txt: https://docs.pingidentity.com/integrations/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: June 10, 2024
+revdate: July 12, 2024
 section_ids:
-  magic-link-integration-kit-1-0-april-2024: Magic Link Integration Kit 1.0 — April 2024
+  about-this-task: About this task
+  steps: Steps
 ---
 
-# Changelog
+# Adding device profiling to a browser-based authentication page using Fingerprint JS
 
-The following is the change history for the Magic Link Integration Kit. Updated April 26, 2024.
+## About this task
 
-## Magic Link Integration Kit 1.0 — April 2024
+You can adapt these instructions to add device profiling to any page, such as the HTML Form Adapter or your web application. The page must meet the criteria listed in [Device profiling methods](pf_p1_risk_ik_device_profiling_methods.html).
 
-* Initial release.
+|   |                                                                                                                                                           |
+| - | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | The PingOne Risk (Signals) SDK is the preferred way to get device profiling and is recommended for use in the PingOne Risk Integration Kit 1.3 and later. |
+
+## Steps
+
+1. If you are modifying an external web application, copy the following files from the integration `.zip` archive to a location that your page can access.
+
+   * `fingerprint2-<version>.min.js`
+
+   * `pingone-risk-management-profiling.js`
+
+   * `pingone-risk-management-embedded.js`
+
+2. Add the following external script references to the sign-on page.
+
+   |   |                                                   |
+   | - | ------------------------------------------------- |
+   |   | The scripts must be added in the following order: |
+
+   ```
+   <script type="text/javascript" src="fingerprint2-<version>.min.js"></script>
+   <script type="text/javascript" src="{file-prefix}-profiling.js"></script>
+   <script type="text/javascript" src="{file-prefix}-embedded.js"></script>
+   ```
+
+3. Edit the `pingone-risk-management-embedded.js` file to use Fingerprint JS according to the comments in the file.
+
+4. **Optional:** Customize the device profile cookie name prefix to suit your environment.
+
+   1. Open `pingone-risk-management-embedded.js` for editing.
+
+   2. On the following line, change the value to a name of your choosing:
+
+      ```
+      var cookieNamePrefix = "pingone.risk.device.profile";
+      ```
+
+   3. Save the file.
+
+5. When you complete the steps in [Configuring an adapter instance](pf_p1_risk_ik_configuring_an_adapter_instance.html), follow the instructions to set the **Device profiling method** to **Captured by a previous adapter**. Update the **Cookie Name Prefix** field if you customized it above.
 
 ---
 
 ---
-title: Changelog
-description: The following is the change history for the PingOne DaVinci Integration Kit.
+title: Adding device profiling to a browser-based authentication page using the PingOne Risk (Signals) SDK and integration kit 1.3 or earlier
+description: You can adapt these instructions to add device profiling to any page, such as the HTML Form Adapter or your web application. The page must meet the criteria listed in Device profiling methods.
 component: pingone
-page_id: pingone:pingone_davinci_integration_kit:pf_p1_davinci_ik_changelog
-canonical_url: https://docs.pingidentity.com/integrations/pingone/pingone_davinci_integration_kit/pf_p1_davinci_ik_changelog.html
+page_id: pingone:pingone_risk_integration_kit:pf_p1_risk_ik_adding_device_profiling_to_a_browser_based_authn_page_using_p1risk_signals_sdk_and_ik_13_or_earlier
+canonical_url: https://docs.pingidentity.com/integrations/pingone/pingone_risk_integration_kit/pf_p1_risk_ik_adding_device_profiling_to_a_browser_based_authn_page_using_p1risk_signals_sdk_and_ik_13_or_earlier.html
 llms_txt: https://docs.pingidentity.com/integrations/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: April 14, 2025
+revdate: July 12, 2024
 section_ids:
-  pingone-davinci-integration-kit-1-3-april-2025: PingOne DaVinci Integration Kit 1.3 - April 2025
-  pingone-davinci-integration-kit-1-2-1-july-2024: PingOne DaVinci Integration Kit 1.2.1 - July 2024
-  pingone-davinci-integration-kit-1-2-july-2023: PingOne DaVinci Integration Kit 1.2 – July 2023
-  pingone-davinci-integration-kit-1-1-2-june-2023: PingOne DaVinci Integration Kit 1.1.2 – June 2023
-  pingone-davinci-integration-kit-1-1-1-april-2023: PingOne DaVinci Integration Kit 1.1.1 – April 2023
-  pingone-davinci-integration-kit-1-1-march-2023: PingOne DaVinci Integration Kit 1.1 – March 2023
-  pingone-davinci-integration-kit-1-0-1-november-2022: PingOne DaVinci Integration Kit 1.0.1 – November 2022
-  pingone-davinci-integration-kit-1-0-august-2022: PingOne DaVinci Integration Kit 1.0 – August 2022
+  about-this-task: About this task
+  steps: Steps
 ---
 
-# Changelog
+# Adding device profiling to a browser-based authentication page using the PingOne Risk (Signals) SDK and integration kit 1.3 or earlier
 
-The following is the change history for the PingOne DaVinci Integration Kit.
+## About this task
 
-## PingOne DaVinci Integration Kit 1.3 - April 2025
+You can adapt these instructions to add device profiling to any page, such as the HTML Form Adapter or your web application. The page must meet the criteria listed in [Device profiling methods](pf_p1_risk_ik_device_profiling_methods.html).
 
-* Added the ability to use the default PingFederate template parameters, including extended properties, in the `pingone-davinci.html` template. Learn more in the updated template file and [Customizable user-facing pages](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/pf_custom_user_facing_pages.html) in the PingFederate documentation.
+## Steps
 
-## PingOne DaVinci Integration Kit 1.2.1 - July 2024
+1. If you are modifying an external web application, copy the following files from the integration `.zip` archive to a location that your page can access.
 
-* Fixed an issue that caused an unexpected system error when using a DaVinci connector that redirected to PingFederate.
+   * `pingone-risk-profiling-signals-sdk.js`
 
-## PingOne DaVinci Integration Kit 1.2 – July 2023
+   * `pingone-risk-management-embedded.js`
 
-* Added the ability to select API-based DaVinci flows for a highly performant integration to support use cases that don't require user interaction. Use the new **Flow Type** adapter setting to specify either widget-based or API-based DaVinci flows.
+   * `signals-sdk.js`
 
-## PingOne DaVinci Integration Kit 1.1.2 – June 2023
+2. Edit the `pingone-risk-profiling-signals-sdk.js` file and add your PingOne environment ID.
 
-* Fixed an issue with error handling in certain scenarios with the HTTP connector.
+   |   |                                                                           |
+   | - | ------------------------------------------------------------------------- |
+   |   | The PingOne Risk SDK won't work if the PingOne environment ID is missing. |
 
-## PingOne DaVinci Integration Kit 1.1.1 – April 2023
+   ```
+   function profileDevice(callback) {
+       // Initialize the SDK
+       // replace <envid> with the PingOne console > Environment > Environment ID value
+       onPingOneSignalsReady(function () {
+           _pingOneSignals.initSilent({
+                envId: "<envid>",
+               deviceAttributesBlackList: []
+           }).then(function ()
+   ```
 
-* Fixed an issue that caused an inconsistent response error.
+3. Add the following external script references to the sign-on page:
 
-* Added support to custom DaVinci domains.
+   |   |                                                   |
+   | - | ------------------------------------------------- |
+   |   | The scripts must be added in the following order. |
 
-## PingOne DaVinci Integration Kit 1.1 – March 2023
+   ```
+   <script type="text/javascript" src="signals-sdk.js"></script>
+   <script type="text/javascript" src="pingone-risk-profiling-signals-sdk.js"></script>
+   <script type="text/javascript" src="pingone-risk-management-embedded.js"></script>
+   ```
 
-* Added support for the **Nonce Attribute Path** field.
+4. **Optional:** Customize the device profile cookie name prefix to suit your environment.
 
-* Resolved a potential security vulnerability.
+   1. Open `pingone-risk-management-embedded.js` for editing.
 
-## PingOne DaVinci Integration Kit 1.0.1 – November 2022
+   2. On the following line, change the value to a name of your choosing:
 
-* Fixed an issue that caused the adapter to return an error during an SLO event.
+      ```
+      var cookieNamePrefix = "pingone.risk.device.profile";
+      ```
 
-## PingOne DaVinci Integration Kit 1.0 – August 2022
+   3. Save the file.
 
-* Initial release.
-
-* Added support for DaVinci connectors with redirect.
-
-* Added the ability for the adapter to bypass or fail when PingOne is unavailable.
-
-* Added the ability to send specific attributes to send to DaVinci using simple and advanced parameter definitions.
-
-* Added the raw response from DaVinci to the log in DEBUG mode.
+5. When you complete the steps in [Configuring an adapter instance](pf_p1_risk_ik_configuring_an_adapter_instance.html), follow the instructions to set the **Device profiling method** to **Captured by a previous adapter**. Update the **Cookie Name Prefix** field if you customized it above.
 
 ---
 
 ---
-title: Changelog
-description: The following is the change history for the PingOne Integration Kit.
+title: Adding device profiling to a browser-based authentication page using the PingOne Risk (Signals) SDK with integration kit 1.3.1
+description: You can adapt these instructions to add device profiling to any page, such as the HTML Form Adapter or your web application. The page must meet the criteria listed in Device profiling methods.
 component: pingone
-page_id: pingone:pingone_integration_kit:pf_p1_ik_changelog
-canonical_url: https://docs.pingidentity.com/integrations/pingone/pingone_integration_kit/pf_p1_ik_changelog.html
+page_id: pingone:pingone_risk_integration_kit:pf_p1_risk_ik_adding_device_profiling_to_a_browser_based_authn_page_using_p1risk_signals_sdk_with_ik_131
+canonical_url: https://docs.pingidentity.com/integrations/pingone/pingone_risk_integration_kit/pf_p1_risk_ik_adding_device_profiling_to_a_browser_based_authn_page_using_p1risk_signals_sdk_with_ik_131.html
 llms_txt: https://docs.pingidentity.com/integrations/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: November 20, 2025
+revdate: July 12, 2024
 section_ids:
-  pingone-integration-kit-3-1-1-may-2026: PingOne Integration Kit 3.1.1 - May 2026
-  pingone-integration-kit-3-1-november-2025: PingOne Integration Kit 3.1 - November 2025
-  pingone-integration-kit-2-7-september-2024: PingOne Integration Kit 2.7 - September 2024
-  pingone-integration-kit-2-6-1-may-2024: PingOne Integration Kit 2.6.1 - May 2024
-  pingone-integration-kit-2-6-may-2024: PingOne Integration Kit 2.6 - May 2024
-  pingone-integration-kit-2-5-1-march-2024: PingOne Integration Kit 2.5.1 - March 2024
-  pingone-integration-kit-2-5-february-2022: PingOne Integration Kit 2.5 - February 2022
-  pingone-integration-kit-2-4-1-october-2021: PingOne Integration Kit 2.4.1 - October 2021
-  pingone-integration-kit-2-4-september-2021: PingOne Integration Kit 2.4 – September 2021
-  pingone-integration-kit-2-3-august-2021: PingOne Integration Kit 2.3 – August 2021
-  pingone-integration-kit-2-2-2-june-2021: PingOne Integration Kit 2.2.2 – June 2021
-  pingone-integration-kit-2-2-1-may-2021: PingOne Integration Kit 2.2.1 – May 2021
-  pingone-integration-kit-2-2-march-2021: PingOne Integration Kit 2.2 – March 2021
-  pingone-integration-kit-2-1-november-2020: PingOne Integration Kit 2.1 – November 2020
-  pingone-integration-kit-2-0-september-2020: PingOne Integration Kit 2.0 – September 2020
-  pingone-integration-kit-1-2-1-september-2019: PingOne Integration Kit 1.2.1 – September 2019
-  pingone-integration-kit-1-2-may-2019: PingOne Integration Kit 1.2 – May 2019
-  pingone-integration-kit-1-1-february-2019: PingOne Integration Kit 1.1 – February 2019
-  pingone-integration-kit-1-0-september-2018: PingOne Integration Kit 1.0 – September 2018
+  about-this-task: About this task
+  steps: Steps
 ---
 
-# Changelog
+# Adding device profiling to a browser-based authentication page using the PingOne Risk (Signals) SDK with integration kit 1.3.1
 
-The following is the change history for the PingOne Integration Kit.
+## About this task
 
-## PingOne Integration Kit 3.1.1 - May 2026
+You can adapt these instructions to add device profiling to any page, such as the HTML Form Adapter or your web application. The page must meet the criteria listed in [Device profiling methods](pf_p1_risk_ik_device_profiling_methods.html).
 
-* Added support for specifying a custom MFA Device Policy ID in attribute mapping for the PingOne provisioning connection.
+|   |                                                                                                                                                                                 |
+| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | PingOne Risk Integration Kit version 1.3.1 must be deployed before any changes can be made on the HTML side. SDK version 5.2 and later requires adapter version 1.3.1 or later. |
 
-## PingOne Integration Kit 3.1 - November 2025
+## Steps
 
-* Fixed an issue that caused the HTML Form IdP adapter to fail when using the PingOne Password Credential Validator if attempting to authenticate a PingOne user that has a backslash (`\`) in the username.
+1. If you are modifying an external web application, copy the following files from the integration `.zip` archive to a location that your page can access.
 
-## PingOne Integration Kit 2.7 - September 2024
+   * `pingone-risk-profiling-signals-sdk.js`
 
-* Fixed an issue that could cause a delay in retrieving an updated user schema.
+   * `pingone-risk-management-embedded.js`
 
-* Added the ability to skip retrieving user group and device details during datastore lookup.
+   * `signals-sdk-<version>.js`
 
-## PingOne Integration Kit 2.6.1 - May 2024
+2. **Optional:** Edit the `pingone-risk-profiling-signals-sdk.js` file and add your PingOne environment ID.
 
-* Added support for the Australia region to the PingOne Connector.
+   ```
+   function profileDevice(callback) {
+       // Initialize the SDK
+       // replace <envid> with the PingOne console > Environment > Environment ID value
+       onPingOneSignalsReady(function () {
+           _pingOneSignals.initSilent({
+                envId: "<envid>",
+               behavioralDataCollection: false,
+               deviceAttributesBlackList: []
+           }).then(function ()
+   ```
 
-## PingOne Integration Kit 2.6 - May 2024
+3. Add the following external script references to the sign-on page:
 
-* Added the ability to exclude retrieving user group, device details, and password expiration information during [password credential validation](pf_p1_ik_configuring_the_password_credential_validator.html).
+   |   |                                                   |
+   | - | ------------------------------------------------- |
+   |   | The scripts must be added in the following order. |
 
-## PingOne Integration Kit 2.5.1 - March 2024
+   ```
+   <script type="text/javascript" src="signals-sdk-<version>.js"></script>
+   <script type="text/javascript" src="pingone-risk-profiling-signals-sdk.js"></script>
+   <script type="text/javascript" src="pingone-risk-management-embedded.js"></script>
+   ```
 
-* Fixed an issue that caused values retrieved from the PingOne datastore for custom multi-value attributes to be formatted incorrectly.
+4. **Optional:** Customize the device profile cookie name prefix to suit your environment.
 
-* Fixed an issue that caused disabled user accounts to receive an account recovery email if the account recovery flow was triggered.
+   1. Open `pingone-risk-management-embedded.js` for editing.
 
-## PingOne Integration Kit 2.5 - February 2022
+   2. On the following line, change the value to a name of your choosing:
 
-* Fixed an issue that caused an error when trying to update the `population ID` attribute.
+      ```
+      var cookieNamePrefix = "pingone.risk.device.profile";
+      ```
 
-## PingOne Integration Kit 2.4.1 - October 2021
+   3. Save the file.
 
-* Changed North America region to North America (US) in the PingOne Connector.
-
-* Added support for the North America (Canada) region to the PingOne Connector.
-
-## PingOne Integration Kit 2.4 – September 2021
-
-* Added support for group provisioning.
-
-* Added the ability to select which device will be the default device on user creation.
-
-* Added the ability to select voice as an option for offline device pairing.
-
-* Fixed an issue that prevented all of a user's authentication methods from being provisioned if any of them were invalid.
-
-* Fixed an issue that allowed duplicate local attributes to be defined when configuring an adapter.
-
-* Fixed an issue that could cause an attribute containing an array of objects to be returned in the incorrect format.
-
-* Fixed an issue that caused password validation to fail intermittently when the user's access token expires.
-
-## PingOne Integration Kit 2.3 – August 2021
-
-* Added support for custom string attributes for provisioning to the PingOne Datastore.
-
-* Fixed an error that prevented a user with an expired password from changing their password.
-
-## PingOne Integration Kit 2.2.2 – June 2021
-
-* Added the provisioning connection status to the PingOne connection summary page.
-
-* Fixed an issue that, after upgrading the PingOne Datastore component, caused an error when using the administrative API to bulk import an earlier version of the PingOne Datastore.
-
-## PingOne Integration Kit 2.2.1 – May 2021
-
-* Fixed an issue that could cause an error in the sign-on flow when the user entered an invalid password.
-
-## PingOne Integration Kit 2.2 – March 2021
-
-* Added support for the PingOne platform connection that was introduced in PingFederate 10.2.
-
-* Added support for the [identifier first action](https://apidocs.pingidentity.com/pingone/platform/v1/api/#identifier-first-action) in PingOne. You can now map an **Authoritative IdP** value when configuring the provisioning channel.
-
-* Added the ability to select PingOne populations from a pre-populated list when configuring the provisioning channel.
-
-* Added support for authentication method nicknames. The provisioning connector can now use nicknames to identify and update authentication methods.
-
-* Added the ability to get a user's group membership information from PingOne.
-
-* Improved the error message that appears when a user tries to change their password too frequently.
-
-* Improved validation rules and error messages for some configuration fields.
-
-## PingOne Integration Kit 2.1 – November 2020
-
-* Added a PingOne region list to provisioning options. This allows the provisioning engine to target the PingOne API in your region.
-
-## PingOne Integration Kit 2.0 – September 2020
-
-* Changed name to PingOne Integration Kit in support of new and future PingOne services.
-
-* Added support for managing users' SMS and email devices for PingOne MFA.
-
-* Improved logging abilities.
-
-## PingOne Integration Kit 1.2.1 – September 2019
-
-* Fixed an issue that caused the adapter to fail when a key-value attribute was mapped with JSON Pointer syntax.
-
-* Improved the input validation for the **Custom Proxy Host** field in the password credential validator configuration.
-
-* Improved the error message that a user sees when they try to change their password too frequently.
-
-## PingOne Integration Kit 1.2 – May 2019
-
-* Added the ability to override the system-default proxy settings in the data store configuration.
-
-* Added the ability to customize authentication error messages in the password credential validator configuration.
-
-* Improved the error messages that appear when a user tries to set a password that doesn't meet the password policy.
-
-* Fixed an issue that prevented users with empty attributes from being provisioned to PingOne.
-
-* Removed support for obsolete scopes from the provisioning connector and data store configuration screen.
-
-## PingOne Integration Kit 1.1 – February 2019
-
-* Added the ability to use PingOne as a data store and password credential validator.
-
-## PingOne Integration Kit 1.0 – September 2018
-
-* Initial release with support for provisioning to PingOne.
+5. When you complete the steps in [Configuring an adapter instance](pf_p1_risk_ik_configuring_an_adapter_instance.html), follow the instructions to set the **Device profiling method** to **Captured by a previous adapter**. Update the **Cookie Name Prefix** field if you customized it above.
 
 ---
 
 ---
-title: Changelog
-description: The following is the change history for the PingOne Protect Integration Kit.
+title: Adding device profiling to an authentication API-based application
+description: Use the following instructions to add device profiling to a web application using the PingOne Protect SDK. For more information about the authentication API, see Authentication API in the PingFederate documentation or PingOne Protect Native SDKs in the PingOne Native SDK documentation.
 component: pingone
-page_id: pingone:pingone_protect_integration_kit:pf_p1_protect_ik_changelog
-canonical_url: https://docs.pingidentity.com/integrations/pingone/pingone_protect_integration_kit/pf_p1_protect_ik_changelog.html
+page_id: pingone:pingone_protect_integration_kit:pf_p1_protect_ik_adding_device_profiling_to_an_api_application
+canonical_url: https://docs.pingidentity.com/integrations/pingone/pingone_protect_integration_kit/pf_p1_protect_ik_adding_device_profiling_to_an_api_application.html
 llms_txt: https://docs.pingidentity.com/integrations/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: June 28, 2024
-section_ids:
-  pingone-protect-integration-kit-1-0-8-june-2026: PingOne Protect Integration Kit 1.0.8 — June 2026
-  pingone-protect-integration-kit-1-0-7-march-2026: PingOne Protect Integration Kit 1.0.7 — March 2026
-  pingone-protect-integration-kit-1-0-6-september-2025: PingOne Protect Integration Kit 1.0.6 — September 2025
-  pingone-protect-integration-kit-1-0-5-march-2025: PingOne Protect Integration Kit 1.0.5 — March 2025
-  pingone-protect-integration-kit-1-0-4-november-2024: PingOne Protect Integration Kit 1.0.4 — November 2024
-  pingone-protect-integration-kit-1-0-3-january-2024: PingOne Protect Integration Kit 1.0.3 — January 2024
-  pingone-protect-integration-kit-1-0-2-november-2023: PingOne Protect Integration Kit 1.0.2 — November 2023
-  pingone-protect-integration-kit-1-0-1-july-2023: PingOne Protect Integration Kit 1.0.1 — July 2023
-  pingone-protect-integration-kit-1-0-july-2023: PingOne Protect Integration Kit 1.0 — July 2023
----
-
-# Changelog
-
-The following is the change history for the PingOne Protect Integration Kit.
-
-## PingOne Protect Integration Kit 1.0.8 — June 2026
-
-* The integration kit now supports targeted risk policies, including mapping of mitigations defined in your policies.
-
-* The included PingOne Protect (Signals) SDK has been updated to version 5.6.6.
-
-* Security improvements.
-
-## PingOne Protect Integration Kit 1.0.7 — March 2026
-
-* This version includes only bug fixes.
-
-## PingOne Protect Integration Kit 1.0.6 — September 2025
-
-* The included PingOne Protect (Signals) SDK has been updated to version 5.6.3.
-
-* The integration kit now has an option to instruct the Signals SDK to include browser-based user location data if the user has provided their consent (option is available on both the adapter and provider configuration pages).
-
-## PingOne Protect Integration Kit 1.0.5 — March 2025
-
-* Modifications have been made to allow use of the PingID Device Trust risk predictor in risk evaluations, based on the data provided by the PingID Device Trust agent installed on user computers.
-
-* The included PingOne Protect (Signals) SDK has been updated to version 5.5.0.
-
-## PingOne Protect Integration Kit 1.0.4 — November 2024
-
-* The included PingOne Protect (Signals) SDK has been updated to version 5.3.7.
-
-* PingFederate now takes into account the additional "recommended actions" that were added for risk evaluations.
-
-* PingFederate now takes into account the flow subtype if one was specified for a risk evaluation.
-
-## PingOne Protect Integration Kit 1.0.3 — January 2024
-
-* There were cases where user authentication would fail if the flow involved an X.509 certificate. This issue has been fixed (STAGING-21876).
-
-## PingOne Protect Integration Kit 1.0.2 — November 2023
-
-* A new setting called **Custom Connection Pool** has been added to allow adjustment of the number of connections to PingOne Protect. Default value is 50.
-
-* General performance improvements
-
-## PingOne Protect Integration Kit 1.0.1 — July 2023
-
-* Critical bug fix
-
-## PingOne Protect Integration Kit 1.0 — July 2023
-
-* Initial release
-
----
-
----
-title: Changelog
-description: The following is the change history for the PingOne Risk Integration Kit.
-component: pingone
-page_id: pingone:pingone_risk_integration_kit:pf_p1_risk_ik_changelog
-canonical_url: https://docs.pingidentity.com/integrations/pingone/pingone_risk_integration_kit/pf_p1_risk_ik_changelog.html
-llms_txt: https://docs.pingidentity.com/integrations/pingone/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: August 13, 2024
-section_ids:
-  pingone-risk-integration-kit-1-3-september-2022: PingOne Risk Integration Kit 1.3 — September 2022
-  pingone-risk-integration-kit-1-2-1-february-2022: PingOne Risk Integration Kit 1.2.1 — February 2022
-  pingone-risk-integration-kit-1-2-september-2021: PingOne Risk Integration Kit 1.2 — September 2021
-  pingone-risk-integration-kit-1-1-march-2021: PingOne Risk Integration Kit 1.1 — March 2021
-  pingone-risk-integration-kit-1-0-december-2020: PingOne Risk Integration Kit 1.0 — December 2020
----
-
-# Changelog
-
-The following is the change history for the PingOne Risk Integration Kit.
-
-## PingOne Risk Integration Kit 1.3 — September 2022
-
-* Changed the product name to PingOne Risk Integration Kit.
-
-* Added the ability to set a **Policy ID** as a chained attribute and use it to set the risk policy.
-
-* Added Signals SDK Javascript and mechanism to capture device profiling.
-
-* Added support for **Risk Score** as an attribute returned by the adapter.
-
-* Fixed an issue that caused page expired issues when the target application did not respond during the Risk Timeout.
-
-## PingOne Risk Integration Kit 1.2.1 — February 2022
-
-* Fixed an issue that caused an error when users attempted the get risk predictors action.
-
-## PingOne Risk Integration Kit 1.2 — September 2021
-
-* Added support for including third-party risk predictors in risk evaluations. Learn more in [Using custom risk predictors](pf_p1_risk_ik_using_custom_risk_predictors.html).
-
-* Improved the **PingOne Risk Policy** list by clarifying that the default selection uses the default PingOne Risk policy.
-
-* Improved the clarity of the tooltips in the adapter configuration.
-
-* Improved the device profiling script by excluding low-value attributes, such as `fonts`, `touchSupport`, `webgl` and `audio`. This reduces the size of the device profile cookie by up to 86% without impacting the quality of the risk evaluations.
-
-## PingOne Risk Integration Kit 1.1 — March 2021
-
-* Added support for pre-populating adapter settings based on the selected PingOne environment. Available in PingFederate 10.2 or later.
-
-* Fixed an issue that caused an error when the adapter received an unexpected attribute type.
-
-* Fixed an issue that skipped device profiling in Internet Explorer 11 when **Captured by this device** was selected.
-
-## PingOne Risk Integration Kit 1.0 — December 2020
-
-* Initial release.
-
-* Added support for getting risk results and transaction information from PingOne Risk.
-
-* Added the ability to send a device profile and transaction information to PingOne Risk.
-
-* Added the ability to add device profiling into any browser-based authentication source.
-
-* Added support for risk models based on user behavior, IP reputation, geovelocity, and anonymous network detection.
-
-* Added the ability to map any PingOne Risk API response attribute to an attribute in the PingFederate authentication policy.
-
-* Added authentication success/failure reporting to PingOne Risk.
-
-* Added the ability to test the connection to PingOne Risk.
-
-* Added support for the [JavaScript Widget for the PingFederate Authentication API](https://github.com/pingidentity/pf-authn-js-widget).
-
-* Added support for the [PingFederate authentication API](https://docs.pingidentity.com/pingfederate/latest/developers_reference_guide/pf_authentication_api.html).
-
-* Added settings for API connection and request timeouts.
-
-* Added settings to override the PingFederate system-default proxy settings.
-
----
-
----
-title: Changelog
-description: The following is the change history for the PingOne Verify Integration Kit.
-component: pingone
-page_id: pingone:pingone_verify_integration_kit:pf_p1_verify_ik_changelog
-canonical_url: https://docs.pingidentity.com/integrations/pingone/pingone_verify_integration_kit/pf_p1_verify_ik_changelog.html
-llms_txt: https://docs.pingidentity.com/integrations/pingone/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: December 18, 2025
-section_ids:
-  pingone-verify-integration-kit-2-3-3-december-2025: PingOne Verify Integration Kit 2.3.3 - December 2025
-  pingone-verify-integration-kit-2-3-2-october-2025: PingOne Verify Integration Kit 2.3.2 - October 2025
-  pingone-verify-integration-kit-2-3-1-august-2025: PingOne Verify Integration Kit 2.3.1 - August 2025
-  pingone-verify-integration-kit-2-3-february-2025: PingOne Verify Integration Kit 2.3 - February 2025
-  pingone-verify-integration-kit-2-2-1-august-2023: PingOne Verify Integration Kit 2.2.1 – August 2023
-  pingone-verify-integration-kit-2-2-july-2023: PingOne Verify Integration Kit 2.2 – July 2023
-  pingone-verify-integration-kit-2-1-december-2022: PingOne Verify Integration Kit 2.1 – December 2022
-  pingone-verify-integration-kit-2-0-july-2022: PingOne Verify Integration Kit 2.0 – July 2022
-  pingone-verify-integration-kit-1-1-july-2021: PingOne Verify Integration Kit 1.1 – July 2021
-  pingone-verify-integration-kit-1-0-january-2021: PingOne Verify Integration Kit 1.0 – January 2021
----
-
-# Changelog
-
-The following is the change history for the PingOne Verify Integration Kit.
-
-## PingOne Verify Integration Kit 2.3.3 - December 2025
-
-* Upgraded the Jackson library to version 2.20.x to ensure continued alignment with maintained upstream dependencies.
-
-## PingOne Verify Integration Kit 2.3.2 - October 2025
-
-* Added support for data-based identity verification. This update introduces new core contract attributes and adapter configuration fields, plus changes to the **First Name Chained Attribute** and **Last Name Chained Attribute** fields.
-
-  Learn more about these updates in [Core contract attributes](pf-p1-verify-ik-core-contract-attributes.html) and the **National ID Number Chained Attribute** through **Country Code Chained Attribute** table entries in [PingOne Verify IdP Adapter settings reference](pf_p1_verify_ik_p1_verify_idp_adapter_settings_reference.html).
-
-  You can find more information about data-based identity verification in [PingOne Verify and data-based verification](https://docs.pingidentity.com/pingone/identity_verification_using_pingone_verify/p1_verify_data_based_verification.html) in the PingOne Verify documentation, and [Verify Data Based Identity Verification](https://apidocs.pingidentity.com/pingone/verify/v1/api/#verify-data-based-identity-verification) in the PingOne Verify API documentation.
-
-* Added the ability to define a policy path if verification fails, but data collection and submission proceed.
-
-  Learn more in the **Verification Failure Mode** table entry in [PingOne Verify IdP Adapter settings reference](pf_p1_verify_ik_p1_verify_idp_adapter_settings_reference.html).
-
-* Updated dependencies to address a potential security vulnerability.
-
-## PingOne Verify Integration Kit 2.3.1 - August 2025
-
-* Added the ability to redirect users automatically when performing verification on a mobile device, letting the user complete document and selfie captures in the same tab instead of opening them in a new tab.
-
-  Redirects simplify the verification process, especially for users with pop-up blockers. Learn more in the same device verification flow in [Overview of the verification flow](pf_p1_verify_ik_overview_of_the_verification_flow.html).
-
-* Updated the velocity template designs that the PingOne Verify Integration Kit uses.
-
-  To use the updated template files, make sure to follow the steps in [Deploying the integration files](pf_p1_verify_ik_deploying_the_integration_files.html) when upgrading to PingOne Verify Integration Kit 2.3.1.
-
-## PingOne Verify Integration Kit 2.3 - February 2025
-
-* Added support for biographic matching. Configure the expected names of incoming chain attributes to collect the actual user values during verification and send them to PingOne Verify.
-
-  Learn more in the **First Name Chained Attribute** through **Date of Birth Chained Attribute** table entries in the [PingOne Verify IdP Adapter settings reference](pf_p1_verify_ik_p1_verify_idp_adapter_settings_reference.html). Learn more about biographic matching in [Types of verification](https://docs.pingidentity.com/pingone/identity_verification_using_pingone_verify/p1_verify_types_of_verification.html) in the PingOne Verify documentation.
-
-  |   |                                                                                                                                                                                                |
-  | - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-  |   | Currently, you must parse the biographic matching metadata to view results and decide how to proceed. Verify policy support for biographic matching results will be added in a future release. |
-
-* Added the ability to configure a redirect URL and message. Learn more in the **Redirect URL** and **Redirect Message** table entries in the [PingOne Verify IdP Adapter settings reference](pf_p1_verify_ik_p1_verify_idp_adapter_settings_reference.html).
-
-* Added the ability to provision a user during the password reset flow if **Provision User** is selected in the adapter configuration. Learn more about **Provision User** in the [PingOne Verify IdP Adapter settings reference](pf_p1_verify_ik_p1_verify_idp_adapter_settings_reference.html).
-
-  |   |                                                                                                                               |
-  | - | ----------------------------------------------------------------------------------------------------------------------------- |
-  |   | Learn more about mitigating risk for password reset flows in the [Account recovery use case](pf_p1_verify_ik_use_cases.html). |
-
-* Removed a deprecated endpoint, `verifyStatus`.
-
-* Fixed an issue that caused a `Null Pointer Exception` when creating a new adapter instance if the PingOne environment didn't include the [PingOne Verify service](https://docs.pingidentity.com/pingone/identity_verification_using_pingone_verify/p1_verify_introduction.html).
-
-  The PingOne environment must include at least one verify policy because you must select something in the **Verify Policy** list in the [adapter configuration](pf_p1_verify_ik_p1_verify_idp_adapter_settings_reference.html) before you can save your configuration. Learn more in [Verify policies](https://docs.pingidentity.com/pingone/identity_verification_using_pingone_verify/p1_verify_policies.html) in the PingOne Verify documentation.
-
-* Improved the error messaging when a user fails a verification attempt and renamed the **Cancel** button **Retry** for clarification and alignment.
-
-  To use the updated template files, make sure to follow the steps in [Deploying the integration files](pf_p1_verify_ik_deploying_the_integration_files.html) when upgrading to PingOne Verify Integration Kit 2.3.
-
-## PingOne Verify Integration Kit 2.2.1 – August 2023
-
-* The adapter now syncs its dependencies with PingFederate 11.3.
-
-## PingOne Verify Integration Kit 2.2 – July 2023
-
-* Added an adapter configuration option to reset a user's verification status for every sign-on attempt.
-
-* Added support for password reset in the PingOne Verify IdP Adapter. To ensure maximum security, the password reset flow requires full verification for all users, even if they're already verified.
-
-  |   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-  | - | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-  |   | For password reset and sign-on flows, a malicious user might try to reset the password of another account by using their own ID. To prevent this:1) Set up a comparison in the PingFederate policy to check if the identity verified matches the user's record.
-
-  2) After the PingOne Verify Integration Kit succeeds, confirm that the first and last names of the verified ID match those in the directory for the username that was entered on the sign-on or forgot password page. |
-
-* Fixed an issue where administrators had to map whether to block or bypass authentication for a user with a disabled verify status in **Service Unavailable Failure Mode** instead of **User Not Found Failure Mode**.
-
-## PingOne Verify Integration Kit 2.1 – December 2022
-
-* Added support for **facial comparison only** verify policy in the adapter.
-
-* Added support for the verify policy.
-
-* Added support for the PingOne Verify Mobile SDK version 2 with QR verification flows.
-
-## PingOne Verify Integration Kit 2.0 – July 2022
-
-* Added support for web authentication flow.
-
-* Added `gender`, `issuingCountry`, `nationality`, and `weight` as core attributes.
-
-* Added `selfie` and `metadata` as option attributes.
-
-* Removed support for PingOne Verify Mobile SDK.
-
-## PingOne Verify Integration Kit 1.1 – July 2021
-
-* Added support for changes to PingOne Verify, including:
-
-  * The adapter now gets the user's `verifyEnabledState` attribute when getting the verification result
-
-  * Updated the list of core contract attributes to support changes to the structure of the `verifiedUserData` attribute
-
-  * Added support for change to the flow behavior when the `verifyDocument` flag is off
-
-  * Updated the core contract to support changes in PingOne Verify:
-
-    | Change description          | Version 1.0          | Version 1.1         |
-    | --------------------------- | -------------------- | ------------------- |
-    | Attribute name change       | `verificationStatus` | `transactionStatus` |
-    | Attribute name change       | `dateOfBirth`        | `birthDate`         |
-    | Attribute name change/merge | `addressLine1`       | `addressStreet`     |
-    | Attribute name change/merge | `addressLine2`       |                     |
-    | Attribute name change       | `city`               | `addressCity`       |
-    | Attribute name change       | `state`              | `addressState`      |
-    | Attribute name change       | `postalCode`         | `addressZip`        |
-    | Attribute name change       | `documentId`         | `idNumber`          |
-    | New attribute               |                      | `idType`            |
-
-|   |                                                                                                                               |
-| - | ----------------------------------------------------------------------------------------------------------------------------- |
-|   | You can find upgrade instructions in [Deploying the integration files](pf_p1_verify_ik_deploying_the_integration_files.html). |
-
-## PingOne Verify Integration Kit 1.0 – January 2021
-
-* Initial release.
-
-* Added the ability to direct users to an identity verification app as part of a sign-on or registration flow.
-
-* Added the ability to control which message pages (templates) are shown to the user.
-
-* Added the ability to customize template messages using a language pack file.
-
-* Added the ability to test the connection to PingOne Verify.
-
-* Added a setting to automatically provision new users to PingOne.
-
-* Added settings to control how the adapter handles sign-on and registration attempts when errors occur.
-
-* Added support for the platform connection to PingOne introduced in PingFederate 10.2.
-
-* Added support for the [PingFederate authentication API](https://docs.pingidentity.com/pingfederate/latest/developers_reference_guide/pf_authentication_api.html)
-
-* Added support for the [JavaScript Widget for the PingFederate Authentication API](https://github.com/pingidentity/pf-authn-js-widget).
-
-* Added settings for API connection and request timeouts.
-
-* Added settings to override the PingFederate system-default proxy settings.
-
----
-
----
-title: Changelog
-description: The following is the change history for the PingOne Verify Integration Kit.
-component: pingone
-page_id: pingone:pingone_verify_integration_kit_11:pf_p1_verify_ik_changelog_11
-canonical_url: https://docs.pingidentity.com/integrations/pingone/pingone_verify_integration_kit_11/pf_p1_verify_ik_changelog_11.html
-llms_txt: https://docs.pingidentity.com/integrations/pingone/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: July 3, 2024
-section_ids:
-  pingone-verify-integration-kit-1-1-july-2021: PingOne Verify Integration Kit 1.1 – July 2021
-  pingone-verify-integration-kit-1-0-january-2021: PingOne Verify Integration Kit 1.0 – January 2021
----
-
-# Changelog
-
-The following is the change history for the PingOne Verify Integration Kit.
-
-## PingOne Verify Integration Kit 1.1 – July 2021
-
-Added support for changes to PingOne Verify, including:
-
-* The adapter now gets the user's `verifyEnabledState` attribute when getting the verification result
-
-* Updated the list of core contract attributes to support changes to the structure of the `verifiedUserData` attribute
-
-* Added support for change to the flow behavior when the `verifyDocument` flag is off
-
-* Updated the core contract to support changes in PingOne Verify:
-
-  | Change description          | Version 1.0          | Version 1.1         |
-  | --------------------------- | -------------------- | ------------------- |
-  | Attribute name change       | `verificationStatus` | `transactionStatus` |
-  | Attribute name change       | `dateOfBirth`        | `birthDate`         |
-  | Attribute name change/merge | `addressLine1`       | `addressStreet`     |
-  | Attribute name change/merge | `addressLine2`       |                     |
-  | Attribute name change       | `city`               | `addressCity`       |
-  | Attribute name change       | `state`              | `addressState`      |
-  | Attribute name change       | `postalCode`         | `addressZip`        |
-  | Attribute name change       | `documentId`         | `idNumber`          |
-  | New attribute               |                      | `idType`            |
-
-|   |                                                                                                                           |
-| - | ------------------------------------------------------------------------------------------------------------------------- |
-|   | For upgrade instructions, see [Deploying the integration files](pf_p1_verify_ik_deploying_the_integration_files_11.html). |
-
-## PingOne Verify Integration Kit 1.0 – January 2021
-
-* Initial release.
-
-* Added the ability to direct users to an identity verification app as part of a sign-on or registration flow.
-
-* Added the ability to control which message pages (templates) are shown to the user.
-
-* Added the ability to customize template messages using a language pack file.
-
-* Added the ability to test the connection to PingOne Verify.
-
-* Added a setting to automatically provision new users to PingOne.
-
-* Added settings to control how the adapter handles sign-on and registration attempts when errors occur.
-
-* Added support for the platform connection to PingOne introduced in PingFederate 10.2.
-
-* Added support for the [PingFederate authentication API](https://docs.pingidentity.com/pingfederate/latest/developers_reference_guide/pf_authentication_api.html)
-
-* Added support for the [JavaScript Widget for the PingFederate Authentication API](https://github.com/pingidentity/pf-authn-js-widget).
-
-* Added settings for API connection and request timeouts.
-
-* Added settings to override the PingFederate system-default proxy settings.
-
----
-
----
-title: CIBA prompt customizations
-description: Client-initiated backchannel authentication (CIBA) involves prompting a user to accept or reject a request. You can customize the request prompt using pre-defined attributes or map complex custom attributes.
-component: pingone
-page_id: pingone:pingone_mfa_integration_kit:pf_p1_mfa_ik_ciba_prompt_customizations_4.0
-canonical_url: https://docs.pingidentity.com/integrations/pingone/pingone_mfa_integration_kit/pf_p1_mfa_ik_ciba_prompt_customizations_4.0.html
-llms_txt: https://docs.pingidentity.com/integrations/pingone/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: June 15, 2024
-section_ids:
-  simple-prompt-customizations: Simple prompt customizations
-  advanced-prompt-customizations: Advanced prompt customizations
----
-
-# CIBA prompt customizations
-
-Client-initiated backchannel authentication (CIBA) involves prompting a user to accept or reject a request. You can customize the request prompt using pre-defined attributes or map complex custom attributes.
-
-## Simple prompt customizations
-
-For simple, centralized customizations, you can modify the notification template that PingOne uses to generate the request prompt. Notification template customizations allow you to use the following:
-
-* Static text
-
-* A pre-defined set of attributes from the client request context
-
-Simple prompt customizations require changes to the PingOne notification template only.
-
-* Location: **PingOne console > Experiences > Notifications**.
-
-You can find more descriptions and examples in [Simple CIBA prompt customizations](pf_p1_mfa_ik_simple_ciba_prompt_customizations_4.0.html).
-
-## Advanced prompt customizations
-
-If you need more advanced customizations in the request prompt, you can define custom attributes in PingFederate and pass them to PingOne.
-
-The PingOne MFA CIBA Authenticator allows you to use the following:
-
-* Static text
-
-* Modified attributes from the client request context
-
-* Contract attributes from the PingFederate CIBA request policy
-
-* Messages from the PingFederate language-pack localization files
-
-* Apache Velocity Template Language code to manipulate any of the above
-
-Advanced prompt customizations require coordinated changes to all the following:
-
-* The PingOne notification template
-
-  * Location: **PingOne console > Experiences > Notifications**.
-
-* The **PingOne Template Variables** table of the PingOne MFA CIBA Authenticator instance
-
-  * Location: **PingFederate console > Authentication > OAuth > CIBA Authenticators > Your PingOne MFA CIBA Authenticator instance > Instance Configuration**.
-
-* The **Extended Contract** tab of the PingOne MFA CIBA Authenticator instance
-
-  * Location: **PingFederate console > Authentication > OAuth > CIBA Authenticators > Your PingOne MFA CIBA Authenticator instance > Instance Configuration**.
-
-* The PingFederate CIBA request policy
-
-  * Location: **PingFederate console > Applications > OAuth > CIBA Request Policies > Your CIBA request policy > Contract Fulfillment**.
-
-You can find more descriptions and examples in [Advanced CIBA prompt customizations](pf_p1_mfa_ik_advanced_ciba_prompt_customizations_4.0.html).
-
----
-
----
-title: CIBA prompt customizations
-description: Client-initiated backchannel authentication (CIBA) involves prompting a user to accept or reject a request. You can customize the request prompt using pre-defined attributes or map complex custom attributes.
-component: pingone
-page_id: pingone:pingone_mfa_integration_kit_3.2:pf_p1_mfa_ik_ciba_prompt_customizations
-canonical_url: https://docs.pingidentity.com/integrations/pingone/pingone_mfa_integration_kit_3.2/pf_p1_mfa_ik_ciba_prompt_customizations.html
-llms_txt: https://docs.pingidentity.com/integrations/pingone/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: June 15, 2024
-section_ids:
-  simple-prompt-customizations: Simple prompt customizations
-  advanced-prompt-customizations: Advanced prompt customizations
----
-
-# CIBA prompt customizations
-
-Client-initiated backchannel authentication (CIBA) involves prompting a user to accept or reject a request. You can customize the request prompt using pre-defined attributes or map complex custom attributes.
-
-## Simple prompt customizations
-
-For simple, centralized customizations, you can modify the notification template that PingOne uses to generate the request prompt. Notification template customizations allow you to use the following:
-
-* Static text
-
-* A pre-defined set of attributes from the client request context
-
-Simple prompt customizations require changes to the PingOne notification template only.
-
-* Location: **PingOne console > Experiences > Notifications**.
-
-You can find more descriptions and examples in [Simple CIBA prompt customizations](pf_p1_mfa_ik_simple_ciba_prompt_customizations.html).
-
-## Advanced prompt customizations
-
-If you need more advanced customizations in the request prompt, you can define custom attributes in PingFederate and pass them to PingOne.
-
-The PingOne MFA CIBA Authenticator allows you to use the following:
-
-* Static text
-
-* Modified attributes from the client request context
-
-* Contract attributes from the PingFederate CIBA request policy
-
-* Messages from the PingFederate language-pack localization files
-
-* Apache Velocity Template Language code to manipulate any of the above
-
-Advanced prompt customizations require coordinated changes to all the following:
-
-* The PingOne notification template
-
-  * Location: **PingOne console > Experiences > Notifications**.
-
-* The **PingOne Template Variables** table of the PingOne MFA CIBA Authenticator instance
-
-  * Location: **PingFederate console > Authentication > OAuth > CIBA Authenticators > Your PingOne MFA CIBA Authenticator instance > Instance Configuration**.
-
-* The **Extended Contract** tab of the PingOne MFA CIBA Authenticator instance
-
-  * Location: **PingFederate console > Authentication > OAuth > CIBA Authenticators > Your PingOne MFA CIBA Authenticator instance > Instance Configuration**.
-
-* The PingFederate CIBA request policy
-
-  * Location: **PingFederate console > Applications > OAuth > CIBA Request Policies > Your CIBA request policy > Contract Fulfillment**.
-
-You can find more descriptions and examples in [Advanced CIBA prompt customizations](pf_p1_mfa_ik_advanced_ciba_prompt_customizations.html).
-
----
-
----
-title: CIBA request flow
-description: When a client makes a Client Initiated Backchannel Authentication (CIBA) request to PingFederate, PingFederate can modify and add to the request information before sending it to PingOne MFA.
-component: pingone
-page_id: pingone:pingone_mfa_integration_kit:pf_p1_mfa_ik_ciba_request_flow_4.0
-canonical_url: https://docs.pingidentity.com/integrations/pingone/pingone_mfa_integration_kit/pf_p1_mfa_ik_ciba_request_flow_4.0.html
-llms_txt: https://docs.pingidentity.com/integrations/pingone/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: June 15, 2024
----
-
-# CIBA request flow
-
-When a client makes a Client Initiated Backchannel Authentication (CIBA) request to PingFederate, PingFederate can modify and add to the request information before sending it to PingOne MFA.
-
-The following steps are involved in conveying the CIBA request information from the client application to the request prompt that the user sees on their mobile device.
-
-1. The client application sends a CIBA request to PingFederate that includes some request context attributes.
-
-2. The CIBA request policy collects attributes from the client request and other attribute sources that you configure, such as a data store.
-
-3. The PingOne MFA CIBA Authenticator parses the client request attributes. The authenticator also processes any custom attribute definitions, as described in [CIBA prompt customizations](pf_p1_mfa_ik_ciba_prompt_customizations_4.0.html).
-
-4. The authenticator sends the attributes to PingOne along with information to identify which PingOne notification template to use for the user prompt.
-
-5. PingOne uses the attributes from the PingOne MFA CIBA Authenticator to populate the variables in a customizable notification template.
-
-6. PingOne sends the notification to the mobile app, which is built with the PingOne Mobile SDK.
-
-7. The mobile app show the request prompt to the user to approve or deny.
-
----
-
----
-title: CIBA request flow
-description: When a client makes a Client Initiated Backchannel Authentication (CIBA) request to PingFederate, PingFederate can modify and add to the request information before sending it to PingOne MFA.
-component: pingone
-page_id: pingone:pingone_mfa_integration_kit_3.2:pf_p1_mfa_ik_ciba_request_flow
-canonical_url: https://docs.pingidentity.com/integrations/pingone/pingone_mfa_integration_kit_3.2/pf_p1_mfa_ik_ciba_request_flow.html
-llms_txt: https://docs.pingidentity.com/integrations/pingone/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: June 15, 2024
----
-
-# CIBA request flow
-
-When a client makes a Client Initiated Backchannel Authentication (CIBA) request to PingFederate, PingFederate can modify and add to the request information before sending it to PingOne MFA.
-
-The following steps are involved in conveying the CIBA request information from the client application to the request prompt that the user sees on their mobile device.
-
-1. The client application sends a CIBA request to PingFederate that includes some request context attributes.
-
-2. The CIBA request policy collects attributes from the client request and other attribute sources that you configure, such as a data store.
-
-3. The PingOne MFA CIBA Authenticator parses the client request attributes. The authenticator also processes any custom attribute definitions, as described in [CIBA prompt customizations](pf_p1_mfa_ik_ciba_prompt_customizations.html).
-
-4. The authenticator sends the attributes to PingOne along with information to identify which PingOne notification template to use for the user prompt.
-
-5. PingOne uses the attributes from the PingOne MFA CIBA Authenticator to populate the variables in a customizable notification template.
-
-6. PingOne sends the notification to the mobile app, which is built with the PingOne Mobile SDK.
-
-7. The mobile app show the request prompt to the user to approve or deny.
-
----
-
----
-title: CIBA setup
-description: When a client application sends a Client Initiated Backchannel Authentication (CIBA) request to PingFederate, the PingOne MFA CIBA Authenticator allows PingFederate to initiate an out-of-band authentication request using PingOne MFA.
-component: pingone
-page_id: pingone:pingone_mfa_integration_kit:pf_p1_mfa_ik_ciba_setup_4.0
-canonical_url: https://docs.pingidentity.com/integrations/pingone/pingone_mfa_integration_kit/pf_p1_mfa_ik_ciba_setup_4.0.html
-llms_txt: https://docs.pingidentity.com/integrations/pingone/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: June 15, 2024
-section_ids:
-  about-this-task: About this task
-  steps: Steps
----
-
-# CIBA setup
-
-When a client application sends a Client Initiated Backchannel Authentication (CIBA) request to PingFederate, the PingOne MFA CIBA Authenticator allows PingFederate to initiate an out-of-band authentication request using PingOne MFA.
-
-## About this task
-
-By completing the steps below, you can show CIBA prompts on the mobile device that a user has paired with their PingOne MFA account.
-
-For general information about CIBA, see [Client Initiated Backchannel Authentication (CIBA)](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/pf_ciba.html) in the PingFederate documentation. Note that the CIBA Authenticator mentioned on that page is different from the PingOne MFA CIBA Authenticator.
-
-For detailed information about the following steps, see [CIBA request flow](pf_p1_mfa_ik_ciba_request_flow_4.0.html) and [CIBA prompt customizations](pf_p1_mfa_ik_ciba_prompt_customizations_4.0.html).
-
-|   |                                                                                |
-| - | ------------------------------------------------------------------------------ |
-|   | The CIBA setup section is optional and independent from the MFA setup section. |
-
-## Steps
-
-1. In PingOne, complete the steps in [Creating a CIBA authentication policy in PingOne](pf_p1_mfa_ik_creating_a_ciba_authentication_policy_p1_4.0.html).
-
-2. In PingFederate, complete the steps in [Configuring a CIBA authenticator instance](pf_p1_mfa_ik_configuring_a_ciba_authenticator_instance_4.0.html).
-
-3. In PingFederate, create a CIBA request policy as shown in [Managing CIBA request policies](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/help_cibapoliciesmanagementtasklet_cibapoliciesmanagementstate.html) in the PingFederate documentation.
-
----
-
----
-title: CIBA setup
-description: When a client application sends a Client Initiated Backchannel Authentication (CIBA) request to PingFederate, the PingOne MFA CIBA Authenticator allows PingFederate to initiate an out-of-band authentication request using PingOne MFA.
-component: pingone
-page_id: pingone:pingone_mfa_integration_kit_3.2:pf_p1_mfa_ik_ciba_setup
-canonical_url: https://docs.pingidentity.com/integrations/pingone/pingone_mfa_integration_kit_3.2/pf_p1_mfa_ik_ciba_setup.html
-llms_txt: https://docs.pingidentity.com/integrations/pingone/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: June 15, 2024
-section_ids:
-  about-this-task: About this task
-  steps: Steps
----
-
-# CIBA setup
-
-When a client application sends a Client Initiated Backchannel Authentication (CIBA) request to PingFederate, the PingOne MFA CIBA Authenticator allows PingFederate to initiate an out-of-band authentication request using PingOne MFA.
-
-## About this task
-
-By completing the steps below, you can show CIBA prompts on the mobile device that a user has paired with their PingOne MFA account.
-
-For general information about CIBA, see [Client Initiated Backchannel Authentication (CIBA)](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/pf_ciba.html) in the PingFederate documentation. Note that the CIBA Authenticator mentioned on that page is different from the PingOne MFA CIBA Authenticator.
-
-For detailed information about the following steps, see [CIBA request flow](pf_p1_mfa_ik_ciba_request_flow.html) and [CIBA prompt customizations](pf_p1_mfa_ik_ciba_prompt_customizations.html).
-
-|   |                                                                                |
-| - | ------------------------------------------------------------------------------ |
-|   | The CIBA setup section is optional and independent from the MFA setup section. |
-
-## Steps
-
-1. In PingOne, complete the steps in [Creating a CIBA authentication policy in PingOne](pf_p1_mfa_ik_creating_a_ciba_authentication_policy_p1.html).
-
-2. In PingFederate, complete the steps in [Configuring a CIBA authenticator instance](pf_p1_mfa_ik_configuring_a_ciba_authenticator_instance.html).
-
-3. In PingFederate, create a CIBA request policy as shown in [Managing CIBA request policies](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/help_cibapoliciesmanagementtasklet_cibapoliciesmanagementstate.html) in the PingFederate documentation.
-
----
-
----
-title: Comparison of FOS vs. Direct MFA API flows
-description: In PingOne MFA Integration Kit version 4.0, the PingOne MFA IdP Adapter migrates from integrating with PingOne via the authentication policy in the Flow Orchestration Service (FOS), used in previous versions, to direct MFA Device Authentication APIs.
-component: pingone
-page_id: pingone:pingone_mfa_integration_kit:pf_p1_mfa_ik_overview_of_the_sso_flow_comparison_4.0
-canonical_url: https://docs.pingidentity.com/integrations/pingone/pingone_mfa_integration_kit/pf_p1_mfa_ik_overview_of_the_sso_flow_comparison_4.0.html
-llms_txt: https://docs.pingidentity.com/integrations/pingone/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: April 28, 2026
-section_ids:
-  flow-changes: Flow changes
-  setup-and-migration-from-version-3-2: Setup and migration from version 3.2
-  core-contract-and-attribute-changes: Core contract and attribute changes
-  mfa-policy-for-authentication: MFA Policy for Authentication
-  user-not-found-failure-mode: User Not Found Failure Mode
-  one-time-device-display-mode: One-Time Device Display Mode
-  user-agent-header-format: User-Agent header format
-  migrating-configuration-from-the-pingone-authentication-policy: Migrating configuration from the PingOne Authentication Policy
-  adapter-configuration-changelog: Adapter configuration changelog
-  added_or_updated_fields_table: Added or updated fields
-  removed-or-changed-fields: Removed or changed fields
-  authentication-initiation: Authentication initiation
-  attribute-and-claim-mapping: Attribute and claim mapping
-  removed-tokens: Removed tokens
-  new-core-contract-attributes: New core contract attributes
-  parameter-mapping: Parameter mapping
----
-
-# Comparison of FOS vs. Direct MFA API flows
-
-In PingOne MFA Integration Kit version 4.0, the PingOne MFA IdP Adapter migrates from integrating with PingOne via the authentication policy in the Flow Orchestration Service (FOS), used in previous versions, to direct MFA Device Authentication APIs.
-
-## Flow changes
-
-This table compares the legacy FOS-based orchestration used in earlier versions with the direct API architecture introduced in version 4.0.
-
-| Capability           | Deprecated FOS-Based Flow                         | New Direct MFA API Flow                                              |
-| -------------------- | ------------------------------------------------- | -------------------------------------------------------------------- |
-| **Orchestration**    | Managed by FOS via `/as/authorize`.               | Managed directly by the MFA Adapter.                                 |
-| **API Endpoint**     | Invokes OIDC-based Flow APIs.                     | Invokes `/deviceAuthentications` service APIs.                       |
-| **State Management** | Handled internally by FOS.                        | Managed by the MFA Adapter across API calls.                         |
-| **Token Handling**   | Returns OIDC tokens (`access_token`, `id_token`). | Returns specific attributes (device ID, enrollment status) directly. |
-| **Session Context**  | Relies on PingOne OIDC session tracking.          | Uses PingFederate as the source of truth for session information.    |
-
-## Setup and migration from version 3.2
-
-Upgrading to version 4.0 requires moving decision logic from the authentication policy (FOS) into the PingFederate environment.
-
-### Core contract and attribute changes
-
-The `id_token` and `access_token` core contracts have been removed. If existing policy rules reference these attributes, they must be updated.
-
-For the `p1.enrollment` attribute source, do one of the following:
-
-* Update the expression value to `pingone.mfa.enrollment`.
-
-  Or
-
-* Remove the `p1.enrollment` attribute entirely and use the core contract attribute `pingone.mfa.enrollment`, ensuring it is mapped in all relevant locations.
-
-### MFA Policy for Authentication
-
-The **MFA Policy for Authentication** field replaces the **PingOne Authentication Policy** text field. If you are upgrading from version 3.2, you must manually select the appropriate MFA policy from this list.
-
-### User Not Found Failure Mode
-
-This setting now exclusively covers users who do not exist in the directory. It no longer applies to disabled users or those with the MFA service disabled.
-
-For those cases, use the new settings available in the MFA Policy under **User Access Configuration**:
-
-* **Block authentication when user status is disabled**
-
-* **Block authentication when user's MFA is disabled**
-
-|   |                                                                                                                                                                                                                                                                                       |
-| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | When **Block authentication when user's MFA is disabled** is enabled, blocked authentication attempts now return `com.pingidentity.pingone.mfa_bypassed_user_mfa_disabled` instead of `com.pingidentity.pingone.mfa_bypassed_invalid_user`, providing more accurate status reporting. |
-
-### One-Time Device Display Mode
-
-The default display mode is now **Standalone**. If your previous adapter instance had **One-Time Device Display Mode** enabled, you must manually select **With Paired Devices**.
-
-### User-Agent header format
-
-The `User-Agent` header format has changed from `PingFederate` to `PingFederate/{version} PingOne-MFA-Integration-Kit/{version}`.
-
-### Migrating configuration from the PingOne Authentication Policy
-
-* **Risk and Protect conditions:** Conditions such as IP reputation, geo-velocity, and anonymous network detection are no longer handled by the MFA Adapter. You must now configure these in the **PingFederate Authentication Policy** using the **PingOne MFA Protect Integration Kit**.
-
-* **NONE OR INCOMPATIBLE METHODS:** If configured, migrate this to the **No Device Failure Mode** field in the MFA Adapter.
-
-  |   |                                                                                                                                                        |
-  | - | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
-  |   | Change in behavior: **No Device Failure Mode** covers only users with zero registered devices. Users with incompatible devices are treated as BLOCKED. |
-
-* **Last Sign-on Older Than:** If configured, migrate this to PingFederate native session management. The MFA Adapter does not handle sessions.
-
-* **Accessing from an Out-of-Range IP Address:** If configured, migrate this to the **MFA for Accessing from IP out of range** field in the MFA Adapter.
-
-* **Being a Member of Any of These Populations:** If configured, migrate this to the **MFA by User Population** field in the MFA Adapter.
-
-* **User Attributes:** If configured, migrate this to the **MFA for User Attributes** table in the MFA Adapter.
-
-## Adapter configuration changelog
-
-The architectural shift to direct APIs results in several changes to the adapter's configuration UI.
-
-### Added or updated fields
-
-| Field                                      | Description                                                                             |
-| ------------------------------------------ | --------------------------------------------------------------------------------------- |
-| **MFA Policy for Authentication**          | Replaces the legacy Authentication Policy text field with a dynamic list.               |
-| **No Device Failure Mode**                 | New setting to Block or Bypass authentication when no usable MFA methods exist.         |
-| **MFA by User Population**                 | New text field to trigger MFA based on PingOne MFA population membership.               |
-| **MFA for Accessing from IP out of range** | New field for CIDR-based MFA enforcement within the adapter.                            |
-| **MFA for User Attributes**                | A new table-based configuration to trigger MFA based on specific user attribute values. |
-
-### Removed or changed fields
-
-* **JWKS Cache Duration:** Removed. Direct API calls eliminate the need for JWKS endpoint polling.
-
-* **User Not Found Failure Mode:** Changed behavior. This now only applies when a user does not exist in the directory; it no longer covers disabled users or disabled MFA service states.
-
-* **CIBA Authenticator:** The change to the **MFA Policy for Authentication** list also applies to all CIBA authenticator configurations.
-
-## Authentication initiation
-
-In earlier versions, the MFA Adapter initiated authentication using the OAuth Authorization API (`/as/authorize`), which triggered FOS to coordinate multiple PingOne MFA calls.
-
-In version 4.0, OAuth authorization is decoupled from MFA execution. The MFA Adapter invokes the **PingOne MFA Device Authentication APIs** directly as a discrete step within the PingFederate authentication policy.
-
-## Attribute and claim mapping
-
-With the removal of FOS, the adapter no longer receives or returns synthetic OIDC tokens. Instead, the adapter receives raw metadata from the MFA service and injects it into the PingFederate attribute map.
-
-### Removed tokens
-
-To simplify security semantics and avoid unnecessary key management, the following attributes are no longer returned in the `authnAdapterResponse.attributeMap`:
-
-* **access\_token**
-
-* **id\_token**
-
-|   |                                                                                                                                                   |
-| - | ------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | If existing PingFederate policy rules or OGNL expressions rely on `id_token`, they must be updated to use the new core contract attributes below. |
-
-### New core contract attributes
-
-The required claims for downstream applications are now returned directly as adapter attributes:
-
-* `pingone.mfa.device.id`
-
-* `pingone.mfa.enrollment`
-
-## Parameter mapping
-
-The transition to direct APIs changes how specific parameters are passed from PingFederate to PingOne MFA.
-
-* **MFA Policy:** Parameters previously passed as `acr_values` are now mapped to `policy.id`.
-
-Learn more about specific field configurations in [PingOne MFA IdP Adapter settings reference](pf-p1-mfa-ik-p1-mfa-idp-adapter-settings-reference_4.0.html).
-
----
-
----
-title: Configuring a channel
-description: To complete your PingOne provisioning configuration, map the necessary attributes in your channel configuration.
-component: pingone
-page_id: pingone:pingone_integration_kit:pf_p1_ik_configuring_a_channel
-canonical_url: https://docs.pingidentity.com/integrations/pingone/pingone_integration_kit/pf_p1_ik_configuring_a_channel.html
-llms_txt: https://docs.pingidentity.com/integrations/pingone/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: June 18, 2024
 section_ids:
   about-this-task: About this task
   steps: Steps
   choose-from: Choose from:
 ---
 
-# Configuring a channel
-
-To complete your PingOne provisioning configuration, map the necessary attributes in your channel configuration.
+# Adding device profiling to an authentication API-based application
 
 ## About this task
 
-Learn more about the following steps in [Managing channels](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/help_saasmanagementtasklet_saasmanagementstate.html) in the PingFederate documentation.
+Use the following instructions to add device profiling to a web application using the PingOne Protect SDK. For more information about the authentication API, see [Authentication API](https://docs.pingidentity.com/pingfederate/latest/developers_reference_guide/pf_authentication_api.html) in the PingFederate documentation or [PingOne Protect Native SDKs](http://apidocs.pingidentity.com/pingone/native-sdks/v1/api/#pingone-protect-native-sdks) in the PingOne Native SDK documentation.
 
 ## Steps
 
-1. On the **Manage Channels** tab, click **Create**.
+1. Implement the Signals SDK by following the steps in [PingOne Protect Native SDKs](https://apidocs.pingidentity.com/pingone/native-sdks/v1/api/#pingone-protect-native-sdks).
 
-2. On the **Channel Info** tab, in the **Channel Name** field, enter a unique name, then click **Next**.
+2. Configure functions to format the device profile and submit it to the authentication API. Use the following code sample as a guide.
 
-3. On the **Source** tab, in the **Active Data Store** list, select the datastore that you configured in [Supported attributes reference](pf_p1_ik_supported_attributes_reference.html), then click **Next**.
+   |   |                                                                                                                                                                                                                                                                                         |
+   | - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+   |   | The `pingone-protect-device-profiling.js` assumes you are using the web SDK. If using a mobile device and you want to send the `deviceProfile` check the [SDK documentation](http://apidocs.pingidentity.com/pingone/native-sdks/v1/api/#pingone-risk-native-sdks) and use accordingly. |
 
-4. On the **Source Settings** tab, click **Next**.
+   ```
+   function onCompletion(flowId, deviceProfile) {
+   	submitDeviceProfile(flowId, deviceProfile);
+   }
 
-5. On the **Source Location** tab, in the **Base DN** field, enter a base DN that includes the users that you want to provision.
+   function submitDeviceProfile(flowId, deviceProfile) {
+   	var myHeaders = new Headers();
+   	myHeaders.append("X-XSRF-Header", "test");
+   	myHeaders.append("Content-Type", "application/vnd.pingidentity.submitDeviceProfile+json");
+   ​
+   	var raw = JSON.stringify({
+       	"signalsSdkDeviceProfile": deviceProfile
+   	});
+   ​
+   	var requestOptions = {
+       	method: 'POST',
+       	headers: myHeaders,
+       	body: raw,
+       	redirect: 'follow'
+   	};
+   ​
+   	fetch("https://pf_host:pf_port/pf-ws/authn/flows/" + flowId, requestOptions)
+       	.then(response => response.text())
+       	.then(result => console.log(result))
+       	.catch(error => console.log('error', error));
+   }
+   ```
 
-6. In the **Users** section, complete the **Group DN** or **Filter** fields to identify the users that you want to provision, then click **Next**.
+   When the authentication API is in the `DEVICE_PROFILE_REQUIRED` state, your application should `submitDeviceProfile` with the value from the `profileDevice(callback)` method.
 
-7. On the **Attribute Mapping** tab, map the required attributes.
+3. When you complete the steps in [Configuring an adapter instance](pf_p1_protect_ik_configuring_an_adapter_instance.html), set the device profiling method. The provider or the adapter can receive the payload sent by the authentication API.
 
-   You can find a list of attributes in the [Supported attributes reference](pf_p1_ik_supported_attributes_reference.html). Learn more about attribute mapping in [Mapping attributes](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/help_saaschanneltasklet_saasattrmappingmgmtstate.html) in the PingFederate documentation.
+   ### Choose from:
 
-   |   |                                                                                                                                                                                                                                                                                                                     |
-   | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-   |   | You can also map custom attributes after adding them. Learn more about adding custom attributes in [Adding user attributes](https://docs.pingidentity.com/pingone/directory/p1_adduserattributes.html) and the [PingOne Platform API Reference](https://apidocs.pingidentity.com/pingone/platform/v1/api/#schemas). |
+   * If the provider is configured, you must add the payload to the `checkUsernamePassword` `requestOptions` API call in the captchaResponse.
 
-   1. On the **Username** row, click **Edit**.
+     ```json
+     {
+       "username": "string",
+       "password": "string",
+       "rememberMyUsername": "boolean",
+       "thisIsMyDevice": "boolean",
+       "captchaResponse": "string"
+     }
+     ```
 
-   2. On the `Username` **Attribute Mapping** tab, in the **Root Object Class** and **Attribute** lists, select the attribute in your datastore that matches the `Username` attribute in PingOne.
+   * When using the PingOne Protect IdP Adapter, submit the payload following the `submitDeviceProfile` `requestOptions` action of the authentication API.
 
-      Learn more in [User and group management](pf_p1_ik_user_and_group_management.html).
-
-   3. Click **Add Attribute**, and then click **Done**.
-
-   4. On the **Population ID** row, click **Edit**.
-
-   5. On the **Population ID** mapping tab, do one of the following:
-
-      ### Choose from:
-
-      * Map a static population ID:
-
-        1. In the **Default Value** list, select the PingOne population that you want to target, then click **Done**.
-
-           |   |                                                                                                                                                                                                                              |
-           | - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-           |   | The **Default Value** list is only available if you entered the correct client credentials from [Connecting PingFederate to PingOne](pf_p1_ik_connecting_pf_to_p1.html). The provisioner will populate the list accordingly. |
-
-      * Map a dynamic population ID.
-
-        |   |                                                                                                                                                                                 |
-        | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-        |   | Learn more about getting the ID for a population in [Viewing populations](https://docs.pingidentity.com/pingone/directory/p1_viewpopulation.html) in the PingOne documentation. |
-
-        1. In the **Root Object Class** and **Attribute** lists, select the user attribute in your datastore that contains the population ID.
-
-        2. Click **Add Attribute**, and then click **Done**.
-
-   6. If you want to manage users and devices for the PingOne MFA service, map any combination of the `MFA Device Email` and `MFA Device SMS` attributes, and map or assign the `MFA Enabled` attribute.
-
-      Learn more in [Supported attributes reference](pf_p1_ik_supported_attributes_reference.html).
-
-   7. Click **Next**.
-
-8. On the **Activation and Summary** tab, on the **Channel Status** row, click **Active**, then click **Done**.
-
-9. On the **Manage Channels** tab, click **Done**.
+     |   |                                                                                                                                                                                                                                     |
+     | - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+     |   | For more information on these options, see [Exploring the authentication API](https://docs.pingidentity.com/pingfederate/latest/developers_reference_guide/pf_exploring_authentication_api.html) in the PingFederate documentation. |
 
 ---
 
 ---
-title: Configuring a CIBA authenticator instance
-description: Configure the PingOne MFA CIBA Authenticator to determine how PingFederate communicates with PingOne MFA for client-initiated backchannel authentication (CIBA) requests.
+title: Adding device profiling to an authentication API-based application
+description: If you are using the PingFederate authentication application programming interface (API) and want to avoid using HTTP cookies, modify your application to collect the device profile and send it to the authentication API.
 component: pingone
-page_id: pingone:pingone_mfa_integration_kit:pf_p1_mfa_ik_configuring_a_ciba_authenticator_instance_4.0
-canonical_url: https://docs.pingidentity.com/integrations/pingone/pingone_mfa_integration_kit/pf_p1_mfa_ik_configuring_a_ciba_authenticator_instance_4.0.html
+page_id: pingone:pingone_risk_integration_kit:pf_p1_risk_ik_adding_device_profiling_to_an_authentication_api_based_application
+canonical_url: https://docs.pingidentity.com/integrations/pingone/pingone_risk_integration_kit/pf_p1_risk_ik_adding_device_profiling_to_an_authentication_api_based_application.html
+llms_txt: https://docs.pingidentity.com/integrations/pingone/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: July 12, 2024
+section_ids:
+  adding-device-profiling-to-an-authentication-api-based-application-using-the-pingone-risk-signals-sdk-and-integration-kit-1-3-1: Adding device profiling to an authentication API-based application using the PingOne Risk (Signals) SDK and integration kit 1.3.1
+  about-this-task: About this task
+  steps: Steps
+  adding-device-profiling-to-an-authentication-api-based-application-using-the-pingone-risk-signals-sdk-and-integration-kit-1-3-or-earlier: Adding device profiling to an authentication API-based application using the PingOne Risk (Signals) SDK and integration kit 1.3 or earlier
+  about-this-task-2: About this task
+  steps-2: Steps
+  adding-device-profiling-to-an-authentication-api-based-application-using-fingerprint-js: Adding device profiling to an Authentication API-based application using Fingerprint JS
+  about-this-task-3: About this task
+  steps-3: Steps
+---
+
+# Adding device profiling to an authentication API-based application
+
+If you are using the PingFederate authentication application programming interface (API) *(tooltip: \<div class="paragraph">
+\<p>A specification of interactions available for building software to access an application or service.\</p>
+\</div>)* and want to avoid using HTTP cookies, modify your application to collect the device profile and send it to the authentication API.
+
+## Adding device profiling to an authentication API-based application using the PingOne Risk (Signals) SDK and integration kit 1.3.1
+
+### About this task
+
+Use the following instructions to add device profiling to a web application using the PingOne Risk (Signals) SDK. Learn more about the authentication API in [Authentication API](https://docs.pingidentity.com/pingfederate/latest/developers_reference_guide/pf_authentication_api.html) in the PingFederate documentation or [PingOne Risk Native SDKs](http://apidocs.pingidentity.com/pingone/native-sdks/v1/api/#pingone-risk-native-sdks) in the PingOne Native SDK documentation.
+
+|   |                                                                                                                                                                                  |
+| - | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | PingOne Risk Integration Kit version 1.3.1 must be deployed before any changes can be made on the HTML side. SDK version 5.2.1 or later requires adapter version 1.3.1 or later. |
+
+### Steps
+
+1. Implement the Signals SDK by following the steps in [PingOne Risk Native SDKs](https://apidocs.pingidentity.com/pingone/native-sdks/v1/api/#pingone-risk-native-sdks).
+
+2. Configure functions to format the device profile and submit it to the authentication API. Use the following code sample as a guide.
+
+   |   |                                                                                                                                                                                                                                                                                           |
+   | - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+   |   | The `pingone-risk-profiling-signals-sdk.js` assumes you are using the web SDK. If using a mobile device and you want to send the `deviceProfile` check the [SDK documentation](http://apidocs.pingidentity.com/pingone/native-sdks/v1/api/#pingone-risk-native-sdks) and use accordingly. |
+
+   ```
+   function onCompletion(flowId, deviceProfile) {
+   	submitDeviceProfile(flowId, deviceProfile);
+   }
+
+   function submitDeviceProfile(flowId, deviceProfile) {
+   	var myHeaders = new Headers();
+   	myHeaders.append("X-XSRF-Header", "test");
+   	myHeaders.append("Content-Type", "application/vnd.pingidentity.submitDeviceProfile+json");
+   ​
+   	var raw = JSON.stringify({
+       	"signalsSdkDeviceProfile": deviceProfile
+   	});
+   ​
+   	var requestOptions = {
+       	method: 'POST',
+       	headers: myHeaders,
+       	body: raw,
+       	redirect: 'follow'
+   	};
+   ​
+   	fetch("https://pf_host:pf_port/pf-ws/authn/flows/" + flowId, requestOptions)
+       	.then(response => response.text())
+       	.then(result => console.log(result))
+       	.catch(error => console.log('error', error));
+   }
+   ```
+
+   When the authentication API is in the `DEVICE_PROFILE_REQUIRED` state, your application should `submitDeviceProfile` with the value from the `profileDevice(callback)` method.
+
+3. When you complete the steps in [Configuring an adapter instance](pf_p1_risk_ik_configuring_an_adapter_instance.html), set the **Device profiling method** to **Captured by previous adapter**.
+
+## Adding device profiling to an authentication API-based application using the PingOne Risk (Signals) SDK and integration kit 1.3 or earlier
+
+### About this task
+
+Use the following instructions to add device profiling to a web application using the PingOne Risk (Signals) SDK. Learn more about the authentication API in [Authentication API](https://docs.pingidentity.com/pingfederate/latest/developers_reference_guide/pf_authentication_api.html) in the PingFederate documentation or [PingOne Risk Native SDKs](http://apidocs.pingidentity.com/pingone/native-sdks/v1/api/#pingone-risk-native-sdks) in the PingOne Native SDK documentation.
+
+### Steps
+
+1. Implement the Signals SDK by following the steps in [PingOne Risk Native SDKs](https://apidocs.pingidentity.com/pingone/native-sdks/v1/api/#pingone-risk-native-sdks).
+
+2. Configure functions to format the device profile and submit it to the authentication API. Use the following code sample as a guide.
+
+   |   |                                                                                                                                                                                                                                                                                           |
+   | - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+   |   | The `pingone-risk-profiling-signals-sdk.js` assumes you are using the web SDK. If using a mobile device and you want to send the `deviceProfile` check the [SDK documentation](http://apidocs.pingidentity.com/pingone/native-sdks/v1/api/#pingone-risk-native-sdks) and use accordingly. |
+
+   ```
+   function onCompletion(flowId, deviceProfile) {
+   	submitDeviceProfile(flowId, deviceProfile);
+   }
+
+   function submitDeviceProfile(flowId, deviceProfile) {
+   	var myHeaders = new Headers();
+   	myHeaders.append("X-XSRF-Header", "test");
+   	myHeaders.append("Content-Type", "application/vnd.pingidentity.submitDeviceProfile+json");
+   ​
+   	var raw = JSON.stringify({
+       	"signalsSdkDeviceProfile": deviceProfile
+   	});
+   ​
+   	var requestOptions = {
+       	method: 'POST',
+       	headers: myHeaders,
+       	body: raw,
+       	redirect: 'follow'
+   	};
+   ​
+   	fetch("https://pf_host:pf_port/pf-ws/authn/flows/" + flowId, requestOptions)
+       	.then(response => response.text())
+       	.then(result => console.log(result))
+       	.catch(error => console.log('error', error));
+   }
+   ```
+
+   When the authentication API is in the `DEVICE_PROFILE_REQUIRED` state, your application should `submitDeviceProfile` with the value from the `profileDevice(callback)` method.
+
+3. When you complete the steps in [Configuring an adapter instance](pf_p1_risk_ik_configuring_an_adapter_instance.html), set the **Device profiling method** to **Captured by previous adapter**.
+
+## Adding device profiling to an Authentication API-based application using Fingerprint JS
+
+### About this task
+
+Use the following instructions to add device profiling to a web application using Fingerprint JS. Learn more about the authentication API in [Authentication API](https://docs.pingidentity.com/pingfederate/latest/developers_reference_guide/pf_authentication_api.html) in the PingFederate documentation.
+
+|   |                                                                                                                                                           |
+| - | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | The PingOne Risk (Signals) SDK is the preferred way to get device profiling and is recommended for use in the PingOne Risk Integration Kit 1.3 and later. |
+
+### Steps
+
+1. Copy the following files from the integration `.zip` archive to your web server.
+
+   * `fingerprint2-<version>.min.js`
+
+   * `pingone-risk-management-profiling.js`
+
+2. Add the following external script references to the sign-on page:
+
+   |   |                                                   |
+   | - | ------------------------------------------------- |
+   |   | The scripts must be added in the following order. |
+
+   ```
+   <script type="text/javascript" src="fingerprint2-<version>.min.js"></script>
+   <script type="text/javascript" src="{file-prefix}-profiling.js"></script>
+   ```
+
+3. Configure your application to call the `profileDevice(onCompletion)` function. This creates the device profile.
+
+4. Configure functions to format the device profile and submit it to the authentication API. Use the following code sample as a guide.
+
+   ```
+   function onCompletion(flowId, components) {
+       var deviceProfile = transformComponentsToDeviceProfile(components);
+       submitDeviceProfile(flowId, deviceProfile);
+   }
+   ​
+   function submitDeviceProfile(flowId, deviceProfile) {
+       var myHeaders = new Headers();
+       myHeaders.append("X-XSRF-Header", "test");
+       myHeaders.append("Content-Type", "application/vnd.pingidentity.submitDeviceProfile+json");
+   ​
+       var raw = JSON.stringify({
+           "deviceProfile": deviceProfile
+       });
+   ​
+       var requestOptions = {
+           method: 'POST',
+           headers: myHeaders,
+           body: raw,
+           redirect: 'follow'
+       };
+   ​
+       fetch("https://pf_host:pf_port/pf-ws/authn/flows/" + flowId, requestOptions)
+           .then(response => response.text())
+           .then(result => console.log(result))
+           .catch(error => console.log('error', error));
+   }
+   ```
+
+   When the authentication API is in the `DEVICE_PROFILE_REQUIRED` state, your application should `submitDeviceProfile` with a value structured as follows:
+
+   ```html
+   {
+      "deviceProfile":{
+         "userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10.14; rv:82.0) Gecko/20100101 Firefox/82.0",
+         "language":"en-CA",
+         "colorDepth":24,
+         "deviceMemory":null,
+         "hardwareConcurrency":12,
+         "screenResolution":[
+            3440,
+            1440
+         ],
+         "availableScreenResolution":[
+            3440,
+            1417
+         ],
+         "timezoneOffset":480,
+         "timezone":"America/Los_Angeles",
+         "sessionStorage":true,
+         "localStorage":true,
+         "indexedDb":true,
+         "addBehaviour":false,
+         "openDatabase":false,
+         "cpuClass":null,
+         "platform":"MacIntel",
+         "plugins":[
+         ],
+         "webgl":[
+            "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAACWCAYAAABkW7XSAAARYUlEQVR4nO3c30vcj57f8effUWg5F1
+   		 [...]
+   		 WEBGL_draw_buffers;WEBGL_lose_context",
+            "webgl aliased line width range:[1, 1]",
+            "webgl aliased point size range:[1, 8191]",
+            [...]
+            "webgl fragment shader low int precision rangeMin:24",
+            "webgl fragment shader low int precision rangeMax:24"
+         ],
+         "webglVendorAndRenderer":"ATI Technologies Inc.~AMD Radeon Pro 560X OpenGL Engine",
+         "adBlock":false,
+         "hasLiedLanguages":false,
+         "hasLiedResolution":false,
+         "hasLiedOs":false,
+         "hasLiedBrowser":false,
+         "touchSupport":[
+            "0",
+            "false",
+            "false"
+         ],
+         "fonts":[
+            "Andale Mono",
+            "Arial",
+            [...]
+            "Wingdings",
+            "Wingdings 2",
+            "Wingdings 3"
+         ],
+         "audio":"35.7383295930922"
+      }
+   }
+   ```
+
+5. When you complete the steps in [Configuring an adapter instance](pf_p1_risk_ik_configuring_an_adapter_instance.html), set the **Device profiling method** to **Captured by this adapter**.
+
+---
+
+---
+title: Adding device profiling to an Authentication API-based application using Fingerprint JS
+description: Use the following instructions to add device profiling to a web application using Fingerprint JS. Learn more about the authentication API in Authentication API in the PingFederate documentation.
+component: pingone
+page_id: pingone:pingone_risk_integration_kit:pf_p1_risk_ik_adding_device_profiling_to_an_authtication_api_based_app_using_fingerprint_js
+canonical_url: https://docs.pingidentity.com/integrations/pingone/pingone_risk_integration_kit/pf_p1_risk_ik_adding_device_profiling_to_an_authtication_api_based_app_using_fingerprint_js.html
+llms_txt: https://docs.pingidentity.com/integrations/pingone/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: July 12, 2024
+section_ids:
+  about-this-task: About this task
+  steps: Steps
+---
+
+# Adding device profiling to an Authentication API-based application using Fingerprint JS
+
+## About this task
+
+Use the following instructions to add device profiling to a web application using Fingerprint JS. Learn more about the authentication API in [Authentication API](https://docs.pingidentity.com/pingfederate/latest/developers_reference_guide/pf_authentication_api.html) in the PingFederate documentation.
+
+|   |                                                                                                                                                           |
+| - | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | The PingOne Risk (Signals) SDK is the preferred way to get device profiling and is recommended for use in the PingOne Risk Integration Kit 1.3 and later. |
+
+## Steps
+
+1. Copy the following files from the integration `.zip` archive to your web server.
+
+   * `fingerprint2-<version>.min.js`
+
+   * `pingone-risk-management-profiling.js`
+
+2. Add the following external script references to the sign-on page:
+
+   |   |                                                   |
+   | - | ------------------------------------------------- |
+   |   | The scripts must be added in the following order. |
+
+   ```
+   <script type="text/javascript" src="fingerprint2-<version>.min.js"></script>
+   <script type="text/javascript" src="{file-prefix}-profiling.js"></script>
+   ```
+
+3. Configure your application to call the `profileDevice(onCompletion)` function. This creates the device profile.
+
+4. Configure functions to format the device profile and submit it to the authentication API. Use the following code sample as a guide.
+
+   ```
+   function onCompletion(flowId, components) {
+       var deviceProfile = transformComponentsToDeviceProfile(components);
+       submitDeviceProfile(flowId, deviceProfile);
+   }
+   ​
+   function submitDeviceProfile(flowId, deviceProfile) {
+       var myHeaders = new Headers();
+       myHeaders.append("X-XSRF-Header", "test");
+       myHeaders.append("Content-Type", "application/vnd.pingidentity.submitDeviceProfile+json");
+   ​
+       var raw = JSON.stringify({
+           "deviceProfile": deviceProfile
+       });
+   ​
+       var requestOptions = {
+           method: 'POST',
+           headers: myHeaders,
+           body: raw,
+           redirect: 'follow'
+       };
+   ​
+       fetch("https://pf_host:pf_port/pf-ws/authn/flows/" + flowId, requestOptions)
+           .then(response => response.text())
+           .then(result => console.log(result))
+           .catch(error => console.log('error', error));
+   }
+   ```
+
+   When the authentication API is in the `DEVICE_PROFILE_REQUIRED` state, your application should `submitDeviceProfile` with a value structured as follows:
+
+   ```html
+   {
+      "deviceProfile":{
+         "userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10.14; rv:82.0) Gecko/20100101 Firefox/82.0",
+         "language":"en-CA",
+         "colorDepth":24,
+         "deviceMemory":null,
+         "hardwareConcurrency":12,
+         "screenResolution":[
+            3440,
+            1440
+         ],
+         "availableScreenResolution":[
+            3440,
+            1417
+         ],
+         "timezoneOffset":480,
+         "timezone":"America/Los_Angeles",
+         "sessionStorage":true,
+         "localStorage":true,
+         "indexedDb":true,
+         "addBehaviour":false,
+         "openDatabase":false,
+         "cpuClass":null,
+         "platform":"MacIntel",
+         "plugins":[
+         ],
+         "webgl":[
+            "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAACWCAYAAABkW7XSAAARYUlEQVR4nO3c30vcj57f8effUWg5F1
+   		 [...]
+   		 WEBGL_draw_buffers;WEBGL_lose_context",
+            "webgl aliased line width range:[1, 1]",
+            "webgl aliased point size range:[1, 8191]",
+            [...]
+            "webgl fragment shader low int precision rangeMin:24",
+            "webgl fragment shader low int precision rangeMax:24"
+         ],
+         "webglVendorAndRenderer":"ATI Technologies Inc.~AMD Radeon Pro 560X OpenGL Engine",
+         "adBlock":false,
+         "hasLiedLanguages":false,
+         "hasLiedResolution":false,
+         "hasLiedOs":false,
+         "hasLiedBrowser":false,
+         "touchSupport":[
+            "0",
+            "false",
+            "false"
+         ],
+         "fonts":[
+            "Andale Mono",
+            "Arial",
+            [...]
+            "Wingdings",
+            "Wingdings 2",
+            "Wingdings 3"
+         ],
+         "audio":"35.7383295930922"
+      }
+   }
+   ```
+
+5. When you complete the steps in [Configuring an adapter instance](pf_p1_risk_ik_configuring_an_adapter_instance.html), set the **Device profiling method** to **Captured by this adapter**.
+
+---
+
+---
+title: Adding device profiling to an authentication API-based application using the PingOne Risk (Signals) SDK and integration kit 1.3 or earlier
+description: Use the following instructions to add device profiling to a web application using the PingOne Risk (Signals) SDK. Learn more about the authentication API in Authentication API in the PingFederate documentation or PingOne Risk Native SDKs in the PingOne Native SDK documentation.
+component: pingone
+page_id: pingone:pingone_risk_integration_kit:pf_p1_risk_ik_adding_device_profiling_to_an_authtication_api_based_app_using_the_p1risk_signals_sdk_and_ik_13_or_earlier
+canonical_url: https://docs.pingidentity.com/integrations/pingone/pingone_risk_integration_kit/pf_p1_risk_ik_adding_device_profiling_to_an_authtication_api_based_app_using_the_p1risk_signals_sdk_and_ik_13_or_earlier.html
+llms_txt: https://docs.pingidentity.com/integrations/pingone/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: July 12, 2024
+section_ids:
+  about-this-task: About this task
+  steps: Steps
+---
+
+# Adding device profiling to an authentication API-based application using the PingOne Risk (Signals) SDK and integration kit 1.3 or earlier
+
+## About this task
+
+Use the following instructions to add device profiling to a web application using the PingOne Risk (Signals) SDK. Learn more about the authentication API in [Authentication API](https://docs.pingidentity.com/pingfederate/latest/developers_reference_guide/pf_authentication_api.html) in the PingFederate documentation or [PingOne Risk Native SDKs](http://apidocs.pingidentity.com/pingone/native-sdks/v1/api/#pingone-risk-native-sdks) in the PingOne Native SDK documentation.
+
+## Steps
+
+1. Implement the Signals SDK by following the steps in [PingOne Risk Native SDKs](https://apidocs.pingidentity.com/pingone/native-sdks/v1/api/#pingone-risk-native-sdks).
+
+2. Configure functions to format the device profile and submit it to the authentication API. Use the following code sample as a guide.
+
+   |   |                                                                                                                                                                                                                                                                                           |
+   | - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+   |   | The `pingone-risk-profiling-signals-sdk.js` assumes you are using the web SDK. If using a mobile device and you want to send the `deviceProfile` check the [SDK documentation](http://apidocs.pingidentity.com/pingone/native-sdks/v1/api/#pingone-risk-native-sdks) and use accordingly. |
+
+   ```
+   function onCompletion(flowId, deviceProfile) {
+   	submitDeviceProfile(flowId, deviceProfile);
+   }
+
+   function submitDeviceProfile(flowId, deviceProfile) {
+   	var myHeaders = new Headers();
+   	myHeaders.append("X-XSRF-Header", "test");
+   	myHeaders.append("Content-Type", "application/vnd.pingidentity.submitDeviceProfile+json");
+   ​
+   	var raw = JSON.stringify({
+       	"signalsSdkDeviceProfile": deviceProfile
+   	});
+   ​
+   	var requestOptions = {
+       	method: 'POST',
+       	headers: myHeaders,
+       	body: raw,
+       	redirect: 'follow'
+   	};
+   ​
+   	fetch("https://pf_host:pf_port/pf-ws/authn/flows/" + flowId, requestOptions)
+       	.then(response => response.text())
+       	.then(result => console.log(result))
+       	.catch(error => console.log('error', error));
+   }
+   ```
+
+   When the authentication API is in the `DEVICE_PROFILE_REQUIRED` state, your application should `submitDeviceProfile` with the value from the `profileDevice(callback)` method.
+
+3. When you complete the steps in [Configuring an adapter instance](pf_p1_risk_ik_configuring_an_adapter_instance.html), set the **Device profiling method** to **Captured by previous adapter**.
+
+---
+
+---
+title: Adding device profiling to an authentication API-based application using the PingOne Risk (Signals) SDK and integration kit 1.3.1
+description: Use the following instructions to add device profiling to a web application using the PingOne Risk (Signals) SDK. Learn more about the authentication API in Authentication API in the PingFederate documentation or PingOne Risk Native SDKs in the PingOne Native SDK documentation.
+component: pingone
+page_id: pingone:pingone_risk_integration_kit:pf_p1_risk_ik_adding_device_profiling_to_an_authtication_api_based_app_using_the_p1risk_signals_sdk_and_ik_131
+canonical_url: https://docs.pingidentity.com/integrations/pingone/pingone_risk_integration_kit/pf_p1_risk_ik_adding_device_profiling_to_an_authtication_api_based_app_using_the_p1risk_signals_sdk_and_ik_131.html
+llms_txt: https://docs.pingidentity.com/integrations/pingone/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: July 12, 2024
+section_ids:
+  about-this-task: About this task
+  steps: Steps
+---
+
+# Adding device profiling to an authentication API-based application using the PingOne Risk (Signals) SDK and integration kit 1.3.1
+
+## About this task
+
+Use the following instructions to add device profiling to a web application using the PingOne Risk (Signals) SDK. Learn more about the authentication API in [Authentication API](https://docs.pingidentity.com/pingfederate/latest/developers_reference_guide/pf_authentication_api.html) in the PingFederate documentation or [PingOne Risk Native SDKs](http://apidocs.pingidentity.com/pingone/native-sdks/v1/api/#pingone-risk-native-sdks) in the PingOne Native SDK documentation.
+
+|   |                                                                                                                                                                                  |
+| - | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | PingOne Risk Integration Kit version 1.3.1 must be deployed before any changes can be made on the HTML side. SDK version 5.2.1 or later requires adapter version 1.3.1 or later. |
+
+## Steps
+
+1. Implement the Signals SDK by following the steps in [PingOne Risk Native SDKs](https://apidocs.pingidentity.com/pingone/native-sdks/v1/api/#pingone-risk-native-sdks).
+
+2. Configure functions to format the device profile and submit it to the authentication API. Use the following code sample as a guide.
+
+   |   |                                                                                                                                                                                                                                                                                           |
+   | - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+   |   | The `pingone-risk-profiling-signals-sdk.js` assumes you are using the web SDK. If using a mobile device and you want to send the `deviceProfile` check the [SDK documentation](http://apidocs.pingidentity.com/pingone/native-sdks/v1/api/#pingone-risk-native-sdks) and use accordingly. |
+
+   ```
+   function onCompletion(flowId, deviceProfile) {
+   	submitDeviceProfile(flowId, deviceProfile);
+   }
+
+   function submitDeviceProfile(flowId, deviceProfile) {
+   	var myHeaders = new Headers();
+   	myHeaders.append("X-XSRF-Header", "test");
+   	myHeaders.append("Content-Type", "application/vnd.pingidentity.submitDeviceProfile+json");
+   ​
+   	var raw = JSON.stringify({
+       	"signalsSdkDeviceProfile": deviceProfile
+   	});
+   ​
+   	var requestOptions = {
+       	method: 'POST',
+       	headers: myHeaders,
+       	body: raw,
+       	redirect: 'follow'
+   	};
+   ​
+   	fetch("https://pf_host:pf_port/pf-ws/authn/flows/" + flowId, requestOptions)
+       	.then(response => response.text())
+       	.then(result => console.log(result))
+       	.catch(error => console.log('error', error));
+   }
+   ```
+
+   When the authentication API is in the `DEVICE_PROFILE_REQUIRED` state, your application should `submitDeviceProfile` with the value from the `profileDevice(callback)` method.
+
+3. When you complete the steps in [Configuring an adapter instance](pf_p1_risk_ik_configuring_an_adapter_instance.html), set the **Device profiling method** to **Captured by previous adapter**.
+
+---
+
+---
+title: Adding PingOne MFA to your authentication policy
+description: By modifying your PingFederate authentication policy to include the PingOne MFA IdP Adapter, you can challenge users to complete a multi-factor authentication (MFA) step.
+component: pingone
+page_id: pingone:pingone_mfa_integration_kit:pf_p1_mfa_ik_adding_p1_mfa_to_your_authentication_policy_4.0
+canonical_url: https://docs.pingidentity.com/integrations/pingone/pingone_mfa_integration_kit/pf_p1_mfa_ik_adding_p1_mfa_to_your_authentication_policy_4.0.html
 llms_txt: https://docs.pingidentity.com/integrations/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: March 18, 2025
@@ -1408,60 +1503,108 @@ section_ids:
   steps: Steps
 ---
 
-# Configuring a CIBA authenticator instance
+# Adding PingOne MFA to your authentication policy
 
-Configure the PingOne MFA CIBA Authenticator to determine how PingFederate communicates with PingOne MFA for client-initiated backchannel authentication (CIBA) *(tooltip: \<div class="paragraph">
-\<p>An extension to OpenID Connect defining a new OAuth grant type where user consent can be requested and granted through an out-of-band authentication flow. CIBA uses direct relying party to OpenID provider communication without redirects through the user's browser.\</p>
-\</div>)* requests.
+By modifying your PingFederate authentication policy to include the PingOne MFA IdP Adapter, you can challenge users to complete a multi-factor authentication (MFA) step.
 
 ## About this task
 
-These steps are only required if you want to enable CIBA support. Learn more in [CIBA request flow](pf_p1_mfa_ik_ciba_request_flow_4.0.html).
+These steps are designed to help you add to an existing authentication policy. You can find more information about configuring authentication policies in [Authentication policies](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/pf_authentication_policies.html) in the PingFederate documentation.
+
+|   |                                                                                                                                                                                                                 |
+| - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | **Changes in Version 4.0:**- **Attribute Mapping:** The `id_token` and `access_token` core contracts are removed. You must manually update policies to use `pingone.mfa.enrollment` or `pingone.mfa.device.id`. |
 
 ## Steps
 
-1. In the PingFederate administrative console, go to **Authentication > OAuth > CIBA Authenticators** and click **Create New Instance**.
+1. In the PingFederate administrative console, go to **Authentication > Policies > Policies**.
 
-2. On the **Type** tab, set the basic adapter instance attributes.
+2. Select the **IdP Authentication Policies** checkbox.
 
-   1. In the **Instance Name** field, enter a name for the authenticator instance.
+3. Open an existing authentication policy, or click **Add Policy**.
 
-   2. In the **Instance ID** field, enter a unique identifier for the authenticator instance.
+   Learn more in [Defining authentication policies](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/pf_defining_auth_policies.html) in the PingFederate documentation.
 
-   3. In the **Type** list, select **PingOne MFA CIBA Authenticator**. Click **Next**.
+4. In the **Policy** area, in the **Select** list, select a PingOne MFA IdP Adapter instance.
 
-3. (Optional) If you want to use the advanced prompt customizations described in [CIBA prompt customizations](pf_p1_mfa_ik_ciba_prompt_customizations_4.0.html), on the **Instance Configuration** tab, in the **PingOne Template Variables** section, map dynamic values to the variables in your PingOne notification template.
+   |   |                                                                                                         |
+   | - | ------------------------------------------------------------------------------------------------------- |
+   |   | In the adapter configuration, ensure a selection is made in the **MFA Policy for Authentication** list. |
 
-   You can find more details and examples in [Advanced CIBA prompt customizations](pf_p1_mfa_ik_advanced_ciba_prompt_customizations_4.0.html).
+   ![Adding the to the authentication policy](_images/zcr1599149554163.jpg)
 
-   1. Click **Add a new row to 'PingOne Template Variables'**.
+5. Map the PingOne user ID or username into the PingOne MFA IdP Adapter instance.
 
-   2. In the **PingOne Template Variable Name** field, enter the name of a variable in your PingOne notification template.
+   |   |                                                                                                                                                                                                                                                                                                            |
+   | - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+   |   | In version 4.0, the PingOne MFA IdP Adapter returns claims directly in the attribute map. To avoid errors, you must set the **Source** to **Adapter**.Attributes include:- `pingone.mfa.enrollment`
 
-   3. In the **PingOne Template Variable Value** field, define the value based on the examples shown in [Advanced CIBA prompt customizations](pf_p1_mfa_ik_advanced_ciba_prompt_customizations_4.0.html).
+   - `pingone.mfa.device.id`You can use these attributes to define additional policy rules and branches. |
 
-   4. In the **Action** column, click **Update**.
+   ![Passing the user ID from the first-factor authentication adapter to the](_images/dnb1651867080726.png)
 
-   5. To add more attributes, repeat steps a - d.
+   1. Under the PingOne MFA IdP Adapter instance, click **Options**.
 
-4. On the **Instance Configuration** tab, configure the authenticator instance by referring to [PingOne MFA CIBA Authenticator settings reference](pf_p1_mfa_ik_p1_mfa_ciba_authenticator_settings_reference_4.0.html). Click **Next**.
+   2. In the **Options** modal, in the **Source** list, select a previous authentication source that collects the PingOne user ID or username.
 
-5. On the **Actions** tab, test your connection to PingOne MFA. Resolve any issues that are reported, and then click **Next**.
+      |   |                                                                                                                                                                                                                                                                                                                     |
+      | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+      |   | The adapter uses the **Username Attribute** value as the username when provisioning new users.In version 4.0, the **User Not Found** failure mode only applies if a user does not exist in the directory. It no longer covers disabled users or users with the MFA service disabled, as it did in earlier versions. |
 
-6. On the **Extended Contract** tab, add any attributes that you used in the **PingOne Template Variable Value** fields on the **Instance Configuration** tab, then click **Next**.
+   3. In the **Attribute** list, select the user ID. Click **Done**.
 
-   The **Extended Contract** tab acts as an input that defines which attributes are available to use in the **PingOne Template Variable Value** fields. The `subject` attribute is always included. Learn more in [Advanced CIBA prompt customizations](pf_p1_mfa_ik_advanced_ciba_prompt_customizations_4.0.html).
+   4. (Optional) Select the **User ID Authenticated** checkbox.
 
-7. On the **Summary** tab, check your configuration, then click **Save**.
+      |   |                                                                                                                                                                                                                                                             |
+      | - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+      |   | The **User ID Authenticated** checkbox indicates whether the mapped user ID has been authenticated by the authentication source and therefore can be trusted by the current adapter. Device management options are limited if the user isn't authenticated. |
+
+6. (Optional) Define policy paths based on the `pingone.mfa.status` or `pingone.mfa.status.reason` attributes.
+
+   ![Branching the authentication policy based on the pingone.mfa.status attribute.](_images/dxf1601405103816.jpg)
+
+   1. Under the PingOne MFA IdP Adapter instance, click **Rules**.
+
+   2. In the **Rules** modal, in the **Attribute Name** list, select **pingone.mfa.status** or **pingone.mfa.status.reason**.
+
+   3. In the **Condition** list, select **equal to**.
+
+   4. In the **Value** field, enter a value from [PingOne MFA attributes reference](pf_p1_mfa_ik_p1_mfa_status_attributes_reference_4.0.html).
+
+   5. In the **Result** field, enter a name. This appears as a new policy path that branches from the authentication source.
+
+   6. If you want to add more authentication paths, click **Add** and repeat steps a-e.
+
+   7. Click **Done**.
+
+7. Configure each of the authentication paths.
+
+   ![The complete authentication policy](_images/xxp1599151225895.jpg)
+
+8. Click **Done**.
+
+9. Configure tracked HTTP parameters:
+
+   1. On the **Tracked HTTP Parameters** tab, in the **Parameter Name** field, enter the name of the parameter that you want to track.
+
+      For example:
+
+      * To enable automatic device pairing, enter `mobilePayload`.
+
+   2. Click **Add**.
+
+   3. Click **Save**.
+
+   4. Repeat the previous steps for any other parameters that you want to add.
 
 ---
 
 ---
-title: Configuring a CIBA authenticator instance
-description: Configure the PingOne MFA CIBA Authenticator to determine how PingFederate communicates with PingOne MFA for client-initiated backchannel authentication (CIBA) requests.
+title: Adding PingOne MFA to your authentication policy
+description: By modifying your PingFederate authentication policy to include the PingOne MFA IdP Adapter, you can challenge users to complete a multi-factor authentication (MFA) step.
 component: pingone
-page_id: pingone:pingone_mfa_integration_kit_3.2:pf_p1_mfa_ik_configuring_a_ciba_authenticator_instance
-canonical_url: https://docs.pingidentity.com/integrations/pingone/pingone_mfa_integration_kit_3.2/pf_p1_mfa_ik_configuring_a_ciba_authenticator_instance.html
+page_id: pingone:pingone_mfa_integration_kit_3.2:pf_p1_mfa_ik_adding_p1_mfa_to_your_authentication_policy
+canonical_url: https://docs.pingidentity.com/integrations/pingone/pingone_mfa_integration_kit_3.2/pf_p1_mfa_ik_adding_p1_mfa_to_your_authentication_policy.html
 llms_txt: https://docs.pingidentity.com/integrations/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: March 18, 2025
@@ -1470,199 +1613,421 @@ section_ids:
   steps: Steps
 ---
 
-# Configuring a CIBA authenticator instance
+# Adding PingOne MFA to your authentication policy
 
-Configure the PingOne MFA CIBA Authenticator to determine how PingFederate communicates with PingOne MFA for client-initiated backchannel authentication (CIBA) *(tooltip: \<div class="paragraph">
-\<p>An extension to OpenID Connect defining a new OAuth grant type where user consent can be requested and granted through an out-of-band authentication flow. CIBA uses direct relying party to OpenID provider communication without redirects through the user's browser.\</p>
-\</div>)* requests.
+By modifying your PingFederate authentication policy to include the PingOne MFA IdP Adapter, you can challenge users to complete a multi-factor authentication (MFA) step.
 
 ## About this task
 
-These steps are only required if you want to enable CIBA support. Learn more in [CIBA request flow](pf_p1_mfa_ik_ciba_request_flow.html).
+These steps are designed to help you add to an existing authentication policy. You can find more information about configuring authentication policies in [Authentication policies](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/pf_authentication_policies.html) in the PingFederate documentation.
 
 ## Steps
 
-1. In the PingFederate administrative console, go to **Authentication > OAuth > CIBA Authenticators** and click **Create New Instance**.
+1. In the PingFederate administrative console, go to **Authentication > Policies > Policies**.
 
-2. On the **Type** tab, set the basic adapter instance attributes.
+2. Select the **IdP Authentication Policies** checkbox.
 
-   1. In the **Instance Name** field, enter a name for the authenticator instance.
+3. Open an existing authentication policy, or click **Add Policy**.
 
-   2. In the **Instance ID** field, enter a unique identifier for the authenticator instance.
+   Learn more in [Defining authentication policies](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/pf_defining_auth_policies.html) in the PingFederate documentation.
 
-   3. In the **Type** list, select **PingOne MFA CIBA Authenticator**. Click **Next**.
+4. In the **Policy** area, in the **Select** list, select a PingOne MFA IdP Adapter instance.
 
-3. (Optional) If you want to use the advanced prompt customizations described in [CIBA prompt customizations](pf_p1_mfa_ik_ciba_prompt_customizations.html), on the **Instance Configuration** tab, in the **PingOne Template Variables** section, map dynamic values to the variables in your PingOne notification template.
+   ![Adding the to the authentication policy](_images/zcr1599149554163.jpg)
 
-   You can find more details and examples in [Advanced CIBA prompt customizations](pf_p1_mfa_ik_advanced_ciba_prompt_customizations.html).
+5. Map the PingOne user ID or username into the PingOne MFA IdP Adapter instance.
 
-   1. Click **Add a new row to 'PingOne Template Variables'**.
+   ![Passing the user ID from the first-factor authentication adapter to the](_images/dnb1651867080726.png)
 
-   2. In the **PingOne Template Variable Name** field, enter the name of a variable in your PingOne notification template.
+   1. Under the PingOne MFA IdP Adapter instance, click **Options**.
 
-   3. In the **PingOne Template Variable Value** field, define the value based on the examples shown in [Advanced CIBA prompt customizations](pf_p1_mfa_ik_advanced_ciba_prompt_customizations.html).
+   2. In the **Options** modal, in the **Source** list, select a previous authentication source that collects the PingOne user ID or username.
 
-   4. In the **Action** column, click **Update**.
+      |   |                                                                                                                                                                                            |
+      | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+      |   | If you left the **Username Attribute** field blank in your PingOne MFA IdP Adapter configuration, the adapter also uses this value as the username when provisioning new users to PingOne. |
 
-   5. To add more attributes, repeat steps a - d.
+   3. In the **Attribute** list, select the user ID. Click **Done**.
 
-4. On the **Instance Configuration** tab, configure the authenticator instance by referring to [PingOne MFA CIBA Authenticator settings reference](pf_p1_mfa_ik_p1_mfa_ciba_authenticator_settings_reference.html). Click **Next**.
+   4. (Optional) Select the **User ID Authenticated** checkbox.
 
-5. On the **Actions** tab, test your connection to PingOne MFA. Resolve any issues that are reported, and then click **Next**.
+      |   |                                                                                                                                                                                                                                                             |
+      | - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+      |   | The **User ID Authenticated** checkbox indicates whether the mapped user ID has been authenticated by the authentication source and therefore can be trusted by the current adapter. Device management options are limited if the user isn't authenticated. |
 
-6. On the **Extended Contract** tab, add any attributes that you used in the **PingOne Template Variable Value** fields on the **Instance Configuration** tab, then click **Next**.
+6. (Optional) Define policy paths based on the `pingone.mfa.status` or `pingone.mfa.status.reason` attributes.
 
-   The **Extended Contract** tab acts as an input that defines which attributes are available to use in the **PingOne Template Variable Value** fields. The `subject` attribute is always included. Learn more in [Advanced CIBA prompt customizations](pf_p1_mfa_ik_advanced_ciba_prompt_customizations.html).
+   ![Branching the authentication policy based on the pingone.mfa.status attribute.](_images/dxf1601405103816.jpg)
 
-7. On the **Summary** tab, check your configuration, then click **Save**.
+   1. Under the PingOne MFA IdP Adapter instance, click **Rules**.
+
+   2. In the **Rules** modal, in the **Attribute Name** list, select **pingone.mfa.status** or **pingone.mfa.status.reason**.
+
+   3. In the **Condition** list, select **equal to**.
+
+   4. In the **Value** field, enter a value from [PingOne MFA attributes reference](pf_p1_mfa_ik_p1_mfa_status_attributes_reference.html).
+
+   5. In the **Result** field, enter a name. This appears as a new policy path that branches from the authentication source.
+
+   6. If you want to add more authentication paths, click **Add** and repeat steps a-e.
+
+   7. Click **Done**.
+
+7. Configure each of the authentication paths.
+
+   ![The complete authentication policy](_images/xxp1599151225895.jpg)
+
+8. Click **Done**.
+
+9. Configure tracked HTTP parameters:
+
+   1. On the **Tracked HTTP Parameters** tab, in the **Parameter Name** field, enter the name of the parameter that you want to track.
+
+      For example:
+
+      * To enable automatic device pairing, enter `mobilePayoad`.
+
+      * To configure the PingOne MFA IdP Adapter to support the prompt parameter, enter `prompt`.
+
+   2. Click **Add**.
+
+   3. Click **Save**.
+
+   4. Repeat the previous steps for any other parameters that you want to add.
 
 ---
 
 ---
-title: Configuring a provider instance
-description: The PingOne Protect provider works similarly to CAPTCHA providers and can detect bot activity before the password credential validator (PCV) is triggered.
+title: Adding PingOne Verify to your authentication policy
+description: By modifying your PingFederate authentication policy to include the PingOne Verify IdP Adapter, you can challenge users to verify their identity as part of the authentication process.
 component: pingone
-page_id: pingone:pingone_protect_integration_kit:pf_p1_protect_ik_configuring_a_provider_instance
-canonical_url: https://docs.pingidentity.com/integrations/pingone/pingone_protect_integration_kit/pf_p1_protect_ik_configuring_a_provider_instance.html
+page_id: pingone:pingone_verify_integration_kit:pf_p1_verify_ik_adding_p1_verify_to_your_authentication_policy
+canonical_url: https://docs.pingidentity.com/integrations/pingone/pingone_verify_integration_kit/pf_p1_verify_ik_adding_p1_verify_to_your_authentication_policy.html
 llms_txt: https://docs.pingidentity.com/integrations/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: June 28, 2024
+revdate: August 2, 2024
 section_ids:
   about-this-task: About this task
   steps: Steps
-  direct-changes-to-javascript-files: Direct changes to Javascript files
-  provider-settings-reference: Provider settings reference
 ---
 
-# Configuring a provider instance
+# Adding PingOne Verify to your authentication policy
 
-The PingOne Protect provider works similarly to CAPTCHA providers and can detect bot activity before the password credential validator (PCV) is triggered.
+By modifying your PingFederate authentication policy to include the PingOne Verify IdP Adapter, you can challenge users to verify their identity as part of the authentication process.
 
 ## About this task
 
-|   |                                                                                    |
-| - | ---------------------------------------------------------------------------------- |
-|   | A provider instance isn't required, but having one is necessary for bot detection. |
+Use these steps to add to an existing authentication policy. You can find general information about configuring authentication policies in [Authentication policies](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/pf_authentication_policies.html) in the PingFederate documentation.
 
 ## Steps
 
-1. In the PingFederate administrative console, go to **System > External Systems > CAPTCHA and Risk Providers**. Click **Create New Instance**.
+1. In the PingFederate administrative console, go to **Authentication > Policies > Policies**.
 
-2. On the **Type** tab, set the basic provider instance attributes:
+2. On the **Policies** tab, select the **IdP Authentication Policies** checkbox.
 
-   1. In the **Instance Name** field, enter a name for the provider instance.
+3. Open an existing authentication policy, or click **Add Policy**.
 
-   2. In the **Instance ID** field, enter a unique identifier for the provider instance.
+   You can find more information in [Defining authentication policies](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/pf_defining_auth_policies.html) in the PingFederate documentation.
 
-   3. In the **Type** list, select **PingOne Protect Provider**. Click **Next**.
+4. In the **Policy** section, in the **Select** list, select a PingOne Verify IdP Adapter instance.
 
-3. On the **Instance Configuration** tab:
+   ![Adding the to the authentication policy](../_images/gvz1607722317720.jpg)
 
-   1. In the **PingOne Environment** field, select your **PingOne Connection** and **Environment Name**.
+5. Map the PingOne `user ID` or `username` into the PingOne Verify IdP Adapter instance.
 
-   2. In the **Field Value** list for **PingOne Risk Policy** section, select the risk policy to use.
+   ![Passing the user ID from the first-factor authentication adapter to the](../_images/mar1607722605939.jpg)
 
-   3. Click **Show Advanced Fields**.
+   1. Under the PingOne Verify IdP Adapter instance, click **Options**.
 
-   4. To allow the adapter to evaluate the risk rather than the provider, clear the **Enable Risk Evaluation** check box.
+   2. On the **Options** window, in the **Source** list, select a previous authentication source that collects the PingOne user ID or username.
 
-   5. Continue configuring the provider instance using the settings listed in [Provider settings reference](#provider-settings-reference).
+   3. In the **Attribute** list, select the user ID.
 
-   6. Click **Next**.
+   4. Select the **User ID Authenticated** checkbox.
 
-4. On the **Summary** tab, review the settings for the provider and click **Save**.
+   5. Click **Done**.
 
-5. Enable the HTML Form adapter to use the provider:
+6. (Optional) Define policy paths based on verification results.
 
-   1. Go to **Authentication > Integration > IdP Adapters**. Select your HTML Form IdP Adapter from the list.
+   |   |                                                                                                                                                                                                                                                                                                                                               |
+   | - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+   |   | Depending on the failure mode settings in your adapter configuration, the adapter can potentially return a `success` result in the authentication policy even when the user verification process did not succeed. It can be useful to create separate policy paths for a successful adapter result and a successful user verification result. |
 
-   2. On the **IdP Adapter** tab, click **Show Advanced Fields**.
+   ![Screen shot that shows the Rules dialog in the authentication policy with two paths configured based on the transactionStatus attribute.](../_images/vne1610049349809.png)
 
-   3. In the **Risk Provider** list, select your PingOne Protect provider instance.
+   1. Under the PingOne Verify IdP Adapter instance, click **Rules**.
 
-   4. Select one or more of the following check boxes.
+   2. On the **Rules** window, in the **Attribute Name** list, select **transactionStatus**.
 
-      | Check box                      | Description                                                                            |
-      | ------------------------------ | -------------------------------------------------------------------------------------- |
-      | **Risk for authentication**    | Enable for the login form to prevent automated attacks                                 |
-      | **Risk for password change**   | Enable for the password change form to prevent automated attacks                       |
-      | **Risk for password reset**    | Enable for the password reset and account unlock features to prevent automated attacks |
-      | **Risk for username recovery** | Enable for the username recovery features to prevent automated attacks                 |
+   3. In the **Condition** list, select **equal to**.
 
-6. **Optional:** Set the device profile settings for the PingOne Protect adapter:
+   4. In the **Value** field, enter `SUCCESS` or `BYPASS`.
 
-   1. Go to **Authentication > Integration > IdP Adapters**.
+      * SUCCESS
 
-   2. Select your PingOne Protect IdP adapter from the list.
+        The user successfully verified their identity.
 
-   3. On the **IdP Adapter** tab, click **Show Advanced Fields**.
+      * BYPASS
 
-   4. **Optional:** Enable **Include Device Dynamic Profile**.
+        An error occurred, and the verification process was not completed, but the adapter is configured to bypass verification and continue the authentication flow.
 
-   When enabled, the adapter will load the device profiling page if it hasn't already received the device profile payload from the provider.
+   5. In the **Result** field, enter a name.
 
-## Direct changes to Javascript files
+      This appears as a new policy path that branches from the authentication source.
 
-In addition to the configuration in the PingFederate administrative console, you must make the following change directly to the relevant Javascript file if you want the device data in the SDK payload to be provided as a signed JWT.
+   6. To add more authentication paths, click **Add** and repeat steps a-e.
 
-* Open the file `<installation directory>\server\default\conf\template\assets\scripts\captcha\signals.js`.
+   7. Click **Done**.
 
-* Add this line: `universalDeviceIdentification: true`
+7. Configure each of the authentication paths, including **Fail**, **Success**, and any paths that you defined in the **Rules** window.
 
-|   |                                                                                          |
-| - | ---------------------------------------------------------------------------------------- |
-|   | The option of using a signed JWT was introduced in version 1.0.4 of the integration kit. |
+   ![The complete authentication policy](../_images/pji1607722789395.jpg)
 
-## Provider settings reference
+8. Click **Done**.
 
-**Standard fields**
+9. In the **Policies** window, click **Save**.
 
-| Field                   | Value                         | Description                                                                                                                                                                            |
-| ----------------------- | ----------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **PingOne Environment** | *\<PingOne Connection>*       | Your PingOne Environment. Create connections in **System > External Systems > PingOne Connections**.This field is blank by default.                                                    |
-| **PingOne Risk Policy** | *\<PingOne Risk Policy Name>* | The risk policy used by PingOne for the risk evaluation. Overrides the environment and global default policy selections. This list is populated when you select a PingOne Environment. |
+---
 
-**Advanced fields**
+---
+title: Adding PingOne Verify to your authentication policy
+description: By modifying your PingFederate authentication policy to include the PingOne Verify IdP Adapter, you can challenge users to verify their identity as part of the authentication process.
+component: pingone
+page_id: pingone:pingone_verify_integration_kit_11:pf_p1_verify_ik_adding_p1_verify_to_your_authentication_policy_11
+canonical_url: https://docs.pingidentity.com/integrations/pingone/pingone_verify_integration_kit_11/pf_p1_verify_ik_adding_p1_verify_to_your_authentication_policy_11.html
+llms_txt: https://docs.pingidentity.com/integrations/pingone/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: August 2, 2024
+section_ids:
+  about-this-task: About this task
+  steps: Steps
+  choose-from: Choose from:
+---
 
-| Field                                      | Value                                                                                                                                                   | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                |
-| ------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Use Targeted Policies**                  | * **Enabled**
+# Adding PingOne Verify to your authentication policy
 
-* **Disabled**                                                                                                                           | When enabled, PingFederate uses the targeted risk policies that have been defined for the environment, rather than using a specific risk policy.&#xA;&#xA;If you select the Use Targeted Policies checkbox, the targeted policies will be used even if a specific risk policy is currently selected from the PingOne Risk Policy list.                                                                                                                     |
-| **Password Encryption**                    | - **SHA-256**
+By modifying your PingFederate authentication policy to include the PingOne Verify IdP Adapter, you can challenge users to verify their identity as part of the authentication process.
 
-- **SHA-384**
+## About this task
 
-- **Disable**                                                                                                             | For improved detection of bots and brute force attacks, use the **Password Encryption** option by selecting one of the SHA-2 hash functions. When this option is enabled, part of the password is hashed and passed to PingOne Protect.                                                                                                                                                                                                                    |
-| **Follow Recommended Action**              | * **Enabled**
+Use these steps to add to an existing authentication policy. You can find general information about configuring authentication policies in [Authentication policies](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/pf_authentication_policies.html) in the PingFederate documentation.
 
-* **Disabled**                                                                                                                           | In certain situations, the response from PingOne Protect includes not just an overall risk level but also a "recommended action", for example, BOT\_MITIGATION or AITM MITIGATION. These recommended actions are passed forward and you can configure the PingFederate policy to act upon the recommendation. Enable this option if you want the provider to automatically stop the transaction if the response includes one of these recommended actions. |
-| **Failure Mode**                           | - **Continue with fallback policy decision**
+## Steps
 
-- **Fail**                                                                                                | Use this option to specify how to proceed if PingOne Protect is unavailable or an error occurs: fail the user's sign-on attempt or continue with a pre-determined policy decision (set with **Fallback Policy Decision Value**).                                                                                                                                                                                                                           |
-| **Fallback Policy Decision Value**         | * **LOW**
+1. In the PingFederate administrative console, go to the **Policies** tab.
 
-* **MEDIUM** (default)
+   ### Choose from:
 
-* **HIGH**
+   * For PingFederate 10.1 or later: go to **Authentication > Policies > Policies**.
 
-* **unknown**                                                                                            | If you set **Failure Mode** to **Continue with fallback policy decision**, use the **Fallback Policy Decision Value** field to enter the risk result to use if PingOne Protect is unavailable or an error occurs ("LOW", "MEDIUM", "HIGH", or "unknown") .                                                                                                                                                                                                 |
-| **API Request Timeout**                    | `2000` (default)                                                                                                                                        | The amount of time in milliseconds that PingFederate allows when establishing a connection with PingOne Protect or waiting for a response to a request. A value of `0` disables the timeout.                                                                                                                                                                                                                                                               |
-| **Proxy Settings**                         | - **No Proxy**
+   * For PingFederate 10.0 or earlier: go to **Identity Provider > Authentication Policies > Policies**.
 
-- **System Defaults** (default)
+2. Select the **IdP Authentication Policies** checkbox.
 
-- **Custom**                                                                                           | To use a proxy for outbound HTTP requests, set **Proxy Settings** to **System Defaults** or set the value to **Custom** to specify a custom proxy host and port.                                                                                                                                                                                                                                                                                           |
-| **Custom Proxy Host**                      | *\<Proxy server host>*                                                                                                                                  | The proxy server host name to use when **Proxy Settings** is set to **Custom**.This field is blank by default.                                                                                                                                                                                                                                                                                                                                             |
-| **Custom Proxy Port**                      | *\<Proxy server port>*                                                                                                                                  | The proxy server port to use when **Proxy Settings** is set to **Custom**.This field is blank by default.                                                                                                                                                                                                                                                                                                                                                  |
-| **Custom Connection Pool**                 | `50` (default)                                                                                                                                          | The number of connections to PingOne Protect. Can be between `25` and `200`. Recommended that the number be left at the default value.                                                                                                                                                                                                                                                                                                                     |
-| **Collect PingID Device Trust Attributes** | * **Enabled**
+3. Open an existing authentication policy, or click **Add Policy**.
 
-* **Disabled**                                                                                                                           | When enabled, the Protect (Signals) SDK collects attributes from the PingID Device Trust Agent and sends them to PingOne Protect.                                                                                                                                                                                                                                                                                                                          |
-| **PingID Device Trust Agent Port**         | *\<Port number>*                                                                                                                                        | The port number to use when connecting to the PingID Device Trust Agent. If left blank, the default port (9400) is used.                                                                                                                                                                                                                                                                                                                                   |
-| **PingID Device Trust Agent Timeout**      | *\<Number of milliseconds>*                                                                                                                             | The time, in milliseconds, that PingFederate allows for establishing a connection with the PingID Device Trust Agent. Value must be between 200 and 10,000. If left blank, the value used is the value that was set in the Protect (Signals) SDK.                                                                                                                                                                                                          |
-| **Browser-based Location**                 | - **Don't get location (default)**
+   For more information, see [Defining authentication policies](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/pf_defining_auth_policies.html) in the PingFederate documentation.
 
-- **Get location - consent window shown by Protect Provider**
+4. In the **Policy** section, in the **Select** list, select a PingOne Verify IdP Adapter instance.
 
-- **Get location - consent window shown separately** | This option instructs the Protect (Signals) SDK to include the browser-based location if the user consents to the inclusion of this information. Select **Get location - consent window shown by Protect Provider** if you want PingFederate to trigger the consent window. Select **Get location - consent window shown separately** if you want one of your own pages to trigger the consent window.                                                     |
+   ![Adding the to the authentication policy](../_images/gvz1607722317720.jpg)
+
+5. Map the PingOne `user ID` or `username` into the PingOne Verify IdP Adapter instance.
+
+   ![Passing the user ID from the first-factor authentication adapter to the](../_images/mar1607722605939.jpg)
+
+   1. Under the PingOne Verify IdP Adapter instance, click **Options**.
+
+   2. On the **Options** window, in the **Source** list, select a previous authentication source that collects the PingOne user ID or username.
+
+   3. In the **Attribute** list, select the user ID.
+
+   4. For PingFederate 10.2 and later, select the **User ID Authenticated** checkbox.
+
+   5. Click **Done**.
+
+6. **Optional:** Define policy paths based on verification results.
+
+   |   |                                                                                                                                                                                                                                                                                                                                               |
+   | - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+   |   | Depending on the failure mode settings in your adapter configuration, the adapter can potentially return a `success` result in the authentication policy even when the user verification process did not succeed. It can be useful to create separate policy paths for a successful adapter result and a successful user verification result. |
+
+   ![Screen shot that shows the Rules dialog in the authentication policy with two paths configured based on the transactionStatus attribute.](../_images/vne1610049349809.png)
+
+   1. Under the PingOne Verify IdP Adapter instance, click **Rules**.
+
+   2. On the **Rules** window, in the **Attribute Name** list, select **transactionStatus**.
+
+   3. In the **Condition** list, select **equal to**.
+
+   4. In the **Value** field, enter `SUCCESS` or `BYPASS`.
+
+      * SUCCESS
+
+        The user successfully verified their identity.
+
+      * BYPASS
+
+        An error occurred, and the verification process was not completed, but the adapter is configured to bypass verification and continue the authentication flow.
+
+   5. In the **Result** field, enter a name.
+
+      This appears as a new policy path that branches from the authentication source.
+
+   6. To add more authentication paths, click **Add** and repeat steps a-e.
+
+   7. Click **Done**.
+
+7. Configure each of the authentication paths, including **Fail**, **Success**, and any paths that you defined in the **Rules** window.
+
+   ![The complete authentication policy](../_images/pji1607722789395.jpg)
+
+8. Click **Done**.
+
+9. In the **Policies** window, click **Save**.
+
+---
+
+---
+title: Adding PingOne Verify to your user registration flow
+description: By modifying your PingFederate authentication policy to include the PingOne Verify IdP Adapter policy fragment, you can challenge users to verify their identity as part of the self-service registration process.
+component: pingone
+page_id: pingone:pingone_verify_integration_kit:pf_p1_verify_ik_adding_p1_verify_user_registration_flow
+canonical_url: https://docs.pingidentity.com/integrations/pingone/pingone_verify_integration_kit/pf_p1_verify_ik_adding_p1_verify_user_registration_flow.html
+llms_txt: https://docs.pingidentity.com/integrations/pingone/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: August 6, 2026
+section_ids:
+  steps: Steps
+---
+
+# Adding PingOne Verify to your user registration flow
+
+By modifying your PingFederate authentication policy to include the PingOne Verify IdP Adapter policy fragment, you can challenge users to verify their identity as part of the self-service registration process.
+
+## Steps
+
+1. In the PingFederate administrative console, go to **Authentication > Policies > Policies**.
+
+2. Select the **IdP Authentication Policies** checkbox.
+
+3. Open the authentication policy that you created in your initial registration configuration.
+
+4. In the **Policy** area, define a policy path for user registration.
+
+   1. Under the HTML Form Adapter instance, click **Rules**.
+
+   2. On the **Rules** dialog, from the **Attribute Name** list, select **policy.action**.
+
+   3. In the **Condition** list, select **equal to**.
+
+   4. In the **Value** field, enter `identity.registration`.
+
+   5. In the **Result** field, enter a name, such as `Registration`.
+
+      This appears as a new policy path that branches from the HTML Form Adapter.
+
+   6. Click **Done**.
+
+5. After the HTML Form Adapter instance, for the **Fail** path, select **Done**.
+
+6. After the HTML Form Adapter instance, for the **Registration** path, select the local identity profile that you created for PingOne Verify.
+
+   1. Click **Local Identity Mapping**.
+
+   2. On the **Inbound Mapping** tab, map the registration form fields to the input policy contract attributes.
+
+      **Table 1. Example mappings**
+
+      | Inbound Mapping Fulfillment | Value                   |
+      | --------------------------- | ----------------------- |
+      | `firstName`                 | `regFirstName`          |
+      | `email`                     | `registrar@example.com` |
+
+   3. On the **Contract Fulfillment** tab, map values for the outbound contract.
+
+      | Outbound Mapping Fulfillment | Source                                   | Value       |
+      | ---------------------------- | ---------------------------------------- | ----------- |
+      | `attr1`                      | Local Identity (Verify Identity Profile) | `email`     |
+      | `subject`                    | Local Identity (Verify Identity Profile) | `firstName` |
+
+   4. Click **Done**.
+
+7. After the HTML Form Adapter instance, for the **Success** path, configure the standard (non-registration) authentication path.
+
+8. Click **Done**.
+
+9. In the **Policies** window, click **Save**.
+
+---
+
+---
+title: Adding PingOne Verify to your user registration flow
+description: By modifying your PingFederate authentication policy to include the PingOne Verify IdP Adapter policy fragment, you can challenge users to verify their identity as part of the self-service registration process.
+component: pingone
+page_id: pingone:pingone_verify_integration_kit_11:pf_p1_verify_ik_adding_p1_verify_to_your_user_registration_flow_11
+canonical_url: https://docs.pingidentity.com/integrations/pingone/pingone_verify_integration_kit_11/pf_p1_verify_ik_adding_p1_verify_to_your_user_registration_flow_11.html
+llms_txt: https://docs.pingidentity.com/integrations/pingone/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: July 3, 2024
+section_ids:
+  steps: Steps
+---
+
+# Adding PingOne Verify to your user registration flow
+
+By modifying your PingFederate authentication policy to include the PingOne Verify IdP Adapter policy fragment, you can challenge users to verify their identity as part of the self-service registration process.
+
+## Steps
+
+1. In the PingFederate administrative console, go to **Authentication > Policies > Policies**.
+
+2. Select the **IdP Authentication Policies** checkbox.
+
+3. Open the authentication policy that you created in your initial registration configuration.
+
+4. In the **Policy** area, define a policy path for user registration.
+
+   1. Under the HTML Form Adapter instance, click **Rules**.
+
+   2. On the **Rules** dialog, in the **Attribute Name** list, select **policy.action**.
+
+   3. In the **Condition** list, select **equal to**.
+
+   4. In the **Value** field, enter `identity.registration`.
+
+   5. In the **Result** field, enter a name, such as `Registration`. This appears as a new policy path that branches from the PingOne Verify IdP Adapter.
+
+   6. Click **Done**.
+
+5. After the HTML Form Adapter instance, for the **Fail** path, select **Done**.
+
+6. After the HTML Form Adapter instance, for the **Registration** path, select the local identity profile that you created for PingOne Verify.
+
+   1. Click **Local Identity Mapping**.
+
+   2. On the **Inbound Mapping** tab, map the registration form fields to the input policy contract attributes.
+
+      **Table 1. Example mappings**
+
+      | Inbound Mapping Fulfillment | Value                  |
+      | --------------------------- | ---------------------- |
+      | firstName                   | regFirstName           |
+      | email                       | registrar\@example.com |
+
+   3. On the **Contract Fulfillment** tab, map values for the outbound contract.
+
+      **Table 2. Example mappings**
+
+      | Outbound Mapping Fulfillment | Source                                   | Value     |
+      | ---------------------------- | ---------------------------------------- | --------- |
+      | attr1                        | Local Identity (Verify Identity Profile) | email     |
+      | subject                      | Local Identity (Verify Identity Profile) | firstName |
+
+   4. Click **Done**.
+
+7. After the HTML Form Adapter instance, for the **Success** path, configure the standard (non-registration) authentication path.
+
+8. Click **Done**.
+
+9. In the **Policies** window, click **Save**.

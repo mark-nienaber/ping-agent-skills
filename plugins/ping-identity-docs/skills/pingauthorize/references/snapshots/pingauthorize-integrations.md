@@ -1,13 +1,13 @@
 ---
 title: Apigee API gateway integration
-description: Ping Identity's shared flow for Apigee extends Apigee's authorization capabilities through an external policy evaluation service.
+description: Configure the Apigee integration kit to use PingAuthorize for centralized API access control and application protection.
 component: pingauthorize
 version: 11.1
 page_id: pingauthorize:pingauthorize_integrations:paz_apigee_integration
 canonical_url: https://docs.pingidentity.com/pingauthorize/11.1/pingauthorize_integrations/paz_apigee_integration.html
 llms_txt: https://docs.pingidentity.com/pingauthorize/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: April 16, 2025
+revdate: 2025-04-16T00:00:00Z
 ---
 
 # Apigee API gateway integration
@@ -28,16 +28,15 @@ To configure the integration kit:
 
 ---
 title: Applying the custom MuleSoft policy for PingAuthorize
-description: You must apply the deployed custom MuleSoft policy to use MuleSoft as an application programming interface (API) gateway with PingAuthorize.
+description: Apply the deployed custom MuleSoft policy to an API so you can connect it to PingAuthorize for external authorization decisions.
 component: pingauthorize
 version: 11.1
 page_id: pingauthorize:pingauthorize_integrations:paz_apply_mulesoft_policy_paz
 canonical_url: https://docs.pingidentity.com/pingauthorize/11.1/pingauthorize_integrations/paz_apply_mulesoft_policy_paz.html
 llms_txt: https://docs.pingidentity.com/pingauthorize/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: August 14, 2023
+revdate: 2026-08-18T00:00:00Z
 section_ids:
-  about-this-task: About this task
   steps: Steps
   result: Result:
   next-steps: Next steps
@@ -45,11 +44,7 @@ section_ids:
 
 # Applying the custom MuleSoft policy for PingAuthorize
 
-You must apply the deployed custom MuleSoft policy to use MuleSoft as an application programming interface (API) *(tooltip: \<div class="paragraph">
-\<p>A specification of interactions available for building software to access an application or service.\</p>
-\</div>)* gateway with PingAuthorize.
-
-## About this task
+You must apply the deployed custom MuleSoft policy to use MuleSoft as an API gateway with PingAuthorize.
 
 The PingAuthorize policy supports HTTP APIs configured with the `Endpoint with proxy` or `Basic Endpoint` options.
 
@@ -89,11 +84,11 @@ The PingAuthorize policy supports HTTP APIs configured with the `Endpoint with p
       | - | ------------------------------------------------------------- |
       |   | Do not include the connection scheme (http\:// or https\://). |
 
-   3. Select the **Enable SSL** check box for a secure HTTPS connection between MuleSoft and PingAuthorize.
+   3. Select the **Enable SSL** checkbox for a secure HTTPS connection between MuleSoft and PingAuthorize.
 
-   4. Select the **Allow self-signed certificate** check box to enable MuleSoft to accept a self-signed certificate from PingAuthorize.
+   4. Select the **Allow self-signed certificate** checkbox to enable MuleSoft to accept a self-signed certificate from PingAuthorize.
 
-      For information about configuring PingAuthorize to use trusted certificates, see [Importing signed and trusted certificates](../pingauthorize_server_administration_guide/paz_import_signed_certs.html).
+      Learn more about configuring PingAuthorize to use trusted certificates in [Importing signed and trusted certificates](../pingauthorize_server_administration_guide/paz_import_signed_certs.html).
 
    5. Select an access token type:
 
@@ -105,30 +100,26 @@ The PingAuthorize policy supports HTTP APIs configured with the `Endpoint with p
 
       * Use parsed access token: Allows configuration of a DataWeave expression for retrieving a parsed access token from the Mule message. When you use MuleSoft's OAuth 2.0 Token Enforcement policies to obtain a parsed access token, use the expression `#[authentication.properties.userProperties]`. For more information, see [DataWeave Language](https://docs.mulesoft.com/mule-runtime/4.3/dataweave).
 
-   6. **Optional:** Configure the **Connection Timeout** and **Read Timeout**.
+   6. (Optional) Configure the **Connection Timeout** and **Read Timeout**.
 
-   Timeouts govern the behavior of the API gateway when it cannot connect to PingAuthorize or the response from PingAuthorize is delayed.
+      Timeouts govern the behavior of the API gateway when it cannot connect to PingAuthorize or the response from PingAuthorize is delayed.
 
-   \+
+      | Timeout parameter  | Description                                                                                                                                             |
+      | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+      | Connection Timeout | Governs the time the API gateway waits to establish a connection with PingAuthorize, following which it sends the client request to the backend server. |
+      | Read Timeout       | Governs the time the API Gateway waits for PingAuthorize's response before sending the request to the backend server.                                   |
 
-   | Timeout parameter  | Description                                                                                                                                             |
-   | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
-   | Connection Timeout | Governs the time the API gateway waits to establish a connection with PingAuthorize, following which it sends the client request to the backend server. |
-   | Read Timeout       | Governs the time the API Gateway waits for PingAuthorize's response before sending the request to the backend server.                                   |
+      |   |                                                                                                                                                                                |
+      | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+      |   | The default value is 5000 milliseconds (5 seconds). It's good practice to configure a small value to limit the delay in case PingAuthorize isn't reachable or is unresponsive. |
 
-   \+
+   7. (Optional) Select the **Enable debug logging** checkbox to see requests sent to PingAuthorize Server along with responses.
 
-   |   |                                                                                                                                                                                |
-   | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-   |   | The default value is 5000 milliseconds (5 seconds). It's good practice to configure a small value to limit the delay in case PingAuthorize isn't reachable or is unresponsive. |
+   8. (Optional) Configure **Methods & Resource Conditions**.
 
-   1. **Optional:** Select the **Enable debug logging** check box to see requests sent to PingAuthorize Server along with responses.
+      Learn more in [Resource-Level Policies](https://docs.mulesoft.com/api-manager/2.x/policies-policy-level) in the MuleSoft documentation.
 
-   2. **Optional:** Configure **Methods & Resource Conditions**.
-
-      See [Resource-Level Policies](https://docs.mulesoft.com/api-manager/2.x/policies-policy-level) for more information.
-
-      ![Screen capture of the Apply PingAuthorize policy page with fields completed as directed in steps 6a-h and in the Apply button in the lower right](_images/fej1626285074831.png)
+      ![Screen capture of the Apply PingAuthorize policy page with fields completed as directed in steps 6a - 6h and in the Apply button in the lower right](_images/fej1626285074831.png)
 
 ## Next steps
 
@@ -145,7 +136,7 @@ page_id: pingauthorize:pingauthorize_integrations:paz_apigee_integration_apigee_
 canonical_url: https://docs.pingidentity.com/pingauthorize/11.1/pingauthorize_integrations/paz_apigee_integration_apigee_setup.html
 llms_txt: https://docs.pingidentity.com/pingauthorize/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: July 16, 2025
+revdate: 2025-07-16T00:00:00Z
 page_aliases: ["paz_apigee_integration_oauth.adoc"]
 section_ids:
   before-you-begin: Before you begin
@@ -366,14 +357,14 @@ Configure fine-grained authorization policies in the PingAuthorize Policy Editor
 
 ---
 title: Configuring Konnect for PingAuthorize integration
-description: For Kong Konnect to use PingAuthorize as an external authorization policy runtime service, you must download, install, and configure the ping-auth plugin.
+description: Install and configure the ping-auth plugin for Kong Konnect to use PingAuthorize as an external authorization service.
 component: pingauthorize
 version: 11.1
 page_id: pingauthorize:pingauthorize_integrations:paz_configuring_konnect_for_integration
 canonical_url: https://docs.pingidentity.com/pingauthorize/11.1/pingauthorize_integrations/paz_configuring_konnect_for_integration.html
 llms_txt: https://docs.pingidentity.com/pingauthorize/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: April 28, 2025
+revdate: 2025-04-28T00:00:00Z
 section_ids:
   add_pingauth_plugin_konnect: Adding the ping-auth plugin to your control plane
   adding-the-plugin-using-the-konnect-ui: Adding the plugin using the Konnect UI
@@ -531,9 +522,9 @@ Install the `ping-auth` plugin inside the Kong Konnect Docker container for each
 
    Substitute your own source and target paths.
 
-   * The *\<source\_path>* is the location where you extracted the `ping-auth` plugin files. This is the parent folder that contains the `ping-auth` folder.
+   * The *\<source_path>* is the location where you extracted the `ping-auth` plugin files. This is the parent folder that contains the `ping-auth` folder.
 
-   * The *\<target\_path>* is where you keep custom Kong plugins. This is the path to the `ping-auth` plugin.
+   * The *\<target_path>* is where you keep custom Kong plugins. This is the path to the `ping-auth` plugin.
 
      ```
      -v "/<source_path>:/ping-auth:/<target_path>/ping-auth" \
@@ -545,7 +536,7 @@ Install the `ping-auth` plugin inside the Kong Konnect Docker container for each
 
    #### Example:
 
-   For example, the command will look something like this, including the three snippet lines from the previous step. In this example, `plugins/kong` represents the *\<source\_path>* and `/usr/local/share/lua/5.1/kong/plugins` represents the *\<target\_path>*.
+   For example, the command will look something like this, including the three snippet lines from the previous step. In this example, `plugins/kong` represents the *\<source_path>* and `/usr/local/share/lua/5.1/kong/plugins` represents the *\<target_path>*.
 
    ```shell
    docker run -d \
@@ -677,7 +668,7 @@ page_id: pingauthorize:pingauthorize_integrations:paz_deploy_mulesoft_policy_paz
 canonical_url: https://docs.pingidentity.com/pingauthorize/11.1/pingauthorize_integrations/paz_deploy_mulesoft_policy_paz.html
 llms_txt: https://docs.pingidentity.com/pingauthorize/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: July 16, 2025
+revdate: 2025-07-16T00:00:00Z
 section_ids:
   before-you-begin: Before you begin
   steps: Steps
@@ -758,14 +749,14 @@ The custom MuleSoft policy is now available to your APIs. For more information, 
 
 ---
 title: Kong API gateway integration
-description: Ping Identity provides the ping-auth Kong Gateway integration plugin, which enables PingAuthorize to be used for attribute-based access control and policy decisions.
+description: Integrate Kong Gateway with PingAuthorize for attribute-based access control and dynamic authorization to API resources.
 component: pingauthorize
 version: 11.1
 page_id: pingauthorize:pingauthorize_integrations:paz_kong_gateway_integration
 canonical_url: https://docs.pingidentity.com/pingauthorize/11.1/pingauthorize_integrations/paz_kong_gateway_integration.html
 llms_txt: https://docs.pingidentity.com/pingauthorize/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: July 12, 2023
+revdate: 2023-07-12T00:00:00Z
 ---
 
 # Kong API gateway integration
@@ -794,21 +785,21 @@ The following are important to consider when using the `ping-auth` Kong Gateway 
 
 ---
 title: Kong Konnect integration
-description: Ping Identity's integration kit for Kong Konnect extends Kong's authorization capabilities through an external policy evaluation service.
+description: Configure the Kong Konnect integration kit to use PingAuthorize for centralized API access control and policy decisions.
 component: pingauthorize
 version: 11.1
 page_id: pingauthorize:pingauthorize_integrations:paz_kong_konnect_integration
 canonical_url: https://docs.pingidentity.com/pingauthorize/11.1/pingauthorize_integrations/paz_kong_konnect_integration.html
 llms_txt: https://docs.pingidentity.com/pingauthorize/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: April 28, 2025
+revdate: 2025-04-28T00:00:00Z
 ---
 
 # Kong Konnect integration
 
 Ping Identity's integration kit for Kong Konnect extends Kong's authorization capabilities through an external policy evaluation service.
 
-Integration with Kong Konnect allows centralized management of API access control and application protection in PingAuthorize while delegating enforcement to Kong Konnect. For information about how traffic flows through Kong Konnect and PingAuthorize, refer to [PingAuthorize Integrations](paz_integrations_main.html).
+Integration with Kong Konnect allows centralized management of API access control and application protection in PingAuthorize while delegating enforcement to Kong Konnect. For information about how traffic flows through Kong Konnect and PingAuthorize, refer to [PingAuthorize integrations](paz_integrations_main.html).
 
 Configure the integration kit in Kong Konnect to enable management of access control rules in PingAuthorize. The same kit supports both Kong Gateway and Kong Konnect.
 
@@ -832,14 +823,14 @@ Learn more in [Adding custom plugins in Konnect](https://docs.konghq.com/konnect
 
 ---
 title: MuleSoft API gateway integration
-description: Learn how to enable fine-grained access control through the MuleSoft API gateway by deploying the PingAuthorize API adapter and connecting to the sideband API.
+description: Configure the MuleSoft API gateway with PingAuthorize for fine-grained API access control.
 component: pingauthorize
 version: 11.1
 page_id: pingauthorize:pingauthorize_integrations:paz_mulesoft_integration
 canonical_url: https://docs.pingidentity.com/pingauthorize/11.1/pingauthorize_integrations/paz_mulesoft_integration.html
 llms_txt: https://docs.pingidentity.com/pingauthorize/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: July 16, 2025
+revdate: 2025-07-16T00:00:00Z
 ---
 
 # MuleSoft API gateway integration
@@ -857,18 +848,18 @@ You can find information on integrating PingAuthorize with the MuleSoft gateway 
 ---
 
 ---
-title: PingAuthorize Integrations
-description: API gateway integrations enable you to use PingAuthorize for attribute-based access control and policy decisions with your API gateway.
+title: PingAuthorize integrations
+description: Use PingAuthorize to provide attribute-based access control and centralized policy decisions for supported API gateways.
 component: pingauthorize
 version: 11.1
 page_id: pingauthorize:pingauthorize_integrations:paz_integrations_main
 canonical_url: https://docs.pingidentity.com/pingauthorize/11.1/pingauthorize_integrations/paz_integrations_main.html
 llms_txt: https://docs.pingidentity.com/pingauthorize/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: April 23, 2026
+revdate: 2026-04-23T00:00:00Z
 ---
 
-# PingAuthorize Integrations
+# PingAuthorize integrations
 
 API gateway integrations enable you to use PingAuthorize for attribute-based access control and policy decisions with your API gateway.
 
@@ -921,7 +912,7 @@ page_id: pingauthorize:pingauthorize_integrations:paz_kong_prepare_paz
 canonical_url: https://docs.pingidentity.com/pingauthorize/11.1/pingauthorize_integrations/paz_kong_prepare_paz.html
 llms_txt: https://docs.pingidentity.com/pingauthorize/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: December 2, 2025
+revdate: 2025-12-02T00:00:00Z
 section_ids:
   before-you-begin: Before you begin
   steps: Steps
@@ -970,7 +961,7 @@ page_id: pingauthorize:pingauthorize_integrations:paz_preparing_paz_konnect_inte
 canonical_url: https://docs.pingidentity.com/pingauthorize/11.1/pingauthorize_integrations/paz_preparing_paz_konnect_integration.html
 llms_txt: https://docs.pingidentity.com/pingauthorize/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: December 2, 2025
+revdate: 2025-12-02T00:00:00Z
 section_ids:
   steps: Steps
 ---
@@ -1001,14 +992,14 @@ For Kong Konnect to use PingAuthorize as an external authorization policy runtim
 
 ---
 title: Setting up Kong Gateway
-description: Download, install, and configure the ping-auth plugin to set up Kong Gateway with PingAuthorize.
+description: Install and configure the ping-auth plugin in Kong Gateway to use PingAuthorize as an external authorization service.
 component: pingauthorize
 version: 11.1
 page_id: pingauthorize:pingauthorize_integrations:paz_kong_gateway_setup
 canonical_url: https://docs.pingidentity.com/pingauthorize/11.1/pingauthorize_integrations/paz_kong_gateway_setup.html
 llms_txt: https://docs.pingidentity.com/pingauthorize/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: March 26, 2025
+revdate: 2026-08-07T00:00:00Z
 section_ids:
   steps: Steps
   result: Result
@@ -1077,7 +1068,7 @@ Download, install, and configure the `ping-auth` plugin to set up Kong Gateway w
 
 6. Click **Update**, and then click **Update Plugin**.
 
-1) Include the following JSON object in a `POST` request to https\://\<KONG\_URL>/plugins:
+1) Include the following JSON object in a `POST` request to https\://\<KONG_URL>/plugins:
 
    ```json
    {
@@ -1129,7 +1120,7 @@ page_id: pingauthorize:pingauthorize_integrations:paz_apigee_integration_paz_set
 canonical_url: https://docs.pingidentity.com/pingauthorize/11.1/pingauthorize_integrations/paz_apigee_integration_paz_setup.html
 llms_txt: https://docs.pingidentity.com/pingauthorize/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: December 2, 2025
+revdate: 2025-12-02T00:00:00Z
 section_ids:
   before-you-begin: Before you begin
   steps: Steps
@@ -1160,3 +1151,220 @@ To allow Apigee to use PingAuthorize as an external runtime authorization servic
 6. In the **New Sideband API Shared Secret** modal, enter a shared secret name and value, and then click **Save**.
 
 7. Click **Save**.
+
+---
+
+---
+title: Troubleshooting the Apigee integration
+description: Enable logging in Apigee and troubleshoot common issues with the Apigee gateway integration with PingAuthorize.
+component: pingauthorize
+version: 11.1
+page_id: pingauthorize:pingauthorize_integrations:paz_apigee_integration_troubleshooting
+canonical_url: https://docs.pingidentity.com/pingauthorize/11.1/pingauthorize_integrations/paz_apigee_integration_troubleshooting.html
+llms_txt: https://docs.pingidentity.com/pingauthorize/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2025-04-28T00:00:00Z
+section_ids:
+  troubleshooting-api-client-http-5xx-errors: Troubleshooting API client HTTP 5xx errors
+  steps: Steps
+  troubleshooting-api-client-http-4xx-errors: Troubleshooting API client HTTP 4xx errors
+  setting-up-error-response-handling-in-the-target-server: Setting up error response handling in the target server
+  steps-2: Steps
+  apigee_logging: Enable logging in Apigee
+---
+
+# Troubleshooting the Apigee integration
+
+Troubleshoot the most common issues with the Apigee gateway integration with PingAuthorize.
+
+## Troubleshooting API client HTTP 5xx errors
+
+Apigee might return `HTTP 502` when there is misconfiguration or miscommunication between the PingAuth shared flow for Apigee and PingAuthorize Server.
+
+To address 5xx errors, make adjustments to the **Load KVM Config** policy assigned to **PingAuth** in Apigee X or the key value map that you created for the PingAuth Shared Flow in Apigee Edge or Apigee Private Cloud.
+
+The PingAuth Shared Flow for Apigee logs warning messages to the Apigee error log when it encounters problems communicating with PingAuthorize. Learn more in [Enable logging in Apigee](#apigee_logging).
+
+### Steps
+
+* Check the PingAuth Shared Flow `service_host_port` value.
+
+  If the Apigee `service_host_port` value does not match your PingAuthorize server environment, the Apigee error log message might indicate that the plugin received an invalid response from the server.
+
+  1. Confirm that the value entered for `service_host_port` matches the host name of your PingAuthorize server and the port of the HTTPS connection handler.
+
+     You can find this port number on the **Configuration** page of the PingAuthorize administration console by going to **System → Connection Handlers**.
+
+  2. If necessary, update the `service_host_port` value to match your PingAuthorize server.
+
+* Check the PingAuth Shared Flow shared secret.
+
+  If the shared secret doesn't match the API gateway credential in PingAuthorize, the Apigee error log message might indicate that the plugin received an `HTTP 401` error from PingAuthorize, which gets translated to a 5xx error and then sent to the API client.
+
+  1. Confirm that the value of the **shared_secret** key that you created in Apigee matches the shared secret value that you created for PingAuthorize.
+
+  2. If necessary, on the **Configuration** page of the PingAuthorize administration console, go to **Web Services and Applications > HTTP Servlet Extensions > Sideband API** and update the value of the shared secret.
+
+  3. Copy the new value of the shared secret and update the value of the Apigee **shared_secret** key.
+
+## Troubleshooting API client HTTP 4xx errors
+
+The Apigee API gateway might return a 4xx error to the API client if the API client's request can't be authenticated by the PingAuthorize sideband API endpoint.
+
+To troubleshoot 4xx errors caused by authentication issues against the PingAuthorize sideband API, refer to [Sideband API authentication](../pingauthorize_server_administration_guide/paz_authn_sideband_api.html).
+
+## Setting up error response handling in the target server
+
+You should have an Apigee policy that handles errors returned by the target server.
+
+If you don't configure error handling using a policy, the API proxy goes into an error state in the `<TargetEndpoint>` response, and the normal API proxy flow won't continue to the `<ProxyEndpoint>`.
+
+### Steps
+
+1. Go to **API Proxies > httpbin_bad_response > Develop** and create a new **ReturnGenericError** policy of type **AssignMessage**. Configure the policy as desired.
+
+   ![Screen capture of the ReturnGenericError policy creation within Apigee](_images/rzw1673906971414.png)
+
+2. Select the **PreFlow** option in the **Target Endpoints** for your API proxy. Add the error policy you just created as a `<Step>` in the `<DefaultFaultRule>`.
+
+   |   |                                                                  |
+   | - | ---------------------------------------------------------------- |
+   |   | There are multiple methods for adding the error handling policy. |
+
+   ![Screen capture of adding the ReturnGenericError policy as a step within the DefaultFaultRule for the API proxy in Apigee](_images/zys1673907502466.png)
+
+## Enable logging in Apigee
+
+To view error log messages, configure Apigee error logging. Learn more in the [View message data with Trace](https://docs.apigee.com/api-platform/tutorials/view-with-trace) in the Apigee documentation.
+
+Apigee also provides debug logging for further troubleshooting. Learn more in [Enabling debug logging](https://docs.apigee.com/private-cloud/v4.18.05/enabling-debug-logging) in the Apigee documentation.
+
+---
+
+---
+title: Troubleshooting the Kong Gateway integration
+description: Enable Kong Gateway logging and troubleshoot common issues for the Kong Gateway integration with PingAuthorize.
+component: pingauthorize
+version: 11.1
+page_id: pingauthorize:pingauthorize_integrations:paz_kong_gateway_troubleshoot
+canonical_url: https://docs.pingidentity.com/pingauthorize/11.1/pingauthorize_integrations/paz_kong_gateway_troubleshoot.html
+llms_txt: https://docs.pingidentity.com/pingauthorize/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2025-04-28T00:00:00Z
+section_ids:
+  kong_5xx_errors: Troubleshooting API client HTTP 5xx errors
+  steps: Steps
+  example: Example:
+  example-2: Example:
+  kong_4xx_errors: API client HTTP 4xx errors
+  enable_error_logging_kong: Enabling error logging in Kong Gateway
+  steps-2: Steps
+  enable_debug_logging_kong_plugin: Enabling debug logging for the Kong Gateway plugin
+  steps-3: Steps
+---
+
+# Troubleshooting the Kong Gateway integration
+
+Consult the following sections to troubleshoot issues with the Kong Gateway integration with PingAuthorize:
+
+* [Troubleshooting API client HTTP 5xx errors](#kong_5xx_errors)
+
+* [API client HTTP 4xx errors](#kong_4xx_errors)
+
+* [Enabling error logging in Kong Gateway](#enable_error_logging_kong)
+
+* [Enabling debug logging for the Kong Gateway plugin](#enable_debug_logging_kong_plugin)
+
+## Troubleshooting API client HTTP 5xx errors
+
+Kong Gateway might return `HTTP 502` when there is misconfiguration or miscommunication between the Ping Identity plugin for Kong Gateway and PingAuthorize Server.
+
+|   |                                                                                                                                                                                                                                  |
+| - | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | The plugin for Kong Gateway logs warning messages to the Kong Gateway error log when it encounters problems communicating with PingAuthorize.Learn more in [Enabling error logging in Kong Gateway](#enable_error_logging_kong). |
+
+### Steps
+
+1. Check the `ping-auth` shared secret value in Kong Gateway to confirm it matches your PingAuthorize environment.
+
+   #### Example:
+
+   If the `ping-auth` **Config.Shared Secret** value doesn't match the PingAuthorize sideband client's shared secret value, the Kong error log message might indicate that the plugin received an `HTTP 401` error from PingAuthorize, which gets translated to a `5xx` error sent to the API client. For example:
+
+   ```
+   2022/03/28 16:19:49 [warn] 78**0: *85187 [lua] network_handler.lua:145: is_failed_request(): [ping-auth] Sideband request denied with status code 401: The Gateway Token is invalid
+   ```
+
+   1. If there is a shared secret mismatch, go to **Configuration > Web Services and Applications > Sideband API Shared Secrets** in the PingAuthorize administrative console.
+
+   2. Update the shared secret value for PingAuthorize.
+
+   3. Copy the value to the **Config.Shared Secret** field in the Kong Gateway `ping-auth` plugin configuration.
+
+2. Check the `ping-auth` **Config.Service URL** value in Kong Gateway to confirm that it matches your PingAuthorize environment.
+
+   #### Example:
+
+   If the **Config.Service URL** value doesn't contain the hostname and HTTPS Connection Handler port configured for your PingAuthorize server, the Kong error log message might indicate that the plugin received an invalid response from the server. For example:
+
+   ```
+   2022/03/28 16:19:49 [error] 78#0: *90929 [lua] access.lua:114: handle_response(): [ping-auth] Unable to parse JSON body returned from policy provider. Error: Expected value but found T_END at character 1
+   ```
+
+   1. If necessary, confirm that the values entered in the **Config.Service Url** field of the `ping-auth` plugin in Kong Gateway correspond to the hostname and HTTPS Connection Handler port of your PingAuthorize server.
+
+      You can find this port number in the PingAuthorize administrative console by going to **Configuration → System → Connection Handlers**.
+
+   2. Update any mismatched values in **Config.Service Url**.
+
+## API client HTTP 4xx errors
+
+The API gateway could return `4xx` errors to API clients in these situations:
+
+* PingAuthorize cannot match an API client's request to any of the base paths configured for a sideband API endpoint.
+
+* The API client's request cannot be authenticated for a sideband API endpoint.
+
+Learn more in [Sideband API authentication](../pingauthorize_server_administration_guide/paz_authn_sideband_api.html).
+
+## Enabling error logging in Kong Gateway
+
+### Steps
+
+1. To view error log messages, configure Kong Gateway error logging.
+
+   Learn more about logging levels in [Logging Reference](https://docs.konghq.com/gateway/2.8.x/configure/logging/) in the Kong Gateway documentation.
+
+   For example, in a Docker environment, you can set the environment variable `KONG_PROXY_ERROR_LOG` to `/dev/stderr` to send the error log to the container console.
+
+2. View the Kong Gateway error log.
+
+   When using Docker Compose, you can use the `docker compose logs <kong-service> --follow` command.
+
+## Enabling debug logging for the Kong Gateway plugin
+
+Ping Identity Support might ask you to enable debug logging for the Kong Gateway integration kit. Changing these settings logs the full authorization request and response between the `ping-auth` plugin in Kong Gateway and PingAuthorize.
+
+|   |                                                                                                                                                          |
+| - | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | Debug logs can contain sensitive and personally identifiable information (PII). Enable debug logging only when troubleshooting and disable it afterward. |
+
+### Steps
+
+1. [Enable error logging](#enable_error_logging_kong) in Kong Gateway.
+
+2. To view debug messages, configure Kong error log verbosity.
+
+   Learn more in [Logging Reference](https://docs.konghq.com/gateway/2.8.x/configure/logging/) in the Kong Gateway documentation.
+
+   For example, in a Docker environment, you can set the environment variable `KONG_LOG_LEVEL` to `debug` to increase the error log verbosity.
+
+3. To enable debug logging, edit settings for the `ping-auth` plugin and select the **Config.Enable Debug Logging** checkbox.
+
+4. View the Kong Gateway error log.
+
+   When using Docker Compose, you can use the `docker compose logs <kong-service> --follow` command.
+
+5. Look for log messages containing `ping-auth`.
+
+   A typical log message looks like: `[ping-auth] Sending sideband request to policy provider`.

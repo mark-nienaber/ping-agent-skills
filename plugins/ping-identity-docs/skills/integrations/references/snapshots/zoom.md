@@ -617,7 +617,7 @@ Before you can integrate with Zoom, you need to apply for a custom Zoom URL for 
 
    1. In a text editor, open the `zoom-saml-metadata.xml` file included in the integration `.zip` file.
 
-   2. In the `.xml` file, replace every instance of *https\://your\_vanity\_url.zoom.us* with the vanity URL that you requested.
+   2. In the `.xml` file, replace every instance of *https\://your_vanity_url.zoom.us* with the vanity URL that you requested.
 
    3. Save the changes.
 

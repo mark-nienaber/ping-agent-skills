@@ -1,11 +1,12 @@
 ---
 title: Create Risk Evaluation
-description: The sample shows the POST {{apiPath}}/v1/environments/{{envID}}/riskEvaluations operation to create a new risk evaluation resource associated with the environment specified in the request URL. The request body defines the event that is processed for risk evaluation.
+description: Create a PingOne Protect risk evaluation for an event, optionally using Signals SDK data, to calculate a risk level
 component: pingone-api
 page_id: pingone-api:protect:risk-evaluations/create-risk-evaluation
 canonical_url: https://developer.pingidentity.com/pingone-api/protect/risk-evaluations/create-risk-evaluation.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-07-30
 section_ids:
   prerequisites: Prerequisites
   headers: Headers
@@ -18,6 +19,10 @@ section_ids:
 
 ##
 
+Required permission:
+
+* [risk:create:evaluation](../../platform/reference/roles-and-permissions-in-pingone/pingone-permissions-by-identifier.html#permission-risk-create-evaluation "Learn more about this permission")
+
 ```none
 POST {{apiPath}}/v1/environments/{{envID}}/riskEvaluations
 ```
@@ -28,13 +33,13 @@ This request uses the `sdk.signals.data` field to provide the additional risk in
 
 ### Prerequisites
 
-* Refer to [Risk Evaluations](../risk-evaluations.html) for important overview information.
+* Refer to [Risk Evaluations](index.html) for important overview information.
 
 * [Create Risk Policy Set](../risk-policies/create_risk_policy_set_scores.html).
 
 > **Collapse: Request Model**
 >
-> For complete property descriptions, refer to [Risk Evaluations](../risk-evaluations.html).
+> For complete property descriptions, refer to [Risk Evaluations](index.html).
 >
 > | Property                  | Type      | Required |
 > | ------------------------- | --------- | -------- |
@@ -49,14 +54,16 @@ This request uses the `sdk.signals.data` field to provide the additional risk in
 > | `riskPolicySet.name`      | String    | Optional |
 > | `sdk.signals.data`        | String    | Optional |
 > | `session.id`              | String    | Optional |
+> | `sharingType`             | String    | Optional |
 > | `targetResource.id`       | String    | Optional |
 > | `targetResource.name`     | String    | Optional |
-> | `user.id`                 | String    | Required |
-> | `user.name`               | String    | Optional |
-> | `user.type`               | String    | Required |
+> | `user.email`              | String    | Optional |
 > | `user.groups`             | String\[] | Optional |
 > | `user.groups.name`        | String    | Optional |
-> | `sharingType`             | String    | Optional |
+> | `user.id`                 | String    | Required |
+> | `user.name`               | String    | Optional |
+> | `user.phone`              | String    | Optional |
+> | `user.type`               | String    | Required |
 
 ### Headers
 
@@ -92,6 +99,8 @@ raw ( application/json )
             "id": "john",
             "name": "John DeMock",
             "type": "EXTERNAL",
+            "email": "john@example.com",
+            "phone": "+1.5125551111",
             "groups": [
                 {
                     "name": "dev"
@@ -143,7 +152,7 @@ raw ( application/json )
 curl --location --globoff '{{apiPath}}/v1/environments/{{envID}}/riskEvaluations' \
 --header 'Content-Type: application/json' \
 --header 'Authorization: Bearer {{accessToken}}' \
---data '{
+--data-raw '{
     "event": {
         "targetResource": {
             "id": "{{targetResourceID}}",
@@ -166,6 +175,8 @@ curl --location --globoff '{{apiPath}}/v1/environments/{{envID}}/riskEvaluations
             "id": "john",
             "name": "John DeMock",
             "type": "EXTERNAL",
+            "email": "john@example.com",
+            "phone": "+1.5125551111",
             "groups": [
                 {
                     "name": "dev"
@@ -219,6 +230,8 @@ var body = @"{" + "\n" +
 @"            ""id"": ""john""," + "\n" +
 @"            ""name"": ""John DeMock""," + "\n" +
 @"            ""type"": ""EXTERNAL""," + "\n" +
+@"            ""email"": ""john@example.com""," + "\n" +
+@"            ""phone"": ""+1.5125551111""," + "\n" +
 @"            ""groups"": [" + "\n" +
 @"                {" + "\n" +
 @"                    ""name"": ""dev""" + "\n" +
@@ -281,6 +294,8 @@ func main() {
             "id": "john",
             "name": "John DeMock",
             "type": "EXTERNAL",
+            "email": "john@example.com",
+            "phone": "+1.5125551111",
             "groups": [
                 {
                     "name": "dev"
@@ -357,6 +372,8 @@ Authorization: Bearer {{accessToken}}
             "id": "john",
             "name": "John DeMock",
             "type": "EXTERNAL",
+            "email": "john@example.com",
+            "phone": "+1.5125551111",
             "groups": [
                 {
                     "name": "dev"
@@ -382,7 +399,7 @@ Authorization: Bearer {{accessToken}}
 OkHttpClient client = new OkHttpClient().newBuilder()
   .build();
 MediaType mediaType = MediaType.parse("application/json");
-RequestBody body = RequestBody.create(mediaType, "{\n    \"event\": {\n        \"targetResource\": {\n            \"id\": \"{{targetResourceID}}\",\n            \"name\": \"Jira\"\n        },\n        \"ip\": \"156.35.85.124\",\n        \"sdk\": {\n            \"signals\": {\n                \"data\": \"{{signalsSdkPayload}}\"\n            }\n        },\n        \"flow\": {\n            \"type\": \"AUTHENTICATION\",\n            \"subtype\": \"ACTIVE_SESSION\"\n        },\n        \"session\": {\n            \"id\": \"{{sessionID}}\"\n        },\n        \"user\": {\n            \"id\": \"john\",\n            \"name\": \"John DeMock\",\n            \"type\": \"EXTERNAL\",\n            \"groups\": [\n                {\n                    \"name\": \"dev\"\n                },\n                {\n                    \"name\": \"sre\"\n                }\n            ]\n        },\n        \"sharingType\": \"SHARED\",\n        \"browser\": {\n            \"userAgent\": \"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.122 Safari/537.36\"\n        }\n    },\n    \"riskPolicySet\": {\n        \"id\": \"{{riskPolicySetID}}\",\n        \"name\": \"ExamplePolicy\"\n    }\n}");
+RequestBody body = RequestBody.create(mediaType, "{\n    \"event\": {\n        \"targetResource\": {\n            \"id\": \"{{targetResourceID}}\",\n            \"name\": \"Jira\"\n        },\n        \"ip\": \"156.35.85.124\",\n        \"sdk\": {\n            \"signals\": {\n                \"data\": \"{{signalsSdkPayload}}\"\n            }\n        },\n        \"flow\": {\n            \"type\": \"AUTHENTICATION\",\n            \"subtype\": \"ACTIVE_SESSION\"\n        },\n        \"session\": {\n            \"id\": \"{{sessionID}}\"\n        },\n        \"user\": {\n            \"id\": \"john\",\n            \"name\": \"John DeMock\",\n            \"type\": \"EXTERNAL\",\n            \"email\": \"john@example.com\",\n            \"phone\": \"+1.5125551111\",\n            \"groups\": [\n                {\n                    \"name\": \"dev\"\n                },\n                {\n                    \"name\": \"sre\"\n                }\n            ]\n        },\n        \"sharingType\": \"SHARED\",\n        \"browser\": {\n            \"userAgent\": \"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.122 Safari/537.36\"\n        }\n    },\n    \"riskPolicySet\": {\n        \"id\": \"{{riskPolicySetID}}\",\n        \"name\": \"ExamplePolicy\"\n    }\n}");
 Request request = new Request.Builder()
   .url("{{apiPath}}/v1/environments/{{envID}}/riskEvaluations")
   .method("POST", body)
@@ -424,6 +441,8 @@ var settings = {
         "id": "john",
         "name": "John DeMock",
         "type": "EXTERNAL",
+        "email": "john@example.com",
+        "phone": "+1.5125551111",
         "groups": [
           {
             "name": "dev"
@@ -482,6 +501,8 @@ var options = {
         "id": "john",
         "name": "John DeMock",
         "type": "EXTERNAL",
+        "email": "john@example.com",
+        "phone": "+1.5125551111",
         "groups": [
           {
             "name": "dev"
@@ -538,6 +559,8 @@ payload = json.dumps({
       "id": "john",
       "name": "John DeMock",
       "type": "EXTERNAL",
+      "email": "john@example.com",
+      "phone": "+1.5125551111",
       "groups": [
         {
           "name": "dev"
@@ -580,7 +603,7 @@ $request->setHeader(array(
   'Content-Type' => 'application/json',
   'Authorization' => 'Bearer {{accessToken}}'
 ));
-$request->setBody('{\n    "event": {\n        "targetResource": {\n            "id": "{{targetResourceID}}",\n            "name": "Jira"\n        },\n        "ip": "156.35.85.124",\n        "sdk": {\n            "signals": {\n                "data": "{{signalsSdkPayload}}"\n            }\n        },\n        "flow": {\n            "type": "AUTHENTICATION",\n            "subtype": "ACTIVE_SESSION"\n        },\n        "session": {\n            "id": "{{sessionID}}"\n        },\n        "user": {\n            "id": "john",\n            "name": "John DeMock",\n            "type": "EXTERNAL",\n            "groups": [\n                {\n                    "name": "dev"\n                },\n                {\n                    "name": "sre"\n                }\n            ]\n        },\n        "sharingType": "SHARED",\n        "browser": {\n            "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.122 Safari/537.36"\n        }\n    },\n    "riskPolicySet": {\n        "id": "{{riskPolicySetID}}",\n        "name": "ExamplePolicy"\n    }\n}');
+$request->setBody('{\n    "event": {\n        "targetResource": {\n            "id": "{{targetResourceID}}",\n            "name": "Jira"\n        },\n        "ip": "156.35.85.124",\n        "sdk": {\n            "signals": {\n                "data": "{{signalsSdkPayload}}"\n            }\n        },\n        "flow": {\n            "type": "AUTHENTICATION",\n            "subtype": "ACTIVE_SESSION"\n        },\n        "session": {\n            "id": "{{sessionID}}"\n        },\n        "user": {\n            "id": "john",\n            "name": "John DeMock",\n            "type": "EXTERNAL",\n            "email": "john@example.com",\n            "phone": "+1.5125551111",\n            "groups": [\n                {\n                    "name": "dev"\n                },\n                {\n                    "name": "sre"\n                }\n            ]\n        },\n        "sharingType": "SHARED",\n        "browser": {\n            "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.122 Safari/537.36"\n        }\n    },\n    "riskPolicySet": {\n        "id": "{{riskPolicySetID}}",\n        "name": "ExamplePolicy"\n    }\n}');
 try {
   $response = $request->send();
   if ($response->getStatus() == 200) {
@@ -630,6 +653,8 @@ request.body = JSON.dump({
       "id": "john",
       "name": "John DeMock",
       "type": "EXTERNAL",
+      "email": "john@example.com",
+      "phone": "+1.5125551111",
       "groups": [
         {
           "name": "dev"
@@ -655,7 +680,7 @@ puts response.read_body
 ```
 
 ```swift
-let parameters = "{\n    \"event\": {\n        \"targetResource\": {\n            \"id\": \"{{targetResourceID}}\",\n            \"name\": \"Jira\"\n        },\n        \"ip\": \"156.35.85.124\",\n        \"sdk\": {\n            \"signals\": {\n                \"data\": \"{{signalsSdkPayload}}\"\n            }\n        },\n        \"flow\": {\n            \"type\": \"AUTHENTICATION\",\n            \"subtype\": \"ACTIVE_SESSION\"\n        },\n        \"session\": {\n            \"id\": \"{{sessionID}}\"\n        },\n        \"user\": {\n            \"id\": \"john\",\n            \"name\": \"John DeMock\",\n            \"type\": \"EXTERNAL\",\n            \"groups\": [\n                {\n                    \"name\": \"dev\"\n                },\n                {\n                    \"name\": \"sre\"\n                }\n            ]\n        },\n        \"sharingType\": \"SHARED\",\n        \"browser\": {\n            \"userAgent\": \"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.122 Safari/537.36\"\n        }\n    },\n    \"riskPolicySet\": {\n        \"id\": \"{{riskPolicySetID}}\",\n        \"name\": \"ExamplePolicy\"\n    }\n}"
+let parameters = "{\n    \"event\": {\n        \"targetResource\": {\n            \"id\": \"{{targetResourceID}}\",\n            \"name\": \"Jira\"\n        },\n        \"ip\": \"156.35.85.124\",\n        \"sdk\": {\n            \"signals\": {\n                \"data\": \"{{signalsSdkPayload}}\"\n            }\n        },\n        \"flow\": {\n            \"type\": \"AUTHENTICATION\",\n            \"subtype\": \"ACTIVE_SESSION\"\n        },\n        \"session\": {\n            \"id\": \"{{sessionID}}\"\n        },\n        \"user\": {\n            \"id\": \"john\",\n            \"name\": \"John DeMock\",\n            \"type\": \"EXTERNAL\",\n            \"email\": \"john@example.com\",\n            \"phone\": \"+1.5125551111\",\n            \"groups\": [\n                {\n                    \"name\": \"dev\"\n                },\n                {\n                    \"name\": \"sre\"\n                }\n            ]\n        },\n        \"sharingType\": \"SHARED\",\n        \"browser\": {\n            \"userAgent\": \"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.122 Safari/537.36\"\n        }\n    },\n    \"riskPolicySet\": {\n        \"id\": \"{{riskPolicySetID}}\",\n        \"name\": \"ExamplePolicy\"\n    }\n}"
 let postData = parameters.data(using: .utf8)
 
 var request = URLRequest(url: URL(string: "{{apiPath}}/v1/environments/{{envID}}/riskEvaluations")!,timeoutInterval: Double.infinity)
@@ -684,21 +709,21 @@ task.resume()
 {
     "_links": {
         "self": {
-            "href": "https://api.pingone.eu/v1/environments/abfba8f6-49eb-49f5-a5d9-80ad5c98f9f6/riskEvaluations/a35a68e2-8066-4dbc-933b-585e29b64ec8"
+            "href": "https://api.pingone.eu/v1/environments/abfba8f6-49eb-49f5-a5d9-80ad5c98f9f6/riskEvaluations/a2a98446-0c82-405e-8d58-811269d87877"
         },
         "environment": {
             "href": "https://api.pingone.eu/v1/environments/abfba8f6-49eb-49f5-a5d9-80ad5c98f9f6"
         },
         "event": {
-            "href": "https://api.pingone.eu/v1/environments/abfba8f6-49eb-49f5-a5d9-80ad5c98f9f6/riskEvaluations/a35a68e2-8066-4dbc-933b-585e29b64ec8/event"
+            "href": "https://api.pingone.eu/v1/environments/abfba8f6-49eb-49f5-a5d9-80ad5c98f9f6/riskEvaluations/a2a98446-0c82-405e-8d58-811269d87877/event"
         }
     },
-    "id": "a35a68e2-8066-4dbc-933b-585e29b64ec8",
+    "id": "a2a98446-0c82-405e-8d58-811269d87877",
     "environment": {
         "id": "abfba8f6-49eb-49f5-a5d9-80ad5c98f9f6"
     },
-    "createdAt": "2024-08-14T14:41:38.075Z",
-    "updatedAt": "2024-08-14T14:41:38.075Z",
+    "createdAt": "2026-07-20T14:54:31.331Z",
+    "updatedAt": "2026-07-20T14:54:31.331Z",
     "event": {
         "completionStatus": "IN_PROGRESS",
         "targetResource": {
@@ -711,11 +736,13 @@ task.resume()
             "subtype": "ACTIVE_SESSION"
         },
         "session": {
-            "id": "01ddc236-0698-467a-919e-40ef0d47cb34"
+            "id": "db259ebc-59b3-4871-bb67-d7715a8fb86e"
         },
         "user": {
             "id": "john",
             "name": "John DeMock",
+            "email": "john@example.com",
+            "phone": "+1.5125551111",
             "type": "EXTERNAL",
             "groups": [
                 {
@@ -732,13 +759,13 @@ task.resume()
         }
     },
     "riskPolicySet": {
-        "id": "8893902f-e7b7-40fe-85ef-82e06f85266f",
-        "name": "Example - Weight Policy"
+        "id": "54ca1c65-fc52-417b-bc0f-c946226f0485",
+        "name": "Score-based policy 2"
     },
     "result": {
         "level": "LOW",
-        "score": 1.5625,
-        "source": "AGGREGATED_WEIGHTS",
+        "score": 0,
+        "source": "AGGREGATED_SCORES",
         "type": "VALUE"
     },
     "details": {
@@ -756,7 +783,8 @@ task.resume()
         "anonymousNetworkDetected": false,
         "country": "spain",
         "device": {
-            "id": "Id-4c0013c4-5739-440f-91f4-147f460dd2ec",
+            "id": "Id-740ec166-51d3-48a3-a326-daadcdacd4de",
+            "isMobile": false,
             "estimatedDistance": 0,
             "os": {
                 "name": "Mac OS X"
@@ -788,22 +816,23 @@ task.resume()
             "status": "IN_TRAINING_PERIOD",
             "type": "USER_LOCATION_ANOMALY"
         },
-        "trafficAnomalyCreatedFromAPI": {
+        "userVelocityByIp": {
             "level": "LOW",
-            "type": "TRAFFIC_ANOMALY"
+            "threshold": {
+                "source": "MIN_NOT_REACHED"
+            },
+            "velocity": {
+                "distinctCount": 1,
+                "during": 3600
+            },
+            "type": "VELOCITY"
         },
         "geoVelocity": {
             "level": "LOW",
             "type": "GEO_VELOCITY"
         },
         "botDetection": {
-            "level": "HIGH",
-            "reason": "Browser loading anomaly",
-            "detected": {
-                "rule": {
-                    "id": 628
-                }
-            },
+            "level": "LOW",
             "type": "BOT"
         },
         "newDevice": {
@@ -821,11 +850,19 @@ task.resume()
             "status": "IN_TRAINING_PERIOD",
             "type": "USER_RISK_BEHAVIOR"
         },
+        "anonymousNetwork": {
+            "level": "LOW",
+            "type": "ANONYMOUS_NETWORK"
+        },
         "adversaryInTheMiddle": {
             "level": "HIGH",
-            "reason": "Unusual domain ping-devops.com. If this is a known domain it should be added to the predictor's allow List.",
+            "reason": "Unusual domain test-one-pingone.com. If this is a known domain it should be added to the predictor's allow List.",
             "status": "UNKNOWN_DOMAIN",
             "type": "ADVERSARY_IN_THE_MIDDLE"
+        },
+        "trafficAnomaly": {
+            "level": "LOW",
+            "type": "TRAFFIC_ANOMALY"
         }
     }
 }
@@ -835,12 +872,13 @@ task.resume()
 
 ---
 title: Create Risk Evaluation (includes device trust predictor)
-description: This example uses POST {{apiPath}}/v1/environments/{{envID}}/riskEvaluations to create a risk evaluation where the risk policy used includes the PingID Device Trust predictor.
+description: Create a PingOne Protect risk evaluation using a risk policy that includes the PingID Device Trust predictor
 component: pingone-api
 page_id: pingone-api:protect:risk-evaluations/create_risk_eval_with_trust_agent
 canonical_url: https://developer.pingidentity.com/pingone-api/protect/risk-evaluations/create_risk_eval_with_trust_agent.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-05-29
 section_ids:
   headers: Headers
   body: Body
@@ -851,6 +889,10 @@ section_ids:
 # Create Risk Evaluation (includes device trust predictor)
 
 ##
+
+Required permission:
+
+* [risk:create:evaluation](../../platform/reference/roles-and-permissions-in-pingone/pingone-permissions-by-identifier.html#permission-risk-create-evaluation "Learn more about this permission")
 
 ```none
 POST {{apiPath}}/v1/environments/{{envID}}/riskEvaluations
@@ -1697,12 +1739,13 @@ task.resume()
 
 ---
 title: Create Risk Evaluation (using targeted risk policies)
-description: This example uses POST {{apiPath}}/v1/environments/{{envID}}/riskEvaluations to create a risk evaluation that processes the defined targeted risk policies before carrying out the risk evaluation.
+description: Create a PingOne Protect risk evaluation that uses targeted risk policies selected by flow type, user, and target application
 component: pingone-api
 page_id: pingone-api:protect:risk-evaluations/create_risk_eval_with_targeted_policies
 canonical_url: https://developer.pingidentity.com/pingone-api/protect/risk-evaluations/create_risk_eval_with_targeted_policies.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-11
 section_ids:
   prerequisites: Prerequisites
   headers: Headers
@@ -1714,6 +1757,10 @@ section_ids:
 # Create Risk Evaluation (using targeted risk policies)
 
 ##
+
+Required permission:
+
+* [risk:create:evaluation](../../platform/reference/roles-and-permissions-in-pingone/pingone-permissions-by-identifier.html#permission-risk-create-evaluation "Learn more about this permission")
 
 ```none
 POST {{apiPath}}/v1/environments/{{envID}}/riskEvaluations
@@ -1729,40 +1776,36 @@ The selection of the risk policy to use for the evaluation is based on the flow 
 
 * Refer to [Risk Evaluations](#risk-evaluations) for important overview information.
 
-:::requestmodel
+> **Collapse: Request Model**
+>
+> For complete property descriptions, refer to [Risk Evaluations](#risk-evaluations).
+>
+> | Property                    | Type    | Required |
+> | --------------------------- | ------- | -------- |
+> | `event`                     | Object  | Required |
+> | `event.browser.userAgent`   | String  | Optional |
+> | `event.flow.type`           | String  | Optional |
+> | `event.flow.subtype`        | String  | Optional |
+> | `event.ip`                  | String  | Required |
+> | `event.session.id`          | String  | Optional |
+> | `event.sharingType`         | String  | Optional |
+> | `event.sdk.signals.data`    | String  | Optional |
+> | `event.targetResource.id`   | String  | Optional |
+> | `event.targetResource.name` | String  | Optional |
+> | `event.user.groups`         | Array   | Optional |
+> | `event.user.groups[].name`  | String  | Optional |
+> | `event.user.id`             | String  | Required |
+> | `event.user.name`           | String  | Optional |
+> | `event.user.type`           | String  | Required |
+> | `riskPolicySet.targeted`    | Boolean | Optional |
 
-For complete property descriptions, refer to [Risk Evaluations](#risk-evaluations).
-
-| Property                    | Type    | Required |
-| --------------------------- | ------- | -------- |
-| `event`                     | Object  | Required |
-| `event.browser.userAgent`   | String  | Optional |
-| `event.flow.type`           | String  | Optional |
-| `event.flow.subtype`        | String  | Optional |
-| `event.ip`                  | String  | Required |
-| `event.session.id`          | String  | Optional |
-| `event.sharingType`         | String  | Optional |
-| `event.sdk.signals.data`    | String  | Optional |
-| `event.targetResource.id`   | String  | Optional |
-| `event.targetResource.name` | String  | Optional |
-| `event.user.groups`         | Array   | Optional |
-| `event.user.groups[].name`  | String  | Optional |
-| `event.user.id`             | String  | Required |
-| `event.user.name`           | String  | Optional |
-| `event.user.type`           | String  | Required |
-| `riskPolicySet.targeted`    | Boolean | Optional |
-
-* :
-
-  :leveloffset: -1
-
-#### Headers
+### Headers
 
 Authorization      Bearer {{accessToken}}
 
 Content-Type      application/json
 
-#### Body
+### Body
 
 raw ( application/json )
 
@@ -1810,9 +1853,9 @@ raw ( application/json )
 }
 ```
 
-###
+##
 
-#### Example Request
+### Example Request
 
 * cURL
 
@@ -2365,7 +2408,7 @@ let task = URLSession.shared.dataTask(with: request) { data, response, error in
 task.resume()
 ```
 
-#### Example Response
+### Example Response
 
 201 Created
 
@@ -2505,12 +2548,13 @@ task.resume()
 
 ---
 title: Create Risk Evaluation (with custom input)
-description: This example uses POST {{apiPath}}/v1/environments/{{envID}}/riskEvaluations to create a risk evaluation, and includes a custom attribute as part of the input for the evaluation.
+description: Create a PingOne Protect risk evaluation that includes a custom event attribute evaluated by a custom risk predictor
 component: pingone-api
 page_id: pingone-api:protect:risk-evaluations/create_risk_eval_with_custom_attribute
 canonical_url: https://developer.pingidentity.com/pingone-api/protect/risk-evaluations/create_risk_eval_with_custom_attribute.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-12
 section_ids:
   prerequisites: Prerequisites
   headers: Headers
@@ -2523,6 +2567,10 @@ section_ids:
 
 ##
 
+Required permission:
+
+* [risk:create:evaluation](../../platform/reference/roles-and-permissions-in-pingone/pingone-permissions-by-identifier.html#permission-risk-create-evaluation "Learn more about this permission")
+
 ```none
 POST {{apiPath}}/v1/environments/{{envID}}/riskEvaluations
 ```
@@ -2533,13 +2581,13 @@ Custom input is provided directly under the `event` object. In this case, `event
 
 The risk policy used for the evaluation includes a custom risk predictor (`deviceManagementPredictor`) that assigns Low risk for managed devices and Medium risk for unmanaged devices. Refer to the `deviceManagementPredictor` object in the body of the response.
 
-The example also uses the `sdk.signals.data` field to provide the additional risk input provided by the Signals (Protect) SDK. For more information, refer to the [Signals (Protect) SDK documentation](/pingone/native-sdks/v1/api/#pingone-protect-native-sdks).
+The example also uses the `sdk.signals.data` field to provide the additional risk input provided by the Signals (Protect) SDK. For more information, refer to the [Signals (Protect) SDK documentation](../../native-sdks/pingone-risk-sdks/risk_evaluation_sdk.html).
 
 ### Prerequisites
 
 * Refer to [Risk Evaluations](#risk-evaluations) for important overview information.
 
-* [Create a Risk Policy Set](../risk-policies.html)
+* [Create a Risk Policy Set](../risk-policies/index.html)
 
 > **Collapse: Request Model**
 >
@@ -3335,12 +3383,13 @@ task.resume()
 
 ---
 title: Create Risk Policy Set
-description: The POST {{apiPath}}/v1/environments/{{envID}}/riskPolicySets operation adds a new risk policy set to the specified environment.
+description: Create a PingOne Protect risk policy set that combines individual risk predictors using the aggregated scores approach
 component: pingone-api
 page_id: pingone-api:protect:risk-policies/create_risk_policy_set_scores
 canonical_url: https://developer.pingidentity.com/pingone-api/protect/risk-policies/create_risk_policy_set_scores.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-05-29
 section_ids:
   prerequisites: Prerequisites
   headers: Headers
@@ -3353,6 +3402,10 @@ section_ids:
 
 ##
 
+Required permission:
+
+* [risk:create:policy](../../platform/reference/roles-and-permissions-in-pingone/pingone-permissions-by-identifier.html#permission-risk-create-policy "Learn more about this permission")
+
 ```none
 POST {{apiPath}}/v1/environments/{{envID}}/riskPolicySets
 ```
@@ -3361,7 +3414,7 @@ The `POST {{apiPath}}/v1/environments/{{envID}}/riskPolicySets` operation adds a
 
 This example uses the Scores approach for combining the individual predictors.
 
-Note that `condition.type` is set to AGGREGATED\_SCORES, and that the request contains the array `condition.aggregatedScores` rather than `condition.aggregatedWeights`.
+Note that `condition.type` is set to AGGREGATED_SCORES, and that the request contains the array `condition.aggregatedScores` rather than `condition.aggregatedWeights`.
 
 ### Prerequisites
 
@@ -4554,12 +4607,13 @@ task.resume()
 
 ---
 title: Create Risk Policy Set - Targeted Policy no Scores (PingID users)
-description: This example uses POST {{apiPath}}/v1/environments/{{envID}}/riskPolicySets to create a new targeted risk policy in an environment that has the PingID service but not the Protect service. The policy contains mitigations but because the Protect service is absent, the policy does not contain a list of specific predictors and scores to use to calculate overall risk level.
+description: Create a targeted PingOne Protect risk policy with mitigations for environments that lack the Protect service
 component: pingone-api
 page_id: pingone-api:protect:risk-policies/create_risk_policy_set_targeted_no_scores
 canonical_url: https://developer.pingidentity.com/pingone-api/protect/risk-policies/create_risk_policy_set_targeted_no_scores.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-05-29
 section_ids:
   prerequisites: Prerequisites
   headers: Headers
@@ -4571,6 +4625,10 @@ section_ids:
 # Create Risk Policy Set - Targeted Policy no Scores (PingID users)
 
 ##
+
+Required permission:
+
+* [risk:create:policy](../../platform/reference/roles-and-permissions-in-pingone/pingone-permissions-by-identifier.html#permission-risk-create-policy "Learn more about this permission")
 
 ```none
 POST {{apiPath}}/v1/environments/{{envID}}/riskPolicySets
@@ -6101,12 +6159,13 @@ task.resume()
 
 ---
 title: Create Risk Policy Set - Targeted Policy with Mitigations
-description: This example uses POST {{apiPath}}/v1/environments/{{envID}}/riskPolicySets to create a new targeted risk policy that includes a number of mitigations.
+description: Create a targeted PingOne Protect risk policy set that includes mitigations specifying recommended actions
 component: pingone-api
 page_id: pingone-api:protect:risk-policies/create_risk_policy_set_targeted_w_mitigations
 canonical_url: https://developer.pingidentity.com/pingone-api/protect/risk-policies/create_risk_policy_set_targeted_w_mitigations.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-05-29
 section_ids:
   prerequisites: Prerequisites
   headers: Headers
@@ -6118,6 +6177,10 @@ section_ids:
 # Create Risk Policy Set - Targeted Policy with Mitigations
 
 ##
+
+Required permission:
+
+* [risk:create:policy](../../platform/reference/roles-and-permissions-in-pingone/pingone-permissions-by-identifier.html#permission-risk-create-policy "Learn more about this permission")
 
 ```none
 POST {{apiPath}}/v1/environments/{{envID}}/riskPolicySets
@@ -8206,12 +8269,13 @@ task.resume()
 
 ---
 title: Create Risk Predictor (Composite with country and user group)
-description: This request creates a composite predictor that includes a condition that takes into account what user groups the user belongs to.
+description: "Create a PingOne Protect composite risk predictor that includes a condition based on the user's group membership"
 component: pingone-api
 page_id: pingone-api:protect:risk-predictors/create_risk_predictor_composite_with_user_group
 canonical_url: https://developer.pingidentity.com/pingone-api/protect/risk-predictors/create_risk_predictor_composite_with_user_group.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-05-29
 section_ids:
   prerequisites: Prerequisites
   headers: Headers
@@ -8223,6 +8287,10 @@ section_ids:
 # Create Risk Predictor (Composite with country and user group)
 
 ##
+
+Required permission:
+
+* [risk:create:predictor](../../platform/reference/roles-and-permissions-in-pingone/pingone-permissions-by-identifier.html#permission-risk-create-predictor "Learn more about this permission")
 
 ```none
 POST {{apiPath}}/v1/environments/{{envID}}/riskPredictors
@@ -9179,12 +9247,13 @@ task.resume()
 
 ---
 title: Create Risk Predictor (Composite with country)
-description: This request creates a composite predictor.
+description: Create a PingOne Protect composite risk predictor that assigns risk levels based on conditions across other predictors
 component: pingone-api
 page_id: pingone-api:protect:risk-predictors/create_risk_predictor_composite
 canonical_url: https://developer.pingidentity.com/pingone-api/protect/risk-predictors/create_risk_predictor_composite.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-05-29
 section_ids:
   prerequisites: Prerequisites
   headers: Headers
@@ -9196,6 +9265,10 @@ section_ids:
 # Create Risk Predictor (Composite with country)
 
 ##
+
+Required permission:
+
+* [risk:create:predictor](../../platform/reference/roles-and-permissions-in-pingone/pingone-permissions-by-identifier.html#permission-risk-create-predictor "Learn more about this permission")
 
 ```none
 POST {{apiPath}}/v1/environments/{{envID}}/riskPredictors
@@ -10090,12 +10163,13 @@ task.resume()
 
 ---
 title: Create Risk Predictor (Custom - IP range)
-description: This example uses the riskPredictors endpoint to create a custom predictor that assigns a risk level on the basis of defined IP ranges.
+description: Create a custom PingOne Protect risk predictor that assigns a risk level based on defined IP address ranges
 component: pingone-api
 page_id: pingone-api:protect:risk-predictors/create_risk_predictor_custom_ip_range
 canonical_url: https://developer.pingidentity.com/pingone-api/protect/risk-predictors/create_risk_predictor_custom_ip_range.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-05-29
 section_ids:
   prerequisites: Prerequisites
   headers: Headers
@@ -10107,6 +10181,10 @@ section_ids:
 # Create Risk Predictor (Custom - IP range)
 
 ##
+
+Required permission:
+
+* [risk:create:predictor](../../platform/reference/roles-and-permissions-in-pingone/pingone-permissions-by-identifier.html#permission-risk-create-predictor "Learn more about this permission")
 
 ```none
 POST {{apiPath}}/v1/environments/{{envID}}/riskPredictors
@@ -10614,12 +10692,13 @@ task.resume()
 
 ---
 title: Create Risk Predictor (Custom - numeric range)
-description: This example uses the riskPredictors endpoint to create a custom predictor that assigns high, medium, or low risk based on the distance between the current location of the device and the location of the device when the last risk evaluation was carried out (distance is given in meters).
+description: Create a custom PingOne Protect risk predictor that assigns a risk level based on a numeric range, such as device distance
 component: pingone-api
 page_id: pingone-api:protect:risk-predictors/create_risk_predictor_custom_numeric_range
 canonical_url: https://developer.pingidentity.com/pingone-api/protect/risk-predictors/create_risk_predictor_custom_numeric_range.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-05-29
 section_ids:
   prerequisites: Prerequisites
   headers: Headers
@@ -10631,6 +10710,10 @@ section_ids:
 # Create Risk Predictor (Custom - numeric range)
 
 ##
+
+Required permission:
+
+* [risk:create:predictor](../../platform/reference/roles-and-permissions-in-pingone/pingone-permissions-by-identifier.html#permission-risk-create-predictor "Learn more about this permission")
 
 ```none
 POST {{apiPath}}/v1/environments/{{envID}}/riskPredictors
@@ -11283,12 +11366,13 @@ task.resume()
 
 ---
 title: Create Risk Predictor (Custom - string matching)
-description: This example uses the riskPredictors endpoint to create a custom predictor that assigns high or medium risk based on the country where the device is located.
+description: Create a custom PingOne Protect risk predictor that assigns a risk level by matching a string, such as country
 component: pingone-api
 page_id: pingone-api:protect:risk-predictors/create_risk_predictor_custom_string_matching
 canonical_url: https://developer.pingidentity.com/pingone-api/protect/risk-predictors/create_risk_predictor_custom_string_matching.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-05-29
 section_ids:
   prerequisites: Prerequisites
   headers: Headers
@@ -11300,6 +11384,10 @@ section_ids:
 # Create Risk Predictor (Custom - string matching)
 
 ##
+
+Required permission:
+
+* [risk:create:predictor](../../platform/reference/roles-and-permissions-in-pingone/pingone-permissions-by-identifier.html#permission-risk-create-predictor "Learn more about this permission")
 
 ```none
 POST {{apiPath}}/v1/environments/{{envID}}/riskPredictors
@@ -11878,12 +11966,13 @@ task.resume()
 
 ---
 title: Create Risk Predictor (Suspicious device)
-description: This request creates a suspicious device predictor.
+description: Create a PingOne Protect suspicious device risk predictor and optionally require a signed Signals SDK payload
 component: pingone-api
 page_id: pingone-api:protect:risk-predictors/create_risk_predictor_suspicious_device
 canonical_url: https://developer.pingidentity.com/pingone-api/protect/risk-predictors/create_risk_predictor_suspicious_device.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-05-29
 section_ids:
   prerequisites: Prerequisites
   headers: Headers
@@ -11895,6 +11984,10 @@ section_ids:
 # Create Risk Predictor (Suspicious device)
 
 ##
+
+Required permission:
+
+* [risk:create:predictor](../../platform/reference/roles-and-permissions-in-pingone/pingone-permissions-by-identifier.html#permission-risk-create-predictor "Learn more about this permission")
 
 ```none
 POST {{apiPath}}/v1/environments/{{envID}}/riskPredictors
@@ -12344,12 +12437,13 @@ task.resume()
 
 ---
 title: Create Risk Predictor (Traffic anomaly)
-description: This request creates a traffic anomaly predictor.
+description: Create a PingOne Protect traffic anomaly risk predictor that tracks unique users per device over a defined interval
 component: pingone-api
 page_id: pingone-api:protect:risk-predictors/create_risk_predictor_traffic_anomaly
 canonical_url: https://developer.pingidentity.com/pingone-api/protect/risk-predictors/create_risk_predictor_traffic_anomaly.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-05-29
 section_ids:
   prerequisites: Prerequisites
   headers: Headers
@@ -12361,6 +12455,10 @@ section_ids:
 # Create Risk Predictor (Traffic anomaly)
 
 ##
+
+Required permission:
+
+* [risk:create:predictor](../../platform/reference/roles-and-permissions-in-pingone/pingone-permissions-by-identifier.html#permission-risk-create-predictor "Learn more about this permission")
 
 ```none
 POST {{apiPath}}/v1/environments/{{envID}}/riskPredictors
@@ -12940,12 +13038,13 @@ task.resume()
 
 ---
 title: Delete Risk Policy Set
-description: The GET {{apiPath}}/v1/environments/{{envID}}/riskPolicySets/{{riskPolicySetID}} operation deletes the risk policy set identified by its ID in the request URL.
+description: Delete a PingOne Protect risk policy set by ID after another policy set has been designated as the default
 component: pingone-api
 page_id: pingone-api:protect:risk-policies/delete-risk-policy-set-
 canonical_url: https://developer.pingidentity.com/pingone-api/protect/risk-policies/delete-risk-policy-set-.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-05-05
 section_ids:
   headers: Headers
   example-request: Example Request
@@ -12955,6 +13054,10 @@ section_ids:
 # Delete Risk Policy Set
 
 ##
+
+Required permission:
+
+* [risk:delete:policy](../../platform/reference/roles-and-permissions-in-pingone/pingone-permissions-by-identifier.html#permission-risk-delete-policy "Learn more about this permission")
 
 ```none
 DELETE {{apiPath}}/v1/environments/{{envID}}/riskPolicySets/{{riskPolicySetID}}
@@ -13183,12 +13286,13 @@ task.resume()
 
 ---
 title: Delete Risk Predictor
-description: The PUT {{apiPath}}/v1/environments/{{envID}}/riskPredictors/{{riskPredictorID}} operation deletes the custom risk predictor specified by its ID in the request URL. Only risk predictors with a type property value set to MAP can be deleted.
+description: Delete a custom PingOne Protect risk predictor by ID, provided it is not in use by a risk policy or composite predictor
 component: pingone-api
 page_id: pingone-api:protect:risk-predictors/delete-risk-predictor
 canonical_url: https://developer.pingidentity.com/pingone-api/protect/risk-predictors/delete-risk-predictor.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-05-05
 section_ids:
   headers: Headers
   example-request: Example Request
@@ -13198,6 +13302,10 @@ section_ids:
 # Delete Risk Predictor
 
 ##
+
+Required permission:
+
+* [risk:delete:predictor](../../platform/reference/roles-and-permissions-in-pingone/pingone-permissions-by-identifier.html#permission-risk-delete-predictor "Learn more about this permission")
 
 ```none
 DELETE {{apiPath}}/v1/environments/{{envID}}/riskPredictors/{{riskPredictorID}}
@@ -13428,12 +13536,13 @@ task.resume()
 
 ---
 title: Erase Risk Data for User
-description: This example uses POST {{apiPath}}/v1/environments/{{envID}}/riskUserProfile to erase all of the risk-related data that was collected for the specified user.
+description: Erase all risk-related data collected for a specified PingOne user
 component: pingone-api
 page_id: pingone-api:protect:risk-data/erase_risk_data_for_user
 canonical_url: https://developer.pingidentity.com/pingone-api/protect/risk-data/erase_risk_data_for_user.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-05-29
 section_ids:
   headers: Headers
   body: Body
@@ -13445,6 +13554,10 @@ section_ids:
 
 ##
 
+Required permission:
+
+* [risk:reset:userProfile](../../platform/reference/roles-and-permissions-in-pingone/pingone-permissions-by-identifier.html#permission-risk-reset-userProfile "Learn more about this permission")
+
 ```none
 POST {{apiPath}}/v1/environments/{{envID}}/riskUserProfile
 ```
@@ -13455,7 +13568,7 @@ Note that the request uses a special value for the Content-Type header: `applica
 
 > **Collapse: Request Model**
 >
-> Refer to [Risk Data](../risk-data.html) for the complete data model.
+> Refer to [Risk Data](index.html) for the complete data model.
 >
 > | Property    | Type   | Required |
 > | ----------- | ------ | -------- |
@@ -13782,47 +13895,138 @@ task.resume()
 
 ---
 title: PingOne Protect
-description: The PingOne Protect service provides capabilities to configure and retrieve risk evaluations from internal and external risk providers based on a specified risk policy.
+description: Explains PingOne Protect risk evaluations, risk policies, and risk predictors, and how they combine to detect fraudulent user behavior
 component: pingone-api
-page_id: pingone-api:protect:introduction
-canonical_url: https://developer.pingidentity.com/pingone-api/protect/introduction.html
+page_id: pingone-api:protect:index
+canonical_url: https://developer.pingidentity.com/pingone-api/protect/index.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-page_aliases: ["index.adoc"]
+revdate: 2026-08-07
+page_aliases: ["introduction.adoc"]
 section_ids:
-  risk-policies: Risk Policies
-  risk-evaluations: Risk Evaluations
-  risk-predictors: Risk Predictors
-  use-cases: Use Cases
+  pingone-protect-components: PingOne Protect components
+  why-use-pingone-protect: Why use PingOne Protect
+  how-pingone-protect-works: How PingOne Protect works
+  pingone-protect-integrations: PingOne Protect integrations
 ---
 
 # PingOne Protect
 
-The PingOne Protect service provides capabilities to configure and retrieve risk evaluations from internal and external risk providers based on a specified risk policy.
+PingOne Protect applies machine learning and configurable, intelligent security policies to analyze user identity and detect potential threats. It combines multiple risk factors to calculate and retrieve risk scores that can identify and challenge high-risk sign-on attempts while providing a frictionless experience for trusted users.
+
+A client initiates a risk evaluation by sending event information in the following request:
+
+```
+POST {{apiPath}}/v1/environments/{{envID}}/riskEvaluations
+```
+
+The request body specifies the activity to evaluate, such as the user, the user's IP address, the flow type, and optionally a device profile gathered by the PingOne Signals (Protect) SDK. The event is evaluated against the risk policies in the environment's risk policy set, and the response returns a risk level for the event along with result details.
+
+## PingOne Protect components
+
+The PingOne Protect service provides these capabilities to configure and retrieve risk evaluations:
+
+* **Risk policies.** A risk policy is determined by your specific configuration settings. The risk policy enables you to customize a risk evaluation to fit your use case. The policy is used during a risk evaluation to calculate the risk scores for received events. To learn more, refer to [Risk Policies](risk-policies/index.html).
+
+* **Risk evaluations.** Use risk evaluations to calculate the risk level and other risk-related details associated with a received event based on the environment's settings and data provided in the event. To learn more, refer to [Risk Evaluations](risk-evaluations/index.html).
+
+* **Risk predictors.** Risk predictors are employed by risk policies, and define thresholds for certain criteria (such as, IP Velocity, User Velocity, or User Location Anomaly) to determine whether there's the potential for fraudulent user behavior. To learn more, refer to [Risk Predictors](risk-predictors/index.html).
 
 Refer also to [PingOne Protect's integration with Ping Gateway](https://docs.pingidentity.com/pinggateway/2025.3/pingone/risk.html) for on-premise use of PingOne Protect with web applications protected by PingGateway.
 
-## Risk Policies
+|   |                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | This service requires `PING_ONE_RISK` in the Bill of Materials (BOM) for your environment. To check the BOM for the list of PingOne products associated with your environment, refer to [Read One Bill of Materials](../platform/bill-of-materials-bom/read-one-bill-of-materials.html). If `PING_ONE_RISK` is not in the BOM, contact your PingOne administrator to check whether your license supports adding this product to your environment. |
 
-A risk policy is determined by your specific configuration settings. The risk policy enables you to customize a risk evaluation to fit your use case. The policy is used during a risk evaluation to calculate the risk scores for received events. For more information about risk policies, refer to [Risk Policies](#risk-policies).
+## Why use PingOne Protect
 
-## Risk Evaluations
+Attackers target the identity layer. They steal credentials, spam users with push notifications until one is approved (MFA fatigue), intercept authentication traffic with adversary-in-the-middle proxies, and sign on with bots and anonymizing networks. Static authentication policies cannot distinguish these attempts from legitimate ones because they treat every sign-on the same way.
 
-Use risk evaluations to calculate the risk level and other risk-related details associated with a received event based on the environment's settings and data provided in the event. For more information about risk evaluation, refer to [Risk Evaluations](#risk-evaluations).
+PingOne Protect addresses this by scoring every event in real time, so the level of friction matches the level of risk:
 
-## Risk Predictors
+* **Reduce fraud without adding friction.** Trusted users from known devices on expected networks sign on without additional challenges, while suspicious events are stepped up or blocked.
 
-Risk predictors are employed by risk policies, and define thresholds for certain criteria (such as, IP Velocity, User Velocity, or User Location Anomaly) to determine whether there's the potential for fraudulent user behavior. For more information refer to [Risk Predictors](#risk-predictors).
+* **Combat MFA fatigue.** Low-risk sign-ons can skip MFA entirely, resulting in fewer push notifications, which lowers the probability of unintentional approvals.
 
-## Use Cases
+* **Identify threats.** Predictors such as bot detection, adversary-in-the-middle detection, and anonymous network detection identify attacks that are not recognized by simple sign on.
 
-* [Create a risk policy set](/pingone/tutorial/v1/api/#create-a-risk-policy-set)
+* **Fine-tune risk predictors.** You configure the weights of individual predictors and the thresholds that map scores to risk levels, so the policy reflects your tolerance for fraud versus user friction.
 
-* [Create a risk evaluation](/pingone/tutorial/v1/api/#create-a-risk-evaluation)
+* **Learn user behavior.** Behavioral predictors train on your traffic and improve over time.
 
-|   |                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | These requests require `PING_ONE_RISK` in the Bill of Materials (BOM) for your environment. To check the BOM for the list of PingOne products associated with your environment, refer to [Read One Bill of Materials](/pingone/platform/v1/api/#get-read-one-bill-of-materials). If `PING_ONE_RISK` is not in the BOM, contact your PingOne administrator to check whether your license supports adding this product to your environment. |
+## How PingOne Protect works
+
+PingOne Protect works with your authentication flow. It calculates risk for an event and returns a risk score that your flow uses to determine the next sign-on actions. The workflow includes these steps:
+
+1. **Gather event data.** The application, orchestration flow, or integration kit collects context about the sign-on attempt, such as the user identity, the request location, device and browser information, and the current flow.
+
+2. **Request a risk evaluation.** The client sends event data to the risk evaluation endpoint. If the request does not specify a risk policy set, the environment uses the default set. The event object identifies the user and the user's IP address, and information from other predictors to return a meaningful result.
+
+3. **Analyze the event.** A risk predictor defines thresholds for certain criteria to determine whether there is the potential for fraudulent user behavior. PingOne Protect leverages the following predictors to learn user behavior and detect anomalies:
+
+   * Adversary-in-the-Middle (AitM)
+
+   * Anonymous network detection
+
+   * Bot detection
+
+   * Device (new device and suspicious device)
+
+   * Email reputation
+
+   * Geovelocity anomaly
+
+   * IP reputation
+
+   * PingID device trust
+
+   * Traffic anomaly
+
+   * User-based risk behavior
+
+   * User location anomaly
+
+   * Velocity (user velocity and IP velocity)
+
+     Each predictor returns its own risk level (Low, Medium, or High). In cases where a level cannot be determined (for example, during a model's training period), it specifies the reason why the risk level could not be calculated. The following predictors require the Signals (Protect) SDK:
+
+     * adversary-in-the-middle
+
+     * bot detection
+
+     * suspicious device
+
+     * user-based risk behavior
+
+4. **Calculate a single result.** A risk policy is your configuration of predictors, their weights, and the conditions that map them to a result. The policy aggregates the predictor outcomes into a risk score (a numerical representation of how likely the event is to be malicious) and a risk level (Low, Medium, High).
+
+5. **Act on the result.** Based on the response from PingOne Protect, your flow can allow the transaction, deny it, or apply additional mitigation, such as an MFA challenge, a password reset, identity verification, or bot detection measures.
+
+6. **Learn user behavior.** After the flow finishes, update the risk evaluation with its completion status (SUCCESS or FAILED). The learning mechanism uses this to improve the precision of future evaluations. You can also send feedback on evaluation accuracy through the `riskFeedback` endpoint.
+
+## PingOne Protect integrations
+
+You can introduce PingOne Protect at any point in a flow where the next action depends on the calculated risk level. Here are some common integration points:
+
+* **PingOne authentication policies.** In a PingOne workforce or customer environment, add a risk policy to the application's registration or authentication policy. PingOne evaluates risk as part of the sign-on flow and can require MFA step-up or deny access based on the risk level.
+
+* **PingOne MFA and PingID policies.** Include the risk level that PingOne Protect calculates as a rule in your PingID or PingOne MFA authentication policies, so that each risk level maps to a different MFA action (for example, no challenge for low risk, push verification for medium, and denial for high).
+
+* **PingOne DaVinci flows.** Add the PingOne Protect connector to a flow at the point where the next action should be risk-based. You can prompt the user to complete MFA for medium or high risk levels but automatically grant access for low risk. The connector can also issue MFA challenges or deny access in high-risk situations, and the flow updates the evaluation's completion status.
+
+* **PingFederate.** Use the PingOne Protect Integration Kit (or the bundled PingOne Protect adapter) to send transaction information and an optional device profile to PingOne when a user signs on. Including the risk evaluation in your PingFederate authentication policy lets you adjust the user's authentication requirements dynamically each time they sign on. You can also drive a risk level rule in PingID policies through the PingID adapter.
+
+* **PingOne Advanced Identity Cloud and PingAM journeys.** Use the PingOne Protect authentication nodes in your journeys with the login widget or the Ping SDKs, which gather contextual data during a transaction and request the risk evaluation for you.
+
+* **PingGateway.** Use PingOne Protect's integration with PingGateway to evaluate risk for web applications protected by PingGateway, so that on-premise applications get risk-based access decisions at the gateway.
+
+* **Direct API calls.** Call the risk evaluation endpoint directly from your application or service. Gather the event data (optionally with the Signals (Protect) SDK), request the evaluation, and branch on the returned level. This pattern suits custom applications, nonstandard flows such as transaction authorization or password reset, and environments without an orchestration engine.
+
+* **Third-party and custom risk data.** Send third-party risk scores to PingOne Protect as custom attributes on the event, then build custom predictors on that data and include them in your risk policies alongside the built-in ones.
+
+|   |                                                                                                                                                                                                                                                                                                                     |
+| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | When there is not enough information for a predictor to provide a risk level, that predictor's level is excluded from the overall risk score, and the risk evaluation includes details on why it occurred. Behavioral predictors typically need a training period of a few weeks before their results are reliable. |
 
 ---
 
@@ -13830,10 +14034,11 @@ Risk predictors are employed by risk policies, and define thresholds for certain
 title: Postman and the PingOne APIs
 description: We use Postman to create our PingOne DaVinci Admin API docs, and have supplied our Postman collections for you to download. There's also an accompanying Postman Environment template already populated with the variables used in the collections.
 component: pingone-api
-page_id: pingone-api:protect:working-with-pingone-apis/postman-and-pingone
-canonical_url: https://developer.pingidentity.com/pingone-api/protect/working-with-pingone-apis/postman-and-pingone.html
+page_id: pingone-api:protect:working-with-pingone-apis/postman-and-pingone/index
+canonical_url: https://developer.pingidentity.com/pingone-api/protect/working-with-pingone-apis/postman-and-pingone/index.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-12
 ---
 
 # Postman and the PingOne APIs
@@ -13842,25 +14047,27 @@ We use Postman to create our PingOne DaVinci Admin API docs, and have supplied o
 
 If you aren't currently using Postman, you can install the free version. Refer to [Download Postman](https://www.postman.com/downloads/) to install Postman, either locally, or in your browser.
 
-Refer to [The PingOne Protect API Postman collections](#protect-collections) for the collections you can download or fork.
+Refer to [The PingOne Protect API Postman collections](download-the-pingone-postman-collections.html#protect-collections) for the collections you can download or fork.
 
-For more information about our Postman environment variables, refer to [The PingOne Postman environment template](postman-and-pingone/use-the-pingone-postman-environment-template.html).
+For more information about our Postman environment variables, refer to [The PingOne Postman environment template](use-the-pingone-postman-environment-template.html).
 
-You'll also find all of the Postman collections for our documented PingOne use cases in our [Use Case Library](/pingone/workflow-library/v1/api/).
+You'll also find all of the Postman collections for our documented PingOne use cases in our [Use Case Library](../../../workflow-library/index.html).
 
 ---
 
 ---
 title: Protect Settings
-description: Use the riskSettings endpoint to specify maximum data retention periods for the risk data that is used by specific predictors.
+description: Configure PingOne Protect settings to define data retention periods for risk data used by the New Device, User Location Anomaly, and User Base Risk Behavior predictors
 component: pingone-api
-page_id: pingone-api:protect:protect-settings
-canonical_url: https://developer.pingidentity.com/pingone-api/protect/protect-settings.html
+page_id: pingone-api:protect:protect-settings/index
+canonical_url: https://developer.pingidentity.com/pingone-api/protect/protect-settings/index.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-11
 section_ids:
   assigning-admin-roles-and-permissions-to-this-service: Assigning admin roles and permissions to this service
   protect-settings-data-model: Protect settings data model
+  protect-settings-errors: Protect settings errors
 ---
 
 # Protect Settings
@@ -13881,19 +14088,19 @@ You can define different data retention periods for each of the following risk p
 
 ## Assigning admin roles and permissions to this service
 
-Admin role assignments determine access to PingOne APIs. When assigning admin roles to this service, refer to [PingOne Permissions by Service](../platform/reference/roles-and-permissions-in-pingone/permissions-by-service.html) for the service-specific permissions.
+Admin role assignments determine access to PingOne APIs. When assigning admin roles to this service, refer to [PingOne Permissions by Service](../../platform/reference/roles-and-permissions-in-pingone/permissions-by-service.html) for the service-specific permissions.
 
-You can also choose to assign admin roles based on particular service resources. Refer to [PingOne Permissions by Resource](../platform/reference/roles-and-permissions-in-pingone/permissions-by-resource.html) when assigning admin roles per service resources.
+You can also choose to assign admin roles based on particular service resources. Refer to [PingOne Permissions by Resource](../../platform/reference/roles-and-permissions-in-pingone/permissions-by-resource.html) when assigning admin roles per service resources.
 
 Admin assignments to roles are set by:
 
-* [Automatic assignment for some roles](../platform/roles/predefined-roles.html#automatic-role-assignment).
+* [Automatic assignment for some roles](../../platform/roles/predefined-roles/index.html#automatic-role-assignment).
 
-* [Group Role Assignments](../platform/group-role-assignments/group-role-assignments.html).
+* [Group Role Assignments](../../platform/group-role-assignments/index.html).
 
-* [User Role Assignments](../platform/users/user-role-assignments.html).
+* [User Role Assignments](../../platform/users/user-role-assignments/index.html).
 
-Refer to [Roles Management](../platform/roles.html) for more information.
+Refer to [Roles Management](../../platform/roles/index.html) for more information.
 
 ## Protect settings data model
 
@@ -13905,3 +14112,30 @@ Refer to [Roles Management](../platform/roles.html) for more information.
 | `dataRetention.userLocationAnomalyInDays`   | Integer | Optional | Mutable   | The number of days that data for the User Location Anomaly predictor should be retained. Minimum is 30, maximum is 90. Default is 90.      |
 | `environment.id`                            | String  | N/A      | Read-only | The ID of the PingOne environment for which the Protect settings are being modified.                                                       |
 | `updatedAt`                                 | Date    | N/A      | Read-only | The date and time the Protect settings were last updated.                                                                                  |
+
+## Protect settings errors
+
+In addition to the general [error codes](../../platform/reference/error-codes.html), Protect settings operations can return the following errors:
+
+| HTTP status | Top‑level code    | Detail code                      | When it happens and what the response contains                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| ----------- | ----------------- | -------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| 400         | `INVALID_DATA`    | `EMPTY_VALUE` or `INVALID_VALUE` | **Message:** `Validation Error : [<property> <message>]`> **Collapse: When and details**
+>
+> **When:** A `PUT /environments/{envID}/riskSettings` request omits the required `dataRetention` object, or supplies a `dataRetention.newDeviceInDays` value outside its allowed range (1 to 180, or 1 to 90 for environments created after the retention cutoff), a `dataRetention.userLocationAnomalyInDays` value outside 30 to 90, or a `dataRetention.userBasedRiskBehaviorInDays` value outside 30 to 180
+>
+> **Details:** `must not be null` for an omitted `dataRetention`; `must be greater than or equal to 1` or `must be less than or equal to 90` for an out-of-range `dataRetention.newDeviceInDays` (or `must be less than or equal to 180` for environments created before the retention cutoff); `must be less than or equal to 90` (or `must be greater than or equal to 30`) for an out-of-range `dataRetention.userLocationAnomalyInDays`; `must be greater than or equal to 30` or `must be less than or equal to 180` for an out-of-range `dataRetention.userBasedRiskBehaviorInDays`; all with the failing property as the target, for example `Validation Error : [dataRetention.userLocationAnomalyInDays must be less than or equal to 90]`. |
+| 400         | `INVALID_REQUEST` | `INVALID_VALUE` or None          | **Message:** `The request could not be completed. The request was malformed or invalid.`> **Collapse: When and details**
+>
+> **When:** The request body cannot be deserialized, for example a property with the wrong JSON type
+>
+> **Details:** For a JSON field conversion error, the detail code is `INVALID_VALUE` with the failing field's path as the target and message `Invalid value for attribute.`; otherwise no details are returned.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| 403         | `ACCESS_FAILED`   | None                             | **Message:** `The actor attempting to perform the request is not authorized.`> **Collapse: When and details**
+>
+> **When:** The actor lacks the `risk:read:riskSettings` permission (read Protect settings) or the `risk:update:riskSettings` permission (update Protect settings)
+>
+> **Details:** None                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| 403         | `ACCESS_FAILED`   | `LICENSE_EXCEEDED`               | **Message:** `The request exceeded your license limit.`> **Collapse: When and details**
+>
+> **When:** The environment does not have the advanced-predictors capability required to read or modify Protect settings
+>
+> **Details:** Detail code `LICENSE_EXCEEDED` with message `Action requires additional capabilities that are not included in your current license.` and a `missingCapabilities` inner error.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |

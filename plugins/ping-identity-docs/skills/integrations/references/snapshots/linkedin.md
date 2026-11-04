@@ -423,17 +423,17 @@ To complete your LinkedIn sign-on integration, add a sign-on hyperlink to your a
 
       | Variable          | Description                                                                                         |
       | ----------------- | --------------------------------------------------------------------------------------------------- |
-      | *\<pf\_host>*     | The host name or IP address of the PingFederate server.                                             |
-      | *\<pf\_port>*     | The port number for PingFederate.                                                                   |
+      | *\<pf_host>*      | The host name or IP address of the PingFederate server.                                             |
+      | *\<pf_port>*      | The port number for PingFederate.                                                                   |
       | *\<ConnectionId>* | The federation identifier of the SP for the connection that uses the LinkedIn IdP Adapter instance. |
 
 2. If your application is inside the PingFederate domain, configure an adapter-to-adapter mapping:
 
-   1. Create an SP connection to your application as shown in [SP connection management](http://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/pf_sp_connect_management.html) in the PingFederate documentation.
+   1. Create an SP connection to your application as shown in [SP connection management](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/pf_sp_connect_management.html) in the PingFederate documentation.
 
-      |   |                                                                                                                                                                                                                                                                     |
-      | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-      |   | Use the LinkedIn IdP Adapter instance as an authentication source. Learn more in [Mapping an adapter instance](http://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/pf_mapping_adapter_instance.html) in the PingFederate documentation. |
+      |   |                                                                                                                                                                                                                                                                      |
+      | - | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+      |   | Use the LinkedIn IdP Adapter instance as an authentication source. Learn more in [Mapping an adapter instance](https://docs.pingidentity.com/pingfederate/latest/administrators_reference_guide/pf_mapping_adapter_instance.html) in the PingFederate documentation. |
 
    2. On the **System > Protocol Settings > Roles & Protocols** page, select **Enable Identity Provider (IdP) role and support for the following** and **Enable Service Provider (SP) role and support for the following**.
 
@@ -453,8 +453,8 @@ To complete your LinkedIn sign-on integration, add a sign-on hyperlink to your a
 
       | Variable          | Description                                                                               |
       | ----------------- | ----------------------------------------------------------------------------------------- |
-      | *\<pf\_host>*     | The host name or IP address of the PingFederate server.                                   |
-      | *\<pf\_port>*     | The port number for PingFederate.                                                         |
+      | *\<pf_host>*      | The host name or IP address of the PingFederate server.                                   |
+      | *\<pf_port>*      | The port number for PingFederate.                                                         |
       | *\<IdpAdapterId>* | The instance ID of the LinkedIn IdP Adapter instance.                                     |
       | *\<SpAdapterId>*  | The instance ID of the SP adapter instance that has been integrated with the application. |
 
@@ -663,8 +663,8 @@ If you need help during the setup process, you can find more information in the 
 title: Overview of the SSO flow
 description: With the LinkedIn Login Integration Kit, PingFederate includes the LinkedIn authentication API in the sign-on flow.
 component: linkedin
-page_id: linkedin::pf_linkedin_cic_overview_of_the_sso_flow
-canonical_url: https://docs.pingidentity.com/integrations/linkedin/pf_linkedin_cic_overview_of_the_sso_flow.html
+page_id: linkedin::pf_linkedin_cic_overview_sso_flow
+canonical_url: https://docs.pingidentity.com/integrations/linkedin/pf_linkedin_cic_overview_sso_flow.html
 llms_txt: https://docs.pingidentity.com/integrations/linkedin/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: July 17, 2025
@@ -678,7 +678,7 @@ With the LinkedIn Login Integration Kit, PingFederate includes the LinkedIn auth
 
 The following figure illustrates a single sign-on (SSO) scenario in which PingFederate authenticates users to an SP application using the LinkedIn IdP Adapter.
 
-A flowchart depicting the SSO flow between the browser and LinkedIn.
+![A flowchart depicting the SSO flow between the browser and LinkedIn.](_images/linkedin_sso_flow_diagram.png)
 
 ## Description
 

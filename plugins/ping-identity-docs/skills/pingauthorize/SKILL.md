@@ -6,7 +6,7 @@ license: MIT
 
 # PingAuthorize
 
-Encrypt log files as they're written.
+Get started with PingAuthorize to implement fine-grained, attribute-based access control and dynamic authorization.
 
 ## Live source of truth
 
@@ -28,14 +28,14 @@ Encrypt log files as they're written.
 | Task category | Guide slug | Live URL pattern | Snapshot |
 |---|---|---|---|
 | Pingauthorize Server Administration Guide: about, log, tool | pingauthorize_server_administration_guide | https://docs.pingidentity.com/pingauthorize/11.1/pingauthorize_server_administration_guide/*.md | references/snapshots/pingauthorize-server-administration-guide.md |
-| Pingauthorize Policy Administration Guide: resource, attribute, attributes | pingauthorize_policy_administration_guide | https://docs.pingidentity.com/pingauthorize/11.1/pingauthorize_policy_administration_guide/*.md | references/snapshots/pingauthorize-policy-administration-guide.md |
+| Pingauthorize Policy Administration Guide: policy, pingauthorize, attribute | pingauthorize_policy_administration_guide | https://docs.pingidentity.com/pingauthorize/11.1/pingauthorize_policy_administration_guide/*.md | references/snapshots/pingauthorize-policy-administration-guide.md |
 | Installing And Uninstalling Pingauthorize: pingauthorize, policy, editor | installing_and_uninstalling_pingauthorize | https://docs.pingidentity.com/pingauthorize/11.1/installing_and_uninstalling_pingauthorize/*.md | references/snapshots/installing-and-uninstalling-pingauthorize.md |
-| Troubleshooting Pingauthorize Server: server, http, troubleshooting | troubleshooting_pingauthorize_server | https://docs.pingidentity.com/pingauthorize/11.1/troubleshooting_pingauthorize_server/*.md | references/snapshots/troubleshooting-pingauthorize-server.md |
+| Troubleshooting Pingauthorize Server: server, pingauthorize, troubleshoot | troubleshooting_pingauthorize_server | https://docs.pingidentity.com/pingauthorize/11.1/troubleshooting_pingauthorize_server/*.md | references/snapshots/troubleshooting-pingauthorize-server.md |
 | Pingauthorize Integrations: pingauthorize, integration, gateway | pingauthorize_integrations | https://docs.pingidentity.com/pingauthorize/11.1/pingauthorize_integrations/*.md | references/snapshots/pingauthorize-integrations.md |
-| Upgrading Pingauthorize: policy, upgrade, pingauthorize | upgrading_pingauthorize | https://docs.pingidentity.com/pingauthorize/11.1/upgrading_pingauthorize/*.md | live-only |
-| Root: pingauthorize, architectural, introduction | root | https://docs.pingidentity.com/pingauthorize/11.1/*.md | live-only |
-| Getting Started With Pingauthorize Tutorials: access, control, pingauthorize | getting_started_with_pingauthorize_tutorials | https://docs.pingidentity.com/pingauthorize/11.1/getting_started_with_pingauthorize_tutorials/*.md | live-only |
-| Release Notes: notes, release | release_notes | https://docs.pingidentity.com/pingauthorize/11.1/release_notes/*.md | live-only |
+| Upgrading Pingauthorize: policy, upgrade, pingauthorize | upgrading_pingauthorize | https://docs.pingidentity.com/pingauthorize/11.1/upgrading_pingauthorize/*.md | references/snapshots/upgrading-pingauthorize.md |
+| Root: pingauthorize, policy, authorization | root | https://docs.pingidentity.com/pingauthorize/11.1/*.md | references/snapshots/root.md |
+| Getting Started With Pingauthorize Tutorials: access, control, pingauthorize | getting_started_with_pingauthorize_tutorials | https://docs.pingidentity.com/pingauthorize/11.1/getting_started_with_pingauthorize_tutorials/*.md | references/snapshots/getting-started-with-pingauthorize-tutorials.md |
+| Release Notes: each, features, improvements | release_notes | https://docs.pingidentity.com/pingauthorize/11.1/release_notes/*.md | references/snapshots/release-notes.md |
 
 ## Composition
 

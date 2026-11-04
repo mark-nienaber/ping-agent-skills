@@ -1,9 +1,11 @@
 ---
 title: Configuring SAML SSO with Workato and PingFederate
-description: Learn how to enable Workato sign-on from the PingFederate console (IdP-initiated sign-on) and direct Workato sign-on using PingFederate (SP-initiated sign-on).
+description: Configure SAML SSO with Workato and PingFederate — IdP-initiated and SP-initiated sign-on
 component: configuration_guides
 page_id: configuration_guides:workato:config_saml_workato_pf
 canonical_url: https://docs.pingidentity.com/configuration_guides/workato/config_saml_workato_pf.html
+llms_txt: https://docs.pingidentity.com/configuration_guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: May 15, 2024
 section_ids:
   before-you-begin: Before you begin
@@ -97,10 +99,12 @@ Learn how to enable Workato sign-on from the PingFederate console (IdP-initiated
 
 ---
 title: Configuring SAML SSO with Workato and PingOne
-description: Learn how to enable Workato sign-on from the PingOne console (IdP-initiated sign-on) and direct Workato sign-on using PingOne (SP-initiated sign-on).
+description: Configure SAML SSO with Workato and PingOne — IdP-initiated and SP-initiated sign-on
 component: configuration_guides
 page_id: configuration_guides:workato:config_saml_workato_p1
 canonical_url: https://docs.pingidentity.com/configuration_guides/workato/config_saml_workato_p1.html
+llms_txt: https://docs.pingidentity.com/configuration_guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: May 15, 2024
 section_ids:
   before-you-begin: Before you begin

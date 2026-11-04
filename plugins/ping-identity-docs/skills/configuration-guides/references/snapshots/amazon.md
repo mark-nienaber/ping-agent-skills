@@ -1,9 +1,11 @@
 ---
 title: Assigning Amazon Managed Grafana administrators
-description: During authentication to Amazon Managed Grafana, you can optionally assign the Grafana Admin role to users by defining an admin role attribute and populating a PingOne SAML assertion attribute with the expected agreed-upon value.
+description: Assign the Grafana Admin role to users via PingOne SAML assertion attribute mapping during authentication
 component: configuration_guides
 page_id: configuration_guides:amazon:config_saml_amazonmanagedgrafana_p1_assigning_administrators
 canonical_url: https://docs.pingidentity.com/configuration_guides/amazon/config_saml_amazonmanagedgrafana_p1_assigning_administrators.html
+llms_txt: https://docs.pingidentity.com/configuration_guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: May 6, 2024
 section_ids:
   about-this-task: About this task
@@ -51,10 +53,12 @@ For the example configuration, in PingOne, the **memberOf** attribute is mapped 
 
 ---
 title: Assigning Amazon Managed Grafana group access
-description: The Group Access tab shows every user group that you've created.
+description: Add PingOne user group access to Amazon Managed Grafana from the Group Access tab
 component: configuration_guides
 page_id: configuration_guides:amazon:config_saml_amazonmanagedgrafana_p1_assigning_group_access
 canonical_url: https://docs.pingidentity.com/configuration_guides/amazon/config_saml_amazonmanagedgrafana_p1_assigning_group_access.html
+llms_txt: https://docs.pingidentity.com/configuration_guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: December 15, 2021
 section_ids:
   about-this-task: About this task
@@ -79,10 +83,12 @@ The **Group Access** tab shows every user group that you've created.
 
 ---
 title: Configuring Amazon Managed Grafana SAML
-description: In PingOne, on the Review Setup tab, either:
+description: Configure Amazon Managed Grafana SAML settings using PingOne metadata or certificate
 component: configuration_guides
 page_id: configuration_guides:amazon:config_saml_amazonmanagedgrafana_p1_configuring_saml
 canonical_url: https://docs.pingidentity.com/configuration_guides/amazon/config_saml_amazonmanagedgrafana_p1_configuring_saml.html
+llms_txt: https://docs.pingidentity.com/configuration_guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: May 6, 2024
 section_ids:
   steps: Steps
@@ -120,10 +126,12 @@ section_ids:
 
 ---
 title: Configuring an Amazon Managed Grafana connection
-description: Set up the Amazon Managed Grafana application in PingOne:
+description: Set up an Amazon Managed Grafana application connection in PingOne from the Application Catalog
 component: configuration_guides
 page_id: configuration_guides:amazon:config_saml_amazonmanagedgrafana_p1_configuring_connection
 canonical_url: https://docs.pingidentity.com/configuration_guides/amazon/config_saml_amazonmanagedgrafana_p1_configuring_connection.html
+llms_txt: https://docs.pingidentity.com/configuration_guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: May 6, 2024
 section_ids:
   steps: Steps
@@ -155,10 +163,12 @@ section_ids:
 
 ---
 title: Configuring SAML SSO with Amazon Managed Grafana and PingOne
-description: Learn how to configure SAML SSO for Amazon Managed Grafana and PingOne.
+description: Configure SAML SSO with Amazon Managed Grafana and PingOne — SP-initiated sign-on from the Grafana Workspace URL
 component: configuration_guides
 page_id: configuration_guides:amazon:config_saml_amazonmanagedgrafana_p1
 canonical_url: https://docs.pingidentity.com/configuration_guides/amazon/config_saml_amazonmanagedgrafana_p1.html
+llms_txt: https://docs.pingidentity.com/configuration_guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: May 6, 2024
 section_ids:
   about-this-task: About this task
@@ -357,10 +367,12 @@ For the example configuration, in PingOne, the **memberOf** attribute is mapped 
 
 ---
 title: Configuring SAML SSO with AWS Client VPN and PingOne
-description: Learn to configure SAML single sign-on (SSO) using AWS Client VPN and PingOne.
+description: Configure SAML SSO with AWS Client VPN and PingOne — IdP-initiated and SP-initiated sign-on
 component: configuration_guides
 page_id: configuration_guides:amazon:config_saml_awsclientvpn_p1
 canonical_url: https://docs.pingidentity.com/configuration_guides/amazon/config_saml_awsclientvpn_p1.html
+llms_txt: https://docs.pingidentity.com/configuration_guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: May 6, 2024
 section_ids:
   before-you-begin: Before you begin
@@ -573,10 +585,12 @@ Make sure you have:
 
 ---
 title: Configuring SAML SSO with AWS IAM and PingFederate
-description: Enable Amazon Web Services (AWS) sign-on from a PingFederate URL (IdP-initiated sign-on).
+description: Configure SAML SSO with AWS IAM and PingFederate — IdP-initiated sign-on from a PingFederate URL
 component: configuration_guides
 page_id: configuration_guides:amazon:config_saml_aws_pf
 canonical_url: https://docs.pingidentity.com/configuration_guides/amazon/config_saml_aws_pf.html
+llms_txt: https://docs.pingidentity.com/configuration_guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: May 15, 2024
 section_ids:
   before-you-begin: Before you begin
@@ -689,10 +703,12 @@ Enable Amazon Web Services (AWS) sign-on from a PingFederate URL (IdP-initiated 
 
 ---
 title: Configuring SAML SSO with AWS IAM and PingOne for Enterprise
-description: Enable AWS sign-on from the PingOne for Enterprise console (IdP-initiated sign-on).
+description: Configure SAML SSO with AWS IAM and PingOne for Enterprise — IdP-initiated sign-on
 component: configuration_guides
 page_id: configuration_guides:amazon:config_saml_aws_p1
 canonical_url: https://docs.pingidentity.com/configuration_guides/amazon/config_saml_aws_p1.html
+llms_txt: https://docs.pingidentity.com/configuration_guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: May 20, 2024
 section_ids:
   before-you-begin: Before you begin
@@ -819,10 +835,12 @@ Enable AWS sign-on from the PingOne for Enterprise console (IdP-initiated sign-o
 
 ---
 title: Customizing Amazon Managed Grafana boxes
-description: To change the application icon, click Select Image and upload a local image file.
+description: Customize the Amazon Managed Grafana application icon and display settings in PingOne
 component: configuration_guides
 page_id: configuration_guides:amazon:config_saml_amazonmanagedgrafana_p1_customizing_boxes
 canonical_url: https://docs.pingidentity.com/configuration_guides/amazon/config_saml_amazonmanagedgrafana_p1_customizing_boxes.html
+llms_txt: https://docs.pingidentity.com/configuration_guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: December 15, 2021
 section_ids:
   steps: Steps
@@ -858,10 +876,12 @@ section_ids:
 
 ---
 title: Mapping Amazon Managed Grafana attributes
-description: PingOne will automatically populate required SAML attributes.
+description: Map required SAML attributes for Amazon Managed Grafana in PingOne, including SAML_SUBJECT
 component: configuration_guides
 page_id: configuration_guides:amazon:config_saml_amazonmanagedgrafana_p1_mapping_attributes
 canonical_url: https://docs.pingidentity.com/configuration_guides/amazon/config_saml_amazonmanagedgrafana_p1_mapping_attributes.html
+llms_txt: https://docs.pingidentity.com/configuration_guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: May 6, 2024
 section_ids:
   about-this-task: About this task

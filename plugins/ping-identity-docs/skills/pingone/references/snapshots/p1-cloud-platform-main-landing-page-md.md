@@ -1,12 +1,12 @@
 ---
 title: PingOne
-description: PingOne is a cloud-based identity as a service (IDaaS) framework for secure identity access management that uses an organization-based model to define tenant accounts and their related entities within the PingOne platform.
+description: Find guides, reference materials, and troubleshooting resources for PingOne.
 component: pingone
 page_id: pingone::p1_cloud__platform_main_landing_page
 canonical_url: https://docs.pingidentity.com/pingone/p1_cloud__platform_main_landing_page.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: February 4, 2025
+revdate: 2026-07-30T00:00:00Z
 section_ids:
   release-notes: Release Notes
   get-started-with-pingone: Get Started with PingOne
@@ -83,7 +83,7 @@ PingOne is a cloud-based identity as a service (IDaaS) *(tooltip: \<div class="p
 
 ## Learn More
 
-* [PingOne Advanced Services](https://docs.pingidentity.com/pingoneadvancedservices/introduction_to_pingone_advanced_services/p1_p1advancedservices_start.html)
+* [PingOne Advanced Services](https://docs.pingidentity.com/pingoneadvancedservices/latest/index.html)
 
 * [PingOne Platform API Reference](https://developer.pingidentity.com/pingone-api/introduction.html)
 

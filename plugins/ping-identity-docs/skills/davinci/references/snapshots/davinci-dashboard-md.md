@@ -1,12 +1,12 @@
 ---
 title: Dashboard
-description: On the PingOne DaVinci dashboard, use the graphs to view your current end-user activity levels.
+description: View PingOne DaVinci dashboard analytics, including flow executions, connector executions, and custom outcome analytics.
 component: davinci
 page_id: davinci::davinci_dashboard
-canonical_url: http://docs.pingidentity.com/davinci/davinci_dashboard.html
-llms_txt: http://docs.pingidentity.com/davinci/llms.txt
+canonical_url: https://docs.pingidentity.com/davinci/davinci_dashboard.html
+llms_txt: https://docs.pingidentity.com/davinci/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: August 22, 2024
+revdate: 2026-03-25
 section_ids:
   overview: Overview
   configuration-statistics: Configuration Statistics

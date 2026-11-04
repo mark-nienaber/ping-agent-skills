@@ -6,7 +6,7 @@ page_id: pingone:pingone_expression_language:p1_expressionlang_arrays_lists
 canonical_url: https://docs.pingidentity.com/pingone/pingone_expression_language/p1_expressionlang_arrays_lists.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: May 3, 2024
+revdate: 2024-05-03T00:00:00Z
 ---
 
 # Arrays and lists
@@ -63,7 +63,7 @@ page_id: pingone:pingone_expression_language:p1_expressionlang_collection_operat
 canonical_url: https://docs.pingidentity.com/pingone/pingone_expression_language/p1_expressionlang_collection_operations.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: April 25, 2025
+revdate: 2025-04-25T00:00:00Z
 page_aliases: ["p1_expressionlang_collection_selection.adoc", "p1_expressionlang_collection_projection.adoc"]
 section_ids:
   p1-exp-lang-collect-select: Collection selection
@@ -188,7 +188,7 @@ page_id: pingone:pingone_expression_language:p1_expressionlang_custom_library_fu
 canonical_url: https://docs.pingidentity.com/pingone/pingone_expression_language/p1_expressionlang_custom_library_functions.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: April 25, 2025
+revdate: 2025-04-25T00:00:00Z
 page_aliases: ["p1_expressionlang_string_library.adoc", "p1_expressionlang_date_time_library.adoc", "p1_expressionlang_data_library.adoc", "p1_expressionlang_regex_library.adoc", "p1_expressionlang_crypto_library.adoc", "p1_expressionlang_core_library.adoc"]
 section_ids:
   exp-lang-string-lib: String library
@@ -776,7 +776,7 @@ page_id: pingone:pingone_expression_language:p1_disabled_spel_features
 canonical_url: https://docs.pingidentity.com/pingone/pingone_expression_language/p1_disabled_spel_features.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: May 3, 2024
+revdate: 2024-05-03T00:00:00Z
 ---
 
 # Disabled and restricted SpEL features
@@ -821,7 +821,7 @@ page_id: pingone:pingone_expression_language:p1_expressionlang_expressions_conca
 canonical_url: https://docs.pingidentity.com/pingone/pingone_expression_language/p1_expressionlang_expressions_concatenation.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: May 3, 2024
+revdate: 2024-05-03T00:00:00Z
 section_ids:
   property-reference-expressions: Property reference expressions
   literal-expressions: Literal expressions
@@ -1194,7 +1194,7 @@ page_id: pingone:pingone_expression_language:p1_expressionlang_maps_objects
 canonical_url: https://docs.pingidentity.com/pingone/pingone_expression_language/p1_expressionlang_maps_objects.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: May 3, 2024
+revdate: 2024-05-03T00:00:00Z
 ---
 
 # Maps and objects
@@ -1270,7 +1270,7 @@ page_id: pingone:pingone_expression_language:p1_expressionlang_null_safe_usage
 canonical_url: https://docs.pingidentity.com/pingone/pingone_expression_language/p1_expressionlang_null_safe_usage.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: May 3, 2024
+revdate: 2024-05-03T00:00:00Z
 section_ids:
   string-concatenation: String concatenation
   creating-an-array-using-nullable-values: Creating an array using nullable values
@@ -1341,7 +1341,7 @@ page_id: pingone:pingone_expression_language:p1_expressionlang_operators
 canonical_url: https://docs.pingidentity.com/pingone/pingone_expression_language/p1_expressionlang_operators.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: April 25, 2025
+revdate: 2025-04-25T00:00:00Z
 page_aliases: ["p1_expressionlang_relational_operators.adoc", "p1_expressionlang_logical_operators.adoc", "p1_expressionlang_mathematical_operators.adoc", "p1_expressionlang_ternary_operator.adoc", "p1_expressionlang_elvis_operator.adoc"]
 section_ids:
   p1-exp-lang-rel-operators: Relational operators
@@ -1453,7 +1453,7 @@ page_id: pingone:pingone_expression_language:p1_expression_language
 canonical_url: https://docs.pingidentity.com/pingone/pingone_expression_language/p1_expression_language.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: February 07, 2025
+revdate: 2025-02-07T00:00:00Z
 ---
 
 # PingOne Expression Language
@@ -1498,7 +1498,7 @@ page_id: pingone:pingone_expression_language:p1_expressionlang_references
 canonical_url: https://docs.pingidentity.com/pingone/pingone_expression_language/p1_expressionlang_references.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: May 3, 2024
+revdate: 2024-05-03T00:00:00Z
 section_ids:
   spring-expression-language: Spring Expression Language
   datetimeformatter-patterns: DateTimeFormatter patterns
@@ -1541,7 +1541,7 @@ page_id: pingone:pingone_expression_language:p1_pel_samples
 canonical_url: https://docs.pingidentity.com/pingone/pingone_expression_language/p1_pel_samples.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: May 29, 2025
+revdate: 2025-05-29T00:00:00Z
 section_ids:
   sample-user-model: Sample user model
   accessing-property-names-with-non-alphanumeric-characters: Accessing property names with non-alphanumeric characters
@@ -1787,7 +1787,7 @@ page_id: pingone:pingone_expression_language:p1_use_expression_builder
 canonical_url: https://docs.pingidentity.com/pingone/pingone_expression_language/p1_use_expression_builder.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: May 29, 2025
+revdate: 2025-05-29T00:00:00Z
 section_ids:
   steps: Steps
 ---
@@ -1830,7 +1830,7 @@ page_id: pingone:pingone_expression_language:p1_expressionlang_variables
 canonical_url: https://docs.pingidentity.com/pingone/pingone_expression_language/p1_expressionlang_variables.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: February 07, 2025
+revdate: 2025-02-07T00:00:00Z
 section_ids:
   root-and-this-variables: "#root and #this variables"
   authentication-jwt-variables: Authentication JWT variables

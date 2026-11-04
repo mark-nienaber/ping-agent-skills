@@ -5,6 +5,9 @@ component: java-agents
 version: 2026
 page_id: java-agents:maintenance-guide:auditing
 canonical_url: https://docs.pingidentity.com/java-agents/2026/maintenance-guide/auditing.html
+llms_txt: https://docs.pingidentity.com/java-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-02T18:52:22Z
 section_ids:
   remote_and_local_auditing: Remote and local auditing
   remote_auditing: Remote auditing
@@ -157,6 +160,9 @@ component: java-agents
 version: 2026
 page_id: java-agents:maintenance-guide:preface
 canonical_url: https://docs.pingidentity.com/java-agents/2026/maintenance-guide/preface.html
+llms_txt: https://docs.pingidentity.com/java-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-02T18:52:22Z
 page_aliases: ["index.adoc"]
 ---
 
@@ -173,6 +179,9 @@ component: java-agents
 version: 2026
 page_id: java-agents:maintenance-guide:logging
 canonical_url: https://docs.pingidentity.com/java-agents/2026/maintenance-guide/logging.html
+llms_txt: https://docs.pingidentity.com/java-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-26T13:59:11Z
 section_ids:
   set_the_log_level: Set the log level
   remote_configuration_mode: Remote configuration mode
@@ -413,6 +422,9 @@ component: java-agents
 version: 2026
 page_id: java-agents:maintenance-guide:monitoring
 canonical_url: https://docs.pingidentity.com/java-agents/2026/maintenance-guide/monitoring.html
+llms_txt: https://docs.pingidentity.com/java-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-02T18:52:22Z
 section_ids:
   monitor-prometheus: Monitor with Prometheus
   expose-prometheus-endpoint: Expose the Prometheus endpoint
@@ -728,7 +740,7 @@ Java Agent exposes the following JVM-related monitoring metrics:
 | `ja_jvm_thread_state_new_result`                                     | Gauge                         | Number of threads in the NEW state.                                                                                     |
 | `ja_jvm_thread_state_runnable_result`                                | Gauge                         | Number of threads in the RUNNABLE state.                                                                                |
 | `ja_jvm_thread_state_terminated_result`                              | Gauge                         | Number of threads in the TERMINATED state.                                                                              |
-| `ja_jvm_thread_state_timed_waiting_result`                           | Gauge                         | Number of threads in the TIMED\_WAITING state.                                                                          |
+| `ja_jvm_thread_state_timed_waiting_result`                           | Gauge                         | Number of threads in the TIMED_WAITING state.                                                                           |
 | `ja_jvm_thread_state_waiting_result`                                 | Gauge                         | Number of threads in the WAITING state.                                                                                 |
 | `ja_jvm_used_memory_bytes`                                           | Gauge                         | Amount of memory used by the Java virtual machine                                                                       |
 
@@ -883,6 +895,9 @@ component: java-agents
 version: 2026
 page_id: java-agents:maintenance-guide:notifications
 canonical_url: https://docs.pingidentity.com/java-agents/2026/maintenance-guide/notifications.html
+llms_txt: https://docs.pingidentity.com/java-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-02T18:52:22Z
 ---
 
 # Notifications
@@ -918,6 +933,9 @@ component: java-agents
 version: 2026
 page_id: java-agents:maintenance-guide:troubleshooting
 canonical_url: https://docs.pingidentity.com/java-agents/2026/maintenance-guide/troubleshooting.html
+llms_txt: https://docs.pingidentity.com/java-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-26T13:59:11Z
 page_aliases: ["user-guide:troubleshooting.adoc"]
 section_ids:
   get-info-about-problem: Get information about the problem
@@ -1262,6 +1280,9 @@ component: java-agents
 version: 2026
 page_id: java-agents:maintenance-guide:connection-pooling
 canonical_url: https://docs.pingidentity.com/java-agents/2026/maintenance-guide/connection-pooling.html
+llms_txt: https://docs.pingidentity.com/java-agents/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-26T13:59:11Z
 ---
 
 # Tune connections

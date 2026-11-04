@@ -1,11 +1,12 @@
 ---
 title: Client Authentication Methods
-description: This comprehensive collection demonstrates all major OAuth 2.0 and OpenID Connect client authentication methods supported by PingOne. This is an educational resource for understanding when and how to use each authentication approach.
+description: Compares the OAuth 2.0 and OpenID Connect client authentication methods supported by PingOne, including client secret and private key JWT options
 component: pingone-api
-page_id: pingone-api:workflow-library:platform-sso-and-authorization/openid-connect-oidc/client-authentication-methods
-canonical_url: https://developer.pingidentity.com/pingone-api/workflow-library/platform-sso-and-authorization/openid-connect-oidc/client-authentication-methods.html
+page_id: pingone-api:workflow-library:platform-sso-and-authorization/openid-connect-oidc/client-authentication-methods/index
+canonical_url: https://developer.pingidentity.com/pingone-api/workflow-library/platform-sso-and-authorization/openid-connect-oidc/client-authentication-methods/index.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-11
 section_ids:
   authentication-methods-comparison: Authentication methods comparison
   when-to-use-each-method: When to use each method
@@ -37,7 +38,7 @@ This comprehensive collection demonstrates all major OAuth 2.0 and OpenID Connec
 
 ## When to use each method
 
-**CLIENT\_SECRET\_BASIC** (Most Common)
+**CLIENT_SECRET_BASIC** (Most Common)
 
 * Best for: Traditional web applications, backend services
 
@@ -47,7 +48,7 @@ This comprehensive collection demonstrates all major OAuth 2.0 and OpenID Connec
 
 * Example: Node.js backend, Java Spring applications
 
-**CLIENT\_SECRET\_POST**
+**CLIENT_SECRET_POST**
 
 * Best for: Applications where header manipulation is difficult
 
@@ -57,7 +58,7 @@ This comprehensive collection demonstrates all major OAuth 2.0 and OpenID Connec
 
 * Example: Legacy systems, certain API gateways
 
-**CLIENT\_SECRET\_JWT**
+**CLIENT_SECRET_JWT**
 
 * Best For: Applications requiring enhanced security and audit trails
 
@@ -67,7 +68,7 @@ This comprehensive collection demonstrates all major OAuth 2.0 and OpenID Connec
 
 * Example: Financial applications, healthcare systems
 
-**PRIVATE\_KEY\_JWT**
+**PRIVATE_KEY_JWT**
 
 * Best for: Enterprise applications with PKI infrastructure
 
@@ -93,17 +94,18 @@ This comprehensive collection demonstrates all major OAuth 2.0 and OpenID Connec
 
 ---
 title: CLIENT_SECRET_BASIC Flow
-description: "For applications that have the tokenEndpointAuthMethod property set to CLIENT_SECRET_BASIC, you authenticate the token endpoint by setting the Authorization: Basic HTTP header in the request URL. The value is a Base64-encoded representation of \"username:password\", in which the username is the client_id and the password is the client_secret."
+description: Test the CLIENT_SECRET_BASIC token endpoint authentication method by sending an authorization request and obtaining an access token
 component: pingone-api
-page_id: pingone-api:workflow-library:platform-sso-and-authorization/openid-connect-oidc/client-authentication-methods/test-the-workflow/client-secret-basic
-canonical_url: https://developer.pingidentity.com/pingone-api/workflow-library/platform-sso-and-authorization/openid-connect-oidc/client-authentication-methods/test-the-workflow/client-secret-basic.html
+page_id: pingone-api:workflow-library:platform-sso-and-authorization/openid-connect-oidc/client-authentication-methods/test-the-workflow/client-secret-basic/index
+canonical_url: https://developer.pingidentity.com/pingone-api/workflow-library/platform-sso-and-authorization/openid-connect-oidc/client-authentication-methods/test-the-workflow/client-secret-basic/index.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-11
 section_ids:
   what-youll-do: What you'll do
 ---
 
-# CLIENT\_SECRET\_BASIC Flow
+# CLIENT_SECRET_BASIC Flow
 
 For applications that have the `tokenEndpointAuthMethod` property set to `CLIENT_SECRET_BASIC`, you authenticate the token endpoint by setting the `Authorization: Basic` HTTP header in the request URL. The value is a Base64-encoded representation of "username:password", in which the `username` is the `client_id` and the password is the `client_secret`.
 
@@ -123,15 +125,16 @@ You will send an authorization request to start the workflow.
 
 ---
 title: CLIENT_SECRET_BASIC Setup
-description: "Authentication requirements for the token endpoint are set by the application's tokenEndpointAuthMethod property. When the application's tokenEndpointAuthMethod is set to CLIENT_SECRET_BASIC, the Authorization: Basic header represents a Base64-encoded representation of \"username:password\", in which the username is the client_id and the password is the client_secret:"
+description: Configure an application with the CLIENT_SECRET_BASIC token endpoint authentication method using a Base64-encoded Authorization header
 component: pingone-api
-page_id: pingone-api:workflow-library:platform-sso-and-authorization/openid-connect-oidc/client-authentication-methods/environment-configuration/client-secret-basic
-canonical_url: https://developer.pingidentity.com/pingone-api/workflow-library/platform-sso-and-authorization/openid-connect-oidc/client-authentication-methods/environment-configuration/client-secret-basic.html
+page_id: pingone-api:workflow-library:platform-sso-and-authorization/openid-connect-oidc/client-authentication-methods/environment-configuration/client-secret-basic/index
+canonical_url: https://developer.pingidentity.com/pingone-api/workflow-library/platform-sso-and-authorization/openid-connect-oidc/client-authentication-methods/environment-configuration/client-secret-basic/index.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-11
 ---
 
-# CLIENT\_SECRET\_BASIC Setup
+# CLIENT_SECRET_BASIC Setup
 
 Authentication requirements for the token endpoint are set by the application's `tokenEndpointAuthMethod` property. When the application's `tokenEndpointAuthMethod` is set to `CLIENT_SECRET_BASIC`, the `Authorization: Basic` header represents a Base64-encoded representation of "username:password", in which the username is the `client_id` and the password is the `client_secret`:
 
@@ -155,17 +158,18 @@ The following workflow shows the application configuration to complete a sign-on
 
 ---
 title: CLIENT_SECRET_JWT Flow
-description: For applications that have the tokenEndpointAuthMethod property set to CLIENT_SECRET_JWT, you authenticate the token endpoint using a JWT signed by the application's client secret to authenticate the request.
+description: Test the CLIENT_SECRET_JWT token endpoint authentication method by sending an authorization request and obtaining an access token
 component: pingone-api
-page_id: pingone-api:workflow-library:platform-sso-and-authorization/openid-connect-oidc/client-authentication-methods/test-the-workflow/client-secret-jwt
-canonical_url: https://developer.pingidentity.com/pingone-api/workflow-library/platform-sso-and-authorization/openid-connect-oidc/client-authentication-methods/test-the-workflow/client-secret-jwt.html
+page_id: pingone-api:workflow-library:platform-sso-and-authorization/openid-connect-oidc/client-authentication-methods/test-the-workflow/client-secret-jwt/index
+canonical_url: https://developer.pingidentity.com/pingone-api/workflow-library/platform-sso-and-authorization/openid-connect-oidc/client-authentication-methods/test-the-workflow/client-secret-jwt/index.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-11
 section_ids:
   what-youll-do: What you'll do
 ---
 
-# CLIENT\_SECRET\_JWT Flow
+# CLIENT_SECRET_JWT Flow
 
 For applications that have the `tokenEndpointAuthMethod` property set to `CLIENT_SECRET_JWT`, you authenticate the token endpoint using a JWT signed by the application's client secret to authenticate the request.
 
@@ -185,17 +189,18 @@ You will send an authorization request to start the workflow.
 
 ---
 title: CLIENT_SECRET_JWT Setup
-description: Authentication requirements for the token endpoint are set by the application's tokenEndpointAuthMethod property. When the application's tokenEndpointAuthMethod is set to CLIENT_SECRET_JWT, the token endpoint uses a JWT signed by the application's client secret to authenticate the request. For information about creating the JWT and the claims in the JWT, refer to Create a client secret JWT. Token requests that use this authentication method require the client_assertion and client_assertion_type OAuth properties to specify the JWT.
+description: Configure an application with the CLIENT_SECRET_JWT token endpoint authentication method using a JWT signed by the client secret
 component: pingone-api
-page_id: pingone-api:workflow-library:platform-sso-and-authorization/openid-connect-oidc/client-authentication-methods/environment-configuration/client-secret-jwt
-canonical_url: https://developer.pingidentity.com/pingone-api/workflow-library/platform-sso-and-authorization/openid-connect-oidc/client-authentication-methods/environment-configuration/client-secret-jwt.html
+page_id: pingone-api:workflow-library:platform-sso-and-authorization/openid-connect-oidc/client-authentication-methods/environment-configuration/client-secret-jwt/index
+canonical_url: https://developer.pingidentity.com/pingone-api/workflow-library/platform-sso-and-authorization/openid-connect-oidc/client-authentication-methods/environment-configuration/client-secret-jwt/index.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-11
 ---
 
-# CLIENT\_SECRET\_JWT Setup
+# CLIENT_SECRET_JWT Setup
 
-Authentication requirements for the token endpoint are set by the application's `tokenEndpointAuthMethod` property. When the application's `tokenEndpointAuthMethod` is set to `CLIENT_SECRET_JWT`, the token endpoint uses a JWT signed by the application's client secret to authenticate the request. For information about creating the JWT and the claims in the JWT, refer to [Create a client secret JWT](../../../../../auth/auth-config-options/create-a-client-secret-jwt.html). Token requests that use this authentication method require the `client_assertion` and `client_assertion_type` OAuth properties to specify the JWT.
+Authentication requirements for the token endpoint are set by the application's `tokenEndpointAuthMethod` property. When the application's `tokenEndpointAuthMethod` is set to `CLIENT_SECRET_JWT`, the token endpoint uses a JWT signed by the application's client secret to authenticate the request. For information about creating the JWT and the claims in the JWT, refer to [Create a client secret JWT](../../../../../../auth/auth-config-options/create-a-client-secret-jwt.html). Token requests that use this authentication method require the `client_assertion` and `client_assertion_type` OAuth properties to specify the JWT.
 
 **Key points**
 
@@ -213,17 +218,18 @@ The following workflow shows the application configuration to complete a sign-on
 
 ---
 title: CLIENT_SECRET_POST Flow
-description: For applications that have the tokenEndpointAuthMethod property set to CLIENT_SECRET_POST, you authenticate the token endpoint by setting the application's client_id and client_secret as properties in the request body.
+description: Test the CLIENT_SECRET_POST token endpoint authentication method by sending an authorization request and obtaining an access token
 component: pingone-api
-page_id: pingone-api:workflow-library:platform-sso-and-authorization/openid-connect-oidc/client-authentication-methods/test-the-workflow/client-secret-post
-canonical_url: https://developer.pingidentity.com/pingone-api/workflow-library/platform-sso-and-authorization/openid-connect-oidc/client-authentication-methods/test-the-workflow/client-secret-post.html
+page_id: pingone-api:workflow-library:platform-sso-and-authorization/openid-connect-oidc/client-authentication-methods/test-the-workflow/client-secret-post/index
+canonical_url: https://developer.pingidentity.com/pingone-api/workflow-library/platform-sso-and-authorization/openid-connect-oidc/client-authentication-methods/test-the-workflow/client-secret-post/index.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-11
 section_ids:
   what-youll-do: What you'll do
 ---
 
-# CLIENT\_SECRET\_POST Flow
+# CLIENT_SECRET_POST Flow
 
 For applications that have the `tokenEndpointAuthMethod` property set to `CLIENT_SECRET_POST`, you authenticate the token endpoint by setting the application's `client_id` and `client_secret` as properties in the request body.
 
@@ -243,15 +249,16 @@ You will send an authorization request to start the workflow.
 
 ---
 title: CLIENT_SECRET_POST Setup
-description: Authentication requirements for the token endpoint are set by the application's tokenEndpointAuthMethod property. When the application's tokenEndpointAuthMethod is set to CLIENT_SECRET_POST, the request does not need an Authorization header, and the client_id and client_secret property values are submitted in the request body.
+description: Configure an application with the CLIENT_SECRET_POST token endpoint authentication method submitting credentials in the request body
 component: pingone-api
-page_id: pingone-api:workflow-library:platform-sso-and-authorization/openid-connect-oidc/client-authentication-methods/environment-configuration/client-secret-post
-canonical_url: https://developer.pingidentity.com/pingone-api/workflow-library/platform-sso-and-authorization/openid-connect-oidc/client-authentication-methods/environment-configuration/client-secret-post.html
+page_id: pingone-api:workflow-library:platform-sso-and-authorization/openid-connect-oidc/client-authentication-methods/environment-configuration/client-secret-post/index
+canonical_url: https://developer.pingidentity.com/pingone-api/workflow-library/platform-sso-and-authorization/openid-connect-oidc/client-authentication-methods/environment-configuration/client-secret-post/index.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-11
 ---
 
-# CLIENT\_SECRET\_POST Setup
+# CLIENT_SECRET_POST Setup
 
 Authentication requirements for the token endpoint are set by the application's `tokenEndpointAuthMethod` property. When the application's `tokenEndpointAuthMethod` is set to `CLIENT_SECRET_POST`, the request does not need an `Authorization` header, and the `client_id` and `client_secret` property values are submitted in the request body.
 
@@ -270,13 +277,56 @@ The following workflow shows the application configuration to complete a sign-on
 ---
 
 ---
-title: Create a Group and Add a User
-description: This activity shows you how to create a group and assign a user to that group. By default, groups are created at the environment level. Groups can also be created per population. This workflow creates an environment-level group and then calls the /users/{{userID}}/memberOfGroups endpoint to associate the specified user with the group.
+title: Configuring and managing Postman
+description: When using the Postman collections linked to PingOne use cases, you'll need to configure any of your Postman requests for authorization and authentication to not follow redirects automatically. You'll also need to do this for requests that require a redirect to the authorization server. These requests will not execute the steps in the Postman collection as intended if Postman's Automatically follow redirects setting is turned on.
 component: pingone-api
-page_id: pingone-api:workflow-library:platform-sso-and-authorization/groups/create-a-group-and-add-a-user
-canonical_url: https://developer.pingidentity.com/pingone-api/workflow-library/platform-sso-and-authorization/groups/create-a-group-and-add-a-user.html
+page_id: pingone-api:workflow-library:using-postman-workflow-collections/configuring-and-managing-postman
+canonical_url: https://developer.pingidentity.com/pingone-api/workflow-library/using-postman-workflow-collections/configuring-and-managing-postman.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+section_ids:
+  removing-session-cookies-in-postman: Removing session cookies in Postman
+---
+
+# Configuring and managing Postman
+
+When using the Postman collections linked to PingOne use cases, you'll need to configure any of your Postman requests for authorization and authentication to *not follow* redirects automatically. You'll also need to do this for requests that require a redirect to the authorization server. These requests will not execute the steps in the Postman collection as intended if Postman's **Automatically follow redirects** setting is turned on.
+
+To disable the **Automatically follow redirects** setting for requests in Postman:
+
+1. Open your Postman application, and for each relevant request, select **Settings**.
+
+2. Ensure that the **Automatically follow redirects** setting is set to **OFF**.
+
+![Postman Request Settings](../../_images/postman-request-settings.png)
+
+For more information about Postman preferences, refer to [Setting up Postman](https://learning.postman.com/docs/getting-started/settings/).
+
+## Removing session cookies in Postman
+
+When you run use case collections that involve authentication flows, the PingOne API uses session token cookies to establish the user's authentication session and maintain the session throughout the workflow. Postman functions as the calling client to save these cookies, allowing the flow to redirect back to the authorization server to get an access token.
+
+Before you run any use case workflows, we recommend that you remove all old session token cookies from Postman. To remove these cookies:
+
+1. For the workflow you want to run, open the Step 1 request.
+
+2. Click the **Cookies** link, which is directly under the **Send** button.
+
+3. On the Manage Cookies page, delete all session token cookies listed until you see the *No Cookies available* message.
+
+For more information about Postman and cookie management, refer to [Using cookies](https://learning.postman.com/docs/sending-requests/cookies/).
+
+---
+
+---
+title: Create a Group and Add a User
+description: Workflow showing how to create a PingOne group and assign a user as a member of that group
+component: pingone-api
+page_id: pingone-api:workflow-library:platform-sso-and-authorization/groups/create-a-group-and-add-a-user/index
+canonical_url: https://developer.pingidentity.com/pingone-api/workflow-library/platform-sso-and-authorization/groups/create-a-group-and-add-a-user/index.html
+llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-11
 section_ids:
   prerequisites: Prerequisites
 ---
@@ -287,9 +337,9 @@ This activity shows you how to create a group and assign a user to that group. B
 
 ## Prerequisites
 
-Get an access token from the worker application that you created in [Create an admin Worker app connection](../../../getting-started/create-an-admin-worker-app.html). To get a token from a different worker application in an alternate sandbox environment, run the token request endpoint using the client ID and client secret of your chosen worker app to authenticate the request. For more information, refer to [Get a PingOne admin access token](../../../getting-started/create-a-test-environment/step-1-get-access-token.html).
+Get an access token from the worker application that you created in [Create an admin Worker app connection](../../../../getting-started/create-an-admin-worker-app/index.html). To get a token from a different worker application in an alternate sandbox environment, run the token request endpoint using the client ID and client secret of your chosen worker app to authenticate the request. For more information, refer to [Get a PingOne admin access token](../../../../getting-started/create-a-test-environment/step-1-get-access-token.html).
 
-Click the **Run in Postman** button below to fork, or download and import, the Postman collection for this workflow to your workspace.
+Click the **Run in Postman** button below to fork or import the Postman collection for this workflow to your workspace.
 
 [Run in Postman](https://god.gw.postman.com/run-collection/18568624-e8c1ce22-1a4e-4328-a3b1-e43146b5b932?action=collection%2Ffork\&source=rip_markdown\&collection-url=entityId%3D18568624-e8c1ce22-1a4e-4328-a3b1-e43146b5b932%26entityType%3Dcollection%26workspaceId%3D3550b170-7818-4801-b1eb-dcb7b3f64263#?env%5BPingOne%20Workflow%20Library%20Template%20%28release%3A%202025-04-17%29%5D=W3sia2V5IjoidGxkIiwidmFsdWUiOiJjb20iLCJlbmFibGVkIjp0cnVlLCJ0eXBlIjoiZGVmYXVsdCJ9LHsia2V5IjoiYXV0aFBhdGgiLCJ2YWx1ZSI6Imh0dHBzOi8vYXV0aC5waW5nb25lLnt7dGxkfX0iLCJlbmFibGVkIjp0cnVlLCJ0eXBlIjoiZGVmYXVsdCJ9LHsia2V5IjoiYXBpUGF0aCIsInZhbHVlIjoiaHR0cHM6Ly9hcGkucGluZ29uZS57e3RsZH19L3YxIiwiZW5hYmxlZCI6dHJ1ZSwidHlwZSI6ImRlZmF1bHQifSx7ImtleSI6ImFkbWluRW52SUQiLCJ2YWx1ZSI6IiIsImVuYWJsZWQiOnRydWUsInR5cGUiOiJkZWZhdWx0In0seyJrZXkiOiJhZG1pbkFwcElEIiwidmFsdWUiOiIiLCJlbmFibGVkIjp0cnVlLCJ0eXBlIjoiZGVmYXVsdCJ9LHsia2V5IjoiYWRtaW5BcHBTZWNyZXQiLCJ2YWx1ZSI6IiIsImVuYWJsZWQiOnRydWUsInR5cGUiOiJkZWZhdWx0In0seyJrZXkiOiJlbnZJRCIsInZhbHVlIjoiIiwiZW5hYmxlZCI6dHJ1ZSwidHlwZSI6ImRlZmF1bHQifV0=)
 
@@ -297,12 +347,13 @@ Click the **Run in Postman** button below to fork, or download and import, the P
 
 ---
 title: Create a Risk Evaluation
-description: This activity shows you how to create a new risk evaluation. This scenario illustrates the following common operations supported by the PingOne APIs:
+description: Workflow showing how to get risk policy set IDs and create a PingOne Protect risk evaluation resource for an authentication event
 component: pingone-api
-page_id: pingone-api:workflow-library:pingone-protect/create-a-risk-evaluation
-canonical_url: https://developer.pingidentity.com/pingone-api/workflow-library/pingone-protect/create-a-risk-evaluation.html
+page_id: pingone-api:workflow-library:pingone-protect/create-a-risk-evaluation/index
+canonical_url: https://developer.pingidentity.com/pingone-api/workflow-library/pingone-protect/create-a-risk-evaluation/index.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-11
 section_ids:
   prerequisites: Prerequisites
   what-youll-do: What you'll do
@@ -319,7 +370,7 @@ This activity shows you how to create a new risk evaluation. This scenario illus
 
 ## Prerequisites
 
-Get an access token from the worker application that you created in [Create an admin Worker app connection](../../getting-started/create-an-admin-worker-app.html). To get a token from a different worker application in an alternate sandbox environment, run the token request endpoint using the client ID and client secret of your chosen worker app to authenticate the request. For more information, refer to [Get a PingOne admin access token](../../getting-started/create-a-test-environment/step-1-get-access-token.html).
+Get an access token from the worker application that you created in [Create an admin Worker app connection](../../../getting-started/create-an-admin-worker-app/index.html). To get a token from a different worker application in an alternate sandbox environment, run the token request endpoint using the client ID and client secret of your chosen worker app to authenticate the request. For more information, refer to [Get a PingOne admin access token](../../../getting-started/create-a-test-environment/step-1-get-access-token.html).
 
 ## What you'll do
 
@@ -329,13 +380,13 @@ To create the new risk evaluation, the following tasks must be completed success
 
 * POST request to create a new risk evaluation resource that references a risk policy set resource.
 
-Click the **Run in Postman** button below to fork, or download and import, the Postman collection for this workflow to your workspace.
+Click the **Run in Postman** button below to fork or import the Postman collection for this workflow to your workspace.
 
 ## Defining the risk evaluation resource
 
-For the `POST` request to `/v1/environments/{{envID}}/riskEvaluations`, the risk evaluation resource definition lets you specify the risk policy set to apply to the evaluation. If a particular risk policy set is not specified, the risk evaluation uses the environment's default risk policy set to determine the risk levels for the event. In this use case, the risk evaluation sets the `riskPolicySet.id` property to the `{{riskPolicySetID}}` Postman variable, which should contain the ID of the risk policy set that you created in the [Create a risk policy set](create-a-risk-policy-set.html) activity.
+For the `POST` request to `/v1/environments/{{envID}}/riskEvaluations`, the risk evaluation resource definition lets you specify the risk policy set to apply to the evaluation. If a particular risk policy set is not specified, the risk evaluation uses the environment's default risk policy set to determine the risk levels for the event. In this use case, the risk evaluation sets the `riskPolicySet.id` property to the `{{riskPolicySetID}}` Postman variable, which should contain the ID of the risk policy set that you created in the [Create a risk policy set](../create-a-risk-policy-set/index.html) activity.
 
-The risk evaluation definition must include an `event` object that specifies details about the authentication action to evaluate against the risk policies defined in the risk policy set. In its most basic form, the event object defines a user (`user.id` and `user.type`) and an IP address (`ip`). From this information, the risk evaluation can provide a meaningful risk response for all supported risk predictors (`anonymousNetwork`, `ipRisk`, `geoVelocity`, `userRiskBehavior`) except the user risk behavior predictor, which requires the `targetResource` and `UserAgent` properties. For more information about the risk evaluation event data model, refer to [Risk Evaluations](../../protect/risk-evaluations.html) in the PingOne API Reference.
+The risk evaluation definition must include an `event` object that specifies details about the authentication action to evaluate against the risk policies defined in the risk policy set. In its most basic form, the event object defines a user (`user.id` and `user.type`) and an IP address (`ip`). From this information, the risk evaluation can provide a meaningful risk response for all supported risk predictors (`anonymousNetwork`, `ipRisk`, `geoVelocity`, `userRiskBehavior`) except the user risk behavior predictor, which requires the `targetResource` and `UserAgent` properties. For more information about the risk evaluation event data model, refer to [Risk Evaluations](../../../protect/risk-evaluations/index.html) in the PingOne API Reference.
 
 The risk evaluation process follows these steps:
 
@@ -345,7 +396,7 @@ The risk evaluation process follows these steps:
 
 3. The risk service returns the risk result to the client.
 
-Click the **Run in Postman** button below to fork, or download and import, the Postman collection for this workflow to your workspace.
+Click the **Run in Postman** button below to fork or import the Postman collection for this workflow to your workspace.
 
 [Run in Postman](https://god.gw.postman.com/run-collection/18568624-2fb495d2-2a93-4768-bb4f-35b7010853f6?action=collection%2Ffork\&source=rip_markdown\&collection-url=entityId%3D18568624-2fb495d2-2a93-4768-bb4f-35b7010853f6%26entityType%3Dcollection%26workspaceId%3D3550b170-7818-4801-b1eb-dcb7b3f64263#?env%5BPingOne%20Workflow%20Library%20Template%20%28release%3A%202025-04-17%29%5D=W3sia2V5IjoidGxkIiwidmFsdWUiOiJjb20iLCJlbmFibGVkIjp0cnVlLCJ0eXBlIjoiZGVmYXVsdCJ9LHsia2V5IjoiYXV0aFBhdGgiLCJ2YWx1ZSI6Imh0dHBzOi8vYXV0aC5waW5nb25lLnt7dGxkfX0iLCJlbmFibGVkIjp0cnVlLCJ0eXBlIjoiZGVmYXVsdCJ9LHsia2V5IjoiYXBpUGF0aCIsInZhbHVlIjoiaHR0cHM6Ly9hcGkucGluZ29uZS57e3RsZH19L3YxIiwiZW5hYmxlZCI6dHJ1ZSwidHlwZSI6ImRlZmF1bHQifSx7ImtleSI6ImFkbWluRW52SUQiLCJ2YWx1ZSI6IiIsImVuYWJsZWQiOnRydWUsInR5cGUiOiJkZWZhdWx0In0seyJrZXkiOiJhZG1pbkFwcElEIiwidmFsdWUiOiIiLCJlbmFibGVkIjp0cnVlLCJ0eXBlIjoiZGVmYXVsdCJ9LHsia2V5IjoiYWRtaW5BcHBTZWNyZXQiLCJ2YWx1ZSI6IiIsImVuYWJsZWQiOnRydWUsInR5cGUiOiJkZWZhdWx0In0seyJrZXkiOiJlbnZJRCIsInZhbHVlIjoiIiwiZW5hYmxlZCI6dHJ1ZSwidHlwZSI6ImRlZmF1bHQifV0=)
 
@@ -353,12 +404,13 @@ Click the **Run in Postman** button below to fork, or download and import, the P
 
 ---
 title: Create a Risk Policy Set
-description: This activity shows you how to create a new risk policy. This scenario illustrates the following common operations supported by the PingOne APIs:
+description: Workflow showing how to create a PingOne Protect risk policy set that defines whitelist and anonymous network detection risk policies
 component: pingone-api
-page_id: pingone-api:workflow-library:pingone-protect/create-a-risk-policy-set
-canonical_url: https://developer.pingidentity.com/pingone-api/workflow-library/pingone-protect/create-a-risk-policy-set.html
+page_id: pingone-api:workflow-library:pingone-protect/create-a-risk-policy-set/index
+canonical_url: https://developer.pingidentity.com/pingone-api/workflow-library/pingone-protect/create-a-risk-policy-set/index.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-11
 section_ids:
   prerequisites: Prerequisites
   what-youll-do: What you'll do
@@ -373,7 +425,7 @@ This activity shows you how to create a new risk policy. This scenario illustrat
 
 ## Prerequisites
 
-Get an access token from the worker application that you created in [Create an admin Worker app connection](../../getting-started/create-an-admin-worker-app.html). To get a token from a different worker application in an alternate sandbox environment, run the token request endpoint using the client ID and client secret of your chosen worker app to authenticate the request. For more information, refer to [Get a PingOne admin access token](../../getting-started/create-a-test-environment/step-1-get-access-token.html).
+Get an access token from the worker application that you created in [Create an admin Worker app connection](../../../getting-started/create-an-admin-worker-app/index.html). To get a token from a different worker application in an alternate sandbox environment, run the token request endpoint using the client ID and client secret of your chosen worker app to authenticate the request. For more information, refer to [Get a PingOne admin access token](../../../getting-started/create-a-test-environment/step-1-get-access-token.html).
 
 ## What you'll do
 
@@ -381,7 +433,7 @@ To create the new risk policy set, the following tasks must be completed success
 
 * POST request to create a new risk policy set resource.
 
-Click the **Run in Postman** button below to fork, or download and import, the Postman collection for this workflow to your workspace.
+Click the **Run in Postman** button below to fork or import the Postman collection for this workflow to your workspace.
 
 ### Policy set logic
 
@@ -433,9 +485,9 @@ The following JSON shows the elements defined in the anonymous network detection
             },
 ```
 
-For more information about risk policies, refer to [Risk Policies](../../protect/risk-policies.html).
+For more information about risk policies, refer to [Risk Policies](../../../protect/risk-policies/index.html).
 
-Click the **Run in Postman** button below to fork, or download and import, the Postman collection for this workflow to your workspace.
+Click the **Run in Postman** button below to fork or import the Postman collection for this workflow to your workspace.
 
 [Run in Postman](https://god.gw.postman.com/run-collection/18568624-4bb35659-b63c-46f9-95e1-69f6d126aa00?action=collection%2Ffork\&source=rip_markdown\&collection-url=entityId%3D18568624-4bb35659-b63c-46f9-95e1-69f6d126aa00%26entityType%3Dcollection%26workspaceId%3D3550b170-7818-4801-b1eb-dcb7b3f64263#?env%5BPingOne%20Workflow%20Library%20Template%20%28release%3A%202025-04-17%29%5D=W3sia2V5IjoidGxkIiwidmFsdWUiOiJjb20iLCJlbmFibGVkIjp0cnVlLCJ0eXBlIjoiZGVmYXVsdCJ9LHsia2V5IjoiYXV0aFBhdGgiLCJ2YWx1ZSI6Imh0dHBzOi8vYXV0aC5waW5nb25lLnt7dGxkfX0iLCJlbmFibGVkIjp0cnVlLCJ0eXBlIjoiZGVmYXVsdCJ9LHsia2V5IjoiYXBpUGF0aCIsInZhbHVlIjoiaHR0cHM6Ly9hcGkucGluZ29uZS57e3RsZH19L3YxIiwiZW5hYmxlZCI6dHJ1ZSwidHlwZSI6ImRlZmF1bHQifSx7ImtleSI6ImFkbWluRW52SUQiLCJ2YWx1ZSI6IiIsImVuYWJsZWQiOnRydWUsInR5cGUiOiJkZWZhdWx0In0seyJrZXkiOiJhZG1pbkFwcElEIiwidmFsdWUiOiIiLCJlbmFibGVkIjp0cnVlLCJ0eXBlIjoiZGVmYXVsdCJ9LHsia2V5IjoiYWRtaW5BcHBTZWNyZXQiLCJ2YWx1ZSI6IiIsImVuYWJsZWQiOnRydWUsInR5cGUiOiJkZWZhdWx0In0seyJrZXkiOiJlbnZJRCIsInZhbHVlIjoiIiwiZW5hYmxlZCI6dHJ1ZSwidHlwZSI6ImRlZmF1bHQifV0=)
 
@@ -443,12 +495,13 @@ Click the **Run in Postman** button below to fork, or download and import, the P
 
 ---
 title: Create a Workday Propagation Connection
-description: This use case shows you how to create a propagation connection between a Workday source identity store and your PingOne directory target identity store.
+description: Workflow showing how to create a PingOne propagation connection between a Workday source identity store and the PingOne directory, including writeback
 component: pingone-api
-page_id: pingone-api:workflow-library:platform-sso-and-authorization/identity-propagation/create-a-workday-propagation-connection
-canonical_url: https://developer.pingidentity.com/pingone-api/workflow-library/platform-sso-and-authorization/identity-propagation/create-a-workday-propagation-connection.html
+page_id: pingone-api:workflow-library:platform-sso-and-authorization/identity-propagation/create-a-workday-propagation-connection/index
+canonical_url: https://developer.pingidentity.com/pingone-api/workflow-library/platform-sso-and-authorization/identity-propagation/create-a-workday-propagation-connection/index.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-11
 section_ids:
   prerequisites: Prerequisites
   workflow-order-of-operations: Workflow order of operations
@@ -480,7 +533,7 @@ This scenario illustrates the following common operations:
 
 ## Prerequisites
 
-Get an access token from the worker application that you created in [Create an admin Worker app connection](../../../getting-started/create-an-admin-worker-app.html). To get a token from a different worker application in an alternate sandbox environment, run the token request endpoint using the client ID and client secret of your chosen worker app to authenticate the request. For more information, refer to [Get a PingOne admin access token](../../../getting-started/create-a-test-environment/step-1-get-access-token.html).
+Get an access token from the worker application that you created in [Create an admin Worker app connection](../../../../getting-started/create-an-admin-worker-app/index.html). To get a token from a different worker application in an alternate sandbox environment, run the token request endpoint using the client ID and client secret of your chosen worker app to authenticate the request. For more information, refer to [Get a PingOne admin access token](../../../../getting-started/create-a-test-environment/step-1-get-access-token.html).
 
 ## Workflow order of operations
 
@@ -518,19 +571,53 @@ To create a Workday inbound propagation connection, you will need to complete th
 
 16. Make a `POST` request to `/v1/environments/{{envID}}/propagation/revisions` to create a new propagation revision to ensure all operations are reflected in the PingOne Admin Console.
 
-Click the **Run in Postman** button below to fork, or download and import, the Postman collection for this workflow to your workspace.
+Click the **Run in Postman** button below to fork or import the Postman collection for this workflow to your workspace.
 
 [Run in Postman](https://god.gw.postman.com/run-collection/18568624-2d38766f-1c22-4eae-bf2c-509f4f71bd08?action=collection%2Ffork\&source=rip_markdown\&collection-url=entityId%3D18568624-2d38766f-1c22-4eae-bf2c-509f4f71bd08%26entityType%3Dcollection%26workspaceId%3D3550b170-7818-4801-b1eb-dcb7b3f64263#?env%5BPingOne%20Workflow%20Library%20Template%20%28release%3A%202025-04-17%29%5D=W3sia2V5IjoidGxkIiwidmFsdWUiOiJjb20iLCJlbmFibGVkIjp0cnVlLCJ0eXBlIjoiZGVmYXVsdCJ9LHsia2V5IjoiYXV0aFBhdGgiLCJ2YWx1ZSI6Imh0dHBzOi8vYXV0aC5waW5nb25lLnt7dGxkfX0iLCJlbmFibGVkIjp0cnVlLCJ0eXBlIjoiZGVmYXVsdCJ9LHsia2V5IjoiYXBpUGF0aCIsInZhbHVlIjoiaHR0cHM6Ly9hcGkucGluZ29uZS57e3RsZH19L3YxIiwiZW5hYmxlZCI6dHJ1ZSwidHlwZSI6ImRlZmF1bHQifSx7ImtleSI6ImFkbWluRW52SUQiLCJ2YWx1ZSI6IiIsImVuYWJsZWQiOnRydWUsInR5cGUiOiJkZWZhdWx0In0seyJrZXkiOiJhZG1pbkFwcElEIiwidmFsdWUiOiIiLCJlbmFibGVkIjp0cnVlLCJ0eXBlIjoiZGVmYXVsdCJ9LHsia2V5IjoiYWRtaW5BcHBTZWNyZXQiLCJ2YWx1ZSI6IiIsImVuYWJsZWQiOnRydWUsInR5cGUiOiJkZWZhdWx0In0seyJrZXkiOiJlbnZJRCIsInZhbHVlIjoiIiwiZW5hYmxlZCI6dHJ1ZSwidHlwZSI6ImRlZmF1bHQifV0=)
 
 ---
 
 ---
+title: Create and Assign a Custom Admin Role
+description: Workflow showing how to create a PingOne custom admin role and assign it to a Worker app.
+component: pingone-api
+page_id: pingone-api:workflow-library:platform-sso-and-authorization/roles/create-and-assign-custom-admin-role/index
+canonical_url: https://developer.pingidentity.com/pingone-api/workflow-library/platform-sso-and-authorization/roles/create-and-assign-custom-admin-role/index.html
+llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-11
+section_ids:
+  prerequisites: Prerequisites
+  postman-collection: Postman Collection
+---
+
+# Create and Assign a Custom Admin Role
+
+This activity shows you how to create a custom admin role and assign the role to a Worker app.
+
+## Prerequisites
+
+Get an access token from the worker application that you created in *Getting Started*, Task 1 [Create an admin Worker app connection](../../../../getting-started/create-an-admin-worker-app/index.html).
+
+To get a token from a different worker application in an alternate sandbox environment, run the token request endpoint using the client ID and client secret of your chosen Worker app to authenticate the request.
+
+## Postman Collection
+
+Click the **Run in Postman** button below to fork or import the Postman collection for this workflow to your workspace.
+
+[Run in Postman](https://god.gw.postman.com/run-collection/5375867-4c3498cb-28fd-4bc7-bca1-b17cb9479598?action=collection%2Ffork\&source=rip_markdown\&collection-url=entityId%3D5375867-4c3498cb-28fd-4bc7-bca1-b17cb9479598%26entityType%3Dcollection%26workspaceId%3D3550b170-7818-4801-b1eb-dcb7b3f64263)
+
+---
+
+---
 title: Create public client app (NONE auth)
+description: Create a native application using the NONE token endpoint authentication method
 component: pingone-api
 page_id: pingone-api:workflow-library:platform-sso-and-authorization/openid-connect-oidc/client-authentication-methods/environment-configuration/none/step-1-create-a-native-application
 canonical_url: https://developer.pingidentity.com/pingone-api/workflow-library/platform-sso-and-authorization/openid-connect-oidc/client-authentication-methods/environment-configuration/none/step-1-create-a-native-application.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-05-05
 section_ids:
   headers: Headers
   body: Body
@@ -542,7 +629,9 @@ section_ids:
 
 ##
 
- 
+Required permission:
+
+* [applications:create:application](../../../../../../platform/reference/roles-and-permissions-in-pingone/pingone-permissions-by-identifier.html#permission-applications-create-application "Learn more about this permission")
 
 ```none
 POST {{apiPath}}/v1/environments/{{envID}}/applications
@@ -1044,17 +1133,18 @@ task.resume()
 
 ---
 title: DaVinci Registration Flow with PingOne Auth
-description: This activity uses the PingOne application and flow policy that you configured in the DaVinci Sign-On Flow with PingOne Auth workflow. If you haven't completed this workflow, do that first before you begin the registration flow.
+description: Workflow showing how to initiate a PingOne DaVinci registration flow through the PingOne authorization server and complete account verification
 component: pingone-api
-page_id: pingone-api:workflow-library:pingone-davinci/davinci-registration-flow-with-pingone-auth
-canonical_url: https://developer.pingidentity.com/pingone-api/workflow-library/pingone-davinci/davinci-registration-flow-with-pingone-auth.html
+page_id: pingone-api:workflow-library:pingone-davinci/davinci-registration-flow-with-pingone-auth/index
+canonical_url: https://developer.pingidentity.com/pingone-api/workflow-library/pingone-davinci/davinci-registration-flow-with-pingone-auth/index.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-11
 ---
 
 # DaVinci Registration Flow with PingOne Auth
 
-This activity uses the PingOne application and flow policy that you configured in the [DaVinci Sign-On Flow with PingOne Auth](davinci-sign-on-flow-with-pingone-auth.html) workflow. If you haven't completed this workflow, do that first before you begin the registration flow.
+This activity uses the PingOne application and flow policy that you configured in the [DaVinci Sign-On Flow with PingOne Auth](../davinci-sign-on-flow-with-pingone-auth/index.html) workflow. If you haven't completed this workflow, do that first before you begin the registration flow.
 
 |   |                                                                                                                                                                                                                                                       |
 | - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -1066,7 +1156,7 @@ This scenario illustrates the following common operations supported by the PingO
 
 * Create the DaVinci flow capabilities requests to manage the registration workflow and get the session token.
 
-Click the **Run in Postman** button below to fork, or download and import, the Postman collection for this workflow to your workspace.
+Click the **Run in Postman** button below to fork or import the Postman collection for this workflow to your workspace.
 
 [Run in Postman](https://god.gw.postman.com/run-collection/18568624-eec93681-1392-417d-a126-9c2ea7875c04?action=collection%2Ffork\&source=rip_markdown\&collection-url=entityId%3D18568624-eec93681-1392-417d-a126-9c2ea7875c04%26entityType%3Dcollection%26workspaceId%3D3550b170-7818-4801-b1eb-dcb7b3f64263#?env%5BPingOne%20Workflow%20Library%20Template%20%28release%3A%202025-04-17%29%5D=W3sia2V5IjoidGxkIiwidmFsdWUiOiJjb20iLCJlbmFibGVkIjp0cnVlLCJ0eXBlIjoiZGVmYXVsdCJ9LHsia2V5IjoiYXV0aFBhdGgiLCJ2YWx1ZSI6Imh0dHBzOi8vYXV0aC5waW5nb25lLnt7dGxkfX0iLCJlbmFibGVkIjp0cnVlLCJ0eXBlIjoiZGVmYXVsdCJ9LHsia2V5IjoiYXBpUGF0aCIsInZhbHVlIjoiaHR0cHM6Ly9hcGkucGluZ29uZS57e3RsZH19L3YxIiwiZW5hYmxlZCI6dHJ1ZSwidHlwZSI6ImRlZmF1bHQifSx7ImtleSI6ImFkbWluRW52SUQiLCJ2YWx1ZSI6IiIsImVuYWJsZWQiOnRydWUsInR5cGUiOiJkZWZhdWx0In0seyJrZXkiOiJhZG1pbkFwcElEIiwidmFsdWUiOiIiLCJlbmFibGVkIjp0cnVlLCJ0eXBlIjoiZGVmYXVsdCJ9LHsia2V5IjoiYWRtaW5BcHBTZWNyZXQiLCJ2YWx1ZSI6IiIsImVuYWJsZWQiOnRydWUsInR5cGUiOiJkZWZhdWx0In0seyJrZXkiOiJlbnZJRCIsInZhbHVlIjoiIiwiZW5hYmxlZCI6dHJ1ZSwidHlwZSI6ImRlZmF1bHQifV0=)
 
@@ -1074,12 +1164,13 @@ Click the **Run in Postman** button below to fork, or download and import, the P
 
 ---
 title: DaVinci Sign-On Flow with PingOne Auth
-description: This activity shows you how to create a PingOne application, find and associate a DaVinci flow policy with the application, and initiate the flow using a PingOne authorize request. The authorize request sets the response_mode property to pi.flow, which tells the authorization server to return data, instead of a redirect URL. In addition, the authorize request sets the X-Requested-With HTTP header with a value of ping-sdk to return JSON instead of HTML (and scripts).
+description: Workflow showing how to create a PingOne application, associate a PingOne DaVinci flow policy, and initiate the flow with an authorize request
 component: pingone-api
-page_id: pingone-api:workflow-library:pingone-davinci/davinci-sign-on-flow-with-pingone-auth
-canonical_url: https://developer.pingidentity.com/pingone-api/workflow-library/pingone-davinci/davinci-sign-on-flow-with-pingone-auth.html
+page_id: pingone-api:workflow-library:pingone-davinci/davinci-sign-on-flow-with-pingone-auth/index
+canonical_url: https://developer.pingidentity.com/pingone-api/workflow-library/pingone-davinci/davinci-sign-on-flow-with-pingone-auth/index.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-11
 ---
 
 # DaVinci Sign-On Flow with PingOne Auth
@@ -1102,7 +1193,7 @@ This scenario illustrates the following common operations supported by the PingO
 
 * Call the PingOne token request to get an access token.
 
-Click the **Run in Postman** button below to fork, or download and import, the Postman collection for this workflow to your workspace.
+Click the **Run in Postman** button below to fork or import the Postman collection for this workflow to your workspace.
 
 [Run in Postman](https://god.gw.postman.com/run-collection/18568624-ea2ad46c-a92a-44b2-9318-42f02fb165f8?action=collection%2Ffork\&source=rip_markdown\&collection-url=entityId%3D18568624-ea2ad46c-a92a-44b2-9318-42f02fb165f8%26entityType%3Dcollection%26workspaceId%3D3550b170-7818-4801-b1eb-dcb7b3f64263#?env%5BPingOne%20Workflow%20Library%20Template%20%28release%3A%202025-04-17%29%5D=W3sia2V5IjoidGxkIiwidmFsdWUiOiJjb20iLCJlbmFibGVkIjp0cnVlLCJ0eXBlIjoiZGVmYXVsdCJ9LHsia2V5IjoiYXV0aFBhdGgiLCJ2YWx1ZSI6Imh0dHBzOi8vYXV0aC5waW5nb25lLnt7dGxkfX0iLCJlbmFibGVkIjp0cnVlLCJ0eXBlIjoiZGVmYXVsdCJ9LHsia2V5IjoiYXBpUGF0aCIsInZhbHVlIjoiaHR0cHM6Ly9hcGkucGluZ29uZS57e3RsZH19L3YxIiwiZW5hYmxlZCI6dHJ1ZSwidHlwZSI6ImRlZmF1bHQifSx7ImtleSI6ImFkbWluRW52SUQiLCJ2YWx1ZSI6IiIsImVuYWJsZWQiOnRydWUsInR5cGUiOiJkZWZhdWx0In0seyJrZXkiOiJhZG1pbkFwcElEIiwidmFsdWUiOiIiLCJlbmFibGVkIjp0cnVlLCJ0eXBlIjoiZGVmYXVsdCJ9LHsia2V5IjoiYWRtaW5BcHBTZWNyZXQiLCJ2YWx1ZSI6IiIsImVuYWJsZWQiOnRydWUsInR5cGUiOiJkZWZhdWx0In0seyJrZXkiOiJlbnZJRCIsInZhbHVlIjoiIiwiZW5hYmxlZCI6dHJ1ZSwidHlwZSI6ImRlZmF1bHQifV0=)
 
@@ -1110,14 +1201,16 @@ Click the **Run in Postman** button below to fork, or download and import, the P
 
 ---
 title: Device Authorization Grant Flow
-description: This activity shows you how to initiate a device authorization grant flow to send an activation code to the end user. The authorization and flow orchestration steps apply only to applications that specify device_code as a grant type in the application configuration.
+description: Workflow showing how to initiate a PingOne device authorization grant flow and complete device sign-on and consent
 component: pingone-api
-page_id: pingone-api:workflow-library:platform-sso-and-authorization/openid-connect-oidc/device-authorization-grant-flow
-canonical_url: https://developer.pingidentity.com/pingone-api/workflow-library/platform-sso-and-authorization/openid-connect-oidc/device-authorization-grant-flow.html
+page_id: pingone-api:workflow-library:platform-sso-and-authorization/openid-connect-oidc/device-authorization-grant-flow/index
+canonical_url: https://developer.pingidentity.com/pingone-api/workflow-library/platform-sso-and-authorization/openid-connect-oidc/device-authorization-grant-flow/index.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-11
 section_ids:
   prerequisites: Prerequisites
+  postman-collection: Postman Collection
 ---
 
 # Device Authorization Grant Flow
@@ -1136,20 +1229,140 @@ The following operations are supported by the PingOne APIs:
 
 ## Prerequisites
 
-* Get an access token from the worker application you created in [Create an admin Worker app connection](../../../getting-started/create-an-admin-worker-app.html). If you prefer to get a token from a different worker application in an alternate sandbox environment, run the token request endpoint using the client ID and client secret of your chosen worker app to authenticate the request. Refer to [Get a PingOne admin access token](../../../getting-started/create-a-test-environment/step-1-get-access-token.html).
+* Get an access token from the worker application you created in [Create an admin Worker app connection](../../../../getting-started/create-an-admin-worker-app/index.html). If you prefer to get a token from a different worker application in an alternate sandbox environment, run the token request endpoint using the client ID and client secret of your chosen worker app to authenticate the request. Refer to [Get a PingOne admin access token](../../../../getting-started/create-a-test-environment/step-1-get-access-token.html).
 
-[Run in Postman](https://god.gw.postman.com/run-collection/18568624-08fad81d-7266-4f54-aa43-803c5f6e96c8?action=collection%2Ffork\&source=rip_markdown\&collection-url=entityId%3D18568624-08fad81d-7266-4f54-aa43-803c5f6e96c8%26entityType%3Dcollection%26workspaceId%3D3550b170-7818-4801-b1eb-dcb7b3f64263#?env%5BPingOne%20Workflow%20Library%20Template%20%28release%3A%202025-04-17%29%5D=W3sia2V5IjoidGxkIiwidmFsdWUiOiJjb20iLCJlbmFibGVkIjp0cnVlLCJ0eXBlIjoiZGVmYXVsdCJ9LHsia2V5IjoiYXV0aFBhdGgiLCJ2YWx1ZSI6Imh0dHBzOi8vYXV0aC5waW5nb25lLnt7dGxkfX0iLCJlbmFibGVkIjp0cnVlLCJ0eXBlIjoiZGVmYXVsdCJ9LHsia2V5IjoiYXBpUGF0aCIsInZhbHVlIjoiaHR0cHM6Ly9hcGkucGluZ29uZS57e3RsZH19L3YxIiwiZW5hYmxlZCI6dHJ1ZSwidHlwZSI6ImRlZmF1bHQifSx7ImtleSI6ImFkbWluRW52SUQiLCJ2YWx1ZSI6IiIsImVuYWJsZWQiOnRydWUsInR5cGUiOiJkZWZhdWx0In0seyJrZXkiOiJhZG1pbkFwcElEIiwidmFsdWUiOiIiLCJlbmFibGVkIjp0cnVlLCJ0eXBlIjoiZGVmYXVsdCJ9LHsia2V5IjoiYWRtaW5BcHBTZWNyZXQiLCJ2YWx1ZSI6IiIsImVuYWJsZWQiOnRydWUsInR5cGUiOiJkZWZhdWx0In0seyJrZXkiOiJlbnZJRCIsInZhbHVlIjoiIiwiZW5hYmxlZCI6dHJ1ZSwidHlwZSI6ImRlZmF1bHQifV0=)
+## Postman Collection
+
+Click the **Run in Postman** button below to fork or import the Postman collection for this workflow to your workspace.
+
+[Run in Postman](https://god.gw.postman.com/run-collection/18568624-08fad81d-7266-4f54-aa43-803c5f6e96c8?action=collection%2Ffork\&source=rip_markdown\&collection-url=entityId%3D18568624-08fad81d-7266-4f54-aa43-803c5f6e96c8%26entityType%3Dcollection%26workspaceId%3D3550b170-7818-4801-b1eb-dcb7b3f64263)
+
+---
+
+---
+title: Downloading PingOne use case collections
+description: The Run in Postman button lets you fork, or download and import the collection to your Postman workspace. Each use case is packaged as its own collection. The following table provides the complete list of use cases with corresponding Run in Postman buttons.
+component: pingone-api
+page_id: pingone-api:workflow-library:using-postman-workflow-collections/downloading-pingone-workflow-collections
+canonical_url: https://developer.pingidentity.com/pingone-api/workflow-library/using-postman-workflow-collections/downloading-pingone-workflow-collections.html
+llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+---
+
+# Downloading PingOne use case collections
+
+The **Run in Postman** button lets you fork, or download and import the collection to your Postman workspace. Each use case is packaged as its own collection. The following table provides the complete list of use cases with corresponding **Run in Postman** buttons.
+
+| Use Case                                                                                                                                             | Retrieve                                                                                                                                                                                                                                                                                                        |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [Create a Group and Add a User](../platform-sso-and-authorization/groups/create-a-group-and-add-a-user/index.html)                                   | [Run in Postman](https://god.gw.postman.com/run-collection/18568624-e8c1ce22-1a4e-4328-a3b1-e43146b5b932?action=collection%2Ffork\&source=rip_markdown\&collection-url=entityId%3D18568624-e8c1ce22-1a4e-4328-a3b1-e43146b5b932%26entityType%3Dcollection%26workspaceId%3D3550b170-7818-4801-b1eb-dcb7b3f64263) |
+| [Create a Risk Evaluation](../pingone-protect/create-a-risk-evaluation/index.html)                                                                   | [Run in Postman](https://god.gw.postman.com/run-collection/18568624-2fb495d2-2a93-4768-bb4f-35b7010853f6?action=collection%2Ffork\&source=rip_markdown\&collection-url=entityId%3D18568624-2fb495d2-2a93-4768-bb4f-35b7010853f6%26entityType%3Dcollection%26workspaceId%3D3550b170-7818-4801-b1eb-dcb7b3f64263) |
+| [Create a Risk Policy Set](../pingone-protect/create-a-risk-policy-set/index.html)                                                                   | [Run in Postman](https://god.gw.postman.com/run-collection/18568624-4bb35659-b63c-46f9-95e1-69f6d126aa00?action=collection%2Ffork\&source=rip_markdown\&collection-url=entityId%3D18568624-4bb35659-b63c-46f9-95e1-69f6d126aa00%26entityType%3Dcollection%26workspaceId%3D3550b170-7818-4801-b1eb-dcb7b3f64263) |
+| [Create a Workday Propagation Connection](../platform-sso-and-authorization/identity-propagation/create-a-workday-propagation-connection/index.html) | [Run in Postman](https://god.gw.postman.com/run-collection/18568624-2d38766f-1c22-4eae-bf2c-509f4f71bd08?action=collection%2Ffork\&source=rip_markdown\&collection-url=entityId%3D18568624-2d38766f-1c22-4eae-bf2c-509f4f71bd08%26entityType%3Dcollection%26workspaceId%3D3550b170-7818-4801-b1eb-dcb7b3f64263) |
+| [Create and Assign a Custom Admin Role](../platform-sso-and-authorization/roles/create-and-assign-custom-admin-role/index.html)                      | [Run in Postman](https://god.gw.postman.com/run-collection/5375867-4c3498cb-28fd-4bc7-bca1-b17cb9479598?action=collection%2Ffork\&source=rip_markdown\&collection-url=entityId%3D5375867-4c3498cb-28fd-4bc7-bca1-b17cb9479598%26entityType%3Dcollection%26workspaceId%3D3550b170-7818-4801-b1eb-dcb7b3f64263)   |
+| [DaVinci Registration Flow with PingOne Auth](../pingone-davinci/davinci-registration-flow-with-pingone-auth/index.html)                             | [Run in Postman](https://god.gw.postman.com/run-collection/18568624-eec93681-1392-417d-a126-9c2ea7875c04?action=collection%2Ffork\&source=rip_markdown\&collection-url=entityId%3D18568624-eec93681-1392-417d-a126-9c2ea7875c04%26entityType%3Dcollection%26workspaceId%3D3550b170-7818-4801-b1eb-dcb7b3f64263) |
+| [DaVinci Sign-On Flow with PingOne Auth](../pingone-davinci/davinci-sign-on-flow-with-pingone-auth/index.html)                                       | [Run in Postman](https://god.gw.postman.com/run-collection/18568624-ea2ad46c-a92a-44b2-9318-42f02fb165f8?action=collection%2Ffork\&source=rip_markdown\&collection-url=entityId%3D18568624-ea2ad46c-a92a-44b2-9318-42f02fb165f8%26entityType%3Dcollection%26workspaceId%3D3550b170-7818-4801-b1eb-dcb7b3f64263) |
+| [Find and Terminate a User Session](../platform-sso-and-authorization/sessions-and-logout/find-and-terminate-a-user-session/index.html)              | [Run in Postman](https://god.gw.postman.com/run-collection/18568624-545436b9-d443-440a-a9b7-8cf1c3605810?action=collection%2Ffork\&source=rip_markdown\&collection-url=entityId%3D18568624-545436b9-d443-440a-a9b7-8cf1c3605810%26entityType%3Dcollection%26workspaceId%3D3550b170-7818-4801-b1eb-dcb7b3f64263) |
+| [Login with an Authenticator App](../pingone-mfa/login-with-an-authenticator-app/index.html)                                                         | [Run in Postman](https://god.gw.postman.com/run-collection/18568624-3b0a1319-61e3-47ba-b2fc-fd4b4efb87b1?action=collection%2Ffork\&source=rip_markdown\&collection-url=entityId%3D18568624-3b0a1319-61e3-47ba-b2fc-fd4b4efb87b1%26entityType%3Dcollection%26workspaceId%3D3550b170-7818-4801-b1eb-dcb7b3f64263) |
+| [Login with Multifactor Authentication](../pingone-mfa/login-with-multifactor-authentication/index.html)                                             | [Run in Postman](https://god.gw.postman.com/run-collection/18568624-94f2e1d1-83a5-440c-bc54-be71038df69a?action=collection%2Ffork\&source=rip_markdown\&collection-url=entityId%3D18568624-94f2e1d1-83a5-440c-bc54-be71038df69a%26entityType%3Dcollection%26workspaceId%3D3550b170-7818-4801-b1eb-dcb7b3f64263) |
+| [Login with Passwordless Authentication](../pingone-mfa/login-with-passwordless-authentication/index.html)                                           | [Run in Postman](https://god.gw.postman.com/run-collection/18568624-ccbb5af6-8f4e-41ca-b154-f2b50e116eda?action=collection%2Ffork\&source=rip_markdown\&collection-url=entityId%3D18568624-ccbb5af6-8f4e-41ca-b154-f2b50e116eda%26entityType%3Dcollection%26workspaceId%3D3550b170-7818-4801-b1eb-dcb7b3f64263) |
+| [Progressive Profiling - Sign-On Action](../platform-sso-and-authorization/openid-connect-oidc/progressive-profiling-sign-on-action/index.html)      | [Run in Postman](https://god.gw.postman.com/run-collection/18568624-386c1bb7-acde-4fa1-b85f-abc3994ffff3?action=collection%2Ffork\&source=rip_markdown\&collection-url=entityId%3D18568624-386c1bb7-acde-4fa1-b85f-abc3994ffff3%26entityType%3Dcollection%26workspaceId%3D3550b170-7818-4801-b1eb-dcb7b3f64263) |
+| [Refresh Token Exchange Flow](../platform-sso-and-authorization/openid-connect-oidc/refresh-token-exchange-flow/index.html)                          | [Run in Postman](https://god.gw.postman.com/run-collection/18568624-b7545289-1269-4f9a-9094-b9366bfd9816?action=collection%2Ffork\&source=rip_markdown\&collection-url=entityId%3D18568624-b7545289-1269-4f9a-9094-b9366bfd9816%26entityType%3Dcollection%26workspaceId%3D3550b170-7818-4801-b1eb-dcb7b3f64263) |
+| [SAML Sign-On Flow](../platform-sso-and-authorization/saml/saml-sign-on-flow/index.html)                                                             | [Run in Postman](https://god.gw.postman.com/run-collection/18568624-cf6d652a-2338-4e26-ac96-574b3a907d40?action=collection%2Ffork\&source=rip_markdown\&collection-url=entityId%3D18568624-cf6d652a-2338-4e26-ac96-574b3a907d40%26entityType%3Dcollection%26workspaceId%3D3550b170-7818-4801-b1eb-dcb7b3f64263) |
+| [Show App Permissions in Token](../pingone-authorize/show-permissions-in-token/index.html)                                                           | [Run in Postman](https://god.gw.postman.com/run-collection/18568624-5deaf4f0-6526-40df-aff1-15d871f65fbf?action=collection%2Ffork\&source=rip_markdown\&collection-url=entityId%3D18568624-5deaf4f0-6526-40df-aff1-15d871f65fbf%26entityType%3Dcollection%26workspaceId%3D3550b170-7818-4801-b1eb-dcb7b3f64263) |
+| [Sign-Off User Session](../platform-sso-and-authorization/sessions-and-logout/sign-off-user-session/index.html)                                      | [Run in Postman](https://god.gw.postman.com/run-collection/18568624-6d0bda4a-c923-4f92-8fa8-f91079792b8c?action=collection%2Ffork\&source=rip_markdown\&collection-url=entityId%3D18568624-6d0bda4a-c923-4f92-8fa8-f91079792b8c%26entityType%3Dcollection%26workspaceId%3D3550b170-7818-4801-b1eb-dcb7b3f64263) |
+| [Simple Login - Username and Password](../platform-sso-and-authorization/openid-connect-oidc/simple-login-username-and-password/index.html)          | [Run in Postman](https://god.gw.postman.com/run-collection/18568624-00d53494-a48f-4d29-9b44-adbbcab6979e?action=collection%2Ffork\&source=rip_markdown\&collection-url=entityId%3D18568624-00d53494-a48f-4d29-9b44-adbbcab6979e%26entityType%3Dcollection%26workspaceId%3D3550b170-7818-4801-b1eb-dcb7b3f64263) |
+| [Transaction Approval Using Email](../pingone-mfa/transaction-approval-using-sms/index.html)                                                         | [Run in Postman](https://god.gw.postman.com/run-collection/18568624-5251a600-ae51-4a38-96c5-d6564d3d8c6a?action=collection%2Ffork\&source=rip_markdown\&collection-url=entityId%3D18568624-5251a600-ae51-4a38-96c5-d6564d3d8c6a%26entityType%3Dcollection%26workspaceId%3D3550b170-7818-4801-b1eb-dcb7b3f64263) |
+| [User Registration - Self-Service Flow](../platform-sso-and-authorization/openid-connect-oidc/user-registration-self-service-flow/index.html)        | [Run in Postman](https://god.gw.postman.com/run-collection/18568624-60b7fde7-4f30-48ce-b852-4ca200124688?action=collection%2Ffork\&source=rip_markdown\&collection-url=entityId%3D18568624-60b7fde7-4f30-48ce-b852-4ca200124688%26entityType%3Dcollection%26workspaceId%3D3550b170-7818-4801-b1eb-dcb7b3f64263) |
+
+---
+
+---
+title: External Identity Provider - Sign On
+description: Workflow showing how to configure two PingOne environments and test sign-on through an external OIDC identity provider
+component: pingone-api
+page_id: pingone-api:workflow-library:platform-sso-and-authorization/openid-connect-oidc/external-identity-provider-sign-on/index
+canonical_url: https://developer.pingidentity.com/pingone-api/workflow-library/platform-sso-and-authorization/openid-connect-oidc/external-identity-provider-sign-on/index.html
+llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-11
+section_ids:
+  prerequisites: Prerequisites
+---
+
+# External Identity Provider - Sign On
+
+This activity shows you how to test the external authentication flow to sign-on using an external identity provider (IdP).
+
+The easiest way to do this is by using two PingOne environments. One environment will act as the service provider (SP) for an OIDC application, while the other environment is used to configure an OIDC identity provider (IdP) connection.
+
+This activity requires completing an internal authentication flow within the external authentication flow, so it's important to take note of which environment should be used to complete each step. On the first use of external authentication, you will need to link accounts. After the accounts are linked once, you will not need to link them again.
+
+## Prerequisites
+
+* Get an access token from the worker application that you created in [Create an admin Worker app connection](../../../../getting-started/create-an-admin-worker-app/index.html).
+
+* A **destination** PingOne environment to act as the service provider (SP) for the OIDC application. You'll use this environment to configure the OIDC IdP connection. Authentication flows in this environment can be configured to allow external authentication.
+
+* A **source** PingOne environment that will act as the OIDC IdP. Users here will be able to complete authentication flows in the destination environment.
+
+* Cross-environment admin permissions for the destination and source environments.
+
+This scenario illustrates the following operations supported by the PingOne APIs:
+
+* Create an OIDC application in the source environment.
+
+* Create an OIDC IdP in the destination environment referencing the source application.
+
+* Create a sign-on policy in the destination environment.
+
+* Create a sign-on policy action to enable the sign-on policy for the OIDC IdP connection.
+
+* Set the sign-on policy as the default for the destination environment.
+
+* Create an OIDC application in the destination environment.
+
+* Set the sign-on policy as the default for the destination environment.
+
+* Create a population in the source and destination environments.
+
+* Create users in the source and destination environments.
+
+* Initiate an authorization request.
+
+* Read an external authentication initialization.
+
+* Send an external authentication request.
+
+* Get the flow for an external identity provider.
+
+* Pass in external identity provider credentials for verification.
+
+* Retrieve an authorization code from the authorization server by calling the resume endpoint.
+
+* Call the external authentication callback to get the response from an external identity provider.
+
+* Get the flow and submit credentials for account linking.
+
+* Retrieve an authorization code from the authorization server by calling the resume endpoint.
+
+* Exchange an authorization code for an access token.
+
+Click the **Run in Postman** button below to fork or import the Postman collection for this workflow to your workspace.
+
+[Run in Postman](https://god.gw.postman.com/run-collection/18568624-2d238da4-4c7c-4b09-b17d-d9f127fb3e58?action=collection%2Ffork\&source=rip_markdown\&collection-url=entityId%3D18568624-2d238da4-4c7c-4b09-b17d-d9f127fb3e58%26entityType%3Dcollection%26workspaceId%3D3550b170-7818-4801-b1eb-dcb7b3f64263#?env%5BPingOne%20Workflow%20Library%20Template%20%28release%3A%202025-04-17%29%5D=W3sia2V5IjoidGxkIiwidmFsdWUiOiJjb20iLCJlbmFibGVkIjp0cnVlLCJ0eXBlIjoiZGVmYXVsdCJ9LHsia2V5IjoiYXV0aFBhdGgiLCJ2YWx1ZSI6Imh0dHBzOi8vYXV0aC5waW5nb25lLnt7dGxkfX0iLCJlbmFibGVkIjp0cnVlLCJ0eXBlIjoiZGVmYXVsdCJ9LHsia2V5IjoiYXBpUGF0aCIsInZhbHVlIjoiaHR0cHM6Ly9hcGkucGluZ29uZS57e3RsZH19L3YxIiwiZW5hYmxlZCI6dHJ1ZSwidHlwZSI6ImRlZmF1bHQifSx7ImtleSI6ImFkbWluRW52SUQiLCJ2YWx1ZSI6IiIsImVuYWJsZWQiOnRydWUsInR5cGUiOiJkZWZhdWx0In0seyJrZXkiOiJhZG1pbkFwcElEIiwidmFsdWUiOiIiLCJlbmFibGVkIjp0cnVlLCJ0eXBlIjoiZGVmYXVsdCJ9LHsia2V5IjoiYWRtaW5BcHBTZWNyZXQiLCJ2YWx1ZSI6IiIsImVuYWJsZWQiOnRydWUsInR5cGUiOiJkZWZhdWx0In0seyJrZXkiOiJlbnZJRCIsInZhbHVlIjoiIiwiZW5hYmxlZCI6dHJ1ZSwidHlwZSI6ImRlZmF1bHQifV0=)
 
 ---
 
 ---
 title: Find and Terminate a User Session
-description: This activity shows you how to find and terminate a user session.
+description: "Workflow showing how to read a user's current session, delete it, and verify that no active sessions remain"
 component: pingone-api
-page_id: pingone-api:workflow-library:platform-sso-and-authorization/sessions-and-logout/find-and-terminate-a-user-session
-canonical_url: https://developer.pingidentity.com/pingone-api/workflow-library/platform-sso-and-authorization/sessions-and-logout/find-and-terminate-a-user-session.html
+page_id: pingone-api:workflow-library:platform-sso-and-authorization/sessions-and-logout/find-and-terminate-a-user-session/index
+canonical_url: https://developer.pingidentity.com/pingone-api/workflow-library/platform-sso-and-authorization/sessions-and-logout/find-and-terminate-a-user-session/index.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-11
 section_ids:
   prerequisites: Prerequisites
 ---
@@ -1166,1976 +1379,8 @@ The following operations are supported by the PingOne APIs:
 
 ## Prerequisites
 
-* Create a user and initiate a user session in [Simple Login - Username and Password](../openid-connect-oidc/simple-login-username-and-password.html).
+* Create a user and initiate a user session in [Simple Login - Username and Password](../../openid-connect-oidc/simple-login-username-and-password/index.html).
 
-Click the **Run in Postman** button below to fork, or download and import, the Postman collection for this workflow to your workspace.
+Click the **Run in Postman** button below to fork the Postman collection for this workflow to your workspace.
 
 [Run in Postman](https://god.gw.postman.com/run-collection/18568624-545436b9-d443-440a-a9b7-8cf1c3605810?action=collection%2Ffork\&source=rip_markdown\&collection-url=entityId%3D18568624-545436b9-d443-440a-a9b7-8cf1c3605810%26entityType%3Dcollection%26workspaceId%3D3550b170-7818-4801-b1eb-dcb7b3f64263#?env%5BPingOne%20Workflow%20Library%20Template%20%28release%3A%202025-04-17%29%5D=W3sia2V5IjoidGxkIiwidmFsdWUiOiJjb20iLCJlbmFibGVkIjp0cnVlLCJ0eXBlIjoiZGVmYXVsdCJ9LHsia2V5IjoiYXV0aFBhdGgiLCJ2YWx1ZSI6Imh0dHBzOi8vYXV0aC5waW5nb25lLnt7dGxkfX0iLCJlbmFibGVkIjp0cnVlLCJ0eXBlIjoiZGVmYXVsdCJ9LHsia2V5IjoiYXBpUGF0aCIsInZhbHVlIjoiaHR0cHM6Ly9hcGkucGluZ29uZS57e3RsZH19L3YxIiwiZW5hYmxlZCI6dHJ1ZSwidHlwZSI6ImRlZmF1bHQifSx7ImtleSI6ImFkbWluRW52SUQiLCJ2YWx1ZSI6IiIsImVuYWJsZWQiOnRydWUsInR5cGUiOiJkZWZhdWx0In0seyJrZXkiOiJhZG1pbkFwcElEIiwidmFsdWUiOiIiLCJlbmFibGVkIjp0cnVlLCJ0eXBlIjoiZGVmYXVsdCJ9LHsia2V5IjoiYWRtaW5BcHBTZWNyZXQiLCJ2YWx1ZSI6IiIsImVuYWJsZWQiOnRydWUsInR5cGUiOiJkZWZhdWx0In0seyJrZXkiOiJlbnZJRCIsInZhbHVlIjoiIiwiZW5hYmxlZCI6dHJ1ZSwidHlwZSI6ImRlZmF1bHQifV0=)
-
----
-
----
-title: "Step 1: Create a risk policy set"
-component: pingone-api
-page_id: pingone-api:workflow-library:pingone-protect/create-a-risk-policy-set/step-2-create-a-risk-policy-set
-canonical_url: https://developer.pingidentity.com/pingone-api/workflow-library/pingone-protect/create-a-risk-policy-set/step-2-create-a-risk-policy-set.html
-llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-section_ids:
-  headers: Headers
-  body: Body
-  example-request: Example Request
-  example-response: Example Response
----
-
-# Step 1: Create a risk policy set
-
-##
-
- 
-
-```none
-POST {{apiPath}}/v1/environments/{{envID}}/riskPolicySets
-```
-
-A risk policy is determined by the customer's specific configuration settings as well as intelligence gathered from common use cases, which are then used in event evaluation to calculate risk scores for received events.
-
-The `POST {{apiPath}}/v1/environments/{{envID}}/riskPolicySets/` creates a new risk policy set in the specified environment. In the request body, you must define at least one risk policy in the `riskPolicies` property array, and the risk policy definition must specify a `condition` expression and a `result`. The `priority` property in the risk policy definition is optional. In this scenario, you will define the whitelist and anonymous network detection policies.
-
-### Headers
-
-Authorization      Bearer {{accessToken}}
-
-Content-Type      application/json
-
-### Body
-
-raw ( application/json )
-
-```json
-{
-    "name": "Use_Case_Risk_Policy_Set",
-    "description": "Custom risk policy set",
-    "defaultResult": {
-        "level": "Low"
-    },
-    "riskPolicies": [
-        {
-            "name": "WHITELIST",
-            "priority": 1,
-            "result": {
-                "level": "LOW"
-            },
-            "condition": {
-                "contains": "${transaction.ip}",
-                "ipRange": [
-                    "1.1.1.1/16",
-                    "2.2.2.2/24"
-                ]
-            }
-        },
-        {
-            "name": "ANONYMOUS_NETWORK_DETECTION",
-            "result": {
-                "level": "HIGH"
-            },
-            "condition": {
-                "value": "${details.anonymousNetworkDetected}",
-                "equals": true
-            }
-        }
-    ]
-}
-```
-
-##
-
-### Example Request
-
-* cURL
-
-* C#
-
-* Go
-
-* HTTP
-
-* Java
-
-* jQuery
-
-* NodeJS
-
-* Python
-
-* PHP
-
-* Ruby
-
-* Swift
-
-```shell
-curl --location --globoff '{{apiPath}}/v1/environments/{{envID}}/riskPolicySets' \
---header 'Content-Type: application/json' \
---header 'Authorization: Bearer {{accessToken}}' \
---data '{
-    "name": "Use_Case_Risk_Policy_Set",
-    "description": "Custom risk policy set",
-    "defaultResult": {
-        "level": "Low"
-    },
-    "riskPolicies": [
-        {
-            "name": "WHITELIST",
-            "priority": 1,
-            "result": {
-                "level": "LOW"
-            },
-            "condition": {
-                "contains": "${transaction.ip}",
-                "ipRange": [
-                    "1.1.1.1/16",
-                    "2.2.2.2/24"
-                ]
-            }
-        },
-        {
-            "name": "ANONYMOUS_NETWORK_DETECTION",
-            "result": {
-                "level": "HIGH"
-            },
-            "condition": {
-                "value": "${details.anonymousNetworkDetected}",
-                "equals": true
-            }
-        }
-    ]
-}'
-```
-
-```csharp
-var options = new RestClientOptions("{{apiPath}}/v1/environments/{{envID}}/riskPolicySets")
-{
-  MaxTimeout = -1,
-};
-var client = new RestClient(options);
-var request = new RestRequest("", Method.Post);
-request.AddHeader("Content-Type", "application/json");
-request.AddHeader("Authorization", "Bearer {{accessToken}}");
-var body = @"{" + "\n" +
-@"    ""name"": ""Use_Case_Risk_Policy_Set""," + "\n" +
-@"    ""description"": ""Custom risk policy set""," + "\n" +
-@"    ""defaultResult"": {" + "\n" +
-@"        ""level"": ""Low""" + "\n" +
-@"    }," + "\n" +
-@"    ""riskPolicies"": [" + "\n" +
-@"        {" + "\n" +
-@"            ""name"": ""WHITELIST""," + "\n" +
-@"            ""priority"": 1," + "\n" +
-@"            ""result"": {" + "\n" +
-@"                ""level"": ""LOW""" + "\n" +
-@"            }," + "\n" +
-@"            ""condition"": {" + "\n" +
-@"                ""contains"": ""${transaction.ip}""," + "\n" +
-@"                ""ipRange"": [" + "\n" +
-@"                    ""1.1.1.1/16""," + "\n" +
-@"                    ""2.2.2.2/24""" + "\n" +
-@"                ]" + "\n" +
-@"            }" + "\n" +
-@"        }," + "\n" +
-@"        {" + "\n" +
-@"            ""name"": ""ANONYMOUS_NETWORK_DETECTION""," + "\n" +
-@"            ""result"": {" + "\n" +
-@"                ""level"": ""HIGH""" + "\n" +
-@"            }," + "\n" +
-@"            ""condition"": {" + "\n" +
-@"                ""value"": ""${details.anonymousNetworkDetected}""," + "\n" +
-@"                ""equals"": true" + "\n" +
-@"            }" + "\n" +
-@"        }" + "\n" +
-@"    ]" + "\n" +
-@"}";
-request.AddStringBody(body, DataFormat.Json);
-RestResponse response = await client.ExecuteAsync(request);
-Console.WriteLine(response.Content);
-```
-
-```golang
-package main
-
-import (
-  "fmt"
-  "strings"
-  "net/http"
-  "io"
-)
-
-func main() {
-
-  url := "{{apiPath}}/v1/environments/{{envID}}/riskPolicySets"
-  method := "POST"
-
-  payload := strings.NewReader(`{
-    "name": "Use_Case_Risk_Policy_Set",
-    "description": "Custom risk policy set",
-    "defaultResult": {
-        "level": "Low"
-    },
-    "riskPolicies": [
-        {
-            "name": "WHITELIST",
-            "priority": 1,
-            "result": {
-                "level": "LOW"
-            },
-            "condition": {
-                "contains": "${transaction.ip}",
-                "ipRange": [
-                    "1.1.1.1/16",
-                    "2.2.2.2/24"
-                ]
-            }
-        },
-        {
-            "name": "ANONYMOUS_NETWORK_DETECTION",
-            "result": {
-                "level": "HIGH"
-            },
-            "condition": {
-                "value": "${details.anonymousNetworkDetected}",
-                "equals": true
-            }
-        }
-    ]
-}`)
-
-  client := &http.Client {
-  }
-  req, err := http.NewRequest(method, url, payload)
-
-  if err != nil {
-    fmt.Println(err)
-    return
-  }
-  req.Header.Add("Content-Type", "application/json")
-  req.Header.Add("Authorization", "Bearer {{accessToken}}")
-
-  res, err := client.Do(req)
-  if err != nil {
-    fmt.Println(err)
-    return
-  }
-  defer res.Body.Close()
-
-  body, err := io.ReadAll(res.Body)
-  if err != nil {
-    fmt.Println(err)
-    return
-  }
-  fmt.Println(string(body))
-}
-```
-
-```http
-POST /v1/environments/{{envID}}/riskPolicySets HTTP/1.1
-Host: {{apiPath}}
-Content-Type: application/json
-Authorization: Bearer {{accessToken}}
-
-{
-    "name": "Use_Case_Risk_Policy_Set",
-    "description": "Custom risk policy set",
-    "defaultResult": {
-        "level": "Low"
-    },
-    "riskPolicies": [
-        {
-            "name": "WHITELIST",
-            "priority": 1,
-            "result": {
-                "level": "LOW"
-            },
-            "condition": {
-                "contains": "${transaction.ip}",
-                "ipRange": [
-                    "1.1.1.1/16",
-                    "2.2.2.2/24"
-                ]
-            }
-        },
-        {
-            "name": "ANONYMOUS_NETWORK_DETECTION",
-            "result": {
-                "level": "HIGH"
-            },
-            "condition": {
-                "value": "${details.anonymousNetworkDetected}",
-                "equals": true
-            }
-        }
-    ]
-}
-```
-
-```java
-OkHttpClient client = new OkHttpClient().newBuilder()
-  .build();
-MediaType mediaType = MediaType.parse("application/json");
-RequestBody body = RequestBody.create(mediaType, "{\n    \"name\": \"Use_Case_Risk_Policy_Set\",\n    \"description\": \"Custom risk policy set\",\n    \"defaultResult\": {\n        \"level\": \"Low\"\n    },\n    \"riskPolicies\": [\n        {\n            \"name\": \"WHITELIST\",\n            \"priority\": 1,\n            \"result\": {\n                \"level\": \"LOW\"\n            },\n            \"condition\": {\n                \"contains\": \"${transaction.ip}\",\n                \"ipRange\": [\n                    \"1.1.1.1/16\",\n                    \"2.2.2.2/24\"\n                ]\n            }\n        },\n        {\n            \"name\": \"ANONYMOUS_NETWORK_DETECTION\",\n            \"result\": {\n                \"level\": \"HIGH\"\n            },\n            \"condition\": {\n                \"value\": \"${details.anonymousNetworkDetected}\",\n                \"equals\": true\n            }\n        }\n    ]\n}");
-Request request = new Request.Builder()
-  .url("{{apiPath}}/v1/environments/{{envID}}/riskPolicySets")
-  .method("POST", body)
-  .addHeader("Content-Type", "application/json")
-  .addHeader("Authorization", "Bearer {{accessToken}}")
-  .build();
-Response response = client.newCall(request).execute();
-```
-
-```javascript
-var settings = {
-  "url": "{{apiPath}}/v1/environments/{{envID}}/riskPolicySets",
-  "method": "POST",
-  "timeout": 0,
-  "headers": {
-    "Content-Type": "application/json",
-    "Authorization": "Bearer {{accessToken}}"
-  },
-  "data": JSON.stringify({
-    "name": "Use_Case_Risk_Policy_Set",
-    "description": "Custom risk policy set",
-    "defaultResult": {
-      "level": "Low"
-    },
-    "riskPolicies": [
-      {
-        "name": "WHITELIST",
-        "priority": 1,
-        "result": {
-          "level": "LOW"
-        },
-        "condition": {
-          "contains": "${transaction.ip}",
-          "ipRange": [
-            "1.1.1.1/16",
-            "2.2.2.2/24"
-          ]
-        }
-      },
-      {
-        "name": "ANONYMOUS_NETWORK_DETECTION",
-        "result": {
-          "level": "HIGH"
-        },
-        "condition": {
-          "value": "${details.anonymousNetworkDetected}",
-          "equals": true
-        }
-      }
-    ]
-  }),
-};
-
-$.ajax(settings).done(function (response) {
-  console.log(response);
-});
-```
-
-```javascript
-var request = require('request');
-var options = {
-  'method': 'POST',
-  'url': '{{apiPath}}/v1/environments/{{envID}}/riskPolicySets',
-  'headers': {
-    'Content-Type': 'application/json',
-    'Authorization': 'Bearer {{accessToken}}'
-  },
-  body: JSON.stringify({
-    "name": "Use_Case_Risk_Policy_Set",
-    "description": "Custom risk policy set",
-    "defaultResult": {
-      "level": "Low"
-    },
-    "riskPolicies": [
-      {
-        "name": "WHITELIST",
-        "priority": 1,
-        "result": {
-          "level": "LOW"
-        },
-        "condition": {
-          "contains": "${transaction.ip}",
-          "ipRange": [
-            "1.1.1.1/16",
-            "2.2.2.2/24"
-          ]
-        }
-      },
-      {
-        "name": "ANONYMOUS_NETWORK_DETECTION",
-        "result": {
-          "level": "HIGH"
-        },
-        "condition": {
-          "value": "${details.anonymousNetworkDetected}",
-          "equals": true
-        }
-      }
-    ]
-  })
-
-};
-request(options, function (error, response) {
-  if (error) throw new Error(error);
-  console.log(response.body);
-});
-```
-
-```python
-import requests
-import json
-
-url = "{{apiPath}}/v1/environments/{{envID}}/riskPolicySets"
-
-payload = json.dumps({
-  "name": "Use_Case_Risk_Policy_Set",
-  "description": "Custom risk policy set",
-  "defaultResult": {
-    "level": "Low"
-  },
-  "riskPolicies": [
-    {
-      "name": "WHITELIST",
-      "priority": 1,
-      "result": {
-        "level": "LOW"
-      },
-      "condition": {
-        "contains": "${transaction.ip}",
-        "ipRange": [
-          "1.1.1.1/16",
-          "2.2.2.2/24"
-        ]
-      }
-    },
-    {
-      "name": "ANONYMOUS_NETWORK_DETECTION",
-      "result": {
-        "level": "HIGH"
-      },
-      "condition": {
-        "value": "${details.anonymousNetworkDetected}",
-        "equals": True
-      }
-    }
-  ]
-})
-headers = {
-  'Content-Type': 'application/json',
-  'Authorization': 'Bearer {{accessToken}}'
-}
-
-response = requests.request("POST", url, headers=headers, data=payload)
-
-print(response.text)
-```
-
-```php
-<?php
-require_once 'HTTP/Request2.php';
-$request = new HTTP_Request2();
-$request->setUrl('{{apiPath}}/v1/environments/{{envID}}/riskPolicySets');
-$request->setMethod(HTTP_Request2::METHOD_POST);
-$request->setConfig(array(
-  'follow_redirects' => TRUE
-));
-$request->setHeader(array(
-  'Content-Type' => 'application/json',
-  'Authorization' => 'Bearer {{accessToken}}'
-));
-$request->setBody('{\n    "name": "Use_Case_Risk_Policy_Set",\n    "description": "Custom risk policy set",\n    "defaultResult": {\n        "level": "Low"\n    },\n    "riskPolicies": [\n        {\n            "name": "WHITELIST",\n            "priority": 1,\n            "result": {\n                "level": "LOW"\n            },\n            "condition": {\n                "contains": "${transaction.ip}",\n                "ipRange": [\n                    "1.1.1.1/16",\n                    "2.2.2.2/24"\n                ]\n            }\n        },\n        {\n            "name": "ANONYMOUS_NETWORK_DETECTION",\n            "result": {\n                "level": "HIGH"\n            },\n            "condition": {\n                "value": "${details.anonymousNetworkDetected}",\n                "equals": true\n            }\n        }\n    ]\n}');
-try {
-  $response = $request->send();
-  if ($response->getStatus() == 200) {
-    echo $response->getBody();
-  }
-  else {
-    echo 'Unexpected HTTP status: ' . $response->getStatus() . ' ' .
-    $response->getReasonPhrase();
-  }
-}
-catch(HTTP_Request2_Exception $e) {
-  echo 'Error: ' . $e->getMessage();
-}
-```
-
-```ruby
-require "uri"
-require "json"
-require "net/http"
-
-url = URI("{{apiPath}}/v1/environments/{{envID}}/riskPolicySets")
-
-http = Net::HTTP.new(url.host, url.port);
-request = Net::HTTP::Post.new(url)
-request["Content-Type"] = "application/json"
-request["Authorization"] = "Bearer {{accessToken}}"
-request.body = JSON.dump({
-  "name": "Use_Case_Risk_Policy_Set",
-  "description": "Custom risk policy set",
-  "defaultResult": {
-    "level": "Low"
-  },
-  "riskPolicies": [
-    {
-      "name": "WHITELIST",
-      "priority": 1,
-      "result": {
-        "level": "LOW"
-      },
-      "condition": {
-        "contains": "\${transaction.ip}",
-        "ipRange": [
-          "1.1.1.1/16",
-          "2.2.2.2/24"
-        ]
-      }
-    },
-    {
-      "name": "ANONYMOUS_NETWORK_DETECTION",
-      "result": {
-        "level": "HIGH"
-      },
-      "condition": {
-        "value": "\${details.anonymousNetworkDetected}",
-        "equals": true
-      }
-    }
-  ]
-})
-
-response = http.request(request)
-puts response.read_body
-```
-
-```swift
-let parameters = "{\n    \"name\": \"Use_Case_Risk_Policy_Set\",\n    \"description\": \"Custom risk policy set\",\n    \"defaultResult\": {\n        \"level\": \"Low\"\n    },\n    \"riskPolicies\": [\n        {\n            \"name\": \"WHITELIST\",\n            \"priority\": 1,\n            \"result\": {\n                \"level\": \"LOW\"\n            },\n            \"condition\": {\n                \"contains\": \"${transaction.ip}\",\n                \"ipRange\": [\n                    \"1.1.1.1/16\",\n                    \"2.2.2.2/24\"\n                ]\n            }\n        },\n        {\n            \"name\": \"ANONYMOUS_NETWORK_DETECTION\",\n            \"result\": {\n                \"level\": \"HIGH\"\n            },\n            \"condition\": {\n                \"value\": \"${details.anonymousNetworkDetected}\",\n                \"equals\": true\n            }\n        }\n    ]\n}"
-let postData = parameters.data(using: .utf8)
-
-var request = URLRequest(url: URL(string: "{{apiPath}}/v1/environments/{{envID}}/riskPolicySets")!,timeoutInterval: Double.infinity)
-request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-request.addValue("Bearer {{accessToken}}", forHTTPHeaderField: "Authorization")
-
-request.httpMethod = "POST"
-request.httpBody = postData
-
-let task = URLSession.shared.dataTask(with: request) { data, response, error in
-  guard let data = data else {
-    print(String(describing: error))
-    return
-  }
-  print(String(data: data, encoding: .utf8)!)
-}
-
-task.resume()
-```
-
-### Example Response
-
-201 Created
-
-```json
-{
-    "_links": {
-        "self": {
-            "href": "https://api.pingone.com/v1/environments/abfba8f6-49eb-49f5-a5d9-80ad5c98f9f6/riskPolicySets/22b059a4-b027-4e2c-a685-1207fa53a455"
-        },
-        "environment": {
-            "href": "https://api.pingone.com/v1/environments/abfba8f6-49eb-49f5-a5d9-80ad5c98f9f6"
-        }
-    },
-    "id": "22b059a4-b027-4e2c-a685-1207fa53a455",
-    "environment": {
-        "id": "abfba8f6-49eb-49f5-a5d9-80ad5c98f9f6"
-    },
-    "name": "Use_Case_Risk_Policy_Set",
-    "description": "Custom risk policy set",
-    "createdAt": "2021-02-25T00:05:57.566Z",
-    "updatedAt": "2021-02-25T00:05:57.566Z",
-    "defaultResult": {
-        "level": "LOW",
-        "type": "VALUE"
-    },
-    "riskPolicies": [
-        {
-            "id": "134715be-27c7-4887-97fb-e4141217e9d2",
-            "environment": {
-                "id": "abfba8f6-49eb-49f5-a5d9-80ad5c98f9f6"
-            },
-            "policySet": {
-                "id": "22b059a4-b027-4e2c-a685-1207fa53a455"
-            },
-            "name": "WHITELIST",
-            "priority": 1,
-            "result": {
-                "level": "LOW",
-                "type": "VALUE"
-            },
-            "condition": {
-                "ipRange": [
-                    "1.1.1.1/16",
-                    "2.2.2.2/24"
-                ],
-                "contains": "${transaction.ip}"
-            },
-            "createdAt": "2021-02-25T00:05:57.566Z",
-            "updatedAt": "2021-02-25T00:05:57.566Z"
-        },
-        {
-            "id": "3e34788e-00f5-4480-88b5-3300e38757e1",
-            "environment": {
-                "id": "abfba8f6-49eb-49f5-a5d9-80ad5c98f9f6"
-            },
-            "policySet": {
-                "id": "22b059a4-b027-4e2c-a685-1207fa53a455"
-            },
-            "name": "ANONYMOUS_NETWORK_DETECTION",
-            "priority": 2,
-            "result": {
-                "level": "HIGH",
-                "type": "VALUE"
-            },
-            "condition": {
-                "equals": true,
-                "value": "${details.anonymousNetworkDetected}"
-            },
-            "createdAt": "2021-02-25T00:05:57.566Z",
-            "updatedAt": "2021-02-25T00:05:57.566Z"
-        }
-    ],
-    "default": false
-}
-```
-
----
-
----
-title: "Step 1: Create a source population"
-component: pingone-api
-page_id: pingone-api:workflow-library:platform-sso-and-authorization/openid-connect-oidc/external-identity-provider-sign-on/configure-your-test-user/step-11-create-a-source-population
-canonical_url: https://developer.pingidentity.com/pingone-api/workflow-library/platform-sso-and-authorization/openid-connect-oidc/external-identity-provider-sign-on/configure-your-test-user/step-11-create-a-source-population.html
-llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-section_ids:
-  headers: Headers
-  body: Body
-  example-request: Example Request
-  example-response: Example Response
----
-
-# Step 1: Create a source population
-
-##
-
-   
-
-```none
-POST {{apiPath}}/v1/environments/{{SourceEnvID}}/populations
-```
-
-Create a new population resource in the source environment using a `POST {{apiPath}}/v1/environments/{{SourceEnvID}}/populations` request.
-
-* In the request body, the population `name` is required The `description` property is optional.
-
-### Headers
-
-Authorization      Bearer {{accessToken}}
-
-Content-Type      application/json
-
-### Body
-
-raw ( application/json )
-
-```json
-{
-    "name": "SourcePopulation_{{$timestamp}}",
-    "description": "Population for simple login users"
-}
-```
-
-##
-
-### Example Request
-
-* cURL
-
-* C#
-
-* Go
-
-* HTTP
-
-* Java
-
-* jQuery
-
-* NodeJS
-
-* Python
-
-* PHP
-
-* Ruby
-
-* Swift
-
-```shell
-curl --location --globoff '{{apiPath}}/v1/environments/{{SourceEnvID}}/populations' \
---header 'Content-Type: application/json' \
---header 'Authorization: Bearer {{accessToken}}' \
---data '{
-    "name": "SourcePopulation_{{$timestamp}}",
-    "description": "Population for simple login users"
-}'
-```
-
-```csharp
-var options = new RestClientOptions("{{apiPath}}/v1/environments/{{SourceEnvID}}/populations")
-{
-  MaxTimeout = -1,
-};
-var client = new RestClient(options);
-var request = new RestRequest("", Method.Post);
-request.AddHeader("Content-Type", "application/json");
-request.AddHeader("Authorization", "Bearer {{accessToken}}");
-var body = @"{" + "\n" +
-@"    ""name"": ""SourcePopulation_{{$timestamp}}""," + "\n" +
-@"    ""description"": ""Population for simple login users""" + "\n" +
-@"}";
-request.AddStringBody(body, DataFormat.Json);
-RestResponse response = await client.ExecuteAsync(request);
-Console.WriteLine(response.Content);
-```
-
-```golang
-package main
-
-import (
-  "fmt"
-  "strings"
-  "net/http"
-  "io"
-)
-
-func main() {
-
-  url := "{{apiPath}}/v1/environments/{{SourceEnvID}}/populations"
-  method := "POST"
-
-  payload := strings.NewReader(`{
-    "name": "SourcePopulation_{{$timestamp}}",
-    "description": "Population for simple login users"
-}`)
-
-  client := &http.Client {
-  }
-  req, err := http.NewRequest(method, url, payload)
-
-  if err != nil {
-    fmt.Println(err)
-    return
-  }
-  req.Header.Add("Content-Type", "application/json")
-  req.Header.Add("Authorization", "Bearer {{accessToken}}")
-
-  res, err := client.Do(req)
-  if err != nil {
-    fmt.Println(err)
-    return
-  }
-  defer res.Body.Close()
-
-  body, err := io.ReadAll(res.Body)
-  if err != nil {
-    fmt.Println(err)
-    return
-  }
-  fmt.Println(string(body))
-}
-```
-
-```http
-POST /v1/environments/{{SourceEnvID}}/populations HTTP/1.1
-Host: {{apiPath}}
-Content-Type: application/json
-Authorization: Bearer {{accessToken}}
-
-{
-    "name": "SourcePopulation_{{$timestamp}}",
-    "description": "Population for simple login users"
-}
-```
-
-```java
-OkHttpClient client = new OkHttpClient().newBuilder()
-  .build();
-MediaType mediaType = MediaType.parse("application/json");
-RequestBody body = RequestBody.create(mediaType, "{\n    \"name\": \"SourcePopulation_{{$timestamp}}\",\n    \"description\": \"Population for simple login users\"\n}");
-Request request = new Request.Builder()
-  .url("{{apiPath}}/v1/environments/{{SourceEnvID}}/populations")
-  .method("POST", body)
-  .addHeader("Content-Type", "application/json")
-  .addHeader("Authorization", "Bearer {{accessToken}}")
-  .build();
-Response response = client.newCall(request).execute();
-```
-
-```javascript
-var settings = {
-  "url": "{{apiPath}}/v1/environments/{{SourceEnvID}}/populations",
-  "method": "POST",
-  "timeout": 0,
-  "headers": {
-    "Content-Type": "application/json",
-    "Authorization": "Bearer {{accessToken}}"
-  },
-  "data": JSON.stringify({
-    "name": "SourcePopulation_{{$timestamp}}",
-    "description": "Population for simple login users"
-  }),
-};
-
-$.ajax(settings).done(function (response) {
-  console.log(response);
-});
-```
-
-```javascript
-var request = require('request');
-var options = {
-  'method': 'POST',
-  'url': '{{apiPath}}/v1/environments/{{SourceEnvID}}/populations',
-  'headers': {
-    'Content-Type': 'application/json',
-    'Authorization': 'Bearer {{accessToken}}'
-  },
-  body: JSON.stringify({
-    "name": "SourcePopulation_{{$timestamp}}",
-    "description": "Population for simple login users"
-  })
-
-};
-request(options, function (error, response) {
-  if (error) throw new Error(error);
-  console.log(response.body);
-});
-```
-
-```python
-import requests
-import json
-
-url = "{{apiPath}}/v1/environments/{{SourceEnvID}}/populations"
-
-payload = json.dumps({
-  "name": "SourcePopulation_{{$timestamp}}",
-  "description": "Population for simple login users"
-})
-headers = {
-  'Content-Type': 'application/json',
-  'Authorization': 'Bearer {{accessToken}}'
-}
-
-response = requests.request("POST", url, headers=headers, data=payload)
-
-print(response.text)
-```
-
-```php
-<?php
-require_once 'HTTP/Request2.php';
-$request = new HTTP_Request2();
-$request->setUrl('{{apiPath}}/v1/environments/{{SourceEnvID}}/populations');
-$request->setMethod(HTTP_Request2::METHOD_POST);
-$request->setConfig(array(
-  'follow_redirects' => TRUE
-));
-$request->setHeader(array(
-  'Content-Type' => 'application/json',
-  'Authorization' => 'Bearer {{accessToken}}'
-));
-$request->setBody('{\n    "name": "SourcePopulation_{{$timestamp}}",\n    "description": "Population for simple login users"\n}');
-try {
-  $response = $request->send();
-  if ($response->getStatus() == 200) {
-    echo $response->getBody();
-  }
-  else {
-    echo 'Unexpected HTTP status: ' . $response->getStatus() . ' ' .
-    $response->getReasonPhrase();
-  }
-}
-catch(HTTP_Request2_Exception $e) {
-  echo 'Error: ' . $e->getMessage();
-}
-```
-
-```ruby
-require "uri"
-require "json"
-require "net/http"
-
-url = URI("{{apiPath}}/v1/environments/{{SourceEnvID}}/populations")
-
-http = Net::HTTP.new(url.host, url.port);
-request = Net::HTTP::Post.new(url)
-request["Content-Type"] = "application/json"
-request["Authorization"] = "Bearer {{accessToken}}"
-request.body = JSON.dump({
-  "name": "SourcePopulation_{{\$timestamp}}",
-  "description": "Population for simple login users"
-})
-
-response = http.request(request)
-puts response.read_body
-```
-
-```swift
-let parameters = "{\n    \"name\": \"SourcePopulation_{{$timestamp}}\",\n    \"description\": \"Population for simple login users\"\n}"
-let postData = parameters.data(using: .utf8)
-
-var request = URLRequest(url: URL(string: "{{apiPath}}/v1/environments/{{SourceEnvID}}/populations")!,timeoutInterval: Double.infinity)
-request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-request.addValue("Bearer {{accessToken}}", forHTTPHeaderField: "Authorization")
-
-request.httpMethod = "POST"
-request.httpBody = postData
-
-let task = URLSession.shared.dataTask(with: request) { data, response, error in
-  guard let data = data else {
-    print(String(describing: error))
-    return
-  }
-  print(String(data: data, encoding: .utf8)!)
-}
-
-task.resume()
-```
-
-### Example Response
-
-201 Created
-
-```json
-{
-    "_links": {
-        "self": {
-            "href": "https://api.pingone.com/v1/environments/abfba8f6-49eb-49f5-a5d9-80ad5c98f9f6/populations/030175e2-3122-48b1-b626-20f5dcbf1861"
-        },
-        "environment": {
-            "href": "https://api.pingone.com/v1/environments/abfba8f6-49eb-49f5-a5d9-80ad5c98f9f6"
-        },
-        "theme": {
-            "href": "https://api.pingone.com/v1/environments/abfba8f6-49eb-49f5-a5d9-80ad5c98f9f6/themes/42ec7345-c220-4d1f-878a-bc16823c8ddd"
-        }
-    },
-    "id": "030175e2-3122-48b1-b626-20f5dcbf1861",
-    "environment": {
-        "id": "abfba8f6-49eb-49f5-a5d9-80ad5c98f9f6"
-    },
-    "name": "SourcePopulation_1776714509",
-    "description": "Population for simple login users",
-    "userCount": 0,
-    "createdAt": "2026-04-20T19:48:29.633Z",
-    "updatedAt": "2026-04-20T19:48:29.633Z",
-    "default": false,
-    "preferredLanguage": "en",
-    "theme": {
-        "id": "42ec7345-c220-4d1f-878a-bc16823c8ddd"
-    }
-}
-```
-
----
-
----
-title: "Step 1: Create a web application"
-component: pingone-api
-page_id: pingone-api:workflow-library:pingone-authorize/show-permissions-in-token/environment-configuration/step-1-create-a-web-application
-canonical_url: https://developer.pingidentity.com/pingone-api/workflow-library/pingone-authorize/show-permissions-in-token/environment-configuration/step-1-create-a-web-application.html
-llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-section_ids:
-  headers: Headers
-  body: Body
-  example-request: Example Request
-  example-response: Example Response
----
-
-# Step 1: Create a web application
-
-##
-
- 
-
-```none
-POST {{apiPath}}/v1/environments/{{envID}}/applications
-```
-
-You can use the `POST {{apiPath}}/v1/environments/{{envID}}/applications` endpoint to create the new application. The application's `protocol` property is required, and in this example it specifies an `OPENID_CONNECT` application.
-
-The response returns information about the new application, including its `id` property, which identifies the ID for this application resource. You will need the application's ID property value to get the application secret and to associate the sign-on policy with the application.
-
-### Headers
-
-Authorization      Bearer {{accessToken}}
-
-Content-Type      application/json
-
-### Body
-
-raw ( application/json )
-
-```json
-{
-    "enabled": true,
-    "name": "CustomResourceApp_{{$timestamp}}",
-    "description": "This is an OIDC Web application.",
-    "type": "WEB_APP",
-    "protocol": "OPENID_CONNECT",
-    "grantTypes": [
-        "AUTHORIZATION_CODE"
-    ],
-    "redirectUris": [
-        "https://www.google.com"
-    ],
-    "responseTypes": [
-        "CODE"
-    ],
-    "tokenEndpointAuthMethod": "CLIENT_SECRET_BASIC"
-}
-```
-
-##
-
-### Example Request
-
-* cURL
-
-* C#
-
-* Go
-
-* HTTP
-
-* Java
-
-* jQuery
-
-* NodeJS
-
-* Python
-
-* PHP
-
-* Ruby
-
-* Swift
-
-```shell
-curl --location --globoff '{{apiPath}}/v1/environments/{{envID}}/applications' \
---header 'Content-Type: application/json' \
---header 'Authorization: Bearer {{accessToken}}' \
---data '{
-    "enabled": true,
-    "name": "CustomResourceApp_{{$timestamp}}",
-    "description": "This is an OIDC Web application.",
-    "type": "WEB_APP",
-    "protocol": "OPENID_CONNECT",
-    "grantTypes": [
-        "AUTHORIZATION_CODE"
-    ],
-    "redirectUris": [
-        "https://www.google.com"
-    ],
-    "responseTypes": [
-        "CODE"
-    ],
-    "tokenEndpointAuthMethod": "CLIENT_SECRET_BASIC"
-}'
-```
-
-```csharp
-var options = new RestClientOptions("{{apiPath}}/v1/environments/{{envID}}/applications")
-{
-  MaxTimeout = -1,
-};
-var client = new RestClient(options);
-var request = new RestRequest("", Method.Post);
-request.AddHeader("Content-Type", "application/json");
-request.AddHeader("Authorization", "Bearer {{accessToken}}");
-var body = @"{" + "\n" +
-@"    ""enabled"": true," + "\n" +
-@"    ""name"": ""CustomResourceApp_{{$timestamp}}""," + "\n" +
-@"    ""description"": ""This is an OIDC Web application.""," + "\n" +
-@"    ""type"": ""WEB_APP""," + "\n" +
-@"    ""protocol"": ""OPENID_CONNECT""," + "\n" +
-@"    ""grantTypes"": [" + "\n" +
-@"        ""AUTHORIZATION_CODE""" + "\n" +
-@"    ]," + "\n" +
-@"    ""redirectUris"": [" + "\n" +
-@"        ""https://www.google.com""" + "\n" +
-@"    ]," + "\n" +
-@"    ""responseTypes"": [" + "\n" +
-@"        ""CODE""" + "\n" +
-@"    ]," + "\n" +
-@"    ""tokenEndpointAuthMethod"": ""CLIENT_SECRET_BASIC""" + "\n" +
-@"}";
-request.AddStringBody(body, DataFormat.Json);
-RestResponse response = await client.ExecuteAsync(request);
-Console.WriteLine(response.Content);
-```
-
-```golang
-package main
-
-import (
-  "fmt"
-  "strings"
-  "net/http"
-  "io"
-)
-
-func main() {
-
-  url := "{{apiPath}}/v1/environments/{{envID}}/applications"
-  method := "POST"
-
-  payload := strings.NewReader(`{
-    "enabled": true,
-    "name": "CustomResourceApp_{{$timestamp}}",
-    "description": "This is an OIDC Web application.",
-    "type": "WEB_APP",
-    "protocol": "OPENID_CONNECT",
-    "grantTypes": [
-        "AUTHORIZATION_CODE"
-    ],
-    "redirectUris": [
-        "https://www.google.com"
-    ],
-    "responseTypes": [
-        "CODE"
-    ],
-    "tokenEndpointAuthMethod": "CLIENT_SECRET_BASIC"
-}`)
-
-  client := &http.Client {
-  }
-  req, err := http.NewRequest(method, url, payload)
-
-  if err != nil {
-    fmt.Println(err)
-    return
-  }
-  req.Header.Add("Content-Type", "application/json")
-  req.Header.Add("Authorization", "Bearer {{accessToken}}")
-
-  res, err := client.Do(req)
-  if err != nil {
-    fmt.Println(err)
-    return
-  }
-  defer res.Body.Close()
-
-  body, err := io.ReadAll(res.Body)
-  if err != nil {
-    fmt.Println(err)
-    return
-  }
-  fmt.Println(string(body))
-}
-```
-
-```http
-POST /v1/environments/{{envID}}/applications HTTP/1.1
-Host: {{apiPath}}
-Content-Type: application/json
-Authorization: Bearer {{accessToken}}
-
-{
-    "enabled": true,
-    "name": "CustomResourceApp_{{$timestamp}}",
-    "description": "This is an OIDC Web application.",
-    "type": "WEB_APP",
-    "protocol": "OPENID_CONNECT",
-    "grantTypes": [
-        "AUTHORIZATION_CODE"
-    ],
-    "redirectUris": [
-        "https://www.google.com"
-    ],
-    "responseTypes": [
-        "CODE"
-    ],
-    "tokenEndpointAuthMethod": "CLIENT_SECRET_BASIC"
-}
-```
-
-```java
-OkHttpClient client = new OkHttpClient().newBuilder()
-  .build();
-MediaType mediaType = MediaType.parse("application/json");
-RequestBody body = RequestBody.create(mediaType, "{\n    \"enabled\": true,\n    \"name\": \"CustomResourceApp_{{$timestamp}}\",\n    \"description\": \"This is an OIDC Web application.\",\n    \"type\": \"WEB_APP\",\n    \"protocol\": \"OPENID_CONNECT\",\n    \"grantTypes\": [\n        \"AUTHORIZATION_CODE\"\n    ],\n    \"redirectUris\": [\n        \"https://www.google.com\"\n    ],\n    \"responseTypes\": [\n        \"CODE\"\n    ],\n    \"tokenEndpointAuthMethod\": \"CLIENT_SECRET_BASIC\"\n}");
-Request request = new Request.Builder()
-  .url("{{apiPath}}/v1/environments/{{envID}}/applications")
-  .method("POST", body)
-  .addHeader("Content-Type", "application/json")
-  .addHeader("Authorization", "Bearer {{accessToken}}")
-  .build();
-Response response = client.newCall(request).execute();
-```
-
-```javascript
-var settings = {
-  "url": "{{apiPath}}/v1/environments/{{envID}}/applications",
-  "method": "POST",
-  "timeout": 0,
-  "headers": {
-    "Content-Type": "application/json",
-    "Authorization": "Bearer {{accessToken}}"
-  },
-  "data": JSON.stringify({
-    "enabled": true,
-    "name": "CustomResourceApp_{{$timestamp}}",
-    "description": "This is an OIDC Web application.",
-    "type": "WEB_APP",
-    "protocol": "OPENID_CONNECT",
-    "grantTypes": [
-      "AUTHORIZATION_CODE"
-    ],
-    "redirectUris": [
-      "https://www.google.com"
-    ],
-    "responseTypes": [
-      "CODE"
-    ],
-    "tokenEndpointAuthMethod": "CLIENT_SECRET_BASIC"
-  }),
-};
-
-$.ajax(settings).done(function (response) {
-  console.log(response);
-});
-```
-
-```javascript
-var request = require('request');
-var options = {
-  'method': 'POST',
-  'url': '{{apiPath}}/v1/environments/{{envID}}/applications',
-  'headers': {
-    'Content-Type': 'application/json',
-    'Authorization': 'Bearer {{accessToken}}'
-  },
-  body: JSON.stringify({
-    "enabled": true,
-    "name": "CustomResourceApp_{{$timestamp}}",
-    "description": "This is an OIDC Web application.",
-    "type": "WEB_APP",
-    "protocol": "OPENID_CONNECT",
-    "grantTypes": [
-      "AUTHORIZATION_CODE"
-    ],
-    "redirectUris": [
-      "https://www.google.com"
-    ],
-    "responseTypes": [
-      "CODE"
-    ],
-    "tokenEndpointAuthMethod": "CLIENT_SECRET_BASIC"
-  })
-
-};
-request(options, function (error, response) {
-  if (error) throw new Error(error);
-  console.log(response.body);
-});
-```
-
-```python
-import requests
-import json
-
-url = "{{apiPath}}/v1/environments/{{envID}}/applications"
-
-payload = json.dumps({
-  "enabled": True,
-  "name": "CustomResourceApp_{{$timestamp}}",
-  "description": "This is an OIDC Web application.",
-  "type": "WEB_APP",
-  "protocol": "OPENID_CONNECT",
-  "grantTypes": [
-    "AUTHORIZATION_CODE"
-  ],
-  "redirectUris": [
-    "https://www.google.com"
-  ],
-  "responseTypes": [
-    "CODE"
-  ],
-  "tokenEndpointAuthMethod": "CLIENT_SECRET_BASIC"
-})
-headers = {
-  'Content-Type': 'application/json',
-  'Authorization': 'Bearer {{accessToken}}'
-}
-
-response = requests.request("POST", url, headers=headers, data=payload)
-
-print(response.text)
-```
-
-```php
-<?php
-require_once 'HTTP/Request2.php';
-$request = new HTTP_Request2();
-$request->setUrl('{{apiPath}}/v1/environments/{{envID}}/applications');
-$request->setMethod(HTTP_Request2::METHOD_POST);
-$request->setConfig(array(
-  'follow_redirects' => TRUE
-));
-$request->setHeader(array(
-  'Content-Type' => 'application/json',
-  'Authorization' => 'Bearer {{accessToken}}'
-));
-$request->setBody('{\n    "enabled": true,\n    "name": "CustomResourceApp_{{$timestamp}}",\n    "description": "This is an OIDC Web application.",\n    "type": "WEB_APP",\n    "protocol": "OPENID_CONNECT",\n    "grantTypes": [\n        "AUTHORIZATION_CODE"\n    ],\n    "redirectUris": [\n        "https://www.google.com"\n    ],\n    "responseTypes": [\n        "CODE"\n    ],\n    "tokenEndpointAuthMethod": "CLIENT_SECRET_BASIC"\n}');
-try {
-  $response = $request->send();
-  if ($response->getStatus() == 200) {
-    echo $response->getBody();
-  }
-  else {
-    echo 'Unexpected HTTP status: ' . $response->getStatus() . ' ' .
-    $response->getReasonPhrase();
-  }
-}
-catch(HTTP_Request2_Exception $e) {
-  echo 'Error: ' . $e->getMessage();
-}
-```
-
-```ruby
-require "uri"
-require "json"
-require "net/http"
-
-url = URI("{{apiPath}}/v1/environments/{{envID}}/applications")
-
-http = Net::HTTP.new(url.host, url.port);
-request = Net::HTTP::Post.new(url)
-request["Content-Type"] = "application/json"
-request["Authorization"] = "Bearer {{accessToken}}"
-request.body = JSON.dump({
-  "enabled": true,
-  "name": "CustomResourceApp_{{\$timestamp}}",
-  "description": "This is an OIDC Web application.",
-  "type": "WEB_APP",
-  "protocol": "OPENID_CONNECT",
-  "grantTypes": [
-    "AUTHORIZATION_CODE"
-  ],
-  "redirectUris": [
-    "https://www.google.com"
-  ],
-  "responseTypes": [
-    "CODE"
-  ],
-  "tokenEndpointAuthMethod": "CLIENT_SECRET_BASIC"
-})
-
-response = http.request(request)
-puts response.read_body
-```
-
-```swift
-let parameters = "{\n    \"enabled\": true,\n    \"name\": \"CustomResourceApp_{{$timestamp}}\",\n    \"description\": \"This is an OIDC Web application.\",\n    \"type\": \"WEB_APP\",\n    \"protocol\": \"OPENID_CONNECT\",\n    \"grantTypes\": [\n        \"AUTHORIZATION_CODE\"\n    ],\n    \"redirectUris\": [\n        \"https://www.google.com\"\n    ],\n    \"responseTypes\": [\n        \"CODE\"\n    ],\n    \"tokenEndpointAuthMethod\": \"CLIENT_SECRET_BASIC\"\n}"
-let postData = parameters.data(using: .utf8)
-
-var request = URLRequest(url: URL(string: "{{apiPath}}/v1/environments/{{envID}}/applications")!,timeoutInterval: Double.infinity)
-request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-request.addValue("Bearer {{accessToken}}", forHTTPHeaderField: "Authorization")
-
-request.httpMethod = "POST"
-request.httpBody = postData
-
-let task = URLSession.shared.dataTask(with: request) { data, response, error in
-  guard let data = data else {
-    print(String(describing: error))
-    return
-  }
-  print(String(data: data, encoding: .utf8)!)
-}
-
-task.resume()
-```
-
-### Example Response
-
-201 Created
-
-```json
-{
-    "_links": {
-        "self": {
-            "href": "https://api.pingone.com/v1/environments/abfba8f6-49eb-49f5-a5d9-80ad5c98f9f6/applications/9093ccb8-5079-46e7-99a4-48e9604659f6"
-        },
-        "environment": {
-            "href": "https://api.pingone.com/v1/environments/abfba8f6-49eb-49f5-a5d9-80ad5c98f9f6"
-        },
-        "metadata": {
-            "href": "https://api.pingone.com/v1/environments/abfba8f6-49eb-49f5-a5d9-80ad5c98f9f6/applications/9093ccb8-5079-46e7-99a4-48e9604659f6/metadata"
-        },
-        "attributes": {
-            "href": "https://api.pingone.com/v1/environments/abfba8f6-49eb-49f5-a5d9-80ad5c98f9f6/applications/9093ccb8-5079-46e7-99a4-48e9604659f6/attributes"
-        },
-        "secret": {
-            "href": "https://api.pingone.com/v1/environments/abfba8f6-49eb-49f5-a5d9-80ad5c98f9f6/applications/9093ccb8-5079-46e7-99a4-48e9604659f6/secret"
-        },
-        "grants": {
-            "href": "https://api.pingone.com/v1/environments/abfba8f6-49eb-49f5-a5d9-80ad5c98f9f6/applications/9093ccb8-5079-46e7-99a4-48e9604659f6/grants"
-        },
-        "keyRotationPolicy": {
-            "href": "https://api.pingone.com/v1/environments/abfba8f6-49eb-49f5-a5d9-80ad5c98f9f6/keyRotationPolicies/1cb8d0b5-c7ba-42e8-a556-240ea2410f1d"
-        }
-    },
-    "environment": {
-        "id": "abfba8f6-49eb-49f5-a5d9-80ad5c98f9f6"
-    },
-    "id": "9093ccb8-5079-46e7-99a4-48e9604659f6",
-    "name": "CustomResourceApp_1776817799",
-    "description": "This is an OIDC Web application.",
-    "enabled": true,
-    "hiddenFromAppPortal": false,
-    "type": "WEB_APP",
-    "protocol": "OPENID_CONNECT",
-    "createdAt": "2026-04-22T00:29:59.348Z",
-    "updatedAt": "2026-04-22T00:29:59.348Z",
-    "clientId": "9093ccb8-5079-46e7-99a4-48e9604659f6",
-    "assignActorRoles": false,
-    "responseTypes": [
-        "CODE"
-    ],
-    "pkceEnforcement": "OPTIONAL",
-    "requestScopesForMultipleResourcesEnabled": false,
-    "redirectUris": [
-        "https://www.google.com"
-    ],
-    "deviceTimeout": 600,
-    "grantTypes": [
-        "AUTHORIZATION_CODE"
-    ],
-    "idpSignoff": false,
-    "additionalRefreshTokenReplayProtectionEnabled": true,
-    "tokenEndpointAuthMethod": "CLIENT_SECRET_BASIC",
-    "parRequirement": "OPTIONAL",
-    "devicePollingInterval": 5,
-    "parTimeout": 60,
-    "signing": {
-        "keyRotationPolicy": {
-            "id": "1cb8d0b5-c7ba-42e8-a556-240ea2410f1d"
-        }
-    }
-}
-```
-
----
-
----
-title: "Step 1: Create a web application"
-component: pingone-api
-page_id: pingone-api:workflow-library:pingone-mfa/login-with-multifactor-authentication/environment-configuration/step-1-create-a-web-application
-canonical_url: https://developer.pingidentity.com/pingone-api/workflow-library/pingone-mfa/login-with-multifactor-authentication/environment-configuration/step-1-create-a-web-application.html
-llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-section_ids:
-  headers: Headers
-  body: Body
-  example-request: Example Request
-  example-response: Example Response
----
-
-# Step 1: Create a web application
-
-##
-
- 
-
-```none
-POST {{apiPath}}/v1/environments/{{envID}}/applications
-```
-
-You can use the `POST {{apiPath}}/v1/environments/{{envID}}/applications` endpoint to create the new application. The application's `protocol` property is required, and in this example it specifies an `OPENID_CONNECT` application.
-
-The response returns information about the new application, including its `id` property, which identifies the ID for this application resource. You will need the application's ID property value to get the application secret and to associate the sign-on policy with the application.
-
-### Headers
-
-Authorization      Bearer {{accessToken}}
-
-Content-Type      application/json
-
-### Body
-
-raw ( application/json )
-
-```json
-{
-    "enabled": true,
-    "name": "WebAppWithMFA_{{$timestamp}}",
-    "description": "This is an OIDC Web application.",
-    "type": "WEB_APP",
-    "protocol": "OPENID_CONNECT",
-    "grantTypes": [
-        "AUTHORIZATION_CODE"
-    ],
-    "redirectUris": [
-        "https://www.google.com"
-    ],
-    "responseTypes": [
-        "CODE"
-    ],
-    "tokenEndpointAuthMethod": "CLIENT_SECRET_BASIC"
-}
-```
-
-##
-
-### Example Request
-
-* cURL
-
-* C#
-
-* Go
-
-* HTTP
-
-* Java
-
-* jQuery
-
-* NodeJS
-
-* Python
-
-* PHP
-
-* Ruby
-
-* Swift
-
-```shell
-curl --location --globoff '{{apiPath}}/v1/environments/{{envID}}/applications' \
---header 'Content-Type: application/json' \
---header 'Authorization: Bearer {{accessToken}}' \
---data '{
-    "enabled": true,
-    "name": "WebAppWithMFA_{{$timestamp}}",
-    "description": "This is an OIDC Web application.",
-    "type": "WEB_APP",
-    "protocol": "OPENID_CONNECT",
-    "grantTypes": [
-        "AUTHORIZATION_CODE"
-    ],
-    "redirectUris": [
-        "https://www.google.com"
-    ],
-    "responseTypes": [
-        "CODE"
-    ],
-    "tokenEndpointAuthMethod": "CLIENT_SECRET_BASIC"
-}'
-```
-
-```csharp
-var options = new RestClientOptions("{{apiPath}}/v1/environments/{{envID}}/applications")
-{
-  MaxTimeout = -1,
-};
-var client = new RestClient(options);
-var request = new RestRequest("", Method.Post);
-request.AddHeader("Content-Type", "application/json");
-request.AddHeader("Authorization", "Bearer {{accessToken}}");
-var body = @"{" + "\n" +
-@"    ""enabled"": true," + "\n" +
-@"    ""name"": ""WebAppWithMFA_{{$timestamp}}""," + "\n" +
-@"    ""description"": ""This is an OIDC Web application.""," + "\n" +
-@"    ""type"": ""WEB_APP""," + "\n" +
-@"    ""protocol"": ""OPENID_CONNECT""," + "\n" +
-@"    ""grantTypes"": [" + "\n" +
-@"        ""AUTHORIZATION_CODE""" + "\n" +
-@"    ]," + "\n" +
-@"    ""redirectUris"": [" + "\n" +
-@"        ""https://www.google.com""" + "\n" +
-@"    ]," + "\n" +
-@"    ""responseTypes"": [" + "\n" +
-@"        ""CODE""" + "\n" +
-@"    ]," + "\n" +
-@"    ""tokenEndpointAuthMethod"": ""CLIENT_SECRET_BASIC""" + "\n" +
-@"}";
-request.AddStringBody(body, DataFormat.Json);
-RestResponse response = await client.ExecuteAsync(request);
-Console.WriteLine(response.Content);
-```
-
-```golang
-package main
-
-import (
-  "fmt"
-  "strings"
-  "net/http"
-  "io"
-)
-
-func main() {
-
-  url := "{{apiPath}}/v1/environments/{{envID}}/applications"
-  method := "POST"
-
-  payload := strings.NewReader(`{
-    "enabled": true,
-    "name": "WebAppWithMFA_{{$timestamp}}",
-    "description": "This is an OIDC Web application.",
-    "type": "WEB_APP",
-    "protocol": "OPENID_CONNECT",
-    "grantTypes": [
-        "AUTHORIZATION_CODE"
-    ],
-    "redirectUris": [
-        "https://www.google.com"
-    ],
-    "responseTypes": [
-        "CODE"
-    ],
-    "tokenEndpointAuthMethod": "CLIENT_SECRET_BASIC"
-}`)
-
-  client := &http.Client {
-  }
-  req, err := http.NewRequest(method, url, payload)
-
-  if err != nil {
-    fmt.Println(err)
-    return
-  }
-  req.Header.Add("Content-Type", "application/json")
-  req.Header.Add("Authorization", "Bearer {{accessToken}}")
-
-  res, err := client.Do(req)
-  if err != nil {
-    fmt.Println(err)
-    return
-  }
-  defer res.Body.Close()
-
-  body, err := io.ReadAll(res.Body)
-  if err != nil {
-    fmt.Println(err)
-    return
-  }
-  fmt.Println(string(body))
-}
-```
-
-```http
-POST /v1/environments/{{envID}}/applications HTTP/1.1
-Host: {{apiPath}}
-Content-Type: application/json
-Authorization: Bearer {{accessToken}}
-
-{
-    "enabled": true,
-    "name": "WebAppWithMFA_{{$timestamp}}",
-    "description": "This is an OIDC Web application.",
-    "type": "WEB_APP",
-    "protocol": "OPENID_CONNECT",
-    "grantTypes": [
-        "AUTHORIZATION_CODE"
-    ],
-    "redirectUris": [
-        "https://www.google.com"
-    ],
-    "responseTypes": [
-        "CODE"
-    ],
-    "tokenEndpointAuthMethod": "CLIENT_SECRET_BASIC"
-}
-```
-
-```java
-OkHttpClient client = new OkHttpClient().newBuilder()
-  .build();
-MediaType mediaType = MediaType.parse("application/json");
-RequestBody body = RequestBody.create(mediaType, "{\n    \"enabled\": true,\n    \"name\": \"WebAppWithMFA_{{$timestamp}}\",\n    \"description\": \"This is an OIDC Web application.\",\n    \"type\": \"WEB_APP\",\n    \"protocol\": \"OPENID_CONNECT\",\n    \"grantTypes\": [\n        \"AUTHORIZATION_CODE\"\n    ],\n    \"redirectUris\": [\n        \"https://www.google.com\"\n    ],\n    \"responseTypes\": [\n        \"CODE\"\n    ],\n    \"tokenEndpointAuthMethod\": \"CLIENT_SECRET_BASIC\"\n}");
-Request request = new Request.Builder()
-  .url("{{apiPath}}/v1/environments/{{envID}}/applications")
-  .method("POST", body)
-  .addHeader("Content-Type", "application/json")
-  .addHeader("Authorization", "Bearer {{accessToken}}")
-  .build();
-Response response = client.newCall(request).execute();
-```
-
-```javascript
-var settings = {
-  "url": "{{apiPath}}/v1/environments/{{envID}}/applications",
-  "method": "POST",
-  "timeout": 0,
-  "headers": {
-    "Content-Type": "application/json",
-    "Authorization": "Bearer {{accessToken}}"
-  },
-  "data": JSON.stringify({
-    "enabled": true,
-    "name": "WebAppWithMFA_{{$timestamp}}",
-    "description": "This is an OIDC Web application.",
-    "type": "WEB_APP",
-    "protocol": "OPENID_CONNECT",
-    "grantTypes": [
-      "AUTHORIZATION_CODE"
-    ],
-    "redirectUris": [
-      "https://www.google.com"
-    ],
-    "responseTypes": [
-      "CODE"
-    ],
-    "tokenEndpointAuthMethod": "CLIENT_SECRET_BASIC"
-  }),
-};
-
-$.ajax(settings).done(function (response) {
-  console.log(response);
-});
-```
-
-```javascript
-var request = require('request');
-var options = {
-  'method': 'POST',
-  'url': '{{apiPath}}/v1/environments/{{envID}}/applications',
-  'headers': {
-    'Content-Type': 'application/json',
-    'Authorization': 'Bearer {{accessToken}}'
-  },
-  body: JSON.stringify({
-    "enabled": true,
-    "name": "WebAppWithMFA_{{$timestamp}}",
-    "description": "This is an OIDC Web application.",
-    "type": "WEB_APP",
-    "protocol": "OPENID_CONNECT",
-    "grantTypes": [
-      "AUTHORIZATION_CODE"
-    ],
-    "redirectUris": [
-      "https://www.google.com"
-    ],
-    "responseTypes": [
-      "CODE"
-    ],
-    "tokenEndpointAuthMethod": "CLIENT_SECRET_BASIC"
-  })
-
-};
-request(options, function (error, response) {
-  if (error) throw new Error(error);
-  console.log(response.body);
-});
-```
-
-```python
-import requests
-import json
-
-url = "{{apiPath}}/v1/environments/{{envID}}/applications"
-
-payload = json.dumps({
-  "enabled": True,
-  "name": "WebAppWithMFA_{{$timestamp}}",
-  "description": "This is an OIDC Web application.",
-  "type": "WEB_APP",
-  "protocol": "OPENID_CONNECT",
-  "grantTypes": [
-    "AUTHORIZATION_CODE"
-  ],
-  "redirectUris": [
-    "https://www.google.com"
-  ],
-  "responseTypes": [
-    "CODE"
-  ],
-  "tokenEndpointAuthMethod": "CLIENT_SECRET_BASIC"
-})
-headers = {
-  'Content-Type': 'application/json',
-  'Authorization': 'Bearer {{accessToken}}'
-}
-
-response = requests.request("POST", url, headers=headers, data=payload)
-
-print(response.text)
-```
-
-```php
-<?php
-require_once 'HTTP/Request2.php';
-$request = new HTTP_Request2();
-$request->setUrl('{{apiPath}}/v1/environments/{{envID}}/applications');
-$request->setMethod(HTTP_Request2::METHOD_POST);
-$request->setConfig(array(
-  'follow_redirects' => TRUE
-));
-$request->setHeader(array(
-  'Content-Type' => 'application/json',
-  'Authorization' => 'Bearer {{accessToken}}'
-));
-$request->setBody('{\n    "enabled": true,\n    "name": "WebAppWithMFA_{{$timestamp}}",\n    "description": "This is an OIDC Web application.",\n    "type": "WEB_APP",\n    "protocol": "OPENID_CONNECT",\n    "grantTypes": [\n        "AUTHORIZATION_CODE"\n    ],\n    "redirectUris": [\n        "https://www.google.com"\n    ],\n    "responseTypes": [\n        "CODE"\n    ],\n    "tokenEndpointAuthMethod": "CLIENT_SECRET_BASIC"\n}');
-try {
-  $response = $request->send();
-  if ($response->getStatus() == 200) {
-    echo $response->getBody();
-  }
-  else {
-    echo 'Unexpected HTTP status: ' . $response->getStatus() . ' ' .
-    $response->getReasonPhrase();
-  }
-}
-catch(HTTP_Request2_Exception $e) {
-  echo 'Error: ' . $e->getMessage();
-}
-```
-
-```ruby
-require "uri"
-require "json"
-require "net/http"
-
-url = URI("{{apiPath}}/v1/environments/{{envID}}/applications")
-
-http = Net::HTTP.new(url.host, url.port);
-request = Net::HTTP::Post.new(url)
-request["Content-Type"] = "application/json"
-request["Authorization"] = "Bearer {{accessToken}}"
-request.body = JSON.dump({
-  "enabled": true,
-  "name": "WebAppWithMFA_{{\$timestamp}}",
-  "description": "This is an OIDC Web application.",
-  "type": "WEB_APP",
-  "protocol": "OPENID_CONNECT",
-  "grantTypes": [
-    "AUTHORIZATION_CODE"
-  ],
-  "redirectUris": [
-    "https://www.google.com"
-  ],
-  "responseTypes": [
-    "CODE"
-  ],
-  "tokenEndpointAuthMethod": "CLIENT_SECRET_BASIC"
-})
-
-response = http.request(request)
-puts response.read_body
-```
-
-```swift
-let parameters = "{\n    \"enabled\": true,\n    \"name\": \"WebAppWithMFA_{{$timestamp}}\",\n    \"description\": \"This is an OIDC Web application.\",\n    \"type\": \"WEB_APP\",\n    \"protocol\": \"OPENID_CONNECT\",\n    \"grantTypes\": [\n        \"AUTHORIZATION_CODE\"\n    ],\n    \"redirectUris\": [\n        \"https://www.google.com\"\n    ],\n    \"responseTypes\": [\n        \"CODE\"\n    ],\n    \"tokenEndpointAuthMethod\": \"CLIENT_SECRET_BASIC\"\n}"
-let postData = parameters.data(using: .utf8)
-
-var request = URLRequest(url: URL(string: "{{apiPath}}/v1/environments/{{envID}}/applications")!,timeoutInterval: Double.infinity)
-request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-request.addValue("Bearer {{accessToken}}", forHTTPHeaderField: "Authorization")
-
-request.httpMethod = "POST"
-request.httpBody = postData
-
-let task = URLSession.shared.dataTask(with: request) { data, response, error in
-  guard let data = data else {
-    print(String(describing: error))
-    return
-  }
-  print(String(data: data, encoding: .utf8)!)
-}
-
-task.resume()
-```
-
-### Example Response
-
-201 Created
-
-```json
-{
-    "_links": {
-        "self": {
-            "href": "https://api.pingone.com/v1/environments/abfba8f6-49eb-49f5-a5d9-80ad5c98f9f6/applications/633d1e1a-e492-4f93-80e8-a76dcf323e82"
-        },
-        "environment": {
-            "href": "https://api.pingone.com/v1/environments/abfba8f6-49eb-49f5-a5d9-80ad5c98f9f6"
-        },
-        "metadata": {
-            "href": "https://api.pingone.com/v1/environments/abfba8f6-49eb-49f5-a5d9-80ad5c98f9f6/applications/633d1e1a-e492-4f93-80e8-a76dcf323e82/metadata"
-        },
-        "attributes": {
-            "href": "https://api.pingone.com/v1/environments/abfba8f6-49eb-49f5-a5d9-80ad5c98f9f6/applications/633d1e1a-e492-4f93-80e8-a76dcf323e82/attributes"
-        },
-        "secret": {
-            "href": "https://api.pingone.com/v1/environments/abfba8f6-49eb-49f5-a5d9-80ad5c98f9f6/applications/633d1e1a-e492-4f93-80e8-a76dcf323e82/secret"
-        },
-        "grants": {
-            "href": "https://api.pingone.com/v1/environments/abfba8f6-49eb-49f5-a5d9-80ad5c98f9f6/applications/633d1e1a-e492-4f93-80e8-a76dcf323e82/grants"
-        },
-        "keyRotationPolicy": {
-            "href": "https://api.pingone.com/v1/environments/abfba8f6-49eb-49f5-a5d9-80ad5c98f9f6/keyRotationPolicies/1cb8d0b5-c7ba-42e8-a556-240ea2410f1d"
-        }
-    },
-    "environment": {
-        "id": "abfba8f6-49eb-49f5-a5d9-80ad5c98f9f6"
-    },
-    "id": "633d1e1a-e492-4f93-80e8-a76dcf323e82",
-    "name": "WebAppWithMFA_1776884203",
-    "description": "This is an OIDC Web application.",
-    "enabled": true,
-    "hiddenFromAppPortal": false,
-    "type": "WEB_APP",
-    "protocol": "OPENID_CONNECT",
-    "createdAt": "2026-04-22T18:56:43.197Z",
-    "updatedAt": "2026-04-22T18:56:43.197Z",
-    "clientId": "633d1e1a-e492-4f93-80e8-a76dcf323e82",
-    "assignActorRoles": false,
-    "responseTypes": [
-        "CODE"
-    ],
-    "pkceEnforcement": "OPTIONAL",
-    "requestScopesForMultipleResourcesEnabled": false,
-    "redirectUris": [
-        "https://www.google.com"
-    ],
-    "deviceTimeout": 600,
-    "grantTypes": [
-        "AUTHORIZATION_CODE"
-    ],
-    "idpSignoff": false,
-    "additionalRefreshTokenReplayProtectionEnabled": true,
-    "tokenEndpointAuthMethod": "CLIENT_SECRET_BASIC",
-    "parRequirement": "OPTIONAL",
-    "devicePollingInterval": 5,
-    "parTimeout": 60,
-    "signing": {
-        "keyRotationPolicy": {
-            "id": "1cb8d0b5-c7ba-42e8-a556-240ea2410f1d"
-        }
-    }
-}
-```

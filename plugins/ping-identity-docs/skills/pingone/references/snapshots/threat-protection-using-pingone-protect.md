@@ -6,7 +6,7 @@ page_id: pingone:threat_protection_using_pingone_protect:p1_protect_adding_risk_
 canonical_url: https://docs.pingidentity.com/pingone/threat_protection_using_pingone_protect/p1_protect_adding_risk_policy.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: May 30, 2025
+revdate: 2026-06-23T00:00:00Z
 section_ids:
   before-you-begin: Before you begin
   steps: Steps
@@ -206,7 +206,7 @@ page_id: pingone:threat_protection_using_pingone_protect:p1_protect_adding_compo
 canonical_url: https://docs.pingidentity.com/pingone/threat_protection_using_pingone_protect/p1_protect_adding_composite_predictors.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: March 5, 2025
+revdate: 2026-06-03T00:00:00Z
 section_ids:
   condition-options: Condition options
   example-scenario: Example scenario
@@ -363,7 +363,7 @@ page_id: pingone:threat_protection_using_pingone_protect:p1_protect_adding_custo
 canonical_url: https://docs.pingidentity.com/pingone/threat_protection_using_pingone_protect/p1_protect_adding_custom_predictors.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: February 19, 2025
+revdate: 2026-03-24T00:00:00Z
 section_ids:
   steps: Steps
   choose-from: Choose from:
@@ -469,7 +469,7 @@ page_id: pingone:threat_protection_using_pingone_protect:p1_protect_adding_predi
 canonical_url: https://docs.pingidentity.com/pingone/threat_protection_using_pingone_protect/p1_protect_adding_predictors.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: March 5, 2025
+revdate: 2025-07-23T00:00:00Z
 section_ids:
   steps: Steps
 ---
@@ -534,7 +534,7 @@ page_id: pingone:threat_protection_using_pingone_protect:p1_protect_best_practic
 canonical_url: https://docs.pingidentity.com/pingone/threat_protection_using_pingone_protect/p1_protect_best_practices.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: April 4, 2024
+revdate: 2026-07-30T00:00:00Z
 section_ids:
   risk-policies: Risk policies
   risk-evaluation-results: Risk evaluation results
@@ -662,11 +662,15 @@ The following are the key details returned in the response, ordered by level of 
 
 ## Flows in DaVinci
 
-* Each flow where you include a risk evaluation should include two different PingOne Protect connectors:
+* Each flow where you include a risk evaluation should include a PingOne Protect connector:
 
-  * Add a connector with the `Create Risk Evaluation` capability at a point in the flow where you want to base the next action on the risk score assigned. For example, show an MFA prompt for MEDIUM or HIGH, but automatically grant access if the risk is deemed Low.
+  * Add a connector with the `Create Risk Evaluation` capability at a point in the flow where you want to base the next action on the risk score assigned. For example, show an MFA prompt for Medium or High, but automatically grant access if the risk is deemed Low.
 
-  * Add a connector with the `Update Risk Evaluation` capability at a point in the flow after authentication has been completed. This capability represents the system's ability to learn over time in order to improve results. Always include an update connector in your flows because the learning mechanism is essential for risk evaluation precision.
+  * Add a connector with the `Update Risk Evaluation` capability to update the risk evaluation result. PingOne Protect requires this update step so that it can learn over time and improve risk evaluation precision. In most flows, this update is handled automatically. If it isn't handled automatically, add the connector at a point in the flow after authentication has been completed.
+
+    |   |                                                                                                                                                                                                                                                                                                                                                |
+    | - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+    |   | In most DaVinci flows, the update step is handled automatically. If it isn't, you must add an additional PingOne Protect connector to send the update. Refer to the [PingOne Protect connector documentation](https://docs.pingidentity.com/connectors/p1_protect_connector.html) for the scenarios where you must add the connector manually. |
 
 * Use the `skrisk` component in your flow to automatically obtain the information from the Signals SDK.
 
@@ -686,7 +690,7 @@ page_id: pingone:threat_protection_using_pingone_protect:p1_protect_browser_dist
 canonical_url: https://docs.pingidentity.com/pingone/threat_protection_using_pingone_protect/p1_protect_browser_distribution.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: February 19, 2025
+revdate: 2025-02-19T00:00:00Z
 ---
 
 # Browser distribution
@@ -713,7 +717,7 @@ page_id: pingone:threat_protection_using_pingone_protect:p1_protect_managing_pre
 canonical_url: https://docs.pingidentity.com/pingone/threat_protection_using_pingone_protect/p1_protect_managing_predictors.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: February 21, 2025
+revdate: 2026-06-23T00:00:00Z
 section_ids:
   steps: Steps
 ---
@@ -765,12 +769,13 @@ Learn more in [Predictors](p1_protect_risk_predictors.html).
 
 ---
 title: Creating a risk policy with an MFA-only license
-description: There are various prerequisites you should be aware of when creating a workforce risk policy for user authentication. This section guides you through the steps needed.
+description: Learn how to create a risk policy with an MFA-only license in PingOne.
 component: pingone
 page_id: pingone:threat_protection_using_pingone_protect:p1_creating_risk_policies_for_mfa_only
 canonical_url: https://docs.pingidentity.com/pingone/threat_protection_using_pingone_protect/p1_creating_risk_policies_for_mfa_only.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-01-18T00:00:00Z
 section_ids:
   before-you-begin: Before you begin
   create-applications-and-user-groups: Create applications and user groups
@@ -882,7 +887,7 @@ page_id: pingone:threat_protection_using_pingone_protect:p1_protect_creating_man
 canonical_url: https://docs.pingidentity.com/pingone/threat_protection_using_pingone_protect/p1_protect_creating_managing_staging_policies.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: February 20, 2025
+revdate: 2025-02-20T00:00:00Z
 section_ids:
   about-this-task: About this task
   steps: Steps
@@ -940,7 +945,7 @@ page_id: pingone:threat_protection_using_pingone_protect:p1_protect_deleting_pre
 canonical_url: https://docs.pingidentity.com/pingone/threat_protection_using_pingone_protect/p1_protect_deleting_predictors.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: February 19, 2025
+revdate: 2025-02-19T00:00:00Z
 section_ids:
   steps: Steps
 ---
@@ -967,7 +972,7 @@ page_id: pingone:threat_protection_using_pingone_protect:p1_protect_editing_risk
 canonical_url: https://docs.pingidentity.com/pingone/threat_protection_using_pingone_protect/p1_protect_editing_risk_policy.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: June 2, 2025
+revdate: 2025-07-07T00:00:00Z
 section_ids:
   steps: Steps
   next-steps: Next steps
@@ -1011,7 +1016,7 @@ page_id: pingone:threat_protection_using_pingone_protect:p1_protect_evaluating_s
 canonical_url: https://docs.pingidentity.com/pingone/threat_protection_using_pingone_protect/p1_protect_evaluating_staging_policy.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: March 5, 2025
+revdate: 2025-07-23T00:00:00Z
 section_ids:
   before-you-begin: Before you begin
   steps: Steps
@@ -1082,7 +1087,7 @@ page_id: pingone:threat_protection_using_pingone_protect:p1_protect_getting_star
 canonical_url: https://docs.pingidentity.com/pingone/threat_protection_using_pingone_protect/p1_protect_getting_started.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: March 5, 2025
+revdate: 2026-07-22T00:00:00Z
 section_ids:
   threat-protection-dashboard: Threat Protection Dashboard
   how-pingone-protect-works: How PingOne Protect works
@@ -1094,39 +1099,32 @@ section_ids:
   intro_predictors: Introduction to predictors
   intro_risk_evaluations: Introduction to risk evaluations
   intro_api_risk_evaluations: Introduction to using the PingOne API for risk evaluations
-  try_sample_app: Trying PingOne Protect with a sample app
-  before-you-begin: Before you begin
-  about-this-task: About this task
-  steps: Steps
-  result: Result:
-  result-2: Result:
   get_up_running: Getting up and running
   add_service: Adding the PingOne Protect service to your environment
+  before-you-begin: Before you begin
+  steps: Steps
+  result: Result
+  p1_protect_integrate: Integrating PingOne Protect with user journeys
   before-you-begin-2: Before you begin
   steps-2: Steps
-  result-3: Result
-  p1_protect_integrate: Integrating PingOne Protect with user journeys
+  using-the-pingone-protect-integration-kit-with-pingfederate: Using the PingOne Protect Integration Kit with PingFederate
   before-you-begin-3: Before you begin
   steps-3: Steps
-  using-the-pingone-protect-integration-kit-with-pingfederate: Using the PingOne Protect Integration Kit with PingFederate
-  before-you-begin-4: Before you begin
-  steps-4: Steps
   choose-from: Choose from:
   building-a-custom-flow-with-pingone-davinci: Building a custom flow with PingOne DaVinci
-  before-you-begin-5: Before you begin
-  about-this-task-2: About this task
-  steps-5: Steps
+  before-you-begin-4: Before you begin
+  steps-4: Steps
   troubleshooting: Troubleshooting
   using-the-pingone-api: Using the PingOne API
-  about-this-task-3: About this task
-  steps-6: Steps
+  about-this-task: About this task
+  steps-5: Steps
   integrating-with-pingone-advanced-identity-cloud: Integrating with PingOne Advanced Identity Cloud
-  before-you-begin-6: Before you begin
-  about-this-task-4: About this task
-  steps-7: Steps
+  before-you-begin-5: Before you begin
+  about-this-task-2: About this task
+  steps-6: Steps
   getting-input-from-the-pingone-signals-protect-sdk: Getting input from the PingOne Signals (Protect) SDK
-  about-this-task-5: About this task
-  steps-8: Steps
+  about-this-task-3: About this task
+  steps-7: Steps
   choose-from-2: Choose from:
   choose-from-3: Choose from:
   third_party_scores: Using third-party risk scores with PingOne Protect
@@ -1134,8 +1132,8 @@ section_ids:
   validating-received-third-party-data-in-pingone-protect: Validating received third-party data in PingOne Protect
   configuring-custom-predictors-using-custom-attributes: Configuring custom predictors using custom attributes
   running-analyzing-and-adjusting-your-risk-policy: Running, analyzing, and adjusting your risk policy
-  about-this-task-6: About this task
-  steps-9: Steps
+  about-this-task-4: About this task
+  steps-8: Steps
   next-steps: Next steps
 ---
 
@@ -1364,54 +1362,6 @@ You can use the PingOne API to:
 
 Learn more in the [PingOne Protect section](https://developer.pingidentity.com/pingone-api/protect/introduction.html) of the PingOne API documentation.
 
-## Trying PingOne Protect with a sample app
-
-### Before you begin
-
-Sign up for a PingOne trial. Learn more in [Starting a PingOne trial](../getting_started_with_pingone/p1_start_a_p1_trial.html).
-
-### About this task
-
-Signing up for a PingOne trial is a great way to experience the functionality of PingOne Protect with an automatically generated sample application. This sample app is a Ping-maintained application that allows you to design registration and sign-on experiences for your customers and test them in the app.
-
-With your PingOne trial, you can try PingOne Protect and quickly and easily simulate risk events with the sample app to test how predictors work. The sample app allows you to test the capabilities of PingOne Protect in addition to other PingOne services, such as PingOne MFA and PingOne SSO, and can be tailored to your industry.
-
-|   |                                                                                                                                                     |
-| - | --------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | Learn more about trying PingOne Protect in your existing PingOne user journey instead of with a trial in [Getting up and running](#get_up_running). |
-
-To try PingOne Protect with a sample app:
-
-### Steps
-
-1. In the PingOne admin console, click **Add Environment**.
-
-2. Select **Customer solution**, and click **Next**.
-
-   |   |                                                                                                                   |
-   | - | ----------------------------------------------------------------------------------------------------------------- |
-   |   | When you create a **Customer solution**, your new environment automatically includes the PingOne Protect service. |
-
-3. Click **Next** again to create the environment.
-
-4. Enter the details for your environment, select the **Include a solution designer to easily design and test experiences** check box, and click **Finish**.
-
-   #### Result:
-
-   Your new PingOne environment is created and automatically opens.
-
-5. Choose if you want to tailor your experience for your industry, or click **Skip**.
-
-   #### Result:
-
-   PingOne creates a sample app based on your selection. You can click **Get Started** to view the tour or close the tour pop-up window.
-
-6. [Test the predictors](p1_protect_testing_risk_predictors.html).
-
-   |   |                                                                                                  |
-   | - | ------------------------------------------------------------------------------------------------ |
-   |   | The PingOne Protect capabilities are available in the **Authentication** flow of the sample app. |
-
 ## Getting up and running
 
 Follow these steps to start using PingOne Protect as part of your user journeys.
@@ -1452,17 +1402,15 @@ To get started, add the PingOne Protect service to your PingOne environment.
 
 * [Add an environment](../getting_started_with_pingone/p1_solution_add_environment.html) to organize your services.
 
-* Make sure that you have the Environment Admin and Identity Data Admin roles in your PingOne environment. Learn more in [Managing user roles](../directory/p1_manage_user_roles.html).
+* Make sure that you have the Environment Admin and Identity Data Admin roles, or a custom role with equivalent permissions, in your PingOne environment. Learn more in [Managing user roles](../directory/p1_manage_user_roles.html).
 
 #### Steps
 
 1. In the PingOne admin console, go to **Overview**.
 
-2. Next to **Services**, click the **[icon: plus, set=fa]**icon.
+2. Next to **Environment Capabilities**, click the **Plus** icon ([icon: plus, set=fa]).
 
-3. Click **[icon: plus, set=fa]Add** to add the **PingOne Protect** service.
-
-4. In the **Add a Service** window, click **Finish**.
+3. In the **Add a Capability** list, locate **Identity Threat Detection and Response** and click **[icon: plus, set=fa]Add**.
 
 #### Result
 
@@ -1542,12 +1490,6 @@ Before proceeding, make sure PingFederate is installed. Learn more in [Installin
 
 ## Building a custom flow with PingOne DaVinci
 
-### Before you begin
-
-Add PingOne DaVinci to your PingOne environment. Learn more in [Adding an environment](../getting_started_with_pingone/p1_getting_started_adding_environment.html).
-
-### About this task
-
 PingOne DaVinci is the graphic orchestration tool used for designing flows, such as user registration and authentication flows. Learn more about using PingOne DaVinci in the [DaVinci documentation](https://docs.pingidentity.com/davinci/davinci_landing_page.html).
 
 You can use the PingOne Protect connector to define different paths in an user journey flow, based on the result of a risk evaluation.
@@ -1572,31 +1514,39 @@ For examples of using the PingOne Protect connector in different types of flows,
 
 * PingID - FIDO2 Passwordless + Protect
 
-To use Protect connectors in a flow:
+### Before you begin
+
+Add PingOne DaVinci to your PingOne environment. Learn more in [Adding an environment](../getting_started_with_pingone/p1_getting_started_adding_environment.html).
 
 ### Steps
 
-1. After you have added DaVinci to your PingOne environment, ensure any risk connectors you add to your flows already have been configured with the correct information for environment ID, client ID, and client secret.
+1. After you've added DaVinci to your PingOne environment, ensure any risk connectors you add to your flows already have been configured with the correct information for environment ID, client ID, and client secret.
 
    If you import a flow from a different PingOne environment, you must go to the settings for the Protect connector and update this information to reflect the environment where you're adding the flow.
 
-2. Add two different Protect connectors to your flow by following the documentation for the [PingOne Protect connector](https://docs.pingidentity.com/connectors/p1_protect_connector.html):
+2. Add PingOne Protect connectors to your flow as needed by following the documentation for the [PingOne Protect connector](https://docs.pingidentity.com/connectors/p1_protect_connector.html):
 
-   1. Add a Protect connector with the Create Risk Evaluation capability.
+   1. Add a PingOne Protect connector with the Create Risk Evaluation capability.
 
-      The response returns a final risk evaluation result - `High`, `Medium`, or `Low`. The Protect connector with the `Create Risk Evaluation` capability should be added at a point in the flow where you would like to base the next action on the risk score assigned, for example, show an MFA prompt for Medium or High, but automatically grant access if the risk is deemed Low.
+      The response returns a final risk evaluation result: `High`, `Medium`, or `Low`. The PingOne Protect connector with the Create Risk Evaluation capability should be added at a point in the flow where you would like to base the next action on the risk score assigned, for example, show an MFA prompt for Medium or High, but automatically grant access if the risk is deemed Low.
 
-   2. Add risk evaluation feedback to the flow by adding a Protect connector with the Update Risk Evaluation capability.
+   2. Add risk evaluation feedback to the flow by adding a PingOne Protect connector with the Update Risk Evaluation capability only if the update isn't handled automatically.
 
-      This step is included after authentication has been completed, and it consists of sending an update with the final state of the transaction, such as `SUCCESS` or `FAIL`. The Update Risk Evaluation capability represents the system's ability to learn over time in order to improve results. You should always include an update connector in your flow because this step is essential for improving the accuracy of the machine learning models.
+      |   |                                                                                                                                                                                                                                                                                                                                                   |
+      | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+      |   | In most flows, this step is handled automatically. However, in some cases, you must add an additional PingOne Protect connector to send the update. Refer to the [PingOne Protect connector documentation](https://docs.pingidentity.com/connectors/p1_protect_connector.html) for a list of scenarios where the update is handled automatically. |
 
-      |   |                                                                                                                                                                |
-      | - | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-      |   | Flows may take users on different paths. Make sure to include a Protect connector with the Update Risk Evaluation capability at the end of each possible path. |
+      If the update isn't handled automatically:
+
+      * Because flows can take users on different paths, make sure to include a PingOne Protect connector with the Update Risk Evaluation capability at the end of each possible path.
+
+      * Add the update after authentication has been completed. The update consists of sending an update with the final state of the transaction, such as `SUCCESS` or `FAIL`. The Update Risk Evaluation capability represents the system's ability to learn over time in order to improve results. You should always include an update connector in your flow because this step is essential for improving the accuracy of the machine learning models.
+
+        Learn more in [Update completion status for risk evaluations](p1_protect_updating_completion_status_risk_evaluations.html).
 
 ### Troubleshooting
 
-If you are having issues with the PingOne Protect Connector, try the following:
+If you're having issues with the PingOne Protect connector, try the following:
 
 * For each connector in the flow, make sure that all of the mandatory inputs have been provided.
 
@@ -1756,7 +1706,7 @@ Depending on your identity service providers, there are multiple ways to send th
 
     * [ID DataWeb Integration Kit](https://docs.pingidentity.com/integrations/iddataweb/pf_iddataweb_ik.html)
 
-    * [iovation Integration Kit](https://docs.pingidentity.com/integrations/iovation/pf_iovation_ik.html)
+    * [TruValidate (iovation) Integration Kit](https://docs.pingidentity.com/integrations/truvalidate/pf_truvalidate_ik.html)
 
     * [ThreatMetrix Integration Kit](https://docs.pingidentity.com/integrations/threatmetrix/pf_threatmetrix_ik.html)
 
@@ -1820,7 +1770,7 @@ Fine-tuning your policy is an iterative process and should follow this approach:
 
 After you've familiarized yourself with how PingOne Protect works and have it running, refer to the following for next steps to deepen your understanding:
 
-* To learn more about how the predictors work, you can [test predictors by simulating risk events in a sample application](p1_protect_testing_risk_predictors.html).
+* To learn more about how the predictors work, you can [test predictors by simulating risk events](p1_protect_testing_risk_predictors.html).
 
 * Learn more about customizing predictors that leverage external or processed data in [Custom predictors](p1_protect_risk_predictors.html#section_jxv_2pv_xxb) and [Adding custom predictors](p1_protect_adding_custom_predictors.html).
 
@@ -1838,7 +1788,7 @@ page_id: pingone:threat_protection_using_pingone_protect:p1_protect_high_risk_mo
 canonical_url: https://docs.pingidentity.com/pingone/threat_protection_using_pingone_protect/p1_protect_high_risk_models.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: February 19, 2025
+revdate: 2025-02-19T00:00:00Z
 ---
 
 # High risk models
@@ -1867,7 +1817,7 @@ page_id: pingone:threat_protection_using_pingone_protect:p1_protect_introduction
 canonical_url: https://docs.pingidentity.com/pingone/threat_protection_using_pingone_protect/p1_protect_introduction.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: February 14, 2025
+revdate: 2025-02-14T00:00:00Z
 ---
 
 # Introduction to PingOne Protect
@@ -1922,7 +1872,7 @@ page_id: pingone:threat_protection_using_pingone_protect:p1_protect_os_distribut
 canonical_url: https://docs.pingidentity.com/pingone/threat_protection_using_pingone_protect/p1_protect_os_distribution.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: February 19, 2025
+revdate: 2025-02-19T00:00:00Z
 ---
 
 # OS distribution
@@ -1949,7 +1899,7 @@ page_id: pingone:threat_protection_using_pingone_protect:p1_protect_signals_sdk
 canonical_url: https://docs.pingidentity.com/pingone/threat_protection_using_pingone_protect/p1_protect_signals_sdk.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: February 19, 2025
+revdate: 2026-06-18T00:00:00Z
 section_ids:
   integrations: Integrations
   predictors-dependent-on-the-sdk: Predictors dependent on the SDK
@@ -2001,7 +1951,7 @@ page_id: pingone:threat_protection_using_pingone_protect:p1_protect_predictor_ru
 canonical_url: https://docs.pingidentity.com/pingone/threat_protection_using_pingone_protect/p1_protect_predictor_rules.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: June 22, 2026
+revdate: 2026-10-30T16:36:18Z
 section_ids:
   bot-detection-predictor: Bot Detection predictor
   suspicious-device-predictor: Suspicious Device predictor
@@ -2026,25 +1976,34 @@ When configuring these predictors, you can exclude specific rules from risk leve
 
 The following rules are used by the Bot Detection predictor:
 
-| Rule ID | Rule                                              | Description                                                                                                                                                                                                                                                                            |
-| ------- | ------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 600     | Automation framework - headless browser           | Flags indicators associated with automated browsing environments.                                                                                                                                                                                                                      |
-| 601     | Automation framework                              | Detects known browser automation frameworks.                                                                                                                                                                                                                                           |
-| 603     | Non-human keyboard interaction                    | Highlights keyboard behavior patterns that appear non-human.                                                                                                                                                                                                                           |
-| 604     | Non-human mouse interaction                       | Highlights mouse interaction patterns that appear automated or synthetic.                                                                                                                                                                                                              |
-| 610     | Suspicious user agent                             | Flags user-agent characteristics commonly associated with automation.                                                                                                                                                                                                                  |
-| 612     | Media mismatch                                    | Detects inconsistencies between reported media capabilities and device profile.                                                                                                                                                                                                        |
-| 618     | Hosting service with a suspicious device property | Flags potentially risky combinations of hosting-network and device characteristics.                                                                                                                                                                                                    |
-| 623     | Automation driver tools                           | Detects automation driver tooling in the browser environment.                                                                                                                                                                                                                          |
-| 625     | Screen resolution anomaly                         | Flags unusual display properties often associated with nonstandard environments.                                                                                                                                                                                                       |
-| 627     | CPU cores anomaly                                 | Flags improbable hardware capacity reports.                                                                                                                                                                                                                                            |
-| 628     | Browser loading anomaly                           | Detects browser initialization patterns associated with automation masking.                                                                                                                                                                                                            |
-| 629     | Browser anomaly                                   | Highlights anomalous browser behavior that can indicate manipulation.                                                                                                                                                                                                                  |
-| 631     | Invalid Chrome properties                         | Flags unexpected behavior in Chrome-specific runtime properties.                                                                                                                                                                                                                       |
-| 632     | Automation framework on emulated device           | Detects signs that a session is running in an emulated environment.                                                                                                                                                                                                                    |
-| 640     | Accelerometer anomaly                             | Flags motion-sensor patterns that are inconsistent with expected device behavior.                                                                                                                                                                                                      |
-| 642     | Touch interaction duration anomaly                | Flags unusual touch interaction timing patterns.                                                                                                                                                                                                                                       |
-| 660     | AI-based browser automation                       | Detects indicators of artificial intelligence (AI)-assisted or scripted browser control.This rule is enabled when the Signals SDK opt-in flag is set to `DetectAIAgents=True` and evaluates device and browser characteristics that strongly indicate AI or automated session control. |
+| Rule ID | Rule                                              | Description                                                                                                                                                                                                                                                                                                        |
+| ------- | ------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| 600     | Automation framework - headless browser           | Flags indicators associated with automated browsing environments.                                                                                                                                                                                                                                                  |
+| 601     | Automation framework                              | Detects known browser automation frameworks.                                                                                                                                                                                                                                                                       |
+| 603     | Non-human keyboard interaction                    | Highlights keyboard behavior patterns that appear non-human.                                                                                                                                                                                                                                                       |
+| 604     | Non-human mouse interaction                       | Highlights mouse interaction patterns that appear automated or synthetic.                                                                                                                                                                                                                                          |
+| 610     | Suspicious user agent                             | Flags user-agent characteristics commonly associated with automation.                                                                                                                                                                                                                                              |
+| 612     | Media mismatch                                    | Detects inconsistencies between reported media capabilities and device profile.                                                                                                                                                                                                                                    |
+| 618     | Hosting service with a suspicious device property | Flags potentially risky combinations of hosting-network and device characteristics.                                                                                                                                                                                                                                |
+| 623     | Automation driver tools                           | Detects automation driver tooling in the browser environment.                                                                                                                                                                                                                                                      |
+| 625     | Screen resolution anomaly                         | Flags unusual display properties often associated with nonstandard environments.                                                                                                                                                                                                                                   |
+| 627     | CPU cores anomaly                                 | Flags improbable hardware capacity reports.                                                                                                                                                                                                                                                                        |
+| 628     | Browser loading anomaly                           | Detects browser initialization patterns associated with automation masking.                                                                                                                                                                                                                                        |
+| 629     | Browser anomaly                                   | Highlights anomalous browser behavior that can indicate manipulation.                                                                                                                                                                                                                                              |
+| 631     | Invalid Chrome properties                         | Flags unexpected behavior in Chrome-specific runtime properties.                                                                                                                                                                                                                                                   |
+| 632     | Automation framework on emulated device           | Detects signs that a session is running in an emulated environment.                                                                                                                                                                                                                                                |
+| 640     | Accelerometer anomaly                             | Flags motion-sensor patterns that are inconsistent with expected device behavior.                                                                                                                                                                                                                                  |
+| 642     | Touch interaction duration anomaly                | Flags unusual touch interaction timing patterns.                                                                                                                                                                                                                                                                   |
+| 660     | AI agent detected                                 | Detects indicators of artificial intelligence (AI)-assisted or scripted browser control.This rule is available when the Signals SDK `isIAFDetectionEnabled` opt-in flag is set to `true` and evaluates device and browser characteristics that strongly indicate AI or automated session control.                  |
+| 661     | AI agent - ChatGPT cloud browser detected         | Detects ChatGPT cloud browser and ChatGPT dots activity. This rule is available when the Signals SDK `isIAFDetectionEnabled` opt-in flag is set to `true`.                                                                                                                                                         |
+| 663     | AI agent - Manus browser extension detected       | Detects Manus browser extension activity. This rule is available when the Signals SDK `isIAFDetectionEnabled` opt-in flag is set to `true`.                                                                                                                                                                        |
+| 664     | AI agent - Claude browser extension detected      | Detects Claude browser extension activity. This rule is available when the Signals SDK `isIAFDetectionEnabled` opt-in flag is set to `true`.                                                                                                                                                                       |
+| 665     | AI agent - Skyvern detected                       | Detects Skyvern AI activity. This rule is available when the Signals SDK `isIAFDetectionEnabled` opt-in flag is set to `true`.                                                                                                                                                                                     |
+| 666     | AI agent - Anchor detected                        | Detects Anchor AI activity. This rule is available when the Signals SDK `isIAFDetectionEnabled` opt-in flag is set to `true`.                                                                                                                                                                                      |
+| 668     | AI agent - Claude Code detected                   | Detects Claude Code browser activity. This rule is only available in workforce flows if users have installed the [PingID Device Trust agent](../strong_authentication_mfa/p1_using_the_workforce_trust_agent.html) version 1.2 or later, and the Signals SDK `isIAFDetectionEnabled` opt-in flag is set to `true`. |
+| 669     | AI agent - Codex detected                         | Detects Codex browser activity. This rule is only available in workforce flows if users have installed the [PingID Device Trust agent](../strong_authentication_mfa/p1_using_the_workforce_trust_agent.html) version 1.2 or later, and the Signals SDK `isIAFDetectionEnabled` opt-in flag is set to `true`.       |
+| 671     | AI agent - Copilot detected                       | Detects Copilot browser activity. This rule is only available in workforce flows if users have installed the [PingID Device Trust agent](../strong_authentication_mfa/p1_using_the_workforce_trust_agent.html) version 1.2 or later, and the Signals SDK `isIAFDetectionEnabled` opt-in flag is set to `true`.     |
+| 674     | AI agent - Muse detected                          | Detects browser activity from Muse, Meta's personal AI agent. This rule is only available when the Signals SDK for Web version 5.6.0 or later is used.                                                                                                                                                             |
 
 ## Suspicious Device predictor
 
@@ -2097,7 +2056,7 @@ page_id: pingone:threat_protection_using_pingone_protect:p1_protect_risk_predict
 canonical_url: https://docs.pingidentity.com/pingone/threat_protection_using_pingone_protect/p1_protect_risk_predictors.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: February 12, 2025
+revdate: 2026-09-02T23:22:10Z
 section_ids:
   adversary-in-the-middle-aitm: Adversary-in-the-Middle (AitM)
   anonymous-network-detection: Anonymous Network Detection
@@ -2209,15 +2168,13 @@ To determine whether activity is bot-driven, the predictor analyzes the followin
 
 * HTTP message signatures
 
-If the predictor detects bot activity, the risk evaluation returns a high-risk result and recommends bot mitigation. PingOne Protect can also identify a subset of specific agent types in the risk evaluation response.
+If the predictor detects bot activity, the risk evaluation returns a high-risk result and recommends bot mitigation. This predictor uses rule-based conditions and patterns to detect risk. You can configure the predictor to exclude one or more rules, such as when a specific rule causes legitimate authentication attempts to be labeled as high risk. PingOne Protect can also identify specific AI agent types in the risk evaluation response. Learn more in [Predictor rules](p1_protect_predictor_rules.html).
 
 You can configure a fallback value for this predictor type to use if there's insufficient information to calculate a risk level.
 
-This predictor uses rule-based conditions and patterns to detect risk. You can configure the predictor to exclude one or more rules, such as when a specific rule causes legitimate authentication attempts to be labeled as high risk. Learn more in [Predictor rules](p1_protect_predictor_rules.html).
-
-|   |                                                                                |
-| - | ------------------------------------------------------------------------------ |
-|   | The PingOne Signals (Protect) SDK is required for the Bot Detection predictor. |
+|   |                                                                                                                                                                                                                                                                    |
+| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+|   | The PingOne Signals (Protect) SDK is required for the Bot Detection predictor. To take advantage of the AI agent type detection capabilities, use Signals SDK version 5.6.10 and set the `isIAFDetectionEnabled` and `agentIdentification` opt-in flags to `true`. |
 
 ## Email Reputation
 
@@ -2455,6 +2412,7 @@ page_id: pingone:threat_protection_using_pingone_protect:p1_protect_general_prot
 canonical_url: https://docs.pingidentity.com/pingone/threat_protection_using_pingone_protect/p1_protect_general_protect_settings.html
 llms_txt: https://docs.pingidentity.com/pingone/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-02T00:00:00Z
 section_ids:
   predictor-retention-periods: Predictor retention periods
 ---

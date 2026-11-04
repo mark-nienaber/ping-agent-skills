@@ -7,6 +7,7 @@ page_id: pingam:auth-nodes:access-identity-profile
 canonical_url: https://docs.pingidentity.com/pingam/8.1/auth-nodes/access-identity-profile.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 keywords: ["Extensibility", "Nodes &amp; Trees"]
 section_ids:
   read_an_identitys_profile: Read an identity's profile
@@ -83,6 +84,7 @@ page_id: pingam:auth-nodes:core-action
 canonical_url: https://docs.pingidentity.com/pingam/8.1/auth-nodes/core-action.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 keywords: ["Extensibility", "Nodes &amp; Trees", "Scripts"]
 section_ids:
   action_fields_and_methods: Action fields and methods
@@ -186,6 +188,7 @@ page_id: pingam:auth-nodes:about-nodes
 canonical_url: https://docs.pingidentity.com/pingam/8.1/auth-nodes/about-nodes.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 keywords: ["Authentication", "Extensibility", "Nodes &amp; Trees"]
 section_ids:
   types-of-nodes: Node types
@@ -297,6 +300,7 @@ page_id: pingam:auth-nodes:build-install-nodes
 canonical_url: https://docs.pingidentity.com/pingam/8.1/auth-nodes/build-install-nodes.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 keywords: ["Authentication", "Extensibility", "Customization", "Nodes &amp; Trees"]
 section_ids:
   proc-build-install-custom-node: Build and install a custom Java node
@@ -351,6 +355,7 @@ page_id: pingam:auth-nodes:changelog
 canonical_url: https://docs.pingidentity.com/pingam/8.1/auth-nodes/changelog.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 keywords: ["Extensibility", "Nodes &amp; Trees", "Scripts"]
 ---
 
@@ -402,6 +407,7 @@ page_id: pingam:auth-nodes:core-config
 canonical_url: https://docs.pingidentity.com/pingam/8.1/auth-nodes/core-config.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 keywords: ["Extensibility", "Nodes &amp; Trees", "Scripts"]
 section_ids:
   define_node_properties: Define node properties
@@ -593,6 +599,7 @@ page_id: pingam:auth-nodes:create-versioned-nodes
 canonical_url: https://docs.pingidentity.com/pingam/8.1/auth-nodes/create-versioned-nodes.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 keywords: ["Extensibility", "Nodes &amp; Trees", "Scripts"]
 ---
 
@@ -635,6 +642,7 @@ page_id: pingam:auth-nodes:preface
 canonical_url: https://docs.pingidentity.com/pingam/8.1/auth-nodes/preface.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 keywords: ["Extensibility", "Integration", "Nodes &amp; Trees"]
 page_aliases: ["index.adoc"]
 ---
@@ -696,6 +704,7 @@ page_id: pingam:auth-nodes:develop-maintain-nodes
 canonical_url: https://docs.pingidentity.com/pingam/8.1/auth-nodes/develop-maintain-nodes.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 keywords: ["Extensibility", "Nodes &amp; Trees"]
 ---
 
@@ -724,6 +733,7 @@ page_id: pingam:auth-nodes:core-error-handling
 canonical_url: https://docs.pingidentity.com/pingam/8.1/auth-nodes/core-error-handling.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 keywords: ["Extensibility", "Nodes &amp; Trees", "Scripts"]
 section_ids:
   authentication_errors: Authentication errors
@@ -775,6 +785,7 @@ page_id: pingam:auth-nodes:handle-multiple-visits
 canonical_url: https://docs.pingidentity.com/pingam/8.1/auth-nodes/handle-multiple-visits.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 keywords: ["Extensibility", "Nodes &amp; Trees"]
 ---
 
@@ -809,6 +820,7 @@ page_id: pingam:auth-nodes:include-callbacks
 canonical_url: https://docs.pingidentity.com/pingam/8.1/auth-nodes/include-callbacks.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 keywords: ["Extensibility", "Nodes &amp; Trees"]
 section_ids:
   client-side-javascript: Send and execute JavaScript in a callback
@@ -901,6 +913,7 @@ page_id: pingam:auth-nodes:core-inject
 canonical_url: https://docs.pingidentity.com/pingam/8.1/auth-nodes/core-inject.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-07-07T12:28:33Z
 keywords: ["Extensibility", "Nodes &amp; Trees", "Scripts"]
 section_ids:
   using-a-cache: Use a cache
@@ -910,9 +923,17 @@ section_ids:
 
 # Inject objects into a node instance
 
-A node instance is constructed every time the node is reached in a tree and is discarded as soon as it's been used to process the state once.
+AM constructs a node instance more than once per authentication request: first during the input-collection phase to discover shared and transient state keys, and then during the execution phase to run `process()`.
 
-State stored in a node is lost when the node's process method completes. To make state available for other nodes in the tree, nodes must return the state to the user or store it in the *shared state*.
+With nested trees (such as when the [Inner Tree Evaluator node](https://docs.pingidentity.com/auth-node-ref/8.1/inner-tree-evaluator.html) is used), every node in the inner tree has its constructor called twice per request.
+
+|   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | Keep constructors lightweight. Only assign injected dependencies to `private final` fields. Never perform the following operations in a constructor:- **Spawning threads** — don't call any `Executors` factory method or instantiate `Thread` objects directly. Inject a Guice-managed `ExecutorService` instead.
+
+- **Network operations** — don't open sockets, perform DNS lookups, initiate TLS handshakes, or set up local connection pools. Inject AM's shared HTTP client (`@Named("CloseableHttpClientHandler") Handler`) or another pre-configured shared client instead.
+
+- **Stateful fields** — keep nodes stateless. Declare all injected components as `private final`. Use `TreeContext` and shared state inside `process()` for request-scoped data.Performing I/O, creating network connections, or spawning threads in a constructor runs on every authentication request and degrades performance or stability. Use `@Singleton` Guice-managed classes for expensive shared resources. Learn more in [Use a cache](#using-a-cache). |
 
 AM uses Google's *Guice* dependency injection framework for authentication nodes and uses Guice to manage most of its object lifecycles. Use *just-in-time* bindings from the constructor to inject an object from Guice.
 
@@ -1063,6 +1084,7 @@ page_id: pingam:auth-nodes:i18n-nodes
 canonical_url: https://docs.pingidentity.com/pingam/8.1/auth-nodes/i18n-nodes.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 keywords: ["Extensibility", "Nodes &amp; Trees", "Scripts", "Translation"]
 section_ids:
   to-localize-callback-node-text: Localize node UI text
@@ -1138,6 +1160,7 @@ page_id: pingam:auth-nodes:core-metadata
 canonical_url: https://docs.pingidentity.com/pingam/8.1/auth-nodes/core-metadata.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 keywords: ["Extensibility", "Nodes &amp; Trees", "Scripts"]
 section_ids:
   outcome-provider: Outcome provider
@@ -1350,6 +1373,7 @@ page_id: pingam:auth-nodes:core-class
 canonical_url: https://docs.pingidentity.com/pingam/8.1/auth-nodes/core-class.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 keywords: ["Extensibility", "Nodes &amp; Trees", "Scripts"]
 ---
 
@@ -1493,6 +1517,7 @@ page_id: pingam:auth-nodes:nodeversionupgrader
 canonical_url: https://docs.pingidentity.com/pingam/8.1/auth-nodes/nodeversionupgrader.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 keywords: ["Extensibility", "Nodes &amp; Trees", "Scripts"]
 section_ids:
   version: Version
@@ -1534,6 +1559,7 @@ page_id: pingam:auth-nodes:plugin-class
 canonical_url: https://docs.pingidentity.com/pingam/8.1/auth-nodes/plugin-class.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 keywords: ["Extensibility", "Integration", "Nodes &amp; Trees", "Scripts", "Upgrade"]
 ---
 
@@ -1630,6 +1656,7 @@ page_id: pingam:auth-nodes:post-install-tasks
 canonical_url: https://docs.pingidentity.com/pingam/8.1/auth-nodes/post-install-tasks.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 keywords: ["Extensibility", "Nodes &amp; Trees", "Scripts", "Testing"]
 page_aliases: ["maintaining-nodes.adoc"]
 section_ids:
@@ -1861,6 +1888,7 @@ page_id: pingam:auth-nodes:preparing-for-nodes
 canonical_url: https://docs.pingidentity.com/pingam/8.1/auth-nodes/preparing-for-nodes.html
 llms_txt: https://docs.pingidentity.com/pingam/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-06-01T14:11:17Z
 keywords: ["Extensibility", "Integration", "Nodes &amp; Trees", "Setup &amp; Configuration"]
 section_ids:
   proc-custom-auth-nodes-prerequisites: Prepare an environment for building custom authentication nodes

@@ -6,7 +6,7 @@ license: MIT
 
 # PingID
 
-Overview of legacy PingID FIDO2 platform biometrics, including supported devices and high-level steps to enable passwordless or MFA authentication.
+How to set up a PingFederate authentication policy for passwordless authentication using a security key with legacy PingID admin portal.
 
 ## Live source of truth
 
@@ -27,16 +27,15 @@ Overview of legacy PingID FIDO2 platform biometrics, including supported devices
 
 | Task category | Guide slug | Live URL pattern | Snapshot |
 |---|---|---|---|
-| Release Notes: december, app, april | release_notes | https://docs.pingidentity.com/pingid/release_notes/*.md | references/snapshots/release-notes.md |
+| Release Notes: pingid, app, notes | release_notes | https://docs.pingidentity.com/pingid/release_notes/*.md | references/snapshots/release-notes.md |
 | Pingid Service Management: authentication, pingid, legacy | pingid_service_management | https://docs.pingidentity.com/pingid/pingid_service_management/*.md | references/snapshots/pingid-service-management.md |
-| Pingid Integrations: configuration, example, passwordless | pingid_integrations | https://docs.pingidentity.com/pingid/pingid_integrations/*.md | references/snapshots/pingid-integrations.md |
-| Pingid Sdk: pingid, sdk, account | pingid_sdk | https://docs.pingidentity.com/pingid/pingid_sdk/*.md | references/snapshots/pingid-sdk.md |
+| Pingid Integrations: pingid, legacy, pam | pingid_integrations | https://docs.pingidentity.com/pingid/pingid_integrations/*.md | references/snapshots/pingid-integrations.md |
 | Pingid User Life Cycle Management: user, pingid, service | pingid_user_life_cycle_management | https://docs.pingidentity.com/pingid/pingid_user_life_cycle_management/*.md | references/snapshots/pingid-user-life-cycle-management.md |
-| Introduction To Pingid: pingid, authentication, pingfederate | introduction_to_pingid | https://docs.pingidentity.com/pingid/introduction_to_pingid/*.md | references/snapshots/introduction-to-pingid.md |
-| Pingid Offline Mfa: mfa, offline, pingid | pingid_offline_mfa | https://docs.pingidentity.com/pingid/pingid_offline_mfa/*.md | references/snapshots/pingid-offline-mfa.md |
+| Introduction To Pingid: pingid, authentication, legacy | introduction_to_pingid | https://docs.pingidentity.com/pingid/introduction_to_pingid/*.md | references/snapshots/introduction-to-pingid.md |
+| Pingid Offline Mfa: pingid, mfa, offline | pingid_offline_mfa | https://docs.pingidentity.com/pingid/pingid_offline_mfa/*.md | references/snapshots/pingid-offline-mfa.md |
 | Orphan Files Old: untitled | _orphan_files_old | https://docs.pingidentity.com/pingid/_orphan_files_old/*.md | references/snapshots/orphan-files-old.md |
 | Pid Landing Page.Md: pingid | pid_landing_page.md | https://docs.pingidentity.com/pingid/pid_landing_page.md | references/snapshots/pid-landing-page-md.md |
-| Pid Link To End User Guide.Md: accessing, end, guide | pid_link_to_end_user_guide.md | https://docs.pingidentity.com/pingid/pid_link_to_end_user_guide.md | references/snapshots/pid-link-to-end-user-guide-md.md |
+| Pid Link To End User Guide.Md: end, getting, help | pid_link_to_end_user_guide.md | https://docs.pingidentity.com/pingid/pid_link_to_end_user_guide.md | references/snapshots/pid-link-to-end-user-guide-md.md |
 
 ## Composition
 

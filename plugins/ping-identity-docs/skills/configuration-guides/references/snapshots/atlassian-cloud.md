@@ -1,9 +1,11 @@
 ---
 title: Configuring SAML SSO with Atlassian Cloud and PingFederate
-description: The following table details the required and optional attributes to be configured in the assertion attribute contract.
+description: Configure SAML SSO with Atlassian Cloud and PingFederate — assertion attribute contract and SP connection
 component: configuration_guides
 page_id: configuration_guides:atlassian_cloud:config_saml_atlassiancloud_pf
 canonical_url: https://docs.pingidentity.com/configuration_guides/atlassian_cloud/config_saml_atlassiancloud_pf.html
+llms_txt: https://docs.pingidentity.com/configuration_guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: May 15, 2024
 section_ids:
   about-this-task: About this task
@@ -108,10 +110,12 @@ The following table details the references that are used within this guide that 
 
 ---
 title: Configuring SAML SSO with Atlassian Cloud and PingOne for Enterprise
-description: The following table details the required and optional attributes to be configured in the assertion attribute contract.
+description: Configure SAML SSO with Atlassian Cloud and PingOne for Enterprise — assertion attribute contract and SP connection
 component: configuration_guides
 page_id: configuration_guides:atlassian_cloud:config_saml_atlassiancloud_p1
 canonical_url: https://docs.pingidentity.com/configuration_guides/atlassian_cloud/config_saml_atlassiancloud_p1.html
+llms_txt: https://docs.pingidentity.com/configuration_guides/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: May 20, 2024
 section_ids:
   about-this-task: About this task

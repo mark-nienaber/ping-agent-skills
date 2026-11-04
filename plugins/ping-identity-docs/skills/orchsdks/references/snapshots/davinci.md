@@ -13,6 +13,7 @@ section_ids:
   step_2_initialize_the_fido_client: Step 2. Initialize the FIDO client
   step_3_registering_fido_authenticators: Step 3. Registering FIDO authenticators
   step_4_authenticating_using_a_fido_authenticator: Step 4. Authenticating using a FIDO authenticator
+  fido-client-errors: Step 5. Handling FIDO client-side errors
 ---
 
 # Adding strong authentication in JavaScript
@@ -74,13 +75,14 @@ Registering a FIDO authenticator in a DaVinci flow
 if (collector.type === 'FidoRegistrationCollector') {
   const credentialOptions = collector.output.config.publicKeyCredentialCreationOptions;
   const publicKeyCredential = await fidoApi.register(credentialOptions);
+
   if ('error' in publicKeyCredential) {
-    // Handle error
-  } else {
-    // Update the FidoRegistrationCollector with the credential
-    const updater = davinciClient.update(collector);
-    updater(publicKeyCredential);
+    // Handle the error
   }
+
+  // Update the FidoRegistrationCollector with the credential or error
+  const updater = davinciClient.update(collector);
+  updater(publicKeyCredential);
 }
 
 let nextStep = davinciClient.next();
@@ -96,17 +98,60 @@ Authenticating with a FIDO authenticator in a DaVinci flow
 if (collector.type === 'FidoAuthenticationCollector') {
   const credentialOptions = collector.output.config.publicKeyCredentialRequestOptions;
   const assertion = await fidoApi.authenticate(credentialOptions);
+
   if ('error' in assertion) {
-    // Handle error
-  } else {
-    // Update the FidoAuthenticationCollector with the credential
-    const updater = davinciClient.update(collector);
-    updater(assertion);
+    // Handle the error
   }
+
+  // Update the FidoAuthenticationCollector with the credential or error
+  const updater = davinciClient.update(collector);
+  updater(assertion);
 }
 
 let nextStep = davinciClient.next();
 ```
+
+## Step 5. Handling FIDO client-side errors
+
+If a call to `register()` or `authenticate()` fails, the returned promise resolves to a `GenericError` instead of a credential or assertion. That error object carries a `code` property, typed as `FidoErrorCode`, which normalizes the underlying WebAuthn `DOMException` into one of the following values:
+
+* `NotAllowedError`
+
+* `AbortError`
+
+* `InvalidStateError`
+
+* `NotSupportedError`
+
+* `SecurityError`
+
+* `TimeoutError`
+
+* `UnknownError` - Returned when the underlying error doesn't match any of the recognized WebAuthn error names.
+
+|   |                                                                                                                                                                                     |
+| - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | The **FIDO** module does not automatically submit a client-side error back to DaVinci. Reporting the error, and deciding when to progress the flow afterwards, is left to your app. |
+
+To report a client-side error, call `davinciClient.update(collector)` with the error object, the same way you would with a successful credential or assertion, and then call `next()` when you're ready to continue the flow:
+
+Reporting a FIDO client-side error to DaVinci
+
+```javascript
+const publicKeyCredential = await fidoApi.register(credentialOptions);
+
+if ('error' in publicKeyCredential) {
+  console.error(publicKeyCredential.code, publicKeyCredential.message);
+
+  const updater = davinciClient.update(collector);
+  updater(publicKeyCredential); // Send the error's `code` and `message` back to the flow
+}
+
+// Call `next()` when you're ready to continue, for example after showing the user a message
+let nextStep = davinciClient.next();
+```
+
+DaVinci flows can use the reported `code` to branch. For example, to offer a retry after a `TimeoutError`, or to fall back to another authentication method after a `NotAllowedError`.
 
 ---
 
@@ -164,23 +209,23 @@ The tutorial also requires a configured PingOne instance.
     >
     > **HTTP Connector field and collector support**
     >
-    > | Field (`Collector`)                       | Description                                                                        | DaVinci module |          |            |
-    > | ----------------------------------------- | ---------------------------------------------------------------------------------- | -------------- | -------- | ---------- |
-    > |                                           |                                                                                    | Android        | iOS      | JavaScript |
-    > | Text field(`TextCollector`)               | Collects a single text string.                                                     | ✅`1.0.0`       | ✅`1.0.0` | ✅`1.0.0`   |
-    > | Password field(`PasswordCollector`)       | Collects a single text string that cannot be read from the screen.                 | ✅`1.0.0`       | ✅`1.0.0` | ✅`1.0.0`   |
-    > | Submit Button(`SubmitCollector`)          | Sends the collected data to PingOne to continue the DaVinci flow.                  | ✅`1.0.0`       | ✅`1.0.0` | ✅`1.0.0`   |
-    > | Flow Button(`FlowCollector`)              | Triggers an alternative flow without sending the data collected so far to PingOne. | ✅`1.0.0`       | ✅`1.0.0` | ✅`1.0.0`   |
-    > | Label(`LabelCollector`)                   | Display a read-only text label.                                                    | ✅`1.1.0`       | ✅`1.1.0` | ✅`1.1.0`   |
-    > | Radio / Dropdown(`SingleSelectCollector`) | Collects a single value from a choice of multiple options.                         | ✅`1.1.0`       | ✅`1.1.0` | ✅`1.1.0`   |
+    > | Field                                                                                             | Collector                      |                                |                               |                              |
+    > | ------------------------------------------------------------------------------------------------- | ------------------------------ | ------------------------------ | ----------------------------- | ---------------------------- |
+    > |                                                                                                   | Android                        | iOS                            | JavaScript                    | React Native                 |
+    > | **Text field**Collects a single text string.                                                      | `TextCollector``1.0.0`         | `TextCollector``1.0.0`         | `TextCollector``1.0.0`        | TextCollector`1.1.0`         |
+    > | **Password field**Collects a single text string that cannot be read from the screen.              | `PasswordCollector``1.0.0`     | `PasswordCollector``1.0.0`     | `PasswordCollector``1.0.0`    | PasswordCollector`1.1.0`     |
+    > | **Submit Button**Sends the collected data to PingOne to continue the DaVinci flow.                | `SubmitCollector``1.0.0`       | `SubmitCollector``1.0.0`       | `SubmitCollector``1.0.0`      | SubmitCollector`1.1.0`       |
+    > | **Flow Button**Triggers an alternative flow without sending the data collected so far to PingOne. | `FlowCollector``1.0.0`         | `FlowCollector``1.0.0`         | `FlowCollector``1.0.0`        | FlowCollector`1.1.0`         |
+    > | **Label**Display a read-only text label.                                                          | `ReadOnlyTextCollector``1.1.0` | `LabelCollector``1.1.0`        | `ReadOnlyCollector``1.1.0`    | LabelCollector`1.1.0`        |
+    > | **Radio** / **Dropdown**Collects a single value from a choice of multiple options.                | `SingleSelectCollector``1.1.0` | `SingleSelectCollector``1.1.0` | `SingleValueCollector``1.1.0` | SingleSelectCollector`1.1.0` |
     >
     > **HTTP Connector SK-Component support**
     >
-    > | SK-Component (`Collector`) | Description                                                                                                               | DaVinci module |          |            |
-    > | -------------------------- | ------------------------------------------------------------------------------------------------------------------------- | -------------- | -------- | ---------- |
-    > |                            |                                                                                                                           | Android        | iOS      | JavaScript |
-    > | skIDP(`IdpCollector`)      | Presents a button to allow users to authenticate using an external identity provider, such as Apple, Facebook, or Google. | ✅`1.1.0`       | ✅`1.1.0` | ✅`1.1.0`   |
-    > | skrisk(`ProtectCollector`) | Instructs the client to gather behavioral data and return it to PingOne so that it can perform risk evaluations.          | ✅`1.3.0`       | ✅`1.3.0` | ✅`1.3.0`   |
+    > | SK-Component                                                                                                                       | DaVinci module            |                           |                           |                         |
+    > | ---------------------------------------------------------------------------------------------------------------------------------- | ------------------------- | ------------------------- | ------------------------- | ----------------------- |
+    > |                                                                                                                                    | Android                   | iOS                       | JavaScript                | React Native            |
+    > | **skIDP**Presents a button to allow users to authenticate using an external identity provider, such as Apple, Facebook, or Google. | `IdpCollector``1.1.0`     | `IdpCollector``1.1.0`     | `IdpCollector``1.1.0`     | IdpCollector`1.1.0`     |
+    > | **skrisk**Instructs the client to gather behavioral data and return it to PingOne so that it can perform risk evaluations.         | `ProtectCollector``1.3.0` | `ProtectCollector``1.3.0` | `ProtectCollector``1.3.0` | ProtectCollector`1.1.0` |
 
     > **Collapse: View unsupported features**
     >
@@ -188,15 +233,13 @@ The tutorial also requires a configured PingOne instance.
     >
     > * SKPolling components
     >
-    >   The **[SKPolling](https://docs.pingidentity.com/davinci/flows/davinci_sk_components.html#skpolling)** component cannot be processed by the DaVinci Client and should not be included in flows.
+    >   The [**SKPolling**](https://docs.pingidentity.com/davinci/flows/davinci_sk_components.html#skpolling) component cannot be processed by the DaVinci Client and should not be included in flows.
     >
     >   Features such as Magic Link authentication require the **SKPolling** component and therefore cannot be used with the DaVinci Client.
     >
     > * Images
     >
-    >   Images included in the flow cannot be passed to the SDK.
-
-  For example, the [PingOne sign-on with sessions DaVinci flow](https://support.pingidentity.com/s/marketplace-integration/a7iDo00000110R2IAI/pingone-sign-on-with-sessions).
+    >   Images embedded in a Custom HTML Template, such as background images or logos, cannot be passed to the Orchestration SDK as structured data.
 
 * PingOne Form Connector
 
@@ -204,42 +247,78 @@ The tutorial also requires a configured PingOne instance.
 
     > **Collapse: View supported fields**
     >
+    > * [Connector property support](#form-connector-properties-android-compatibility)
+    >
     > * [Custom Fields support](#form-connector-fields-android-compatibility)
     >
     > * [Toolbox support](#form-connector-toolbox-android-compatibility)
     >
+    > **Connector property support**
+    >
+    > | Property                                                                                                                                                                               | Collector                 |                           |                           |                         |
+    > | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------- | ------------------------- | ------------------------- | ----------------------- |
+    > |                                                                                                                                                                                        | Android                   | iOS                       | JavaScript                | React Native            |
+    > | **Enable Device Profiling**Instructs PingOne Protect to collect device information.                                                                                                    | `ProtectCollector``2.0.0` | `ProtectCollector``2.0.0` | `ProtectCollector``2.0.0` | ProtectCollector`1.1.0` |
+    > | **Include Behavioral Data**When enabled, PingOne Protect collects behavioral data to identify non-human activity.You must first select **Enable Device Profiling** to use this option. | `ProtectCollector``2.0.0` | `ProtectCollector``2.0.0` | `ProtectCollector``2.0.0` | ProtectCollector`1.1.0` |
+    >
     > **Custom Fields support**
     >
-    > | Field (`Collector`)                        | Description                                                                                                     | DaVinci module |          |            |
-    > | ------------------------------------------ | --------------------------------------------------------------------------------------------------------------- | -------------- | -------- | ---------- |
-    > |                                            |                                                                                                                 | Android        | iOS      | JavaScript |
-    > | Text Input(`TextCollector`)                | Collects a single text string.                                                                                  | ✅`1.1.0`       | ✅`1.1.0` | ✅`1.1.0`   |
-    > | Password(`PasswordCollector`)              | Collects a single text string that cannot be read from the screen.                                              | ✅`1.1.0`       | ✅`1.1.0` | ✅`1.1.0`   |
-    > | Dropdown(`SingleSelectCollector`)          | Collects a value from a dropdown containing one or more text strings.                                           | ✅`1.1.0`       | ✅`1.1.0` | ✅`1.1.0`   |
-    > | Combobox(`MultiSelectCollector`)           | Collects a value from a dropdown containing one or more text strings, the user can enter their own text string. | ✅`1.1.0`       | ✅`1.1.0` | ✅`1.1.0`   |
-    > | Radio Button List(`SingleSelectCollector`) | Collects a value from one or radio buttons.                                                                     | ✅`1.1.0`       | ✅`1.1.0` | ✅`1.1.0`   |
-    > | Checkbox List(`MultiSelectCollector`)      | Collects the value of one or more checkboxes.                                                                   | ✅`1.1.0`       | ✅`1.1.0` | ✅`1.1.0`   |
-    > | Phone Number Input(`PhoneNumberCollector`) | Collects a phone number, including the country code.                                                            | ✅`1.2.0`       | ✅`1.2.0` | ✅`1.2.0`   |
+    > | Field                                                                                                                                                                                                                                                                             | Collector                      |                                |                                                                                                                                                                                                                                    |                              |
+    > | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------ | ------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------- |
+    > |                                                                                                                                                                                                                                                                                   | Android                        | iOS                            | JavaScript                                                                                                                                                                                                                         | React Native                 |
+    > | **Checkbox**Collects `true` or `false` from a checkbox or switch.                                                                                                                                                                                                                 | `BooleanCollector``2.1.0`      | `BooleanCollector``2.1.0`      | `BooleanCollector` / `ValidatedBooleanCollector`\[[1](#_footnotedef_1 "View footnote.")]`2.1.0`***[1](#_footnoteref_1). `ValidatedBooleanCollector` is returned for required checkboxes, and `BooleanCollector` for optional ones. | BooleanCollector`1.1.0`      |
+    > | **Checkbox List**Collects the value of one or more checkboxes.                                                                                                                                                                                                                    | `MultiSelectCollector``1.1.0`  | `MultiSelectCollector``1.1.0`  | `MultiValueCollector``1.1.0`                                                                                                                                                                                                       | MultiSelectCollector`1.1.0`  |
+    > | **Combobox**Collects a value from a dropdown containing one or more text strings.                                                                                                                                                                                                 | `MultiSelectCollector``1.1.0`  | `MultiSelectCollector``1.1.0`  | `MultiValueCollector``1.1.0`                                                                                                                                                                                                       | MultiSelectCollector`1.1.0`  |
+    > | **Dropdown**Collects a value from a dropdown containing one or more text strings.                                                                                                                                                                                                 | `SingleSelectCollector``1.1.0` | `SingleSelectCollector``1.1.0` | `SingleValueCollector``1.1.0`                                                                                                                                                                                                      | SingleSelectCollector`1.1.0` |
+    > | **Password**Collects a single text string that cannot be read from the screen, and optionally verifies the provided value against a policy.\[[2](#_footnotedef_2 "View footnote.")]***[2](#_footnoteref_2). Support for verification against password policies was added in 2.1.0 | `PasswordCollector``1.1.0`     | `PasswordCollector``1.1.0`     | `PasswordCollector``1.1.0`                                                                                                                                                                                                         | PasswordCollector`1.1.0`     |
+    > | **New Password**Collects a new password and validates it against the environment's password policy. Optionally presents password requirements to the user.                                                                                                                        | ❌                              | ❌                              | `ValidatedPasswordCollector``2.1.0`                                                                                                                                                                                                | ❌                            |
+    > | **Phone Number Input**Collects a phone number, with optional country code, and extension values.\[[3](#_footnotedef_3 "View footnote.")]***[3](#_footnoteref_3). Support for the extension value was added in 2.1.0                                                               | `PhoneNumberCollector``1.2.0`  | `PhoneNumberCollector``1.2.0`  | `PhoneNumberCollector` / `PhoneNumberExtensionCollector``1.2.0`                                                                                                                                                                    | PhoneNumberCollector`1.1.0`  |
+    > | **Radio Button List**Collects a value from one or radio buttons.                                                                                                                                                                                                                  | `SingleSelectCollector``1.1.0` | `SingleSelectCollector``1.1.0` | `SingleValueCollector``1.1.0`                                                                                                                                                                                                      | SingleSelectCollector`1.1.0` |
+    > | **Submit Button**Presents a button for form submission.                                                                                                                                                                                                                           | `SubmitCollector``1.1.0`       | `SubmitCollector``1.1.0`       | `SubmitCollector``1.1.0`                                                                                                                                                                                                           | SubmitCollector`1.1.0`       |
+    > | **Text Input**Collects a single text string.                                                                                                                                                                                                                                      | `TextCollector``1.1.0`         | `TextCollector``1.1.0`         | `TextCollector``1.1.0`                                                                                                                                                                                                             | TextCollector`1.1.0`         |
     >
     > **Toolbox support**
     >
-    > | Field (`Collector`)                                                    | Description                                                                                                                                                             | DaVinci module |          |            |
-    > | ---------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------- | -------- | ---------- |
-    > |                                                                        |                                                                                                                                                                         | Android        | iOS      | JavaScript |
-    > | Flow Button(`FlowCollector`)                                           | Presents a customized button.                                                                                                                                           | ✅`1.1.0`       | ✅`1.1.0` | ✅`1.1.0`   |
-    > | Flow Link(`FlowCollector`)                                             | Presents a customized link.                                                                                                                                             | ✅`1.1.0`       | ✅`1.1.0` | ✅`1.1.0`   |
-    > | Translatable Rich Text(`TextCollector`)                                | Presents rich text that you can translate into multiple languages.                                                                                                      | ✅`1.1.0`       | ✅`1.1.0` | ✅`1.1.0`   |
-    > | Social Login(`IdpCollector`)                                           | Presents a button to allow users to authenticate using an external identity provider, such as Apple, Facebook, or Google.                                               | ✅`1.1.0`       | ✅`1.1.0` | ✅`1.1.0`   |
-    > | MFA Device Selection - Authentication(`DeviceAuthenticationCollector`) | Presents a list of methods for performing multi-factor authentication (MFA).&#xA;&#xA;DaVinci client currently only supports the Email, SMS, and Voice MFA types.       | ✅`1.2.0`       | ✅`1.2.0` | ✅`1.2.0`   |
-    > | MFA Device Selection - Registration(`DeviceRegistrationCollector`)     | Presents a list of methods you can register for multi-factor authentication (MFA).&#xA;&#xA;DaVinci client currently only supports the Email, SMS, and Voice MFA types. | ✅`1.2.0`       | ✅`1.2.0` | ✅`1.2.0`   |
+    > | Field                                                                                                                                                                                                                                   | Collector                                                          |                                                                    |                                                                    |                                                                |
+    > | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ | -------------------------------------------------------------- |
+    > |                                                                                                                                                                                                                                         | Android                                                            | iOS                                                                | JavaScript                                                         | React Native                                                   |
+    > | **Agreement**Presents text configured in PingOne under **User Experience** > **Agreements**, such as terms of service.                                                                                                                  | `ReadOnlyTextCollector``2.1.0`                                     | `ReadOnlyTextCollector``2.1.0`                                     | `ReadOnlyCollector``2.1.0`                                         | ReadOnlyTextCollector`1.1.0`                                   |
+    > | **FIDO2**Allows users to perform multi-factor authentication with a FIDO2 device, or register a new device.                                                                                                                             | `FidoAuthenticationCollector` / `FidoRegistrationCollector``1.3.0` | `FidoAuthenticationCollector` / `FidoRegistrationCollector``1.3.0` | `FidoAuthenticationCollector` / `FidoRegistrationCollector``1.3.0` | FidoAuthenticationCollector / FidoRegistrationCollector`1.1.0` |
+    > | **Image**Presents an image.                                                                                                                                                                                                             | `ImageCollector``2.2.0`                                            | `ImageCollector``2.2.0`                                            | `ImageCollector``2.1.0`                                            | ❌                                                              |
+    > | **Flow Button**Presents a customized button.                                                                                                                                                                                            | `FlowCollector``1.1.0`                                             | `FlowCollector``1.1.0`                                             | `FlowCollector``1.1.0`                                             | FlowCollector`1.1.0`                                           |
+    > | **Flow Link**Presents a customized link.                                                                                                                                                                                                | `FlowCollector``1.1.0`                                             | `FlowCollector``1.1.0`                                             | `FlowCollector``1.1.0`                                             | FlowCollector`1.1.0`                                           |
+    > | **MFA Device Selection - Authentication**Presents a list of methods for performing multi-factor authentication (MFA).&#xA;&#xA;DaVinci client supports the FIDO2, Email, SMS, and Voice MFA types.                                      | `DeviceAuthenticationCollector``1.2.0`                             | `DeviceAuthenticationCollector``1.2.0`                             | `DeviceAuthenticationCollector``1.2.0`                             | DeviceAuthenticationCollector`1.1.0`                           |
+    > | **MFA Device Selection - Registration**Presents a list of methods you can register for multi-factor authentication (MFA).&#xA;&#xA;DaVinci client supports the FIDO2, Email, SMS, and Voice MFA types.                                  | `DeviceRegistrationCollector``1.2.0`                               | `DeviceRegistrationCollector``1.2.0`                               | `DeviceRegistrationCollector``1.2.0`                               | DeviceRegistrationCollector`1.1.0`                             |
+    > | **Polling**Presents an activity indicator which allows you to pause or loop the flow while the user completes an action.                                                                                                                | `PollingCollector``2.1.0`                                          | `PollingCollector``2.1.0`                                          | `PollingCollector``2.1.0`                                          | PollingCollector`1.1.0`                                        |
+    > | **QR Code**Presents a QR code containing data, for example, a URL.                                                                                                                                                                      | `QRCodeCollector``2.1.0`                                           | `QRCodeCollector``2.1.0`                                           | `QrCodeCollector``2.1.0`                                           | QRCodeCollector`1.1.0`                                         |
+    > | **Social Login**Presents a button to allow users to authenticate using an external identity provider, such as Apple, Facebook, or Google.                                                                                               | `IdpCollector``1.1.0`                                              | `IdpCollector``1.1.0`                                              | `IdpCollector``1.1.0`                                              | IdpCollector`1.1.0`                                            |
+    > | **Translatable Rich Text**Presents rich text, including links, that you can translate into multiple languages.\[[4](#_footnotedef_4 "View footnote.")]***[4](#_footnoteref_4). Support for links in rich text fields was added in 2.1.0 | `LabelCollector``1.1.0`                                            | `LabelCollector``1.1.0`                                            | `RichTextCollector``1.1.0`                                         | LabelCollector`1.1.0`                                          |
 
 * PingOne Protect Connector
 
   * **Create Risk Evaluation** capability
 
-    | Android  | iOS      | JavaScript |
-    | -------- | -------- | ---------- |
-    | ✅`1.3.0` | ✅`1.3.0` | ✅`1.3.0`   |
+    > **Collapse: View supported fields**
+    >
+    > **PingOne Protect Connector support overview**
+    >
+    > | Capability                                                                                                                | Collector                 |                           |                           |                         |
+    > | ------------------------------------------------------------------------------------------------------------------------- | ------------------------- | ------------------------- | ------------------------- | ----------------------- |
+    > |                                                                                                                           | Android                   | iOS                       | JavaScript                | React Native            |
+    > | **Create Risk Evaluation**Sends device and behavioral data collected by PingOne Protect to DaVinci for a risk evaluation. | `ProtectCollector``1.3.0` | `ProtectCollector``1.3.0` | `ProtectCollector``1.3.0` | ProtectCollector`1.1.0` |
+
+* DaVinci SDK Integrator
+
+  * **Exchange Custom Metadata with DaVinci SDK** capability
+
+    > **Collapse: View supported fields**
+    >
+    > **DaVinci SDK Integrator support overview**
+    >
+    > | Capability                                                                                                                                                 | Collector                  |                            |                            |
+    > | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------- | -------------------------- | -------------------------- |
+    > |                                                                                                                                                            | Android                    | iOS                        | JavaScript                 |
+    > | **Exchange Custom Metadata**Exchanges custom JSON metadata and payloads between a DaVinci flow and the app, pausing flow execution until the app responds. | `MetadataCollector``2.2.0` | `MetadataCollector``2.2.0` | `MetadataCollector``2.2.0` |
 
 - Android
 
@@ -329,23 +408,23 @@ The tutorial also requires a configured PingOne instance.
     >
     > **HTTP Connector field and collector support**
     >
-    > | Field (`Collector`)                       | Description                                                                        | DaVinci module |          |            |
-    > | ----------------------------------------- | ---------------------------------------------------------------------------------- | -------------- | -------- | ---------- |
-    > |                                           |                                                                                    | Android        | iOS      | JavaScript |
-    > | Text field(`TextCollector`)               | Collects a single text string.                                                     | ✅`1.0.0`       | ✅`1.0.0` | ✅`1.0.0`   |
-    > | Password field(`PasswordCollector`)       | Collects a single text string that cannot be read from the screen.                 | ✅`1.0.0`       | ✅`1.0.0` | ✅`1.0.0`   |
-    > | Submit Button(`SubmitCollector`)          | Sends the collected data to PingOne to continue the DaVinci flow.                  | ✅`1.0.0`       | ✅`1.0.0` | ✅`1.0.0`   |
-    > | Flow Button(`FlowCollector`)              | Triggers an alternative flow without sending the data collected so far to PingOne. | ✅`1.0.0`       | ✅`1.0.0` | ✅`1.0.0`   |
-    > | Label(`LabelCollector`)                   | Display a read-only text label.                                                    | ✅`1.1.0`       | ✅`1.1.0` | ✅`1.1.0`   |
-    > | Radio / Dropdown(`SingleSelectCollector`) | Collects a single value from a choice of multiple options.                         | ✅`1.1.0`       | ✅`1.1.0` | ✅`1.1.0`   |
+    > | Field                                                                                             | Collector                      |                                |                               |                              |
+    > | ------------------------------------------------------------------------------------------------- | ------------------------------ | ------------------------------ | ----------------------------- | ---------------------------- |
+    > |                                                                                                   | Android                        | iOS                            | JavaScript                    | React Native                 |
+    > | **Text field**Collects a single text string.                                                      | `TextCollector``1.0.0`         | `TextCollector``1.0.0`         | `TextCollector``1.0.0`        | TextCollector`1.1.0`         |
+    > | **Password field**Collects a single text string that cannot be read from the screen.              | `PasswordCollector``1.0.0`     | `PasswordCollector``1.0.0`     | `PasswordCollector``1.0.0`    | PasswordCollector`1.1.0`     |
+    > | **Submit Button**Sends the collected data to PingOne to continue the DaVinci flow.                | `SubmitCollector``1.0.0`       | `SubmitCollector``1.0.0`       | `SubmitCollector``1.0.0`      | SubmitCollector`1.1.0`       |
+    > | **Flow Button**Triggers an alternative flow without sending the data collected so far to PingOne. | `FlowCollector``1.0.0`         | `FlowCollector``1.0.0`         | `FlowCollector``1.0.0`        | FlowCollector`1.1.0`         |
+    > | **Label**Display a read-only text label.                                                          | `ReadOnlyTextCollector``1.1.0` | `LabelCollector``1.1.0`        | `ReadOnlyCollector``1.1.0`    | LabelCollector`1.1.0`        |
+    > | **Radio** / **Dropdown**Collects a single value from a choice of multiple options.                | `SingleSelectCollector``1.1.0` | `SingleSelectCollector``1.1.0` | `SingleValueCollector``1.1.0` | SingleSelectCollector`1.1.0` |
     >
     > **HTTP Connector SK-Component support**
     >
-    > | SK-Component (`Collector`) | Description                                                                                                               | DaVinci module |          |            |
-    > | -------------------------- | ------------------------------------------------------------------------------------------------------------------------- | -------------- | -------- | ---------- |
-    > |                            |                                                                                                                           | Android        | iOS      | JavaScript |
-    > | skIDP(`IdpCollector`)      | Presents a button to allow users to authenticate using an external identity provider, such as Apple, Facebook, or Google. | ✅`1.1.0`       | ✅`1.1.0` | ✅`1.1.0`   |
-    > | skrisk(`ProtectCollector`) | Instructs the client to gather behavioral data and return it to PingOne so that it can perform risk evaluations.          | ✅`1.3.0`       | ✅`1.3.0` | ✅`1.3.0`   |
+    > | SK-Component                                                                                                                       | DaVinci module            |                           |                           |                         |
+    > | ---------------------------------------------------------------------------------------------------------------------------------- | ------------------------- | ------------------------- | ------------------------- | ----------------------- |
+    > |                                                                                                                                    | Android                   | iOS                       | JavaScript                | React Native            |
+    > | **skIDP**Presents a button to allow users to authenticate using an external identity provider, such as Apple, Facebook, or Google. | `IdpCollector``1.1.0`     | `IdpCollector``1.1.0`     | `IdpCollector``1.1.0`     | IdpCollector`1.1.0`     |
+    > | **skrisk**Instructs the client to gather behavioral data and return it to PingOne so that it can perform risk evaluations.         | `ProtectCollector``1.3.0` | `ProtectCollector``1.3.0` | `ProtectCollector``1.3.0` | ProtectCollector`1.1.0` |
 
     > **Collapse: View unsupported features**
     >
@@ -353,15 +432,13 @@ The tutorial also requires a configured PingOne instance.
     >
     > * SKPolling components
     >
-    >   The **[SKPolling](https://docs.pingidentity.com/davinci/flows/davinci_sk_components.html#skpolling)** component cannot be processed by the DaVinci Client and should not be included in flows.
+    >   The [**SKPolling**](https://docs.pingidentity.com/davinci/flows/davinci_sk_components.html#skpolling) component cannot be processed by the DaVinci Client and should not be included in flows.
     >
     >   Features such as Magic Link authentication require the **SKPolling** component and therefore cannot be used with the DaVinci Client.
     >
     > * Images
     >
-    >   Images included in the flow cannot be passed to the SDK.
-
-  For example, the [PingOne sign-on with sessions DaVinci flow](https://support.pingidentity.com/s/marketplace-integration/a7iDo00000110R2IAI/pingone-sign-on-with-sessions).
+    >   Images embedded in a Custom HTML Template, such as background images or logos, cannot be passed to the Orchestration SDK as structured data.
 
 * PingOne Form Connector
 
@@ -369,42 +446,78 @@ The tutorial also requires a configured PingOne instance.
 
     > **Collapse: View supported fields**
     >
+    > * [Connector property support](#form-connector-properties-ios-compatibility)
+    >
     > * [Custom Fields support](#form-connector-fields-ios-compatibility)
     >
     > * [Toolbox support](#form-connector-toolbox-ios-compatibility)
     >
+    > **Connector property support**
+    >
+    > | Property                                                                                                                                                                               | Collector                 |                           |                           |                         |
+    > | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------- | ------------------------- | ------------------------- | ----------------------- |
+    > |                                                                                                                                                                                        | Android                   | iOS                       | JavaScript                | React Native            |
+    > | **Enable Device Profiling**Instructs PingOne Protect to collect device information.                                                                                                    | `ProtectCollector``2.0.0` | `ProtectCollector``2.0.0` | `ProtectCollector``2.0.0` | ProtectCollector`1.1.0` |
+    > | **Include Behavioral Data**When enabled, PingOne Protect collects behavioral data to identify non-human activity.You must first select **Enable Device Profiling** to use this option. | `ProtectCollector``2.0.0` | `ProtectCollector``2.0.0` | `ProtectCollector``2.0.0` | ProtectCollector`1.1.0` |
+    >
     > **Custom Fields support**
     >
-    > | Field (`Collector`)                        | Description                                                                                                     | DaVinci module |          |            |
-    > | ------------------------------------------ | --------------------------------------------------------------------------------------------------------------- | -------------- | -------- | ---------- |
-    > |                                            |                                                                                                                 | Android        | iOS      | JavaScript |
-    > | Text Input(`TextCollector`)                | Collects a single text string.                                                                                  | ✅`1.1.0`       | ✅`1.1.0` | ✅`1.1.0`   |
-    > | Password(`PasswordCollector`)              | Collects a single text string that cannot be read from the screen.                                              | ✅`1.1.0`       | ✅`1.1.0` | ✅`1.1.0`   |
-    > | Dropdown(`SingleSelectCollector`)          | Collects a value from a dropdown containing one or more text strings.                                           | ✅`1.1.0`       | ✅`1.1.0` | ✅`1.1.0`   |
-    > | Combobox(`MultiSelectCollector`)           | Collects a value from a dropdown containing one or more text strings, the user can enter their own text string. | ✅`1.1.0`       | ✅`1.1.0` | ✅`1.1.0`   |
-    > | Radio Button List(`SingleSelectCollector`) | Collects a value from one or radio buttons.                                                                     | ✅`1.1.0`       | ✅`1.1.0` | ✅`1.1.0`   |
-    > | Checkbox List(`MultiSelectCollector`)      | Collects the value of one or more checkboxes.                                                                   | ✅`1.1.0`       | ✅`1.1.0` | ✅`1.1.0`   |
-    > | Phone Number Input(`PhoneNumberCollector`) | Collects a phone number, including the country code.                                                            | ✅`1.2.0`       | ✅`1.2.0` | ✅`1.2.0`   |
+    > | Field                                                                                                                                                                                                                                                                             | Collector                      |                                |                                                                                                                                                                                                                                    |                              |
+    > | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------ | ------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------- |
+    > |                                                                                                                                                                                                                                                                                   | Android                        | iOS                            | JavaScript                                                                                                                                                                                                                         | React Native                 |
+    > | **Checkbox**Collects `true` or `false` from a checkbox or switch.                                                                                                                                                                                                                 | `BooleanCollector``2.1.0`      | `BooleanCollector``2.1.0`      | `BooleanCollector` / `ValidatedBooleanCollector`\[[1](#_footnotedef_1 "View footnote.")]`2.1.0`***[1](#_footnoteref_1). `ValidatedBooleanCollector` is returned for required checkboxes, and `BooleanCollector` for optional ones. | BooleanCollector`1.1.0`      |
+    > | **Checkbox List**Collects the value of one or more checkboxes.                                                                                                                                                                                                                    | `MultiSelectCollector``1.1.0`  | `MultiSelectCollector``1.1.0`  | `MultiValueCollector``1.1.0`                                                                                                                                                                                                       | MultiSelectCollector`1.1.0`  |
+    > | **Combobox**Collects a value from a dropdown containing one or more text strings.                                                                                                                                                                                                 | `MultiSelectCollector``1.1.0`  | `MultiSelectCollector``1.1.0`  | `MultiValueCollector``1.1.0`                                                                                                                                                                                                       | MultiSelectCollector`1.1.0`  |
+    > | **Dropdown**Collects a value from a dropdown containing one or more text strings.                                                                                                                                                                                                 | `SingleSelectCollector``1.1.0` | `SingleSelectCollector``1.1.0` | `SingleValueCollector``1.1.0`                                                                                                                                                                                                      | SingleSelectCollector`1.1.0` |
+    > | **Password**Collects a single text string that cannot be read from the screen, and optionally verifies the provided value against a policy.\[[2](#_footnotedef_2 "View footnote.")]***[2](#_footnoteref_2). Support for verification against password policies was added in 2.1.0 | `PasswordCollector``1.1.0`     | `PasswordCollector``1.1.0`     | `PasswordCollector``1.1.0`                                                                                                                                                                                                         | PasswordCollector`1.1.0`     |
+    > | **New Password**Collects a new password and validates it against the environment's password policy. Optionally presents password requirements to the user.                                                                                                                        | ❌                              | ❌                              | `ValidatedPasswordCollector``2.1.0`                                                                                                                                                                                                | ❌                            |
+    > | **Phone Number Input**Collects a phone number, with optional country code, and extension values.\[[3](#_footnotedef_3 "View footnote.")]***[3](#_footnoteref_3). Support for the extension value was added in 2.1.0                                                               | `PhoneNumberCollector``1.2.0`  | `PhoneNumberCollector``1.2.0`  | `PhoneNumberCollector` / `PhoneNumberExtensionCollector``1.2.0`                                                                                                                                                                    | PhoneNumberCollector`1.1.0`  |
+    > | **Radio Button List**Collects a value from one or radio buttons.                                                                                                                                                                                                                  | `SingleSelectCollector``1.1.0` | `SingleSelectCollector``1.1.0` | `SingleValueCollector``1.1.0`                                                                                                                                                                                                      | SingleSelectCollector`1.1.0` |
+    > | **Submit Button**Presents a button for form submission.                                                                                                                                                                                                                           | `SubmitCollector``1.1.0`       | `SubmitCollector``1.1.0`       | `SubmitCollector``1.1.0`                                                                                                                                                                                                           | SubmitCollector`1.1.0`       |
+    > | **Text Input**Collects a single text string.                                                                                                                                                                                                                                      | `TextCollector``1.1.0`         | `TextCollector``1.1.0`         | `TextCollector``1.1.0`                                                                                                                                                                                                             | TextCollector`1.1.0`         |
     >
     > **Toolbox support**
     >
-    > | Field (`Collector`)                                                    | Description                                                                                                                                                             | DaVinci module |          |            |
-    > | ---------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------- | -------- | ---------- |
-    > |                                                                        |                                                                                                                                                                         | Android        | iOS      | JavaScript |
-    > | Flow Button(`FlowCollector`)                                           | Presents a customized button.                                                                                                                                           | ✅`1.1.0`       | ✅`1.1.0` | ✅`1.1.0`   |
-    > | Flow Link(`FlowCollector`)                                             | Presents a customized link.                                                                                                                                             | ✅`1.1.0`       | ✅`1.1.0` | ✅`1.1.0`   |
-    > | Translatable Rich Text(`TextCollector`)                                | Presents rich text that you can translate into multiple languages.                                                                                                      | ✅`1.1.0`       | ✅`1.1.0` | ✅`1.1.0`   |
-    > | Social Login(`IdpCollector`)                                           | Presents a button to allow users to authenticate using an external identity provider, such as Apple, Facebook, or Google.                                               | ✅`1.1.0`       | ✅`1.1.0` | ✅`1.1.0`   |
-    > | MFA Device Selection - Authentication(`DeviceAuthenticationCollector`) | Presents a list of methods for performing multi-factor authentication (MFA).&#xA;&#xA;DaVinci client currently only supports the Email, SMS, and Voice MFA types.       | ✅`1.2.0`       | ✅`1.2.0` | ✅`1.2.0`   |
-    > | MFA Device Selection - Registration(`DeviceRegistrationCollector`)     | Presents a list of methods you can register for multi-factor authentication (MFA).&#xA;&#xA;DaVinci client currently only supports the Email, SMS, and Voice MFA types. | ✅`1.2.0`       | ✅`1.2.0` | ✅`1.2.0`   |
+    > | Field                                                                                                                                                                                                                                   | Collector                                                          |                                                                    |                                                                    |                                                                |
+    > | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ | -------------------------------------------------------------- |
+    > |                                                                                                                                                                                                                                         | Android                                                            | iOS                                                                | JavaScript                                                         | React Native                                                   |
+    > | **Agreement**Presents text configured in PingOne under **User Experience** > **Agreements**, such as terms of service.                                                                                                                  | `ReadOnlyTextCollector``2.1.0`                                     | `ReadOnlyTextCollector``2.1.0`                                     | `ReadOnlyCollector``2.1.0`                                         | ReadOnlyTextCollector`1.1.0`                                   |
+    > | **FIDO2**Allows users to perform multi-factor authentication with a FIDO2 device, or register a new device.                                                                                                                             | `FidoAuthenticationCollector` / `FidoRegistrationCollector``1.3.0` | `FidoAuthenticationCollector` / `FidoRegistrationCollector``1.3.0` | `FidoAuthenticationCollector` / `FidoRegistrationCollector``1.3.0` | FidoAuthenticationCollector / FidoRegistrationCollector`1.1.0` |
+    > | **Image**Presents an image.                                                                                                                                                                                                             | `ImageCollector``2.2.0`                                            | `ImageCollector``2.2.0`                                            | `ImageCollector``2.1.0`                                            | ❌                                                              |
+    > | **Flow Button**Presents a customized button.                                                                                                                                                                                            | `FlowCollector``1.1.0`                                             | `FlowCollector``1.1.0`                                             | `FlowCollector``1.1.0`                                             | FlowCollector`1.1.0`                                           |
+    > | **Flow Link**Presents a customized link.                                                                                                                                                                                                | `FlowCollector``1.1.0`                                             | `FlowCollector``1.1.0`                                             | `FlowCollector``1.1.0`                                             | FlowCollector`1.1.0`                                           |
+    > | **MFA Device Selection - Authentication**Presents a list of methods for performing multi-factor authentication (MFA).&#xA;&#xA;DaVinci client supports the FIDO2, Email, SMS, and Voice MFA types.                                      | `DeviceAuthenticationCollector``1.2.0`                             | `DeviceAuthenticationCollector``1.2.0`                             | `DeviceAuthenticationCollector``1.2.0`                             | DeviceAuthenticationCollector`1.1.0`                           |
+    > | **MFA Device Selection - Registration**Presents a list of methods you can register for multi-factor authentication (MFA).&#xA;&#xA;DaVinci client supports the FIDO2, Email, SMS, and Voice MFA types.                                  | `DeviceRegistrationCollector``1.2.0`                               | `DeviceRegistrationCollector``1.2.0`                               | `DeviceRegistrationCollector``1.2.0`                               | DeviceRegistrationCollector`1.1.0`                             |
+    > | **Polling**Presents an activity indicator which allows you to pause or loop the flow while the user completes an action.                                                                                                                | `PollingCollector``2.1.0`                                          | `PollingCollector``2.1.0`                                          | `PollingCollector``2.1.0`                                          | PollingCollector`1.1.0`                                        |
+    > | **QR Code**Presents a QR code containing data, for example, a URL.                                                                                                                                                                      | `QRCodeCollector``2.1.0`                                           | `QRCodeCollector``2.1.0`                                           | `QrCodeCollector``2.1.0`                                           | QRCodeCollector`1.1.0`                                         |
+    > | **Social Login**Presents a button to allow users to authenticate using an external identity provider, such as Apple, Facebook, or Google.                                                                                               | `IdpCollector``1.1.0`                                              | `IdpCollector``1.1.0`                                              | `IdpCollector``1.1.0`                                              | IdpCollector`1.1.0`                                            |
+    > | **Translatable Rich Text**Presents rich text, including links, that you can translate into multiple languages.\[[4](#_footnotedef_4 "View footnote.")]***[4](#_footnoteref_4). Support for links in rich text fields was added in 2.1.0 | `LabelCollector``1.1.0`                                            | `LabelCollector``1.1.0`                                            | `RichTextCollector``1.1.0`                                         | LabelCollector`1.1.0`                                          |
 
 * PingOne Protect Connector
 
   * **Create Risk Evaluation** capability
 
-    | Android  | iOS      | JavaScript |
-    | -------- | -------- | ---------- |
-    | ✅`1.3.0` | ✅`1.3.0` | ✅`1.3.0`   |
+    > **Collapse: View supported fields**
+    >
+    > **PingOne Protect Connector support overview**
+    >
+    > | Capability                                                                                                                | Collector                 |                           |                           |                         |
+    > | ------------------------------------------------------------------------------------------------------------------------- | ------------------------- | ------------------------- | ------------------------- | ----------------------- |
+    > |                                                                                                                           | Android                   | iOS                       | JavaScript                | React Native            |
+    > | **Create Risk Evaluation**Sends device and behavioral data collected by PingOne Protect to DaVinci for a risk evaluation. | `ProtectCollector``1.3.0` | `ProtectCollector``1.3.0` | `ProtectCollector``1.3.0` | ProtectCollector`1.1.0` |
+
+* DaVinci SDK Integrator
+
+  * **Exchange Custom Metadata with DaVinci SDK** capability
+
+    > **Collapse: View supported fields**
+    >
+    > **DaVinci SDK Integrator support overview**
+    >
+    > | Capability                                                                                                                                                 | Collector                  |                            |                            |
+    > | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------- | -------------------------- | -------------------------- |
+    > |                                                                                                                                                            | Android                    | iOS                        | JavaScript                 |
+    > | **Exchange Custom Metadata**Exchanges custom JSON metadata and payloads between a DaVinci flow and the app, pausing flow execution until the app responds. | `MetadataCollector``2.2.0` | `MetadataCollector``2.2.0` | `MetadataCollector``2.2.0` |
 
 - iOS
 
@@ -488,23 +601,23 @@ The tutorial also requires a configured server.
     >
     > **HTTP Connector field and collector support**
     >
-    > | Field (`Collector`)                       | Description                                                                        | DaVinci module |          |            |
-    > | ----------------------------------------- | ---------------------------------------------------------------------------------- | -------------- | -------- | ---------- |
-    > |                                           |                                                                                    | Android        | iOS      | JavaScript |
-    > | Text field(`TextCollector`)               | Collects a single text string.                                                     | ✅`1.0.0`       | ✅`1.0.0` | ✅`1.0.0`   |
-    > | Password field(`PasswordCollector`)       | Collects a single text string that cannot be read from the screen.                 | ✅`1.0.0`       | ✅`1.0.0` | ✅`1.0.0`   |
-    > | Submit Button(`SubmitCollector`)          | Sends the collected data to PingOne to continue the DaVinci flow.                  | ✅`1.0.0`       | ✅`1.0.0` | ✅`1.0.0`   |
-    > | Flow Button(`FlowCollector`)              | Triggers an alternative flow without sending the data collected so far to PingOne. | ✅`1.0.0`       | ✅`1.0.0` | ✅`1.0.0`   |
-    > | Label(`LabelCollector`)                   | Display a read-only text label.                                                    | ✅`1.1.0`       | ✅`1.1.0` | ✅`1.1.0`   |
-    > | Radio / Dropdown(`SingleSelectCollector`) | Collects a single value from a choice of multiple options.                         | ✅`1.1.0`       | ✅`1.1.0` | ✅`1.1.0`   |
+    > | Field                                                                                             | Collector                      |                                |                               |                              |
+    > | ------------------------------------------------------------------------------------------------- | ------------------------------ | ------------------------------ | ----------------------------- | ---------------------------- |
+    > |                                                                                                   | Android                        | iOS                            | JavaScript                    | React Native                 |
+    > | **Text field**Collects a single text string.                                                      | `TextCollector``1.0.0`         | `TextCollector``1.0.0`         | `TextCollector``1.0.0`        | TextCollector`1.1.0`         |
+    > | **Password field**Collects a single text string that cannot be read from the screen.              | `PasswordCollector``1.0.0`     | `PasswordCollector``1.0.0`     | `PasswordCollector``1.0.0`    | PasswordCollector`1.1.0`     |
+    > | **Submit Button**Sends the collected data to PingOne to continue the DaVinci flow.                | `SubmitCollector``1.0.0`       | `SubmitCollector``1.0.0`       | `SubmitCollector``1.0.0`      | SubmitCollector`1.1.0`       |
+    > | **Flow Button**Triggers an alternative flow without sending the data collected so far to PingOne. | `FlowCollector``1.0.0`         | `FlowCollector``1.0.0`         | `FlowCollector``1.0.0`        | FlowCollector`1.1.0`         |
+    > | **Label**Display a read-only text label.                                                          | `ReadOnlyTextCollector``1.1.0` | `LabelCollector``1.1.0`        | `ReadOnlyCollector``1.1.0`    | LabelCollector`1.1.0`        |
+    > | **Radio** / **Dropdown**Collects a single value from a choice of multiple options.                | `SingleSelectCollector``1.1.0` | `SingleSelectCollector``1.1.0` | `SingleValueCollector``1.1.0` | SingleSelectCollector`1.1.0` |
     >
     > **HTTP Connector SK-Component support**
     >
-    > | SK-Component (`Collector`) | Description                                                                                                               | DaVinci module |          |            |
-    > | -------------------------- | ------------------------------------------------------------------------------------------------------------------------- | -------------- | -------- | ---------- |
-    > |                            |                                                                                                                           | Android        | iOS      | JavaScript |
-    > | skIDP(`IdpCollector`)      | Presents a button to allow users to authenticate using an external identity provider, such as Apple, Facebook, or Google. | ✅`1.1.0`       | ✅`1.1.0` | ✅`1.1.0`   |
-    > | skrisk(`ProtectCollector`) | Instructs the client to gather behavioral data and return it to PingOne so that it can perform risk evaluations.          | ✅`1.3.0`       | ✅`1.3.0` | ✅`1.3.0`   |
+    > | SK-Component                                                                                                                       | DaVinci module            |                           |                           |                         |
+    > | ---------------------------------------------------------------------------------------------------------------------------------- | ------------------------- | ------------------------- | ------------------------- | ----------------------- |
+    > |                                                                                                                                    | Android                   | iOS                       | JavaScript                | React Native            |
+    > | **skIDP**Presents a button to allow users to authenticate using an external identity provider, such as Apple, Facebook, or Google. | `IdpCollector``1.1.0`     | `IdpCollector``1.1.0`     | `IdpCollector``1.1.0`     | IdpCollector`1.1.0`     |
+    > | **skrisk**Instructs the client to gather behavioral data and return it to PingOne so that it can perform risk evaluations.         | `ProtectCollector``1.3.0` | `ProtectCollector``1.3.0` | `ProtectCollector``1.3.0` | ProtectCollector`1.1.0` |
 
     > **Collapse: View unsupported features**
     >
@@ -512,15 +625,13 @@ The tutorial also requires a configured server.
     >
     > * SKPolling components
     >
-    >   The **[SKPolling](https://docs.pingidentity.com/davinci/flows/davinci_sk_components.html#skpolling)** component cannot be processed by the DaVinci Client and should not be included in flows.
+    >   The [**SKPolling**](https://docs.pingidentity.com/davinci/flows/davinci_sk_components.html#skpolling) component cannot be processed by the DaVinci Client and should not be included in flows.
     >
     >   Features such as Magic Link authentication require the **SKPolling** component and therefore cannot be used with the DaVinci Client.
     >
     > * Images
     >
-    >   Images included in the flow cannot be passed to the SDK.
-
-  For example, the [PingOne sign-on with sessions DaVinci flow](https://support.pingidentity.com/s/marketplace-integration/a7iDo00000110R2IAI/pingone-sign-on-with-sessions).
+    >   Images embedded in a Custom HTML Template, such as background images or logos, cannot be passed to the Orchestration SDK as structured data.
 
 * PingOne Form Connector
 
@@ -528,42 +639,78 @@ The tutorial also requires a configured server.
 
     > **Collapse: View supported fields**
     >
+    > * [Connector property support](#form-connector-properties-js-compatibility)
+    >
     > * [Custom Fields support](#form-connector-fields-js-compatibility)
     >
     > * [Toolbox support](#form-connector-toolbox-js-compatibility)
     >
+    > **Connector property support**
+    >
+    > | Property                                                                                                                                                                               | Collector                 |                           |                           |                         |
+    > | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------- | ------------------------- | ------------------------- | ----------------------- |
+    > |                                                                                                                                                                                        | Android                   | iOS                       | JavaScript                | React Native            |
+    > | **Enable Device Profiling**Instructs PingOne Protect to collect device information.                                                                                                    | `ProtectCollector``2.0.0` | `ProtectCollector``2.0.0` | `ProtectCollector``2.0.0` | ProtectCollector`1.1.0` |
+    > | **Include Behavioral Data**When enabled, PingOne Protect collects behavioral data to identify non-human activity.You must first select **Enable Device Profiling** to use this option. | `ProtectCollector``2.0.0` | `ProtectCollector``2.0.0` | `ProtectCollector``2.0.0` | ProtectCollector`1.1.0` |
+    >
     > **Custom Fields support**
     >
-    > | Field (`Collector`)                        | Description                                                                                                     | DaVinci module |          |            |
-    > | ------------------------------------------ | --------------------------------------------------------------------------------------------------------------- | -------------- | -------- | ---------- |
-    > |                                            |                                                                                                                 | Android        | iOS      | JavaScript |
-    > | Text Input(`TextCollector`)                | Collects a single text string.                                                                                  | ✅`1.1.0`       | ✅`1.1.0` | ✅`1.1.0`   |
-    > | Password(`PasswordCollector`)              | Collects a single text string that cannot be read from the screen.                                              | ✅`1.1.0`       | ✅`1.1.0` | ✅`1.1.0`   |
-    > | Dropdown(`SingleSelectCollector`)          | Collects a value from a dropdown containing one or more text strings.                                           | ✅`1.1.0`       | ✅`1.1.0` | ✅`1.1.0`   |
-    > | Combobox(`MultiSelectCollector`)           | Collects a value from a dropdown containing one or more text strings, the user can enter their own text string. | ✅`1.1.0`       | ✅`1.1.0` | ✅`1.1.0`   |
-    > | Radio Button List(`SingleSelectCollector`) | Collects a value from one or radio buttons.                                                                     | ✅`1.1.0`       | ✅`1.1.0` | ✅`1.1.0`   |
-    > | Checkbox List(`MultiSelectCollector`)      | Collects the value of one or more checkboxes.                                                                   | ✅`1.1.0`       | ✅`1.1.0` | ✅`1.1.0`   |
-    > | Phone Number Input(`PhoneNumberCollector`) | Collects a phone number, including the country code.                                                            | ✅`1.2.0`       | ✅`1.2.0` | ✅`1.2.0`   |
+    > | Field                                                                                                                                                                                                                                                                             | Collector                      |                                |                                                                                                                                                                                                                                    |                              |
+    > | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------ | ------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------- |
+    > |                                                                                                                                                                                                                                                                                   | Android                        | iOS                            | JavaScript                                                                                                                                                                                                                         | React Native                 |
+    > | **Checkbox**Collects `true` or `false` from a checkbox or switch.                                                                                                                                                                                                                 | `BooleanCollector``2.1.0`      | `BooleanCollector``2.1.0`      | `BooleanCollector` / `ValidatedBooleanCollector`\[[1](#_footnotedef_1 "View footnote.")]`2.1.0`***[1](#_footnoteref_1). `ValidatedBooleanCollector` is returned for required checkboxes, and `BooleanCollector` for optional ones. | BooleanCollector`1.1.0`      |
+    > | **Checkbox List**Collects the value of one or more checkboxes.                                                                                                                                                                                                                    | `MultiSelectCollector``1.1.0`  | `MultiSelectCollector``1.1.0`  | `MultiValueCollector``1.1.0`                                                                                                                                                                                                       | MultiSelectCollector`1.1.0`  |
+    > | **Combobox**Collects a value from a dropdown containing one or more text strings.                                                                                                                                                                                                 | `MultiSelectCollector``1.1.0`  | `MultiSelectCollector``1.1.0`  | `MultiValueCollector``1.1.0`                                                                                                                                                                                                       | MultiSelectCollector`1.1.0`  |
+    > | **Dropdown**Collects a value from a dropdown containing one or more text strings.                                                                                                                                                                                                 | `SingleSelectCollector``1.1.0` | `SingleSelectCollector``1.1.0` | `SingleValueCollector``1.1.0`                                                                                                                                                                                                      | SingleSelectCollector`1.1.0` |
+    > | **Password**Collects a single text string that cannot be read from the screen, and optionally verifies the provided value against a policy.\[[2](#_footnotedef_2 "View footnote.")]***[2](#_footnoteref_2). Support for verification against password policies was added in 2.1.0 | `PasswordCollector``1.1.0`     | `PasswordCollector``1.1.0`     | `PasswordCollector``1.1.0`                                                                                                                                                                                                         | PasswordCollector`1.1.0`     |
+    > | **New Password**Collects a new password and validates it against the environment's password policy. Optionally presents password requirements to the user.                                                                                                                        | ❌                              | ❌                              | `ValidatedPasswordCollector``2.1.0`                                                                                                                                                                                                | ❌                            |
+    > | **Phone Number Input**Collects a phone number, with optional country code, and extension values.\[[3](#_footnotedef_3 "View footnote.")]***[3](#_footnoteref_3). Support for the extension value was added in 2.1.0                                                               | `PhoneNumberCollector``1.2.0`  | `PhoneNumberCollector``1.2.0`  | `PhoneNumberCollector` / `PhoneNumberExtensionCollector``1.2.0`                                                                                                                                                                    | PhoneNumberCollector`1.1.0`  |
+    > | **Radio Button List**Collects a value from one or radio buttons.                                                                                                                                                                                                                  | `SingleSelectCollector``1.1.0` | `SingleSelectCollector``1.1.0` | `SingleValueCollector``1.1.0`                                                                                                                                                                                                      | SingleSelectCollector`1.1.0` |
+    > | **Submit Button**Presents a button for form submission.                                                                                                                                                                                                                           | `SubmitCollector``1.1.0`       | `SubmitCollector``1.1.0`       | `SubmitCollector``1.1.0`                                                                                                                                                                                                           | SubmitCollector`1.1.0`       |
+    > | **Text Input**Collects a single text string.                                                                                                                                                                                                                                      | `TextCollector``1.1.0`         | `TextCollector``1.1.0`         | `TextCollector``1.1.0`                                                                                                                                                                                                             | TextCollector`1.1.0`         |
     >
     > **Toolbox support**
     >
-    > | Field (`Collector`)                                                    | Description                                                                                                                                                             | DaVinci module |          |            |
-    > | ---------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------- | -------- | ---------- |
-    > |                                                                        |                                                                                                                                                                         | Android        | iOS      | JavaScript |
-    > | Flow Button(`FlowCollector`)                                           | Presents a customized button.                                                                                                                                           | ✅`1.1.0`       | ✅`1.1.0` | ✅`1.1.0`   |
-    > | Flow Link(`FlowCollector`)                                             | Presents a customized link.                                                                                                                                             | ✅`1.1.0`       | ✅`1.1.0` | ✅`1.1.0`   |
-    > | Translatable Rich Text(`TextCollector`)                                | Presents rich text that you can translate into multiple languages.                                                                                                      | ✅`1.1.0`       | ✅`1.1.0` | ✅`1.1.0`   |
-    > | Social Login(`IdpCollector`)                                           | Presents a button to allow users to authenticate using an external identity provider, such as Apple, Facebook, or Google.                                               | ✅`1.1.0`       | ✅`1.1.0` | ✅`1.1.0`   |
-    > | MFA Device Selection - Authentication(`DeviceAuthenticationCollector`) | Presents a list of methods for performing multi-factor authentication (MFA).&#xA;&#xA;DaVinci client currently only supports the Email, SMS, and Voice MFA types.       | ✅`1.2.0`       | ✅`1.2.0` | ✅`1.2.0`   |
-    > | MFA Device Selection - Registration(`DeviceRegistrationCollector`)     | Presents a list of methods you can register for multi-factor authentication (MFA).&#xA;&#xA;DaVinci client currently only supports the Email, SMS, and Voice MFA types. | ✅`1.2.0`       | ✅`1.2.0` | ✅`1.2.0`   |
+    > | Field                                                                                                                                                                                                                                   | Collector                                                          |                                                                    |                                                                    |                                                                |
+    > | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ | -------------------------------------------------------------- |
+    > |                                                                                                                                                                                                                                         | Android                                                            | iOS                                                                | JavaScript                                                         | React Native                                                   |
+    > | **Agreement**Presents text configured in PingOne under **User Experience** > **Agreements**, such as terms of service.                                                                                                                  | `ReadOnlyTextCollector``2.1.0`                                     | `ReadOnlyTextCollector``2.1.0`                                     | `ReadOnlyCollector``2.1.0`                                         | ReadOnlyTextCollector`1.1.0`                                   |
+    > | **FIDO2**Allows users to perform multi-factor authentication with a FIDO2 device, or register a new device.                                                                                                                             | `FidoAuthenticationCollector` / `FidoRegistrationCollector``1.3.0` | `FidoAuthenticationCollector` / `FidoRegistrationCollector``1.3.0` | `FidoAuthenticationCollector` / `FidoRegistrationCollector``1.3.0` | FidoAuthenticationCollector / FidoRegistrationCollector`1.1.0` |
+    > | **Image**Presents an image.                                                                                                                                                                                                             | `ImageCollector``2.2.0`                                            | `ImageCollector``2.2.0`                                            | `ImageCollector``2.1.0`                                            | ❌                                                              |
+    > | **Flow Button**Presents a customized button.                                                                                                                                                                                            | `FlowCollector``1.1.0`                                             | `FlowCollector``1.1.0`                                             | `FlowCollector``1.1.0`                                             | FlowCollector`1.1.0`                                           |
+    > | **Flow Link**Presents a customized link.                                                                                                                                                                                                | `FlowCollector``1.1.0`                                             | `FlowCollector``1.1.0`                                             | `FlowCollector``1.1.0`                                             | FlowCollector`1.1.0`                                           |
+    > | **MFA Device Selection - Authentication**Presents a list of methods for performing multi-factor authentication (MFA).&#xA;&#xA;DaVinci client supports the FIDO2, Email, SMS, and Voice MFA types.                                      | `DeviceAuthenticationCollector``1.2.0`                             | `DeviceAuthenticationCollector``1.2.0`                             | `DeviceAuthenticationCollector``1.2.0`                             | DeviceAuthenticationCollector`1.1.0`                           |
+    > | **MFA Device Selection - Registration**Presents a list of methods you can register for multi-factor authentication (MFA).&#xA;&#xA;DaVinci client supports the FIDO2, Email, SMS, and Voice MFA types.                                  | `DeviceRegistrationCollector``1.2.0`                               | `DeviceRegistrationCollector``1.2.0`                               | `DeviceRegistrationCollector``1.2.0`                               | DeviceRegistrationCollector`1.1.0`                             |
+    > | **Polling**Presents an activity indicator which allows you to pause or loop the flow while the user completes an action.                                                                                                                | `PollingCollector``2.1.0`                                          | `PollingCollector``2.1.0`                                          | `PollingCollector``2.1.0`                                          | PollingCollector`1.1.0`                                        |
+    > | **QR Code**Presents a QR code containing data, for example, a URL.                                                                                                                                                                      | `QRCodeCollector``2.1.0`                                           | `QRCodeCollector``2.1.0`                                           | `QrCodeCollector``2.1.0`                                           | QRCodeCollector`1.1.0`                                         |
+    > | **Social Login**Presents a button to allow users to authenticate using an external identity provider, such as Apple, Facebook, or Google.                                                                                               | `IdpCollector``1.1.0`                                              | `IdpCollector``1.1.0`                                              | `IdpCollector``1.1.0`                                              | IdpCollector`1.1.0`                                            |
+    > | **Translatable Rich Text**Presents rich text, including links, that you can translate into multiple languages.\[[4](#_footnotedef_4 "View footnote.")]***[4](#_footnoteref_4). Support for links in rich text fields was added in 2.1.0 | `LabelCollector``1.1.0`                                            | `LabelCollector``1.1.0`                                            | `RichTextCollector``1.1.0`                                         | LabelCollector`1.1.0`                                          |
 
 * PingOne Protect Connector
 
   * **Create Risk Evaluation** capability
 
-    | Android  | iOS      | JavaScript |
-    | -------- | -------- | ---------- |
-    | ✅`1.3.0` | ✅`1.3.0` | ✅`1.3.0`   |
+    > **Collapse: View supported fields**
+    >
+    > **PingOne Protect Connector support overview**
+    >
+    > | Capability                                                                                                                | Collector                 |                           |                           |                         |
+    > | ------------------------------------------------------------------------------------------------------------------------- | ------------------------- | ------------------------- | ------------------------- | ----------------------- |
+    > |                                                                                                                           | Android                   | iOS                       | JavaScript                | React Native            |
+    > | **Create Risk Evaluation**Sends device and behavioral data collected by PingOne Protect to DaVinci for a risk evaluation. | `ProtectCollector``1.3.0` | `ProtectCollector``1.3.0` | `ProtectCollector``1.3.0` | ProtectCollector`1.1.0` |
+
+* DaVinci SDK Integrator
+
+  * **Exchange Custom Metadata with DaVinci SDK** capability
+
+    > **Collapse: View supported fields**
+    >
+    > **DaVinci SDK Integrator support overview**
+    >
+    > | Capability                                                                                                                                                 | Collector                  |                            |                            |
+    > | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------- | -------------------------- | -------------------------- |
+    > |                                                                                                                                                            | Android                    | iOS                        | JavaScript                 |
+    > | **Exchange Custom Metadata**Exchanges custom JSON metadata and payloads between a DaVinci flow and the app, pausing flow execution until the app responds. | `MetadataCollector``2.2.0` | `MetadataCollector``2.2.0` | `MetadataCollector``2.2.0` |
 
 ## Prerequisites
 
@@ -600,6 +747,261 @@ The values you'll need when configuring the OIDC application in PingOne for this
 | **Signoff URLs**                       | `http://localhost:8443`                         |
 | **Terminate User Session by ID Token** | `Enabled`                                       |
 | **Allowed Origins**                    | `http://localhost:8443` `http://localhost:9443` |
+
+---
+
+---
+title: Before you begin
+description: Prerequisites, compatibility requirements, and PingOne DaVinci configuration steps needed before starting the React Native tutorial.
+component: orchsdks
+page_id: orchsdks:davinci:try-it-out/react-native/00_before-you-begin
+canonical_url: https://developer.pingidentity.com/orchsdks/davinci/try-it-out/react-native/00_before-you-begin.html
+llms_txt: https://developer.pingidentity.com/orchsdks/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+keywords: ["PingOne", "DaVinci", "Setup &amp; Configuration", "Source Code", "Tutorial", "SDK", "React Native"]
+section_ids:
+  compatibility: Compatibility
+  prerequisites: Prerequisites
+  server_configuration: Server configuration
+---
+
+# Before you begin
+
+[icon: circle-check, set=far]PingOne [icon: react, set=fab]React Native
+
+* **Prepare**
+
+* [Download](01_download_samples.html)
+
+* [Install](02_prepare-projects.html)
+
+* [Configure](03_configure_sample.html)
+
+* [Run](04_run_the_sample.html)
+
+To successfully complete this tutorial, refer to the prerequisites and compatibility requirements in this section.
+
+The tutorial also requires a configured PingOne instance.
+
+## Compatibility
+
+* React Native
+
+  This sample app requires React Native 0.80.1 or later.
+
+* iOS
+
+  This sample app requires iOS 16.0 or later.
+
+* Android
+
+  This sample app requires Android 10 (API level 29) or later.
+
+* PingOne
+
+  * Your PingOne instance must have DaVinci enabled.
+
+- DaVinci flows
+
+  Ensure your flows only use supported connectors, capabilities and fields for user interactions:
+
+* HTTP Connector
+
+  * **Custom HTML** capability
+
+    > **Collapse: View supported fields**
+    >
+    > * [HTTP Connector field and collector support](#http-connector-fields-react-native-compatibility)
+    >
+    > * [HTTP Connector SK-Component support](#http-connector-sk-components-react-native-compatibility)
+    >
+    > **HTTP Connector field and collector support**
+    >
+    > | Field                                                                                             | Collector                      |                                |                               |                              |
+    > | ------------------------------------------------------------------------------------------------- | ------------------------------ | ------------------------------ | ----------------------------- | ---------------------------- |
+    > |                                                                                                   | Android                        | iOS                            | JavaScript                    | React Native                 |
+    > | **Text field**Collects a single text string.                                                      | `TextCollector``1.0.0`         | `TextCollector``1.0.0`         | `TextCollector``1.0.0`        | TextCollector`1.1.0`         |
+    > | **Password field**Collects a single text string that cannot be read from the screen.              | `PasswordCollector``1.0.0`     | `PasswordCollector``1.0.0`     | `PasswordCollector``1.0.0`    | PasswordCollector`1.1.0`     |
+    > | **Submit Button**Sends the collected data to PingOne to continue the DaVinci flow.                | `SubmitCollector``1.0.0`       | `SubmitCollector``1.0.0`       | `SubmitCollector``1.0.0`      | SubmitCollector`1.1.0`       |
+    > | **Flow Button**Triggers an alternative flow without sending the data collected so far to PingOne. | `FlowCollector``1.0.0`         | `FlowCollector``1.0.0`         | `FlowCollector``1.0.0`        | FlowCollector`1.1.0`         |
+    > | **Label**Display a read-only text label.                                                          | `ReadOnlyTextCollector``1.1.0` | `LabelCollector``1.1.0`        | `ReadOnlyCollector``1.1.0`    | LabelCollector`1.1.0`        |
+    > | **Radio** / **Dropdown**Collects a single value from a choice of multiple options.                | `SingleSelectCollector``1.1.0` | `SingleSelectCollector``1.1.0` | `SingleValueCollector``1.1.0` | SingleSelectCollector`1.1.0` |
+    >
+    > **HTTP Connector SK-Component support**
+    >
+    > | SK-Component                                                                                                                       | DaVinci module            |                           |                           |                         |
+    > | ---------------------------------------------------------------------------------------------------------------------------------- | ------------------------- | ------------------------- | ------------------------- | ----------------------- |
+    > |                                                                                                                                    | Android                   | iOS                       | JavaScript                | React Native            |
+    > | **skIDP**Presents a button to allow users to authenticate using an external identity provider, such as Apple, Facebook, or Google. | `IdpCollector``1.1.0`     | `IdpCollector``1.1.0`     | `IdpCollector``1.1.0`     | IdpCollector`1.1.0`     |
+    > | **skrisk**Instructs the client to gather behavioral data and return it to PingOne so that it can perform risk evaluations.         | `ProtectCollector``1.3.0` | `ProtectCollector``1.3.0` | `ProtectCollector``1.3.0` | ProtectCollector`1.1.0` |
+
+    > **Collapse: View unsupported features**
+    >
+    > Verify that your flow does not depend on any *unsupported* elements:
+    >
+    > * SKPolling components
+    >
+    >   The [**SKPolling**](https://docs.pingidentity.com/davinci/flows/davinci_sk_components.html#skpolling) component cannot be processed by the DaVinci Client and should not be included in flows.
+    >
+    >   Features such as Magic Link authentication require the **SKPolling** component and therefore cannot be used with the DaVinci Client.
+    >
+    > * Images
+    >
+    >   Images embedded in a Custom HTML Template, such as background images or logos, cannot be passed to the Orchestration SDK as structured data.
+
+* PingOne Form Connector
+
+  * **Show Form** capability
+
+    > **Collapse: View supported fields**
+    >
+    > * [Connector property support](#form-connector-properties-react-native-compatibility)
+    >
+    > * [Custom Fields support](#form-connector-fields-react-native-compatibility)
+    >
+    > * [Toolbox support](#form-connector-toolbox-react-native-compatibility)
+    >
+    > **Connector property support**
+    >
+    > | Property                                                                                                                                                                               | Collector                 |                           |                           |                         |
+    > | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------- | ------------------------- | ------------------------- | ----------------------- |
+    > |                                                                                                                                                                                        | Android                   | iOS                       | JavaScript                | React Native            |
+    > | **Enable Device Profiling**Instructs PingOne Protect to collect device information.                                                                                                    | `ProtectCollector``2.0.0` | `ProtectCollector``2.0.0` | `ProtectCollector``2.0.0` | ProtectCollector`1.1.0` |
+    > | **Include Behavioral Data**When enabled, PingOne Protect collects behavioral data to identify non-human activity.You must first select **Enable Device Profiling** to use this option. | `ProtectCollector``2.0.0` | `ProtectCollector``2.0.0` | `ProtectCollector``2.0.0` | ProtectCollector`1.1.0` |
+    >
+    > **Custom Fields support**
+    >
+    > | Field                                                                                                                                                                                                                                                                             | Collector                      |                                |                                                                                                                                                                                                                                    |                              |
+    > | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------ | ------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------- |
+    > |                                                                                                                                                                                                                                                                                   | Android                        | iOS                            | JavaScript                                                                                                                                                                                                                         | React Native                 |
+    > | **Checkbox**Collects `true` or `false` from a checkbox or switch.                                                                                                                                                                                                                 | `BooleanCollector``2.1.0`      | `BooleanCollector``2.1.0`      | `BooleanCollector` / `ValidatedBooleanCollector`\[[1](#_footnotedef_1 "View footnote.")]`2.1.0`***[1](#_footnoteref_1). `ValidatedBooleanCollector` is returned for required checkboxes, and `BooleanCollector` for optional ones. | BooleanCollector`1.1.0`      |
+    > | **Checkbox List**Collects the value of one or more checkboxes.                                                                                                                                                                                                                    | `MultiSelectCollector``1.1.0`  | `MultiSelectCollector``1.1.0`  | `MultiValueCollector``1.1.0`                                                                                                                                                                                                       | MultiSelectCollector`1.1.0`  |
+    > | **Combobox**Collects a value from a dropdown containing one or more text strings.                                                                                                                                                                                                 | `MultiSelectCollector``1.1.0`  | `MultiSelectCollector``1.1.0`  | `MultiValueCollector``1.1.0`                                                                                                                                                                                                       | MultiSelectCollector`1.1.0`  |
+    > | **Dropdown**Collects a value from a dropdown containing one or more text strings.                                                                                                                                                                                                 | `SingleSelectCollector``1.1.0` | `SingleSelectCollector``1.1.0` | `SingleValueCollector``1.1.0`                                                                                                                                                                                                      | SingleSelectCollector`1.1.0` |
+    > | **Password**Collects a single text string that cannot be read from the screen, and optionally verifies the provided value against a policy.\[[2](#_footnotedef_2 "View footnote.")]***[2](#_footnoteref_2). Support for verification against password policies was added in 2.1.0 | `PasswordCollector``1.1.0`     | `PasswordCollector``1.1.0`     | `PasswordCollector``1.1.0`                                                                                                                                                                                                         | PasswordCollector`1.1.0`     |
+    > | **New Password**Collects a new password and validates it against the environment's password policy. Optionally presents password requirements to the user.                                                                                                                        | ❌                              | ❌                              | `ValidatedPasswordCollector``2.1.0`                                                                                                                                                                                                | ❌                            |
+    > | **Phone Number Input**Collects a phone number, with optional country code, and extension values.\[[3](#_footnotedef_3 "View footnote.")]***[3](#_footnoteref_3). Support for the extension value was added in 2.1.0                                                               | `PhoneNumberCollector``1.2.0`  | `PhoneNumberCollector``1.2.0`  | `PhoneNumberCollector` / `PhoneNumberExtensionCollector``1.2.0`                                                                                                                                                                    | PhoneNumberCollector`1.1.0`  |
+    > | **Radio Button List**Collects a value from one or radio buttons.                                                                                                                                                                                                                  | `SingleSelectCollector``1.1.0` | `SingleSelectCollector``1.1.0` | `SingleValueCollector``1.1.0`                                                                                                                                                                                                      | SingleSelectCollector`1.1.0` |
+    > | **Submit Button**Presents a button for form submission.                                                                                                                                                                                                                           | `SubmitCollector``1.1.0`       | `SubmitCollector``1.1.0`       | `SubmitCollector``1.1.0`                                                                                                                                                                                                           | SubmitCollector`1.1.0`       |
+    > | **Text Input**Collects a single text string.                                                                                                                                                                                                                                      | `TextCollector``1.1.0`         | `TextCollector``1.1.0`         | `TextCollector``1.1.0`                                                                                                                                                                                                             | TextCollector`1.1.0`         |
+    >
+    > **Toolbox support**
+    >
+    > | Field                                                                                                                                                                                                                                   | Collector                                                          |                                                                    |                                                                    |                                                                |
+    > | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ | -------------------------------------------------------------- |
+    > |                                                                                                                                                                                                                                         | Android                                                            | iOS                                                                | JavaScript                                                         | React Native                                                   |
+    > | **Agreement**Presents text configured in PingOne under **User Experience** > **Agreements**, such as terms of service.                                                                                                                  | `ReadOnlyTextCollector``2.1.0`                                     | `ReadOnlyTextCollector``2.1.0`                                     | `ReadOnlyCollector``2.1.0`                                         | ReadOnlyTextCollector`1.1.0`                                   |
+    > | **FIDO2**Allows users to perform multi-factor authentication with a FIDO2 device, or register a new device.                                                                                                                             | `FidoAuthenticationCollector` / `FidoRegistrationCollector``1.3.0` | `FidoAuthenticationCollector` / `FidoRegistrationCollector``1.3.0` | `FidoAuthenticationCollector` / `FidoRegistrationCollector``1.3.0` | FidoAuthenticationCollector / FidoRegistrationCollector`1.1.0` |
+    > | **Image**Presents an image.                                                                                                                                                                                                             | `ImageCollector``2.2.0`                                            | `ImageCollector``2.2.0`                                            | `ImageCollector``2.1.0`                                            | ❌                                                              |
+    > | **Flow Button**Presents a customized button.                                                                                                                                                                                            | `FlowCollector``1.1.0`                                             | `FlowCollector``1.1.0`                                             | `FlowCollector``1.1.0`                                             | FlowCollector`1.1.0`                                           |
+    > | **Flow Link**Presents a customized link.                                                                                                                                                                                                | `FlowCollector``1.1.0`                                             | `FlowCollector``1.1.0`                                             | `FlowCollector``1.1.0`                                             | FlowCollector`1.1.0`                                           |
+    > | **MFA Device Selection - Authentication**Presents a list of methods for performing multi-factor authentication (MFA).&#xA;&#xA;DaVinci client supports the FIDO2, Email, SMS, and Voice MFA types.                                      | `DeviceAuthenticationCollector``1.2.0`                             | `DeviceAuthenticationCollector``1.2.0`                             | `DeviceAuthenticationCollector``1.2.0`                             | DeviceAuthenticationCollector`1.1.0`                           |
+    > | **MFA Device Selection - Registration**Presents a list of methods you can register for multi-factor authentication (MFA).&#xA;&#xA;DaVinci client supports the FIDO2, Email, SMS, and Voice MFA types.                                  | `DeviceRegistrationCollector``1.2.0`                               | `DeviceRegistrationCollector``1.2.0`                               | `DeviceRegistrationCollector``1.2.0`                               | DeviceRegistrationCollector`1.1.0`                             |
+    > | **Polling**Presents an activity indicator which allows you to pause or loop the flow while the user completes an action.                                                                                                                | `PollingCollector``2.1.0`                                          | `PollingCollector``2.1.0`                                          | `PollingCollector``2.1.0`                                          | PollingCollector`1.1.0`                                        |
+    > | **QR Code**Presents a QR code containing data, for example, a URL.                                                                                                                                                                      | `QRCodeCollector``2.1.0`                                           | `QRCodeCollector``2.1.0`                                           | `QrCodeCollector``2.1.0`                                           | QRCodeCollector`1.1.0`                                         |
+    > | **Social Login**Presents a button to allow users to authenticate using an external identity provider, such as Apple, Facebook, or Google.                                                                                               | `IdpCollector``1.1.0`                                              | `IdpCollector``1.1.0`                                              | `IdpCollector``1.1.0`                                              | IdpCollector`1.1.0`                                            |
+    > | **Translatable Rich Text**Presents rich text, including links, that you can translate into multiple languages.\[[4](#_footnotedef_4 "View footnote.")]***[4](#_footnoteref_4). Support for links in rich text fields was added in 2.1.0 | `LabelCollector``1.1.0`                                            | `LabelCollector``1.1.0`                                            | `RichTextCollector``1.1.0`                                         | LabelCollector`1.1.0`                                          |
+
+* PingOne Protect Connector
+
+  * **Create Risk Evaluation** capability
+
+    > **Collapse: View supported fields**
+    >
+    > **PingOne Protect Connector support overview**
+    >
+    > | Capability                                                                                                                | Collector                 |                           |                           |                         |
+    > | ------------------------------------------------------------------------------------------------------------------------- | ------------------------- | ------------------------- | ------------------------- | ----------------------- |
+    > |                                                                                                                           | Android                   | iOS                       | JavaScript                | React Native            |
+    > | **Create Risk Evaluation**Sends device and behavioral data collected by PingOne Protect to DaVinci for a risk evaluation. | `ProtectCollector``1.3.0` | `ProtectCollector``1.3.0` | `ProtectCollector``1.3.0` | ProtectCollector`1.1.0` |
+
+* DaVinci SDK Integrator
+
+  * **Exchange Custom Metadata with DaVinci SDK** capability
+
+    > **Collapse: View supported fields**
+    >
+    > **DaVinci SDK Integrator support overview**
+    >
+    > | Capability                                                                                                                                                 | Collector                  |                            |                            |
+    > | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------- | -------------------------- | -------------------------- |
+    > |                                                                                                                                                            | Android                    | iOS                        | JavaScript                 |
+    > | **Exchange Custom Metadata**Exchanges custom JSON metadata and payloads between a DaVinci flow and the app, pausing flow execution until the app responds. | `MetadataCollector``2.2.0` | `MetadataCollector``2.2.0` | `MetadataCollector``2.2.0` |
+
+## Prerequisites
+
+The React Native development environment must be fully configured before you begin.
+
+Follow the official [React Native environment setup guide](https://reactnative.dev/docs/set-up-your-environment) and ensure the following tools are installed:
+
+* Node.js and Yarn
+
+  Install [Node.js](https://nodejs.org/) version 20 or later.
+
+  This project uses Yarn. Install Yarn by running:
+
+  ```shell
+  corepack enable
+  ```
+
+* Xcode (iOS only)
+
+  Download and install [Xcode](https://developer.apple.com/xcode/) from the Mac App Store.
+
+  Xcode 16 or later is recommended.
+
+* Ruby and Bundler (iOS only)
+
+  Ruby 3.3.6 or later is required to manage CocoaPods.
+
+  Install [Bundler](https://bundler.io/) with:
+
+  ```shell
+  gem install bundler
+  ```
+
+* CocoaPods (iOS only)
+
+  CocoaPods is installed locally during the tutorial.
+
+* Android Studio (Android only)
+
+  Download and install [Android Studio](https://developer.android.com/studio).
+
+  An Android emulator or physical device is required to run the app.
+
+* Java (Android only)
+
+  JDK 21 is required by the current Ping Android SDK dependencies used by the sample app.
+
+  Check that you are correctly setting the `JAVA_HOME` environment variable.
+
+  For example, a `~/.zshrc` file might contain the following:
+
+  ```shell
+  export JAVA_HOME=$(/usr/libexec/java_home -v21)
+  export PATH="$JAVA_HOME/bin:$PATH"
+  ```
+
+* `keytool` (Android only)
+
+  `keytool` is part of the Java Development Kit and is used to generate the debug signing keystore required for the Android build.
+
+## Server configuration
+
+You must configure your PingOne instance for use with the DaVinci module.
+
+Ask your PingOne administrator to complete the following tasks:
+
+* Configure a DaVinci flow
+
+* Create a DaVinci application
+
+* Configure PingOne for DaVinci flow invocation
+
+To learn how to complete these steps, refer to [Launching a flow with a Ping SDK](https://docs.pingidentity.com/davinci/integrating_flows_into_applications/davinci_sdk_launching_a_flow_with_the_sdk.html) in the *PingOne DaVinci documentation*.
+
+The OAuth 2.0 client must allow the redirect URI used by the sample app. You will enter the client ID, discovery endpoint, redirect URI, scopes, and, optionally, the DaVinci flow policy in the sample app's `.env` file.
 
 ---
 
@@ -767,8 +1169,8 @@ keywords: ["DaVinci", "Compatibility", "Supported OS", "Browsers", "PingOne Fiel
 section_ids:
   supported-servers: Supported server versions
   supported-os: Supported operating systems and browsers
-  webviews_unsupported_davinci: JavaScript Compatibility with WebViews
   supported-davinci-fields: Supported PingOne fields and collectors
+  webviews_unsupported_davinci: JavaScript Compatibility with WebViews
 ---
 
 # Compatibility
@@ -793,25 +1195,27 @@ Select a platform below to view the supported operating systems and browsers.
 
 * JavaScript / Login Widget
 
+* React Native
+
 The Orchestration SDK for Android supports the following versions of the Android operating system:
 
 **Supported Android versions and original release dates**
 
-| Release    | API Levels | Released        |
+| Release    | API Levels | Release date    |
 | ---------- | ---------- | --------------- |
+| Android 17 | 37         | June, 2026      |
 | Android 16 | 36         | August, 2025    |
 | Android 15 | 35         | September, 2024 |
 | Android 14 | 34         | October, 2023   |
 | Android 13 | 33         | March, 2022     |
 | Android 12 | 31, 32     | October, 2021   |
 | Android 11 | 30         | September, 2020 |
-| Android 10 | 29         | September, 2019 |
 
 |   |                                                                                                                                                                                                                                                                                                        |
 | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 |   | We have updated how we determine which Android versions form our support policy for the Orchestration SDK for Android.The support policy is as follows:- Every public major release of Android within the last 6 years.
 
-  For example, this would mean support for **Android 10** and later versions. |
+  For example, this would mean support for **Android 11** and later versions. |
 
 **Supported browsers on Android**
 
@@ -821,18 +1225,18 @@ The Orchestration SDK for iOS supports the following versions of the iOS operati
 
 **Supported iOS versions and original release dates**
 
-| Release | Released        |
+| Release | Release date    |
 | ------- | --------------- |
+| iOS 27  | September, 2026 |
 | iOS 26  | September, 2025 |
 | iOS 18  | September, 2024 |
 | iOS 17  | September, 2023 |
-| iOS 16  | September, 2022 |
 
 |   |                                                                                                                                                                                                                                                                                        |
 | - | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 |   | We have updated how we determine which iOS versions form our support policy for the Orchestration SDK for iOS.The support policy is as follows:- Every public major release of iOS within the last 3 years.
 
-  For example, this would mean support for **iOS 16** and later versions. |
+  For example, this would mean support for **iOS 17** and later versions. |
 
 **Supported browsers on iOS**
 
@@ -856,6 +1260,171 @@ The Orchestration SDK for JavaScript, and the Advanced Identity Cloud/PingAM Log
 
 * Android (Chrome) - Two most recent major versions of the operating system.
 
+The Orchestration SDK for React Native modules wrap the native Android and iOS Orchestration SDK modules, so supported operating systems and browsers are a superset of the Android and iOS support listed in the tabs above.
+
+Support depends on the platform the app runs on:
+
+**Supported Android versions and original release dates**
+
+| Release    | API Levels | Release date    |
+| ---------- | ---------- | --------------- |
+| Android 17 | 37         | June, 2026      |
+| Android 16 | 36         | August, 2025    |
+| Android 15 | 35         | September, 2024 |
+| Android 14 | 34         | October, 2023   |
+| Android 13 | 33         | March, 2022     |
+| Android 12 | 31, 32     | October, 2021   |
+| Android 11 | 30         | September, 2020 |
+
+**Supported iOS versions and original release dates**
+
+| Release | Release date    |
+| ------- | --------------- |
+| iOS 27  | September, 2026 |
+| iOS 26  | September, 2025 |
+| iOS 18  | September, 2024 |
+| iOS 17  | September, 2023 |
+
+## Supported PingOne fields and collectors
+
+The DaVinci modules support the following connectors and capabilities:
+
+* PingOne Forms Connector
+
+  * **Show Form** capability
+
+* HTTP Connector
+
+  * **Custom HTML** capability
+
+* PingOne Protect Connector
+
+  * **Create Risk Evaluation** capability
+
+* DaVinci SDK Integrator
+
+  * **Exchange Custom Metadata with DaVinci SDK** capability
+
+* PingOne MFA Connector
+
+  * **Mobile Pairing** capability
+
+- PingOne Form Connector fields
+
+- HTTP Connector fields
+
+- PingOne Protect Connector fields
+
+- DaVinci SDK Integrator fields
+
+- PingOne MFA Connector fields
+
+* [Connector property support](#form-connector-properties-compatibility)
+
+* [Custom Fields support](#form-connector-fields-compatibility)
+
+* [Toolbox support](#form-connector-toolbox-compatibility)
+
+**Connector property support**
+
+| Property                                                                                                                                                                               | Collector                 |                           |                           |                         |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------- | ------------------------- | ------------------------- | ----------------------- |
+|                                                                                                                                                                                        | Android                   | iOS                       | JavaScript                | React Native            |
+| **Enable Device Profiling**Instructs PingOne Protect to collect device information.                                                                                                    | `ProtectCollector``2.0.0` | `ProtectCollector``2.0.0` | `ProtectCollector``2.0.0` | ProtectCollector`1.1.0` |
+| **Include Behavioral Data**When enabled, PingOne Protect collects behavioral data to identify non-human activity.You must first select **Enable Device Profiling** to use this option. | `ProtectCollector``2.0.0` | `ProtectCollector``2.0.0` | `ProtectCollector``2.0.0` | ProtectCollector`1.1.0` |
+
+**Custom Fields support**
+
+| Field                                                                                                                                                                                                                                                                             | Collector                      |                                |                                                                                                                                                                                                                                    |                              |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------ | ------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------- |
+|                                                                                                                                                                                                                                                                                   | Android                        | iOS                            | JavaScript                                                                                                                                                                                                                         | React Native                 |
+| **Checkbox**Collects `true` or `false` from a checkbox or switch.                                                                                                                                                                                                                 | `BooleanCollector``2.1.0`      | `BooleanCollector``2.1.0`      | `BooleanCollector` / `ValidatedBooleanCollector`\[[1](#_footnotedef_1 "View footnote.")]`2.1.0`***[1](#_footnoteref_1). `ValidatedBooleanCollector` is returned for required checkboxes, and `BooleanCollector` for optional ones. | BooleanCollector`1.1.0`      |
+| **Checkbox List**Collects the value of one or more checkboxes.                                                                                                                                                                                                                    | `MultiSelectCollector``1.1.0`  | `MultiSelectCollector``1.1.0`  | `MultiValueCollector``1.1.0`                                                                                                                                                                                                       | MultiSelectCollector`1.1.0`  |
+| **Combobox**Collects a value from a dropdown containing one or more text strings.                                                                                                                                                                                                 | `MultiSelectCollector``1.1.0`  | `MultiSelectCollector``1.1.0`  | `MultiValueCollector``1.1.0`                                                                                                                                                                                                       | MultiSelectCollector`1.1.0`  |
+| **Dropdown**Collects a value from a dropdown containing one or more text strings.                                                                                                                                                                                                 | `SingleSelectCollector``1.1.0` | `SingleSelectCollector``1.1.0` | `SingleValueCollector``1.1.0`                                                                                                                                                                                                      | SingleSelectCollector`1.1.0` |
+| **Password**Collects a single text string that cannot be read from the screen, and optionally verifies the provided value against a policy.\[[2](#_footnotedef_2 "View footnote.")]***[2](#_footnoteref_2). Support for verification against password policies was added in 2.1.0 | `PasswordCollector``1.1.0`     | `PasswordCollector``1.1.0`     | `PasswordCollector``1.1.0`                                                                                                                                                                                                         | PasswordCollector`1.1.0`     |
+| **New Password**Collects a new password and validates it against the environment's password policy. Optionally presents password requirements to the user.                                                                                                                        | ❌                              | ❌                              | `ValidatedPasswordCollector``2.1.0`                                                                                                                                                                                                | ❌                            |
+| **Phone Number Input**Collects a phone number, with optional country code, and extension values.\[[3](#_footnotedef_3 "View footnote.")]***[3](#_footnoteref_3). Support for the extension value was added in 2.1.0                                                               | `PhoneNumberCollector``1.2.0`  | `PhoneNumberCollector``1.2.0`  | `PhoneNumberCollector` / `PhoneNumberExtensionCollector``1.2.0`                                                                                                                                                                    | PhoneNumberCollector`1.1.0`  |
+| **Radio Button List**Collects a value from one or radio buttons.                                                                                                                                                                                                                  | `SingleSelectCollector``1.1.0` | `SingleSelectCollector``1.1.0` | `SingleValueCollector``1.1.0`                                                                                                                                                                                                      | SingleSelectCollector`1.1.0` |
+| **Submit Button**Presents a button for form submission.                                                                                                                                                                                                                           | `SubmitCollector``1.1.0`       | `SubmitCollector``1.1.0`       | `SubmitCollector``1.1.0`                                                                                                                                                                                                           | SubmitCollector`1.1.0`       |
+| **Text Input**Collects a single text string.                                                                                                                                                                                                                                      | `TextCollector``1.1.0`         | `TextCollector``1.1.0`         | `TextCollector``1.1.0`                                                                                                                                                                                                             | TextCollector`1.1.0`         |
+
+**Toolbox support**
+
+| Field                                                                                                                                                                                                                                   | Collector                                                          |                                                                    |                                                                    |                                                                |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ | -------------------------------------------------------------- |
+|                                                                                                                                                                                                                                         | Android                                                            | iOS                                                                | JavaScript                                                         | React Native                                                   |
+| **Agreement**Presents text configured in PingOne under **User Experience** > **Agreements**, such as terms of service.                                                                                                                  | `ReadOnlyTextCollector``2.1.0`                                     | `ReadOnlyTextCollector``2.1.0`                                     | `ReadOnlyCollector``2.1.0`                                         | ReadOnlyTextCollector`1.1.0`                                   |
+| **FIDO2**Allows users to perform multi-factor authentication with a FIDO2 device, or register a new device.                                                                                                                             | `FidoAuthenticationCollector` / `FidoRegistrationCollector``1.3.0` | `FidoAuthenticationCollector` / `FidoRegistrationCollector``1.3.0` | `FidoAuthenticationCollector` / `FidoRegistrationCollector``1.3.0` | FidoAuthenticationCollector / FidoRegistrationCollector`1.1.0` |
+| **Image**Presents an image.                                                                                                                                                                                                             | `ImageCollector``2.2.0`                                            | `ImageCollector``2.2.0`                                            | `ImageCollector``2.1.0`                                            | ❌                                                              |
+| **Flow Button**Presents a customized button.                                                                                                                                                                                            | `FlowCollector``1.1.0`                                             | `FlowCollector``1.1.0`                                             | `FlowCollector``1.1.0`                                             | FlowCollector`1.1.0`                                           |
+| **Flow Link**Presents a customized link.                                                                                                                                                                                                | `FlowCollector``1.1.0`                                             | `FlowCollector``1.1.0`                                             | `FlowCollector``1.1.0`                                             | FlowCollector`1.1.0`                                           |
+| **MFA Device Selection - Authentication**Presents a list of methods for performing multi-factor authentication (MFA).&#xA;&#xA;DaVinci client supports the FIDO2, Email, SMS, and Voice MFA types.                                      | `DeviceAuthenticationCollector``1.2.0`                             | `DeviceAuthenticationCollector``1.2.0`                             | `DeviceAuthenticationCollector``1.2.0`                             | DeviceAuthenticationCollector`1.1.0`                           |
+| **MFA Device Selection - Registration**Presents a list of methods you can register for multi-factor authentication (MFA).&#xA;&#xA;DaVinci client supports the FIDO2, Email, SMS, and Voice MFA types.                                  | `DeviceRegistrationCollector``1.2.0`                               | `DeviceRegistrationCollector``1.2.0`                               | `DeviceRegistrationCollector``1.2.0`                               | DeviceRegistrationCollector`1.1.0`                             |
+| **Polling**Presents an activity indicator which allows you to pause or loop the flow while the user completes an action.                                                                                                                | `PollingCollector``2.1.0`                                          | `PollingCollector``2.1.0`                                          | `PollingCollector``2.1.0`                                          | PollingCollector`1.1.0`                                        |
+| **QR Code**Presents a QR code containing data, for example, a URL.                                                                                                                                                                      | `QRCodeCollector``2.1.0`                                           | `QRCodeCollector``2.1.0`                                           | `QrCodeCollector``2.1.0`                                           | QRCodeCollector`1.1.0`                                         |
+| **Social Login**Presents a button to allow users to authenticate using an external identity provider, such as Apple, Facebook, or Google.                                                                                               | `IdpCollector``1.1.0`                                              | `IdpCollector``1.1.0`                                              | `IdpCollector``1.1.0`                                              | IdpCollector`1.1.0`                                            |
+| **Translatable Rich Text**Presents rich text, including links, that you can translate into multiple languages.\[[4](#_footnotedef_4 "View footnote.")]***[4](#_footnoteref_4). Support for links in rich text fields was added in 2.1.0 | `LabelCollector``1.1.0`                                            | `LabelCollector``1.1.0`                                            | `RichTextCollector``1.1.0`                                         | LabelCollector`1.1.0`                                          |
+
+* [HTTP Connector field and collector support](#http-connector-fields-compatibility)
+
+* [HTTP Connector SK-Component support](#http-connector-sk-components-compatibility)
+
+**HTTP Connector field and collector support**
+
+| Field                                                                                             | Collector                      |                                |                               |                              |
+| ------------------------------------------------------------------------------------------------- | ------------------------------ | ------------------------------ | ----------------------------- | ---------------------------- |
+|                                                                                                   | Android                        | iOS                            | JavaScript                    | React Native                 |
+| **Text field**Collects a single text string.                                                      | `TextCollector``1.0.0`         | `TextCollector``1.0.0`         | `TextCollector``1.0.0`        | TextCollector`1.1.0`         |
+| **Password field**Collects a single text string that cannot be read from the screen.              | `PasswordCollector``1.0.0`     | `PasswordCollector``1.0.0`     | `PasswordCollector``1.0.0`    | PasswordCollector`1.1.0`     |
+| **Submit Button**Sends the collected data to PingOne to continue the DaVinci flow.                | `SubmitCollector``1.0.0`       | `SubmitCollector``1.0.0`       | `SubmitCollector``1.0.0`      | SubmitCollector`1.1.0`       |
+| **Flow Button**Triggers an alternative flow without sending the data collected so far to PingOne. | `FlowCollector``1.0.0`         | `FlowCollector``1.0.0`         | `FlowCollector``1.0.0`        | FlowCollector`1.1.0`         |
+| **Label**Display a read-only text label.                                                          | `ReadOnlyTextCollector``1.1.0` | `LabelCollector``1.1.0`        | `ReadOnlyCollector``1.1.0`    | LabelCollector`1.1.0`        |
+| **Radio** / **Dropdown**Collects a single value from a choice of multiple options.                | `SingleSelectCollector``1.1.0` | `SingleSelectCollector``1.1.0` | `SingleValueCollector``1.1.0` | SingleSelectCollector`1.1.0` |
+
+**HTTP Connector SK-Component support**
+
+| SK-Component                                                                                                                       | DaVinci module            |                           |                           |                         |
+| ---------------------------------------------------------------------------------------------------------------------------------- | ------------------------- | ------------------------- | ------------------------- | ----------------------- |
+|                                                                                                                                    | Android                   | iOS                       | JavaScript                | React Native            |
+| **skIDP**Presents a button to allow users to authenticate using an external identity provider, such as Apple, Facebook, or Google. | `IdpCollector``1.1.0`     | `IdpCollector``1.1.0`     | `IdpCollector``1.1.0`     | IdpCollector`1.1.0`     |
+| **skrisk**Instructs the client to gather behavioral data and return it to PingOne so that it can perform risk evaluations.         | `ProtectCollector``1.3.0` | `ProtectCollector``1.3.0` | `ProtectCollector``1.3.0` | ProtectCollector`1.1.0` |
+
+**Unsupported features:**
+
+Verify that your flow does not depend on any *unsupported* elements:
+
+* SKPolling components
+
+  The [**SKPolling**](https://docs.pingidentity.com/davinci/flows/davinci_sk_components.html#skpolling) component cannot be processed by the DaVinci Client and should not be included in flows.
+
+  Features such as Magic Link authentication require the **SKPolling** component and therefore cannot be used with the DaVinci Client.
+
+* Images
+
+  Images embedded in a Custom HTML Template, such as background images or logos, cannot be passed to the Orchestration SDK as structured data.
+
+**PingOne Protect Connector support overview**
+
+| Capability                                                                                                                | Collector                 |                           |                           |                         |
+| ------------------------------------------------------------------------------------------------------------------------- | ------------------------- | ------------------------- | ------------------------- | ----------------------- |
+|                                                                                                                           | Android                   | iOS                       | JavaScript                | React Native            |
+| **Create Risk Evaluation**Sends device and behavioral data collected by PingOne Protect to DaVinci for a risk evaluation. | `ProtectCollector``1.3.0` | `ProtectCollector``1.3.0` | `ProtectCollector``1.3.0` | ProtectCollector`1.1.0` |
+
+**DaVinci SDK Integrator support overview**
+
+| Capability                                                                                                                                                 | Collector                  |                            |                            |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------- | -------------------------- | -------------------------- |
+|                                                                                                                                                            | Android                    | iOS                        | JavaScript                 |
+| **Exchange Custom Metadata**Exchanges custom JSON metadata and payloads between a DaVinci flow and the app, pausing flow execution until the app responds. | `MetadataCollector``2.2.0` | `MetadataCollector``2.2.0` | `MetadataCollector``2.2.0` |
+
+**PingOne MFA Connector support overview**
+
+| Capability                                                                                                      | Collector                       |                                 |            |
+| --------------------------------------------------------------------------------------------------------------- | ------------------------------- | ------------------------------- | ---------- |
+|                                                                                                                 | Android                         | iOS                             | JavaScript |
+| **Mobile Pairing**Pairs the user's PingOne MFA account directly within a DaVinci flow, without leaving the app. | `MobilePairingCollector``2.2.0` | `MobilePairingCollector``2.2.0` | ❌          |
+
 ### JavaScript Compatibility with WebViews
 
 A WebView allows you to embed a web browser into your native Android or iOS application to display HTML pages, and run JavaScript apps.
@@ -872,89 +1441,6 @@ We also do not support or test usage with any wrappers around WebViews.
 
 Whilst you might be able to implement simple use-cases using the Orchestration SDK for JavaScript within a WebView, we recommend that you use an alternative such as opening a full browser, or using an in-app instance of a full browser such as [Custom Tabs](https://developer.android.com/develop/ui/views/layout/webapps/overview-of-android-custom-tabs) for Android or [SFSafariViewController](https://developer.apple.com/documentation/safariservices/sfsafariviewcontroller) for iOS.
 
-## Supported PingOne fields and collectors
-
-The DaVinci modules support the following connectors and capabilities:
-
-* PingOne Forms Connector
-
-  * **Show Form** capability
-
-* HTTP Connector
-
-  * **Custom HTML** capability
-
-- PingOne Form Connector fields
-
-- HTTP Connector fields
-
-* [Custom Fields support](#form-connector-fields-compatibility)
-
-* [Toolbox support](#form-connector-toolbox-compatibility)
-
-**Custom Fields support**
-
-| Field (`Collector`)                        | Description                                                                                                     | DaVinci module |          |            |
-| ------------------------------------------ | --------------------------------------------------------------------------------------------------------------- | -------------- | -------- | ---------- |
-|                                            |                                                                                                                 | Android        | iOS      | JavaScript |
-| Text Input(`TextCollector`)                | Collects a single text string.                                                                                  | ✅`1.1.0`       | ✅`1.1.0` | ✅`1.1.0`   |
-| Password(`PasswordCollector`)              | Collects a single text string that cannot be read from the screen.                                              | ✅`1.1.0`       | ✅`1.1.0` | ✅`1.1.0`   |
-| Dropdown(`SingleSelectCollector`)          | Collects a value from a dropdown containing one or more text strings.                                           | ✅`1.1.0`       | ✅`1.1.0` | ✅`1.1.0`   |
-| Combobox(`MultiSelectCollector`)           | Collects a value from a dropdown containing one or more text strings, the user can enter their own text string. | ✅`1.1.0`       | ✅`1.1.0` | ✅`1.1.0`   |
-| Radio Button List(`SingleSelectCollector`) | Collects a value from one or radio buttons.                                                                     | ✅`1.1.0`       | ✅`1.1.0` | ✅`1.1.0`   |
-| Checkbox List(`MultiSelectCollector`)      | Collects the value of one or more checkboxes.                                                                   | ✅`1.1.0`       | ✅`1.1.0` | ✅`1.1.0`   |
-| Phone Number Input(`PhoneNumberCollector`) | Collects a phone number, including the country code.                                                            | ✅`1.2.0`       | ✅`1.2.0` | ✅`1.2.0`   |
-
-**Toolbox support**
-
-| Field (`Collector`)                                                    | Description                                                                                                                                                             | DaVinci module |          |            |
-| ---------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------- | -------- | ---------- |
-|                                                                        |                                                                                                                                                                         | Android        | iOS      | JavaScript |
-| Flow Button(`FlowCollector`)                                           | Presents a customized button.                                                                                                                                           | ✅`1.1.0`       | ✅`1.1.0` | ✅`1.1.0`   |
-| Flow Link(`FlowCollector`)                                             | Presents a customized link.                                                                                                                                             | ✅`1.1.0`       | ✅`1.1.0` | ✅`1.1.0`   |
-| Translatable Rich Text(`TextCollector`)                                | Presents rich text that you can translate into multiple languages.                                                                                                      | ✅`1.1.0`       | ✅`1.1.0` | ✅`1.1.0`   |
-| Social Login(`IdpCollector`)                                           | Presents a button to allow users to authenticate using an external identity provider, such as Apple, Facebook, or Google.                                               | ✅`1.1.0`       | ✅`1.1.0` | ✅`1.1.0`   |
-| MFA Device Selection - Authentication(`DeviceAuthenticationCollector`) | Presents a list of methods for performing multi-factor authentication (MFA).&#xA;&#xA;DaVinci client currently only supports the Email, SMS, and Voice MFA types.       | ✅`1.2.0`       | ✅`1.2.0` | ✅`1.2.0`   |
-| MFA Device Selection - Registration(`DeviceRegistrationCollector`)     | Presents a list of methods you can register for multi-factor authentication (MFA).&#xA;&#xA;DaVinci client currently only supports the Email, SMS, and Voice MFA types. | ✅`1.2.0`       | ✅`1.2.0` | ✅`1.2.0`   |
-
-* [HTTP Connector field and collector support](#http-connector-fields-compatibility)
-
-* [HTTP Connector SK-Component support](#http-connector-sk-components-compatibility)
-
-**HTTP Connector field and collector support**
-
-| Field (`Collector`)                       | Description                                                                        | DaVinci module |          |            |
-| ----------------------------------------- | ---------------------------------------------------------------------------------- | -------------- | -------- | ---------- |
-|                                           |                                                                                    | Android        | iOS      | JavaScript |
-| Text field(`TextCollector`)               | Collects a single text string.                                                     | ✅`1.0.0`       | ✅`1.0.0` | ✅`1.0.0`   |
-| Password field(`PasswordCollector`)       | Collects a single text string that cannot be read from the screen.                 | ✅`1.0.0`       | ✅`1.0.0` | ✅`1.0.0`   |
-| Submit Button(`SubmitCollector`)          | Sends the collected data to PingOne to continue the DaVinci flow.                  | ✅`1.0.0`       | ✅`1.0.0` | ✅`1.0.0`   |
-| Flow Button(`FlowCollector`)              | Triggers an alternative flow without sending the data collected so far to PingOne. | ✅`1.0.0`       | ✅`1.0.0` | ✅`1.0.0`   |
-| Label(`LabelCollector`)                   | Display a read-only text label.                                                    | ✅`1.1.0`       | ✅`1.1.0` | ✅`1.1.0`   |
-| Radio / Dropdown(`SingleSelectCollector`) | Collects a single value from a choice of multiple options.                         | ✅`1.1.0`       | ✅`1.1.0` | ✅`1.1.0`   |
-
-**HTTP Connector SK-Component support**
-
-| SK-Component (`Collector`) | Description                                                                                                               | DaVinci module |          |            |
-| -------------------------- | ------------------------------------------------------------------------------------------------------------------------- | -------------- | -------- | ---------- |
-|                            |                                                                                                                           | Android        | iOS      | JavaScript |
-| skIDP(`IdpCollector`)      | Presents a button to allow users to authenticate using an external identity provider, such as Apple, Facebook, or Google. | ✅`1.1.0`       | ✅`1.1.0` | ✅`1.1.0`   |
-| skrisk(`ProtectCollector`) | Instructs the client to gather behavioral data and return it to PingOne so that it can perform risk evaluations.          | ✅`1.3.0`       | ✅`1.3.0` | ✅`1.3.0`   |
-
-**Unsupported features:**
-
-Verify that your flow does not depend on any *unsupported* elements:
-
-* SKPolling components
-
-  The **[SKPolling](https://docs.pingidentity.com/davinci/flows/davinci_sk_components.html#skpolling)** component cannot be processed by the DaVinci Client and should not be included in flows.
-
-  Features such as Magic Link authentication require the **SKPolling** component and therefore cannot be used with the DaVinci Client.
-
-* Images
-
-  Images included in the flow cannot be passed to the SDK.
-
 ---
 
 ---
@@ -966,7 +1452,7 @@ canonical_url: https://developer.pingidentity.com/orchsdks/davinci/use-cases/ext
 llms_txt: https://developer.pingidentity.com/orchsdks/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: Tue, 25 Mar 2025 11:00:37 +0100
-keywords: ["DaVinci", "Flows", "Tutorial", "Source Code", "Integration", "SDK", "Android"]
+keywords: ["PingOne", "DaVinci", "Flows", "Setup &amp; Configuration", "Source Code", "Use Case", "SDK", "IdP", "JavaScript"]
 section_ids:
   step_1_adding_core_dependencies: Step 1. Adding core dependencies
   step_2_authenticating_with_external_idps: Step 2. Authenticating with external IdPs
@@ -978,17 +1464,75 @@ section_ids:
 
 Complete the following high-level tasks to configure a JavaScript client app to perform social sign-on with an external identity provider (IdP):
 
-## [Step 1. Adding core dependencies](../../../../journey/use-cases/external-idp/javascript/01_adding_core_dependencies.html)
+## [Step 1. Adding core dependencies](01_adding_core_dependencies.html)
 
 These dependencies provide core support for social sign-on. These are the minimum required dependencies for redirecting users to the IdP for authentication.
 
-[**Start step 1**[icon: chevrons-right, set=fas, size=xs]](../../../../journey/use-cases/external-idp/javascript/01_adding_core_dependencies.html)
+[**Start step 1**[icon: chevrons-right, set=fas, size=xs]](01_adding_core_dependencies.html)
 
-## [Step 2. Authenticating with external IdPs](../../../../journey/use-cases/external-idp/javascript/02_authenticate_with_external_idps.html)
+## [Step 2. Authenticating with external IdPs](02_authenticate_with_external_idps.html)
 
 Learn how to authenticate your users with the external IdPs you have configured in your DaVinci flows.
 
-[**Start step 3**[icon: chevrons-right, set=fas, size=xs]](../../../../journey/use-cases/external-idp/javascript/02_authenticate_with_external_idps.html)
+[**Start step 2**[icon: chevrons-right, set=fas, size=xs]](02_authenticate_with_external_idps.html)
+
+---
+
+---
+title: Configure a React Native app for social sign-on
+description: Configure a React Native app to perform social sign-on with an external identity provider using DaVinci flows
+component: orchsdks
+page_id: orchsdks:davinci:use-cases/external-idp/react-native/index
+canonical_url: https://developer.pingidentity.com/orchsdks/davinci/use-cases/external-idp/react-native/index.html
+llms_txt: https://developer.pingidentity.com/orchsdks/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: Thu, 4 Sep 2026 00:00:00 +0000
+keywords: ["PingOne", "DaVinci", "Flows", "Setup &amp; Configuration", "Source Code", "Use Case", "SDK", "IdP", "React Native"]
+section_ids:
+  before_you_begin: Before you begin
+  step_1_adding_core_dependencies: Step 1. Adding core dependencies
+  step_2_handling_uri_schemes: Step 2. Handling URI schemes
+  step_3_configuring_native_provider_sdks: Step 3. Configuring native provider SDKs
+  step_4_authenticating_with_external_idps: Step 4. Authenticating with external IdPs
+---
+
+# Configure a React Native app for social sign-on
+
+[icon: circle-check, set=far]PingOne [icon: react, set=fab]React Native
+
+Complete the following high-level tasks to configure a React Native app to perform social sign-on with an external identity provider (IdP):
+
+## [Before you begin](../before-you-begin.html)
+
+Ensure that you have completed the prerequisites before starting the numbered steps on this page below.
+
+You need to have configured Apple, Facebook, and Google as external identity providers in PingOne, and set up the DaVinci flows your client app will step through.
+
+[**Complete prerequisites**[icon: chevrons-right, set=fas, size=xs]](../before-you-begin.html)
+
+## [Step 1. Adding core dependencies](01_adding_core_dependencies.html)
+
+Install the **External IdP**, **DaVinci**, and supporting modules.
+
+[**Start step 1**[icon: chevrons-right, set=fas, size=xs]](01_adding_core_dependencies.html)
+
+## [Step 2. Handling URI schemes](02_handling_uri_schemes.html)
+
+Register a URI scheme on Android and iOS so the OS can route provider redirects back to your app.
+
+[**Start step 2**[icon: chevrons-right, set=fas, size=xs]](02_handling_uri_schemes.html)
+
+## [Step 3. Configuring native provider SDKs](03_configuring_native_provider_sdks.html)
+
+Add and configure the native SDK for each provider you want to support. The React Native **External IdP** module authenticates users with the provider's native SDK, and falls back to a browser redirect when the native SDK is not linked.
+
+[**Start step 3**[icon: chevrons-right, set=fas, size=xs]](03_configuring_native_provider_sdks.html)
+
+## [Step 4. Authenticating with external IdPs](04_authenticate_with_external_idps.html)
+
+Learn how to authenticate your users with the external IdPs you have configured in your DaVinci flows.
+
+[**Start step 4**[icon: chevrons-right, set=fas, size=xs]](04_authenticate_with_external_idps.html)
 
 ---
 
@@ -1015,29 +1559,29 @@ section_ids:
 
 Complete the following high-level tasks to configure an Android client app to perform social sign-on with an external identity provider (IdP):
 
-## [Step 1. Adding core dependencies](../../../../journey/use-cases/external-idp/android/01_adding_core_dependencies.html)
+## [Step 1. Adding core dependencies](01_adding_core_dependencies.html)
 
 These dependencies provide core support for social sign-on. These are the minimum required dependencies for redirecting users to the IdP for authentication.
 
-[**Start step 1**[icon: chevrons-right, set=fas, size=xs]](../../../../journey/use-cases/external-idp/android/01_adding_core_dependencies.html)
+[**Start step 1**[icon: chevrons-right, set=fas, size=xs]](01_adding_core_dependencies.html)
 
-## [Step 2. Handling URI schemes](../../../../journey/use-cases/external-idp/android/02_handling_uri_schemes.html)
+## [Step 2. Handling URI schemes](02_handling_uri_schemes.html)
 
 You must configure your Android app to open when the server redirects the user after authentication.
 
-[**Start step 2**[icon: chevrons-right, set=fas, size=xs]](../../../../journey/use-cases/external-idp/android/02_handling_uri_schemes.html)
+[**Start step 2**[icon: chevrons-right, set=fas, size=xs]](02_handling_uri_schemes.html)
 
-## [Step 3. Authenticating with external IdPs](../../../../journey/use-cases/external-idp/android/03_authenticate_with_external_idps.html)
+## [Step 3. Authenticating with external IdPs](03_authenticate_with_external_idps.html)
 
 Learn how to authenticate your users with the external IdPs you have configured in your DaVinci flows.
 
-[**Start step 3**[icon: chevrons-right, set=fas, size=xs]](../../../../journey/use-cases/external-idp/android/03_authenticate_with_external_idps.html)
+[**Start step 3**[icon: chevrons-right, set=fas, size=xs]](03_authenticate_with_external_idps.html)
 
-## [Step 4. Customizing the user experience](../../../../journey/use-cases/external-idp/android/04_customize_the_user_experience.html)
+## [Step 4. Customizing the user experience](04_customize_the_user_experience.html)
 
 You can optionally tweak the user experience for authenticating with an external IdP.
 
-[**Start step 4**[icon: chevrons-right, set=fas, size=xs]](../../../../journey/use-cases/external-idp/android/04_customize_the_user_experience.html)
+[**Start step 4**[icon: chevrons-right, set=fas, size=xs]](04_customize_the_user_experience.html)
 
 ---
 
@@ -1062,31 +1606,31 @@ section_ids:
 
 [icon: circle-check, set=far]PingOne [icon: apple, set=fab]iOS
 
-Complete the following high-level tasks to configure an Android client app to perform social sign-on with an external identity provider (IdP):
+Complete the following high-level tasks to configure an iOS client app to perform social sign-on with an external identity provider (IdP):
 
-## [Step 1. Adding core dependencies](../../../../journey/use-cases/external-idp/ios/01_adding_core_dependencies.html)
+## [Step 1. Adding core dependencies](01_adding_core_dependencies.html)
 
 These dependencies provide core support for social sign-on. These are the minimum required dependencies for redirecting users to the IdP for authentication.
 
-[**Start step 1**[icon: chevrons-right, set=fas, size=xs]](../../../../journey/use-cases/external-idp/ios/01_adding_core_dependencies.html)
+[**Start step 1**[icon: chevrons-right, set=fas, size=xs]](01_adding_core_dependencies.html)
 
-## [Step 2. Handling URI schemes](../../../../journey/use-cases/external-idp/ios/02_handling_uri_schemes.html)
+## [Step 2. Handling URI schemes](02_handling_uri_schemes.html)
 
-You must configure your Android app to open when the server redirects the user after authentication.
+You must configure your iOS app to open when the server redirects the user after authentication.
 
-[**Start step 2**[icon: chevrons-right, set=fas, size=xs]](../../../../journey/use-cases/external-idp/ios/02_handling_uri_schemes.html)
+[**Start step 2**[icon: chevrons-right, set=fas, size=xs]](02_handling_uri_schemes.html)
 
-## [Step 3. Authenticating with external IdPs](../../../../journey/use-cases/external-idp/ios/03_authenticate_with_external_idps.html)
+## [Step 3. Authenticating with external IdPs](03_authenticate_with_external_idps.html)
 
 Learn how to authenticate your users with the external IdPs you have configured in your DaVinci flows.
 
-[**Start step 3**[icon: chevrons-right, set=fas, size=xs]](../../../../journey/use-cases/external-idp/ios/03_authenticate_with_external_idps.html)
+[**Start step 3**[icon: chevrons-right, set=fas, size=xs]](03_authenticate_with_external_idps.html)
 
-## [Step 4. Customizing the user experience](../../../../journey/use-cases/external-idp/ios/04_customize_the_user_experience.html)
+## [Step 4. Customizing the user experience](04_customize_the_user_experience.html)
 
 You can optionally tweak the user experience for authenticating with an external IdP.
 
-[**Start step 4**[icon: chevrons-right, set=fas, size=xs]](../../../../journey/use-cases/external-idp/ios/04_customize_the_user_experience.html)
+[**Start step 4**[icon: chevrons-right, set=fas, size=xs]](04_customize_the_user_experience.html)
 
 ---
 
@@ -1339,7 +1883,7 @@ section_ids:
 
 # Configuring PingOne for PingOne Protect
 
-[icon: circle-check, set=far]PingOne [icon: android, set=fab]Android [icon: apple, set=fab]iOS [icon: js, set=fab]JavaScript
+[icon: circle-check, set=far]PingOne [icon: android, set=fab]Android [icon: apple, set=fab]iOS [icon: js, set=fab]JavaScript [icon: react, set=fab]React Native
 
 In this step, you set up your PingOne server to perform risk evaluations.
 
@@ -1369,7 +1913,7 @@ You can now add risk evaluations to different types of flows, such as sign-on wi
 
 The DaVinci Client supports the following DaVinci flow configurations:
 
-* **PingOne Forms connector**
+* **PingOne Forms connector properties**
 
   Enable the **Enable Device Profiling** and **Include Behavioral Data** properties.
 
@@ -1409,6 +1953,12 @@ Integrate iOS apps with PingOne Protect DaVinci flows
 
 Integrate JavaScript apps with PingOne Protect DaVinci flows
 
+[icon: react, set=fab, size=3x]
+
+#### [React Native](react-native/index.html)
+
+Integrate React Native apps with PingOne Protect DaVinci flows
+
 ---
 
 ---
@@ -1425,6 +1975,7 @@ section_ids:
   compatibility: Compatibility
   overview: Overview
   connecting_external_identity_providers_in_pingone: Connecting external identity providers in PingOne
+  configuring_facebook_login_mode_in_pingone: Configuring Facebook Login mode in PingOne
   configuring_davinci_flows_for_social_sign_on: Configuring DaVinci Flows for social sign-on
   idp-in-dv-flow-forms: Option A. Configuring DaVinci Forms for social sign-on
   creating_a_davinci_form: Creating a DaVinci Form
@@ -1438,7 +1989,7 @@ section_ids:
 
 # Configuring social sign-on in PingOne
 
-[icon: circle-check, set=far]PingOne [icon: android, set=fab]Android [icon: apple, set=fab]iOS [icon: js, set=fab]JavaScript
+[icon: circle-check, set=far]PingOne [icon: android, set=fab]Android [icon: apple, set=fab]iOS [icon: js, set=fab]JavaScript [icon: react, set=fab]React Native
 
 In this section, you set your identity providers (IdP) to work with your apps through PingOne and DaVinci flows.
 
@@ -1460,7 +2011,7 @@ The **External IdP** module defaults to using a browser redirect method when enc
 
 In this mode PingOne interacts with the IdP to authenticate users on your app's behalf, and then redirects back to your app to continue the flow. This makes the overall configuration simpler, as your app only communicates with PingOne, not individual IdPs.
 
-Optionally, you can choose to use the embedded SDKs of supported IdPs for Android and iOS apps. In this mode your app communicates directly with the supported IdP via its SDK. This requires additional configuration in the IdP and in your client application. These additional steps are covered in a later step for each platform.
+Optionally, you can choose to use the embedded SDKs of supported IdPs for Android and iOS apps. In this mode your app communicates directly with the supported IdP by using their own SDK. This requires additional configuration in the IdP and in your client application. These additional steps are covered in a later step for each platform.
 
 ## Connecting external identity providers in PingOne
 
@@ -1468,9 +2019,9 @@ In this section, you configure PingOne with details about the social login ident
 
 The Orchestration SDKs are compatible with any OpenID Connect 1.0-compliant Identity Provider, such as those available by default in PingOne.
 
-|   |                                                                                                                                                                                                                                                                            |
-| - | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | You must configure the identity provider as a **PingOne External IdP**. Learn more in [External IdPs ](https://docs.pingidentity.com/pingone/integrations/p1_external_idps.html).Identity providers configured by using a **DaVinci Service Connector** are not supported. |
+|   |                                                                                                                                                                                                                                              |
+| - | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | You must configure the identity provider as a [**PingOne External IdP**](https://docs.pingidentity.com/pingone/integrations/p1_external_idps.html).Identity providers configured by using a **DaVinci Service Connector** are not supported. |
 
 Ping Identity has tested the steps in this tutorial with the Identity Providers listed below. Select a provider to view the PingOne documentation with instructions on how to configure an external IdP in PingOne:
 
@@ -1492,11 +2043,45 @@ Adding an identity provider - Facebook
 
 Adding an identity provider - Google
 
+### Configuring Facebook Login mode in PingOne
+
+Meta offers two different login modes for authenticating:
+
+* Classic login
+
+  Allows Tracking and returns an OAuth access token.
+
+  Requires that the user grants the **App Tracking Transparency (ATT)** permission in iOS.
+
+* Limited Login
+
+  Prevents access to your Facebook friends, photos, and pages is disabled to prevent cross-app tracking.
+
+  Limited Login uses an OIDC flow and returns an ID token.
+
+To select the mode to use, when adding Facebook as an external IdP in PingOne, configure the **Login Mode** to use:
+
+![pingone external idp facebook limited login](../../_images/pingone-external-idp-facebook-limited-login.png)
+
+If you have already added Facebook as an external IdP in PingOne, you can edit the **Login Mode** as follows:
+
+1. In the PingOne admin console, go to **Integrations** > **External IdPs** and browse or search for the Facebook IdP you want to edit.
+
+2. Click the IdP to open its details panel.
+
+3. On the **Connection** tab, click the **Pencil** icon ([icon: pencil, set=fas]).
+
+4. Change the **Login Mode** as required.
+
+5. Save your changes.
+
+Learn more in [Limited Login for iOS](https://developers.facebook.com/documentation/facebook-login/ios/limited-login/ios) in the *Facebook Login* documentation.
+
 ## Configuring DaVinci Flows for social sign-on
 
 After connecting your chosen external identity providers to PingOne, the next step is to configure a DaVinci flow to display buttons on your login pages so that users can choose to authenticate using the external IdP.
 
-![An Android app with three external IdP options; Google, Apple, and Facebook.](../../_images/social-sign-on-example.png)Figure 1. An Android app with three external IdP options: Google, Apple, and Facebook.
+![An Android app with three external IdP options; Apple, Facebook, and Google.](../../_images/social-sign-on-example.png)Figure 1. An Android app with three external IdP options: Apple, Facebook, and Google.
 
 The Orchestration SDKs support two options for adding social sign-on to your DaVinci flows. Choose *one* of the following options:
 
@@ -1568,11 +2153,15 @@ When you have added your external identity providers to your form, you must now 
 
      * Android
 
-       [Step 2. Handling URI schemes](../../../journey/use-cases/external-idp/android/02_handling_uri_schemes.html)
+       [Step 2. Handling URI schemes](android/02_handling_uri_schemes.html)
 
      * iOS
 
-       [Step 2. Handling URI schemes](../../../journey/use-cases/external-idp/ios/02_handling_uri_schemes.html)
+       [Step 2. Handling URI schemes](ios/02_handling_uri_schemes.html)
+
+     * React Native
+
+       [Step 2. Handling URI schemes](react-native/02_handling_uri_schemes.html)
 
    The result will resemble the following
 
@@ -1648,17 +2237,25 @@ With the HTTP Collector in place in the flow, you can now add custom HTML to dis
 
         * Android
 
-          [Step 2. Handling URI schemes](../../../journey/use-cases/external-idp/android/02_handling_uri_schemes.html)
+          [Step 2. Handling URI schemes](android/02_handling_uri_schemes.html)
 
         * iOS
 
-          [Step 2. Handling URI schemes](../../../journey/use-cases/external-idp/ios/02_handling_uri_schemes.html)
+          [Step 2. Handling URI schemes](ios/02_handling_uri_schemes.html)
+
+        * React Native
+
+          [Step 2. Handling URI schemes](react-native/02_handling_uri_schemes.html)
 
       The result will resemble the following:
 
       ![Configuring an skIdP component in an HTTP connector.](../../_images/davinci-http-connector-skidp-config.png)Figure 8. Configuring an skIdP component in an HTTP connector.
 
 4. Save your changes.
+
+For Facebook Limited Login, the `skIdP` component produces the same `IdpCollector` used by the Forms path. The iOS application selects the mode by setting `facebookLimitedLoginEnabled`; changing the HTML button does not change the token type. In classic mode, the SDK sends an `accessToken`. In Limited mode, it sends an `idToken`.
+
+Ensure that the PingOne Facebook connector has the `p14c-72745-facebook-limited-login` capability enabled and can accept and validate the OIDC ID token before enabling Limited Login in the iOS application.
 
 You can now proceed to [Configuring a DaVinci flow to be launched by the Orchestration SDKs](#launch-davinci-sdks).
 
@@ -1690,7 +2287,7 @@ In this section you completed the following tasks:
 
 * Added relevant IdP nodes to a DaVinci flow
 
-  * If you are developing an Android or iOS app, you added redirect URI values to the flow to return users after authentication.
+  * If you are developing a mobile app, you added redirect URI values to the flow to return users after authentication.
 
 * Created an application in PingOne so that the Orchestration SDKs can connect
 
@@ -1700,21 +2297,27 @@ You can now proceed to configuring your client apps to step through the DaVinci 
 
 [icon: android, set=fab, size=3x]
 
-#### [Android](../../../journey/use-cases/external-idp/android/index.html)
+#### [Android](android/index.html)
 
 Configure an Android app for social sign-on
 
 [icon: apple, set=fab, size=3x]
 
-#### [iOS](../../../journey/use-cases/external-idp/ios/index.html)
+#### [iOS](ios/index.html)
 
 Configure an iOS app for social sign-on
 
 [icon: js, set=fab, size=3x]
 
-#### [JavaScript](../../../journey/use-cases/external-idp/javascript/index.html)
+#### [JavaScript](javascript/index.html)
 
 Configure a JavaScript app for social sign-on
+
+[icon: react, set=fab, size=3x]
+
+#### [React Native](react-native/index.html)
+
+Configure a React Native app for social sign-on
 
 ---
 
@@ -1728,6 +2331,10 @@ llms_txt: https://developer.pingidentity.com/orchsdks/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: Fri, 9 Jan 2026 17:23:51 +0000
 keywords: ["DaVinci", "Android", "Configuration", "Properties", "PingOne", "Integration"]
+section_ids:
+  full-configuration: Full configuration
+  common-json-configuration: Common JSON configuration
+  configuration_property_reference: Configuration property reference
 ---
 
 # Configuring the DaVinci module
@@ -1742,6 +2349,18 @@ keywords: ["DaVinci", "Android", "Configuration", "Properties", "PingOne", "Inte
 
 Configure DaVinci module for Android properties to connect to PingOne and step through an associated DaVinci flow.
 
+There are two methods for configuring the DaVinci module:
+
+* [Full configuration](#full-configuration)
+
+  Use the Kotlin builder DSL to access all available settings, including Android-specific options such as custom HTTP clients and storage configuration.
+
+* [Common JSON configuration](#common-json-configuration)
+
+  Use a shared key-value structure that works identically across Android, iOS, and JavaScript, letting you load a single config file across platforms.
+
+## Full configuration
+
 The following shows an example DaVinci module configuration, using the underlying `Oidc` module:
 
 Configure DaVinci module connection properties
@@ -1750,7 +2369,7 @@ Configure DaVinci module connection properties
 import com.pingidentity.davinci.DaVinci
 import com.pingidentity.davinci.module.Oidc
 
-val daVinci = DaVinci {
+val davinciClient = DaVinci {
     logger = Logger.STANDARD
     module(Oidc) {
         clientId = "6c7eb89a-66e9-ab12-cd34-eeaf795650b2"
@@ -1758,25 +2377,98 @@ val daVinci = DaVinci {
             "as/.well-known/openid-configuration"
         scopes = mutableSetOf("openid", "profile", "email", "address", "revoke")
         redirectUri = "com.example.demo://oauth2redirect"
+        par = true
         additionalParameters = mapOf("customKey" to "customValue")
     }
 }
 ```
 
-The following properties are available for configuring the DaVinci module for Android:
+## Common JSON configuration
 
-**Properties**
+You can provide the same configuration as a JSON object, which lets you share a single config file across Android, iOS, and JavaScript.
 
-| Property               | Description                                                                                                                                                                                                                                                                                                                                                                                              | Required? |
-| ---------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------- |
-| `discoveryEndpoint`    | Your PingOne server's `.well-known/openid-configuration` endpoint.*Example*:`https://auth.pingone.com/3072206d-c6ce-ch15-m0nd-f87e972c7cc3/as/.well-known/openid-configuration`                                                                                                                                                                                                                          | Yes       |
-| `clientId`             | The `client_id` of the OAuth 2.0 client profile to use.For example, `6c7eb89a-66e9-ab12-cd34-eeaf795650b2`                                                                                                                                                                                                                                                                                               | Yes       |
-| `scopes`               | A set of scopes to request when performing an OAuth 2.0 authorization flow\.For example, `"openid", "profile", "email", "address", "revoke"`.                                                                                                                                                                                                                                                            | Yes       |
-| `redirectUri`          | The `redirect_uri` as configured in the OAuth 2.0 client profile.	This value must match a value configured in your OAuth 2.0 client.For example, `com.example.demo://oauth2redirect`.                                                                                                                                                                                                                    | Yes       |
-| `timeout`              | A timeout, in seconds, for each request that communicates with the server.Default is `30` seconds.                                                                                                                                                                                                                                                                                                       | No        |
-| `acrValues`            | Request which flow the PingOne server uses by adding an Authentication Context Class Reference (ACR) parameter.Enter a single DaVinci policy by using its flow policy ID.Example:`"d1210a6b0b2665dbaa5b652221badba2"`                                                                                                                                                                                    | No        |
-| `logger`               | Specify which logger the Orchestration SDK should use to output messages. Select from the built-in presets `STANDARD` (the default), `WARN`, or `NONE`.You can also create and use your own logger implementation. Learn more in [Customizing logging on Android](../../customization/logging/android-custom-logging.html).                                                                              | No        |
-| `additionalParameters` | Add additional key-pair parameters as query strings to the initial OAuth 2.0 call to the `/authorize` endpoint.For example, `additionalParameters = mapOf("customKey" to "customValue")`&#xA;&#xA;You can access these additional OAuth 2.0 parameters in your DaVinci flows by using the authorizationRequest.\<customParameter> property.&#xA;&#xA;Learn more in Referencing PingOne data in the flow. | No        |
+Configure the `DaVinci` module from a JSON object
+
+```kotlin
+val davinciClient = DaVinci(buildJsonObject {
+    put("timeout", 30000) // milliseconds
+    put("log", "WARN")
+    putJsonObject("oidc") {
+        put("clientId", "6c7eb89a-66e9-ab12-cd34-eeaf795650b2")
+        put("discoveryEndpoint",
+            "https://auth.pingone.com/3072206d-c6ce-ch15-m0nd-f87e972c7cc3/as/.well-known/openid-configuration")
+        putJsonArray("scopes") {
+            add("openid"); add("profile"); add("email"); add("revoke")
+        }
+        put("redirectUri", "com.example.demo://oauth2redirect")
+    }
+}).getOrThrow()
+```
+
+Optionally, you can store this JSON in a file alongside your app and load it at runtime so the same file can be shared across platforms.
+
+|   |                                                                                                                                                                                                                                                                  |
+| - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | The JSON factory and the native `DaVinci {}` builder DSL are mutually exclusive, there is no combined form.If you need Android-specific settings such as `httpClient` or storage configuration, use the native builder DSL for the entire configuration instead. |
+
+## Configuration property reference
+
+The following properties are available when configuring the DaVinci module for Android.
+
+The **JSON property** column shows the equivalent key when using JSON configuration.
+
+**DaVinci module configuration properties for Android**
+
+| Property               | JSON property               | Description                                                                                                                                                                                                                                                                                                                                                                                              | Required? |
+| ---------------------- | --------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------- |
+| `logger`               | `log`                       | Specify which logger the Orchestration SDK should use to output messages. Select from the built-in presets `STANDARD` (the default), `WARN`, or `NONE`.You can also create and use your own logger implementation. Learn more in [Customizing logging on Android](../../customization/logging/android-custom-logging.html).In JSON configuration, use the `log` property at the root level.              | No        |
+| `timeout`              | `timeout`                   | A timeout, in seconds, for each request that communicates with the server.Default is `30` seconds.When using JSON configuration, specify `timeout` at the root level with the value in milliseconds:```json
+{
+  "timeout": 30000
+}
+```                                                                                                                                                                   | No        |
+| `acrValues`            | `oidc.acrValues`            | Request which flow the PingOne server uses by adding an Authentication Context Class Reference (ACR) parameter.Enter a single DaVinci policy by using its flow policy ID.Example:`"d1210a6b0b2665dbaa5b652221badba2"`                                                                                                                                                                                    | No        |
+| `additionalParameters` | `oidc.additionalParameters` | Add additional key-pair parameters as query strings to the initial OAuth 2.0 call to the `/authorize` endpoint.For example, `additionalParameters = mapOf("customKey" to "customValue")`&#xA;&#xA;You can access these additional OAuth 2.0 parameters in your DaVinci flows by using the authorizationRequest.\<customParameter> property.&#xA;&#xA;Learn more in Referencing PingOne data in the flow. | No        |
+| `clientId`             | `oidc.clientId`             | The `client_id` of the OAuth 2.0 client profile to use.For example, `6c7eb89a-66e9-ab12-cd34-eeaf795650b2`                                                                                                                                                                                                                                                                                               | Yes       |
+| `discoveryEndpoint`    | `oidc.discoveryEndpoint`    | Your PingOne server's `.well-known/openid-configuration` endpoint.*Example*:`https://auth.pingone.com/3072206d-c6ce-ch15-m0nd-f87e972c7cc3/as/.well-known/openid-configuration`                                                                                                                                                                                                                          | Yes       |
+| `par`                  | `oidc.par`                  | Whether to use Pushed Authorization Requests (PAR) for communicating with the authorization server.Learn more in [Securing OIDC sign-on with Pushed Authorization Requests](../../../oidc/use-cases/par/index.html).                                                                                                                                                                                     | No        |
+| `redirectUri`          | `oidc.redirectUri`          | The `redirect_uri` as configured in the OAuth 2.0 client profile.	This value must match a value configured in your OAuth 2.0 client.For example, `com.example.demo://oauth2redirect`.                                                                                                                                                                                                                    | Yes       |
+| `scopes`               | `oidc.scopes`               | A set of scopes to request when performing an OAuth 2.0 authorization flow\.For example, `"openid", "profile", "email", "address", "revoke"`.                                                                                                                                                                                                                                                            | Yes       |
+| `display`              | `oidc.display`              | How the authorization server should display the authentication UI.- `page`
+
+  Full-page redirect (default).
+
+- `popup`
+
+  Pop-up window.
+
+- `touch`
+
+  Optimized for touch-based devices.
+
+- `wap`
+
+  Optimized for WAP/mobile browsers.                                                                                                                                                                 | No        |
+| `loginHint`            | `oidc.loginHint`            | A hint to pre-populate the username field on the authorization server's sign-on page.For example, `user@example.com`                                                                                                                                                                                                                                                                                     | No        |
+| `nonce`                | `oidc.nonce`                | A value to associate with the ID token to prevent replay attacks.If not set, the SDK generates a nonce automatically.                                                                                                                                                                                                                                                                                    | No        |
+| `prompt`               | `oidc.prompt`               | Controls whether the authorization server prompts the user for re-authentication or consent.Select one of the following:- `none`
+
+  No UI; returns an error if interaction is required.
+
+- `login`
+
+  Force re-authentication.
+
+- `consent`
+
+  Request consent even if previously granted.
+
+- `select_account`
+
+  Prompt to select an account.                                                           | No        |
+| `refreshThreshold`     | `oidc.refreshThreshold`     | The number of seconds before token expiry at which the SDK proactively refreshes the token.Defaults to `0`, meaning the SDK refreshes only when the token has expired.                                                                                                                                                                                                                                   | No        |
+| `signOutRedirectUri`   | `oidc.signOutRedirectUri`   | The URI to redirect to after sign-out.Maps to the `post_logout_redirect_uri` parameter in the end-session request.This value must be registered in your OAuth 2.0 client.                                                                                                                                                                                                                                | No        |
+| `uiLocales`            | `oidc.uiLocales`            | Space-separated BCP 47 language tags indicating the preferred display language for the authorization server's UI.For example, `en-US fr`                                                                                                                                                                                                                                                                 | No        |
 
 ---
 
@@ -1790,6 +2482,10 @@ llms_txt: https://developer.pingidentity.com/orchsdks/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: Fri, 9 Jan 2026 17:23:51 +0000
 keywords: ["DaVinci", "iOS", "Configuration", "Properties", "PingOne", "Integration"]
+section_ids:
+  full-configuration: Full configuration
+  common-json-configuration: Common JSON configuration
+  configuration_property_reference: Configuration property reference
 ---
 
 # Configuring the DaVinci module
@@ -1804,12 +2500,24 @@ keywords: ["DaVinci", "iOS", "Configuration", "Properties", "PingOne", "Integrat
 
 Configure DaVinci module for iOS properties to connect to PingOne and step through an associated DaVinci flow.
 
+There are two methods for configuring the DaVinci module:
+
+* [Full configuration](#full-configuration)
+
+  Use the Swift builder closure to access all available settings, including iOS-specific options such as keychain access groups, custom HTTP clients, and storage configuration.
+
+* [Common JSON configuration](#common-json-configuration)
+
+  Use a shared key-value structure that works identically across Android, iOS, and JavaScript, letting you load a single config file across platforms.
+
+## Full configuration
+
 The following shows an example DaVinci module configuration, using the underlying `Oidc` module:
 
 Configure DaVinci module connection properties
 
 ```swift
-let daVinci = DaVinci.createDaVinci { config in
+let davinciClient = DaVinci.createDaVinci { config in
     config.logger = LogManager.standard
     // Oidc as module
     config.module(OidcModule.config) { oidcValue in
@@ -1817,25 +2525,103 @@ let daVinci = DaVinci.createDaVinci { config in
         oidcValue.discoveryEndpoint = "https://auth.pingone.com/3072206d-c6ce-ch15-m0nd-f87e972c7cc3/as/.well-known/openid-configuration"
         oidcValue.scopes = ["openid", "profile", "email", "address", "revoke"]
         oidcValue.redirectUri = "com.example.demo://oauth2redirect"
+        oidcValue.par = true
         oidcValue.additionalParameters = ["customKey":"customValue"]
     }
 }
 ```
 
-The following properties are available for configuring the DaVinci module for iOS:
+## Common JSON configuration
 
-**Properties**
+You can provide the same configuration as a JSON-compatible dictionary, which lets you share a single config file across Android, iOS, and JavaScript.
 
-| Property               | Description                                                                                                                                                                                                                                                                                                                                                                                               | Required? |
-| ---------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------- |
-| `discoveryEndpoint`    | Your PingOne server's `.well-known/openid-configuration` endpoint.*Example*:`https://auth.pingone.com/3072206d-c6ce-ch15-m0nd-f87e972c7cc3/as/.well-known/openid-configuration`                                                                                                                                                                                                                           | Yes       |
-| `clientId`             | The `client_id` of the OAuth 2.0 client profile to use.For example, `6c7eb89a-66e9-ab12-cd34-eeaf795650b2`                                                                                                                                                                                                                                                                                                | Yes       |
-| `scopes`               | A set of scopes to request when performing an OAuth 2.0 authorization flow\.For example, `"openid", "profile", "email", "address", "revoke"`.                                                                                                                                                                                                                                                             | Yes       |
-| `redirectUri`          | The `redirect_uri` as configured in the OAuth 2.0 client profile.	This value must match a value configured in your OAuth 2.0 client.For example, `com.example.demo://oauth2redirect`.                                                                                                                                                                                                                     | Yes       |
-| `timeout`              | A timeout, in seconds, for each request that communicates with the server.Default is `30` seconds.                                                                                                                                                                                                                                                                                                        | No        |
-| `acrValues`            | Request which flow the PingOne server uses by adding an Authentication Context Class Reference (ACR) parameter.Enter a single DaVinci policy by using its flow policy ID.Example:`"d1210a6b0b2665dbaa5b652221badba2"`                                                                                                                                                                                     | No        |
-| `logger`               | Specify which logger the Orchestration SDK should use to output messages. Select from the built-in presets `standard` (the default), `warning`, or `none`.You can also create and use your own logger implementation. Learn more in [Customizing logging on iOS](../../customization/logging/ios-custom-logging.html).                                                                                    | No        |
-| `additionalParameters` | Add additional key-pair parameters as query strings to the initial OAuth 2.0 call to the `/authorize` endpoint.For example, `myConfig.additionalParameters = ["customKey":"customValue"]`&#xA;&#xA;You can access these additional OAuth 2.0 parameters in your DaVinci flows by using the authorizationRequest.\<customParameter> property.&#xA;&#xA;Learn more in Referencing PingOne data in the flow. | No        |
+Configure the `DaVinci` module from a JSON dictionary
+
+```swift
+let json: [String: Any] = [
+    "timeout": 30000, // milliseconds
+    "log": "WARN",
+    "oidc": [
+        "clientId": "6c7eb89a-66e9-ab12-cd34-eeaf795650b2",
+        "discoveryEndpoint":
+            "https://auth.pingone.com/3072206d-c6ce-ch15-m0nd-f87e972c7cc3/as/.well-known/openid-configuration",
+        "scopes": ["openid", "profile", "email", "revoke"],
+        "redirectUri": "com.example.demo://oauth2redirect"
+    ]
+]
+
+switch DaVinci.createDaVinci(json: json) {
+case .success(let davinciClient):
+    // use davinciClient
+case .failure(let error):
+    // handle configuration error
+}
+```
+
+Optionally, you can store this JSON in a file alongside your app and load it at runtime so the same file can be shared across platforms.
+
+|   |                                                                                                                                                                                                                                                                                                              |
+| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+|   | The JSON factory and the native `DaVinci.createDaVinci { }` builder closure are mutually exclusive, there is no combined form.If you need iOS-specific settings such as keychain access groups, `httpClient`, or storage configuration, use the native builder closure for the entire configuration instead. |
+
+## Configuration property reference
+
+The following properties are available when configuring the DaVinci module for iOS.
+
+The **JSON property** column shows the equivalent key when using JSON configuration.
+
+**DaVinci module configuration properties for iOS**
+
+| Property               | JSON property               | Description                                                                                                                                                                                                                                                                                                                                                                                               | Required? |
+| ---------------------- | --------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------- |
+| `logger`               | `log`                       | Specify which logger the Orchestration SDK should use to output messages. Select from the built-in presets `standard` (the default), `warning`, or `none`.You can also create and use your own logger implementation. Learn more in [Customizing logging on iOS](../../customization/logging/ios-custom-logging.html).In JSON configuration, use the `log` property at the root level.                    | No        |
+| `timeout`              | `timeout`                   | A timeout, in seconds, for each request that communicates with the server.Default is `30` seconds.When using JSON configuration, specify `timeout` at the root level with the value in milliseconds:```json
+{
+  "timeout": 30000
+}
+```                                                                                                                                                                    | No        |
+| `acrValues`            | `oidc.acrValues`            | Request which flow the PingOne server uses by adding an Authentication Context Class Reference (ACR) parameter.Enter a single DaVinci policy by using its flow policy ID.Example:`"d1210a6b0b2665dbaa5b652221badba2"`                                                                                                                                                                                     | No        |
+| `additionalParameters` | `oidc.additionalParameters` | Add additional key-pair parameters as query strings to the initial OAuth 2.0 call to the `/authorize` endpoint.For example, `myConfig.additionalParameters = ["customKey":"customValue"]`&#xA;&#xA;You can access these additional OAuth 2.0 parameters in your DaVinci flows by using the authorizationRequest.\<customParameter> property.&#xA;&#xA;Learn more in Referencing PingOne data in the flow. | No        |
+| `clientId`             | `oidc.clientId`             | The `client_id` of the OAuth 2.0 client profile to use.For example, `6c7eb89a-66e9-ab12-cd34-eeaf795650b2`                                                                                                                                                                                                                                                                                                | Yes       |
+| `discoveryEndpoint`    | `oidc.discoveryEndpoint`    | Your PingOne server's `.well-known/openid-configuration` endpoint.*Example*:`https://auth.pingone.com/3072206d-c6ce-ch15-m0nd-f87e972c7cc3/as/.well-known/openid-configuration`                                                                                                                                                                                                                           | Yes       |
+| `par`                  | `oidc.par`                  | Whether to use Pushed Authorization Requests (PAR) for communicating with the authorization server.Learn more in [Securing OIDC sign-on with Pushed Authorization Requests](../../../oidc/use-cases/par/index.html).                                                                                                                                                                                      | No        |
+| `redirectUri`          | `oidc.redirectUri`          | The `redirect_uri` as configured in the OAuth 2.0 client profile.	This value must match a value configured in your OAuth 2.0 client.For example, `com.example.demo://oauth2redirect`.                                                                                                                                                                                                                     | Yes       |
+| `scopes`               | `oidc.scopes`               | A set of scopes to request when performing an OAuth 2.0 authorization flow\.For example, `"openid", "profile", "email", "address", "revoke"`.                                                                                                                                                                                                                                                             | Yes       |
+| `display`              | `oidc.display`              | How the authorization server should display the authentication UI.- `page`
+
+  Full-page redirect (default).
+
+- `popup`
+
+  Pop-up window.
+
+- `touch`
+
+  Optimized for touch-based devices.
+
+- `wap`
+
+  Optimized for WAP/mobile browsers.                                                                                                                                                                  | No        |
+| `loginHint`            | `oidc.loginHint`            | A hint to pre-populate the username field on the authorization server's sign-on page.For example, `user@example.com`                                                                                                                                                                                                                                                                                      | No        |
+| `nonce`                | `oidc.nonce`                | A value to associate with the ID token to prevent replay attacks.If not set, the SDK generates a nonce automatically.                                                                                                                                                                                                                                                                                     | No        |
+| `prompt`               | `oidc.prompt`               | Controls whether the authorization server prompts the user for re-authentication or consent.Select one of the following:- `none`
+
+  No UI; returns an error if interaction is required.
+
+- `login`
+
+  Force re-authentication.
+
+- `consent`
+
+  Request consent even if previously granted.
+
+- `select_account`
+
+  Prompt to select an account.                                                            | No        |
+| `refreshThreshold`     | `oidc.refreshThreshold`     | The number of seconds before token expiry at which the SDK proactively refreshes the token.Defaults to `0`, meaning the SDK refreshes only when the token has expired.                                                                                                                                                                                                                                    | No        |
+| `signOutRedirectUri`   | `oidc.signOutRedirectUri`   | The URI to redirect to after sign-out.Maps to the `post_logout_redirect_uri` parameter in the end-session request.This value must be registered in your OAuth 2.0 client.                                                                                                                                                                                                                                 | No        |
+| `uiLocales`            | `oidc.uiLocales`            | Space-separated BCP 47 language tags indicating the preferred display language for the authorization server's UI.For example, `en-US fr`                                                                                                                                                                                                                                                                  | No        |
 
 ---
 
@@ -1849,6 +2635,10 @@ llms_txt: https://developer.pingidentity.com/orchsdks/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 revdate: Fri, 9 Jan 2026 17:23:51 +0000
 keywords: ["DaVinci", "JavaScript", "Configuration", "Properties", "PingOne", "Integration"]
+section_ids:
+  full-configuration: Full configuration
+  common-json-configuration: Common JSON configuration
+  configuration_property_reference: Configuration property reference
 ---
 
 # Configuring the DaVinci module
@@ -1862,6 +2652,18 @@ keywords: ["DaVinci", "JavaScript", "Configuration", "Properties", "PingOne", "I
 * [Navigate](03-stepping-through-davinci-flows.html)
 
 Configure DaVinci module for JavaScript properties to connect to PingOne and step through an associated DaVinci flow.
+
+There are two methods for configuring the DaVinci module:
+
+* [Full configuration](#full-configuration)
+
+  Use the JavaScript factory function to access all available settings, including JavaScript-specific options such as request middleware and custom loggers.
+
+* [Common JSON configuration](#common-json-configuration)
+
+  Use a shared key-value structure that works identically across Android, iOS, and JavaScript, letting you load a single config file across platforms.
+
+## Full configuration
 
 The following shows a full DaVinci module configuration:
 
@@ -1877,38 +2679,95 @@ const davinciClient = await davinci({
   },
   config: {
     clientId: '6c7eb89a-66e9-ab12-cd34-eeaf795650b2',
+    redirectUri: 'https://localhost:8443/callback',
     serverConfig: {
       wellknown: 'https://auth.pingone.com/3072206d-c6ce-ch15-m0nd-f87e972c7cc3/as/.well-known/openid-configuration',
       timeout: 3000,
     },
-    scope: '"openid", "email", "address", "profile", "phone"',
+    scope: 'openid profile email phone',
     responseType: 'code',
   },
 });
 ```
 
-The following properties are available for configuring the DaVinci module for JavaScript:
+## Common JSON configuration
+
+You can provide the same configuration as a JSON object, which lets you share a single config file across Android, iOS, and JavaScript.
+
+Use the `makeDavinciConfig()` helper from `@forgerock/sdk-utilities` to convert the JSON to native config, then pass it to `davinci()`:
+
+Configure the `DaVinci` module from a JSON object
+
+```javascript
+import { davinci } from '@forgerock/davinci-client';
+import { makeDavinciConfig } from '@forgerock/sdk-utilities';
+
+const unifiedConfig = {
+    timeout: 30000, // milliseconds
+    log: 'WARN',
+    oidc: {
+        clientId: '6c7eb89a-66e9-ab12-cd34-eeaf795650b2',
+        discoveryEndpoint:
+            'https://auth.pingone.com/3072206d-c6ce-ch15-m0nd-f87e972c7cc3/as/.well-known/openid-configuration',
+        scopes: ['openid', 'profile', 'email', 'revoke'],
+        redirectUri: 'https://localhost:8443/callback',
+    },
+};
+
+const davinciClient = await davinci({
+    config: makeDavinciConfig(unifiedConfig),
+});
+```
+
+Because `makeDavinciConfig()` returns a standard native config object, you can combine it with JavaScript-specific options in the same `davinci()` call:
+
+Combining JSON config with JavaScript-specific options
+
+```javascript
+const davinciClient = await davinci({
+    config: makeDavinciConfig(unifiedConfig),
+    logger: { level: 'debug', custom: myCustomLogger },
+    requestMiddleware: [customHeaderMiddleware],
+});
+```
+
+The `makeDavinciConfig()` helper maps JSON properties to the native config automatically:
+
+* `oidc.discoveryEndpoint` → `config.serverConfig.wellknown`
+
+* `oidc.scopes` (array) → `config.scope` (space-separated string)
+
+* `timeout` → `config.serverConfig.timeout`
+
+Optionally, you can store the JSON in a file alongside your app and load it at runtime so the same file can be shared across platforms.
+
+## Configuration property reference
+
+The following properties are available when configuring the DaVinci module for JavaScript.
+
+The **JSON property** column shows the equivalent key when using JSON configuration.
 
 1. [Properties of the `config{}` object](#config-props)
 
 2. [Properties of the `logger{}` object](#logger-props)
 
-**confg{} Properties**
+**config{} Properties**
 
-| Property                    | Description                                                                                                                                                                     | Required? |
-| --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------- |
-| `serverConfig`              | An interface for configuring how the SDK contacts the PingAM instance.Contains `wellknown` and `timeout`.                                                                       | Yes       |
-| `serverConfig: {wellknown}` | Your PingOne server's `.well-known/openid-configuration` endpoint.*Example*:`https://auth.pingone.com/3072206d-c6ce-ch15-m0nd-f87e972c7cc3/as/.well-known/openid-configuration` | Yes       |
-| `serverConfig: {timeout}`   | A timeout, in milliseconds, for each request that communicates with your server.For example, for 30 seconds specify `30000`.Defaults to `5000` (5 seconds).                     | No        |
-| `clientId`                  | The `client_id` of the OAuth 2.0 client profile to use.For example, `6c7eb89a-66e9-ab12-cd34-eeaf795650b2`                                                                      | Yes       |
-| `scope`                     | A list of scopes to request when performing an OAuth 2.0 authorization flow, separated by spaces.For example, `"openid", "email", "address", "profile", "phone"`.               | No        |
-| `responseType`              | The type of OAuth 2.0 flow to use, either `code` or `token`.Defaults to `code`.                                                                                                 | No        |
+| Property                    | JSON property            | Description                                                                                                                                                                                                                                                                         | Required? |
+| --------------------------- | ------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------- |
+| `serverConfig: {timeout}`   | `timeout`                | A timeout, in milliseconds, for each request that communicates with your server.For example, for 30 seconds specify `30000`.Defaults to `5000` (5 seconds).When using JSON configuration, specify `timeout` at the root level.                                                      | No        |
+| `serverConfig: {wellknown}` | `oidc.discoveryEndpoint` | Your PingOne server's `.well-known/openid-configuration` endpoint.*Example*:`https://auth.pingone.com/3072206d-c6ce-ch15-m0nd-f87e972c7cc3/as/.well-known/openid-configuration`                                                                                                     | Yes       |
+| `clientId`                  | `oidc.clientId`          | The `client_id` of the OAuth 2.0 client profile to use.For example, `6c7eb89a-66e9-ab12-cd34-eeaf795650b2`                                                                                                                                                                          | Yes       |
+| `redirectUri`               | `oidc.redirectUri`       | The `redirect_uri` as configured in the OAuth 2.0 client profile.	This value must match a value configured in your OAuth 2.0 client.For example, `https://localhost:8443/callback`.                                                                                                 | Yes       |
+| `scope`                     | `oidc.scopes`            | A list of scopes to request when performing an OAuth 2.0 authorization flow, separated by spaces.For example, `"openid", "email", "address", "profile", "phone"`.When using JSON configuration, provide scopes as an array. The SDK joins the values into a space-separated string. | Yes       |
+| `par`                       | `oidc.par`               | Whether to use Pushed Authorization Requests (PAR) for communicating with the authorization server.Learn more in [Securing OIDC sign-on with Pushed Authorization Requests](../../../oidc/use-cases/par/index.html).                                                                | No        |
+| `responseType`              |                          | The type of OAuth 2.0 flow to use, either `code` or `token`.Defaults to `code`.                                                                                                                                                                                                     | No        |
 
 **logger{} Properties**
 
-| Property | Description                                                                                                                                                                                                                                                                                                 | Required? |
-| -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------- |
-| `level`  | Specify what level of logging the Orchestration SDK should output.Select one of the following:- `none`
+| Property | JSON property | Description                                                                                                                                                                                                                                                                                                                                                                                                                         | Required? |
+| -------- | ------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------- |
+| `level`  | `log`         | Specify what level of logging the Orchestration SDK should output.Select one of the following:- `none`
 
 - `error`
 
@@ -1916,8 +2775,167 @@ The following properties are available for configuring the DaVinci module for Ja
 
 - `info` (the default)
 
-- `debug`Learn more in [Configuring JavaScript logging](../../customization/logging/javascript-custom-logging.html#configuring-logging-on-javascript). | No        |
-| `custom` | Specify a custom logger the Orchestration SDK should use to output messages.Learn more in [Customizing JavaScript logging](../../customization/logging/javascript-custom-logging.html#customize-logger-javascript).Example:`customLogger`                                                                   | No        |
+- `debug`Learn more in [Configuring JavaScript logging](../../customization/logging/javascript-custom-logging.html#configuring-logging-on-javascript).In JSON configuration, set the `log` property at the root level, with values `NONE`, `ERROR`, `WARN`, `INFO` or `DEBUG`. | No        |
+| `custom` |               | Specify a custom logger the Orchestration SDK should use to output messages.Learn more in [Customizing JavaScript logging](../../customization/logging/javascript-custom-logging.html#customize-logger-javascript).Example:`customLogger`                                                                                                                                                                                           | No        |
+
+---
+
+---
+title: Configuring the DaVinci module in React Native
+description: Configure the DaVinci client in React Native to connect to PingOne and start a flow
+component: orchsdks
+page_id: orchsdks:davinci:usage/react-native/03-configuring-the-davinci-module
+canonical_url: https://developer.pingidentity.com/orchsdks/davinci/usage/react-native/03-configuring-the-davinci-module.html
+llms_txt: https://developer.pingidentity.com/orchsdks/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: Thu, 27 Aug 2026 00:00:00 +0000
+keywords: ["DaVinci", "React Native", "Configuration", "PingOne", "OIDC"]
+section_ids:
+  configuring_logging: Configuring logging
+---
+
+# Configuring the DaVinci module in React Native
+
+[icon: circle-check, set=far]PingOne [icon: react, set=fab]React Native
+
+* [Prepare](01-configuring-the-server.html)
+
+* [Install](02-installing-the-davinci-module.html)
+
+* **Configure**
+
+* [Start](04-starting-a-davinci-flow.html)
+
+* [Navigate](05-stepping-through-davinci-flows.html)
+
+* [Manage](06-handling-sessions.html)
+
+You must configure a DaVinci client to connect to your PingOne instance.
+
+To configure a client, call `createDaVinciClient()` and provide the OIDC configuration in the `modules` property:
+
+Configuring a DaVinci client
+
+```typescript
+import { createDaVinciClient } from '@ping-identity/rn-davinci';
+
+const davinciClient = createDaVinciClient({
+  modules: {
+    oidc: {
+      clientId: '6c7eb89a-66e9-ab12-cd34-eeaf795650b2',
+      discoveryEndpoint: 'https://auth.pingone.com/3072206d-c6ce-ch15-m0nd-f87e972c7cc3/as/.well-known/openid-configuration',
+      redirectUri: 'org.forgerock.demo://oauth2redirect',
+      scopes: ['openid', 'profile', 'email'],
+    },
+  },
+  timeout: 30000,
+});
+```
+
+Update the following properties with values that match your environment:
+
+* *clientId*
+
+  The client ID from the OAuth 2.0 application you created in PingOne.
+
+  For example, `6c7eb89a-66e9-ab12-cd34-eeaf795650b2`
+
+* *discoveryEndpoint*
+
+  The OIDC discovery endpoint for your PingOne environment.
+
+  For example, `https://auth.pingone.com/3072206d-c6ce-ch15-m0nd-f87e972c7cc3/as/.well-known/openid-configuration`.
+
+* *redirectUri*
+
+  The redirect URI configured in the OAuth 2.0 application.
+
+  This value must exactly match a redirect URI configured in PingOne.
+
+  For example, `org.forgerock.demo://oauth2redirect`
+
+* *scopes*
+
+  The OIDC scopes to request. The example requests the `openid`, `profile`, and `email` scopes.
+
+* *timeout*
+
+  The maximum time, in milliseconds, that the client waits for a response from the server.
+
+  Default is `15000` (15 seconds).
+
+## Configuring logging
+
+If you installed the `@ping-identity/rn-logger` package, create a logger and pass it to the client configuration:
+
+Configuring the DaVinci logger
+
+```typescript
+import { logger } from '@ping-identity/rn-logger';
+
+const davinciClient = createDaVinciClient({
+  logger: logger({ level: 'debug' }),
+  modules: {
+    oidc: {
+      clientId: '6c7eb89a-66e9-ab12-cd34-eeaf795650b2',
+      discoveryEndpoint: 'https://auth.pingone.com/3072206d-c6ce-ch15-m0nd-f87e972c7cc3/as/.well-known/openid-configuration',
+      redirectUri: 'org.forgerock.demo://oauth2redirect',
+    },
+  },
+});
+```
+
+Pass the `level` parameter to configure the amount of detail the Orchestration SDK outputs. Choose from, `debug`, `info`, `warn`, `error`, or `none`.
+
+---
+
+---
+title: Configuring the server for React Native
+description: Configure PingOne with the prerequisite tasks required before using the DaVinci module in a React Native app
+component: orchsdks
+page_id: orchsdks:davinci:usage/react-native/01-configuring-the-server
+canonical_url: https://developer.pingidentity.com/orchsdks/davinci/usage/react-native/01-configuring-the-server.html
+llms_txt: https://developer.pingidentity.com/orchsdks/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: Thu, 27 Aug 2026 00:00:00 +0000
+keywords: ["DaVinci", "React Native", "PingOne", "Server configuration", "Flows"]
+section_ids:
+  supported_collectors: Supported collectors
+---
+
+# Configuring the server for React Native
+
+[icon: circle-check, set=far]PingOne [icon: react, set=fab]React Native
+
+* **Prepare**
+
+* [Install](02-installing-the-davinci-module.html)
+
+* [Configure](03-configuring-the-davinci-module.html)
+
+* [Start](04-starting-a-davinci-flow.html)
+
+* [Navigate](05-stepping-through-davinci-flows.html)
+
+* [Manage](06-handling-sessions.html)
+
+You must configure your PingOne instance for use with the DaVinci module.
+
+Ask your PingOne administrator to complete the following tasks:
+
+* Configure a DaVinci flow
+
+* Create a DaVinci application
+
+* Configure PingOne for DaVinci flow invocation
+
+To learn how to complete these steps, refer to [Launching a flow with a Ping SDK](https://docs.pingidentity.com/davinci/integrating_flows_into_applications/davinci_sdk_launching_a_flow_with_the_sdk.html) in the *PingOne DaVinci documentation*.
+
+## Supported collectors
+
+Your app must handle the collector types that your DaVinci flow returns.
+
+For the current list of supported DaVinci fields and collectors, see [Supported PingOne fields and collectors](../../compatibility.html#supported-davinci-fields).
 
 ---
 
@@ -1971,10 +2989,10 @@ To add the storage module dependencies to your Android project:
    ```gradle
    dependencies {
      // DaVinci orchestration module
-     implementation("com.pingidentity.sdks:davinci:2.0.1")
+     implementation("com.pingidentity.sdks:davinci:2.2.0")
 
      // Storage module
-     implementation("com.pingidentity.sdks:storage:2.0.1")
+     implementation("com.pingidentity.sdks:storage:2.2.0")
    }
    ```
 
@@ -2166,696 +3184,3 @@ module(Cookie) {
 |   |                                                                                                                                                                                                                         |
 | - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 |   | Use an equals sign when assigning a custom class to the `storage` property in the module configuration.You do not need an equals sign when passing configuration settings to the default storage solution for a module. |
-
----
-
----
-title: Customizing DaVinci module storage on iOS
-description: Configure the DaVinci iOS SDK storage module to use built-in or custom storage solutions, with optional caching and encryption
-component: orchsdks
-page_id: orchsdks:davinci:customization/storage/customize-ios-storage
-canonical_url: https://developer.pingidentity.com/orchsdks/davinci/customization/storage/customize-ios-storage.html
-llms_txt: https://developer.pingidentity.com/orchsdks/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: Thu, 22 Jan 2026 12:23:51 +0000
-section_ids:
-  add_dependencies: Add dependencies
-  install-protect-ios: Adding iOS dependencies
-  add_dependencies_using_cocoapods: Add dependencies using CocoaPods
-  add_dependencies_using_swift_package_manager: Add dependencies using Swift Package Manager
-  using_the_provided_storage_solutions: Using the provided storage solutions
-  provided_default_storage_solutions: Provided default storage solutions
-  configuring_storage_solutions: Configuring storage solutions
-  caching: Enabling caching
-  encrypt-ios: Encrypting storage instances on iOS
-  implementing_your_own_custom_storage: Implementing your own custom storage
----
-
-# Customizing DaVinci module storage on iOS
-
-[icon: circle-check, set=far]PingOne [icon: apple, set=fab]iOS
-
-Depending on the authentication use case, you may need to store and retrieve ID tokens, access tokens, refresh tokens, or cookies.
-
-Each token is serving a different use case, and as such how you handle them can be different.
-
-The Orchestration SDKs employ identity best practices for storing data by default. However there are use cases where you might need to customize how the SDK stores data.
-
-For example, you might be running on hardware that provides specialized security features, or perhaps target older hardware that cannot handle the latest algorithms.
-
-For these cases, you can customize the provided storage solutions, or provide your own custom storage classes.
-
-## Add dependencies
-
-To customize your storage solution you need to add the `storage` module to your project.
-
-### Adding iOS dependencies
-
-You can use CocoaPods or the Swift Package Manager to add the dependencies to your iOS project.
-
-#### Add dependencies using CocoaPods
-
-1. If you do not already have CocoaPods, install the [latest version](https://guides.cocoapods.org/using/getting-started.html).
-
-2. If you do not already have a Podfile, in a terminal window, run the following command to create a new [Podfile](https://guides.cocoapods.org/syntax/podfile.html):
-
-   ```podfile
-   pod init
-   ```
-
-3. Add the following lines to your Podfile:
-
-   ```podfile
-   pod 'Storage' // Add-on for customizing storage
-   ```
-
-4. Run the following command to install pods:
-
-   ```
-   pod install
-   ```
-
-#### Add dependencies using Swift Package Manager
-
-1. With your project open in **Xcode**, select File > Add Package Dependencies.
-
-2. In the search bar, enter the iOS repository URL: `https://github.com/ForgeRock/ping-ios-sdk`.
-
-3. Select the `ping-ios-sdk` package, and then click Add Package.
-
-4. In the Choose Package Products dialog, ensure that the `Storage` library is added to your target project.
-
-5. Click Add Package.
-
-6. In your project, import the library:
-
-   ```swift
-   // Import the Storage library
-   import Storage
-   ```
-
-## Using the provided storage solutions
-
-You can use the default storage solutions, and configure them to suit your requirements.
-
-### Provided default storage solutions
-
-You can use the default storage solutions in your apps, depending on the type of data you want to store.
-
-* `MemoryStorage`
-
-  Storage that stores data in memory.
-
-  |   |                                                                                                                                                                                                 |
-  | - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-  |   | Data stored using the `MemoryStorage` solution is kept in plain text and is not encrypted.A device that can output a memory dump may expose sensitive information, such as access or ID tokens. |
-
-* `KeychainStorage`
-
-  Storage backed by the [iOS keychain](https://support.apple.com/en-gb/guide/security/secb0694df1a/web).
-
-  This storage solution does not encrypt the data by default.
-
-### Configuring storage solutions
-
-You can customize aspects of the storage solutions by passing parameters when creating a storage instance.
-
-The available properties are listed below:
-
-**iOS storage properties**
-
-| Property    | Description                                                                                                                                                                                            | Storage types                          |
-| ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------- |
-| `account`   | A user-defined string to uniquely identify the storage instance.                                                                                                                                       | * `MemoryStorage`
-
-* `KeychainStorage` |
-| `cacheable` | Enable caching of the data.Learn more in [Enabling caching](#caching).* Default value
-
-  `CacheStrategy.NO_CACHE`                                                                                      | - `MemoryStorage`
-
-- `KeychainStorage` |
-| `encryptor` | Enable encryption of the data, by specifying the encryptor to use.Learn more in [Encrypting storage instances on iOS](#encrypt-ios).Available options are:- `SecuredKeyEncryptor()`
-
-- `NoEncryptor()` | * `MemoryStorage`
-
-* `KeychainStorage` |
-
-The following code shows an example of customizing storage solutions and using custom types:
-
-Customizing the `KeychainStorage` storage solution
-
-```swift
-// Define the custom data to store
-struct Dog: Codable {
-    let name: String
-    let breed: String
-}
-
-// Create custom storage for custom data
-let customStorage = KeychainStorage<Dog>(
-  account: "myStorageId"
-)
-
-// Persist custom data
-try? await customStorage.save(item: Dog(name: "Lucky", breed: "Golden Retriever"))
-
-// Retrieve custom data
-let storedData = try? await customStorage.get()
-```
-
-#### Enabling caching
-
-You can add caching to each storage solution depending on the requirements of the type of data you store.
-
-|   |                                                                                                                                                                         |
-| - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | Data stored in a cache is kept in plain text and is not encrypted.A device that can output a memory dump may expose sensitive information, such as access or ID tokens. |
-
-Use the `cacheable` property when creating a storage instance to enable caching:
-
-Creating a storage instance with cache enabled
-
-```swift
-let customStorage = KeychainStorage<Dog>(
-  account: "myStorageId",
-  cacheable: true
-)
-```
-
-#### Encrypting storage instances on iOS
-
-On iOS, you can enable encryption for any storage instance that implements the `StorageDelegate` protocol, including all the built-in storage solutions.
-
-Creating a storage instance that uses `SecuredKeyEncryptor`
-
-```swift
-let customStorage = KeychainStorage<Dog>(
-  account: "myStorageId",
-  encryptor: SecuredKeyEncryptor() ?? NoEncryptor()
-)
-```
-
-The `KeychainStorage` uses the `NoEncryptor` encryptor by default or if not specified.
-
-You can create your own custom encryptor by implementing the `Encryptor` protocol:
-
-Creating a custom encryptor for a storage instance
-
-```swift
-struct MyEncryptor: Encryptor {
-  func encrypt(data: Data) async throws -> Data {
-    // Implement the encryption logic
-  }
-
-  func decrypt(data: Data) async throws -> Data {
-    // Implement the decryption logic
-  }
-}
-```
-
-## Implementing your own custom storage
-
-You can create your own custom storage solutions by implementing the `Storage` interface:
-
-The `Storage` interface on iOS
-
-```swift
-public class CustomStorage<T: Codable>: Storage {
-  private var data: T?
-
-  public func save(item: T) async throws {
-    data = item
-  }
-
-  public func get() async throws → T?  {
-    return data
-  }
-
-  public func delete() async throws {
-    data = nil
-  }
-
-}
-
-public class CustomStorageDelegate<T: Codable>: StorageDelegate<T> {
-  public init(cacheable: Bool = false) {
-    super.init(delegate: CustomStorage<T>(), cacheable: cacheable)
-  }
-}
-```
-
-For example, you could implement a file-based or cloud-based storage solution. You must implement the following functions in each storage class:
-
-* `save()`
-
-  Stores an item in the customized storage.
-
-* `get()`
-
-  Retrieves an item from the customized storage.
-
-* `delete()`
-
-  Removes an item from the customized storage.
-
-Use your custom storage solution in a module as follows:
-
-Using a custom storage solution
-
-```swift
-let config = OathConfiguration.build { config in
-  config.storage = myCustomStorage()
-  config.enableCredentialCache = false
-  config.logger = customLogger
-}
-```
-
-|   |                                                                                                                                                                                                                         |
-| - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | Use an equals sign when assigning a custom class to the `storage` property in the module configuration.You do not need an equals sign when passing configuration settings to the default storage solution for a module. |
-
----
-
----
-title: Customizing logging on Android
-description: Configure logging in DaVinci Android apps using preset loggers or define custom loggers to control log output and troubleshoot authentication flows
-component: orchsdks
-page_id: orchsdks:davinci:customization/logging/android-custom-logging
-canonical_url: https://developer.pingidentity.com/orchsdks/davinci/customization/logging/android-custom-logging.html
-llms_txt: https://developer.pingidentity.com/orchsdks/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-keywords: ["DaVinci", "Android", "Logging", "Debug", "Console"]
-section_ids:
-  configuring_android_logcat_logging: Configuring Android Logcat logging
-  defining_and_using_custom_loggers: Defining and using custom loggers
-  android_logger_module: Step 1. Installing modules
-  step_2_defining_and_using_custom_loggers: Step 2. Defining and using custom loggers
----
-
-# Customizing logging on Android
-
-[icon: circle-check, set=far]PingOne [icon: android, set=fab]Android
-
-When you develop applications with the Orchestration SDK, you might need to understand its internal workings or troubleshoot unexpected behavior.
-
-Use logging to gain crucial insights into your application's operations, identify issues, verify expected functionality, and better understand authentication flows.
-
-This section covers how to configure and customize the logging output from the Orchestration SDK for Android.
-
-## Configuring Android Logcat logging
-
-To configure the logging output from the Orchestration SDK for Android, specify the logger to use in the client module configuration:
-
-Setting the logging level in the DaVinci client configuration
-
-```kotlin
-import com.pingidentity.logger.Logger
-
-val daVinci = DaVinci {
-  logger = Logger.STANDARD
-  module(Oidc) {
-    clientId = "6c7eb89a-66e9-ab12-cd34-eeaf795650b2"
-    discoveryEndpoint = "https://auth.pingone.com/3072206d-c6ce-ch15-m0nd-f87e972c7cc3/as/.well-known/openid-configuration"
-    scopes = mutableSetOf("openid", "profile", "email", "address", "revoke")
-    redirectUri = "com.example.demo://oauth2redirect"
-  }
-}
-```
-
-The Orchestration SDK for Android includes the following logger presets:
-
-| Logger preset | Description                                                        |
-| ------------- | ------------------------------------------------------------------ |
-| `STANDARD`    | Outputs all log messages to the Android Logcat.                    |
-| `WARN`        | Outputs only warning and error log messages to the Android Logcat. |
-| `NONE`        | Prevents all log messages.                                         |
-
-|   |                                                                                                                                                                                                                                                                                                 |
-| - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | The `STANDARD` logger tags messages in Android Logcat with the Orchestration SDK version. You can filter the console to only show the tagged messages:![Filtering Android Logcat output by tag](../../../_images/logger/android-logcat-tag.png)Figure 1. Filtering Android Logcat output by tag |
-
-## Defining and using custom loggers
-
-In addition to the preset loggers you can create your own loggers. For example, you could output Orchestration SDK for Android messages to a file or a third-party service, or filter which messages to display.
-
-### Step 1. Installing modules
-
-To create custom loggers, you need to add the **Logger** module for Android as a dependency to your project:
-
-* `logging`
-
-To install the module into your Android app:
-
-1. In the **Project** tree view of your Android Studio project, open the `build.gradle.kts` file.
-
-2. In the `dependencies` section, add the `logger` module as a dependency:
-
-   ```gradle
-   dependencies {
-     implementation("com.pingidentity.sdks:logger:2.0.1")
-   }
-   ```
-
-|   |                                                                        |
-| - | ---------------------------------------------------------------------- |
-|   | Remember to synchronize your Gradle project after adding dependencies. |
-
-### Step 2. Defining and using custom loggers
-
-To create a custom logger, first define a class and override each of the logger methods with the new behavior.
-
-For example, the following code creates a custom logger named `WARN_ERROR_ONLY`, that only outputs warning and error messages, and ignores both info and debug messages:
-
-Defining a custom logger class on Android
-
-```kotlin
-import com.pingidentity.logger.Logger.Companion.logger
-
-open class WarnErrorOnlyLogger : Logger {
-
-    override fun d(message: String) {
-    }
-
-    override fun i(message: String) {
-    }
-
-    override fun w(message: String, throwable: Throwable?) {
-        println("$message: $throwable")
-    }
-
-    override fun e(message: String, throwable: Throwable?) {
-        println("$message: $throwable")
-    }
-}
-
-val Logger.Companion.WARN_ERROR_ONLY: Logger by lazy {
-    WarnErrorOnlyLogger()
-}
-```
-
-To use the custom logger in your app, specify the logger's name, just as with the preset loggers:
-
-Using a custom logger for the DaVinci module on Android
-
-```kotlin
-val daVinci = DaVinci {
-  logger = WARN_ERROR_ONLY
-  module(Oidc) {
-    clientId = "6c7eb89a-66e9-ab12-cd34-eeaf795650b2"
-    discoveryEndpoint = "https://auth.pingone.com/3072206d-c6ce-ch15-m0nd-f87e972c7cc3/as/.well-known/openid-configuration"
-    scopes = mutableSetOf("openid", "profile", "email", "address", "revoke")
-    redirectUri = "com.example.demo://oauth2redirect"
-  }
-}
-```
-
----
-
----
-title: Customizing logging on iOS
-description: Configure custom logging in your iOS app to capture and route DaVinci SDK log output for debugging and monitoring
-component: orchsdks
-page_id: orchsdks:davinci:customization/logging/ios-custom-logging
-canonical_url: https://developer.pingidentity.com/orchsdks/davinci/customization/logging/ios-custom-logging.html
-llms_txt: https://developer.pingidentity.com/orchsdks/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-keywords: ["DaVinci", "iOS", "Logging", "Debug", "Console"]
-section_ids:
-  configuring_ios_logging: Configuring iOS logging
-  defining_and_using_custom_loggers: Defining and using custom loggers
-  ios_logger_module: Step 1. Installing modules
-  add_dependencies_using_spm_swift_package_manager: Add dependencies using SPM (Swift Package Manager)
-  add_dependencies_using_cocoapods: Add dependencies using CocoaPods
-  step_2_defining_and_using_custom_loggers: Step 2. Defining and using custom loggers
----
-
-# Customizing logging on iOS
-
-[icon: circle-check, set=far]PingOne [icon: apple, set=fab]iOS
-
-When you develop applications with the Orchestration SDK, you might need to understand its internal workings or troubleshoot unexpected behavior.
-
-Use logging to gain crucial insights into your application's operations, identify issues, verify expected functionality, and better understand authentication flows.
-
-This section covers how to configure and customize the logging output from the Orchestration SDK for iOS.
-
-## Configuring iOS logging
-
-To configure the logging output from the Orchestration SDK for iOS, specify the logger to use in the client module configuration:
-
-Setting the logging level in the DaVinci client configuration
-
-```swift
-import PingLogger
-
-let daVinci = DaVinci.createDaVinci { config in
-  config.logger = LogManager.standard
-  config.module(OidcModule.config) { oidcValue in
-    oidcValue.clientId = "6c7eb89a-66e9-ab12-cd34-eeaf795650b2"
-    oidcValue.discoveryEndpoint = "https://auth.pingone.com/3072206d-c6ce-ch15-m0nd-f87e972c7cc3/as/.well-known/openid-configuration"
-    oidcValue.scopes = ["openid", "profile", "email", "address", "revoke"]
-    oidcValue.redirectUri = "com.example.demo://oauth2redirect"
-  }
-}
-```
-
-The Orchestration SDK for iOS includes the following logger presets:
-
-| Logger preset | Description                                                 |
-| ------------- | ----------------------------------------------------------- |
-| `standard`    | Outputs all log messages to the console.                    |
-| `warning`     | Outputs only warning and error log messages to the console. |
-| `none`        | Prevents all log messages.                                  |
-
-|   |                                                                                                                                                                                                                                                                             |
-| - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | The `standard` logger tags messages in the console with the Orchestration SDK version. You can filter the console to only show the tagged messages:![Filtering console output by tag](../../../_images/logger/ios-console-tag.png)Figure 1. Filtering console output by tag |
-
-## Defining and using custom loggers
-
-In addition to the preset loggers you can create your own loggers. For example, you could output Orchestration SDK for Android messages to a file or a third-party service, or filter which messages to display.
-
-### Step 1. Installing modules
-
-To create custom loggers, you need to add the **Logger** module for iOS as a dependency to your project.
-
-You can use Swift Package Manager (SPM) or Cocoapods to add the dependencies to your iOS project.
-
-#### Add dependencies using SPM (Swift Package Manager)
-
-You can install this by using SPM (Swift Package Manager) on the generated iOS project.
-
-1. In Xcode,in the Project Navigator, right-click your project, and then click Add Package Dependencies…​.
-
-2. In the **Search or Enter Package URL** field, enter the URL of the repo containing the DaVinci module for iOS, `https://github.com/ForgeRock/ping-ios-sdk.git`.
-
-3. In **Add to Project**, select the name of your project, and then click **Add Package**.
-
-   Xcode shows a dialog containing the libraries available in the Orchestration SDK for iOS.
-
-4. Select the `PingLogger` library, and in the **Add to Target** column select the name of your project.
-
-5. Repeat the previous step for any other Orchestration SDK libraries you want to add to your project.
-
-6. Click **Add Package**.
-
-   Xcode displays the chosen libraries and any prerequisites they might have in the **Package Dependencies** pane of the Project Navigator:
-
-   ![Package dependencies in the Xcode package navigator pane.](../../_images/Xcode-package-dependencies-dv-client.png)Figure 2. Package dependencies in the Xcode package navigator pane.
-
-#### Add dependencies using CocoaPods
-
-1. If you do not already have CocoaPods, install the [latest version](https://guides.cocoapods.org/using/getting-started.html).
-
-2. If you do not already have a Podfile, in a terminal window, run the following command to create a new [Podfile](https://guides.cocoapods.org/syntax/podfile.html):
-
-   ```
-   pod init
-   ```
-
-3. Add the following lines to your Podfile:
-
-   ```
-   pod 'PingLogger'
-   ```
-
-4. Run the following command to install pods:
-
-   ```
-   pod install
-   ```
-
-### Step 2. Defining and using custom loggers
-
-To create a custom logger, first define a class and override each of the logger methods with the new behavior.
-
-For example, the following code creates a custom logger named `warningErrorOnly`, that only outputs warning and error messages, and ignores both info and debug messages:
-
-Defining a custom logger class on iOS
-
-```swift
-import PingLogger
-
-struct WarningErrorOnlyLogger: Logger {
-
-  func i(_ message: String) {
-  }
-
-  func d(_ message: String) {
-  }
-
-  func w(_ message: String, error: Error?) {
-    if let error = error {
-      print("\(message): \(error)")
-    } else {
-      print(message)
-    }
-  }
-
-  func e(_ message: String, error: Error?) {
-    if let error = error {
-      print("\(message): \(error)")
-    } else {
-      print(message)
-    }
-  }
-}
-
-extension LogManager {
-  static var warningErrorOnly: Logger {
-    return WarningErrorOnlyLogger()
-  }
-}
-```
-
-To use the custom logger in your app, specify the logger's name, just as with the preset loggers:
-
-Using a custom logger with the DaVinci module on iOS
-
-```swift
-let daVinci = DaVinci.createDaVinci { config in
-  config.logger = warningErrorOnly
-  config.module(OidcModule.config) { oidcValue in
-    oidcValue.clientId = "6c7eb89a-66e9-ab12-cd34-eeaf795650b2"
-    oidcValue.discoveryEndpoint = "https://auth.pingone.com/3072206d-c6ce-ch15-m0nd-f87e972c7cc3/as/.well-known/openid-configuration"
-    oidcValue.scopes = ["openid", "profile", "email", "address", "revoke"]
-    oidcValue.redirectUri = "com.example.demo://oauth2redirect"
-  }
-}
-```
-
----
-
----
-title: Customizing logging on JavaScript
-description: Configure logging levels and custom logger functions in the Orchestration SDK for JavaScript to redirect or filter SDK output
-component: orchsdks
-page_id: orchsdks:davinci:customization/logging/javascript-custom-logging
-canonical_url: https://developer.pingidentity.com/orchsdks/davinci/customization/logging/javascript-custom-logging.html
-llms_txt: https://developer.pingidentity.com/orchsdks/llms.txt
-docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-keywords: ["DaVinci", "JavaScript", "Logging", "Debug", "Console"]
-section_ids:
-  configuring_javascript_logging: Configuring JavaScript logging
-  customize-logger-javascript: Customizing JavaScript logging
----
-
-# Customizing logging on JavaScript
-
-[icon: circle-check, set=far]PingOne [icon: js, set=fab]JavaScript
-
-When you develop applications with the Orchestration SDK, you might need to understand its internal workings or troubleshoot unexpected behavior.
-
-Use logging to gain crucial insights into your application's operations, identify issues, verify expected functionality, and better understand authentication flows.
-
-This section covers how to configure and customize the logging output from the Orchestration SDK for JavaScript.
-
-## Configuring JavaScript logging
-
-To configure the logging output from the Orchestration SDK for JavaScript, inside the `logger` object, specify the level to use for logging in the `level` property in the client module configuration:
-
-Setting the logging level in the DaVinci client configuration
-
-```javascript
-const davinciClient = await davinci({
-  logger: {
-    level: 'warn',
-  },
-  config: {
-    clientId: '6c7eb89a-66e9-ab12-cd34-eeaf795650b2',
-    serverConfig: {
-      wellknown: 'https://auth.pingone.com/3072206d-c6ce-ch15-m0nd-f87e972c7cc3/as/.well-known/openid-configuration',
-      timeout: 3000,
-    },
-    scope: '"openid", "email", "address", "profile", "phone"',
-    responseType: 'code',
-  },
-});
-```
-
-The Orchestration SDK for JavaScript supports the following logger levels:
-
-| Level   | Priority | Description                                                                          |
-| ------- | -------- | ------------------------------------------------------------------------------------ |
-| `none`  | `-1`     | Does not output any log messages.                                                    |
-| `error` | `0`      | Log messages describing errors that have occurred.                                   |
-| `warn`  | `1`      | Log messages detailing possible issues that aren't yet errors.                       |
-| `info`  | `3`      | Log messages for expected activities during regular usage.This is the default value. |
-| `debug` | `4`      | Log messages intended only for development and troubleshooting.                      |
-
-The Orchestration SDK outputs messages that have a priority equal to, or less than your chosen level.
-
-For example, if you set the level to `warn`, the module outputs `warn` and `error` messages.
-
-## Customizing JavaScript logging
-
-The Orchestration SDK for JavaScript allows developers to customize the default logger behavior. For example, you might want to redirect the logs to an external service, or pipe them to a file.
-
-To customize how the Orchestration SDK outputs logger messages:
-
-1. Create a function that implements the `LoggerFunctions` interface.
-
-   For example, the following code adds a prefix to output from the SDK before logging it to the console:
-
-   ```javascript
-   const customLogger = {
-     error: (...args) => console.error(`[Ping SDK Error]:`, ...args),
-     warn: (...args) => console.warn(`[Ping SDK Warning]:`, ...args),
-     info: (...args) => console.info(`[Ping SDK Info]:`, ...args),
-     debug: (...args) => console.debug(`[Ping SDK Debug]:`, ...args)
-   };
-   ```
-
-   The signature of the interface defaults to the following:
-
-   `(...msgs: unknown[]) => void`
-
-2. Specify the custom logger to use in the `custom` property in the `logger` object of your client module configuration:
-
-   Setting the logging level in the DaVinci client configuration
-
-   ```javascript
-   const davinciClient = await davinci({
-     logger: {
-       level: 'debug',
-       custom: customLogger,
-     },
-     config: {
-       clientId: '6c7eb89a-66e9-ab12-cd34-eeaf795650b2',
-       serverConfig: {
-         wellknown: 'https://auth.pingone.com/3072206d-c6ce-ch15-m0nd-f87e972c7cc3/as/.well-known/openid-configuration',
-         timeout: 3000,
-       },
-       scope: '"openid", "email", "address", "profile", "phone"',
-       responseType: 'code',
-     },
-   });
-   ```
-
-The Orchestration SDK redirects its logging output to your custom logger:
-
-![Custom logger output in the Chrome developer console.](../../../_images/logger/chrome-console-custom-logger.png)Figure 1. Custom logger output in the Chrome developer console.
-
-|   |                                                                                                                                                                                                                                                           |
-| - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | You might need to adjust the default console output filters in your browser's developer console, to view output from the Orchestration SDK.For example, to view `debug` level messages in Chrome, make sure you enable **Verbose** output in the console. |

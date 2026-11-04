@@ -1,4 +1,182 @@
 ---
+title: Performing post-upgrade tasks
+description: Perform post-upgrade tasks after upgrading your PingAccess environment to ensure the new version works correctly.
+component: pingaccess
+version: 9.1
+page_id: pingaccess:upgrading_pingaccess:pa_performing_post_upgrade_tasks
+canonical_url: https://docs.pingidentity.com/pingaccess/9.1/upgrading_pingaccess/pa_performing_post_upgrade_tasks.html
+llms_txt: https://docs.pingidentity.com/pingaccess/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: August 25, 2026
+section_ids:
+  steps: Steps
+---
+
+# Performing post-upgrade tasks
+
+After upgrading your PingAccess deployment using the upgrade utility or the installer, you must perform several post-upgrade tasks to ensure the target version works correctly.
+
+|   |                                                                                                                                          |
+| - | ---------------------------------------------------------------------------------------------------------------------------------------- |
+|   | You can find details about the upgrade in `log/upgrade.log`. For details about the migrated configuration data, examine `log/audit.log`. |
+
+## Steps
+
+1. Review any warnings returned by the upgrade utility.
+
+   At the end of an upgrade, the PingAccess upgrade utility or installer records any manual steps that require user intervention both in the command-line output and in `log/upgrade.log` at the WARN level. Information that doesn't require user intervention is added to the `log/upgrade.log` at the INFO level.
+
+2. In the PingAccess admin console, go to **Settings > HTTP Requests > IP Source** and review the configuration. Ensure that the use of the IP source settings is appropriate for the environment.
+
+   You can find more information in [HTTP requests](../pingaccess_user_interface_reference_guide/pa_http_requests.html) and [Configuring alternative IP source headers](../pingaccess_user_interface_reference_guide/pa_configuring_alt_ip_source_headers.html).
+
+3. [Stop](../installing_and_uninstalling_pingaccess/pa_stopping_pa.html) the source version of PingAccess.
+
+4. [Start](../installing_and_uninstalling_pingaccess/pa_starting_pa.html) the target version of PingAccess.
+
+5. (Optional) If you enabled basic authentication for the PingAccess admin API to perform the upgrade, you can now safely turn it off by deselecting the **Basic Authentication** checkbox.
+
+   ![admin api basic authn disabled](_images/admin-api-basic-authn-disabled.png)
+
+---
+
+---
+title: PingAccess cluster upgrade parameters
+description: The command-line parameters are the same regardless of the platform, and are defined as follows.
+component: pingaccess
+version: 9.1
+page_id: pingaccess:upgrading_pingaccess:pa_cluster_upgrade_parameters
+canonical_url: https://docs.pingidentity.com/pingaccess/9.1/upgrading_pingaccess/pa_cluster_upgrade_parameters.html
+llms_txt: https://docs.pingidentity.com/pingaccess/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: February 6, 2023
+section_ids:
+  parameter-definitions: Parameter definitions
+  environment-variables: Environment variables
+  java-virtual-machine-jvm-memory-options: Java virtual machine (JVM) memory options
+  example: Example
+---
+
+# PingAccess cluster upgrade parameters
+
+The command-line parameters are the same regardless of the platform, and are defined as follows.
+
+## Parameter definitions
+
+| Parameter                          | Value description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| ---------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| -r \| --disable-config-replication | Disables configuration replication on the admin node. For more information about using this parameter in an upgrade, see the [Zero Downtime Upgrade](../pingaccess_zero_downtime_upgrade/pa_zero_downtime_upgrade.html).                                                                                                                                                                                                                                                                                                                                                                |
+| -p *\<admin_port>*                 | Optional port to be used by the temporary PingAccess instance run during the upgrade. The default is 9001.                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| -i *\<directory>*                  | An optional directory containing additional library JAR files, such as plugins, Java Database Connectivity (JDBC) drivers to be copied into the target installation.Beginning in version 6.0, `JAR` files are stored in the `<PA HOME>/deploy` folder.During an upgrade from versions earlier than 6.0, third-party `JAR` files are migrated from the `lib` folder to the `deploy` folder if no directory is specified.During an upgrade from version 6.0 or later, the contents of the `deploy` folder are migrated to the new `<PA HOME>/deploy` folder if no directory is specified. |
+| *\<sourcePingAccessRootDir>*       | The PA_HOME for the source PingAccess version.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| -l *\<newPingAccessLicense>*       | An optional path to the PingAccess license file to use for the target version. If not specified, the existing license is reused.                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| -j *\<jvm_memory_options_file>*    | An optional path to a file with Java Virtual Machine (JVM) *(tooltip: \<div class="paragraph">&#xA;\<p>A virtual machine that allows a computer to run Java programs and programs that are compiled to Java bytecode.\</p>&#xA;\</div>)* memory options to use for the new PingAccess instance during the upgrade.                                                                                                                                                                                                                                                                      |
+| -s \| --silent                     | Run the upgrade with no user input required. To use this option, specify the source version's credentials using environment variables.                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+
+## Environment variables
+
+You can specify the username and password for the source version using these environment variables:
+
+* `PA_SOURCE_API_USERNAME` – The username for the source version's Admin API. This should be set to Administrator.
+
+* `PA_SOURCE_API_PASSWORD` – The basic authorization password for the Administrator in the source version's Admin API.
+
+## Java virtual machine (JVM) memory options
+
+These options can be included in the JVM memory options file. Memory amounts use `m` or `g` to specify the unit.
+
+* `-Xms<amount>` – Minimum heap size.
+
+* `-Xmx<amount>` – Maximum heap size.
+
+* `-XX:NewSize=<amount>` – Minimum size for the Young Gen space.
+
+* `-XX:MaxNewSize=<amount>` – Maximum size for the Young Gen space.
+
+* `-XX:+UseParallelGC` – Specifies that the parallel garbage collector should be used.
+
+You can copy the existing `<PA_HOME>/conf/jvm-memory.options` file to create a JVM memory options file for the upgrade.
+
+## Example
+
+```
+#Sample JVM Memory options file
+-Xms512m
+-Xmx1g
+-XX:NewSize=256m
+-XX:MaxNewSize=512m
+-XX:+UseParallelGC
+```
+
+---
+
+---
+title: PingAccess standalone upgrade parameters
+description: The command-line parameters are the same regardless of the platform and are defined in the following table.
+component: pingaccess
+version: 9.1
+page_id: pingaccess:upgrading_pingaccess:pa_standalone_upgrade_parameters
+canonical_url: https://docs.pingidentity.com/pingaccess/9.1/upgrading_pingaccess/pa_standalone_upgrade_parameters.html
+llms_txt: https://docs.pingidentity.com/pingaccess/llms.txt
+docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: February 6, 2023
+section_ids:
+  environment-variables: Environment variables
+  java-virtual-machine-jvm-memory-options: Java virtual machine (JVM) memory options
+  example: Example
+---
+
+# PingAccess standalone upgrade parameters
+
+The command-line parameters are the same regardless of the platform and are defined in the following table.
+
+| Parameter                       | Value description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| ------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| -p *\<admin_port>*              | Optional port to be used by the temporary PingAccess instance run during the upgrade. The default is 9001.                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| -i *\<directory>*               | An optional directory containing additional library JAR files, such as plugins and Java Database Connectivity (JDBC) drivers, to be copied into the target installation.Beginning in version 6.0, JAR files are stored in the `<PA HOME>/deploy` folder.During an upgrade from versions earlier than 6.0, third-party JAR files are migrated from the `lib` folder to the `deploy` folder if no directory is specified.During an upgrade from version 6.0 or later, the contents of the `deploy` folder are migrated to the new `<PA HOME>/deploy` folder if no directory is specified. |
+| *\<sourcePingAccessRootDir>*    | The `PA_HOME` for the source PingAccess version.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| -l *\<newPingAccessLicense>*    | An optional path to the PingAccess license file to use for the target version. If not specified, the existing license is reused.                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| -j *\<jvm_memory_options_file>* | An optional path to a file with Java Virtual Machine (JVM) *(tooltip: \<div class="paragraph">&#xA;\<p>A virtual machine that allows a computer to run Java programs and programs that are compiled to Java bytecode.\</p>&#xA;\</div>)* options to use for the new PingAccess instance during the upgrade.                                                                                                                                                                                                                                                                             |
+| -s \| --silent                  | Run the upgrade with no user input required. To use this option, specify the source version's credentials using environment variables.                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+
+## Environment variables
+
+You can specify the username and password for the source version using these environment variables:
+
+* `PA_SOURCE_API_USERNAME` – The username for the source version's Admin API. This should be set to Administrator.
+
+* `PA_SOURCE_API_PASSWORD` – The basic authorization password for the Administrator in the source version's Admin API.
+
+## Java virtual machine (JVM) memory options
+
+You can include these options in the JVM memory options file. Memory amounts use `m` or `g` to specify the unit.
+
+* `-Xms<amount>` – Minimum heap size
+
+* `-Xmx<amount>` – Maximum heap size
+
+* `-XX:NewSize=<amount>` – Minimum size for the Young Gen space
+
+* `-XX:MaxNewSize=<amount>` – Maximum size for the Young Gen space
+
+* `-XX:+UseParallelGC` – Specifies that the parallel garbage collector should be used
+
+You can copy the existing `<PA_HOME>/conf/jvm-memory.options` file to create a JVM memory options file for the upgrade.
+
+## Example
+
+```
+#Sample JVM Memory options file
+-Xms512m
+-Xmx1g
+-XX:NewSize=256m
+-XX:MaxNewSize=512m
+-XX:+UseParallelGC
+```
+
+---
+
+---
 title: Restoring a PingAccess configuration backup
 description: If an upgrade fails, restore your PingAccess configuration using an automatically generated backup.
 component: pingaccess
@@ -49,16 +227,17 @@ page_id: pingaccess:upgrading_pingaccess:pa_upgrade_considerations
 canonical_url: https://docs.pingidentity.com/pingaccess/9.1/upgrading_pingaccess/pa_upgrade_considerations.html
 llms_txt: https://docs.pingidentity.com/pingaccess/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: June 1, 2026
+revdate: August 20, 2026
 section_ids:
   considerations-when-upgrading-to-6-0-or-later: Considerations when upgrading to 6.0 or later
   new-templates-for-error-and-logout-pages: New templates for error and logout pages
+  previous-target-version: Upgrading to a PingAccess version released before your current version
   using-a-proxied-pingfederate-deployment: Using a proxied PingFederate deployment
   spa-support: SPA support
   considerations-when-upgrading-to-7-0-or-later: Considerations when upgrading to 7.0 or later
   runtime-state-clustering-removal: Runtime state clustering removal
   upgrading-to-or-past-version-7-3-with-a-customized-log4j2-xml-file: Upgrading to or past version 7.3 with a customized log4j2.xml file
-  elliptic-curve-key-pair-issues-with-aws-cloudhsm-client-sdk-5: Elliptic Curve key pair issues with AWS CloudHSM Client SDK 5
+  ec-key-pair-issues-with-aws-cloudhsm-client-sdk-5: EC key pair issues with AWS CloudHSM Client SDK 5
   improved-configuration-replication-compatibility: Improved configuration replication compatibility
   considerations-when-upgrading-to-8-0-or-later: Considerations when upgrading to 8.0 or later
   upgrading-to-or-past-version-8-0-from-version-6-2-or-below: Upgrading to or past version 8.0 from version 6.2 or below
@@ -88,6 +267,38 @@ In PingAccess 6.1, we updated several error and logout page template files to mo
 * `policy.error.page.template.html`
 
 You can find more information about the templates in [User-facing page customization reference](../configuring_and_customizing_pingaccess/pa_user_facing_page_customization_ref.html). If you customized the template files previously, recustomize the new files.
+
+### Upgrading to a PingAccess version released before your current version
+
+As of PingAccess 6.1, the upgrade utility can download missing reference files if connected to the internet. This simplifies upgrading to a PingAccess version that was released before your current version. For example, upgrading from PingAccess 7.3.4 (released May 2024) to 8.0.1 (released March 2024).
+
+If an internet connection is unavailable, you can use the following workaround.
+
+> **Collapse: Workaround**
+>
+> 1. Go to https\://pingone.s3.amazonaws.com/public_downloads/pingaccess/*\<version_you're_upgrading_from>*/reference-files-*\<version_you're_upgrading_from>*.zip to download the missing reference file automatically.
+>
+>    For example:
+>
+>    ```
+>    https://pingone.s3.amazonaws.com/public_downloads/pingaccess/7.3.4/reference-files-7.3.4.zip
+>    ```
+>
+> 2. In a new installation of the PingAccess version you want to upgrade to, create the following directory:
+>
+>    ```
+>    <PA_<target_upgrade_version>_HOME>/upgrade/reference-files/<version_you're_upgrading_from>/
+>    ```
+>
+>    For example:
+>
+>    ```
+>    <PA_8.0.1_HOME>/upgrade/reference-files/7.3.4/
+>    ```
+>
+> 3. Add the reference files to the upgrade utility manually by extracting their contents to the directory you created in the previous step.
+>
+>    For example, extract the contents of the 7.3.4 reference files and add them to the upgrade utility in 8.0.1 manually.
 
 ### Using a proxied PingFederate deployment
 
@@ -127,15 +338,15 @@ If you're using runtime state clustering with rate limiting rules, before upgrad
 
 PingAccess 7.3 introduced a new `log4j-categories.xml` file to enable adjustment of the amount of detail included in PingAccess's logs. Learn more in [Configuring verbose logging in the admin console](../pingaccess_user_interface_reference_guide/pa_configuring_verbose_logging.html).
 
-If you have customized your `log4j2.xml` file, you must merge this file with the `log4j-categories.xml` file the first time you upgrade to PingAccess 7.3 or a later version.
+If you've customized your `log4j2.xml` file, you must merge those customizations into the updated `log4j2.xml` file the first time you upgrade to PingAccess 7.3 or a later version.
 
-### Elliptic Curve key pair issues with AWS CloudHSM Client SDK 5
+### EC key pair issues with AWS CloudHSM Client SDK 5
 
 As of PingAccess 7.3, PingAccess offers support for Amazon Web Services (AWS) *(tooltip: \<div class="paragraph">
 \<p>An Amazon subsidiary providing cloud computing platforms.\</p>
 \</div>)* CloudHSM Client SDK 5 instead of Client SDK 3.
 
-Client SDK 5 introduces an issue with elliptic curve (EC) key pairs for all TLS handshakes, similar to the extant issue with TLS 1.3 for EC and RSA keys. As a result, you can create EC key pairs in PingAccess, but you can't assign them to a listener.
+Client SDK 5 introduces an issue with elliptic-curve (EC) key pairs for all TLS handshakes, similar to the extant issue with TLS 1.3 for EC and RSA keys. As a result, you can create EC key pairs in PingAccess, but you can't assign them to a listener.
 
 ### Improved configuration replication compatibility
 
@@ -263,10 +474,9 @@ page_id: pingaccess:upgrading_pingaccess:pa_upgrading_a_pa_cluster_using_the_inc
 canonical_url: https://docs.pingidentity.com/pingaccess/9.1/upgrading_pingaccess/pa_upgrading_a_pa_cluster_using_the_incremental_upgrade_package.html
 llms_txt: https://docs.pingidentity.com/pingaccess/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: March 5, 2024
+revdate: July 16, 2026
 section_ids:
   before-you-begin: Before you begin
-  about-this-task: About this task
   steps: Steps
   next-steps: Next steps
 ---
@@ -275,51 +485,57 @@ section_ids:
 
 Upgrade a PingAccess cluster to a newer version using the incremental update package.
 
+Use the PingAccess incremental update bundle to upgrade from your current environment version (the *source version*) to a more recent maintenance release for that version of PingAccess (the *target version*). For example, use the bundle to upgrade PingAccess 6.3 to the most recent maintenance release for 6.3.
+
+|   |                                                                                                                                                                                              |
+| - | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | The upgrade procedure causes some downtime. To upgrade a cluster with no downtime, use the [Zero Downtime Upgrade](../pingaccess_zero_downtime_upgrade/pa_zero_downtime_upgrade.html) guide. |
+
 ## Before you begin
 
-* Make a backup copy of the PingAccess home directory. If the upgrade fails, use the backup copy to restore PingAccess.
+* Make a backup copy of the PingAccess home directory. If the upgrade fails, restore your environment from this backup.
 
-* Review the release notes for every version between your current version and the target version.
+* Review the release notes for every version between the source and target version.
 
-* Verify that each node is using the same PingAccess version. You can check the version by viewing the `<PA_HOME>/lib/pingaccess-admin-ui-<version number>.jar` file.
+* Verify the following:
 
-* Verify that the PingAccess administrative node is running.
+  * Basic authentication is configured and enabled for the admin API of the source PingAccess instance.
 
-* Verify that basic authentication is configured and enabled for the running PingAccess administrative node.
+    |   |                                                                                                                                                                                                                                                            |
+    | - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+    |   | You might need to enable basic authentication if you have limited access permissions to OAuth because of your configured role. Learn more in [Configuring API authentication](../pingaccess_user_interface_reference_guide/pa_configuring_api_authn.html). |
 
-* Download the PingAccess incremental update `.zip` file for the target version.
+  * Each node is using the same PingAccess version.
 
-## About this task
+    You can check the version by viewing the `<PA_HOME>/lib/pingaccess-admin-ui-<version_number>.jar` file.
 
-Use the PingAccess incremental update bundle to upgrade a cluster from PingAccess 6.3 or later, the source version, to the most recent maintenance release for that version of PingAccess, the target version. For example, upgrade PingAccess 6.3 to the most recent maintenance release for 6.3.
+  * The PingAccess administrative node is running.
 
-|   |                                                                                                                                                                                               |
-| - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | This upgrade procedure causes some downtime. To upgrade a cluster with no downtime, see the [Zero Downtime Upgrade](../pingaccess_zero_downtime_upgrade/pa_zero_downtime_upgrade.html) guide. |
+  * You have the incremental update `.zip` file for the target version of PingAccess.
 
 ## Steps
 
-1. Upgrade the administrative node.
+1. Upgrade the administrative node:
 
-   1. Extract the `.zip` file for the target version of PingAccess.
+   1. Extract the `.zip` archive for the target version of PingAccess.
 
-   2. Open the `readme` file included in the extracted `.zip` bundle.
-
-   3. Make the file changes specified in the `readme` file.
-
-2. Upgrade the replica administrative node.
-
-   1. Extract the `.zip` file for the target version of PingAccess.
-
-   2. Open the `readme` file included in the extracted `.zip` bundle.
+   2. Open the `readme` file included in the extracted `.zip` archive.
 
    3. Make the file changes specified in the `readme` file.
 
-3. Upgrade each engine node.
+2. Upgrade the replica administrative node:
 
-   1. Extract the `.zip` file for the target version of PingAccess.
+   1. Extract the `.zip` archive for the target version of PingAccess.
 
-   2. Open the `readme` file included in the extracted `.zip` bundle.
+   2. Open the `readme` file included in the extracted `.zip` archive.
+
+   3. Make the file changes specified in the `readme` file.
+
+3. Upgrade each engine node:
+
+   1. Extract the `.zip` archive for the target version of PingAccess.
+
+   2. Open the `readme` file included in the extracted `.zip` archive.
 
    3. Make the file changes specified in the `readme` file.
 
@@ -333,86 +549,150 @@ Use the PingAccess incremental update bundle to upgrade a cluster from PingAcces
 
 ## Next steps
 
-After you complete the upgrade, see [Performing post-upgrade tasks](pa_performing_post_upgrade_tasks.html).
+Review [Performing post-upgrade tasks](pa_performing_post_upgrade_tasks.html).
 
 ---
 
 ---
 title: Upgrading a PingAccess cluster using the upgrade utility
-description: Upgrade a PingAccess cluster to a newer version.
+description: Upgrade a PingAccess cluster to a newer version using the upgrade utility.
 component: pingaccess
 version: 9.1
 page_id: pingaccess:upgrading_pingaccess:pa_upgrading_a_pa_cluster_using_the_upgrade_utility
 canonical_url: https://docs.pingidentity.com/pingaccess/9.1/upgrading_pingaccess/pa_upgrading_a_pa_cluster_using_the_upgrade_utility.html
 llms_txt: https://docs.pingidentity.com/pingaccess/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: February 6, 2023
+revdate: August 20, 2026
 section_ids:
   before-you-begin: Before you begin
-  about-this-task: About this task
-  steps: Steps
-  choose-from: Choose from:
-  choose-from-2: Choose from:
-  choose-from-3: Choose from:
-  next-steps: Next steps
   pingaccess-cluster-upgrade-parameters: PingAccess cluster upgrade parameters
   parameter-definitions: Parameter definitions
   environment-variables: Environment variables
   java-virtual-machine-jvm-memory-options: Java virtual machine (JVM) memory options
   example: Example
+  steps: Steps
+  choose-from: Choose from:
+  choose-from-2: Choose from:
+  choose-from-3: Choose from:
+  next-steps: Next steps
 ---
 
 # Upgrading a PingAccess cluster using the upgrade utility
 
 Upgrade a PingAccess cluster to a newer version.
 
-## Before you begin
-
-* If you are using PingAccess 3.2 or earlier, upgrade to PingAccess 4.3 or 5.3 before upgrading to the latest version.
-
-* Create a backup of your existing PingAccess configuration. If the upgrade fails, you can restore your environment from this backup.
-
-* Review the release notes for every version between your current version and the target version.
-
-  |   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
-  | - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-  |   | In PingAccess 5.0 or later, there are potentially breaking changes to the Software Development Kit (SDK) *(tooltip: \<div class="paragraph">&#xA;\<p>A set of tools that allows a developer to build a custom application that integrates with or connects to a platform or service.\</p>&#xA;\</div>)* for Java, Groovy scripts, and the administrative SDK. For information on these changes and the actions administrators might need to take, see the [Upgrade considerations](pa_upgrade_considerations.html) and the [PingAccess 5.0](https://cdn-docs.pingidentity.com/archive/pdf/pingaccess/pingaccess-50.pdf#page=263) release notes. |
-
-* Verify the following:
-
-  * Each node is using the same PingAccess version. You can check the version by viewing the `<PA_HOME>/lib/pingaccess-admin-ui-<version number>.jar` file.
-
-  * The PingAccess administrative node is running.
-
-  * Basic authentication is configured and enabled for the running PingAccess administrative node.
-
-  * You have the `.zip` bundle for the target version of PingAccess.
-
-* Verify that you are using the same account normally used to run PingAccess.
-
-## About this task
-
-Use the PingAccess upgrade utility to upgrade a cluster from PingAccess 4.0 or later, the source version, to the most recent version, the target version.
+Use the PingAccess upgrade utility to upgrade from your current environment version (the *source version*) to the most recent version (the *target version*).
 
 |   |                                                                                                                                                                                              |
 | - | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | The upgrade procedure causes some downtime. To upgrade a cluster with no downtime, see the [Zero Downtime Upgrade](../pingaccess_zero_downtime_upgrade/pa_zero_downtime_upgrade.html) guide. |
+|   | The upgrade procedure causes some downtime. To upgrade a cluster with no downtime, use the [Zero Downtime Upgrade](../pingaccess_zero_downtime_upgrade/pa_zero_downtime_upgrade.html) guide. |
 
-The upgrade utility starts an instance of PingAccess with an administrative listener on port 9001. You can change this port number using the `upgrade.bat` or `upgrade.sh` `-p` parameter. This port configuration is only used for the upgrade. The configured port is used by the upgraded server when the upgrade is complete.
+The upgrade utility starts an instance of PingAccess with an administrative listener on port 9001. You can change this port number using the `upgrade.bat` or `upgrade.sh` `-p` parameter, but this port configuration is only used for the upgrade. The upgraded server uses the port configured in the `run.properties` file after the upgrade is complete.
 
-Any warnings or errors encountered are recorded in `log/upgrade.log`, as well as on-screen while the utility is being run. The upgrade uses an exit code of 0 to indicate a successful upgrade and an exit code of 1 to indicate failure.
+|   |                                                                                   |
+| - | --------------------------------------------------------------------------------- |
+|   | During the upgrade, don't make any changes to the running PingAccess environment. |
 
-|   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
-| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-|   | If you are upgrading from version 4.3 or earlier, and your installation uses custom plugins, they must be rebuilt using the SDK version included in PingAccess 5.0 or later. Run the upgrade utility manually with the new `-i` command-line option to specify a directory containing the custom plugin JAR files and only the custom plugin JAR files. To migrate your custom plugins, see the [PingAccess Addon SDK for Java Migration Guide](../agents_and_integrations/pa_add_on_sdk_for_java_migration_guide.html). |
+Any warnings or errors are recorded in `log/upgrade.log`, as well as on screen while the utility is running. The upgrade uses the following exit codes:
 
-|   |                                                                                    |
-| - | ---------------------------------------------------------------------------------- |
-|   | During the upgrade, do not make any changes to the running PingAccess environment. |
+* 0
+
+  Indicates a successful upgrade.
+
+* 1
+
+  Indicates the upgrade failed.
+
+|   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | If you're upgrading from PingAccess 4.3 or earlier and your installation uses custom plugins, you must:* Rebuild them using the SDK version included in PingAccess 5.0 or later.
+
+* Run the upgrade utility manually with the new `-i` command-line option to specify a directory containing only the custom plugin JAR files.Learn more about migrating your custom plugins in the [PingAccess Add-On SDK for Java migration guide](../agents_and_integrations/pa_add_on_sdk_for_java_migration_guide.html). |
+
+## Before you begin
+
+* Create a backup of your existing PingAccess configuration. If the upgrade fails, restore your environment from this backup.
+
+* If you're using PingAccess 6.2 or earlier, upgrade to PingAccess 6.3 before upgrading to a more recent version.
+
+* Review the release notes for every version between the source and target version.
+
+  |   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+  | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+  |   | PingAccess 5.0 contains potentially breaking changes to the Software Development Kit (SDK) *(tooltip: \<div class="paragraph">&#xA;\<p>A set of tools that allows a developer to build a custom application that integrates with or connects to a platform or service.\</p>&#xA;\</div>)* for Java, Groovy scripts, and the admin API. Learn more about these changes and actions administrators might need to take in [Upgrade considerations](pa_upgrade_considerations.html) and the [PingAccess 5.0](https://cdn-docs.pingidentity.com/archive/pdf/pingaccess/pingaccess-50.pdf#page=263) release notes. |
+
+* Verify the following:
+
+  * Basic authentication is configured and enabled for the admin API of the source PingAccess instance.
+
+    |   |                                                                                                                                                                                                                                                            |
+    | - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+    |   | You might need to enable basic authentication if you have limited access permissions to OAuth because of your configured role. Learn more in [Configuring API authentication](../pingaccess_user_interface_reference_guide/pa_configuring_api_authn.html). |
+
+  * You're using the same account normally used to run PingAccess.
+
+  * Each node is using the same PingAccess version.
+
+    You can check the version by viewing the `<PA_HOME>/lib/pingaccess-admin-ui-<version_number>.jar` file.
+
+  * The PingAccess administrative node is running.
+
+  * You have the `.zip` archive for the target version of PingAccess.
+
+## PingAccess cluster upgrade parameters
+
+The command-line parameters are the same regardless of the platform, and are defined as follows.
+
+### Parameter definitions
+
+| Parameter                          | Value description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| ---------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| -r \| --disable-config-replication | Disables configuration replication on the admin node. For more information about using this parameter in an upgrade, see the [Zero Downtime Upgrade](../pingaccess_zero_downtime_upgrade/pa_zero_downtime_upgrade.html).                                                                                                                                                                                                                                                                                                                                                                |
+| -p *\<admin_port>*                 | Optional port to be used by the temporary PingAccess instance run during the upgrade. The default is 9001.                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| -i *\<directory>*                  | An optional directory containing additional library JAR files, such as plugins, Java Database Connectivity (JDBC) drivers to be copied into the target installation.Beginning in version 6.0, `JAR` files are stored in the `<PA HOME>/deploy` folder.During an upgrade from versions earlier than 6.0, third-party `JAR` files are migrated from the `lib` folder to the `deploy` folder if no directory is specified.During an upgrade from version 6.0 or later, the contents of the `deploy` folder are migrated to the new `<PA HOME>/deploy` folder if no directory is specified. |
+| *\<sourcePingAccessRootDir>*       | The PA_HOME for the source PingAccess version.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| -l *\<newPingAccessLicense>*       | An optional path to the PingAccess license file to use for the target version. If not specified, the existing license is reused.                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| -j *\<jvm_memory_options_file>*    | An optional path to a file with Java Virtual Machine (JVM) *(tooltip: \<div class="paragraph">&#xA;\<p>A virtual machine that allows a computer to run Java programs and programs that are compiled to Java bytecode.\</p>&#xA;\</div>)* memory options to use for the new PingAccess instance during the upgrade.                                                                                                                                                                                                                                                                      |
+| -s \| --silent                     | Run the upgrade with no user input required. To use this option, specify the source version's credentials using environment variables.                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+
+### Environment variables
+
+You can specify the username and password for the source version using these environment variables:
+
+* `PA_SOURCE_API_USERNAME` – The username for the source version's Admin API. This should be set to Administrator.
+
+* `PA_SOURCE_API_PASSWORD` – The basic authorization password for the Administrator in the source version's Admin API.
+
+### Java virtual machine (JVM) memory options
+
+These options can be included in the JVM memory options file. Memory amounts use `m` or `g` to specify the unit.
+
+* `-Xms<amount>` – Minimum heap size.
+
+* `-Xmx<amount>` – Maximum heap size.
+
+* `-XX:NewSize=<amount>` – Minimum size for the Young Gen space.
+
+* `-XX:MaxNewSize=<amount>` – Maximum size for the Young Gen space.
+
+* `-XX:+UseParallelGC` – Specifies that the parallel garbage collector should be used.
+
+You can copy the existing `<PA_HOME>/conf/jvm-memory.options` file to create a JVM memory options file for the upgrade.
+
+### Example
+
+```
+#Sample JVM Memory options file
+-Xms512m
+-Xmx1g
+-XX:NewSize=256m
+-XX:MaxNewSize=512m
+-XX:+UseParallelGC
+```
 
 ## Steps
 
-1. On the administrative node, extract the `.zip` file for the target version of PingAccess.
+1. On the administrative node, extract the `.zip` archive for the target version of PingAccess.
 
 2. Go to the new version's `/upgrade/bin` directory.
 
@@ -460,58 +740,7 @@ Any warnings or errors encountered are recorded in `log/upgrade.log`, as well as
 
 ## Next steps
 
-After you complete the upgrade, see [Performing post-upgrade tasks](pa_performing_post_upgrade_tasks.html).
-
-## PingAccess cluster upgrade parameters
-
-The command-line parameters are the same regardless of the platform, and are defined as follows.
-
-### Parameter definitions
-
-| Parameter                          | Value description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| ---------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| -r \| --disable-config-replication | Disables configuration replication on the admin node. For more information about using this parameter in an upgrade, see the [Zero Downtime Upgrade](../pingaccess_zero_downtime_upgrade/pa_zero_downtime_upgrade.html).                                                                                                                                                                                                                                                                                                                                                                |
-| -p *\<admin\_port>*                | Optional port to be used by the temporary PingAccess instance run during the upgrade. The default is 9001.                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| -i *\<directory>*                  | An optional directory containing additional library JAR files, such as plugins, Java Database Connectivity (JDBC) drivers to be copied into the target installation.Beginning in version 6.0, `JAR` files are stored in the `<PA HOME>/deploy` folder.During an upgrade from versions earlier than 6.0, third-party `JAR` files are migrated from the `lib` folder to the `deploy` folder if no directory is specified.During an upgrade from version 6.0 or later, the contents of the `deploy` folder are migrated to the new `<PA HOME>/deploy` folder if no directory is specified. |
-| *\<sourcePingAccessRootDir>*       | The PA\_HOME for the source PingAccess version.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| -l *\<newPingAccessLicense>*       | An optional path to the PingAccess license file to use for the target version. If not specified, the existing license is reused.                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-| -j *\<jvm\_memory\_options\_file>* | An optional path to a file with Java Virtual Machine (JVM) *(tooltip: \<div class="paragraph">&#xA;\<p>A virtual machine that allows a computer to run Java programs and programs that are compiled to Java bytecode.\</p>&#xA;\</div>)* memory options to use for the new PingAccess instance during the upgrade.                                                                                                                                                                                                                                                                      |
-| -s \| --silent                     | Run the upgrade with no user input required. To use this option, specify the source version's credentials using environment variables.                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
-
-### Environment variables
-
-You can specify the username and password for the source version using these environment variables:
-
-* `PA_SOURCE_API_USERNAME` – The username for the source version's Admin API. This should be set to Administrator.
-
-* `PA_SOURCE_API_PASSWORD` – The basic authorization password for the Administrator in the source version's Admin API.
-
-### Java virtual machine (JVM) memory options
-
-These options can be included in the JVM memory options file. Memory amounts use `m` or `g` to specify the unit.
-
-* `-Xms<amount>` – Minimum heap size.
-
-* `-Xmx<amount>` – Maximum heap size.
-
-* `-XX:NewSize=<amount>` – Minimum size for the Young Gen space.
-
-* `-XX:MaxNewSize=<amount>` – Maximum size for the Young Gen space.
-
-* `-XX:+UseParallelGC` – Specifies that the parallel garbage collector should be used.
-
-You can copy the existing `<PA_HOME>/conf/jvm-memory.options` file to create a JVM memory options file for the upgrade.
-
-### Example
-
-```
-#Sample JVM Memory options file
--Xms512m
--Xmx1g
--XX:NewSize=256m
--XX:MaxNewSize=512m
--XX:+UseParallelGC
-```
+Review [Performing post-upgrade tasks](pa_performing_post_upgrade_tasks.html).
 
 ---
 
@@ -524,10 +753,9 @@ page_id: pingaccess:upgrading_pingaccess:pa_upgrading_a_pa_standalone_version_us
 canonical_url: https://docs.pingidentity.com/pingaccess/9.1/upgrading_pingaccess/pa_upgrading_a_pa_standalone_version_using_the_incremental_update_package.html
 llms_txt: https://docs.pingidentity.com/pingaccess/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: March 5, 2024
+revdate: July 16, 2026
 section_ids:
   before-you-begin: Before you begin
-  about-this-task: About this task
   steps: Steps
   next-steps: Next steps
 ---
@@ -536,25 +764,29 @@ section_ids:
 
 Upgrade a standalone PingAccess deployment to a newer version using the incremental update package.
 
+Use the PingAccess incremental update bundle to upgrade from your current environment version (the *source version*) to a more recent maintenance release for that version of PingAccess (the *target version*). For example, use the bundle to upgrade PingAccess 6.3 to the most recent maintenance release for 6.3.
+
 ## Before you begin
 
-* Make a backup copy of the PingAccess home directory. If the upgrade fails, use the backup copy to restore PingAccess.
+* Make a backup copy of the PingAccess home directory. If the upgrade fails, restore your environment from this backup.
 
-* Review the release notes for every version between your current version and the target version.
+* Review the release notes for every version between the source and target version.
 
-* Verify that you have the following:
+* Verify the following:
 
-  * The PingAccess incremental update `.zip` file for the target version
+  * Basic authentication is configured and enabled for the admin API of the source PingAccess instance.
 
-  * Administrator credentials for the running PingAccess instance
+    |   |                                                                                                                                                                                                                                                            |
+    | - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+    |   | You might need to enable basic authentication if you have limited access permissions to OAuth because of your configured role. Learn more in [Configuring API authentication](../pingaccess_user_interface_reference_guide/pa_configuring_api_authn.html). |
 
-* Verify that basic authentication is configured and enabled for the running PingAccess instance.
+  * The PingAccess host is running.
 
-* Verify that the PingAccess host is running.
+* Make sure that you have:
 
-## About this task
+  * The PingAccess incremental update `.zip` file for the target version.
 
-Use the PingAccess incremental update bundle to upgrade from PingAccess 6.3 or later, the source version, to the most recent maintenance release for that version of PingAccess, the target version. For example, upgrade PingAccess 6.3 to the most recent maintenance release for 6.3.
+  * Administrator credentials for the running PingAccess instance.
 
 ## Steps
 
@@ -568,23 +800,22 @@ Use the PingAccess incremental update bundle to upgrade from PingAccess 6.3 or l
 
 ## Next steps
 
-After you complete the upgrade, see [Performing post-upgrade tasks](pa_performing_post_upgrade_tasks.html).
+Review [Performing post-upgrade tasks](pa_performing_post_upgrade_tasks.html).
 
 ---
 
 ---
 title: Upgrading a PingAccess standalone version using the upgrade utility
-description: Upgrade a standalone PingAccess deployment to a newer version.
+description: Upgrade a standalone PingAccess deployment to a newer version using the upgrade utility.
 component: pingaccess
 version: 9.1
 page_id: pingaccess:upgrading_pingaccess:pa_upgrading_a_pa_standalone_version_using_the_upgrade_utility
 canonical_url: https://docs.pingidentity.com/pingaccess/9.1/upgrading_pingaccess/pa_upgrading_a_pa_standalone_version_using_the_upgrade_utility.html
 llms_txt: https://docs.pingidentity.com/pingaccess/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: February 6, 2023
+revdate: July 16, 2026
 section_ids:
   before-you-begin: Before you begin
-  about-this-task: About this task
   steps: Steps
   choose-from: Choose from:
   example: Example:
@@ -599,59 +830,73 @@ section_ids:
 
 Upgrade a standalone PingAccess deployment to a newer version.
 
-## Before you begin
+Use the PingAccess upgrade utility to upgrade from your current environment version (the *source version*) to the most recent version (the *target version*).
 
-* If you are using PingAccess 3.2 or earlier, upgrade to PingAccess 4.3 or 5.3 before upgrading to the current version of PingAccess.
+The upgrade utility starts an instance of PingAccess with an administrative listener on port 9001. You can change this port number using the `upgrade.bat` or `upgrade.sh` `-p` parameter, but this port configuration is only used for the upgrade. The upgraded server uses the port configured in the `run.properties` file after the upgrade is complete.
+
+|   |                                                                                   |
+| - | --------------------------------------------------------------------------------- |
+|   | During the upgrade, don't make any changes to the running PingAccess environment. |
+
+Any warnings or errors are recorded in `log/upgrade.log`, as well as on screen while the utility is running. The upgrade uses the following exit codes:
+
+* 0
+
+  Indicates a successful upgrade.
+
+* 1
+
+  Indicates the upgrade failed.
+
+|   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | If you're upgrading from PingAccess 4.3 or earlier and your installation uses custom plugins, you must:* Rebuild them using the SDK version included in PingAccess 5.0 or later.
+
+* Run the upgrade utility manually with the new `-i` command-line option to specify a directory containing only the custom plugin JAR files.Learn more about migrating your custom plugins in the [PingAccess Add-On SDK for Java migration guide](../agents_and_integrations/pa_add_on_sdk_for_java_migration_guide.html). |
+
+## Before you begin
 
 * Create a backup of your existing PingAccess configuration. If the upgrade fails, restore your environment from this backup.
 
-* Review the release notes for every version between your current version and the target version.
+* If you're using PingAccess 6.2 or earlier, upgrade to PingAccess 6.3 before upgrading to a more recent version.
 
-  |   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
-  | - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-  |   | In release 5.0, there are potentially breaking changes to the Software Development Kit (SDK) *(tooltip: \<div class="paragraph">&#xA;\<p>A set of tools that allows a developer to build a custom application that integrates with or connects to a platform or service.\</p>&#xA;\</div>)* for Java, Groovy scripts, and the administrative application programming interface (API) *(tooltip: \<div class="paragraph">&#xA;\<p>A specification of interactions available for building software to access an application or service.\</p>&#xA;\</div>)*. For information on these changes and the actions administrators might need to take, review the [Upgrade considerations](pa_upgrade_considerations.html) and the [PingAccess 5.0](https://cdn-docs.pingidentity.com/archive/pdf/pingaccess/pingaccess-50.pdf#page=263) release notes. |
+* Review the release notes for every version between the source and target version.
 
-* Verify that you have the following:
+  |   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+  | - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+  |   | PingAccess 5.0 contains potentially breaking changes to the Software Development Kit (SDK) *(tooltip: \<div class="paragraph">&#xA;\<p>A set of tools that allows a developer to build a custom application that integrates with or connects to a platform or service.\</p>&#xA;\</div>)* for Java, Groovy scripts, and the admin API. Learn more about these changes and actions administrators might need to take in [Upgrade considerations](pa_upgrade_considerations.html) and the [PingAccess 5.0](https://cdn-docs.pingidentity.com/archive/pdf/pingaccess/pingaccess-50.pdf#page=263) release notes. |
 
-  * The PingAccess distribution `.zip` file
+* Make sure that you have:
 
-  * Your new PingAccess license file, if you plan to switch to a new license file
+  * The PingAccess distribution `.zip` file.
 
-  * Sign on access to the PingAccess host, as the utility is run on the host
+  * Your new PingAccess license file, if you plan to switch to a new license file.
 
-  * Administrator credentials for the running PingAccess instance
+  * Sign-on access to the PingAccess host, because the utility is run on the host.
 
-* Verify that basic authentication is configured and enabled for the running PingAccess instance.
+  * Administrator credentials for the running PingAccess instance.
 
-* Verify that the PingAccess host is running.
+* Verify the following:
 
-* Verify that you are using the same account normally used to run PingAccess.
+  * Basic authentication is configured and enabled for the admin API of the source PingAccess instance.
 
-|   |                                                                                                                                                                                                                                                              |
-| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-|   | If you have set `security.overridePropertiesFile=false` in `$JAVA_HOME/jre/lib/java.security`, the upgrade utility might fail because the PingAccess upgrade utility uses an override to enable deprecated ciphers and protocols during the upgrade process. |
+    |   |                                                                                                                                                                                                                                                            |
+    | - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+    |   | You might need to enable basic authentication if you have limited access permissions to OAuth because of your configured role. Learn more in [Configuring API authentication](../pingaccess_user_interface_reference_guide/pa_configuring_api_authn.html). |
 
-## About this task
+  * You're using the same account normally used to run PingAccess.
 
-Use the PingAccess upgrade utility to upgrade from PingAccess 4.0 or later, the source version, to the most recent version, the target version.
+  * The PingAccess host is running.
 
-The upgrade utility starts an instance of PingAccess with an administrative listener on port 9001. This port number can be changed using the `upgrade.bat` or `upgrade.sh` `-p` parameter. This port configuration is only used for the upgrade. The configured port is used by the upgraded server when the upgrade is complete.
-
-Any warnings or errors encountered are recorded in `log/upgrade.log`, as well as on-screen while the utility is being run. The upgrade uses an exit code of 0 to indicate a successful upgrade and an exit code of 1 to indicate failure.
-
-|   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
-| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-|   | If you are upgrading from version 4.3 or earlier, and your installation uses custom plugins, they must be rebuilt using the SDK version included in PingAccess 5.0 or later. Run the upgrade utility manually with the new `-i` command-line option to specify a directory containing the custom plugin JAR files and only the custom plugin JAR files. To migrate your custom plugins, see the [PingAccess Addon SDK for Java Migration Guide](../agents_and_integrations/pa_add_on_sdk_for_java_migration_guide.html). |
-
-|   |                                                                                    |
-| - | ---------------------------------------------------------------------------------- |
-|   | During the upgrade, do not make any changes to the running PingAccess environment. |
+|   |                                                                                                                                                                                                                                                            |
+| - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | If you've set `security.overridePropertiesFile=false` in `$JAVA_HOME/jre/lib/java.security`, the upgrade utility might fail because the PingAccess upgrade utility uses an override to enable deprecated ciphers and protocols during the upgrade process. |
 
 ## Steps
 
 1. Copy the `.zip` file for the new PingAccess version to the PingAccess host and extract it.
 
-2. Change to the new version's `/upgrade/bin` directory.
+2. Go to the new version's `/upgrade/bin` directory.
 
 3. Run the PingAccess upgrade utility:
 
@@ -661,26 +906,26 @@ Any warnings or errors encountered are recorded in `log/upgrade.log`, as well as
 
    * On Linux: `./upgrade.sh [-p <admin_port>] [-i <directory>] [-j <jvm_memory_options_file>] [-l <newPingAccessLicense>] [-s | --silent] <sourcePingAccessRootDir>`
 
-     ### Example:
+   ### Example:
 
-     For example: `./upgrade.sh -p 9002 -i MyJARDir pingaccess-5.3`
+   For example: `./upgrade.sh -p 9002 -i MyJARDir pingaccess-5.3`
 
 ## Next steps
 
-After you complete the upgrade, see [Performing post-upgrade tasks](pa_performing_post_upgrade_tasks.html).
+Review [Performing post-upgrade tasks](pa_performing_post_upgrade_tasks.html).
 
 ## PingAccess standalone upgrade parameters
 
 The command-line parameters are the same regardless of the platform and are defined in the following table.
 
-| Parameter                          | Value description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| ---------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| -p *\<admin\_port>*                | Optional port to be used by the temporary PingAccess instance run during the upgrade. The default is 9001.                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| -i *\<directory>*                  | An optional directory containing additional library JAR files, such as plugins and Java Database Connectivity (JDBC) drivers, to be copied into the target installation.Beginning in version 6.0, JAR files are stored in the `<PA HOME>/deploy` folder.During an upgrade from versions earlier than 6.0, third-party JAR files are migrated from the `lib` folder to the `deploy` folder if no directory is specified.During an upgrade from version 6.0 or later, the contents of the `deploy` folder are migrated to the new `<PA HOME>/deploy` folder if no directory is specified. |
-| *\<sourcePingAccessRootDir>*       | The `PA_HOME` for the source PingAccess version.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-| -l *\<newPingAccessLicense>*       | An optional path to the PingAccess license file to use for the target version. If not specified, the existing license is reused.                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-| -j *\<jvm\_memory\_options\_file>* | An optional path to a file with Java Virtual Machine (JVM) *(tooltip: \<div class="paragraph">&#xA;\<p>A virtual machine that allows a computer to run Java programs and programs that are compiled to Java bytecode.\</p>&#xA;\</div>)* options to use for the new PingAccess instance during the upgrade.                                                                                                                                                                                                                                                                             |
-| -s \| --silent                     | Run the upgrade with no user input required. To use this option, specify the source version's credentials using environment variables.                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| Parameter                       | Value description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| ------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| -p *\<admin_port>*              | Optional port to be used by the temporary PingAccess instance run during the upgrade. The default is 9001.                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| -i *\<directory>*               | An optional directory containing additional library JAR files, such as plugins and Java Database Connectivity (JDBC) drivers, to be copied into the target installation.Beginning in version 6.0, JAR files are stored in the `<PA HOME>/deploy` folder.During an upgrade from versions earlier than 6.0, third-party JAR files are migrated from the `lib` folder to the `deploy` folder if no directory is specified.During an upgrade from version 6.0 or later, the contents of the `deploy` folder are migrated to the new `<PA HOME>/deploy` folder if no directory is specified. |
+| *\<sourcePingAccessRootDir>*    | The `PA_HOME` for the source PingAccess version.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| -l *\<newPingAccessLicense>*    | An optional path to the PingAccess license file to use for the target version. If not specified, the existing license is reused.                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| -j *\<jvm_memory_options_file>* | An optional path to a file with Java Virtual Machine (JVM) *(tooltip: \<div class="paragraph">&#xA;\<p>A virtual machine that allows a computer to run Java programs and programs that are compiled to Java bytecode.\</p>&#xA;\</div>)* options to use for the new PingAccess instance during the upgrade.                                                                                                                                                                                                                                                                             |
+| -s \| --silent                  | Run the upgrade with no user input required. To use this option, specify the source version's credentials using environment variables.                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
 
 ### Environment variables
 
@@ -728,7 +973,7 @@ page_id: pingaccess:upgrading_pingaccess:pa_upgrading_pa_landing_topic
 canonical_url: https://docs.pingidentity.com/pingaccess/9.1/upgrading_pingaccess/pa_upgrading_pa_landing_topic.html
 llms_txt: https://docs.pingidentity.com/pingaccess/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: May 11, 2026
+revdate: August 20, 2026
 ---
 
 # Upgrading PingAccess
@@ -758,6 +1003,10 @@ You can find more information about what to do during or after your upgrade in:
 * [Upgrade Troubleshooting](pa_upgrade_troubleshooting.html)
 
 * [Upgrade utility configuration file reference](pa_upgrade_utility_config_file_ref.html)
+
+|   |                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+|   | When upgrading to a PingAccess version that was released before your current version, PingAccess requires an internet connection to download missing reference files. This is relevant when upgrading from an up-to-date maintenance release.Learn more and find a workaround in [Upgrading to a PingAccess version released before your current version](pa_upgrade_considerations.html#previous-target-version). |
 
 ---
 

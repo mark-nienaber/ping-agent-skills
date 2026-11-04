@@ -143,9 +143,9 @@ net.ipv4.tcp_tw_reuse = 1
 
 The parameter `net.ipv4.tcp_fin_timeout` sets the length of time in seconds to wait for a final FIN packet before forcing a close of the socket. The default is 60 (seconds).
 
-The parameter `net.ipv4.tcp_tw_recycle` enables fast recycling of TIME\_WAIT sockets. The default is 0 (false). Enabling this can cause Network Address Translation (NAT) issues.
+The parameter `net.ipv4.tcp_tw_recycle` enables fast recycling of TIME_WAIT sockets. The default is 0 (false). Enabling this can cause Network Address Translation (NAT) issues.
 
-The parameter `net.ipv4.tcp_tw_reuse` enables reuse of TIME\_WAIT sockets for new connections. The default is 0 (false).
+The parameter `net.ipv4.tcp_tw_reuse` enables reuse of TIME_WAIT sockets for new connections. The default is 0 (false).
 
 These settings are recommended only for testing, and *not for production systems* .
 
@@ -557,9 +557,9 @@ net.ipv4.tcp_tw_reuse = 1
 
 The parameter `net.ipv4.tcp_fin_timeout` sets the length of time in seconds to wait for a final FIN packet before forcing a close of the socket. The default is 60 (seconds).
 
-The parameter `net.ipv4.tcp_tw_recycle` enables fast recycling of TIME\_WAIT sockets. The default is 0 (false). Enabling this can cause Network Address Translation (NAT) issues.
+The parameter `net.ipv4.tcp_tw_recycle` enables fast recycling of TIME_WAIT sockets. The default is 0 (false). Enabling this can cause Network Address Translation (NAT) issues.
 
-The parameter `net.ipv4.tcp_tw_reuse` enables reuse of TIME\_WAIT sockets for new connections. The default is 0 (false).
+The parameter `net.ipv4.tcp_tw_reuse` enables reuse of TIME_WAIT sockets for new connections. The default is 0 (false).
 
 These settings are recommended only for testing, and *not for production systems* .
 
@@ -3247,7 +3247,7 @@ The second form uses an identifier you provide. It lets you automate the recover
 
 Example:
 
-dsrepl disaster-recovery --baseDn dc=example,dc=com --user-generated-id Recovery\_Date\_20240101
+dsrepl disaster-recovery --baseDn dc=example,dc=com --user-generated-id Recovery_Date_20240101
 
 Read the documentation on disaster recovery carefully before using this command.
 

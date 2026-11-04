@@ -60,13 +60,13 @@ Use the following procedure to configure a quick connection for single sign-on (
 
     ![A screenshot of the Assertion Creation page, showing the Configure Assertion Creation button.](_images/nal1563995393601.jpg)
 
-12. On the **Attribute Contract** page, ensure that the SAML\_SUBJECT name format is set to:
+12. On the **Attribute Contract** page, ensure that the SAML_SUBJECT name format is set to:
 
     ```
     following:urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress
     ```
 
-    ![A screenshot of the Attribute Contract page, showing the SAML\_SUBJECT field populated.](_images/hnm1563995394378.jpg)
+    ![A screenshot of the Attribute Contract page, showing the SAML_SUBJECT field populated.](_images/hnm1563995394378.jpg)
 
 13. On the **Authentication Source Mapping** page, click **Map New Adapter Instance** and map the IdP Adapter Instance you defined earlier in this procedure. When you return to the Authentication Source Mapping page, click **Done**.
 
@@ -134,7 +134,7 @@ To complete single sign-on (SSO) setup for Heroku, configure these steps to enab
 
 ## Steps
 
-1. Go to https\://dashboard.heroku.com/orgs/*\<ORGANIZATION\_NAME>*/settings.
+1. Go to https\://dashboard.heroku.com/orgs/*\<ORGANIZATION_NAME>*/settings.
 
 2. Sign on with your administrator credentials.
 
@@ -259,7 +259,7 @@ This guide uses a metadata XML file to assist in configuring many settings in th
        </md:EntityDescriptor>
    ```
 
-2. Replace the instances of *\<ORGANIZATION\_NAME>* with the organization name for the Heroku account.
+2. Replace the instances of *\<ORGANIZATION_NAME>* with the organization name for the Heroku account.
 
    For example, if the URL you use to access your Heroku team account is
 
@@ -267,6 +267,6 @@ This guide uses a metadata XML file to assist in configuring many settings in th
    https://dashboard.heroku.com/orgs/myOrgName/settings
    ```
 
-   then your *\<ORGANIZATION\_NAME>* is `myOrgName`.
+   then your *\<ORGANIZATION_NAME>* is `myOrgName`.
 
 3. Once you have updated the file, save `saml-metadata.xml`.

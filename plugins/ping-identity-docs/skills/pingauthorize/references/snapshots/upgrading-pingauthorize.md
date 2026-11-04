@@ -97,7 +97,7 @@ If you originally installed the Policy Editor with Docker per [Deploying the Pol
    | - | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
    |   | If you use a shared volume, you should always stop the Docker container running the older version of the Policy Editor before you start the new container. |
 
-   The following commands stop the running container and run a new image named *\<pap\_new>*. This image uses the volumes from *\<pap\_old>* to house the policy database. Also, the command uses the same `PING_H2_FILE` location from [Example: Override the configured policy database location](../pingauthorize_server_administration_guide/paz_start_pe.html#override_policy_db_location).
+   The following commands stop the running container and run a new image named *\<pap_new>*. This image uses the volumes from *\<pap_old>* to house the policy database. Also, the command uses the same `PING_H2_FILE` location from [Example: Override the configured policy database location](../pingauthorize_server_administration_guide/paz_start_pe.html#override_policy_db_location).
 
    |   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
    | - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -301,7 +301,7 @@ page_id: pingauthorize:upgrading_pingauthorize:paz_upgrade_consids
 canonical_url: https://docs.pingidentity.com/pingauthorize/11.1/upgrading_pingauthorize/paz_upgrade_consids.html
 llms_txt: https://docs.pingidentity.com/pingauthorize/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
-revdate: June 9, 2026
+revdate: 2026-08-24T22:41:22Z
 section_ids:
   general-considerations: General considerations
   considerations-when-upgrading-to-11-1-or-later: Considerations when upgrading to 11.1 or later
@@ -321,12 +321,12 @@ section_ids:
   considerations-when-upgrading-to-10-1-or-later: Considerations when upgrading to 10.1 or later
   resolving-issues-with-copying-policy-elements: Resolving issues with copying policy elements
   upgrade_consids_100: Considerations when upgrading to 10.0 or later
-  sni-hostname-checking-disabled-by-default: SNI hostname checking disabled by default
+  sni-host-name-checking-disabled-by-default: SNI host name checking disabled by default
 ---
 
 # Upgrade considerations
 
-When upgrading, you must consider factors such as the scope of the update, the PingAuthorize version from which you're upgrading, and if you're not using Docker, your installed version of Java.
+When upgrading, you must consider factors such as the scope of the update, the PingAuthorize version from which you're upgrading, and your installed version of Java if you aren't using Docker.
 
 ## General considerations
 
@@ -340,9 +340,9 @@ Consider the following when upgrading:
 
 * The update tool verifies that the installed version of Java meets the new server requirements. To simplify the process, install the version of Java that is supported by the new server before running the tool.
 
-|   |                                                                                                                                                                                     |
-| - | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   | For additional considerations, refer to [Best Practices: Planning your upgrade](https://docs.pingidentity.com/solution-guides/best_practice_guides/htg_plan_software_upgrade.html). |
+|   |                                                                                                                                                                                       |
+| - | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | You can find additional considerations in [Best Practices: Planning your upgrade](https://docs.pingidentity.com/solution-guides/best_practice_guides/htg_plan_software_upgrade.html). |
 
 ## Considerations when upgrading to 11.1 or later
 
@@ -416,7 +416,7 @@ PingAuthorize 10.3 now supports Apache Camel 4.0. The limitations on using Apach
 
 ### Java considerations
 
-Support for Java 11 has been removed, and upgrading to Version 10.3 of PingAuthorize will fail unless you are running Java 17 or 21.
+Support for Java 11 has been removed, and upgrading to Version 10.3 of PingAuthorize will fail unless you're running Java 17 or 21.
 
 #### Prerequisites for upgrading
 
@@ -482,7 +482,7 @@ Select one of the following options for modifying the `java.properties` file. Wh
 
 ##### Upgrading a Policy Editor instance running an unsupported version of Java
 
-If you are upgrading from a Policy Editor instance running an unsupported version of Java, you must export the `JAVA_HOME` environment variable by running the following command:
+If you're upgrading from a Policy Editor instance running an unsupported version of Java, you must export the `JAVA_HOME` environment variable by running the following command:
 
 ```
 export JAVA_HOME=$JAVA11_HOME
@@ -498,9 +498,9 @@ After upgrading from a version of PingAuthorize earlier than 10.1 and attempting
 
 ## Considerations when upgrading to 10.0 or later
 
-### SNI hostname checking disabled by default
+### SNI host name checking disabled by default
 
-If you're upgrading to PingAuthorize 10.0 or later with an existing configuration that has SNI hostname checks enabled, you might encounter an issue when using a host name not found in the key store. To migrate an existing configuration from an earlier version of PingAuthorize and disable SNI host name checks, add the following to your `configuration.yml` file:
+If you're upgrading to PingAuthorize 10.0 or later with an existing configuration that has SNI host name checks enabled, you might encounter an issue when using a host name not found in the key store. To migrate an existing configuration from an earlier version of PingAuthorize and disable SNI host name checks, add the following to your `configuration.yml` file:
 
 ```
 server:
@@ -511,7 +511,7 @@ server:
     disableSniHostCheck: "${PING_DISABLE_SNI_HOSTNAME_CHECKS:-true}"
 ```
 
-This change also introduces a new `setup` option, `--disableSniHostnameChecks`, that you can set to `false` to enable SNI hostname checks.
+This change also introduces a new `setup` option, `--disableSniHostnameChecks`, that you can set to `false` to enable SNI host name checks.
 
 ---
 

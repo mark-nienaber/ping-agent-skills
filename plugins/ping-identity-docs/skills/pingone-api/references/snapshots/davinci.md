@@ -1,11 +1,12 @@
 ---
 title: Add a DaVinci Flow Version Alias
-description: The PUT {{apiPath}}/v1/environments/{{envID}}/flows/{{davinciFlowID}}/versions/{{davinciFlowVersionID}}/alias updates the flow version specified by its ID in the request URL to add an alias. The request body uses the alias property to specify a user friendly name for the flow version.
+description: Add a user-friendly alias to a PingOne DaVinci flow version specified by its ID
 component: pingone-api
 page_id: pingone-api:davinci:davinci-admin-apis/admin-flow-versions/add-flow-version-alias
 canonical_url: https://developer.pingidentity.com/pingone-api/davinci/davinci-admin-apis/admin-flow-versions/add-flow-version-alias.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-05-05
 section_ids:
   prerequisites: Prerequisites
   headers: Headers
@@ -17,6 +18,10 @@ section_ids:
 # Add a DaVinci Flow Version Alias
 
 ##
+
+Required permission:
+
+* [davinci:update:flowVersions](../../../platform/reference/roles-and-permissions-in-pingone/pingone-permissions-by-identifier.html#permission-davinci-update-flowVersions "Learn more about this permission")
 
 ```none
 PUT {{apiPath}}/v1/environments/{{envID}}/flows/{{davinciFlowID}}/versions/{{davinciFlowVersionID}}/alias
@@ -320,12 +325,13 @@ task.resume()
 
 ---
 title: Clone a DaVinci Flow
-description: The POST {{apiPath}}/v1/environments/{{envID}}/flows/{{flowID}} endpoint uses the application/vnd.pingidentity.flow.clone+json custom Content-Type value to initiate an action to clone the flow specified by its ID in the request URL.
+description: Clone an existing PingOne DaVinci flow specified by its ID to create a new flow
 component: pingone-api
 page_id: pingone-api:davinci:davinci-admin-apis/admin-flows/clone-flow
 canonical_url: https://developer.pingidentity.com/pingone-api/davinci/davinci-admin-apis/admin-flows/clone-flow.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-05-05
 section_ids:
   headers: Headers
   example-request: Example Request
@@ -335,6 +341,10 @@ section_ids:
 # Clone a DaVinci Flow
 
 ##
+
+Required permission:
+
+* [davinci:create:dvFlows](../../../platform/reference/roles-and-permissions-in-pingone/pingone-permissions-by-identifier.html#permission-davinci-create-dvFlows "Learn more about this permission")
 
 ```none
 POST {{apiPath}}/v1/environments/{{envID}}/flows/{{davinciFlowID}}
@@ -609,12 +619,13 @@ task.resume()
 
 ---
 title: Clone DaVinci Connector Instance
-description: The POST {{apiPath}}/v1/environments/{{envID}}/connectorInstances/{{connectorInstanceID}} clones the connector instance resource specified by its ID in the request URL.
+description: Clone an existing PingOne DaVinci connector instance to create a new connector instance resource
 component: pingone-api
 page_id: pingone-api:davinci:davinci-admin-apis/admin-connections/clone-connection
 canonical_url: https://developer.pingidentity.com/pingone-api/davinci/davinci-admin-apis/admin-connections/clone-connection.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-05-05
 section_ids:
   prerequisites: Prerequisites
   headers: Headers
@@ -625,6 +636,10 @@ section_ids:
 # Clone DaVinci Connector Instance
 
 ##
+
+Required permission:
+
+* [davinci:create:connections](../../../platform/reference/roles-and-permissions-in-pingone/pingone-permissions-by-identifier.html#permission-davinci-create-connections "Learn more about this permission")
 
 ```none
 POST {{apiPath}}/v1/environments/{{envID}}/connectorInstances/{{connectorInstanceID}}
@@ -894,12 +909,13 @@ task.resume()
 
 ---
 title: Create DaVinci Application
-description: The POST {{apiPath}}/v1/environments/{{envID}}/davinciApplications endpoint creates a new DaVinci application resource.
+description: Create a new PingOne DaVinci application resource in the specified environment
 component: pingone-api
 page_id: pingone-api:davinci:davinci-admin-apis/davinci-admin-applications/create-davinci-application
 canonical_url: https://developer.pingidentity.com/pingone-api/davinci/davinci-admin-apis/davinci-admin-applications/create-davinci-application.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-05-29
 section_ids:
   headers: Headers
   body: Body
@@ -910,6 +926,10 @@ section_ids:
 # Create DaVinci Application
 
 ##
+
+Required permission:
+
+* [davinci:create:applications](../../../platform/reference/roles-and-permissions-in-pingone/pingone-permissions-by-identifier.html#permission-davinci-create-applications "Learn more about this permission")
 
 ```none
 POST {{apiPath}}/v1/environments/{{envID}}/davinciApplications
@@ -934,7 +954,7 @@ The `POST {{apiPath}}/v1/environments/{{envID}}/davinciApplications` endpoint cr
 > | `oauth.spjwksUrl`    | String  | Optional |
 > | `oauth.spJwksOpenid` | String  | Optional |
 >
-> Refer to [DaVinci Admin Applications data model](../davinci-admin-applications.html#davinci-admin-applications-data-model) for full property descriptions.
+> Refer to [DaVinci Admin Applications data model](index.html#davinci-admin-applications-data-model) for full property descriptions.
 
 ### Headers
 
@@ -1254,12 +1274,13 @@ task.resume()
 
 ---
 title: Create DaVinci Application Flow Policies
-description: The POST {{apiPath}}/v1/environments/{{envID}}/davinciApplications/{{davinciApplicationID}}/flowPolicies endpoint creates a new DaVinci application flow policy resource.
+description: Create a new PingOne DaVinci application flow policy resource for an application
 component: pingone-api
 page_id: pingone-api:davinci:davinci-admin-apis/davinci-admin-application-flow-policies/create-davinci-application-flow-policies
 canonical_url: https://developer.pingidentity.com/pingone-api/davinci/davinci-admin-apis/davinci-admin-application-flow-policies/create-davinci-application-flow-policies.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-05-29
 section_ids:
   headers: Headers
   body: Body
@@ -1270,6 +1291,10 @@ section_ids:
 # Create DaVinci Application Flow Policies
 
 ##
+
+Required permission:
+
+* [davinci:create:flowPolicies](../../../platform/reference/roles-and-permissions-in-pingone/pingone-permissions-by-identifier.html#permission-davinci-create-flowPolicies "Learn more about this permission")
 
 ```none
 POST {{apiPath}}/v1/environments/{{envID}}/davinciApplications/{{davinciApplicationID}}/flowPolicies
@@ -1292,7 +1317,7 @@ The `POST {{apiPath}}/v1/environments/{{envID}}/davinciApplications/{{davinciApp
 > | `trigger`                           | Object | Optional |
 > | `trigger.type`                      | String | Optional |
 >
-> Refer to [DaVinci Admin Application Flow Policies data model](../davinci-admin-application-flow-policies.html#davinci-admin-application-flow-policies-data-model) for full property descriptions.
+> Refer to [DaVinci Admin Application Flow Policies data model](index.html#davinci-admin-application-flow-policies-data-model) for full property descriptions.
 
 ### Headers
 
@@ -1660,12 +1685,13 @@ task.resume()
 
 ---
 title: Create DaVinci Connector Instance
-description: The POST {{apiPath}}/v1/environments/{{envID}}/connectorInstances creates a new connector instance resource in the specified environment.
+description: Create a new PingOne DaVinci connector instance resource in the specified environment
 component: pingone-api
 page_id: pingone-api:davinci:davinci-admin-apis/admin-connections/create-connection
 canonical_url: https://developer.pingidentity.com/pingone-api/davinci/davinci-admin-apis/admin-connections/create-connection.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-05-29
 section_ids:
   headers: Headers
   body: Body
@@ -1676,6 +1702,10 @@ section_ids:
 # Create DaVinci Connector Instance
 
 ##
+
+Required permission:
+
+* [davinci:create:connections](../../../platform/reference/roles-and-permissions-in-pingone/pingone-permissions-by-identifier.html#permission-davinci-create-connections "Learn more about this permission")
 
 ```none
 POST {{apiPath}}/v1/environments/{{envID}}/connectorInstances
@@ -1692,7 +1722,7 @@ The `POST {{apiPath}}/v1/environments/{{envID}}/connectorInstances` creates a ne
 > | `name`         | String | Required |
 > | `properties`   | Object | Optional |
 >
-> Refer to the [DaVinci admin connector instances data model](../admin-connections.html) for full property descriptions.
+> Refer to the [DaVinci admin connector instances data model](index.html) for full property descriptions.
 
 ### Headers
 
@@ -2022,12 +2052,13 @@ task.resume()
 
 ---
 title: Create DaVinci Flow
-description: The POST {{apiPath}}/v1/environments/{{envID}}/flows endpoint when used with a Content-Type header value of application/json creates a new DaVinci flow.
+description: Create a new PingOne DaVinci flow in the specified environment
 component: pingone-api
 page_id: pingone-api:davinci:davinci-admin-apis/admin-flows/create-flow
 canonical_url: https://developer.pingidentity.com/pingone-api/davinci/davinci-admin-apis/admin-flows/create-flow.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-05-29
 section_ids:
   headers: Headers
   body: Body
@@ -2039,6 +2070,10 @@ section_ids:
 
 ##
 
+Required permission:
+
+* [davinci:create:dvFlows](../../../platform/reference/roles-and-permissions-in-pingone/pingone-permissions-by-identifier.html#permission-davinci-create-dvFlows "Learn more about this permission")
+
 ```none
 POST {{apiPath}}/v1/environments/{{envID}}/flows
 ```
@@ -2047,7 +2082,7 @@ The `POST {{apiPath}}/v1/environments/{{envID}}/flows` endpoint when used with a
 
 > **Collapse: Request Model**
 >
-> Refer to the [DaVinci Admin Flows data model](../admin-flows.html) for full property descriptions.
+> Refer to the [DaVinci Admin Flows data model](index.html) for full property descriptions.
 >
 > | Property           | Type           | Required |
 > | ------------------ | -------------- | -------- |
@@ -2935,12 +2970,13 @@ task.resume()
 
 ---
 title: Create DaVinci UI Template
-description: The POST {{apiPath}}/v1/environments/{{envID}}/uiTemplates endpoint creates a new DaVinci UI template resource.
+description: Create a new PingOne DaVinci UI template resource for branding flows
 component: pingone-api
 page_id: pingone-api:davinci:davinci-admin-apis/admin-ui-templates/create-davinci-template
 canonical_url: https://developer.pingidentity.com/pingone-api/davinci/davinci-admin-apis/admin-ui-templates/create-davinci-template.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-05-29
 section_ids:
   headers: Headers
   body: Body
@@ -2951,6 +2987,10 @@ section_ids:
 # Create DaVinci UI Template
 
 ##
+
+Required permission:
+
+* [davinci:create:uiTemplates](../../../platform/reference/roles-and-permissions-in-pingone/pingone-permissions-by-identifier.html#permission-davinci-create-uiTemplates "Learn more about this permission")
 
 ```none
 POST {{apiPath}}/v1/environments/{{envID}}/uiTemplates
@@ -2977,7 +3017,7 @@ The `POST {{apiPath}}/v1/environments/{{envID}}/uiTemplates` endpoint creates a 
 > | `validationRules.rules.attribute` | String | Optional |
 > | `validationRules.rules.pattern`   | String | Optional |
 >
-> Refer to [DaVinci Admin UI Templates data model](../admin-ui-templates.html#davinci-admin-ui-templates-data-model) for full property descriptions.
+> Refer to [DaVinci Admin UI Templates data model](index.html#davinci-admin-ui-templates-data-model) for full property descriptions.
 
 ### Headers
 
@@ -3444,12 +3484,13 @@ task.resume()
 
 ---
 title: Create DaVinci Variable
-description: The POST {{apiPath}}/v1/environments/{{envID}}/variables endpoint creates a new DaVinci variable resource. You must specify a name, dataType, and context for the variable.
+description: Create a new PingOne DaVinci variable with a name, data type, and context
 component: pingone-api
 page_id: pingone-api:davinci:davinci-admin-apis/admin-variables/create-variable
 canonical_url: https://developer.pingidentity.com/pingone-api/davinci/davinci-admin-apis/admin-variables/create-variable.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-05-29
 section_ids:
   headers: Headers
   body: Body
@@ -3460,6 +3501,10 @@ section_ids:
 # Create DaVinci Variable
 
 ##
+
+Required permission:
+
+* [davinci:create:constructs](../../../platform/reference/roles-and-permissions-in-pingone/pingone-permissions-by-identifier.html#permission-davinci-create-constructs "Learn more about this permission")
 
 ```none
 POST {{apiPath}}/v1/environments/{{envID}}/variables
@@ -3482,7 +3527,7 @@ The `POST {{apiPath}}/v1/environments/{{envID}}/variables` endpoint creates a ne
 > | `name`        | String  | Required |
 > | `value`       | String  | Optional |
 >
-> Refer to [DaVinci Admin Variables data model](../admin-variables.html) for full property descriptions.
+> Refer to [DaVinci Admin Variables data model](index.html) for full property descriptions.
 
 ### Headers
 
@@ -3829,12 +3874,13 @@ task.resume()
 
 ---
 title: DaVinci Admin APIs
-description: The PingOne DaVinci Admin APIs provide access to DaVinci operations through the PingOne API resource server. These services are called using the api.pingone.com domain (or api.pingone.ca, api.pingone.eu, api.pingone.com.au, api.pingone.sg, and api.pingone.asia for other geographic domains) to manage DaVinci workflow configuration.
+description: Lists the PingOne DaVinci Admin API services available through the PingOne API resource server for managing DaVinci flows, variables, connectors, and applications
 component: pingone-api
-page_id: pingone-api:davinci:davinci-admin-apis
-canonical_url: https://developer.pingidentity.com/pingone-api/davinci/davinci-admin-apis.html
+page_id: pingone-api:davinci:davinci-admin-apis/index
+canonical_url: https://developer.pingidentity.com/pingone-api/davinci/davinci-admin-apis/index.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-11
 ---
 
 # DaVinci Admin APIs
@@ -3843,35 +3889,35 @@ The PingOne DaVinci Admin APIs provide access to DaVinci operations through the 
 
 At this time, the following services are supported on the PingOne API resource server:
 
-* [**DaVinci Admin Variables**](davinci-admin-apis/admin-variables.html)
+* [**DaVinci Admin Variables**](admin-variables/index.html)
 
   Endpoints for managing DaVinci variables and their context.
 
-* [**DaVinci Admin Flows**](davinci-admin-apis/admin-flows.html)
+* [**DaVinci Admin Flows**](admin-flows/index.html)
 
   Endpoints for creating and managing DaVinci flows.
 
-* [**DaVinci Admin Flow Versions**](davinci-admin-apis/admin-flow-versions.html)
+* [**DaVinci Admin Flow Versions**](admin-flow-versions/index.html)
 
   Endpoints for managing DaVinci flow versions.
 
-* [**DaVinci Admin Connector Instances**](davinci-admin-apis/admin-connections.html)
+* [**DaVinci Admin Connector Instances**](admin-connections/index.html)
 
   Endpoints for managing DaVinci connector instances, which provide access to DaVinci connector capabilities.
 
-* [**DaVinci Admin Applications**](davinci-admin-apis/davinci-admin-applications.html)
+* [**DaVinci Admin Applications**](davinci-admin-applications/index.html)
 
   Endpoints for managing DaVinci applications.
 
-* [**DaVinci Admin Application Flow Policies**](davinci-admin-apis/davinci-admin-application-flow-policies.html)
+* [**DaVinci Admin Application Flow Policies**](davinci-admin-application-flow-policies/index.html)
 
   Endpoints for managing DaVinci application flow policies.
 
-* [**DaVinci Admin Connectors**](davinci-admin-apis/admin-connectors.html)
+* [**DaVinci Admin Connectors**](admin-connectors/index.html)
 
   Endpoints for managing DaVinci connectors.
 
-* [**DaVinci Admin UI Templates**](davinci-admin-apis/admin-ui-templates.html)
+* [**DaVinci Admin UI Templates**](admin-ui-templates/index.html)
 
   Endpoints for managing DaVinci UI templates.
 
@@ -3879,17 +3925,19 @@ At this time, the following services are supported on the PingOne API resource s
 
 ---
 title: DaVinci Admin Application Flow Policies
-description: The PingOne DaVinci Admin Application Flow Policies service provides endpoints to create, read, update, and delete DaVinci application flow policies. Application flow policies specify which flows are run through the application. A flow policy is an entity that points to one or more flows or versions of flows.
+description: Describes the PingOne DaVinci Admin Application Flow Policies service for creating, reading, updating, and deleting policies that specify which flows run through an application
 component: pingone-api
-page_id: pingone-api:davinci:davinci-admin-apis/davinci-admin-application-flow-policies
-canonical_url: https://developer.pingidentity.com/pingone-api/davinci/davinci-admin-apis/davinci-admin-application-flow-policies.html
+page_id: pingone-api:davinci:davinci-admin-apis/davinci-admin-application-flow-policies/index
+canonical_url: https://developer.pingidentity.com/pingone-api/davinci/davinci-admin-apis/davinci-admin-application-flow-policies/index.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-11
 section_ids:
   assigning-admin-roles-and-permissions-to-this-service: Assigning admin roles and permissions to this service
   davinci-admin-application-flow-policies-data-model: DaVinci Admin application flow policies data model properties
   davinci-admin-application-flow-policy-event-data-model: DaVinci Admin application flow policy event data model properties
   response-codes: Response codes
+  davinci-application-flow-policy-errors: DaVinci application flow policy errors
 ---
 
 # DaVinci Admin Application Flow Policies
@@ -3898,19 +3946,19 @@ The PingOne DaVinci Admin Application Flow Policies service provides endpoints t
 
 ## Assigning admin roles and permissions to this service
 
-Admin role assignments determine access to PingOne APIs. When assigning admin roles to this service, refer to [PingOne Permissions by Service](../../platform/reference/roles-and-permissions-in-pingone/permissions-by-service.html) for the service-specific permissions.
+Admin role assignments determine access to PingOne APIs. When assigning admin roles to this service, refer to [PingOne Permissions by Service](../../../platform/reference/roles-and-permissions-in-pingone/permissions-by-service.html) for the service-specific permissions.
 
-You can also choose to assign admin roles based on particular service resources. Refer to [PingOne Permissions by Resource](../../platform/reference/roles-and-permissions-in-pingone/permissions-by-resource.html) when assigning admin roles per service resources.
+You can also choose to assign admin roles based on particular service resources. Refer to [PingOne Permissions by Resource](../../../platform/reference/roles-and-permissions-in-pingone/permissions-by-resource.html) when assigning admin roles per service resources.
 
 Admin assignments to roles are set by:
 
-* [Automatic assignment for some roles](../../platform/roles/predefined-roles.html#automatic-role-assignment).
+* [Automatic assignment for some roles](../../../platform/roles/predefined-roles/index.html#automatic-role-assignment).
 
-* [Group Role Assignments](../../platform/group-role-assignments/group-role-assignments.html).
+* [Group Role Assignments](../../../platform/group-role-assignments/index.html).
 
-* [User Role Assignments](../../platform/users/user-role-assignments.html).
+* [User Role Assignments](../../../platform/users/user-role-assignments/index.html).
 
-Refer to [Roles Management](../../platform/roles.html) for more information.
+Refer to [Roles Management](../../../platform/roles/index.html) for more information.
 
 ## DaVinci Admin application flow policies data model properties
 
@@ -3960,20 +4008,84 @@ Refer to [Roles Management](../../platform/roles.html) for more information.
 | 403  | You do not have permissions or are not licensed to make this request. |
 | 404  | The requested resource was not found.                                 |
 
+## DaVinci application flow policy errors
+
+In addition to the general [error codes](../../../platform/reference/error-codes.html), DaVinci application flow policy operations can return the following errors:
+
+| HTTP status | Top‑level code     | Detail code                                                         | When it happens and what the response contains                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| ----------- | ------------------ | ------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 400         | `INVALID_DATA`     | `REQUIRED_VALUE`, `EMPTY_VALUE`, `INVALID_VALUE`, or `OUT_OF_RANGE` | **Message:** `The request could not be completed. One or more validation errors were in the request.`> **Collapse: When and details**
+>
+> **When:** A `POST /environments/{envID}/davinciApplications/{davinciApplicationID}/flowPolicies` or a `PUT /environments/{envID}/davinciApplications/{davinciApplicationID}/flowPolicies/{davinciAppFlowPolicyID}` request supplies a body that violates the data model: an omitted `flowDistributions` array, an omitted `name` on update, a flow distribution entry without an `id` or `version`, an empty `flowDistributions` array on create, an empty `successNodes` array, a blank `name`, a blank `trigger.subtype`, a blank success node ID, a `name` longer than 256 characters, a `trigger.type` longer than 50 characters, more than 100 `flowDistributions` entries, an unknown `status` value, a `name`, `status`, or `trigger.type` value that is not a string, a `name` that starts with an unsupported character or contains a `<` or a `${` sequence, a property inside a flow distribution entry that the entry schema does not allow, or a flow distribution or success node ID that contains characters outside its allowed set
+>
+> **Details:** One detail per validation error, each with the failing property path as the target. `must have required property 'flowDistributions'` with target `flowDistributions` when the create request omits `flowDistributions`. `must have required property 'name'` with target `name` when an update request omits `name`. `must have required property 'id'` or `must have required property 'version'` with the flow distribution entry path as the target, for example `flowDistributions.0`, when an entry omits either property. `must NOT have fewer than 1 items` with target `flowDistributions` when the create request supplies an empty `flowDistributions` array, and with the `successNodes` path as the target, for example `flowDistributions.0.successNodes`, for an empty `successNodes` array. `must not be empty or blank` for a blank `name`, a blank `trigger.subtype`, or a blank success node ID, for example with target `flowDistributions.0.successNodes.0.id`. `must NOT have more than 256 characters` for a `name` longer than 256 characters and `must NOT have more than 50 characters` for a `trigger.type` longer than 50 characters. `must NOT have more than 100 items` for more than 100 `flowDistributions` entries. `must be one of the values: enabled or disabled` for an unknown `status` value. `must NOT have additional properties` for a property inside a flow distribution entry that the entry schema does not allow. `must match pattern "<pattern>"`, where the pattern is the JSON schema pattern for the property, for a `name` that starts with an unsupported character or contains a `<` or a `${` sequence, or for a flow distribution or success node ID that contains characters outside its allowed set. `must be string` for a property of the wrong JSON type, for example with target `name`. |
+| 400         | `INVALID_DATA`     | `INVALID_PARAMETER` or `INVALID_VALUE`                              | **Message:** `The request could not be completed. One or more validation errors were in the request.`> **Collapse: When and details**
+>
+> **When:** A `GET` all flow policies request supplies a `page`, `limit`, `filter`, or `expand` query parameter longer than 256 characters, a `GET` flow policy events request includes any query parameter, or a `DELETE` flow policy request includes any query parameter
+>
+> **Details:** For an overlong query parameter on a `GET` all flow policies request, detail code `INVALID_PARAMETER` with message `must NOT have more than 256 characters` and the overlong query parameter as the target. For a `GET` flow policy events request or a `DELETE` flow policy request that includes a query parameter, detail code `INVALID_VALUE` with message `must NOT have additional properties` and the rejected query parameter as the target.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| 400         | `REQUEST_FAILED`   | `CONSTRAINT_VIOLATION`                                              | **Message:** `The request could not be completed. There was an issue processing the request.`> **Collapse: When and details**
+>
+> **When:** A `POST`, `PUT`, or `DELETE` request targets an application that is read-only, or a `POST` or `PUT` request includes a read-only flow in `flowDistributions`
+>
+> **Details:** Detail code `CONSTRAINT_VIOLATION` with message `The request violates a constraint imposed by the service.` No target is returned.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| 400         | `REQUEST_FAILED`   | `CONSTRAINT_VIOLATION`                                              | **Message:** `The request could not be completed. There was an issue processing the request.`> **Collapse: When and details**
+>
+> **When:** A `POST` or `PUT` request references flows that fail flow policy validation, for example a flow ID or flow version that does not exist, or a schedule-triggered policy that references more than one flow or a flow version that is not deployed
+>
+> **Details:** Detail code `CONSTRAINT_VIOLATION` with message `Flow validation failed. Please add valid flows.` No target is returned.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| 400         | `REQUEST_FAILED`   | `CONSTRAINT_VIOLATION`                                              | **Message:** `The request could not be completed. There was an issue processing the request.`> **Collapse: When and details**
+>
+> **When:** A `POST` or `PUT` request includes flows whose trigger types do not resolve to a single trigger type, for example a PingOne authentication flow combined with a non-PingOne flow, or a flow reference that does not exist
+>
+> **Details:** Detail code `CONSTRAINT_VIOLATION` with message `This policy does not allow flows created with Ping and non-Ping triggers to be part of the same policy.` No target is returned.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| 400         | `REQUEST_FAILED`   | `CONSTRAINT_VIOLATION`                                              | **Message:** `The request could not be completed. There was an issue processing the request.`> **Collapse: When and details**
+>
+> **When:** A `POST` or `PUT` request includes a `trigger.configuration` object for a policy whose flows do not resolve to the `AUTHENTICATION` trigger type
+>
+> **Details:** Detail code `CONSTRAINT_VIOLATION` with message `Non-PingOne Flow Policies do not support the configuration property.` No target is returned.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| 400         | `REQUEST_FAILED`   | `CONSTRAINT_VIOLATION`                                              | **Message:** `The request could not be completed. There was an issue processing the request.`> **Collapse: When and details**
+>
+> **When:** A `POST` or `PUT` request includes flows that share a trigger type but resolve to different trigger subtypes
+>
+> **Details:** Detail code `CONSTRAINT_VIOLATION` with message `This policy does not allow flows with different trigger subtypes.` No target is returned.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| 400         | `REQUEST_FAILED`   | `INVALID_PARAMETER` or `INVALID_FILTER`                             | **Message:** `The request could not be completed. There was an issue processing the request.`> **Collapse: When and details**
+>
+> **When:** A `GET` all flow policies request supplies a `filter` query parameter that references an attribute other than `createdBy.user.id`, `createdBy.client.id`, `updatedBy.user.id`, or `updatedBy.client.id`, or an operator other than `eq`, `and`, or `or`, when actor metadata is enabled for the environment. When actor metadata is disabled, the filter parameter is ignored
+>
+> **Details:** Detail code `INVALID_PARAMETER` with message `The filter attribute was invalid or does not support filtering.` and the invalid attribute as the target, or message `The filter operator was invalid or not supported.` and the invalid operator as the target. A filter that is not a well-formed SCIM expression returns detail code `INVALID_FILTER` with message `The specified filter was invalid.` and no target.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| 403         | `ACCESS_FAILED`    | None                                                                | **Message:** `The request could not be completed. You do not have access to this resource.`> **Collapse: When and details**
+>
+> **When:** The actor lacks the `davinci:create:flowPolicies` permission (`POST` operations), the `davinci:read:flowPolicies` permission (`GET` operations, including the events endpoint), the `davinci:update:flowPolicies` permission (`PUT` operations), or the `davinci:delete:flowPolicies` permission (`DELETE` operations)
+>
+> **Details:** None                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| 404         | `NOT_FOUND`        | None                                                                | **Message:** `The request could not be completed. The requested resource was not found.`> **Collapse: When and details**
+>
+> **When:** Any operation references a DaVinci application ID that does not exist in the environment, or a `GET` one, `PUT`, or `DELETE` flow policy request or a `GET` flow policy events request references a flow policy ID that does not exist in the application
+>
+> **Details:** None                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| 500         | `UNEXPECTED_ERROR` | None                                                                | **Message:** `There was an unexpected error with the service. Please try again later.`> **Collapse: When and details**
+>
+> **When:** A `DELETE` request targets an existing flow policy but the service cannot remove the policy from the application's stored policy list, or the service encounters an unexpected internal failure while processing any flow policy operation
+>
+> **Details:** None                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+
 ---
 
 ---
 title: DaVinci Admin Applications
-description: The PingOne DaVinci Admin Applications service provides endpoints to create, read, update, and delete DaVinci applications. This service also includes endpoints to rotate the application key and application secret values.
+description: Describes the PingOne DaVinci Admin Applications service for creating, reading, updating, deleting, and rotating keys and secrets for DaVinci applications
 component: pingone-api
-page_id: pingone-api:davinci:davinci-admin-apis/davinci-admin-applications
-canonical_url: https://developer.pingidentity.com/pingone-api/davinci/davinci-admin-apis/davinci-admin-applications.html
+page_id: pingone-api:davinci:davinci-admin-apis/davinci-admin-applications/index
+canonical_url: https://developer.pingidentity.com/pingone-api/davinci/davinci-admin-apis/davinci-admin-applications/index.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-11
 section_ids:
   assigning-admin-roles-and-permissions-to-this-service: Assigning admin roles and permissions to this service
   davinci-admin-applications-data-model: DaVinci Admin applications data model properties
   response-codes: Response codes
+  davinci-application-errors: DaVinci application errors
 ---
 
 # DaVinci Admin Applications
@@ -3984,19 +4096,19 @@ A DaVinci application configuration is the link between your site and the sign-o
 
 ## Assigning admin roles and permissions to this service
 
-Admin role assignments determine access to PingOne APIs. When assigning admin roles to this service, refer to [PingOne Permissions by Service](../../platform/reference/roles-and-permissions-in-pingone/permissions-by-service.html) for the service-specific permissions.
+Admin role assignments determine access to PingOne APIs. When assigning admin roles to this service, refer to [PingOne Permissions by Service](../../../platform/reference/roles-and-permissions-in-pingone/permissions-by-service.html) for the service-specific permissions.
 
-You can also choose to assign admin roles based on particular service resources. Refer to [PingOne Permissions by Resource](../../platform/reference/roles-and-permissions-in-pingone/permissions-by-resource.html) when assigning admin roles per service resources.
+You can also choose to assign admin roles based on particular service resources. Refer to [PingOne Permissions by Resource](../../../platform/reference/roles-and-permissions-in-pingone/permissions-by-resource.html) when assigning admin roles per service resources.
 
 Admin assignments to roles are set by:
 
-* [Automatic assignment for some roles](../../platform/roles/predefined-roles.html#automatic-role-assignment).
+* [Automatic assignment for some roles](../../../platform/roles/predefined-roles/index.html#automatic-role-assignment).
 
-* [Group Role Assignments](../../platform/group-role-assignments/group-role-assignments.html).
+* [Group Role Assignments](../../../platform/group-role-assignments/index.html).
 
-* [User Role Assignments](../../platform/users/user-role-assignments.html).
+* [User Role Assignments](../../../platform/users/user-role-assignments/index.html).
 
-Refer to [Roles Management](../../platform/roles.html) for more information.
+Refer to [Roles Management](../../../platform/roles/index.html) for more information.
 
 ## DaVinci Admin applications data model properties
 
@@ -4032,20 +4144,81 @@ Refer to [Roles Management](../../platform/roles.html) for more information.
 | 403  | You do not have permissions or are not licensed to make this request. |
 | 404  | The requested resource was not found.                                 |
 
+## DaVinci application errors
+
+In addition to the general [error codes](../../../platform/reference/error-codes.html), DaVinci application operations can return the following errors:
+
+| HTTP status | Top‑level code     | Detail code                                                         | When it happens and what the response contains                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| ----------- | ------------------ | ------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 400         | `INVALID_DATA`     | `REQUIRED_VALUE`, `EMPTY_VALUE`, `INVALID_VALUE`, or `OUT_OF_RANGE` | **Message:** `The request could not be completed. One or more validation errors were in the request.`> **Collapse: When and details**
+>
+> **When:** A `POST /environments/{envID}/davinciApplications` or a `PUT /environments/{envID}/davinciApplications/{davinciApplicationID}` request supplies a body that violates the data model: an omitted `name`, a blank or null `name`, a `name` longer than 256 characters, a `name` whose first non-whitespace character is outside the allowed set or that contains a `<` or a `${` sequence, an `apiKeyEnabled` value that is not a boolean, an `oauth` value that is not an object, or an unknown `oauth.scopes` or `oauth.grantTypes` value
+>
+> **Details:** One detail per validation error, each with the failing property path as the target. `must have required property 'name'` with target `name` when the request omits `name`. `must not be empty or blank` for a blank `name`. `must be string`, `must be boolean`, or `must be object` for a property of the wrong JSON type. `must NOT have more than 256 characters` for a `name` longer than 256 characters. `must match pattern "<pattern>"`, where the pattern is the JSON schema pattern for the property, for a `name` whose first non-whitespace character is outside the allowed set or that contains a `<` or a `${` sequence. `must be one of the values: <allowed values joined by or>`, for example `must be one of the values: openid or profile or flow_analytics or offline_access` with target `oauth.scopes.2` for an unknown `oauth.scopes` entry. |
+| 400         | `INVALID_DATA`     | `UNIQUENESS_VIOLATION`                                              | **Message:** `The request could not be completed. One or more validation errors were in the request.`> **Collapse: When and details**
+>
+> **When:** A `POST /environments/{envID}/davinciApplications` request fails with a duplicate-key storage error, for example when the request specifies an application name that already exists
+>
+> **Details:** `App record already exists`. No target is returned.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| 400         | `INVALID_DATA`     | `INVALID_PARAMETER`                                                 | **Message:** `The request could not be completed. One or more validation errors were in the request.`> **Collapse: When and details**
+>
+> **When:** A `GET` all applications request supplies a `page`, `limit`, `filter`, or `expand` query parameter longer than 256 characters
+>
+> **Details:** Detail code `INVALID_PARAMETER` with message `must NOT have more than 256 characters` and the overlong query parameter as the target.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| 400         | `REQUEST_FAILED`   | `CONSTRAINT_VIOLATION`                                              | **Message:** `The request could not be completed. There was an issue processing the request.`> **Collapse: When and details**
+>
+> **When:** A `PUT`, `DELETE`, key rotation `POST`, or secret rotation `POST` targets an application that is read-only
+>
+> **Details:** `Application is read-only.` The target is `readOnly`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| 400         | `REQUEST_FAILED`   | `INVALID_PARAMETER` or `INVALID_FILTER`                             | **Message:** `The request could not be completed. There was an issue processing the request.`> **Collapse: When and details**
+>
+> **When:** A `GET` all applications request supplies a `filter` query parameter that references an attribute other than `createdBy.user.id`, `createdBy.client.id`, `updatedBy.user.id`, or `updatedBy.client.id`, or an operator other than `eq`, `and`, or `or`, when actor metadata is enabled for the environment. When actor metadata is disabled, the filter parameter is ignored
+>
+> **Details:** Detail code `INVALID_PARAMETER` with message `The filter attribute was invalid or does not support filtering.` and the invalid attribute as the target, or message `The filter operator was invalid or not supported.` and the invalid operator as the target. A filter that is not a well-formed SCIM expression returns detail code `INVALID_FILTER` with message `The specified filter was invalid.` and no target.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| 400         | `REQUEST_FAILED`   | `ITEM_LIMIT_EXCEEDED`                                               | **Message:** `The request could not be completed. There was an issue processing the request.`> **Collapse: When and details**
+>
+> **When:** A `POST /environments/{envID}/davinciApplications` request creates an application after the environment has reached the maximum number of applications allowed for the environment
+>
+> **Details:** `Cannot create more than <resourceLimit> applications.` No target is returned.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| 403         | `ACCESS_FAILED`    | None                                                                | **Message:** `The request could not be completed. You do not have access to this resource.`> **Collapse: When and details**
+>
+> **When:** The actor lacks the `davinci:create:applications` permission (`POST` operations), the `davinci:read:applications` permission (`GET` operations), the `davinci:update:applications` permission (`PUT` or the key or secret rotation `POST`), or the `davinci:delete:applications` permission (`DELETE`)
+>
+> **Details:** None                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| 404         | `NOT_FOUND`        | None                                                                | **Message:** `The request could not be completed. The requested resource was not found.`> **Collapse: When and details**
+>
+> **When:** A `GET` one, `PUT`, `DELETE`, key rotation, or secret rotation request references a DaVinci application ID that does not exist in the environment
+>
+> **Details:** None                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| 415         | `INVALID_REQUEST`  | None                                                                | **Message:**```
+The server is refusing to service the request because the entity of the request is in a format not supported by the requested resource for the requested method.
+```> **Collapse: When and details**
+>
+> **When:** A key rotation request does not use the `application/vnd.pingidentity.davinciApplication.rotateKey+json` content type, or a secret rotation request does not use the `application/vnd.pingidentity.davinciApplication.rotateSecret+json` content type
+>
+> **Details:** None                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| 500         | `UNEXPECTED_ERROR` | None                                                                | **Message:** `There was an unexpected error with the service. Please try again later.`> **Collapse: When and details**
+>
+> **When:** The service encounters an unexpected internal failure while processing the request, for example a `GET` all applications request that cannot read the application list
+>
+> **Details:** None                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+
 ---
 
 ---
 title: DaVinci Admin Connector Instances
-description: The PingOne DaVinci Admin Connector Instances service provides endpoints to create, read, update, and delete DaVinci connector instances. A DaVinci connector instance is one instance of a DaVinci connector (the connection configuration specifies a connector by name). You can then use the capabilities provided by the connector inside a flow, and launch the flow through an application.
+description: Describes the PingOne DaVinci Admin Connector Instances service for creating, reading, updating, deleting, and cloning DaVinci connector instances
 component: pingone-api
-page_id: pingone-api:davinci:davinci-admin-apis/admin-connections
-canonical_url: https://developer.pingidentity.com/pingone-api/davinci/davinci-admin-apis/admin-connections.html
+page_id: pingone-api:davinci:davinci-admin-apis/admin-connections/index
+canonical_url: https://developer.pingidentity.com/pingone-api/davinci/davinci-admin-apis/admin-connections/index.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-11
 section_ids:
   assigning-admin-roles-and-permissions-to-this-service: Assigning admin roles and permissions to this service
   davinci-admin-connector-instances-data-model-properties: DaVinci admin connector instances data model properties
   response-codes: Response codes
+  davinci-connector-instance-errors: DaVinci connector instance errors
 ---
 
 # DaVinci Admin Connector Instances
@@ -4056,19 +4229,19 @@ This service also includes an action to clone connector instance resources.
 
 ## Assigning admin roles and permissions to this service
 
-Admin role assignments determine access to PingOne APIs. When assigning admin roles to this service, refer to [PingOne Permissions by Service](../../platform/reference/roles-and-permissions-in-pingone/permissions-by-service.html) for the service-specific permissions.
+Admin role assignments determine access to PingOne APIs. When assigning admin roles to this service, refer to [PingOne Permissions by Service](../../../platform/reference/roles-and-permissions-in-pingone/permissions-by-service.html) for the service-specific permissions.
 
-You can also choose to assign admin roles based on particular service resources. Refer to [PingOne Permissions by Resource](../../platform/reference/roles-and-permissions-in-pingone/permissions-by-resource.html) when assigning admin roles per service resources.
+You can also choose to assign admin roles based on particular service resources. Refer to [PingOne Permissions by Resource](../../../platform/reference/roles-and-permissions-in-pingone/permissions-by-resource.html) when assigning admin roles per service resources.
 
 Admin assignments to roles are set by:
 
-* [Automatic assignment for some roles](../../platform/roles/predefined-roles.html#automatic-role-assignment).
+* [Automatic assignment for some roles](../../../platform/roles/predefined-roles/index.html#automatic-role-assignment).
 
-* [Group Role Assignments](../../platform/group-role-assignments/group-role-assignments.html).
+* [Group Role Assignments](../../../platform/group-role-assignments/index.html).
 
-* [User Role Assignments](../../platform/users/user-role-assignments.html).
+* [User Role Assignments](../../../platform/users/user-role-assignments/index.html).
 
-Refer to [Roles Management](../../platform/roles.html) for more information.
+Refer to [Roles Management](../../../platform/roles/index.html) for more information.
 
 ## DaVinci admin connector instances data model properties
 
@@ -4096,21 +4269,77 @@ Refer to [Roles Management](../../platform/roles.html) for more information.
 | 403  | You do not have permissions or are not licensed to make this request. |
 | 404  | The requested resource was not found.                                 |
 
+## DaVinci connector instance errors
+
+In addition to the general [error codes](../../../platform/reference/error-codes.html), DaVinci connector instance operations can return the following errors:
+
+| HTTP status | Top‑level code    | Detail code                                                         | When it happens and what the response contains                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| ----------- | ----------------- | ------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 400         | `INVALID_DATA`    | `REQUIRED_VALUE`, `EMPTY_VALUE`, `INVALID_VALUE`, or `OUT_OF_RANGE` | **Message:** `The request could not be completed. One or more validation errors were in the request.`> **Collapse: When and details**
+>
+> **When:** A `POST /environments/{envID}/connectorInstances` or a `PUT /environments/{envID}/connectorInstances/{connectorInstanceID}` request supplies a body that violates the data model: an omitted `name` property, an omitted `connector` object or an omitted `connector.id` property on create, an empty or blank `name`, a `name` or `connector.id` value longer than 256 characters, a `name` or `connector.id` value that starts with an unsupported character or contains a `<` or a `${` sequence, or a property whose value is not of the documented JSON type
+>
+> **Details:** One detail per validation error, each with the failing property path as the target. `must have required property 'name'` with target `name` and `must have required property 'connector'` with target `connector` when the create request omits either property, and `must have required property 'id'` with target `connector` when the `connector` object omits `id`. `must not be empty or blank` for an empty or blank `name`. `must NOT have more than 256 characters` for a `name` or `connector.id` value longer than 256 characters. `must match pattern "<pattern>"`, where \<pattern> is the schema pattern, for a `name` or `connector.id` value that starts with an unsupported character or contains a `<` or a `${` sequence. `must be string` for a property of the wrong JSON type, for example with target `name`. |
+| 400         | `INVALID_DATA`    | `INVALID_PARAMETER`                                                 | **Message:** `The request could not be completed. One or more validation errors were in the request.`> **Collapse: When and details**
+>
+> **When:** A `GET /environments/{envID}/connectorInstances` or a `GET /environments/{envID}/connectorInstances/{connectorInstanceID}` request supplies a `page`, `limit`, `expand`, or `filter` query parameter longer than 256 characters
+>
+> **Details:** Detail code `INVALID_PARAMETER` with message `must NOT have more than 256 characters` and the overlong query parameter as the target.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| 400         | `INVALID_DATA`    | `INVALID_VALUE`                                                     | **Message:** `The request could not be completed. One or more validation errors were in the request.`> **Collapse: When and details**
+>
+> **When:** A `POST /environments/{envID}/connectorInstances` request specifies a `connector.id` value that does not identify a connector available to the environment
+>
+> **Details:** Detail code `INVALID_VALUE` with message `Invalid connector id` and no target.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| 400         | `INVALID_DATA`    | `UNIQUENESS_VIOLATION`                                              | **Message:** `The request could not be completed. One or more validation errors were in the request.`> **Collapse: When and details**
+>
+> **When:** A `POST /environments/{envID}/connectorInstances` or a `POST /environments/{envID}/connectorInstances/{connectorInstanceID}` clone request uses a name that is already associated with a connector instance in the environment
+>
+> **Details:** Detail code `UNIQUENESS_VIOLATION` with message `The connector name entered is already associated with another connector. Enter a different name.` and no target.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| 400         | `INVALID_DATA`    | `UNIQUENESS_VIOLATION`                                              | **Message:** `The request could not be completed. One or more validation errors were in the request.`> **Collapse: When and details**
+>
+> **When:** A `PUT /environments/{envID}/connectorInstances/{connectorInstanceID}` request renames the connector instance to a name that another connector instance in the environment already uses
+>
+> **Details:** Detail code `UNIQUENESS_VIOLATION` with message `A resource with the specified name already exists` and target `name`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| 400         | `REQUEST_FAILED`  | `INVALID_PARAMETER` or `INVALID_FILTER`                             | **Message:** `The request could not be completed. There was an issue processing the request.`> **Collapse: When and details**
+>
+> **When:** A `GET /environments/{envID}/connectorInstances` request supplies a `filter` query parameter that references any attribute other than the six actor identifier attributes `createdBy.user.id`, `createdBy.client.id`, `createdBy.environment.id`, `updatedBy.user.id`, `updatedBy.client.id`, or `updatedBy.environment.id` when actor metadata is enabled for the environment, or supplies any `filter` query parameter when actor metadata is disabled. When actor metadata is enabled, actor attributes support only `eq` combined through `and` or `or`
+>
+> **Details:** Detail code `INVALID_PARAMETER` with message `The filter attribute was invalid or does not support filtering.` and the invalid attribute as the target, or message `The filter operator was invalid or not supported.` and the attribute that does not support the supplied operator as the target. A filter that is not a well-formed SCIM expression returns detail code `INVALID_FILTER` with message `The specified filter was invalid.` and no target.                                                                                                                                                                                                                                                                                                                                                                                       |
+| 403         | `ACCESS_FAILED`   | None                                                                | **Message:** `The request could not be completed. You do not have access to this resource.`> **Collapse: When and details**
+>
+> **When:** The actor lacks the `davinci:create:connections` permission (`POST` operations), the `davinci:read:connections` permission (`GET` operations), the `davinci:update:connections` permission (`PUT` operations), or the `davinci:delete:connections` permission (`DELETE` operations)
+>
+> **Details:** None                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| 404         | `NOT_FOUND`       | None                                                                | **Message:** `The request could not be completed. The requested resource was not found.`> **Collapse: When and details**
+>
+> **When:** A `GET`, `PUT`, or `DELETE` request references a connector instance ID that does not exist in the environment, or a `POST` clone request references a source connector instance ID that does not exist or could not be read
+>
+> **Details:** None                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| 415         | `INVALID_REQUEST` | None                                                                | **Message:**```
+The server is refusing to service the request because the entity of the request is in a format not supported by the requested resource for the requested method.
+```> **Collapse: When and details**
+>
+> **When:** A `POST /environments/{envID}/connectorInstances/{connectorInstanceID}` clone request does not set the `Content-Type` header to `application/vnd.pingidentity.connectorInstance.clone+json`
+>
+> **Details:** None                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+
 ---
 
 ---
 title: DaVinci Admin Connectors
-description: The PingOne DaVinci Admin Connector service provides endpoints to read DaVinci connector resources. Connectors give DaVinci the ability to integrate third party technologies, HTML pages, and other tools to create a sign-on flow. They define the capabilities that you can use as nodes in a flow. For example, an HTTP connector provides the capability to present an HTML form to collect and submit user information or make REST API calls.
+description: Describes the PingOne DaVinci Admin Connector service for reading DaVinci connector resources that define the capabilities available to use as nodes in a flow
 component: pingone-api
-page_id: pingone-api:davinci:davinci-admin-apis/admin-connectors
-canonical_url: https://developer.pingidentity.com/pingone-api/davinci/davinci-admin-apis/admin-connectors.html
+page_id: pingone-api:davinci:davinci-admin-apis/admin-connectors/index
+canonical_url: https://developer.pingidentity.com/pingone-api/davinci/davinci-admin-apis/admin-connectors/index.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-11
 section_ids:
   assigning-admin-roles-and-permissions-to-this-service: Assigning admin roles and permissions to this service
   davinci-admin-connector-data-model-properties: DaVinci admin connector data model properties
   davinci-admin-connectors-details-data-model-properties: DaVinci admin connectors details data model properties
   response-codes: Response codes
+  davinci-connector-errors: DaVinci connector errors
 ---
 
 # DaVinci Admin Connectors
@@ -4123,19 +4352,19 @@ The PingOne DaVinci Admin Connector service provides endpoints to read DaVinci c
 
 ## Assigning admin roles and permissions to this service
 
-Admin role assignments determine access to PingOne APIs. When assigning admin roles to this service, refer to [PingOne Permissions by Service](../../platform/reference/roles-and-permissions-in-pingone/permissions-by-service.html) for the service-specific permissions.
+Admin role assignments determine access to PingOne APIs. When assigning admin roles to this service, refer to [PingOne Permissions by Service](../../../platform/reference/roles-and-permissions-in-pingone/permissions-by-service.html) for the service-specific permissions.
 
-You can also choose to assign admin roles based on particular service resources. Refer to [PingOne Permissions by Resource](../../platform/reference/roles-and-permissions-in-pingone/permissions-by-resource.html) when assigning admin roles per service resources.
+You can also choose to assign admin roles based on particular service resources. Refer to [PingOne Permissions by Resource](../../../platform/reference/roles-and-permissions-in-pingone/permissions-by-resource.html) when assigning admin roles per service resources.
 
 Admin assignments to roles are set by:
 
-* [Automatic assignment for some roles](../../platform/roles/predefined-roles.html#automatic-role-assignment).
+* [Automatic assignment for some roles](../../../platform/roles/predefined-roles/index.html#automatic-role-assignment).
 
-* [Group Role Assignments](../../platform/group-role-assignments/group-role-assignments.html).
+* [Group Role Assignments](../../../platform/group-role-assignments/index.html).
 
-* [User Role Assignments](../../platform/users/user-role-assignments.html).
+* [User Role Assignments](../../../platform/users/user-role-assignments/index.html).
 
-Refer to [Roles Management](../../platform/roles.html) for more information.
+Refer to [Roles Management](../../../platform/roles/index.html) for more information.
 
 ## DaVinci admin connector data model properties
 
@@ -4192,22 +4421,46 @@ Refer to [Roles Management](../../platform/roles.html) for more information.
 | 403  | You do not have permissions or are not licensed to make this request. |
 | 404  | The requested resource was not found.                                 |
 
+## DaVinci connector errors
+
+In addition to the general [error codes](../../../platform/reference/error-codes.html), DaVinci connector operations can return the following errors:
+
+| HTTP status | Top‑level code  | Detail code             | When it happens and what the response contains                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| ----------- | --------------- | ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| 400         | `INVALID_DATA`  | `INVALID_PARAMETER`     | **Message:** `The request could not be completed. One or more validation errors were in the request.`> **Collapse: When and details**
+>
+> **When:** A `GET /environments/{envID}/connectors`, a `GET /environments/{envID}/connectors/{davinciConnectorID}`, or a `GET /environments/{envID}/connectors/{davinciConnectorID}/details` request supplies any query parameter
+>
+> **Details:** Detail code `INVALID_PARAMETER` with message `must NOT have additional properties` and the rejected query parameter as the target. |
+| 403         | `ACCESS_FAILED` | None                    | **Message:** `The request could not be completed. You do not have access to this resource.`> **Collapse: When and details**
+>
+> **When:** The actor lacks the `davinci:read:connectors` permission, which every connector read operation requires
+>
+> **Details:** None                                                                                                                                                                                                                                                        |
+| 404         | `NOT_FOUND`     | `INVALID_VALUE` or None | **Message:** `The request could not be completed. The requested resource was not found.`> **Collapse: When and details**
+>
+> **When:** Any connector request targets an environment ID that does not exist, or a `GET` one connector or a `GET` connector details request references a connector ID that does not exist
+>
+> **Details:** `Company not found` with detail code `INVALID_VALUE` for an unknown environment ID. No details for an unknown connector ID.                                                           |
+
 ---
 
 ---
 title: DaVinci Admin Flow Versions
-description: The PingOne DaVinci Admin Flow Versions service provides endpoints to read, update, and delete DaVinci flow versions. This service also includes endpoints to export, revert, and see details about a flow version.
+description: Describes the PingOne DaVinci Admin Flow Versions service for reading, updating, deleting, exporting, and reverting DaVinci flow versions
 component: pingone-api
-page_id: pingone-api:davinci:davinci-admin-apis/admin-flow-versions
-canonical_url: https://developer.pingidentity.com/pingone-api/davinci/davinci-admin-apis/admin-flow-versions.html
+page_id: pingone-api:davinci:davinci-admin-apis/admin-flow-versions/index
+canonical_url: https://developer.pingidentity.com/pingone-api/davinci/davinci-admin-apis/admin-flow-versions/index.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-11
 section_ids:
   assigning-admin-roles-and-permissions-to-this-service: Assigning admin roles and permissions to this service
   flow-versions-data-model: DaVinci admin flow versions data model properties
   flow-versions-details-data-model: Flow versions details property data model
   flow-versions-graph-data-model: Flow versions graph data property data model
   response-codes: Response codes
+  davinci-flow-version-errors: DaVinci flow version errors
 ---
 
 # DaVinci Admin Flow Versions
@@ -4220,19 +4473,19 @@ The PingOne DaVinci Admin Flow Versions service provides endpoints to read, upda
 
 ## Assigning admin roles and permissions to this service
 
-Admin role assignments determine access to PingOne APIs. When assigning admin roles to this service, refer to [PingOne Permissions by Service](../../platform/reference/roles-and-permissions-in-pingone/permissions-by-service.html) for the service-specific permissions.
+Admin role assignments determine access to PingOne APIs. When assigning admin roles to this service, refer to [PingOne Permissions by Service](../../../platform/reference/roles-and-permissions-in-pingone/permissions-by-service.html) for the service-specific permissions.
 
-You can also choose to assign admin roles based on particular service resources. Refer to [PingOne Permissions by Resource](../../platform/reference/roles-and-permissions-in-pingone/permissions-by-resource.html) when assigning admin roles per service resources.
+You can also choose to assign admin roles based on particular service resources. Refer to [PingOne Permissions by Resource](../../../platform/reference/roles-and-permissions-in-pingone/permissions-by-resource.html) when assigning admin roles per service resources.
 
 Admin assignments to roles are set by:
 
-* [Automatic assignment for some roles](../../platform/roles/predefined-roles.html#automatic-role-assignment).
+* [Automatic assignment for some roles](../../../platform/roles/predefined-roles/index.html#automatic-role-assignment).
 
-* [Group Role Assignments](../../platform/group-role-assignments/group-role-assignments.html).
+* [Group Role Assignments](../../../platform/group-role-assignments/index.html).
 
-* [User Role Assignments](../../platform/users/user-role-assignments.html).
+* [User Role Assignments](../../../platform/users/user-role-assignments/index.html).
 
-Refer to [Roles Management](../../platform/roles.html) for more information.
+Refer to [Roles Management](../../../platform/roles/index.html) for more information.
 
 ## DaVinci admin flow versions data model properties
 
@@ -4273,7 +4526,7 @@ The following table lists the supported flow versions details settings propertie
 | `inputSchema`                          | Array\[object] | Optional | Mutable   | The flow input parameters in an array of `JSONschema` objects.                                                                                                                 |
 | `name`                                 | String         | Required | Mutable   | The name of the flow.                                                                                                                                                          |
 | `outputSchema`                         | Object         | Required | Mutable   | The `JSONschema` output object of the flow.                                                                                                                                    |
-| `settings`                             | Object         | Optional | Mutable   | Flow settings saved by the user. Refer to the [Settings property data model](admin-flows.html#settings-property-data-model) table for details.                                 |
+| `settings`                             | Object         | Optional | Mutable   | Flow settings saved by the user. Refer to the [Settings property data model](../admin-flows/index.html#settings-property-data-model) table for details.                        |
 | `trigger`                              | Object         | Optional | Mutable   | The flow trigger object.                                                                                                                                                       |
 | `trigger.type`                         | String         | Optional | Mutable   | If the trigger type is set to `AUTHENTICATION`, you invoke the flow through PingOne OpenID Connect or SAML endpoints.                                                          |
 | `trigger.configuration`                | Object         | Optional | Mutable   | The configuration object for session reuse.                                                                                                                                    |
@@ -4388,16 +4641,91 @@ The following table lists the supported flow versions graph data settings proper
 | 403  | You do not have permissions or are not licensed to make this request. |
 | 404  | The requested resource was not found.                                 |
 
+## DaVinci flow version errors
+
+In addition to the general [error codes](../../../platform/reference/error-codes.html), DaVinci flow version operations can return the following errors:
+
+| HTTP status | Top‑level code     | Detail code                                                         | When it happens and what the response contains                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| ----------- | ------------------ | ------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 400         | `INVALID_DATA`     | `REQUIRED_VALUE`, `EMPTY_VALUE`, `INVALID_VALUE`, or `OUT_OF_RANGE` | **Message:** `The request could not be completed. One or more validation errors were in the request.`> **Collapse: When and details**
+>
+> **When:** A `POST /environments/{envID}/flows/{davinciFlowID}/versions` or a `PUT /environments/{envID}/flows/{davinciFlowID}/versions/{davinciFlowVersionID}` request supplies a body that violates the data model: an omitted `version` on create, a `name` longer than 256 characters, a blank or null `name`, a `name` whose first non-whitespace character is outside the allowed set or that contains a `<` or a `${` sequence, a `trigger` that is not an object or that omits `type`, a `trigger.type` value other than `AUTHENTICATION`, or a `name`, `description`, `color`, `graphData`, `inputSchema`, `outputSchema`, `settings`, `skcomponents`, or `enabled` value of the wrong JSON type
+>
+> **Details:** One detail per validation error, each with the failing property path as the target. `must have required property 'version'` with target `version` when the create request omits `version`. `must not be empty or blank` for a blank `name`. `must be string`, `must be object`, `must be array`, or `must be boolean` for a property of the wrong JSON type, for example `must be string` for a null `name`. `must NOT have more than 256 characters` for a `name` longer than 256 characters. `must match pattern "<pattern>"`, where the pattern is the JSON schema pattern for the property, for a `name` whose first non-whitespace character is outside the allowed set or that contains a `<` or a `${` sequence. `must be object` for a `trigger` that is not an object. `must have required property 'type'` with target `trigger` when `trigger` omits `type`. `must be one of the values: AUTHENTICATION` with target `trigger.type` for an unknown or unsupported `trigger.type` value. |
+| 400         | `INVALID_DATA`     | `REQUIRED_VALUE`, `EMPTY_VALUE`, `INVALID_VALUE`, or `OUT_OF_RANGE` | **Message:** `The request could not be completed. One or more validation errors were in the request.`> **Collapse: When and details**
+>
+> **When:** A `PUT /environments/{envID}/flows/{davinciFlowID}/versions/{davinciFlowVersionID}/alias` request supplies a body that violates the data model: an omitted `alias`, a blank `alias`, an `alias` longer than 256 characters, an `alias` that starts with a whitespace or unsupported character or that contains a `<` or a `${` sequence, or an `alias` value that is not a string
+>
+> **Details:** One detail per validation error, each with the failing property path as the target. `must have required property 'alias'` with target `alias` when the request omits `alias`. `must not be empty or blank` for a blank `alias`. `must be string` for an `alias` that is not a string. `must NOT have more than 256 characters` for an `alias` longer than 256 characters. `must match pattern "<pattern>"`, where the pattern is the JSON schema pattern for the property, for an `alias` that starts with a whitespace or unsupported character or that contains a `<` or a `${` sequence.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| 400         | `INVALID_DATA`     | `INVALID_VALUE`                                                     | **Message:** `The request could not be completed. One or more validation errors were in the request.`> **Collapse: When and details**
+>
+> **When:** A request to a flow version endpoint other than the create `POST` supplies a `versionId` path parameter that the service cannot parse as a version number, for example a value that is not a number or a `<flowId>-<version>` value whose flow ID does not match the flow ID in the request path
+>
+> **Details:** `must be a number` for a `versionId` value that is not a number, or `Flow ID in the version ID does not match the flow ID in the request path` when the flow ID embedded in the `versionId` value does not match the `flowId` path parameter. The target is `versionId`, or `version` when the request body includes a `version` property.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| 400         | `INVALID_DATA`     | `INVALID_VALUE`                                                     | **Message:** `The request could not be completed. One or more validation errors were in the request.`> **Collapse: When and details**
+>
+> **When:** A `POST` export request supplies `includeSubFlows`, `includeVariableValues`, or `includeForms` with a value that is not a boolean, a `POST` revert request includes a request body property, or a `DELETE` request includes a query parameter
+>
+> **Details:** `must be boolean` with the property name as the target for an export property that is not a boolean, or `must NOT have additional properties` with the rejected body property or query parameter as the target.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| 400         | `INVALID_DATA`     | `INVALID_PARAMETER`                                                 | **Message:** `The request could not be completed. One or more validation errors were in the request.`> **Collapse: When and details**
+>
+> **When:** A `GET` all flow versions request or a `GET` one flow version request includes any query parameter, or a `GET` flow version details request includes an `expand` value other than `skcomponents` or a query parameter other than `expand`
+>
+> **Details:** `must NOT have additional properties` with the rejected query parameter as the target, or `must be one of the values: skcomponents` with target `expand` for an unsupported `expand` value.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| 400         | `REQUEST_FAILED`   | `CONSTRAINT_VIOLATION`                                              | **Message:** `The request could not be completed. There was an issue processing the request.`> **Collapse: When and details**
+>
+> **When:** A `POST` create or `PUT` update request specifies a version number that is less than zero
+>
+> **Details:** `Flow version should be zero or greater than zero`. The target is `version` on create and `versionId` on update.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| 400         | `REQUEST_FAILED`   | `CONSTRAINT_VIOLATION`                                              | **Message:** `The request could not be completed. There was an issue processing the request.`> **Collapse: When and details**
+>
+> **When:** A `POST` create request specifies a version number that already exists for the flow
+>
+> **Details:** `Flow version already exists`. The target is `version`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| 400         | `REQUEST_FAILED`   | `CONSTRAINT_VIOLATION`                                              | **Message:** `The request could not be completed. There was an issue processing the request.`> **Collapse: When and details**
+>
+> **When:** A `DELETE` request targets the flow's current version
+>
+> **Details:** `Can not delete current flow version`. No target is returned.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| 400         | `REQUEST_FAILED`   | `ITEM_LIMIT_EXCEEDED`                                               | **Message:** `The request could not be completed. There was an issue processing the request.`> **Collapse: When and details**
+>
+> **When:** A `POST` create, `PUT` update, or `POST` revert request creates a new flow version after the flow has reached the maximum number of flow versions allowed and the service cannot free an existing version
+>
+> **Details:** `Flow version limit is exceeded`. No target is returned.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| 403         | `ACCESS_FAILED`    | None                                                                | **Message:** `The request could not be completed. You do not have access to this resource.`> **Collapse: When and details**
+>
+> **When:** The actor lacks the `davinci:read:flowVersions` permission (`GET` operations), the `davinci:update:flowVersions` permission (the create `POST`, the update `PUT`, or the alias `PUT`), the `davinci:delete:flowVersions` permission (`DELETE`), the `davinci:export:flowVersions` permission (the export `POST`), or the `davinci:revert:flowVersions` permission (the revert `POST`)
+>
+> **Details:** None                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| 404         | `NOT_FOUND`        | None                                                                | **Message:** `The request could not be completed. The requested resource was not found.`> **Collapse: When and details**
+>
+> **When:** Any operation references a DaVinci flow ID that does not exist in the environment, or a `GET` one, `GET` details, update `PUT`, alias `PUT`, `DELETE`, revert, or export request references a flow version that does not exist for the flow
+>
+> **Details:** None                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| 415         | `INVALID_REQUEST`  | None                                                                | **Message:**```
+The server is refusing to service the request because the entity of the request is in a format not supported by the requested resource for the requested method.
+```> **Collapse: When and details**
+>
+> **When:** A `POST /environments/{envID}/flows/{davinciFlowID}/versions/{davinciFlowVersionID}` request uses a `Content-Type` header value other than `application/vnd.pingidentity.flowversion.revert+json` or `application/vnd.pingidentity.flowversion.export+json`, or omits the header
+>
+> **Details:** None                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| 500         | `UNEXPECTED_ERROR` | None                                                                | **Message:** `There was an unexpected error with the service. Please try again later.`> **Collapse: When and details**
+>
+> **When:** The service encounters an unexpected internal failure while processing the request, for example a revert that cannot create the new flow version
+>
+> **Details:** None                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+
 ---
 
 ---
 title: DaVinci Admin Flows
-description: DaVinci flows are constructed, logical paths that specify the workflow for the user's authorization and authentication experiences.
+description: Describes the PingOne DaVinci Admin Flows service for creating, reading, updating, deleting, enabling, deploying, importing, and cloning DaVinci flows
 component: pingone-api
-page_id: pingone-api:davinci:davinci-admin-apis/admin-flows
-canonical_url: https://developer.pingidentity.com/pingone-api/davinci/davinci-admin-apis/admin-flows.html
+page_id: pingone-api:davinci:davinci-admin-apis/admin-flows/index
+canonical_url: https://developer.pingidentity.com/pingone-api/davinci/davinci-admin-apis/admin-flows/index.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-11
 section_ids:
   assigning-admin-roles-and-permissions-to-this-service: Assigning admin roles and permissions to this service
   davinci-admin-flow-data-model-properties: DaVinci admin flow data model properties
@@ -4406,6 +4734,7 @@ section_ids:
   limiting-and-filtering-data: Limiting and filtering data
   scim-operators: SCIM operators
   response-codes: Response codes
+  davinci-flow-errors: DaVinci flow errors
 ---
 
 # DaVinci Admin Flows
@@ -4418,19 +4747,19 @@ The PingOne DaVinci Admin Flows service provides endpoints to create, read, upda
 
 ## Assigning admin roles and permissions to this service
 
-Admin role assignments determine access to PingOne APIs. When assigning admin roles to this service, refer to [PingOne Permissions by Service](../../platform/reference/roles-and-permissions-in-pingone/permissions-by-service.html) for the service-specific permissions.
+Admin role assignments determine access to PingOne APIs. When assigning admin roles to this service, refer to [PingOne Permissions by Service](../../../platform/reference/roles-and-permissions-in-pingone/permissions-by-service.html) for the service-specific permissions.
 
-You can also choose to assign admin roles based on particular service resources. Refer to [PingOne Permissions by Resource](../../platform/reference/roles-and-permissions-in-pingone/permissions-by-resource.html) when assigning admin roles per service resources.
+You can also choose to assign admin roles based on particular service resources. Refer to [PingOne Permissions by Resource](../../../platform/reference/roles-and-permissions-in-pingone/permissions-by-resource.html) when assigning admin roles per service resources.
 
 Admin assignments to roles are set by:
 
-* [Automatic assignment for some roles](../../platform/roles/predefined-roles.html#automatic-role-assignment).
+* [Automatic assignment for some roles](../../../platform/roles/predefined-roles/index.html#automatic-role-assignment).
 
-* [Group Role Assignments](../../platform/group-role-assignments/group-role-assignments.html).
+* [Group Role Assignments](../../../platform/group-role-assignments/index.html).
 
-* [User Role Assignments](../../platform/users/user-role-assignments.html).
+* [User Role Assignments](../../../platform/users/user-role-assignments/index.html).
 
-Refer to [Roles Management](../../platform/roles.html) for more information.
+Refer to [Roles Management](../../../platform/roles/index.html) for more information.
 
 ## DaVinci admin flow data model properties
 
@@ -4519,7 +4848,7 @@ The following table lists the supported flow settings properties that can be use
 
 ## Limiting and filtering data
 
-You can limit the number of results returned on the [Read DaVinci Flows](admin-flows/read-flows.html) and [Read One DaVinci Flow](admin-flows/read-one-flow.html) requests with the `attributes` parameter. This parameter filters the response data returned by the request. The query accepts top-level DaVinci admin flow data model properties as a list of comma separated values. The query returns only the specified property values; it removes all other properties from the response. For example, the following request uses the `attributes` query parameter:
+You can limit the number of results returned on the [Read DaVinci Flows](read-flows.html) and [Read One DaVinci Flow](read-one-flow.html) requests with the `attributes` parameter. This parameter filters the response data returned by the request. The query accepts top-level DaVinci admin flow data model properties as a list of comma separated values. The query returns only the specified property values; it removes all other properties from the response. For example, the following request uses the `attributes` query parameter:
 
 `/v1/environments/{{envID}}/flows/{{davinciFlowID}}?attributes=name,description`
 
@@ -4594,20 +4923,162 @@ These SCIM operators can be applied to the following attributes:
 | 403  | You do not have permissions or are not licensed to make this request. |
 | 404  | The requested resource was not found.                                 |
 
+## DaVinci flow errors
+
+In addition to the general [error codes](../../../platform/reference/error-codes.html), DaVinci flow operations can return the following errors:
+
+| HTTP status | Top‑level code     | Detail code                                                         | When it happens and what the response contains                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| ----------- | ------------------ | ------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 400         | `INVALID_DATA`     | `REQUIRED_VALUE`, `EMPTY_VALUE`, `INVALID_VALUE`, or `OUT_OF_RANGE` | **Message:** `The request could not be completed. One or more validation errors were in the request.`> **Collapse: When and details**
+>
+> **When:** A `POST /environments/{envID}/flows`, a `PUT /environments/{envID}/flows/{davinciFlowID}`, or a `PUT /environments/{envID}/flows/{davinciFlowID}/enabled` request supplies a body that violates the data model: an omitted `name` property on create or update, an omitted `enabled` property on enable or disable, a `trigger` object without a `type` property, an `inputSchema` entry without a `propertyName` or `preferredDataType` property, an empty or blank `name`, a `name` or `description` value longer than 256 or 1024 characters respectively, a `name` value that starts with an unsupported character or contains a `<` or a `${` sequence, a `trigger.type` value other than `AUTHENTICATION` or `SCHEDULE` on create or update, a `trigger.subtype` value other than `CIBA`, an `inputSchema.preferredDataType` value other than `string`, `number`, `boolean`, `array`, or `object`, an `inputSchema.preferredControlType` value outside the supported control type list, an `enabled` value that is not a boolean, or a property whose value is not of the documented JSON type
+>
+> **Details:** One detail per validation error, each with the failing property path as the target. `must have required property 'name'` with target `name` when a create or update request omits `name`, and `must have required property 'enabled'` with target `enabled` when an enable or disable request omits `enabled`. `must have required property 'type'` with target `trigger` when the `trigger` object omits `type`, and `must have required property 'propertyName'` or `must have required property 'preferredDataType'` with the entry path as the target, for example `inputSchema.0`, when an `inputSchema` entry omits either property. `must not be empty or blank` for an empty or blank `name`. `must NOT have more than 256 characters` for a `name` longer than 256 characters and `must NOT have more than 1024 characters` for a `description` longer than 1024 characters. `must match pattern "<pattern>"`, where \<pattern> is the schema pattern for the property, for a `name` or `description` value that starts with an unsupported character or contains a `<` or a `${` sequence. `must be one of the values: AUTHENTICATION or SCHEDULE` for an unknown `trigger.type` value, `must be one of the values: CIBA` for an unknown `trigger.subtype` value, `must be one of the values: string or number or boolean or array or object` for an unknown `inputSchema.preferredDataType` value, and the analogous `must be one of the values: <allowed control types>` literal for an unknown `inputSchema.preferredControlType` value. `must be boolean` for a non-boolean `enabled` or `inputSchema.required` value, `must not be empty or blank` for an `enabled` value of null, and `must be string` for a property of the wrong JSON type, for example with target `name`. |
+| 400         | `INVALID_DATA`     | `INVALID_PARAMETER`                                                 | **Message:** `The request could not be completed. One or more validation errors were in the request.`> **Collapse: When and details**
+>
+> **When:** A `GET /environments/{envID}/flows` or a `GET /environments/{envID}/flows/{davinciFlowID}` request supplies an `attributes` query parameter longer than 500 characters or an `expand` query parameter longer than 100 characters
+>
+> **Details:** Detail code `INVALID_PARAMETER` with message `must NOT have more than 500 characters` and target `attributes` for an overlong `attributes` parameter, or message `must NOT have more than 100 characters` and target `expand` for an overlong `expand` parameter.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| 400         | `INVALID_DATA`     | `INVALID_PARAMETER`                                                 | **Message:** `Invalid attribute provided for sorting`> **Collapse: When and details**
+>
+> **When:** A `GET /environments/{envID}/flows` request supplies an `order` query parameter that names an attribute other than `name`, `updatedAt`, `createdAt`, `deployedAt`, `enabled`, `trigger.type`, `settings.logLevel`, `publishedVersion`, or `currentVersion`
+>
+> **Details:** Detail code `INVALID_PARAMETER` with message:
+>
+> ```
+> Invalid attribute provided for sorting: valid parameters are name, updatedAt, createdAt, deployedAt, enabled, trigger.type, settings.logLevel, publishedVersion, currentVersion
+> ```
+>
+> and target `order`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| 400         | `INVALID_DATA`     | `INVALID_PARAMETER`                                                 | **Message:** `Invalid page size provided`> **Collapse: When and details**
+>
+> **When:** A `GET /environments/{envID}/flows` request supplies a `limit` query parameter that is not a positive integer or is greater than 100
+>
+> **Details:** Detail code `INVALID_PARAMETER` with message `Invalid page size provided: page size ranges from 1 to 100` and target `limit`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| 400         | `INVALID_DATA`     | `INVALID_VALUE`                                                     | **Message:** `The request could not be completed. One or more validation errors were in the request.`> **Collapse: When and details**
+>
+> **When:** A `POST /environments/{envID}/flows` or a `PUT /environments/{envID}/flows/{davinciFlowID}` request sets `trigger.type` to `SCHEDULE` or `BATCH_PROCESSING_SUBFLOW` in an environment where the corresponding scheduled flows or batch processing feature flag is disabled
+>
+> **Details:** Detail code `INVALID_VALUE` with message `must be one of the values: AUTHENTICATION` and target `trigger.type` for a scheduled flow in an environment where scheduled flows are not enabled, or message `must be one of the values: AUTHENTICATION, SCHEDULE` and target `trigger.type` for a batch processing subflow in an environment where batch processing is not enabled.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| 400         | `INVALID_DATA`     | `UNIQUENESS_VIOLATION`                                              | **Message:** `The request could not be completed. One or more validation errors were in the request.`> **Collapse: When and details**
+>
+> **When:** A `POST /environments/{envID}/flows`, a `POST /environments/{envID}/flows/{davinciFlowID}` clone request with a `name` property, or a flow import request uses a flow name that already exists in the environment. Import requests additionally return this error when two flows in the same import payload share a name, when a payload subflow name collides with the main flow name, or when a payload subflow name matches a flow that already exists in the environment
+>
+> **Details:** Detail code `UNIQUENESS_VIOLATION`. Create, clone, and main-flow import collisions return message `A flow with that name already exists, or the provided name isn't valid. Check the flow names and try again.` An import payload with two subflows of the same name returns message `The import contains more than one subflow with the same name: "<name>". Rename one of the subflows and try again.` A subflow whose name matches the main flow returns message `The import contains a subflow with the same name as the main flow: "<name>". Rename one of them and try again.` A subflow colliding with an existing environment flow returns message `A flow with the name "<name>" already exists. Rename the subflow and try again.`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| 400         | `REQUEST_FAILED`   | `INVALID_PARAMETER` or `INVALID_FILTER`                             | **Message:** `The request could not be completed. There was an issue processing the request.`> **Collapse: When and details**
+>
+> **When:** A `GET /environments/{envID}/flows` request supplies a `filter` query parameter that references an attribute outside the filterable set, an operator that the filtered attribute does not support, or an actor attribute such as `createdBy.user.id` when actor metadata is disabled for the environment. The filterable attributes are `name`, `description`, `currentVersionAlias`, `publishedVersionAlias`, `enabled`, `trigger.type`, `createdAt`, `updatedAt`, `deployedAt`, and `settings.logLevel`, plus the actor identifier attributes when actor metadata is enabled. String attributes support `eq`, `and`, `or`, `sw`, `co`, and `ew`, date attributes support `eq`, `and`, `or`, `gt`, `ge`, `lt`, and `le`, and boolean attributes and actor attributes support only `eq` combined through `and` or `or`
+>
+> **Details:** Detail code `INVALID_PARAMETER` with message `The filter attribute was invalid or does not support filtering.` and the invalid attribute as the target, or message `The filter operator was invalid or not supported.` and the attribute that does not support the supplied operator as the target. A filter that is not a well-formed SCIM expression returns detail code `INVALID_FILTER` with message `The specified filter was invalid.` and no target.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| 400         | `REQUEST_FAILED`   | `ITEM_LIMIT_EXCEEDED`                                               | **Message:** `The request could not be completed. There was an issue processing the request.`> **Collapse: When and details**
+>
+> **When:** A `POST /environments/{envID}/flows` create, clone, or import request runs after the environment has reached the maximum number of flows allowed for the environment
+>
+> **Details:** Detail code `ITEM_LIMIT_EXCEEDED` with message `Flow limit is exceeded` and no target. The limit preflight runs ahead of the duplicate-name check, so an over-limit environment returns this error even when the request also reuses an existing flow name.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| 400         | `REQUEST_FAILED`   | `CONSTRAINT_VIOLATION`                                              | **Message:** `The request could not be completed. There was an issue processing the request.`> **Collapse: When and details**
+>
+> **When:** A `DELETE /environments/{envID}/flows/{davinciFlowID}` request targets a flow that an application flow policy currently references
+>
+> **Details:** Detail code `CONSTRAINT_VIOLATION` with message `This Flow is in a Application Flow Policy` and no target. Remove the flow from the application's flow policy before deleting it.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| 400         | `REQUEST_FAILED`   | `CONSTRAINT_VIOLATION`                                              | **Message:** `The request could not be completed. There was an issue processing the request.`> **Collapse: When and details**
+>
+> **When:** A `POST /environments/{envID}/flows/{davinciFlowID}` validate request targets a flow that has no `graphData`, or a `PUT /environments/{envID}/flows/{davinciFlowID}` request includes a flow graph whose subflow node references the flow being updated. A `PUT` request also returns this error when the stored previous flow version or the flow's current version record cannot be found during the version diff
+>
+> **Details:** Detail code `CONSTRAINT_VIOLATION` with message `Flow is empty` for a validate request on a flow without `graphData`, message `Flow validation error` for a self-referencing subflow graph, and message `Flow version not found` for a missing previous version record. None of these details carry a target.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| 400         | `REQUEST_FAILED`   | `CONSTRAINT_VIOLATION`                                              | **Message:** `The request could not be completed. There was an issue processing the request.`> **Collapse: When and details**
+>
+> **When:** A `PUT /environments/{envID}/flows/{davinciFlowID}` update request or a `POST /environments/{envID}/flows/{davinciFlowID}/versions/{davinciFlowVersionID}` revert request is rejected on schedule-trigger transition grounds: a scheduled flow cannot be changed to a non-scheduled flow and a non-scheduled flow cannot be changed to a scheduled flow. A create, update, or import request that sets `trigger.type` to `SCHEDULE` also returns this error when the flow graph has no `graphData`, when the graph has no single START node, or when the START node has more than one connected edge
+>
+> **Details:** Detail code `CONSTRAINT_VIOLATION` with message `A schedule flow cannot be changed to a non-schedule flow` or `A non-schedule flow cannot be changed to a schedule flow` and no target, or with message `The flow graph cannot be empty` with target `graphData` for a scheduled flow whose graph has no nodes, message `There can only be one start node` with target `graphData` for a graph whose START node count is not one, or message `The start node can only have one edge connected to it` with target `graphData` for a START node with more than one edge.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| 400         | `REQUEST_FAILED`   | `CONSTRAINT_VIOLATION`                                              | **Message:** `The request could not be completed. There was an issue processing the request.`> **Collapse: When and details**
+>
+> **When:** A `PUT /environments/{envID}/flows/{davinciFlowID}` request changes the trigger type of a batch processing subflow away from `BATCH_PROCESSING_SUBFLOW`, or changes any other flow's trigger type to `BATCH_PROCESSING_SUBFLOW`
+>
+> **Details:** Detail code `CONSTRAINT_VIOLATION` with message `A batch processing flow cannot be changed to a non-batch processing flow.` or `A non-batch processing flow cannot be changed to a batch processing flow.` and no target.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| 400         | `REQUEST_FAILED`   | `CONSTRAINT_VIOLATION`                                              | **Message:** `The request could not be completed. There was an issue processing the request.`> **Collapse: When and details**
+>
+> **When:** A `DELETE /environments/{envID}/flows/{davinciFlowID}` or a `PUT /environments/{envID}/flows/{davinciFlowID}` request targets a flow whose `readOnly` attribute is set, such as a flow exported by Ping Identity for a customer
+>
+> **Details:** Detail code `CONSTRAINT_VIOLATION` with message `Flow is read-only.` and target `readOnly`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| 400         | `REQUEST_FAILED`   | `INVALID_VALUE`                                                     | **Message:** `The request could not be completed. There was an issue processing the request.`> **Collapse: When and details**
+>
+> **When:** A `PUT /environments/{envID}/flows/{davinciFlowID}` request supplies flow settings that violate content security policy validation: enabling `shouldEnforceCsp` without an `enforcedCsp` value, enabling `shouldReportCspViolations` without a valid HTTPS `cspReportUri`, omitting `reportOnlyCsp` when violation reporting is enabled, supplying an `enforcedCsp` or `reportOnlyCsp` value that fails CSP linting, or supplying any CSP setting when the environment has no custom domain configured
+>
+> **Details:** Detail code `INVALID_VALUE` with message `A custom domain is required to modify content security policy settings.` and target `settings` when the environment has no custom domain, with message `Report destination URL must be a valid HTTPS URL or relative path when reporting CSP violations is enabled.` and target `settings.cspReportUri`, with message `Enforced CSP value is invalid: CSP linting failed.` and target `settings.enforcedCsp`, or with message `Report-only CSP value is invalid: CSP linting failed.` and target `settings.reportOnlyCsp`. Detail code `EMPTY_VALUE` with message `Enforced CSP Value is required when Enforce Content Security Policy is enabled.` and target `settings.enforcedCsp`, or with message `Report-only CSP value cannot be empty when reporting CSP violations is enabled.` and target `settings.reportOnlyCsp`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| 400         | `INVALID_DATA`     | `INVALID_VALUE`                                                     | **Message:** `The request could not be completed. One or more validation errors were in the request.`> **Collapse: When and details**
+>
+> **When:** A `POST /environments/{envID}/flows` create or import request or a `PUT /environments/{envID}/flows/{davinciFlowID}` update request includes a flow graph node whose variable name is the reserved JavaScript name `proto`, `prototype`, or `constructor`
+>
+> **Details:** Detail code `INVALID_VALUE` with message `Cannot create variable with this name` and no target.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| 400         | `INVALID_DATA`     | `REQUIRED_VALUE`                                                    | **Message:** `The request is missing a required value.`> **Collapse: When and details**
+>
+> **When:** A flow import request supplies a payload without a `flow` object on the `application/vnd.pingidentity.flow.import+json` content type, or without a `flowInfo` or `flowNameMapping` object on the `application/vnd.pingidentity.flow.import.legacy+json` content type
+>
+> **Details:** Detail code `REQUIRED_VALUE` with message `must have required property 'flow'` for the standard import content type, or `must have required property 'flowInfo'` or `must have required property 'flowNameMapping'` for the legacy import content type, each with the omitted property as the target.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| 400         | `INVALID_DATA`     | `REQUIRED_VALUE` or `INVALID_VALUE`                                 | **Message:** `The request could not be completed. One or more validation errors were in the request.`> **Collapse: When and details**
+>
+> **When:** A flow import request fails against the imported flow's contents: a connector ID listed in the payload does not identify a connector present in the environment, or the payload omits the `connectorIds` list
+>
+> **Details:** Detail code `REQUIRED_VALUE` with message `Flow template - no connectorIds found` when the payload omits `connectorIds`. Detail code `INVALID_VALUE` with message `Error importing flow. The Connectors are not present in environment [<connector id list>]` for unavailable connectors.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| 400         | `INVALID_DATA`     | `UNIQUENESS_VIOLATION`                                              | **Message:** `The request could not be completed. One or more validation errors were in the request.`> **Collapse: When and details**
+>
+> **When:** A flow import request includes a form whose name matches a form that already exists in the environment
+>
+> **Details:** Detail code `UNIQUENESS_VIOLATION` with message `Failed to import form: uniqueness violation` and no target.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| 400         | `REQUEST_FAILED`   | `ITEM_LIMIT_EXCEEDED`                                               | **Message:** `The request could not be completed. There was an issue processing the request.`> **Collapse: When and details**
+>
+> **When:** A flow import request would push the environment past the maximum number of forms allowed for the environment
+>
+> **Details:** Detail code `ITEM_LIMIT_EXCEEDED` with message `Failed to import forms: the maximum number of forms permitted in this environment would be exceeded.` and no target.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| 403         | `ACCESS_FAILED`    | `INSUFFICIENT_PERMISSIONS`                                          | **Message:** `The request could not be completed. You do not have access to this resource.`> **Collapse: When and details**
+>
+> **When:** A `POST /environments/{envID}/flows` create or import request sets `trigger.type` to `SCHEDULE` or `BATCH_PROCESSING_SUBFLOW` in an environment that is not licensed for scheduled flows. The create and import paths check the license; update, clone, and deploy requests do not
+>
+> **Details:** Detail code `INSUFFICIENT_PERMISSIONS` with message `You do not have permissions or are not licensed to make this request.` and no target.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| 403         | `ACCESS_FAILED`    | `INSUFFICIENT_PERMISSIONS`                                          | **Message:** `The request could not be completed. You do not have access to this resource.`> **Collapse: When and details**
+>
+> **When:** A flow import request includes forms that the environment lacks the permissions to import
+>
+> **Details:** Detail code `INSUFFICIENT_PERMISSIONS` with message `Failed to import flow with form(s): invalid permissions` and no target.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| 403         | `ACCESS_FAILED`    | None                                                                | **Message:** `The request could not be completed. You do not have access to this resource.`> **Collapse: When and details**
+>
+> **When:** The actor lacks the `davinci:create:dvFlows` permission (`POST` operations), the `davinci:read:dvFlows` permission (`GET` operations), the `davinci:update:dvFlows` permission (`PUT` operations), or the `davinci:delete:dvFlows` permission (`DELETE` operations)
+>
+> **Details:** None                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| 404         | `NOT_FOUND`        | None                                                                | **Message:** `The request could not be completed. The requested resource was not found.`> **Collapse: When and details**
+>
+> **When:** A `GET` one, `PUT`, `DELETE`, `POST` clone, deploy, or validate request, or a `PUT /environments/{envID}/flows/{davinciFlowID}/enabled` request, references a flow ID that does not exist in the environment
+>
+> **Details:** None                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| 415         | `INVALID_REQUEST`  | None                                                                | **Message:**```
+The server is refusing to service the request because the entity of the request is in a format not supported by the requested resource for the requested method.
+```> **Collapse: When and details**
+>
+> **When:** A `POST /environments/{envID}/flows/{davinciFlowID}` request does not set the `Content-Type` header to one of `application/vnd.pingidentity.flow.clone+json` for clone, `application/vnd.pingidentity.flow.deploy+json` for deploy, or `application/vnd.pingidentity.flow.validate+json` for validate
+>
+> **Details:** None                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| 500         | `UNEXPECTED_ERROR` | None                                                                | **Message:** `There was an unexpected error with the service. Please try again later.`> **Collapse: When and details**
+>
+> **When:** The service encounters an unexpected internal failure while processing a flow operation, including a create, clone, import, or update whose internal processing fails after validation, a `POST` validate request whose DV Linter evaluation returns no lint results, and a flow import request that supplies batch processing subflows or streaming capability nodes while the batch processing feature flag is disabled for the environment
+>
+> **Details:** None                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+
 ---
 
 ---
 title: DaVinci Admin UI Templates
-description: You can create user interface (UI) templates that match your company style and branding, which you can include in flows using an HTTP connector. The PingOne DaVinci Admin UI Templates service provides endpoints to create, read, and delete DaVinci UI templates.
+description: Describes the PingOne DaVinci Admin UI Templates service for creating, reading, and deleting custom branded UI templates used in DaVinci flows
 component: pingone-api
-page_id: pingone-api:davinci:davinci-admin-apis/admin-ui-templates
-canonical_url: https://developer.pingidentity.com/pingone-api/davinci/davinci-admin-apis/admin-ui-templates.html
+page_id: pingone-api:davinci:davinci-admin-apis/admin-ui-templates/index
+canonical_url: https://developer.pingidentity.com/pingone-api/davinci/davinci-admin-apis/admin-ui-templates/index.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-11
 section_ids:
   assigning-admin-roles-and-permissions-to-this-service: Assigning admin roles and permissions to this service
   davinci-admin-ui-templates-data-model: DaVinci Admin UI templates data model properties
   response-codes: Response codes
+  davinci-ui-template-errors: DaVinci UI template errors
 ---
 
 # DaVinci Admin UI Templates
@@ -4616,19 +5087,19 @@ You can create user interface (UI) templates that match your company style and b
 
 ## Assigning admin roles and permissions to this service
 
-Admin role assignments determine access to PingOne APIs. When assigning admin roles to this service, refer to [PingOne Permissions by Service](../../platform/reference/roles-and-permissions-in-pingone/permissions-by-service.html) for the service-specific permissions.
+Admin role assignments determine access to PingOne APIs. When assigning admin roles to this service, refer to [PingOne Permissions by Service](../../../platform/reference/roles-and-permissions-in-pingone/permissions-by-service.html) for the service-specific permissions.
 
-You can also choose to assign admin roles based on particular service resources. Refer to [PingOne Permissions by Resource](../../platform/reference/roles-and-permissions-in-pingone/permissions-by-resource.html) when assigning admin roles per service resources.
+You can also choose to assign admin roles based on particular service resources. Refer to [PingOne Permissions by Resource](../../../platform/reference/roles-and-permissions-in-pingone/permissions-by-resource.html) when assigning admin roles per service resources.
 
 Admin assignments to roles are set by:
 
-* [Automatic assignment for some roles](../../platform/roles/predefined-roles.html#automatic-role-assignment).
+* [Automatic assignment for some roles](../../../platform/roles/predefined-roles/index.html#automatic-role-assignment).
 
-* [Group Role Assignments](../../platform/group-role-assignments/group-role-assignments.html).
+* [Group Role Assignments](../../../platform/group-role-assignments/index.html).
 
-* [User Role Assignments](../../platform/users/user-role-assignments.html).
+* [User Role Assignments](../../../platform/users/user-role-assignments/index.html).
 
-Refer to [Roles Management](../../platform/roles.html) for more information.
+Refer to [Roles Management](../../../platform/roles/index.html) for more information.
 
 ## DaVinci Admin UI templates data model properties
 
@@ -4666,21 +5137,60 @@ Refer to [Roles Management](../../platform/roles.html) for more information.
 | 403  | You do not have permissions or are not licensed to make this request. |
 | 404  | The requested resource was not found.                                 |
 
+## DaVinci UI template errors
+
+In addition to the general [error codes](../../../platform/reference/error-codes.html), DaVinci UI template operations can return the following errors:
+
+| HTTP status | Top‑level code   | Detail code                                                         | When it happens and what the response contains                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| ----------- | ---------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| 400         | `INVALID_DATA`   | `REQUIRED_VALUE`, `EMPTY_VALUE`, `INVALID_VALUE`, or `OUT_OF_RANGE` | **Message:** `The request could not be completed. One or more validation errors were in the request.`> **Collapse: When and details**
+>
+> **When:** A `POST /environments/{envID}/uiTemplates` or a `PUT /environments/{envID}/uiTemplates/{davinciTemplateID}` request supplies a body that violates the data model: an omitted `name`, a `name` or a `validationRules` entry `propertyName` longer than 100 characters, a blank `name`, a `name` or `propertyName` whose first non-whitespace character is outside the allowed set or that contains a `<` or a `${` sequence, a `description` longer than 3000 characters, a `name` or `description` value that is not a string, a `validationRules` entry without a `propertyName`, a `validationRules.rules` array with no entries, or a `validationRules.rules` entry without a `ruleName` or with a `ruleName` other than `presence`, `email`, `length`, `format`, or `equality`
+>
+> **Details:** One detail per validation error, each with the failing property path as the target. `must have required property 'name'` with target `name` when the request omits `name`. `must NOT have more than 100 characters` for a `name` or `propertyName` longer than 100 characters and `must NOT have more than 3000 characters` for a `description` longer than 3000 characters. `must not be empty or blank` for a blank `name`. `must match pattern "<pattern>"`, where the pattern is the JSON schema pattern for the property, for a `name` or a `validationRules` entry `propertyName` whose first non-whitespace character is outside the allowed set or that contains a `<` or a `${` sequence. `must be string` for a property of the wrong JSON type. `must have required property 'propertyName'` with the entry path as the target, for example `validationRules.0`, when an entry omits `propertyName`. `must NOT have fewer than 1 items` for an empty `validationRules.rules` array. `must have required property 'ruleName'` with the rule path as the target, for example `validationRules.0.rules.0`, when a rule omits `ruleName`. `must be one of the values: presence or email or length or format or equality` for an unknown `ruleName` value. |
+| 400         | `INVALID_DATA`   | `INVALID_PARAMETER` or `INVALID_VALUE`                              | **Message:** `The request could not be completed. One or more validation errors were in the request.`> **Collapse: When and details**
+>
+> **When:** A `GET` all UI templates request or a `GET` one UI template request supplies an `expand` query parameter longer than 100 characters or a `filter` query parameter longer than 256 characters, or a `DELETE` request includes any query parameter
+>
+> **Details:** For an overlong query parameter on a `GET` request, detail code `INVALID_PARAMETER` with message `must NOT have more than 100 characters` for `expand` or `must NOT have more than 256 characters` for `filter`, with the overlong parameter as the target. For any query parameter on a `DELETE` request, detail code `INVALID_VALUE` with message `must NOT have additional properties` and the rejected parameter as the target.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| 400         | `REQUEST_FAILED` | `CONSTRAINT_VIOLATION`                                              | **Message:** `The request could not be completed. There was an issue processing the request.`> **Collapse: When and details**
+>
+> **When:** A `POST` request creates a UI template after the environment has reached the maximum number of UI templates allowed for the environment
+>
+> **Details:** Detail code `CONSTRAINT_VIOLATION` with message `Cannot create more than 100 UI templates.` No target is returned.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| 400         | `REQUEST_FAILED` | `INVALID_PARAMETER` or `INVALID_FILTER`                             | **Message:** `The request could not be completed. There was an issue processing the request.`> **Collapse: When and details**
+>
+> **When:** A `GET` all UI templates request supplies a `filter` query parameter that references an attribute other than `createdBy.user.id`, `createdBy.client.id`, `createdBy.environment.id`, `updatedBy.user.id`, `updatedBy.client.id`, or `updatedBy.environment.id`, or an operator other than `eq`, `and`, or `or`, when actor metadata is enabled for the environment. When actor metadata is disabled, every `filter` value is rejected
+>
+> **Details:** Detail code `INVALID_PARAMETER` with message `The filter attribute was invalid or does not support filtering.` and the invalid attribute as the target, or message `The filter operator was invalid or not supported.` and the invalid operator as the target. A filter that is not a well-formed SCIM expression returns detail code `INVALID_FILTER` with message `The specified filter was invalid.` and no target.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| 403         | `ACCESS_FAILED`  | None                                                                | **Message:** `The request could not be completed. You do not have access to this resource.`> **Collapse: When and details**
+>
+> **When:** The actor lacks the `davinci:create:uiTemplates` permission (`POST` operations), the `davinci:read:uiTemplates` permission (`GET` operations), the `davinci:update:uiTemplates` permission (`PUT` operations), or the `davinci:delete:uiTemplates` permission (`DELETE` operations)
+>
+> **Details:** None                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| 404         | `NOT_FOUND`      | None                                                                | **Message:** `The request could not be completed. The requested resource was not found.`> **Collapse: When and details**
+>
+> **When:** A `GET` one, a `PUT`, or a `DELETE` request references a UI template ID that does not exist in the environment
+>
+> **Details:** None                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+
 ---
 
 ---
 title: DaVinci Admin Variables
-description: The PingOne DaVinci Admin Variables service provides endpoints to create, read, update, and delete DaVinci variables. Variables are values that can be read and modified during a flow. Every variable has a context, which determines how widely its value is shared.
+description: Describes the PingOne DaVinci Admin Variables service for creating, reading, updating, and deleting DaVinci variables and their context types
 component: pingone-api
-page_id: pingone-api:davinci:davinci-admin-apis/admin-variables
-canonical_url: https://developer.pingidentity.com/pingone-api/davinci/davinci-admin-apis/admin-variables.html
+page_id: pingone-api:davinci:davinci-admin-apis/admin-variables/index
+canonical_url: https://developer.pingidentity.com/pingone-api/davinci/davinci-admin-apis/admin-variables/index.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-11
 section_ids:
   assigning-admin-roles-and-permissions-to-this-service: Assigning admin roles and permissions to this service
   davinci-admin-variable-data-model-properties: DaVinci Admin variable data model properties
   limiting-and-filtering-data: Limiting and filtering data
   response-codes: Response codes
+  davinci-variable-errors: DaVinci variable errors
 ---
 
 # DaVinci Admin Variables
@@ -4711,19 +5221,19 @@ The options for the variable's context types are:
 
 ## Assigning admin roles and permissions to this service
 
-Admin role assignments determine access to PingOne APIs. When assigning admin roles to this service, refer to [PingOne Permissions by Service](../../platform/reference/roles-and-permissions-in-pingone/permissions-by-service.html) for the service-specific permissions.
+Admin role assignments determine access to PingOne APIs. When assigning admin roles to this service, refer to [PingOne Permissions by Service](../../../platform/reference/roles-and-permissions-in-pingone/permissions-by-service.html) for the service-specific permissions.
 
-You can also choose to assign admin roles based on particular service resources. Refer to [PingOne Permissions by Resource](../../platform/reference/roles-and-permissions-in-pingone/permissions-by-resource.html) when assigning admin roles per service resources.
+You can also choose to assign admin roles based on particular service resources. Refer to [PingOne Permissions by Resource](../../../platform/reference/roles-and-permissions-in-pingone/permissions-by-resource.html) when assigning admin roles per service resources.
 
 Admin assignments to roles are set by:
 
-* [Automatic assignment for some roles](../../platform/roles/predefined-roles.html#automatic-role-assignment).
+* [Automatic assignment for some roles](../../../platform/roles/predefined-roles/index.html#automatic-role-assignment).
 
-* [Group Role Assignments](../../platform/group-role-assignments/group-role-assignments.html).
+* [Group Role Assignments](../../../platform/group-role-assignments/index.html).
 
-* [User Role Assignments](../../platform/users/user-role-assignments.html).
+* [User Role Assignments](../../../platform/users/user-role-assignments/index.html).
 
-Refer to [Roles Management](../../platform/roles.html) for more information.
+Refer to [Roles Management](../../../platform/roles/index.html) for more information.
 
 ## DaVinci Admin variable data model properties
 
@@ -4773,7 +5283,7 @@ These SCIM operators can be applied to the following attributes:
 
   Logical OR for building compound expressions if either expression is true.
 
-For information about paging and ordering the response for [Read All DaVinci Variables](admin-variables/read-variables.html), refer to [Paging and ordering collections](../../platform/reference/paging-ordering-collections.html).
+For information about paging and ordering the response for [Read All DaVinci Variables](read-variables.html), refer to [Paging and ordering collections](../../../platform/reference/paging-ordering-collections.html).
 
 ### Response codes
 
@@ -4787,484 +5297,158 @@ For information about paging and ordering the response for [Read All DaVinci Var
 | 403  | You do not have permissions or are not licensed to make this request. |
 | 404  | The requested resource was not found.                                 |
 
+## DaVinci variable errors
+
+In addition to the general [error codes](../../../platform/reference/error-codes.html), DaVinci variable operations can return the following errors:
+
+| HTTP status | Top‑level code     | Detail code                                                         | When it happens and what the response contains                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| ----------- | ------------------ | ------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 400         | `INVALID_DATA`     | `REQUIRED_VALUE`, `EMPTY_VALUE`, `INVALID_VALUE`, or `OUT_OF_RANGE` | **Message:** `The request could not be completed. One or more validation errors were in the request.`> **Collapse: When and details**
+>
+> **When:** A `POST /environments/{envID}/variables` or a `PUT /environments/{envID}/variables/{davinciVariableID}` request supplies a body that violates the data model: an omitted `name`, `context`, `dataType`, or `mutable` property, a `flow` object without an `id` property, a `name` or `displayName` longer than 256 characters, an empty or blank `name` or `displayName`, a `name`, `displayName`, or `flow.id` value that starts with an unsupported character or contains a `<` or a `${` sequence, a `context` value other than `flow`, `flowInstance`, `company`, or `user`, a `dataType` value other than `string`, `number`, `object`, `boolean`, or `secret`, or a property whose value is not of the documented JSON type
+>
+> **Details:** One detail per validation error, each with the failing property path as the target. `must have required property 'name'`, `must have required property 'context'`, `must have required property 'dataType'`, or `must have required property 'mutable'` with the omitted property as the target when the request omits that property, and `must have required property 'id'` with target `flow` when the request supplies a `flow` object without an `id` property. `must NOT have more than 256 characters` for a `name` or `displayName` longer than 256 characters. `must not be empty or blank` for an empty or blank `name` or `displayName`. `must match pattern "<pattern>"`, where \<pattern> is the schema pattern, for a `name`, `displayName`, or `flow.id` value that starts with an unsupported character or contains a `<` or a `${` sequence. `must be one of the values: flow or flowInstance or company or user` for an unknown `context` value and `must be one of the values: string or number or object or boolean or secret` for an unknown `dataType` value. `must be string` for a property that must be a string, for example with target `name`, `must be boolean` for a `mutable` value that is not a boolean, `must be integer` for a `min` or `max` value that is not an integer, and `must be string,number,boolean,object` for a `value` that is not one of those types. |
+| 400         | `INVALID_DATA`     | `INVALID_PARAMETER`                                                 | **Message:** `The request could not be completed. One or more validation errors were in the request.`> **Collapse: When and details**
+>
+> **When:** A `GET /environments/{envID}/variables` or a `GET /environments/{envID}/variables/{davinciVariableID}` request supplies an `expand` query parameter longer than 100 characters or a `filter` query parameter longer than 256 characters
+>
+> **Details:** Detail code `INVALID_PARAMETER` with message `must NOT have more than 100 characters` and target `expand` for an overlong `expand` parameter, or message `must NOT have more than 256 characters` and target `filter` for an overlong `filter` parameter.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| 400         | `INVALID_DATA`     | `INVALID_PARAMETER`                                                 | **Message:** `Invalid attribute provided for sorting`> **Collapse: When and details**
+>
+> **When:** A `GET /environments/{envID}/variables` request supplies an `order` query parameter that names an attribute other than `name`, `createdAt`, `context`, `value`, `dataType`, or `updatedAt`
+>
+> **Details:** Detail code `INVALID_PARAMETER` with message `Invalid attribute provided for sorting: valid parameters are name, createdAt, context, value, dataType, updatedAt` and target `order`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| 400         | `INVALID_DATA`     | `INVALID_PARAMETER`                                                 | **Message:** `Invalid page size provided`> **Collapse: When and details**
+>
+> **When:** A `GET /environments/{envID}/variables` request supplies a `limit` query parameter that is not a positive integer or is greater than 100
+>
+> **Details:** Detail code `INVALID_PARAMETER` with message `Invalid page size provided: page size ranges from 1 to 100` and target `limit`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| 400         | `INVALID_DATA`     | `INVALID_VALUE`                                                     | **Message:** `The request could not be completed. One or more validation errors were in the request.`> **Collapse: When and details**
+>
+> **When:** A `POST` request that sets `dataType` to `secret` while `context` is anything other than `company`, a `PUT` request that sets `dataType` to `secret` for a variable whose context is not `company`, or a `POST` request that uses the reserved variable name `proto`, `prototype`, or `constructor`
+>
+> **Details:** Detail code `INVALID_VALUE` with message `'Secret' type is only available for company variables` for a secret data type outside the company context, or message `Cannot create variable with this name` for a reserved name. No target is returned.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| 400         | `INVALID_DATA`     | `REQUIRED_VALUE`                                                    | **Message:** `The request could not be completed. One or more validation errors were in the request.`> **Collapse: When and details**
+>
+> **When:** A `POST` request sets `context` to `flow` without a `flow.id` property in the request body
+>
+> **Details:** Detail code `REQUIRED_VALUE` with message `must have required property 'flow.id'` and no target.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| 400         | `INVALID_DATA`     | `UNIQUENESS_VIOLATION`                                              | **Message:** `The request could not be completed. One or more validation errors were in the request.`> **Collapse: When and details**
+>
+> **When:** A `POST` request creates a variable whose name and context combination already exists in the environment
+>
+> **Details:** Detail code `UNIQUENESS_VIOLATION` with message `Construct already exists` and no target.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| 400         | `REQUEST_FAILED`   | `INVALID_PARAMETER` or `INVALID_FILTER`                             | **Message:** `The request could not be completed. There was an issue processing the request.`> **Collapse: When and details**
+>
+> **When:** A `GET /environments/{envID}/variables` request supplies a `filter` query parameter that references an attribute other than `context`, `name`, `value`, `createdAt`, or `updatedAt`, an operator that the filtered attribute does not support, or an actor attribute such as `createdBy.user.id` when actor metadata is disabled for the environment. When actor metadata is enabled, actor attributes support only `eq` combined through `and` or `or`
+>
+> **Details:** Detail code `INVALID_PARAMETER` with message `The filter attribute was invalid or does not support filtering.` and the invalid attribute as the target, or message `The filter operator was invalid or not supported.` and the invalid operator or the attribute that does not support it as the target. A filter that is not a well-formed SCIM expression returns detail code `INVALID_FILTER` with message `The specified filter was invalid.` and no target.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| 400         | `REQUEST_FAILED`   | `CONSTRAINT_VIOLATION`                                              | **Message:** `The request could not be completed. There was an issue processing the request.`> **Collapse: When and details**
+>
+> **When:** A `POST` request creates a variable after the environment has reached the maximum number of variables allowed for the environment
+>
+> **Details:** Detail code `CONSTRAINT_VIOLATION` with message `Cannot create more constructs due to resource limit` and no target.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| 403         | `ACCESS_FAILED`    | None                                                                | **Message:** `The request could not be completed. You do not have access to this resource.`> **Collapse: When and details**
+>
+> **When:** The actor lacks the `davinci:create:constructs` permission (`POST` operations), the `davinci:read:constructs` permission (`GET` operations), the `davinci:update:constructs` permission (`PUT` operations), or the `davinci:delete:constructs` permission (`DELETE` operations)
+>
+> **Details:** None                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| 404         | `NOT_FOUND`        | None                                                                | **Message:** `The request could not be completed. The requested resource was not found.`> **Collapse: When and details**
+>
+> **When:** A `GET` one, `PUT`, or `DELETE` request references a variable ID that does not exist in the environment
+>
+> **Details:** None                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| 500         | `UNEXPECTED_ERROR` | None                                                                | **Message:** `There was an unexpected error with the service. Please try again later.`> **Collapse: When and details**
+>
+> **When:** The service encounters an unexpected internal failure while processing a variable operation, including a create or update whose variable value exceeds the 1 MB per-variable size limit when size-limit enforcement is enabled for the environment
+>
+> **Details:** None                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+
 ---
 
 ---
-title: Delete DaVinci Application
-description: The DELETE {{apiPath}}/v1/environments/{{envID}}/davinciApplications/{{davinciApplicationID}} operation deletes the DaVinci application resource specified by its ID in the request URL.
+title: DaVinci and backend flows
+description: For backend-initiated PingOne DaVinci flows, you use the direct API method to trigger flow orchestration without any user interface components. This is ideal for actions such as automated risk checks or account provisioning. You configure the flow to accept and return JSON data from the API. The flow terminates with an HTTP Connector node using the Send Success JSON Response capability to return data back to your backend.
 component: pingone-api
-page_id: pingone-api:davinci:davinci-admin-apis/davinci-admin-applications/delete-davinci-application
-canonical_url: https://developer.pingidentity.com/pingone-api/davinci/davinci-admin-apis/davinci-admin-applications/delete-davinci-application.html
+page_id: pingone-api:davinci:getting-started-with-davinci/backend-flows
+canonical_url: https://developer.pingidentity.com/pingone-api/davinci/getting-started-with-davinci/backend-flows.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
-  headers: Headers
-  example-request: Example Request
-  example-response: Example Response
+  why-use-davinci-backend-flows: Why use DaVinci backend flows
+  backend-use-cases: Backend use cases
 ---
 
-# Delete DaVinci Application
+# DaVinci and backend flows
 
-##
+For backend-initiated PingOne DaVinci flows, you use the direct API method to trigger flow orchestration without any user interface components. This is ideal for actions such as automated risk checks or account provisioning. You configure the flow to accept and return JSON data from the API. The flow terminates with an HTTP Connector node using the `Send Success JSON Response` capability to return data back to your backend.
 
-```none
-DELETE {{apiPath}}/v1/environments/{{envID}}/davinciApplications/{{davinciApplicationID}}
-```
+If the flow requires further steps or is part of a larger journey, the response could include a `flowResponse` object with instructions for the next action.
 
-The `DELETE {{apiPath}}/v1/environments/{{envID}}/davinciApplications/{{davinciApplicationID}}` operation deletes the DaVinci application resource specified by its ID in the request URL.
+## Why use DaVinci backend flows
 
-When successful, the `DELETE` request returns a code `204 No Content` message.
+DaVinci backend flows (initiated through API calls) are designed for automation and background processing. The benefits include:
 
-### Headers
+* **Security:** Running logic on the backend protects sensitive business rules and data consistency, ensuring that critical security decisions are not exposed to or manipulated by the frontend environment.
 
-Authorization      Bearer {{accessToken}}
+* **Consistency:** A single backend flow can serve multiple different frontends (web, mobile), providing consistency for identity logic regardless of the device.
 
-##
+* **Integration:** Backend flows can connect incompatible systems or custom databases to orchestrate complex security responses across an entire environment.
 
-### Example Request
+* **Headless Operations:** You can perform migrations or background account updates without interrupting a user session or forcing users to complete specific UI actions.
 
-* cURL
+## Backend use cases
 
-* C#
+The following table provides guidance on when to implement a backend orchestration solution compared to frontend solutions.
 
-* Go
-
-* HTTP
-
-* Java
-
-* jQuery
-
-* NodeJS
-
-* Python
-
-* PHP
-
-* Ruby
-
-* Swift
-
-```shell
-curl --location --globoff --request DELETE '{{apiPath}}/v1/environments/{{envID}}/davinciApplications/{{davinciApplicationID}}' \
---header 'Authorization: Bearer {{accessToken}}'
-```
-
-```csharp
-var options = new RestClientOptions("{{apiPath}}/v1/environments/{{envID}}/davinciApplications/{{davinciApplicationID}}")
-{
-  MaxTimeout = -1,
-};
-var client = new RestClient(options);
-var request = new RestRequest("", Method.Delete);
-request.AddHeader("Authorization", "Bearer {{accessToken}}");
-RestResponse response = await client.ExecuteAsync(request);
-Console.WriteLine(response.Content);
-```
-
-```golang
-package main
-
-import (
-  "fmt"
-  "net/http"
-  "io"
-)
-
-func main() {
-
-  url := "{{apiPath}}/v1/environments/{{envID}}/davinciApplications/{{davinciApplicationID}}"
-  method := "DELETE"
-
-  client := &http.Client {
-  }
-  req, err := http.NewRequest(method, url, nil)
-
-  if err != nil {
-    fmt.Println(err)
-    return
-  }
-  req.Header.Add("Authorization", "Bearer {{accessToken}}")
-
-  res, err := client.Do(req)
-  if err != nil {
-    fmt.Println(err)
-    return
-  }
-  defer res.Body.Close()
-
-  body, err := io.ReadAll(res.Body)
-  if err != nil {
-    fmt.Println(err)
-    return
-  }
-  fmt.Println(string(body))
-}
-```
-
-```http
-DELETE /v1/environments/{{envID}}/davinciApplications/{{davinciApplicationID}} HTTP/1.1
-Host: {{apiPath}}
-Authorization: Bearer {{accessToken}}
-```
-
-```java
-OkHttpClient client = new OkHttpClient().newBuilder()
-  .build();
-MediaType mediaType = MediaType.parse("text/plain");
-RequestBody body = RequestBody.create(mediaType, "");
-Request request = new Request.Builder()
-  .url("{{apiPath}}/v1/environments/{{envID}}/davinciApplications/{{davinciApplicationID}}")
-  .method("DELETE", body)
-  .addHeader("Authorization", "Bearer {{accessToken}}")
-  .build();
-Response response = client.newCall(request).execute();
-```
-
-```javascript
-var settings = {
-  "url": "{{apiPath}}/v1/environments/{{envID}}/davinciApplications/{{davinciApplicationID}}",
-  "method": "DELETE",
-  "timeout": 0,
-  "headers": {
-    "Authorization": "Bearer {{accessToken}}"
-  },
-};
-
-$.ajax(settings).done(function (response) {
-  console.log(response);
-});
-```
-
-```javascript
-var request = require('request');
-var options = {
-  'method': 'DELETE',
-  'url': '{{apiPath}}/v1/environments/{{envID}}/davinciApplications/{{davinciApplicationID}}',
-  'headers': {
-    'Authorization': 'Bearer {{accessToken}}'
-  }
-};
-request(options, function (error, response) {
-  if (error) throw new Error(error);
-  console.log(response.body);
-});
-```
-
-```python
-import requests
-
-url = "{{apiPath}}/v1/environments/{{envID}}/davinciApplications/{{davinciApplicationID}}"
-
-payload = {}
-headers = {
-  'Authorization': 'Bearer {{accessToken}}'
-}
-
-response = requests.request("DELETE", url, headers=headers, data=payload)
-
-print(response.text)
-```
-
-```php
-<?php
-require_once 'HTTP/Request2.php';
-$request = new HTTP_Request2();
-$request->setUrl('{{apiPath}}/v1/environments/{{envID}}/davinciApplications/{{davinciApplicationID}}');
-$request->setMethod(HTTP_Request2::METHOD_DELETE);
-$request->setConfig(array(
-  'follow_redirects' => TRUE
-));
-$request->setHeader(array(
-  'Authorization' => 'Bearer {{accessToken}}'
-));
-try {
-  $response = $request->send();
-  if ($response->getStatus() == 200) {
-    echo $response->getBody();
-  }
-  else {
-    echo 'Unexpected HTTP status: ' . $response->getStatus() . ' ' .
-    $response->getReasonPhrase();
-  }
-}
-catch(HTTP_Request2_Exception $e) {
-  echo 'Error: ' . $e->getMessage();
-}
-```
-
-```ruby
-require "uri"
-require "net/http"
-
-url = URI("{{apiPath}}/v1/environments/{{envID}}/davinciApplications/{{davinciApplicationID}}")
-
-http = Net::HTTP.new(url.host, url.port);
-request = Net::HTTP::Delete.new(url)
-request["Authorization"] = "Bearer {{accessToken}}"
-
-response = http.request(request)
-puts response.read_body
-```
-
-```swift
-var request = URLRequest(url: URL(string: "{{apiPath}}/v1/environments/{{envID}}/davinciApplications/{{davinciApplicationID}}")!,timeoutInterval: Double.infinity)
-request.addValue("Bearer {{accessToken}}", forHTTPHeaderField: "Authorization")
-
-request.httpMethod = "DELETE"
-
-let task = URLSession.shared.dataTask(with: request) { data, response, error in
-  guard let data = data else {
-    print(String(describing: error))
-    return
-  }
-  print(String(data: data, encoding: .utf8)!)
-}
-
-task.resume()
-```
-
-### Example Response
-
-204 No Content
+| Use case                    | Recommended method              |
+| --------------------------- | ------------------------------- |
+| User login and registration | Frontend (UI is required)       |
+| Syncing data                | Backend (No UI needed)          |
+| Risk Scoring in background  | Backend (invisible to the user) |
 
 ---
 
 ---
-title: Delete DaVinci Application Flow Policy
-description: The DELETE {{apiPath}}/v1/environments/{{envID}}/davinciApplications/{{davinciApplicationID}}/flowPolicies/{{davinciAppFlowPolicyID}} operation deletes the DaVinci application flow policy resource specified by its ID in the request URL.
+title: DaVinci and frontend flows
+description: DaVinci flows designated as PingOne flows (triggered by a PingOne authorize request) use the redirect method to launch and execute the flow in a new browser tab. These flows identify a DaVinci flow policy by its ID and use PingOne endpoints to associate the flow policy with the application. After the user completes all sign-on actions, the flow terminates with specific nodes such as Return a Success Response or Return an Error Response to redirect back to the application.
 component: pingone-api
-page_id: pingone-api:davinci:davinci-admin-apis/davinci-admin-application-flow-policies/delete-davinci-application-flow-policy
-canonical_url: https://developer.pingidentity.com/pingone-api/davinci/davinci-admin-apis/davinci-admin-application-flow-policies/delete-davinci-application-flow-policy.html
+page_id: pingone-api:davinci:getting-started-with-davinci/frontend-flows
+canonical_url: https://developer.pingidentity.com/pingone-api/davinci/getting-started-with-davinci/frontend-flows.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
 section_ids:
-  headers: Headers
-  example-request: Example Request
-  example-response: Example Response
+  why-use-davinci-frontend-flows: Why use DaVinci frontend flows
+  frontend-implementation-method-comparison: Frontend implementation method comparison
 ---
 
-# Delete DaVinci Application Flow Policy
+# DaVinci and frontend flows
 
-##
+DaVinci flows designated as PingOne flows (triggered by a PingOne authorize request) use the redirect method to launch and execute the flow in a new browser tab. These flows identify a DaVinci flow policy by its ID and use PingOne endpoints to associate the flow policy with the application. After the user completes all sign-on actions, the flow terminates with specific nodes such as `Return a Success Response` or `Return an Error Response` to redirect back to the application.
 
-```none
-DELETE {{apiPath}}/v1/environments/{{envID}}/davinciApplications/{{davinciApplicationID}}/flowPolicies/{{davinciAppFlowPolicyID}}
-```
+|   |                                                                                                                                                                                                                                                                                                                        |
+| - | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   | DaVinci frontend flows that use the widget integration method are not initiated through a call to the PingOne authorization server. These flows require the inclusion of the DaVinci widget JavaScript file (`davinci.js`) into your application's code. This integration method will not be covered in this document. |
 
-The `DELETE {{apiPath}}/v1/environments/{{envID}}/davinciApplications/{{davinciApplicationID}}/flowPolicies/{{davinciAppFlowPolicyID}}` operation deletes the DaVinci application flow policy resource specified by its ID in the request URL.
+## Why use DaVinci frontend flows
 
-When successful, the `DELETE` request returns a code `204 No Content` message.
+DaVinci frontend flows (using the redirect method) is a more efficient, easier to use integration method than the widget or API methods. The benefits include:
 
-### Headers
+* **No-code/low-code implementation**: The redirect method provides a fast integration because it requires minimal or no development skills compared to embedding widgets or building API calls.
 
-Authorization      Bearer {{accessToken}}
+* **Protocol support:** The redirect method supports both OpenID Connect (OIDC) and Security Assertion Markup Language (SAML) application types.
 
-##
+* **Versatile user experience:** It supports complex, multi-step flows such as registration, profile management, or step-up authentication.
 
-### Example Request
+* **Session management:** Using the PingOne Authentication Connector with a redirect creates a PingOne user authentication session upon successful completion of the authentication flow, simplifying session handling.
 
-* cURL
+## Frontend implementation method comparison
 
-* C#
+The following table provides guidance on frontend implementation method features and when to use the supported DaVinci methods.
 
-* Go
-
-* HTTP
-
-* Java
-
-* jQuery
-
-* NodeJS
-
-* Python
-
-* PHP
-
-* Ruby
-
-* Swift
-
-```shell
-curl --location --globoff --request DELETE '{{apiPath}}/v1/environments/{{envID}}/davinciApplications/{{davinciApplicationID}}/flowPolicies/{{davinciAppFlowPolicyID}}' \
---header 'Authorization: Bearer {{accessToken}}'
-```
-
-```csharp
-var options = new RestClientOptions("{{apiPath}}/v1/environments/{{envID}}/davinciApplications/{{davinciApplicationID}}/flowPolicies/{{davinciAppFlowPolicyID}}")
-{
-  MaxTimeout = -1,
-};
-var client = new RestClient(options);
-var request = new RestRequest("", Method.Delete);
-request.AddHeader("Authorization", "Bearer {{accessToken}}");
-RestResponse response = await client.ExecuteAsync(request);
-Console.WriteLine(response.Content);
-```
-
-```golang
-package main
-
-import (
-  "fmt"
-  "net/http"
-  "io"
-)
-
-func main() {
-
-  url := "{{apiPath}}/v1/environments/{{envID}}/davinciApplications/{{davinciApplicationID}}/flowPolicies/{{davinciAppFlowPolicyID}}"
-  method := "DELETE"
-
-  client := &http.Client {
-  }
-  req, err := http.NewRequest(method, url, nil)
-
-  if err != nil {
-    fmt.Println(err)
-    return
-  }
-  req.Header.Add("Authorization", "Bearer {{accessToken}}")
-
-  res, err := client.Do(req)
-  if err != nil {
-    fmt.Println(err)
-    return
-  }
-  defer res.Body.Close()
-
-  body, err := io.ReadAll(res.Body)
-  if err != nil {
-    fmt.Println(err)
-    return
-  }
-  fmt.Println(string(body))
-}
-```
-
-```http
-DELETE /v1/environments/{{envID}}/davinciApplications/{{davinciApplicationID}}/flowPolicies/{{davinciAppFlowPolicyID}} HTTP/1.1
-Host: {{apiPath}}
-Authorization: Bearer {{accessToken}}
-```
-
-```java
-OkHttpClient client = new OkHttpClient().newBuilder()
-  .build();
-MediaType mediaType = MediaType.parse("text/plain");
-RequestBody body = RequestBody.create(mediaType, "");
-Request request = new Request.Builder()
-  .url("{{apiPath}}/v1/environments/{{envID}}/davinciApplications/{{davinciApplicationID}}/flowPolicies/{{davinciAppFlowPolicyID}}")
-  .method("DELETE", body)
-  .addHeader("Authorization", "Bearer {{accessToken}}")
-  .build();
-Response response = client.newCall(request).execute();
-```
-
-```javascript
-var settings = {
-  "url": "{{apiPath}}/v1/environments/{{envID}}/davinciApplications/{{davinciApplicationID}}/flowPolicies/{{davinciAppFlowPolicyID}}",
-  "method": "DELETE",
-  "timeout": 0,
-  "headers": {
-    "Authorization": "Bearer {{accessToken}}"
-  },
-};
-
-$.ajax(settings).done(function (response) {
-  console.log(response);
-});
-```
-
-```javascript
-var request = require('request');
-var options = {
-  'method': 'DELETE',
-  'url': '{{apiPath}}/v1/environments/{{envID}}/davinciApplications/{{davinciApplicationID}}/flowPolicies/{{davinciAppFlowPolicyID}}',
-  'headers': {
-    'Authorization': 'Bearer {{accessToken}}'
-  }
-};
-request(options, function (error, response) {
-  if (error) throw new Error(error);
-  console.log(response.body);
-});
-```
-
-```python
-import requests
-
-url = "{{apiPath}}/v1/environments/{{envID}}/davinciApplications/{{davinciApplicationID}}/flowPolicies/{{davinciAppFlowPolicyID}}"
-
-payload = {}
-headers = {
-  'Authorization': 'Bearer {{accessToken}}'
-}
-
-response = requests.request("DELETE", url, headers=headers, data=payload)
-
-print(response.text)
-```
-
-```php
-<?php
-require_once 'HTTP/Request2.php';
-$request = new HTTP_Request2();
-$request->setUrl('{{apiPath}}/v1/environments/{{envID}}/davinciApplications/{{davinciApplicationID}}/flowPolicies/{{davinciAppFlowPolicyID}}');
-$request->setMethod(HTTP_Request2::METHOD_DELETE);
-$request->setConfig(array(
-  'follow_redirects' => TRUE
-));
-$request->setHeader(array(
-  'Authorization' => 'Bearer {{accessToken}}'
-));
-try {
-  $response = $request->send();
-  if ($response->getStatus() == 200) {
-    echo $response->getBody();
-  }
-  else {
-    echo 'Unexpected HTTP status: ' . $response->getStatus() . ' ' .
-    $response->getReasonPhrase();
-  }
-}
-catch(HTTP_Request2_Exception $e) {
-  echo 'Error: ' . $e->getMessage();
-}
-```
-
-```ruby
-require "uri"
-require "net/http"
-
-url = URI("{{apiPath}}/v1/environments/{{envID}}/davinciApplications/{{davinciApplicationID}}/flowPolicies/{{davinciAppFlowPolicyID}}")
-
-http = Net::HTTP.new(url.host, url.port);
-request = Net::HTTP::Delete.new(url)
-request["Authorization"] = "Bearer {{accessToken}}"
-
-response = http.request(request)
-puts response.read_body
-```
-
-```swift
-var request = URLRequest(url: URL(string: "{{apiPath}}/v1/environments/{{envID}}/davinciApplications/{{davinciApplicationID}}/flowPolicies/{{davinciAppFlowPolicyID}}")!,timeoutInterval: Double.infinity)
-request.addValue("Bearer {{accessToken}}", forHTTPHeaderField: "Authorization")
-
-request.httpMethod = "DELETE"
-
-let task = URLSession.shared.dataTask(with: request) { data, response, error in
-  guard let data = data else {
-    print(String(describing: error))
-    return
-  }
-  print(String(data: data, encoding: .utf8)!)
-}
-
-task.resume()
-```
-
-### Example Response
-
-204 No Content
+| Feature          | Redirect           | Widget           | SDK                         |
+| ---------------- | ------------------ | ---------------- | --------------------------- |
+| User experience  | Full-page redirect | Embedded in page | Completely native or custom |
+| Developer effort | None to low        | Minimal          | Medium                      |
+| Domain           | PingOne domain     | Your domain      | Your domain                 |
+| Speed            | Fastest setup      | Fast             | Slower setup                |

@@ -6,6 +6,7 @@ page_id: pingone-api::changelog
 canonical_url: https://developer.pingidentity.com/pingone-api/changelog.html
 llms_txt: https://developer.pingidentity.com/pingone-api/llms.txt
 docs_for_agents: https://developer.pingidentity.com/build-with-ai/docs-for-agents.md
+revdate: 2026-08-26
 page_aliases: ["platform:changelog.adoc"]
 section_ids:
   2025: 2025
@@ -14,12 +15,71 @@ section_ids:
   support-for-opaque-refresh-tokens: Support for opaque refresh tokens
   key-rotation-policy-for-token-signing: Key rotation policy for token signing
   mandatory-typ-header-parameter-for-access-tokens: Mandatory typ header parameter for access tokens
+  october: October
+  october-27: October 27
+  option-to-keep-access-and-refresh-tokens-valid-after-session-termination: Option to keep access and refresh tokens valid after session termination
+  october-27-2: October 27
+  new-ws-federation-properties-for-windows-prt-support-with-pingid: New WS-Federation properties for Windows PRT support with PingID
+  october-26: October 26
+  error-code-tables-for-pingone-platform-operations-and-universal-services: Error code tables for PingOne platform operations and universal services
+  october-22: October 22
+  a-value-of-none-added-to-token_endpoint_auth_methods_supported-in-oidc-discovery: A value of none added to token_endpoint_auth_methods_supported in OIDC discovery
+  october-21: October 21
+  sso-session-token-cookie-persistence-setting: SSO session token cookie persistence setting
+  october-16: October 16
+  variable-added-to-password-change-notification-template: Variable added to Password Change notification template
+  october-9: October 9
+  add-middlename-property-to-pingone-verify-verified-data-for-government-id: Add middleName property to PingOne Verify verified data for government ID
+  removal-of-reset-verification: Removal of Reset Verification
+  october-8: October 8
+  geolocation-verification-removed-from-pingone-verify-apis: Geolocation verification removed from PingOne Verify APIs
+  october-2: October 2
+  mitek-manual-review-processing-reasons-added-to-pingone-verify-transactions-docs: Mitek manual review processing reasons added to PingOne Verify transactions docs
+  october-1: October 1
+  voice-verification-removed-from-pingone-verify-apis: Voice verification removed from PingOne Verify APIs
+  september: September
+  september-30: September 30
+  create-saml-identity-providers-support: Create SAML identity providers support
+  september-30-2: September 30
+  guidance-for-choosing-how-to-run-davinci-flows-in-pingone: Guidance for choosing how to run DaVinci flows in PingOne
+  biometric-enrollment-with-pingone-recognize: Biometric enrollment with PingOne Recognize
+  september-23: September 23
+  new-account-updated-notification-template: New Account Updated notification template
+  september-22: September 22
+  support-for-id-token-encryption-from-external-identity-providers: Support for ID token encryption from external identity providers
+  september-15: September 15
+  custom-client-id-and-custom-client-secret: Custom Client ID and Custom Client Secret
+  september-3: September 3
+  document-subtype-in-government-id-verified-data-results: Document subtype in government ID verified data results
+  august: August
+  august-26: August 26
+  support-for-government-identification-documents-with-two-identification-numbers: Support for government identification documents with two identification numbers
+  august-11: August 11
+  limiting-claims-in-access-tokens-using-scopes: Limiting claims in access tokens using scopes
+  august-10: August 10
+  extended-retention-period-for-previous-client-secret: Extended retention period for previous client secret
+  august-05: August 05
+  http-post-support-for-oidc-rp-initiated-logout: HTTP POST support for OIDC RP-initiated logout
   july: July
+  july-30: July 30
+  additional-saml-requests: Additional SAML requests
+  deprecation-of-the-clone-branding-theme-operation: Deprecation of the Clone Branding Theme operation
+  new-user-fields-for-risk-evaluations: New user fields for risk evaluations
+  july-29: July 29
+  support-for-australian-passports: Support for Australian passports
+  device-integrity-checking-with-apple-app-attest: Device integrity checking with Apple App Attest
+  july-28: July 28
+  scim-eq-filtering-on-the-user-id-attribute: SCIM eq filtering on the user id attribute
+  july-19: July 19
+  mfa-device-response-changes: Changes in responses for Read MFA User Devices and Check Remember Me Device
+  july-15: July 15
+  delete-a-user-credential-request: Delete a user credential request
+  july-14: July 14
+  external-idp-attribute-mapping-to-json-attributes: External IdP attribute mapping to JSON attributes
   july-8: July 8
   images-for-pingone-forms: Images for PingOne forms
   july-1: July 1
   password-locked-event: PASSWORD.LOCKED event
-  july-1-2: July 1
   pingone-design-center-experiences-apis: PingOne Design Center Experiences APIs
   june: June
   june-30: June 30
@@ -104,36 +164,36 @@ section_ids:
   deprecation-of-voice-verification-in-pingone-verify: Deprecation of Voice Verification in PingOne Verify
   november-17: November 17
   inbound-traffic-policies-for-customer-configuration-data: Inbound traffic policies for customer-configuration data
-  october: October
+  october-3: October
   october-28: October 28
   support-for-mtls-on-custom-domains: Support for mTLS on custom domains
-  october-22: October 22
+  october-22-2: October 22
   endpoints-for-importing-and-exporting-forms: Endpoints for importing and exporting forms
   retrieval-of-authorization-server-metadata: Retrieval of authorization server metadata
   october-20: October 20
   independent-documentation-sets-for-pingone-universal-services: Independent documentation sets for PingOne Universal Services
-  september: September
+  september-2: September
   september-24: September 24
   removal-of-verification-limits-and-deprecation-of-reset-verification: Removal of verification limits and deprecation of Reset Verification
-  september-15: September 15
+  september-15-2: September 15
   support-for-api-rate-limiting-and-usage-dashboard: Support for API Rate Limiting and Usage Dashboard
-  september-2: September 2
+  september-2-2: September 2
   custom-notification-providers-with-oauth-2-or-custom-header-authentication: Custom notification providers with OAuth 2 or custom header authentication
-  august: August
+  august-2: August
   august-27: August 27
   support-for-scrypt-password-encoding-rfc-7914: Support for Scrypt password encoding (RFC 7914)
   august-19: August 19
   detection-of-compromised-accounts-in-user-based-risk-behavior-predictor: Detection of compromised accounts in User-based Risk Behavior predictor
   august-13: August 13
   pingid-authentication-methods-in-device-authentication-policies: PingID authentication methods in device authentication policies
-  august-10: August 10
+  august-10-2: August 10
   configurable-passcode-grace-period-for-mobile-applications: Configurable passcode grace period for mobile applications
   july-2: July
   july-27: July 27
   email-provider-fallback-for-pingone-notifications: Email provider fallback for PingOne notifications
   july-23: July 23
   visibility-control-for-form-fields: Visibility control for form fields
-  july-14: July 14
+  july-14-2: July 14
   access-multiple-custom-resource-scopes-in-a-single-oidc-request: Access multiple custom resource scopes in a single OIDC request
   july-7: July 7
   external-id-support-for-portal-link-applications: External ID support for portal link applications
@@ -229,7 +289,7 @@ On March 2, 2027, PingOne will issue only opaque refresh tokens, and JWTs will b
 
 ### Key rotation policy for token signing
 
-PingOne will only use signing keys from key rotation policies (KRPs) to sign ID tokens and access tokens, regardless of whether the audience for the access token is PingOne APIs or custom resources. Any OIDC-based applications not using the KRP will automatically update to use the default KRP by March 1, 2027. Learn more in [Key Rotation Policies](platform/certificate-management/key-rotation-policies.html).
+PingOne will only use signing keys from key rotation policies (KRPs) to sign ID tokens and access tokens, regardless of whether the audience for the access token is PingOne APIs or custom resources. Any OIDC-based applications not using the KRP will automatically update to use the default KRP by March 1, 2027. Learn more in [Key Rotation Policies](platform/certificate-management/key-rotation-policies/index.html).
 
 ### Mandatory `typ` header parameter for access tokens
 
@@ -237,7 +297,257 @@ On March 2, 2027, PingOne will always include the `typ` header property with the
 
 ## 2026
 
+### October
+
+#### October 27
+
+##### Option to keep access and refresh tokens valid after session termination
+
+New PingOne
+
+You can now choose whether PingOne keeps access and refresh tokens for OIDC-based applications alive after a user's session becomes invalid. When enabled, these tokens remain valid if the session expires, is deleted through the API, is purged by the system, or the user signs off. Learn more in [Token validation](foundations/authentication-concepts/access-tokens-and-id-tokens/token-validation.html).
+
+#### October 27
+
+##### New WS-Federation properties for Windows PRT support with PingID
+
+New PingOne PingID
+
+WS-Federation application configurations now support the `userAttributeX509Match` and `validIssuanceCertificates` properties to enable Microsoft Windows primary refresh token (PRT) operations when users log on to (or unlock) their Windows devices using PingID. These optional properties are documented in the WS-Federation settings data model and in the create and update requests for WS-Federation applications. See [WS-Federation settings data model](platform/applications/applications-1/index.html#applications-ws-federation-settings-data-model).
+
+#### October 26
+
+##### Error code tables for PingOne platform operations and universal services
+
+Improved PingOne
+
+We've added detailed error code tables to the API documentation for all PingOne platform operations and universal services. These tables map HTTP statuses, specific error codes, trigger conditions, and response messages to help you diagnose and handle API errors more precisely. For an example, see [Application errors](platform/applications/applications-1/index.html#application-errors).
+
+#### October 22
+
+##### A value of `none` added to `token_endpoint_auth_methods_supported` in OIDC discovery
+
+Improved PingOne
+
+The OIDC discovery document now advertises `none` in the `token_endpoint_auth_methods_supported` property. This is returned by [Discovery OpenID Configuration](auth/openid-connect-oauth-2/authorization/discovery-openid-configuration.html).
+
+#### October 21
+
+##### SSO session token cookie persistence setting
+
+New PingOne
+
+PingOne now provides an endpoint to configure an environment to support non-persistent SSO session token cookies. Learn more in [Session Token Persistence Settings](platform/session-token-settings/index.html).
+
+#### October 16
+
+##### Variable added to Password Change notification template
+
+Improved PingOne
+
+The `user.location` variable was added to the [Password Change (End User) - DaVinci](platform/notifications/notifications-templates/index.html) notification template, which users receive when they change their own password in a PingOne DaVinci flow.
+
+#### October 9
+
+##### Add middleName property to PingOne Verify verified data for government ID
+
+Fixed PingOne Verify
+
+In PingOne Verify [Verified Data for government ID](verify/verified-data/index.html#verify-data-object-for-type-government_id), the `middleName` property was added.
+
+##### Removal of Reset Verification
+
+Removed PingOne Verify
+
+PingOne Verify removed limits per user, both per hour and per day. Therefore, *Reset Verification*, which resets the verification limits of a user, was deprecated September 24, 2025 and is now removed.
+
+#### October 8
+
+##### Geolocation verification removed from PingOne Verify APIs
+
+Removed PingOne Verify
+
+Geolocation verification support has been removed from the PingOne Verify APIs. Geolocation verify policy configuration and verified data type are no longer available.
+
+#### October 2
+
+##### Mitek manual review processing reasons added to PingOne Verify transactions docs
+
+Improved PingOne Verify
+
+The PingOne Verify transactions documentation adds a table listing the reasons for failures returned by Mitek manual review of document verification, such as image quality failures and forgery evidence. Learn more in [Mitek errors](verify/verify-transactions/index.html#verify-transactions-mitek-errors).
+
+#### October 1
+
+##### Voice verification removed from PingOne Verify APIs
+
+Removed PingOne Verify
+
+Voice verification support has been removed from the PingOne Verify APIs. Voice phrase endpoints and voice-related reference data operations are no longer available, and the Verify Documents endpoints no longer accept the `Voice Sample` type. Examples throughout the PingOne Verify API documentation have been updated accordingly.
+
+### September
+
+#### September 30
+
+##### Create SAML identity providers support
+
+Info PingOne
+
+The platform supports SAML identity provider creation using metadata. Learn more in [Create Identity Provider (SAML XML Metadata)](platform/identity-provider-management/identity-providers/create-identity-provider-saml-xml.html) and [Create Identity Provider (SAML URL Metadata)](platform/identity-provider-management/identity-providers/create-identity-provider-saml-url.html).
+
+#### September 30
+
+##### Guidance for choosing how to run DaVinci flows in PingOne
+
+Info PingOne
+
+New documentation explains the flow execution options and app integration methods that you should consider before you design and build your DaVinci flows. To learn more, see [Getting Started with DaVinci](davinci/getting-started-with-davinci/index.html).
+
+##### Biometric enrollment with PingOne Recognize
+
+New PingOne Verify
+
+Verify policies now support biometric enrollment: when facial comparison is set to `REQUIRED`, you can set `biometricEnrollment.face.enabled` to `true` to automatically enroll the user's self-image in PingOne Recognize (licensed separately) for future verification. Enrollment metadata is returned with the new `BIOMETRIC_ENROLLMENT` type and `RECOGNIZE` provider. Learn more in [Verify policies](verify/verify-policy/index.html) and [Verification MetaData](verify/verification-metadata/index.html).
+
+#### September 23
+
+##### New Account Updated notification template
+
+New PingOne
+
+A new `account_updated` email notification template is available. Users receive this notification when their account is updated as a result of a PingOne DaVinci flow. Learn more in [Notification templates](platform/notifications/notifications-templates/index.html).
+
+#### September 22
+
+##### Support for ID token encryption from external identity providers
+
+New PingOne
+
+The platform now supports decryption of encrypted ID tokens returned by OIDC external identity providers. Learn more in [Create Identity Provider (OpenID Connect)](platform/identity-provider-management/identity-providers/create-identity-provider-openid-connect.html) and [Export Public Key (JWKS JSON)](platform/certificate-management/export-jwks-json.html).
+
+#### September 15
+
+##### Custom Client ID and Custom Client Secret
+
+New PingOne
+
+You can now import an OIDC-based application or a custom resource with a custom client ID and (optionally) a custom client secret. See [Import an application](platform/applications/applications-1/import-application-oidc.html) and [Import a custom resource](platform/resources/resources-1/import-resource.html) for details.
+
+You can also set the client secret of an existing imported OIDC-based application or imported custom resource with a custom value. See [Set Application Secret (Imported App)](platform/applications/application-secret/set-application-secret.html) and [Set Resource Client Secret (Imported Resource)](platform/resources/resource-secret/set-resource-client-secret.html) for details.
+
+#### September 3
+
+##### Document subtype in government ID verified data results
+
+New PingOne Verify
+
+Government ID verified data results now include a `documentSubtype` property that identifies the subtype of the document, such as `NON-DOMICILED COMMERCIAL DRIVER LICENSE`. This lets you distinguish between document variants that share the same document type. Learn more in [Verified data](verify/verified-data/index.html).
+
+### August
+
+#### August 26
+
+##### Support for government identification documents with two identification numbers
+
+Improved PingOne Verify
+
+Some government identification documents have two different identification numbers, such as a New York state driver license. Government ID verification results from Veriff now contain both identification numbers. Learn more in [Verified data](verify/verified-data/index.html).
+
+#### August 11
+
+##### Limiting claims in access tokens using scopes
+
+New PingOne
+
+Resource scopes includes a new `enableMappedClaims` data model property to limit custom resource claims returned in an access token. See [Resource Scopes](platform/resources/resource-scopes/index.html) for details.
+
+#### August 10
+
+##### Extended retention period for previous client secret
+
+Improved PingOne
+
+When you rotate an application or custom resource client secret, you can now keep the replaced secret valid as a "previous" secret for up to 90 days instead of 30 days, giving you a longer window to migrate clients to the new secret. See [Update application secret](platform/applications/application-secret/update-application-secret.html) and [Create resource client secret](platform/resources/resource-secret/create-resource-client-secret.html).
+
+#### August 05
+
+##### HTTP POST support for OIDC RP-initiated logout
+
+New PingOne
+
+The `/as/signoff` endpoint now accepts HTTP POST requests in addition to HTTP GET, so you can send `id_token_hint`, `post_logout_redirect_uri`, and `state` as `application/x-www-form-urlencoded` body parameters instead of query string parameters. Learn more in [Signoff (POST)](auth/openid-connect-oauth-2/authorization/signoff-post.html).
+
 ### July
+
+#### July 30
+
+##### Additional SAML requests
+
+Improved PingOne
+
+You can now use the SAML `POST {{apiPath}}/v1/environments/{{envID}}/applications` operation to add a new application to the environment based on either a URL for the SP metadata or an SP metadata XML file. See [Create an application using SAML protocol (URL)](platform/applications/applications-1/create-application-saml-protocol-url.html) and [Create an application using SAML protocol (XML)](platform/applications/applications-1/create-application-saml-protocol-xml.html) for details.
+
+##### Deprecation of the Clone Branding Theme operation
+
+Deprecated PingOne
+
+The [POST Clone Branding Theme operation](platform/branding/branding-themes/clone-branding-theme-deprecated.html) is now deprecated, and will be removed in a future release. To duplicate a theme, read the existing theme, and create a new theme with the returned configuration. The PingOne Postman collections have also been updated to reflect this change.
+
+##### New user fields for risk evaluations
+
+New PingOne Protect
+
+When [creating a risk evaluation](protect/risk-evaluations/create-risk-evaluation.html), you can now include a phone number and email address for the user. If you provide an email address, it's used for predictors such as Email Reputation instead of the user ID.
+
+In addition, the response for risk evaluations now includes a new field, `details.device.isMobile`, that indicates whether the accessing device is a mobile device.
+
+#### July 29
+
+##### Support for Australian passports
+
+New PingOne PingOne Verify
+
+Verify [data-based identity verification](verify/verify-data-based-identity-verification/index.html) adds support for Australian passports as a government identification document type.
+
+##### Device integrity checking with Apple App Attest
+
+New PingOne
+
+If you enable device integrity checking for an iOS app, you can now use the new [appleAppAttestSettings object](platform/applications/applications-1/index.html#applications-oidc-settings-data-model) to specify that the check should use Apple App Attest.
+
+#### July 28
+
+##### SCIM `eq` filtering on the user `id` attribute
+
+Improved PingOne
+
+You can now use the SCIM `eq` (equals) operator with the `id` attribute when filtering users, making it easier to retrieve a specific user by ID in a filtered query. See [Attributes supporting the use of SCIM operators](platform/users/users-1/index.html#attributes-supporting-the-use-of-scim-operators).
+
+#### July 19
+
+##### Changes in responses for Read MFA User Devices and Check Remember Me Device
+
+Info PingOne MFA
+
+The device type `BROWSER` is used when creating remembered devices. Previously, when you sent an API request to [get MFA user devices](mfa/users/mfa-devices/read-all-mfa-user-devices.html), the list of devices in the response included devices of type `BROWSER`. This has been changed, and these devices are no longer included in the response. If you need to have `BROWSER` devices returned, include the query parameter `expand=accessingDevices` in the URL.
+
+A change has also been made to the response to API requests to [check a if a device is a remembered device](mfa/users/remembered-devices/check_remembered_device.html). Previously, the details of the accessing device were returned in the `_embedded.devices` array. Now, these details are returned in the new `_embedded.accessingDevices` array.
+
+#### July 15
+
+##### Delete a user credential request
+
+New PingOne Credentials PingOne
+
+Administrators can now [delete a user credential](credentials/user-credentials/delete-a-user-credential.html). If an AUTOMATED credential is revoked, it cannot be reissued because revocation prevents the issuance rule from issuing a credential. By deleting that user credential, the credential will be reissued if the user still meets the requirements of the issuance rule.
+
+#### July 14
+
+##### External IdP attribute mapping to JSON attributes
+
+New PingOne
+
+When configuring attribute mapping for an external IdP connection, you can now map inbound attributes to custom PingOne user attributes of type JSON. Single-valued JSON attributes are populated as a JSON object; multi-valued JSON attributes are populated as an array of JSON objects. For SAML IdPs, use an expression to construct the JSON value from inbound attributes. Learn more in [Identity Provider Management](platform/identity-provider-management/index.html).
 
 #### July 8
 
@@ -245,7 +555,7 @@ On March 2, 2027, PingOne will always include the `typ` header property with the
 
 New PingOne
 
-You can now add images to PingOne forms. Configure forms to render images by supplying a static public URL or passing a dynamic URL at runtime. The form image [data model](platform/forms.html#form-image-data-model) supports configurable sizing, positioning, padding, static or dynamic hyperlinks, along with custom HTML attributes.
+You can now add images to PingOne forms. Configure forms to render images by supplying a static public URL or passing a dynamic URL at runtime. The form image [data model](platform/forms/index.html#form-image-data-model) supports configurable sizing, positioning, padding, static or dynamic hyperlinks, along with custom HTML attributes.
 
 #### July 1
 
@@ -255,13 +565,11 @@ New PingOne
 
 When a user exceeds their password policy's maximum failed attempts, a PASSWORD.LOCKED event is now generated by the Password Check request on the last password check failure. See [Password Check](platform/users/user-passwords/password-check.html) for details.
 
-#### July 1
-
 ##### PingOne Design Center Experiences APIs
 
 New PingOne
 
-You can now use the new Experiences APIs to create branded sign-on, registration, and account recovery experiences. See [Experiences](platform/experiences.html) for details.
+You can now use the new Experiences APIs to create branded sign-on, registration, and account recovery experiences. See [Experiences](platform/experiences/index.html) for details.
 
 ### June
 
@@ -285,7 +593,7 @@ You can now use the new [blockDisabledUsers](mfa/device-authentication-policy/cr
 
 New PingOne Verify
 
-You can now use the Australia Medicare Card to verify a user's identity with [Verify Data-Based Identity Verification](verify/verify-data-based-identity-verification.html#data-based-identity-verification-data-model).
+You can now use the Australia Medicare Card to verify a user's identity with [Verify Data-Based Identity Verification](verify/verify-data-based-identity-verification/index.html#data-based-identity-verification-data-model).
 
 #### June 15
 
@@ -293,7 +601,7 @@ You can now use the Australia Medicare Card to verify a user's identity with [Ve
 
 New PingOne MFA PingID
 
-With the release of PingID desktop app 1.0, there are now API requests for creating and activating a desktop device and for carrying out authentication with a desktop device. The series of steps involved in creating a device can be found in [PingID Desktop device](mfa/users/mfa-devices.html#pingid-desktop-device). The series of steps involved in authenticating with a desktop device can be found in [Device authentication with PingID Desktop](mfa/mfa-authentication/mfa-device-authentications.html#device-authentication-with-pingid-desktop).
+With the release of PingID desktop app 1.0, there are now API requests for creating and activating a desktop device and for carrying out authentication with a desktop device. The series of steps involved in creating a device can be found in [PingID Desktop device](mfa/users/mfa-devices/index.html#pingid-desktop-device). The series of steps involved in authenticating with a desktop device can be found in [Device authentication with PingID Desktop](mfa/mfa-authentication/mfa-device-authentications/index.html#device-authentication-with-pingid-desktop).
 
 #### June 12
 
@@ -309,7 +617,7 @@ The Gateway API service now supports PingAM connections. Learn more in [Create P
 
 New PingOne
 
-You can now scope a role over a group, giving you more specific delegation for use cases where segmenting users by population isn't desirable. For details, refer to [Group Role Assignments](platform/group-role-assignments/group-role-assignments.html).
+You can now scope a role over a group, giving you more specific delegation for use cases where segmenting users by population isn't desirable. For details, refer to [Group Role Assignments](platform/group-role-assignments/index.html).
 
 #### June 9
 
@@ -333,7 +641,7 @@ New PingOne Protect
 
 For the three predictor types that use defined predictor rules (bot detection, suspicious device, traffic anomaly), you can now use the new [excludedDetectionRules array](protect/risk-predictors/update_bot_detection_predictor.html) to specify that one or more of the rules used by the predictor should be ignored when evaluating the level of risk.
 
-You can also include specific predictor rules when [defining conditions in a composite predictor](protect/risk-predictors.html#predictor-rule-exclusion).
+You can also include specific predictor rules when [defining conditions in a composite predictor](protect/risk-predictors/index.html#predictor-rule-exclusion).
 
 This capability is useful in situations where you find a specific rule is leading to legitimate authentication attempts being labeled as high risk.
 
@@ -345,7 +653,7 @@ This capability is useful in situations where you find a specific rule is leadin
 
 New PingOne PingOne DaVinci
 
-We've added a new notification template, `password_recovery_new`, which supports DaVinci flows using the PingOne Connector. Use this template to send a code to the user when they need to reset their password. Learn more in [Notifications Templates](platform/notifications/notifications-templates.html) and the [PingOne Connector](https://docs.pingidentity.com/connectors/p1_connector.html) documentation.
+We've added a new notification template, `password_recovery_new`, which supports DaVinci flows using the PingOne Connector. Use this template to send a code to the user when they need to reset their password. Learn more in [Notifications Templates](platform/notifications/notifications-templates/index.html) and the [PingOne Connector](https://docs.pingidentity.com/connectors/p1_connector.html) documentation.
 
 #### May 25
 
@@ -367,7 +675,7 @@ If you run such existing code without making these changes, you do not encounter
 
 New PingOne
 
-PingOne now supports including the `typ` header parameter with the `at+jwt` value in JWT-based access tokens, whether the intended audience is the UserInfo endpoint, PingOne APIs, or custom resources. You can enable the `typ` header by setting the `includeTyp` property to `true`. Learn more in [Applications OIDC settings data model](platform/applications/applications-1.html#applications-oidc-settings-data-model).
+PingOne now supports including the `typ` header parameter with the `at+jwt` value in JWT-based access tokens, whether the intended audience is the UserInfo endpoint, PingOne APIs, or custom resources. You can enable the `typ` header by setting the `includeTyp` property to `true`. Learn more in [Applications OIDC settings data model](platform/applications/applications-1/index.html#applications-oidc-settings-data-model).
 
 On March 2, 2027, the `includeTyp` property will be removed, and PingOne will always include the `typ` header with the `at+jwt` value when minting access tokens for the UserInfo endpoint, PingOne APIs, or custom resources. To avoid service disruptions, validate and update your applications and custom resources with the `includeTyp` property before this date. Learn more in [Access token claims](foundations/authentication-concepts/access-tokens-and-id-tokens/token-claims.html#access-token-claims).
 
@@ -377,13 +685,13 @@ On March 2, 2027, the `includeTyp` property will be removed, and PingOne will al
 
 New PingOne MFA
 
-When generating MFA device reports, you can now include the new value `bypassUntil` in the [fields array](mfa/users/mfa-reports.html#mfa-reports-data-model) to have the report include information about users who are currently allowed to bypass MFA.
+When generating MFA device reports, you can now include the new value `bypassUntil` in the [fields array](mfa/users/mfa-reports/index.html#mfa-reports-data-model) to have the report include information about users who are currently allowed to bypass MFA.
 
 ##### Custom sender - new variables for country code and national number
 
 New PingOne
 
-When configuring a custom sender for SMS or voice, if your provider's API requires that the phone number be split into the country code and the rest of the number, you can use `${to.country-code}` and `${to.national-number}` instead of `${to}`, as described in `requests.body` and `requests.url` in [Custom provider phone delivery settings properties (excluding Twilio and Syniverse)](platform/notifications/phone-delivery-settings.html#custom-provider-phone-delivery-settings-properties-excluding-twilio-and-syniverse).
+When configuring a custom sender for SMS or voice, if your provider's API requires that the phone number be split into the country code and the rest of the number, you can use `${to.country-code}` and `${to.national-number}` instead of `${to}`, as described in `requests.body` and `requests.url` in [Custom provider phone delivery settings properties (excluding Twilio and Syniverse)](platform/notifications/phone-delivery-settings/index.html#custom-provider-phone-delivery-settings-properties-excluding-twilio-and-syniverse).
 
 #### May 10
 
@@ -399,7 +707,7 @@ For custom notification senders where you have set the authentication method to 
 
 New PingOne
 
-We've added notification templates for password changes made on a user's PingOne account as a result of a DaVinci flow. `password_change_admin` is used when an administrator changes or resets a user's password, and `password_change_user` is used when the end user changes their own password. Learn more in [Notifications Templates](platform/notifications/notifications-templates.html) and in the [PingOne Connector](https://docs.pingidentity.com/connectors/p1_connector.html) documentation.
+We've added notification templates for password changes made on a user's PingOne account as a result of a DaVinci flow. `password_change_admin` is used when an administrator changes or resets a user's password, and `password_change_user` is used when the end user changes their own password. Learn more in [Notifications Templates](platform/notifications/notifications-templates/index.html) and in the [PingOne Connector](https://docs.pingidentity.com/connectors/p1_connector.html) documentation.
 
 #### May 5
 
@@ -431,7 +739,7 @@ When an application includes `response_mode=pi.flow` and `redirect_uri=<URI>` in
 
 Improved PingOne
 
-To increase the visibility of critical information, we've changed the title of *Working With PingOne APIs* to [Before You Begin](before-you-begin/introduction.html) and moved its location in the table of contents to follow this Changelog document. In particular, you'll find here the discussion of [Forward Compatibility](before-you-begin/forward-compatibility.html).
+To increase the visibility of critical information, we've changed the title of *Working With PingOne APIs* to [Before You Begin](before-you-begin/index.html) and moved its location in the table of contents to follow this Changelog document. In particular, you'll find here the discussion of [Forward Compatibility](before-you-begin/forward-compatibility.html).
 
 #### April 9
 
@@ -447,7 +755,7 @@ You can now create a custom notification sender that uses your defined Syniverse
 
 New PingOne
 
-We have added new endpoints to allow administrators to optionally manage custom metadata properties for applications. These properties are intended for administrative purposes, such as storing contact or other relevant information about the application. You can find details in [Application Metadata](platform/applications/application-metadata.html).
+We have added new endpoints to allow administrators to optionally manage custom metadata properties for applications. These properties are intended for administrative purposes, such as storing contact or other relevant information about the application. You can find details in [Application Metadata](platform/applications/application-metadata/index.html).
 
 #### April 5
 
@@ -455,7 +763,7 @@ We have added new endpoints to allow administrators to optionally manage custom 
 
 New PingOne MFA
 
-The existing `pushEnabled` and `otpEnabled` fields indicate whether push and OTP were initially enabled for a device. Since the enabled/disabled status can change over time, two new objects, `pushStatus` and `otpStatus`, have been added for mobile devices to reflect the current device status for receiving pushes and the current device status for OTP authentication. You can find details in [Native Device Properties](mfa/users/mfa-devices.html#native-device-properties).
+The existing `pushEnabled` and `otpEnabled` fields indicate whether push and OTP were initially enabled for a device. Since the enabled/disabled status can change over time, two new objects, `pushStatus` and `otpStatus`, have been added for mobile devices to reflect the current device status for receiving pushes and the current device status for OTP authentication. You can find details in [Native Device Properties](mfa/users/mfa-devices/index.html#native-device-properties).
 
 #### April 1
 
@@ -463,7 +771,7 @@ The existing `pushEnabled` and `otpEnabled` fields indicate whether push and OTP
 
 New PingOne
 
-We've released a new notification template for account creation, which sends a notification to the user when an account is created using the PingOne Connector in DaVinci. We've also released a new notification template for user verification, in which you can customize the verification code notification templates to use in a DaVinci flow. Learn more in [Notifications Templates](platform/notifications/notifications-templates.html).
+We've released a new notification template for account creation, which sends a notification to the user when an account is created using the PingOne Connector in DaVinci. We've also released a new notification template for user verification, in which you can customize the verification code notification templates to use in a DaVinci flow. Learn more in [Notifications Templates](platform/notifications/notifications-templates/index.html).
 
 ### March
 
@@ -473,7 +781,7 @@ We've released a new notification template for account creation, which sends a n
 
 New PingOne Credentials
 
-PingOne Credentials enables you to sign credentials using your cryptographic keys that you hold on-premise, rather than using keys stored in PingOne. Refer to [Credential signing with on-premise keys](credentials/credential-signing-keys.html) for details.
+PingOne Credentials enables you to sign credentials using your cryptographic keys that you hold on-premise, rather than using keys stored in PingOne. Refer to [Credential signing with on-premise keys](credentials/credential-signing-keys/index.html) for details.
 
 #### March 29
 
@@ -481,7 +789,7 @@ PingOne Credentials enables you to sign credentials using your cryptographic key
 
 New PingOne Protect
 
-You can now erase all of the risk-related data that has been collected for a specific user, using the `riskUserProfile` endpoint. For details, refer to [Risk Data](protect/risk-data.html).
+You can now erase all of the risk-related data that has been collected for a specific user, using the `riskUserProfile` endpoint. For details, refer to [Risk Data](protect/risk-data/index.html).
 
 #### March 18
 
@@ -499,7 +807,7 @@ New PingOne
 
 Added the `userAttributeUsernameMatch` attribute for Microsoft 365 applications. This allows you to customize how the username in an STS Username token request is matched to a PingOne user profile, overriding the default email address match.
 
-You can find details in the [Applications WS-Federation settings data model](platform/applications/applications-1.html#applications-ws-federation-settings-data-model).
+You can find details in the [Applications WS-Federation settings data model](platform/applications/applications-1/index.html#applications-ws-federation-settings-data-model).
 
 #### March 10
 
@@ -519,7 +827,7 @@ PingOne now supports OAuth 2.0 token exchange ([RFC 8693](https://www.rfc-editor
 
 New PingOne
 
-We've added the `Required` Boolean attribute to the Resource service. This is an optional setting enabling you to make a property required for custom resources. Learn more in [Resource attributes data model](platform/resources/resource-attributes.html#resource-attributes-data-model).
+We've added the `Required` Boolean attribute to the Resource service. This is an optional setting enabling you to make a property required for custom resources. Learn more in [Resource attributes data model](platform/resources/resource-attributes/index.html#resource-attributes-data-model).
 
 ### February
 
@@ -529,7 +837,7 @@ We've added the `Required` Boolean attribute to the Resource service. This is an
 
 New PingOne MFA
 
-The grace period for authenticator app (TOTP) passcodes is now configurable. You can find the description of the new parameter `passcodeGracePeriod` in the [TOTP device authentication policy data model](mfa/device-authentication-policy.html#totp-device-authentication-policy-data-model) and the [Create Device Authentication Policy example](mfa/device-authentication-policy/create-device-authentication-policy.html).
+The grace period for authenticator app (TOTP) passcodes is now configurable. You can find the description of the new parameter `passcodeGracePeriod` in the [TOTP device authentication policy data model](mfa/device-authentication-policy/index.html#totp-device-authentication-policy-data-model) and the [Create Device Authentication Policy example](mfa/device-authentication-policy/create-device-authentication-policy.html).
 
 #### February 20
 
@@ -545,7 +853,7 @@ The Gateway API service now supports PingOne Advanced Identity Cloud connections
 
 New PingOne
 
-You can now use key rotation policies (KRPs) with OIDC worker applications. Learn more in the [Applications OIDC settings data model](platform/applications/applications-1.html#applications-oidc-settings-data-model). PingOne now uses the KRP for token signing when the application includes PingOne API scopes in its authorization requests. Previously, PingOne would use the default key in this instance.
+You can now use key rotation policies (KRPs) with OIDC worker applications. Learn more in the [Applications OIDC settings data model](platform/applications/applications-1/index.html#applications-oidc-settings-data-model). PingOne now uses the KRP for token signing when the application includes PingOne API scopes in its authorization requests. Previously, PingOne would use the default key in this instance.
 
 ### January
 
@@ -563,7 +871,7 @@ Opaque refresh tokens are now supported for OIDC-based applications. Because opa
 
 New PingOne Protect
 
-Using the new `riskSettings` endpoint, you can now specify maximum retention periods for the risk data that's used by the following risk predictors: New Device, User Location Anomaly, User Based Risk Behavior. You can find details in the [Protect settings data model](protect/protect-settings.html#protect-settings-data-model) and the relevant [update](protect/protect-settings/update_protect_settings.html) and [read](protect/protect-settings/read_protect_settings.html) examples.
+Using the new `riskSettings` endpoint, you can now specify maximum retention periods for the risk data that's used by the following risk predictors: New Device, User Location Anomaly, User Based Risk Behavior. You can find details in the [Protect settings data model](protect/protect-settings/index.html#protect-settings-data-model) and the relevant [update](protect/protect-settings/update_protect_settings.html) and [read](protect/protect-settings/read_protect_settings.html) examples.
 
 #### January 15
 
@@ -571,7 +879,7 @@ Using the new `riskSettings` endpoint, you can now specify maximum retention per
 
 New PingOne MFA
 
-When defining FIDO policies, you can now use the new object `userVerification.pinRequirement` to set a minimum PIN code length for devices. For details, refer to the [FIDO policies data model](mfa/fido-policies.html#fido-policies-data-model) and the [Create FIDO Policy - specific authenticators](mfa/fido-policies/create_fido_policy_specific_authenticators.html) example.
+When defining FIDO policies, you can now use the new object `userVerification.pinRequirement` to set a minimum PIN code length for devices. For details, refer to the [FIDO policies data model](mfa/fido-policies/index.html#fido-policies-data-model) and the [Create FIDO Policy - specific authenticators](mfa/fido-policies/create_fido_policy_specific_authenticators.html) example.
 
 #### January 12
 
@@ -591,7 +899,7 @@ For Microsoft 365 applications, you can now specify the Assertion Validity Durat
 
 New PingOne
 
-To reduce the likelihood of PingOne email notifications getting flagged as spam when you are using Ping Identity as the notification sender, you can use the new endpoint `mailFromDomain` to define a custom MAIL FROM domain for trusted email domains that you have configured. Specifying a MAIL FROM domain results in SPF alignment with the FROM header, reducing the chances that the DMARC check will fail. You can find details in [Custom MAIL FROM domains](platform/notifications/trusted-email-domains.html#custom-mail-from-domains), and in the relevant [PUT](platform/notifications/trusted-email-domains/create-mail-from-domain.html), [GET](platform/notifications/trusted-email-domains/read-mail-from-domain.html), and [DELETE](platform/notifications/trusted-email-domains/delete-mail-from-domain.html) examples.
+To reduce the likelihood of PingOne email notifications getting flagged as spam when you are using Ping Identity as the notification sender, you can use the new endpoint `mailFromDomain` to define a custom MAIL FROM domain for trusted email domains that you have configured. Specifying a MAIL FROM domain results in SPF alignment with the FROM header, reducing the chances that the DMARC check will fail. You can find details in [Custom MAIL FROM domains](platform/notifications/trusted-email-domains/index.html#custom-mail-from-domains), and in the relevant [PUT](platform/notifications/trusted-email-domains/create-mail-from-domain.html), [GET](platform/notifications/trusted-email-domains/read-mail-from-domain.html), and [DELETE](platform/notifications/trusted-email-domains/delete-mail-from-domain.html) examples.
 
 ### November
 
@@ -607,7 +915,7 @@ Info PingOne Verify Voice Verification capability within PingOne Verify is depre
 
 New PingOne
 
-The platform now supports incoming customer-configuration data on requests to customer environments. You can define multiple inbound traffic policies that identify specific clients and the structure of their requests. For detailed information, refer to [Inbound Traffic Policies](platform/inbound-traffic.html).
+The platform now supports incoming customer-configuration data on requests to customer environments. You can define multiple inbound traffic policies that identify specific clients and the structure of their requests. For detailed information, refer to [Inbound Traffic Policies](platform/inbound-traffic/index.html).
 
 ### October
 
@@ -617,7 +925,7 @@ The platform now supports incoming customer-configuration data on requests to cu
 
 New PingOne
 
-The platform includes an `mtlsEnabled` property on custom domains to specify whether the custom domain supports the use of mTLS when establishing connections to PingOne. Refer to [Custom Domains](platform/custom-domains.html).
+The platform includes an `mtlsEnabled` property on custom domains to specify whether the custom domain supports the use of mTLS when establishing connections to PingOne. Refer to [Custom Domains](platform/custom-domains/index.html).
 
 #### October 22
 
@@ -631,7 +939,7 @@ The platform now includes endpoints to import and export forms. Refer to [Import
 
 New PingOne
 
-The platform now includes endpoints to retrieve authorization server metadata. Refer to [OAuth 2.0 Authorization Server Metadata](auth/openid-connect-oauth-2/auth-server-metadata.html) and [OAuth 2.0 Authorization Server Metadata (custom domain)](auth/openid-connect-oauth-2/auth-server-metadata-ccd.html).
+The platform now includes endpoints to retrieve authorization server metadata. Refer to [OAuth 2.0 Authorization Server Metadata](auth/openid-connect-oauth-2/authorization/auth-server-metadata.html) and [OAuth 2.0 Authorization Server Metadata (custom domain)](auth/openid-connect-oauth-2/authorization/auth-server-metadata-ccd.html).
 
 #### October 20
 
@@ -639,7 +947,7 @@ The platform now includes endpoints to retrieve authorization server metadata. R
 
 Info PingOne
 
-We've published the PingOne Universal Services collections ([PingOne Authorize](authorize/introduction.html), [PingOne DaVinci](davinci/introduction.html), [PingOne MFA](mfa/introduction.html), [PingOne Credentials](credentials/introduction.html), and [PingOne Protect](protect/introduction.html)) as independent documentation sets. All are linked from the PingOne Platform APIs.
+We've published the PingOne Universal Services collections ([PingOne Authorize](authorize/index.html), [PingOne DaVinci](davinci/index.html), [PingOne MFA](mfa/index.html), [PingOne Credentials](credentials/index.html), and [PingOne Protect](protect/index.html)) as independent documentation sets. All are linked from the PingOne Platform APIs.
 
 ### September
 
@@ -649,7 +957,7 @@ We've published the PingOne Universal Services collections ([PingOne Authorize](
 
 Info PingOne Verify
 
-PingOne Verify removed limits per user, both per hour and per day. Therefore, [Reset Verification](verify/verification-actions/reset-verification-deprecated.html), which resets the verification limits of a user, is deprecated and will be removed Sep 24, 2026.
+PingOne Verify removed limits per user, both per hour and per day. Therefore, *Reset Verification*, which resets the verification limits of a user, is deprecated and will be removed Sep 24, 2026.
 
 #### September 15
 
@@ -657,7 +965,7 @@ PingOne Verify removed limits per user, both per hour and per day. Therefore, [R
 
 New PingOne
 
-We've added support for the new Rate Limiting feature. Rate entitlement enforcement will begin at some point after September 2025. You can use the [API Usage Dashboard](https://docs.pingidentity.com/pingone/settings/p1_api_usage_dashboard.html) now to track your usage, and determine if the existing entitlements will be sufficient to meet the needs of your business when enforcement starts. Refer to [Rate Limiting](platform/rate-limiting.html) for more information.
+We've added support for the new Rate Limiting feature. Rate entitlement enforcement will begin at some point after September 2025. You can use the [API Usage Dashboard](https://docs.pingidentity.com/pingone/settings/p1_api_usage_dashboard.html) now to track your usage, and determine if the existing entitlements will be sufficient to meet the needs of your business when enforcement starts. Refer to [Rate Limiting](platform/rate-limiting/index.html) for more information.
 
 #### September 2
 
@@ -665,7 +973,7 @@ We've added support for the new Rate Limiting feature. Rate entitlement enforcem
 
 New PingOne
 
-When defining a custom provider for SMS/voice or email notifications from PingOne, you can now also use providers that require authentication with OAuth 2 or a custom header. For details, see the [Create Phone Delivery Settings (custom, OAUTH2)](platform/notifications/phone-delivery-settings/create_phone_delivery_settings_oauth.html) example, the [Create Phone Delivery Settings (custom, custom header)](platform/notifications/phone-delivery-settings/create_phone_delivery_settings_custom_header.html) example, the *Email delivery settings data model* under [Email Delivery Settings](platform/notifications/email-delivery-settings.html), and the *Custom provider phone delivery settings properties (excluding Twilio and Syniverse)* table under [Phone Delivery Settings](platform/notifications/phone-delivery-settings.html).
+When defining a custom provider for SMS/voice or email notifications from PingOne, you can now also use providers that require authentication with OAuth 2 or a custom header. For details, see the [Create Phone Delivery Settings (custom, OAUTH2)](platform/notifications/phone-delivery-settings/create_phone_delivery_settings_oauth.html) example, the [Create Phone Delivery Settings (custom, custom header)](platform/notifications/phone-delivery-settings/create_phone_delivery_settings_custom_header.html) example, the *Email delivery settings data model* under [Email Delivery Settings](platform/notifications/email-delivery-settings/index.html), and the *Custom provider phone delivery settings properties (excluding Twilio and Syniverse)* table under [Phone Delivery Settings](platform/notifications/phone-delivery-settings/index.html).
 
 ### August
 
@@ -683,7 +991,7 @@ We've added support for [RFC 7914 for Scrypt password encoding](https://datatrac
 
 New PingOne Protect
 
-For the User-based Risk Behavior predictor, you can now include the new field `shouldDetectCompromisedAccount` if you want PingOne to attempt to detect compromised user accounts and take this into account when calculating the risk level for this predictor. In cases where there are indications that the user's account has been compromised, `result.recommendedAction` is returned with a value of ACCOUNT\_RECOVERY. For details, refer to [Risk Predictors](protect/risk-predictors.html).
+For the User-based Risk Behavior predictor, you can now include the new field `shouldDetectCompromisedAccount` if you want PingOne to attempt to detect compromised user accounts and take this into account when calculating the risk level for this predictor. In cases where there are indications that the user's account has been compromised, `result.recommendedAction` is returned with a value of ACCOUNT_RECOVERY. For details, refer to [Risk Predictors](protect/risk-predictors/index.html).
 
 #### August 13
 
@@ -691,7 +999,7 @@ For the User-based Risk Behavior predictor, you can now include the new field `s
 
 New PingOne MFA
 
-For PingOne environments where PingID accounts have been integrated, you can now include the PingID-specific authentication methods such as the PingID app in your device authentication policies. For details, refer to [Device Authentication Policies](mfa/device-authentication-policy.html) and the [Update Device Authentication Policy (env with PingID integration)](mfa/device-authentication-policy/update_mfa_policy_pingid_env.html) example.
+For PingOne environments where PingID accounts have been integrated, you can now include the PingID-specific authentication methods such as the PingID app in your device authentication policies. For details, refer to [Device Authentication Policies](mfa/device-authentication-policy/index.html) and the [Update Device Authentication Policy (env with PingID integration)](mfa/device-authentication-policy/update_mfa_policy_pingid_env.html) example.
 
 #### August 10
 
@@ -699,7 +1007,7 @@ For PingOne environments where PingID accounts have been integrated, you can now
 
 New PingOne
 
-For mobile applications, a new parameter called `passcodeGracePeriod` has been added to allow you to customize the grace period during which the passcode can still be used even after the passcode has been refreshed. For details, refer to the [Applications OIDC settings data model](platform/applications/applications-1.html#applications-oidc-settings-data-model).
+For mobile applications, a new parameter called `passcodeGracePeriod` has been added to allow you to customize the grace period during which the passcode can still be used even after the passcode has been refreshed. For details, refer to the [Applications OIDC settings data model](platform/applications/applications-1/index.html#applications-oidc-settings-data-model).
 
 ### July
 
@@ -709,7 +1017,7 @@ For mobile applications, a new parameter called `passcodeGracePeriod` has been a
 
 Improved PingOne
 
-For PingOne email notifications, you can now use the new `emailProviderFallbackChain` field to switch back to using the Ping server without losing the settings for the custom server/provider that you defined. For details, refer to [Notifications settings](platform/notifications/notifications-settings.html).
+For PingOne email notifications, you can now use the new `emailProviderFallbackChain` field to switch back to using the Ping server without losing the settings for the custom server/provider that you defined. For details, refer to [Notifications settings](platform/notifications/notifications-settings/index.html).
 
 #### July 23
 
@@ -717,7 +1025,7 @@ For PingOne email notifications, you can now use the new `emailProviderFallbackC
 
 New PingOne
 
-The platform now supports a Forms component setting to control the visibility of a form field. For more information, refer to [FormField data model](platform/forms.html#form-field-data-model).
+The platform now supports a Forms component setting to control the visibility of a form field. For more information, refer to [FormField data model](platform/forms/index.html#form-field-data-model).
 
 #### July 14
 
@@ -725,7 +1033,7 @@ The platform now supports a Forms component setting to control the visibility of
 
 Improved PingOne
 
-OIDC-based applications in PingOne can now request an access token that accesses scopes from multiple custom resources in a single request. For more information, refer to [Applications OIDC settings data model](platform/applications/applications-1.html#applications-oidc-settings-data-model) and [Resource Scopes](platform/resources/resource-scopes.html).
+OIDC-based applications in PingOne can now request an access token that accesses scopes from multiple custom resources in a single request. For more information, refer to [Applications OIDC settings data model](platform/applications/applications-1/index.html#applications-oidc-settings-data-model) and [Resource Scopes](platform/resources/resource-scopes/index.html).
 
 #### July 7
 
@@ -733,19 +1041,19 @@ OIDC-based applications in PingOne can now request an access token that accesses
 
 New PingOne
 
-For applications of type `PORTAL_LINK_APP`, you can now specify an external ID for the application. For details, refer to the description of the new `externalId` field in the [Applications base data model](platform/applications/applications-1.html#applications-base-data-model).
+For applications of type `PORTAL_LINK_APP`, you can now specify an external ID for the application. For details, refer to the description of the new `externalId` field in the [Applications base data model](platform/applications/applications-1/index.html#applications-base-data-model).
 
 ##### Targeted risk policies for specific transaction types and groups
 
 New PingOne Protect
 
-You can now use Targeted risk policies to define risk policies for different "targets" - combinations of transaction types, user groups, and applications that are being accessed. When a risk evaluation is carried out, these targeted policies are processed in the order that you specified. PingOne Protect uses the first policy whose conditions (transaction type, user group, application) are met. For details, refer to *Targeted risk policies* under [Risk Policies](protect/risk-policies.html), the [Create Risk Policy Set - Targeted Policy with Mitigations](protect/risk-policies/create_risk_policy_set_targeted_w_mitigations.html) example, and the [Create Risk Evaluation (using targeted risk policies)](protect/risk-evaluations/create_risk_eval_with_targeted_policies.html) example.
+You can now use Targeted risk policies to define risk policies for different "targets" - combinations of transaction types, user groups, and applications that are being accessed. When a risk evaluation is carried out, these targeted policies are processed in the order that you specified. PingOne Protect uses the first policy whose conditions (transaction type, user group, application) are met. For details, refer to *Targeted risk policies* under [Risk Policies](protect/risk-policies/index.html), the [Create Risk Policy Set - Targeted Policy with Mitigations](protect/risk-policies/create_risk_policy_set_targeted_w_mitigations.html) example, and the [Create Risk Evaluation (using targeted risk policies)](protect/risk-evaluations/create_risk_eval_with_targeted_policies.html) example.
 
 ##### Risk policy mitigations for recommended actions
 
 New PingOne Protect
 
-You can now include *mitigations* in your risk policies. In this context, a mitigation is an action that you recommend if a given condition is met, for example, deny access if the email reputation predictor indicates high risk. In situations where the condition is met, the action that you recommended be taken is returned in the risk evaluation response as the value of the `result.mitigations[].action` field. For details, refer to *Using mitigations in your policies* and *Risk policies data model* under [Risk Policies](protect/risk-policies.html), and the [Create Risk Policy Set - Targeted Policy with Mitigations](protect/risk-policies/create_risk_policy_set_targeted_w_mitigations.html) example.
+You can now include *mitigations* in your risk policies. In this context, a mitigation is an action that you recommend if a given condition is met, for example, deny access if the email reputation predictor indicates high risk. In situations where the condition is met, the action that you recommended be taken is returned in the risk evaluation response as the value of the `result.mitigations[].action` field. For details, refer to *Using mitigations in your policies* and *Risk policies data model* under [Risk Policies](protect/risk-policies/index.html), and the [Create Risk Policy Set - Targeted Policy with Mitigations](protect/risk-policies/create_risk_policy_set_targeted_w_mitigations.html) example.
 
 #### July 2
 
@@ -753,7 +1061,7 @@ You can now include *mitigations* in your risk policies. In this context, a miti
 
 New PingOne
 
-We've added a new role, Help Desk Admin, to manage user MFA methods and devices, and reset passwords to resolve any account lockouts. Refer to [Built-in Admin Roles](platform/roles/predefined-roles.html) and [PingOne Role Permissions](platform/reference/roles-and-permissions-in-pingone/pingone-role-permissions.html) for more information.
+We've added a new role, Help Desk Admin, to manage user MFA methods and devices, and reset passwords to resolve any account lockouts. Refer to [Built-in Admin Roles](platform/roles/predefined-roles/index.html) and [PingOne Role Permissions](platform/reference/roles-and-permissions-in-pingone/pingone-role-permissions.html) for more information.
 
 ### June
 
@@ -763,7 +1071,7 @@ We've added a new role, Help Desk Admin, to manage user MFA methods and devices,
 
 New PingOne
 
-The platform now supports the SG (Singapore) region. For details, refer to [Before You Begin](before-you-begin/introduction.html).
+The platform now supports the SG (Singapore) region. For details, refer to [Before You Begin](before-you-begin/index.html).
 
 #### June 25
 
@@ -771,7 +1079,7 @@ The platform now supports the SG (Singapore) region. For details, refer to [Befo
 
 New PingOne
 
-Added the `opSessionCheckEnabled` application property to support OIDC session management. For more information see, [OIDC Session Management](foundations/authentication-concepts/oidc-session-management.html) and the [Applications OIDC settings data model](platform/applications/applications-1.html#applications-oidc-settings-data-model).
+Added the `opSessionCheckEnabled` application property to support OIDC session management. For more information see, [OIDC Session Management](foundations/authentication-concepts/oidc-session-management.html) and the [Applications OIDC settings data model](platform/applications/applications-1/index.html#applications-oidc-settings-data-model).
 
 #### June 24
 
@@ -779,7 +1087,7 @@ Added the `opSessionCheckEnabled` application property to support OIDC session m
 
 New PingOne
 
-We now support the Czech language for language translations. Refer to [Language Translations](platform/language-management/language-translations.html) for more information.
+We now support the Czech language for language translations. Refer to [Language Translations](platform/language-management/language-translations/index.html) for more information.
 
 #### June 17
 
@@ -787,7 +1095,7 @@ We now support the Czech language for language translations. Refer to [Language 
 
 New PingOne
 
-It is now possible to send PingOne notifications via Twilio Verify, and you can use any Verify templates that you have defined. For details, refer to [Phone Delivery Settings](platform/notifications/phone-delivery-settings.html), the *Content Properties* table under [Notifications Templates](platform/notifications/notifications-templates.html), and the following Postman examples: [Create Phone Delivery Settings (Twilio Verify)](platform/notifications/phone-delivery-settings/create_phone_delivery_settings_twilio_verify.html), [Read One Phone Delivery Settings (include Verify templates)](platform/notifications/phone-delivery-settings/read_single_phone_delivery_settings_with_twilio_verify_templates.html), and [Create SMS Content (including Twilio Verify template)](platform/notifications/notifications-templates/create_sms_content_twilio_verify.html).
+It is now possible to send PingOne notifications via Twilio Verify, and you can use any Verify templates that you have defined. For details, refer to [Phone Delivery Settings](platform/notifications/phone-delivery-settings/index.html), the *Content Properties* table under [Notifications Templates](platform/notifications/notifications-templates/index.html), and the following Postman examples: [Create Phone Delivery Settings (Twilio Verify)](platform/notifications/phone-delivery-settings/create_phone_delivery_settings_twilio_verify.html), [Read One Phone Delivery Settings (include Verify templates)](platform/notifications/phone-delivery-settings/read_single_phone_delivery_settings_with_twilio_verify_templates.html), and [Create SMS Content (including Twilio Verify template)](platform/notifications/notifications-templates/create_sms_content_twilio_verify.html).
 
 #### June 3
 
@@ -795,7 +1103,7 @@ It is now possible to send PingOne notifications via Twilio Verify, and you can 
 
 New PingOne
 
-We've added the `virtualServerSettings` properties for SAML applications, enabling you to use multiple self-identifiers when connecting to the same SAML application. Refer to [Applications SAML settings data model](platform/applications/applications-1.html#applications-saml-settings-data-model) for details.
+We've added the `virtualServerSettings` properties for SAML applications, enabling you to use multiple self-identifiers when connecting to the same SAML application. Refer to [Applications SAML settings data model](platform/applications/applications-1/index.html#applications-saml-settings-data-model) for details.
 
 ### May
 
@@ -805,7 +1113,7 @@ We've added the `virtualServerSettings` properties for SAML applications, enabli
 
 New PingOne
 
-We've added the `logoutType` property, enabling you to specify either OIDC\_RP\_INITIATED or SAML2\_SLO when logging out of applications of type PING\_ONE\_SELF\_SERVICE or PING\_ONE\_PORTAL (Application Portal). Refer to the [OIDC data model settings for PING\_ONE\_SELF\_SERVICE and PING\_ONE\_PORTAL](platform/applications/applications-1.html) for details.
+We've added the `logoutType` property, enabling you to specify either OIDC_RP_INITIATED or SAML2_SLO when logging out of applications of type PING_ONE_SELF_SERVICE or PING_ONE_PORTAL (Application Portal). Refer to the [OIDC data model settings for PING_ONE_SELF_SERVICE and PING_ONE_PORTAL](platform/applications/applications-1/index.html) for details.
 
 #### May 13
 
@@ -813,13 +1121,13 @@ We've added the `logoutType` property, enabling you to specify either OIDC\_RP\_
 
 New PingOne MFA
 
-When creating a FIDO policy, you can now specify that it requires enterprise attestation to verify that the authenticator being used was provided by the organization. For details, refer to the [Create FIDO Policy - FIDO-certified and enterprise](mfa/fido-policies/create_fido_policy_certified_w_enterprise_attestation.html) example and the [FIDO policies data model](mfa/fido-policies.html).
+When creating a FIDO policy, you can now specify that it requires enterprise attestation to verify that the authenticator being used was provided by the organization. For details, refer to the [Create FIDO Policy - FIDO-certified and enterprise](mfa/fido-policies/create_fido_policy_certified_w_enterprise_attestation.html) example and the [FIDO policies data model](mfa/fido-policies/index.html).
 
 ##### Environment and organization names in FIDO passkey popups
 
 New PingOne MFA
 
-When creating a FIDO policy, you can use the new `userDisplayNameAttributes.suffix` field to include the PingOne environment name and/or the PingOne organization name in the popup window that is displayed when a user adds a passkey as an authentication method. For details, refer to the [FIDO policies data model](mfa/fido-policies.html).
+When creating a FIDO policy, you can use the new `userDisplayNameAttributes.suffix` field to include the PingOne environment name and/or the PingOne organization name in the popup window that is displayed when a user adds a passkey as an authentication method. For details, refer to the [FIDO policies data model](mfa/fido-policies/index.html).
 
 #### May 11
 
@@ -827,7 +1135,7 @@ When creating a FIDO policy, you can use the new `userDisplayNameAttributes.suff
 
 New PingOne MFA
 
-The use of OATH tokens as an authentication method, which was introduced a number of months ago for environments where PingID accounts were integrated, is now available for all PingOne environments that include the PingOne MFA or PingID services. You can use the `oathTokens` endpoint to add OATH tokens to the environment and carry out actions such as revoking or resyncing tokens. For details, refer to [OATH tokens](mfa/oath-tokens.html) and the [Create MFA User Device (OATH token)](mfa/users/mfa-devices/create_mfa_user_device_oath_token.html) example.
+The use of OATH tokens as an authentication method, which was introduced a number of months ago for environments where PingID accounts were integrated, is now available for all PingOne environments that include the PingOne MFA or PingID services. You can use the `oathTokens` endpoint to add OATH tokens to the environment and carry out actions such as revoking or resyncing tokens. For details, refer to [OATH tokens](mfa/oath-tokens/index.html) and the [Create MFA User Device (OATH token)](mfa/users/mfa-devices/create_mfa_user_device_oath_token.html) example.
 
 ### April
 
@@ -837,13 +1145,13 @@ The use of OATH tokens as an authentication method, which was introduced a numbe
 
 New PingOne
 
-You can now soft-delete PingOne `PRODUCTION` environments, making the environment non-operational for a waiting period before it can be deleted. This is to help protect you from inadvertently deleting a Production environment. Refer to [Environments](platform/environments.html) and [Deleting Environments](platform/environments.html#deleting-environments) for more information.
+You can now soft-delete PingOne `PRODUCTION` environments, making the environment non-operational for a waiting period before it can be deleted. This is to help protect you from inadvertently deleting a Production environment. Refer to [Environments](platform/environments/index.html) and [Deleting Environments](platform/environments/index.html#deleting-environments) for more information.
 
 ##### Deprecation of TEXTBLOB form field type
 
 Info PingOne
 
-The `TEXTBLOB` form field type (`fieldTypes` property) has been deprecated. Refer to [Forms](platform/forms.html) for more information.
+The `TEXTBLOB` form field type (`fieldTypes` property) has been deprecated. Refer to [Forms](platform/forms/index.html) for more information.
 
 #### April 29
 
@@ -851,7 +1159,7 @@ The `TEXTBLOB` form field type (`fieldTypes` property) has been deprecated. Refe
 
 New PingOne
 
-We've published a new Getting Started guide for the PingOne Platform APIs, and removed the existing Tutorial guide (the Getting Started guide now covers this information). Refer to [Getting Started](getting-started/introduction.html).
+We've published a new Getting Started guide for the PingOne Platform APIs, and removed the existing Tutorial guide (the Getting Started guide now covers this information). Refer to [Getting Started](getting-started/index.html).
 
 #### April 28
 
@@ -859,29 +1167,29 @@ We've published a new Getting Started guide for the PingOne Platform APIs, and r
 
 New PingOne
 
-In your notification policies, you can now define waiting periods before users can request another notification such as another OTP, as well as a maximum number of such requests before the user is temporarily locked out. Refer to the new `cooldownConfiguration` object in [Notification Policies](platform/notifications/notification-policies.html) and the [Create Notification Policy / Environment](platform/notifications/notification-policies/create_env_notification_policy_total.html) example.
+In your notification policies, you can now define waiting periods before users can request another notification such as another OTP, as well as a maximum number of such requests before the user is temporarily locked out. Refer to the new `cooldownConfiguration` object in [Notification Policies](platform/notifications/notification-policies/index.html) and the [Create Notification Policy / Environment](platform/notifications/notification-policies/create_env_notification_policy_total.html) example.
 
 ##### WhatsApp support in MFA policies
 
 New PingOne MFA
 
-Your MFA policies can now include WhatsApp as an authentication method. For details, refer to [Instant Messaging Delivery Settings](platform/notifications/instant-messaging-delivery-settings.html), the *Offline device (SMS, voice, email, WhatsApp) authentication policy data model* in [Device Authentication Policies](mfa/device-authentication-policy.html), and the [Create WhatsApp Content](platform/notifications/notifications-templates/create_whatsapp_content.html) example.
+Your MFA policies can now include WhatsApp as an authentication method. For details, refer to [Instant Messaging Delivery Settings](platform/notifications/instant-messaging-delivery-settings/index.html), the *Offline device (SMS, voice, email, WhatsApp) authentication policy data model* in [Device Authentication Policies](mfa/device-authentication-policy/index.html), and the [Create WhatsApp Content](platform/notifications/notifications-templates/create_whatsapp_content.html) example.
 
 #### April 22
 
-\| May 6, 2024 | The platform now supports the AU (Australia/Asia Pacific) region. The platform continues to support the AP (Asia Pacific) region. However, if your environments use the `AP` geographydesignation (`api.pingone.asia` domain) for Asia-Pacific countries, be aware that this geographydoes not support the migration of PingID customers (or the PingID product) to the PingOne platform. To get PingID platform support for your Asia-Pacific environments, use the `AU` geographydesignation (`api.pingone.com.au` domain) when creating your new environments. For details, refer to [Before You Begin](before-you-begin/introduction.html).
+\| May 6, 2024 | The platform now supports the AU (Australia/Asia Pacific) region. The platform continues to support the AP (Asia Pacific) region. However, if your environments use the `AP` geographydesignation (`api.pingone.asia` domain) for Asia-Pacific countries, be aware that this geographydoes not support the migration of PingID customers (or the PingID product) to the PingOne platform. To get PingID platform support for your Asia-Pacific environments, use the `AU` geographydesignation (`api.pingone.com.au` domain) when creating your new environments. For details, refer to [Before You Begin](before-you-begin/index.html).
 
 ##### Support for x5t signature header in signed JWTs
 
 New PingOne
 
-The platform now supports the x5t signature header in the signed JWT. Refer to [Applications OIDC settings data model](platform/applications/applications-1.html#applications-oidc-settings-data-model).
+The platform now supports the x5t signature header in the signed JWT. Refer to [Applications OIDC settings data model](platform/applications/applications-1/index.html#applications-oidc-settings-data-model).
 
 ##### DaVinci flow execution options via authorize endpoint
 
 New PingOne
 
-The platform now supports configuration options for Davinci flow execution using the PingOne authorize endpoint in which the response returns JSON. Refer to [DaVinci Flow Executions](auth/pingone-davinci/davinci-runtime-apis.html).
+The platform now supports configuration options for Davinci flow execution using the PingOne authorize endpoint in which the response returns JSON. Refer to [DaVinci Flow Executions](auth/davinci-flow-executions/index.html).
 
 #### April 21
 
@@ -889,7 +1197,7 @@ The platform now supports configuration options for Davinci flow execution using
 
 New PingOne
 
-The platform now supports DaVinci Admin API operations through the PingOne API resource server to manage DaVinci workflow configuration. Refer to [DaVinci Admin APIs](davinci/davinci-admin-apis.html) for links to all available services.
+The platform now supports DaVinci Admin API operations through the PingOne API resource server to manage DaVinci workflow configuration. Refer to [DaVinci Admin APIs](davinci/davinci-admin-apis/index.html) for links to all available services.
 
 #### April 7
 
@@ -897,7 +1205,7 @@ The platform now supports DaVinci Admin API operations through the PingOne API r
 
 New PingOne
 
-We've added Early Access Features APIs enabling you to adopt and provide feedback on PingOne features before the General Availability release. Refer to [Early Access Features](platform/environments/early-access-features.html) for more information.
+We've added Early Access Features APIs enabling you to adopt and provide feedback on PingOne features before the General Availability release. Refer to [Early Access Features](platform/environments/early-access-features/index.html) for more information.
 
 #### April 2
 
@@ -905,7 +1213,7 @@ We've added Early Access Features APIs enabling you to adopt and provide feedbac
 
 New PingOne MFA
 
-You can now specify that a mobile push requires the user to match a number that they were shown when requesting access. To enable the option for an application, use the new `push.numberMatching.enabled` property in your MFA policy. Refer to [Device Authentication Policies](mfa/device-authentication-policy.html). To control how the user performs the matching - selection from a group of three numbers or manually entering the number - use the `push.numberMatching.type` property when configuring the mobile settings for the application. Refer to [Application Operations](platform/applications/applications-1.html).
+You can now specify that a mobile push requires the user to match a number that they were shown when requesting access. To enable the option for an application, use the new `push.numberMatching.enabled` property in your MFA policy. Refer to [Device Authentication Policies](mfa/device-authentication-policy/index.html). To control how the user performs the matching - selection from a group of three numbers or manually entering the number - use the `push.numberMatching.type` property when configuring the mobile settings for the application. Refer to [Application Operations](platform/applications/applications-1/index.html).
 
 ##### Cancel ongoing authentication processes
 
@@ -921,7 +1229,7 @@ You can now cancel an authentication process that has already begun. This can be
 
 Improved PingOne MFA
 
-When using the `devices` endpoint to request details of a single MFA device or all MFA devices, responses for activated FIDO2 devices can now include the AAGUID for the type of authenticator. For details, refer to the new `fidoDeviceMetadata` object in [MFA devices](mfa/users/mfa-devices.html).
+When using the `devices` endpoint to request details of a single MFA device or all MFA devices, responses for activated FIDO2 devices can now include the AAGUID for the type of authenticator. For details, refer to the new `fidoDeviceMetadata` object in [MFA devices](mfa/users/mfa-devices/index.html).
 
 #### March 18
 
@@ -929,7 +1237,7 @@ When using the `devices` endpoint to request details of a single MFA device or a
 
 New PingOne MFA
 
-When configuring an MFA policy, you can now specify for FIDO2 devices the maximum number of times authentication can fail before the user is blocked temporarily, and how long the user should be blocked. Refer to the new `fido2.failure` object in [Device Authentication Policies](mfa/device-authentication-policy.html).
+When configuring an MFA policy, you can now specify for FIDO2 devices the maximum number of times authentication can fail before the user is blocked temporarily, and how long the user should be blocked. Refer to the new `fido2.failure` object in [Device Authentication Policies](mfa/device-authentication-policy/index.html).
 
 #### March 10
 
@@ -945,7 +1253,7 @@ ID tokens now include a new claim called `p1.mfa_device_id`, the ID of the devic
 
 New PingOne Protect
 
-For workforce contexts, risk evaluations can now include the new PingID Device Trust predictor. For details, refer to [Risk Predictors](protect/risk-predictors.html) and the [Create Risk Evaluation (includes device trust predictor)](protect/risk-evaluations/create_risk_eval_with_trust_agent.html) example.
+For workforce contexts, risk evaluations can now include the new PingID Device Trust predictor. For details, refer to [Risk Predictors](protect/risk-predictors/index.html) and the [Create Risk Evaluation (includes device trust predictor)](protect/risk-evaluations/create_risk_eval_with_trust_agent.html) example.
 
 ### February
 
@@ -955,13 +1263,13 @@ For workforce contexts, risk evaluations can now include the new PingID Device T
 
 Improved PingOne
 
-When determining the language to use for a notification, PingOne now also takes into consideration the Accept-Language header in the request. For details, refer to [Runtime logic for content selection](platform/notifications/notifications-templates.html#notifications-templates-runtime-logic-for-content-selection) in Notifications Templates.
+When determining the language to use for a notification, PingOne now also takes into consideration the Accept-Language header in the request. For details, refer to [Runtime logic for content selection](platform/notifications/notifications-templates/index.html#notifications-templates-runtime-logic-for-content-selection) in Notifications Templates.
 
 ##### Associate specific notification policies with MFA policies
 
 New PingOne MFA
 
-When creating or updating an MFA policy, you can now specify the notification policy that should be used with the MFA policy by using the new `notificationsPolicy.id` field. Refer to [Device Authentication Policies](mfa/device-authentication-policy.html) and the [Create Device Authentication Policy](mfa/device-authentication-policy/create-device-authentication-policy.html) example.
+When creating or updating an MFA policy, you can now specify the notification policy that should be used with the MFA policy by using the new `notificationsPolicy.id` field. Refer to [Device Authentication Policies](mfa/device-authentication-policy/index.html) and the [Create Device Authentication Policy](mfa/device-authentication-policy/create-device-authentication-policy.html) example.
 
 #### February 24
 
@@ -969,7 +1277,7 @@ When creating or updating an MFA policy, you can now specify the notification po
 
 New PingOne MFA
 
-In MFA policies, you can now include a "remember me" option so that users do not have to authenticate when accessing applications from a device they have used before. Refer to the new `rememberMe` object in [Device Authentication Policies](mfa/device-authentication-policy.html) and the implementation instructions in [Remembered Devices](mfa/users/remembered-devices.html).
+In MFA policies, you can now include a "remember me" option so that users do not have to authenticate when accessing applications from a device they have used before. Refer to the new `rememberMe` object in [Device Authentication Policies](mfa/device-authentication-policy/index.html) and the implementation instructions in [Remembered Devices](mfa/users/remembered-devices/index.html).
 
 #### February 18
 
@@ -993,7 +1301,7 @@ The platform supports token fulfillment in PingOne, enabling admins to map attri
 
 New PingOne
 
-You can now define multiple custom providers to use for SMS / voice notifications. In environments with more than one custom provider, you can specify in your notification policies the order of provider preference to use in different geographical locations. For details, refer to the new `providerConfiguration` object in [Notification Policies](platform/notifications/notification-policies.html).
+You can now define multiple custom providers to use for SMS / voice notifications. In environments with more than one custom provider, you can specify in your notification policies the order of provider preference to use in different geographical locations. For details, refer to the new `providerConfiguration` object in [Notification Policies](platform/notifications/notification-policies/index.html).
 
 ### January
 
@@ -1003,7 +1311,7 @@ You can now define multiple custom providers to use for SMS / voice notification
 
 New PingOne
 
-We've added the ability for an OIDC application to request to terminate a user session from the IdP associated with the user using only the ID token. Refer to [GET IdP Signoff](auth/openid-connect-oauth-2/idp-signoff.html) for details.
+We've added the ability for an OIDC application to request to terminate a user session from the IdP associated with the user using only the ID token. Refer to [GET IdP Signoff](auth/openid-connect-oauth-2/authorization/idp-signoff.html) for details.
 
 #### January 21
 
@@ -1019,7 +1327,7 @@ The platform now supports the `LINKEDIN_OIDC` identity provider type to specify 
 
 New PingOne Verify
 
-PingOne Verify added an additional provider, Babel Street Rosette, to enhance matching of biographic data on submitted documents to corresponding data on verified records. A new request, [Verify Identity Record Matching](verify/verify-identity-record-matching.html) provides access to this provider outside the context of a verify transaction. This new request requires a specific license entitlement.
+PingOne Verify added an additional provider, Babel Street Rosette, to enhance matching of biographic data on submitted documents to corresponding data on verified records. A new request, [Verify Identity Record Matching](verify/verify-identity-record-matching/index.html) provides access to this provider outside the context of a verify transaction. This new request requires a specific license entitlement.
 
 #### January 9
 
@@ -1033,13 +1341,13 @@ You can now define a period during which a specific user should be allowed to by
 
 New PingOne
 
-For RADIUS gateways, support has been added for the EAP-MSCHAP v2 protocol. Also, to help block Blast RADIUS attacks, a new object called `blastRadiusMitigation` has been added. Refer to [Gateway Management](platform/gateway-management.html).
+For RADIUS gateways, support has been added for the EAP-MSCHAP v2 protocol. Also, to help block Blast RADIUS attacks, a new object called `blastRadiusMitigation` has been added. Refer to [Gateway Management](platform/gateway-management/index.html).
 
 ##### Public key credential hints in FIDO policies
 
 New PingOne MFA
 
-When defining FIDO policies, you can now include the new `publicKeyCredentialHints` array to provide public key credential hints to the browser in order to give priority to the authentication method that the user is most likely to use. For details, refer to [FIDO Policies](mfa/fido-policies.html).
+When defining FIDO policies, you can now include the new `publicKeyCredentialHints` array to provide public key credential hints to the browser in order to give priority to the authentication method that the user is most likely to use. For details, refer to [FIDO Policies](mfa/fido-policies/index.html).
 
 #### January 7
 
@@ -1047,4 +1355,4 @@ When defining FIDO policies, you can now include the new `publicKeyCredentialHin
 
 New PingOne MFA
 
-For PingOne environments where PingID accounts have been integrated, you can use the new `oathTokens` endpoint to add OATH tokens to the environment and carry out actions such as revoking or resyncing tokens. For details, refer to [OATH tokens](mfa/oath-tokens.html) and the [Create MFA User Device (OATH token)](mfa/users/mfa-devices/create_mfa_user_device_oath_token.html) example.
+For PingOne environments where PingID accounts have been integrated, you can use the new `oathTokens` endpoint to add OATH tokens to the environment and carry out actions such as revoking or resyncing tokens. For details, refer to [OATH tokens](mfa/oath-tokens/index.html) and the [Create MFA User Device (OATH token)](mfa/users/mfa-devices/create_mfa_user_device_oath_token.html) example.

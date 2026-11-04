@@ -457,19 +457,19 @@ Each of the following options can reduce the PingAccess cookie size. The exact r
   | - | ----------------------------------------------------------------------------------------------------------------------------- |
   |   | This option isn't as impactful as the other options and might not be possible depending on your environment's security needs. |
 
-* When [Configuring admin UI SSO authentication](../pingaccess_user_interface_reference_guide/pa_configuring_admin_ui_sso_authn_task.html), clear the **Include id\_token\_hint in SLO** checkbox.
+* When [Configuring admin UI SSO authentication](../pingaccess_user_interface_reference_guide/pa_configuring_admin_ui_sso_authn_task.html), clear the **Include id_token_hint in SLO** checkbox.
 
   |   |                                                                                                                                                                                                                                                                                                                      |
   | - | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
   |   | If your token provider requires the `id_token_hint` parameter to complete single logout (SLO) *(tooltip: \<div class="paragraph">&#xA;\<p>The process of signing a user out of multiple sites where the user has started a SSO session.\</p>&#xA;\</div>)*, explore the other options to reduce cookie size instead. |
 
-* When [Configuring OpenID Connect token providers](../pingaccess_user_interface_reference_guide/pa_configuring_oidc.html), clear the **Track token\_id** checkbox.
+* When [Configuring OpenID Connect token providers](../pingaccess_user_interface_reference_guide/pa_configuring_oidc.html), clear the **Track token_id** checkbox.
 
   |   |                                                                                                                                                                |
   | - | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
   |   | If you want to use the `id_token` attribute in an identity mapping, rule, or virtual logout resource, explore the other options to reduce cookie size instead. |
 
-* When [Configuring PingOne Advanced Identity Cloud or PingAM as the token provider](../pingaccess_user_interface_reference_guide/pa_configuring_p1aic_or_pingam_as_the_token_provider.html), clear the **Track token\_id** checkbox.
+* When [Configuring PingOne Advanced Identity Cloud or PingAM as the token provider](../pingaccess_user_interface_reference_guide/pa_configuring_p1aic_or_pingam_as_the_token_provider.html), clear the **Track token_id** checkbox.
 
   |   |                                                                                                                                                                |
   | - | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |

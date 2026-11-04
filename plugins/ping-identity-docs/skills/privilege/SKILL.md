@@ -6,7 +6,7 @@ license: MIT
 
 # PingOne Privilege
 
-PingOne Privilege supports certificate-based SSH and Remote Desktop Protocol for secure access to your resources.
+PingOne Privilege documentation home for Human Privilege and Agent Privilege.
 
 ## Live source of truth
 
@@ -27,14 +27,12 @@ PingOne Privilege supports certificate-based SSH and Remote Desktop Protocol for
 
 | Task category | Guide slug | Live URL pattern | Snapshot |
 |---|---|---|---|
-| Privileged Access Management: access, user, managing | privileged-access-management | https://docs.pingidentity.com/privilege/privileged-access-management/*.md | references/snapshots/privileged-access-management.md |
-| Configuration: access, configuring, privilege | configuration | https://docs.pingidentity.com/privilege/configuration/*.md | references/snapshots/configuration.md |
-| Getting Started: pingone, privilege, access | getting-started | https://docs.pingidentity.com/privilege/getting-started/*.md | references/snapshots/getting-started.md |
-| Integrations: integration, access, teams | integrations | https://docs.pingidentity.com/privilege/integrations/*.md | references/snapshots/integrations.md |
-| Procyonreadpolicy: create, policy, enable | procyonreadpolicy | https://docs.pingidentity.com/privilege/procyonreadpolicy/*.md | references/snapshots/procyonreadpolicy.md |
-| Troubleshooting: pingone, privilege, troubleshooting | troubleshooting | https://docs.pingidentity.com/privilege/troubleshooting/*.md | references/snapshots/troubleshooting.md |
-| Index.Md: pingone, privilege | index.md | https://docs.pingidentity.com/privilege/index.md | references/snapshots/index-md.md |
-| Release Notes: pingone, privilege, about | release-notes | https://docs.pingidentity.com/privilege/release-notes/*.md | references/snapshots/release-notes.md |
+| Human Privilege: access, configuring, privilege | human-privilege | https://docs.pingidentity.com/privilege/human-privilege/*.md | references/snapshots/human-privilege.md |
+| Agent Privilege: agent, privilege, pingone | agent-privilege | https://docs.pingidentity.com/privilege/agent-privilege/*.md | references/snapshots/agent-privilege.md |
+| Integrations: secrets, pingone, privilege | integrations | https://docs.pingidentity.com/privilege/integrations/*.md | references/snapshots/integrations.md |
+| Getting Started: privilege, pingone, controller | getting-started | https://docs.pingidentity.com/privilege/getting-started/*.md | references/snapshots/getting-started.md |
+| Index.Md: privilege, pingone, agent | index.md | https://docs.pingidentity.com/privilege/index.md | references/snapshots/index-md.md |
+| Release Notes: notes, pingone, privilege | release-notes | https://docs.pingidentity.com/privilege/release-notes/*.md | references/snapshots/release-notes.md |
 
 ## Composition
 
