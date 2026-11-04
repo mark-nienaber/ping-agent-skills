@@ -142,6 +142,61 @@ class SyncDocsetCoverageTests(unittest.TestCase):
             self.assertNotEqual("stale\n", skill_text)
             self.assertIn("references/snapshots/guide.md", skill_text)
 
+    def test_sync_prunes_stale_versions_from_cached_index(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            repo_root = Path(temp_dir)
+            registry = repo_root / "scripts" / "docsets.yaml"
+            registry.parent.mkdir(parents=True)
+            registry.write_text(
+                "docsets:\n"
+                "  - skill_slug: example\n"
+                "    label: Example Product\n"
+                "    source: test\n"
+                "    base_url: https://docs.example/product\n"
+                "    preferred_version: 2.0\n"
+                "    enabled: true\n",
+                encoding="utf-8",
+            )
+            skill_root = repo_root / "skills" / "example"
+            skill_root.mkdir(parents=True)
+
+            llms_text = (
+                "## Current\n\n"
+                "- [Keep](https://docs.example/product/2.0/guide/keep.md)\n"
+                "- [Keep unversioned](https://docs.example/product/release-notes/changes-1.0.md)\n"
+                "## Old\n\n"
+                "- [Drop](https://docs.example/product/1.0/guide/drop.md)\n"
+            )
+
+            def fake_fetch(url: str, destination: Path) -> bool:
+                if url.endswith("/llms.txt"):
+                    destination.write_text(llms_text, encoding="utf-8")
+                    return True
+                destination.write_text(f"# {url.rsplit('/', 1)[-1]}\n", encoding="utf-8")
+                return True
+
+            args = argparse.Namespace(
+                repo_root=str(repo_root),
+                registry="scripts/docsets.yaml",
+                skills_root="skills",
+                slug="example",
+                page_fallback=True,
+                max_routes=12,
+            )
+            with (
+                patch.object(sync_docset, "curl_fetch", side_effect=fake_fetch),
+                patch.object(sync_docset.time, "sleep"),
+                patch.dict("os.environ", {"PING_DOCS_SYNC_DELAY": "0"}),
+            ):
+                self.assertEqual(0, sync_docset.sync_docset(args))
+
+            cached = (skill_root / "references" / "llms.txt").read_text(encoding="utf-8")
+            self.assertIn("/product/2.0/guide/keep.md", cached)
+            self.assertIn("/product/release-notes/changes-1.0.md", cached)
+            self.assertNotIn("/product/1.0/guide/drop.md", cached)
+            manifest = (skill_root / "references" / "MANIFEST.md").read_text(encoding="utf-8")
+            self.assertIn("- Total pages indexed: 2", manifest)
+
 
 class GeneratedRouteSnapshotTests(unittest.TestCase):
     def test_only_current_manifest_source_rows_enable_snapshot_routes(self) -> None:

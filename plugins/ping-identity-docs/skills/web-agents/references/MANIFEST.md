@@ -30,7 +30,7 @@
 
 | File | SHA-256 |
 |---|---|
-| llms.txt | a2afad1473f2ef87fec3759c2b936829e5933ec26a1562875fd64625d53d2658 |
+| llms.txt | 277fb3ee8d63f87a92bf02329ff94a482a948ae415c87192c035168ff6117d74 |
 | snapshots/properties-reference.md | eb8b810b2f0dca6cf5d73da3143fe51ce964bd431bf467da0847579eae0d31f2 |
 | snapshots/release-notes.md | 8ba458fd995014f2149454c2d197507eb457e58e56d9de9930a6701bcc531fa3 |
 | snapshots/user-guide.md | 166f729b148be1ce1840237c303aa0ff578f30f978033a274d03c9fe98d99bdf |

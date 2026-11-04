@@ -204,6 +204,28 @@ def _version_key(version: str) -> tuple[int, ...]:
     return tuple(int(part) for part in version.split("."))
 
 
+def prune_llms_text(text: str, base_url: str, selected_version: str | None) -> str:
+    """Drop index entries under versioned paths other than ``selected_version``.
+
+    Version-independent pages (unversioned paths, e.g. release notes) are always
+    kept, and non-entry lines pass through unchanged.
+    """
+    if not selected_version:
+        return text
+    prefix = f"{base_url.rstrip('/')}/"
+    kept: list[str] = []
+    for line in text.splitlines(keepends=True):
+        match = LLMS_ENTRY_RE.match(line)
+        if match:
+            url = match.group("url")
+            if url.startswith(prefix):
+                first_segment = url[len(prefix) :].split("/", 1)[0]
+                if VERSION_RE.fullmatch(first_segment) and first_segment != selected_version:
+                    continue
+        kept.append(line)
+    return "".join(kept)
+
+
 def cluster_entries(
     entries: Iterable[LlmEntry], base_url: str, selected_version: str
 ) -> list[GuideCluster]:

@@ -19,6 +19,7 @@ from ping_docsets import (
     find_docset,
     load_docsets,
     parse_llms_file,
+    prune_llms_text,
 )
 
 
@@ -134,6 +135,19 @@ def sync_docset(args: argparse.Namespace) -> int:
     selected_version = detect_latest_version(
         entries, docset.base_url, preferred_version=docset.preferred_version
     )
+
+    # Keep only the selected version's entries plus version-independent pages,
+    # so the cached index does not carry every historical doc version.
+    original_text = llms_path.read_text(encoding="utf-8")
+    pruned_text = prune_llms_text(original_text, docset.base_url, selected_version)
+    if pruned_text != original_text:
+        llms_path.write_text(pruned_text, encoding="utf-8")
+        entries = parse_llms_file(llms_path)
+        print(
+            f"[{docset.skill_slug}] pruned stale versions from cached index "
+            f"(keeping {selected_version or 'current'})"
+        )
+
     clusters = cluster_entries(entries, docset.base_url, selected_version)
     if not clusters:
         die(

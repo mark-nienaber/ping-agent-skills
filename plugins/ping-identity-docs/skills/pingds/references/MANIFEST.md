@@ -40,7 +40,7 @@
 
 | File | SHA-256 |
 |---|---|
-| llms.txt | aad0d49af8d649290c132c54f772f6b455a2120729783e298d93282d5338388f |
+| llms.txt | c9398cd6f5e4f718d7f49b1caf294389266f45e33f1557dbd094b99e9afa4b53 |
 | snapshots/schemaref.md | 9e1558e94b20d480ace2126bf5aa0ecc743bd1a7266539e21fc2bf3b72b32962 |
 | snapshots/configref.md | 4b2168a9f9ba627be831aede629d9ce60cffc5ab6f19b55dac109335af087389 |
 | snapshots/config-guide.md | 9e6d8f0bb128c7b7235d431c80b21f678eed8a8f6501897d4b71c3af4fa7e43c |

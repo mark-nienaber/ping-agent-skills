@@ -93,9 +93,14 @@ class SearchDocsTests(unittest.TestCase):
         self.assertEqual(first["title"], "Account lockout")
         self.assertIn("/pingam/8.1/", first["live_markdown_url"])
         self.assertTrue(first["live_markdown_url"].endswith("/security/account-lockout.md"))
-        self.assertTrue(first["local_snapshot"].endswith("/pingam/references/snapshots/security.md"))
+        # Snapshots are an untracked local cache: present after a sync, absent on
+        # fresh clones. Either way the live URL and manifest must resolve.
         self.assertTrue(first["local_manifest"].endswith("/pingam/references/MANIFEST.md"))
         self.assertTrue(first["snapshot_sync_date"])
+        if first["local_snapshot"] is not None:
+            self.assertTrue(
+                first["local_snapshot"].endswith("/pingam/references/snapshots/security.md")
+            )
 
     def test_pingauthorize_policy_task_finds_specific_policy_page(self) -> None:
         response = search_docs.search(
@@ -109,11 +114,14 @@ class SearchDocsTests(unittest.TestCase):
         self.assertIn("dynamically modify a resource", first["title"].lower())
         self.assertIn("/pingauthorize/11.1/", first["live_markdown_url"])
         self.assertTrue(first["live_markdown_url"].endswith("/paz_create_policy_modify.md"))
-        self.assertTrue(
-            first["local_snapshot"].endswith(
-                "/pingauthorize/references/snapshots/pingauthorize-policy-administration-guide.md"
+        # Snapshots are an untracked local cache: present after a sync, absent on
+        # fresh clones. Either way the live URL must resolve.
+        if first["local_snapshot"] is not None:
+            self.assertTrue(
+                first["local_snapshot"].endswith(
+                    "/pingauthorize/references/snapshots/pingauthorize-policy-administration-guide.md"
+                )
             )
-        )
 
     def test_unrelated_prompt_abstains_without_loading_indexes(self) -> None:
         response = search_docs.search("Write a Python hello world program", top_k=5)
@@ -146,17 +154,42 @@ class SearchDocsTests(unittest.TestCase):
         self.assertTrue(response["results"][0]["live_markdown_url"].endswith("/oauth2-par-endpoint.md"))
 
     def test_requested_older_version_does_not_claim_current_snapshot(self) -> None:
-        response = search_docs.search(
-            "PingAM 7.5 account lockout",
-            product_filter="pingam",
-            top_k=1,
-        )
+        # Cached indexes hold only the current version (sync prunes stale ones),
+        # so older-version behavior is exercised through a fixture that still
+        # carries an old version entry.
+        with tempfile.TemporaryDirectory() as temporary_directory:
+            tmp_path = Path(temporary_directory)
+            docset = tmp_path / "docsets" / "pingam" / "references"
+            docset.mkdir(parents=True)
+            (docset / "llms.txt").write_text(
+                "# PingAM\n\n"
+                "- [Current lockout](https://docs.pingidentity.com/pingam/8.1/security/account-lockout.md): lockout\n"
+                "- [Old lockout](https://docs.pingidentity.com/pingam/7.5/security/account-lockout.md): lockout\n",
+                encoding="utf-8",
+            )
+            (docset / "MANIFEST.md").write_text(
+                "# Snapshot Manifest - pingam\n\n"
+                "- Product: PingAM\n"
+                "- Version: 8.1\n"
+                "- Sync date: 2026-07-13\n"
+                "- Source: https://docs.pingidentity.com/pingam/llms.txt\n\n"
+                "| Snapshot | Source type | Source URL | Pages indexed | Pages captured | Coverage |\n"
+                "|---|---|---|---|---|---|\n",
+                encoding="utf-8",
+            )
 
-        first = response["results"][0]
-        self.assertEqual(first["document_version"], "7.5")
-        self.assertIn("/pingam/7.5/", first["live_markdown_url"])
-        self.assertIsNone(first["local_snapshot"])
-        self.assertEqual(first["snapshot_version"], "8.1")
+            response = search_docs.search(
+                "PingAM 7.5 account lockout",
+                product_filter="pingam",
+                data_root=tmp_path / "docsets",
+                top_k=1,
+            )
+
+            first = response["results"][0]
+            self.assertEqual(first["document_version"], "7.5")
+            self.assertIn("/pingam/7.5/", first["live_markdown_url"])
+            self.assertIsNone(first["local_snapshot"])
+            self.assertEqual(first["snapshot_version"], "8.1")
 
     def test_standalone_data_root_layout(self) -> None:
         with tempfile.TemporaryDirectory() as temporary_directory:
