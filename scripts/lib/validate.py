@@ -224,6 +224,7 @@ def validate_manifest(
     source_names: list[str] = []
     captured_page_counts: list[int] = []
     coverage_values: list[str] = []
+    missing_snapshot_files: set[str] = set()
     for row_number, row in enumerate(source_rows, start=1):
         snapshot_name = row.get("snapshot", "").strip().strip("`")
         if not snapshot_name:
@@ -240,9 +241,12 @@ def validate_manifest(
                 f"{manifest_path}: invalid snapshot entry {snapshot_name!r}"
             )
         elif not snapshot_path.is_file():
-            reporter.error(
+            # Snapshots are an optional local cache (regenerable with sync); a
+            # listed capture row with no local file is a data gap, not a defect.
+            reporter.warn(
                 f"{manifest_path}: listed snapshot is missing: snapshots/{snapshot_name}"
             )
+            missing_snapshot_files.add(f"snapshots/{snapshot_name}")
 
         if has_captured_count:
             try:
@@ -308,9 +312,14 @@ def validate_manifest(
             reporter.error(f"{manifest_path}: invalid checksum path {file_name!r}")
             continue
         if not file_path.is_file():
-            reporter.error(
-                f"{manifest_path}: checksummed file is missing: {file_name}"
-            )
+            if file_name in missing_snapshot_files:
+                reporter.warn(
+                    f"{manifest_path}: checksummed file is missing: {file_name}"
+                )
+            else:
+                reporter.error(
+                    f"{manifest_path}: checksummed file is missing: {file_name}"
+                )
             continue
         if not SHA256_RE.fullmatch(expected_sha):
             reporter.error(
@@ -335,6 +344,9 @@ def validate_manifest(
         name for name in checksum_names if name.startswith("snapshots/")
     }
     for file_name in sorted(source_snapshot_paths - checksum_snapshot_paths):
+        if file_name in missing_snapshot_files:
+            # The file itself is absent; requiring its checksum row adds nothing.
+            continue
         reporter.error(
             f"{manifest_path}: snapshot has no checksum entry: {file_name}"
         )

@@ -25,6 +25,6 @@ scripts/__pycache__/
 /evals/
 /reports/
 
-# Sync working dirs (kept out until we decide commit-snapshots policy)
-# Uncomment to gitignore snapshots:
-# plugins/*/skills/*/references/snapshots/
+# Snapshots are a regenerable offline cache, not tracked repo data.
+# Run scripts/sync-all.sh to (re)build them for offline use.
+plugins/*/skills/*/references/snapshots/

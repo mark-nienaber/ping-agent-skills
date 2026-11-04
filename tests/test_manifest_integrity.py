@@ -15,6 +15,8 @@ from ping_docsets import sha256_file  # noqa: E402
 from validate import Reporter, validate_manifest  # noqa: E402
 
 
+
+
 class ManifestWriterTests(unittest.TestCase):
     def test_distinguishes_indexed_and_captured_pages(self) -> None:
         with tempfile.TemporaryDirectory() as temp_dir:
@@ -127,6 +129,48 @@ class ManifestWriterTests(unittest.TestCase):
             self.assertEqual(20, infer_pages_captured(snapshot, "assembled", 240))
             self.assertEqual(240, infer_pages_captured(snapshot, "single-page", 240))
             self.assertEqual(1, infer_pages_captured(snapshot, "page", 240))
+
+    def test_missing_snapshot_files_warn_instead_of_error(self) -> None:
+        """Untracked snapshots: manifests keep capture rows; absent files warn only."""
+        with tempfile.TemporaryDirectory() as temp_dir:
+            references = Path(temp_dir)
+            snapshots = references / "snapshots"
+            snapshots.mkdir()
+            llms_path = references / "llms.txt"
+            llms_path.write_text("index\n", encoding="utf-8")
+            (snapshots / "present.md").write_text("present\n", encoding="utf-8")
+            manifest_path = references / "MANIFEST.md"
+
+            manifest = f"""# Snapshot Manifest - example
+
+## Source URLs
+
+| Snapshot | Source type | Source URL | Pages indexed | Pages captured | Coverage |
+|---|---|---|---|---|---|
+| present.md | assembled | https://docs.example/llms.txt | 5 | 2 | partial |
+| absent.md | assembled | https://docs.example/llms.txt | 4 | 2 | partial |
+
+## Checksums
+
+| File | SHA-256 |
+|---|---|
+| llms.txt | {sha256_file(llms_path)} |
+| snapshots/present.md | {sha256_file(snapshots / 'present.md')} |
+| snapshots/absent.md | {'a' * 64} |
+"""
+            manifest_path.write_text(manifest, encoding="utf-8")
+
+            reporter = Reporter()
+            validate_manifest(references, manifest_path, manifest, reporter)
+            errors = "\n".join(reporter.errors)
+            warnings = "\n".join(reporter.warnings)
+            self.assertIn(
+                "listed snapshot is missing: snapshots/absent.md", warnings
+            )
+            self.assertNotIn("snapshots/absent.md", errors)
+            self.assertIn(
+                "checksummed file is missing: snapshots/absent.md", warnings
+            )
 
 
 class ManifestValidatorTests(unittest.TestCase):
